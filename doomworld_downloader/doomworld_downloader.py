@@ -112,6 +112,10 @@ def main():
     with open('search_start_date.txt') as search_stream:
         search_start_date = search_stream.read().strip()
     search_start_date = datetime.strptime(search_start_date, '%Y-%m-%dT%H:%M:%SZ')
+	
+    with open('search_end_date.txt') as search_stream:
+        search_end_date = search_stream.read().strip()
+    search_end_date = datetime.strptime(search_end_date, '%Y-%m-%dT%H:%M:%SZ')
 
     threads = []
     for page_num in itertools.count(1):
@@ -133,7 +137,7 @@ def main():
 
         for page_num in range(last_page_num, 0, -1):
             cur_posts = parse_thread_page(thread.url, page_num)
-            new_posts = [post for post in cur_posts if post.post_date > search_start_date]
+            new_posts = [post for post in cur_posts if post.post_date > search_start_date and post.post_date < search_end_date]
             posts.extend(new_posts)
             if len(cur_threads) != len(new_threads):
                 break
