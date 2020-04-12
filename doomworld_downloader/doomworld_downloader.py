@@ -48,6 +48,7 @@ class Post:
     attachments: dict
     links: dict
     post_text: str
+    parent: Thread
 
 
 def get_link_elems(link_elems, extract_link=False):
@@ -81,11 +82,23 @@ def parse_thread_list(page_number):
     return threads
 
 
-def parse_thread_page(base_url, page_number):
+def parse_thread_page(base_url, page_number, thread):
     soup = get_page(THREAD_URL.format(base_url=base_url, num=page_number))
     post_elems = soup.find_all('article', class_='ipsComment')
     posts = []
     for post in post_elems:
+        post_content_elem = post.find('div', class_='cPost_contentWrap')
+        post_content_elem = post_content_elem.find('div', attrs={'data-role': 'commentContent'})
+        attachments = get_link_elems(post_content_elem.find_all('a', class_='ipsAttachLink'),
+                                     extract_link=True)
+        # Skip posts with no attachments as they have no demos to search for
+        if not attachments:
+            continue
+
+        # TODO: We may not want to extract_link here because that removes the links, so it might be
+        # harder to infer which wad maps to which demos from a multi-wad multi-demo post
+        links = get_link_elems(post_content_elem.find_all('a'), extract_link=True)
+
         author_elem = post.find('aside', class_='ipsComment_author')
         author_name = author_elem.find('h3', class_='cAuthorPane_author').getText().strip()
 
@@ -94,25 +107,22 @@ def parse_thread_page(base_url, page_number):
         post_date = post_meta_elem.find('time')['datetime']
         post_date = datetime.strptime(post_date, '%Y-%m-%dT%H:%M:%SZ')
 
-        post_content_elem = post.find('div', class_='cPost_contentWrap')
-        post_content_elem = post_content_elem.find('div', attrs={'data-role': 'commentContent'})
-        attachments = get_link_elems(post_content_elem.find_all('a', class_='ipsAttachLink'),
-                                     extract_link=True)
-        links = get_link_elems(post_content_elem.find_all('a'), extract_link=True)
-
         post_text = post_content_elem.getText().strip()
         post_text = '\n'.join([line.strip() for line in post_text.splitlines() if line.strip()])
 
-        posts.append(Post(author_name, post_date, attachments, links, post_text))
+        posts.append(Post(author_name, post_date, attachments, links, post_text, thread))
 
     return posts
 
 
 def main():
+    with open('thread_map.yaml') as thread_map_stream:
+        THREAD_MAP.update(yaml.safe_load(thread_map_stream))
+
     with open('search_start_date.txt') as search_stream:
         search_start_date = search_stream.read().strip()
     search_start_date = datetime.strptime(search_start_date, '%Y-%m-%dT%H:%M:%SZ')
-	
+
     with open('search_end_date.txt') as search_stream:
         search_end_date = search_stream.read().strip()
     search_end_date = datetime.strptime(search_end_date, '%Y-%m-%dT%H:%M:%SZ')
@@ -136,13 +146,34 @@ def main():
                 last_page_num = 1
 
         for page_num in range(last_page_num, 0, -1):
-            cur_posts = parse_thread_page(thread.url, page_num)
-            new_posts = [post for post in cur_posts if post.post_date > search_start_date and post.post_date < search_end_date]
+            cur_posts = parse_thread_page(thread.url, page_num, thread)
+            new_posts = [post for post in cur_posts
+                         if search_start_date < post.post_date < search_end_date]
             posts.extend(new_posts)
             if len(cur_threads) != len(new_threads):
                 break
 
-    print(posts)
+    demo_jsons = []
+    for post in posts:
+
+
+        demo_jsons.append({
+            'is_tas': None,
+            'is_solo_net': None,
+            'player_count': None,
+            'wad_name': None,
+            'zip_name': None,
+            'engine': None,
+            'time': None,
+            'level': None,
+            'kills': None,
+            'items': None,
+            'secrets': None,
+            'category': None,
+            'recorded_at': None,
+            'player_list': None,
+            'comment': None
+        })
 
 
 if __name__ == '__main__':
