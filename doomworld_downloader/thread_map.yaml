@@ -981,6 +981,7 @@
   name: "Personal Best Demo Thread ← POST YOUR NON-WRs HERE"
 
 ### IGNORED THREADS FOR UPDATES
+# Non-speedrun demo threads
 "https://www.doomworld.com/forum/topic/53932-failed-demo-attempts/":
   additional_info:
     ignore: true
@@ -1001,10 +1002,48 @@
     ignore: true
   id: "112534"
   name: TAS Practice Runs
+
+# Non-finalized WAD threads
 "https://www.doomworld.com/forum/topic/112350-freedoom-2/":
   additional_info:
-    # Ignored because the WAD is not finalized
     ignore: true
     wad: freedoom2
   id: "112350"
   name: Freedoom 2
+
+# Non-demo threads
+"https://www.doomworld.com/forum/topic/107427-the-next-iteration-of-dsda/":
+  additional_info:
+    ignore: true
+  id: "107427"
+  name: "The Next Iteration of DSDA"
+"https://www.doomworld.com/forum/topic/95502-dsda-on-youtube/":
+  additional_info:
+    ignore: true
+  id: "95502"
+  name: "DSDA on YouTube"
+"https://www.doomworld.com/forum/topic/18410-welcome-to-the-demos-forum-prboom-plus-usage-wad-and-irc-links-general-info/":
+  additional_info:
+    ignore: true
+  id: "18410"
+  name: Welcome to the Demos forum! [Prboom-plus usage, WAD and IRC links, general info]
+"https://www.doomworld.com/forum/topic/112543-how-to-use-xdre/":
+  additional_info:
+    ignore: true
+  id: "112543"
+  name: How to use XDRE
+"https://www.doomworld.com/forum/topic/112326-cheating-and-the-use-of-tas-tools/":
+  additional_info:
+    ignore: true
+  id: "112326"
+  name: Cheating and the use of TAS tools.
+"https://www.doomworld.com/forum/topic/112175-new-category-ideas/":
+  additional_info:
+    ignore: true
+  id: "112175"
+  name: New category ideas
+"https://www.doomworld.com/forum/topic/113159-fast-caps-cup-speed-run-competition-hosted-by-mdf-plasmabump/":
+  additional_info:
+    ignore: true
+  id: "113159"
+  name: "Fast Caps Cup! (speed run competition) hosted by MDF & Plasmabump"
