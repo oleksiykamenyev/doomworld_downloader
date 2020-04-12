@@ -1,7 +1,9 @@
 import itertools
+import logging
 import os
 import re
 
+from configparser import ConfigParser
 from dataclasses import dataclass
 from datetime import datetime
 from urllib.parse import urlparse, parse_qs
@@ -31,9 +33,12 @@ CATEGORY_REGEXES = [
     re.compile(r'(UV)?[ -_]?Reality', re.IGNORECASE),
     re.compile(r'(UV)?[ -_]?Stroller', re.IGNORECASE)
 ]
+ZIP_RE = re.compile(r'^.*\.zip$')
 
 THREAD_MAP = {}
 THREAD_MAP_KEYED_ON_ID = {}
+
+LOGGER = logging.getLogger(__name__)
 
 
 @dataclass
@@ -55,7 +60,7 @@ class Post:
     parent: Thread
 
 
-def get_link_elems(link_elems, extract_link=False):
+def get_links(link_elems, extract_link=False):
     links = {}
     for link_elem in link_elems:
         link_url = link_elem['href']
@@ -109,15 +114,18 @@ def parse_thread_page(base_url, page_number, thread):
     for post in post_elems:
         post_content_elem = post.find('div', class_='cPost_contentWrap')
         post_content_elem = post_content_elem.find('div', attrs={'data-role': 'commentContent'})
-        attachments = get_link_elems(post_content_elem.find_all('a', class_='ipsAttachLink'),
-                                     extract_link=True)
+        attachments = get_links(post_content_elem.find_all('a', class_='ipsAttachLink'),
+                                extract_link=True)
+        # TODO: Consider repackaging rars and 7zs so we don't have to ask the posters to do it
+        attachments = {attach: attach_url for attach, attach_url in attachments.items()
+                       if ZIP_RE.match(attach)}
         # Skip posts with no attachments as they have no demos to search for
         if not attachments:
             continue
 
         # TODO: We may not want to extract_link here because that removes the links, so it might be
         # harder to infer which wad maps to which demos from a multi-wad multi-demo post
-        links = get_link_elems(post_content_elem.find_all('a'), extract_link=True)
+        links = get_links(post_content_elem.find_all('a'), extract_link=True)
 
         author_elem = post.find('aside', class_='ipsComment_author')
         author_name = author_elem.find('h3', class_='cAuthorPane_author').getText().strip()
@@ -136,6 +144,12 @@ def parse_thread_page(base_url, page_number, thread):
 
 
 def main():
+    # TODO: Probably refactor this to a separate module/class handling configuration
+    # TODO: Provide example config file format
+    upload_config = ConfigParser()
+    upload_config.read('upload.ini')
+    test_mode = upload_config.getboolean('general', 'testing_mode')
+
     with open('thread_map.yaml', encoding='utf-8') as thread_map_stream:
         THREAD_MAP.update(yaml.safe_load(thread_map_stream))
 
@@ -156,8 +170,9 @@ def main():
 
     threads = []
     for page_num in itertools.count(1):
-        # In case testing, uncomment to speed up the tests
-        # break
+        # In case of testing, use dummy data
+        if test_mode:
+            break
         cur_threads = parse_thread_list(page_num)
         new_threads = [thread for thread in cur_threads
                        if thread.last_post_date > search_start_date]
@@ -169,8 +184,9 @@ def main():
 
     posts = []
     for thread in threads:
-        # In case testing, uncomment to speed up the tests
-        # break
+        # In case of testing, use dummy data
+        if test_mode:
+            break
         for page_num in range(thread.last_page_num, 0, -1):
             cur_posts = parse_thread_page(thread.url, page_num, thread)
             # If the last post on a page is before the start date, we can break out immediately
@@ -184,9 +200,15 @@ def main():
             if not new_posts:
                 break
 
-    # In case testing, uncomment in case you need just a couple test posts
-    # posts = [Post(author_name='the_kovic', post_date=datetime(2020, 4, 10, 15, 22, 55), attachments={'kovic_e2m1-40.zip': 'https://www.doomworld.com/applications/core/interface/file/attachment.php?id=82293'}, links={'https://www.youtube.com/watch?v=aXyPH0J4BD8': 'https://www.youtube.com/watch?v=aXyPH0J4BD8'}, post_text='Ultimate Doom E2M1 in 40\nPort used: Crispy Doom\nDemo:\nVideo:\nI was inspired to attempt to run something in Doom by a couple of content creators on YT (you probably know which ones), decided to try E2M1. I got 41 in about ten minutes and then spent three more hours grinding 40. It might be bias but for now I think that running Doom is much harder for me than bunnyhopping in Source games (which is what I usually play and run).\nI hope I read all the rules correctly and that the demo works fine.', parent=Thread(name='Personal Best Demo Thread ← POST YOUR NON-WRs HERE', id=112532, url='https://www.doomworld.com/forum/topic/112532-personal-best-demo-thread-%E2%86%90-post-your-non-wrs-here/', last_post_date=datetime(2020, 4, 11, 3, 4, 56), last_page_num=3)), Post(author_name='RobUrHP420', post_date=datetime(2020, 4, 11, 3, 4, 56), attachments={'9.94e1m1(uv  pacifist).zip': 'https://www.doomworld.com/applications/core/interface/file/attachment.php?id=82370'}, links={'https://www.youtube.com/watch?v=2LF_jlA1aLc': 'https://www.youtube.com/watch?v=2LF_jlA1aLc'}, post_text='Finally hit 9s on Hangar (UV Pacifist) So happy rn! Took me well over a thousand attempts.\nVideo:', parent=Thread(name='Personal Best Demo Thread ← POST YOUR NON-WRs HERE', id=112532, url='https://www.doomworld.com/forum/topic/112532-personal-best-demo-thread-%E2%86%90-post-your-non-wrs-here/', last_post_date=datetime(2020, 4, 11, 3, 4, 56), last_page_num=3))]
-    # print(posts)
+    # In case testing, use dummy data
+    # TODO: Generate this in a better way
+    # Long-term we need unit tests, so maybe this mode can be removed entirely in the future, or if
+    # it's needed, we can put the test data into a test input file somewhere instead of directly in
+    # the code
+    if test_mode:
+        posts = [
+            Post(author_name='the_kovic', post_date=datetime(2020, 4, 10, 15, 22, 55), attachments={'kovic_e2m1-40.zip': 'https://www.doomworld.com/applications/core/interface/file/attachment.php?id=82293'}, links={'https://www.youtube.com/watch?v=aXyPH0J4BD8': 'https://www.youtube.com/watch?v=aXyPH0J4BD8'}, post_text='Ultimate Doom E2M1 in 40\nPort used: Crispy Doom\nDemo:\nVideo:\nI was inspired to attempt to run something in Doom by a couple of content creators on YT (you probably know which ones), decided to try E2M1. I got 41 in about ten minutes and then spent three more hours grinding 40. It might be bias but for now I think that running Doom is much harder for me than bunnyhopping in Source games (which is what I usually play and run).\nI hope I read all the rules correctly and that the demo works fine.', parent=Thread(name='Personal Best Demo Thread ← POST YOUR NON-WRs HERE', id=112532, url='https://www.doomworld.com/forum/topic/112532-personal-best-demo-thread-%E2%86%90-post-your-non-wrs-here/', last_post_date=datetime(2020, 4, 11, 3, 4, 56), last_page_num=3)), Post(author_name='RobUrHP420', post_date=datetime(2020, 4, 11, 3, 4, 56), attachments={'9.94e1m1(uv  pacifist).zip': 'https://www.doomworld.com/applications/core/interface/file/attachment.php?id=82370'}, links={'https://www.youtube.com/watch?v=2LF_jlA1aLc': 'https://www.youtube.com/watch?v=2LF_jlA1aLc'}, post_text='Finally hit 9s on Hangar (UV Pacifist) So happy rn! Took me well over a thousand attempts.\nVideo:', parent=Thread(name='Personal Best Demo Thread ← POST YOUR NON-WRs HERE', id=112532, url='https://www.doomworld.com/forum/topic/112532-personal-best-demo-thread-%E2%86%90-post-your-non-wrs-here/', last_post_date=datetime(2020, 4, 11, 3, 4, 56), last_page_num=3))]
+        LOGGER.debug(posts)
 
     demo_jsons = []
     for post in posts:
