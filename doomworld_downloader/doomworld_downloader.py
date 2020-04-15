@@ -1,3 +1,17 @@
+"""
+Doomworld downloader.
+
+# TODO: Rename/reorganize this code
+Specifically, I see the following structure making sense:
+  - entry main code (probably rename this class to something like dsda_auto_updater)
+    - this will contain just calls to the underlying stuff; i.e.:
+      - get all of the relevant posts using the web parsing module and download demos
+      - then use a separate interpolator module that takes the data from all the sources and mushes
+        it together
+  - separate module where we can move all of the BeautifulSoup/web parsing crap in here
+    - the download request code can be in there too
+"""
+
 import itertools
 import logging
 import os

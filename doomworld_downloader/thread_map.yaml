@@ -1,6 +1,9 @@
 #### TODOs
 # Update the WAD info to be unambiguous (perhaps it should be an ID mapping to a WAD map that has
 # all the relevant info about the WAD such as WAD name, compat, etc.)
+# Consider making all the IDs in here ints
+#  - They were auto-parsed into strings, and I've been too lazy to fix it, but it probably should be
+#    fixed
 
 # Single WAD threads
 "https://www.doomworld.com/forum/topic/100975-sparta-ii-project-vesuvius-demos-complevel-9/":
@@ -1047,3 +1050,17 @@
     ignore: true
   id: "113159"
   name: "Fast Caps Cup! (speed run competition) hosted by MDF & Plasmabump"
+"https://www.doomworld.com/forum/topic/111006-similarities-between-speedrunning-and-musical-performance/":
+  additional_info:
+    ignore: true
+  id: "111006"
+  name: Similarities between speedrunning and musical performance
+
+# Miscellanous threads
+# Ignored because this is not the correct thread for NRFTL, and the one demo post in here was duped
+# in the correct thread
+"https://www.doomworld.com/forum/topic/113687-doom-ii-no-rest-for-the-living/":
+  additional_info:
+    ignore: true
+  id: "113687"
+  name: "DOOM II: No Rest For The Living"
