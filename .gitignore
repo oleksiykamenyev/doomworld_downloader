@@ -130,3 +130,14 @@ dmypy.json
 
 # PyCharm project folder
 .idea
+
+# Uploader configs
+# These need to be configured by the person responsible for the upload.
+upload.ini
+
+# Uploader working files/directories
+# These are automatically created by the upload process.
+demos_for_upload/
+
+# 4shockblast: will use this for any tmp code I write to auto-generate/fix configs and stuff
+tmp_code.py

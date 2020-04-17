@@ -1,3 +1,11 @@
+"""
+Stub: textfile parser
+
+TODO: We can start working on this earlier. Please operate off the following assumptions:
+  - You're provided a textfile in a local directory
+  - Your output should be a dictionary of all relevant info for the final JSON
+"""
+
 import itertools
 import re
 
