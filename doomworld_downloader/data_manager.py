@@ -110,7 +110,7 @@ class DataManager:
 
         def __raw_values(self, value_dict):
             value_counters = value_dict.values()
-            return list(map(lambda x: x.value, value_counters))
+            return [x.value for x in value_counters]
 
         class ValueCounter:
             """Counts the number of times a value is reported"""
