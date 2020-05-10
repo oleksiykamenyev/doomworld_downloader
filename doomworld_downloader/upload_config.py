@@ -5,7 +5,15 @@ class UploadConfig:
     def __init__(self):
         self._config = ConfigParser()
         # TODO: Consider making this configurable
-        self._config.read('upload.ini')
+        self._config.read('doomworld_downloader/upload.ini')
+
+    @property
+    def search_start_date(self):
+        return self._config.get('general', 'search_start_date')
+
+    @property
+    def search_end_date(self):
+        return self._config.get('general', 'search_end_date')
 
     @property
     def prboom_plus_directory(self):

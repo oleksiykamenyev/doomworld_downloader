@@ -27,7 +27,7 @@ import yaml
 from bs4 import BeautifulSoup
 from lxml import etree
 
-from .upload_config import CONFIG
+from doomworld_downloader.upload_config import CONFIG
 
 
 DOOM_SPEED_DEMOS_URL = 'https://www.doomworld.com/forum/37-doom-speed-demos/?page={num}'
@@ -161,9 +161,11 @@ def parse_thread_page(base_url, page_number, thread):
 
 def main():
     # TODO: Probably refactor this to a separate module/class handling configuration
-    # TODO: Provide example config file format
+    # TODO:
+    #   The config files (thread map, upload.ini, etc.) should eventually be moved to be managed by
+    #   pkg_resources instead of relative paths
     testing_mode = CONFIG.testing_mode
-    with open('thread_map.yaml', encoding='utf-8') as thread_map_stream:
+    with open('doomworld_downloader/thread_map.yaml', encoding='utf-8') as thread_map_stream:
         THREAD_MAP.update(yaml.safe_load(thread_map_stream))
 
     # TODO: I made the map keyed on URL, but depending on how we use it over time, might want to
@@ -173,14 +175,8 @@ def main():
                                                      for key, value in thread_dict.items()}
         THREAD_MAP_KEYED_ON_ID['url'] = url
 
-    with open('search_start_date.txt') as search_stream:
-        search_start_date = search_stream.read().strip()
-    search_start_date = datetime.strptime(search_start_date, '%Y-%m-%dT%H:%M:%SZ')
-
-    with open('search_end_date.txt') as search_stream:
-        search_end_date = search_stream.read().strip()
-    search_end_date = datetime.strptime(search_end_date, '%Y-%m-%dT%H:%M:%SZ')
-
+    search_start_date = datetime.strptime(CONFIG.search_start_date, '%Y-%m-%dT%H:%M:%SZ')
+    search_end_date = datetime.strptime(CONFIG.search_end_date, '%Y-%m-%dT%H:%M:%SZ')
     threads = []
     for page_num in itertools.count(1):
         # In case of testing, use dummy data
@@ -195,6 +191,7 @@ def main():
 
         threads.extend(new_threads)
 
+    print(threads)
     posts = []
     for thread in threads:
         # In case of testing, use dummy data
@@ -210,8 +207,8 @@ def main():
             new_posts = [post for post in cur_posts
                          if search_start_date < post.post_date < search_end_date]
             posts.extend(new_posts)
-            if not new_posts:
-                break
+
+    print(posts)
 
     # In case testing, use dummy data
     # TODO: Generate this in a better way
