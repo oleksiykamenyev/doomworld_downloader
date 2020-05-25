@@ -130,6 +130,12 @@ def parse_thread_page(base_url, page_number, thread):
     for post in post_elems:
         post_content_elem = post.find('div', class_='cPost_contentWrap')
         post_content_elem = post_content_elem.find('div', attrs={'data-role': 'commentContent'})
+        # Remove all quotes from each post so we don't accidentally parse a different post's
+        # category/other info and don't accidentally get attachments from a different post.
+        quotes = post_content_elem.find_all('blockquote', class_='ipsQuote')
+        for quote in quotes:
+            quote.extract()
+
         attachments = get_links(post_content_elem.find_all('a', class_='ipsAttachLink'),
                                 extract_link=True)
         # TODO: Consider repackaging rars and 7zs so we don't have to ask the posters to do it
