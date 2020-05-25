@@ -17,7 +17,6 @@ import logging
 import os
 import re
 
-from configparser import ConfigParser
 from dataclasses import dataclass
 from datetime import datetime
 from urllib.parse import urlparse, parse_qs
@@ -27,6 +26,9 @@ import yaml
 
 from bs4 import BeautifulSoup
 from lxml import etree
+
+from doomworld_downloader.upload_config import CONFIG
+
 
 DOOM_SPEED_DEMOS_URL = 'https://www.doomworld.com/forum/37-doom-speed-demos/?page={num}'
 THREAD_URL = '{base_url}/?page={num}'
@@ -159,12 +161,11 @@ def parse_thread_page(base_url, page_number, thread):
 
 def main():
     # TODO: Probably refactor this to a separate module/class handling configuration
-    # TODO: Provide example config file format
-    upload_config = ConfigParser()
-    upload_config.read('upload.ini')
-    test_mode = upload_config.getboolean('general', 'testing_mode')
-
-    with open('thread_map.yaml', encoding='utf-8') as thread_map_stream:
+    # TODO:
+    #   The config files (thread map, upload.ini, etc.) should eventually be moved to be managed by
+    #   pkg_resources instead of relative paths
+    testing_mode = CONFIG.testing_mode
+    with open('doomworld_downloader/thread_map.yaml', encoding='utf-8') as thread_map_stream:
         THREAD_MAP.update(yaml.safe_load(thread_map_stream))
 
     # TODO: I made the map keyed on URL, but depending on how we use it over time, might want to
@@ -174,18 +175,12 @@ def main():
                                                      for key, value in thread_dict.items()}
         THREAD_MAP_KEYED_ON_ID['url'] = url
 
-    with open('search_start_date.txt') as search_stream:
-        search_start_date = search_stream.read().strip()
-    search_start_date = datetime.strptime(search_start_date, '%Y-%m-%dT%H:%M:%SZ')
-
-    with open('search_end_date.txt') as search_stream:
-        search_end_date = search_stream.read().strip()
-    search_end_date = datetime.strptime(search_end_date, '%Y-%m-%dT%H:%M:%SZ')
-
+    search_start_date = datetime.strptime(CONFIG.search_start_date, '%Y-%m-%dT%H:%M:%SZ')
+    search_end_date = datetime.strptime(CONFIG.search_end_date, '%Y-%m-%dT%H:%M:%SZ')
     threads = []
     for page_num in itertools.count(1):
         # In case of testing, use dummy data
-        if test_mode:
+        if testing_mode:
             break
         cur_threads = parse_thread_list(page_num)
         new_threads = [thread for thread in cur_threads
@@ -196,10 +191,11 @@ def main():
 
         threads.extend(new_threads)
 
+    LOGGER.debug(threads)
     posts = []
     for thread in threads:
         # In case of testing, use dummy data
-        if test_mode:
+        if testing_mode:
             break
         for page_num in range(thread.last_page_num, 0, -1):
             cur_posts = parse_thread_page(thread.url, page_num, thread)
@@ -211,18 +207,16 @@ def main():
             new_posts = [post for post in cur_posts
                          if search_start_date < post.post_date < search_end_date]
             posts.extend(new_posts)
-            if not new_posts:
-                break
 
+    LOGGER.debug(posts)
     # In case testing, use dummy data
     # TODO: Generate this in a better way
     # Long-term we need unit tests, so maybe this mode can be removed entirely in the future, or if
     # it's needed, we can put the test data into a test input file somewhere instead of directly in
     # the code
-    if test_mode:
+    if testing_mode:
         posts = [
             Post(author_name='the_kovic', post_date=datetime(2020, 4, 10, 15, 22, 55), attachments={'kovic_e2m1-40.zip': 'https://www.doomworld.com/applications/core/interface/file/attachment.php?id=82293'}, links={'https://www.youtube.com/watch?v=aXyPH0J4BD8': 'https://www.youtube.com/watch?v=aXyPH0J4BD8'}, post_text='Ultimate Doom E2M1 in 40\nPort used: Crispy Doom\nDemo:\nVideo:\nI was inspired to attempt to run something in Doom by a couple of content creators on YT (you probably know which ones), decided to try E2M1. I got 41 in about ten minutes and then spent three more hours grinding 40. It might be bias but for now I think that running Doom is much harder for me than bunnyhopping in Source games (which is what I usually play and run).\nI hope I read all the rules correctly and that the demo works fine.', parent=Thread(name='Personal Best Demo Thread ← POST YOUR NON-WRs HERE', id=112532, url='https://www.doomworld.com/forum/topic/112532-personal-best-demo-thread-%E2%86%90-post-your-non-wrs-here/', last_post_date=datetime(2020, 4, 11, 3, 4, 56), last_page_num=3)), Post(author_name='RobUrHP420', post_date=datetime(2020, 4, 11, 3, 4, 56), attachments={'9.94e1m1(uv  pacifist).zip': 'https://www.doomworld.com/applications/core/interface/file/attachment.php?id=82370'}, links={'https://www.youtube.com/watch?v=2LF_jlA1aLc': 'https://www.youtube.com/watch?v=2LF_jlA1aLc'}, post_text='Finally hit 9s on Hangar (UV Pacifist) So happy rn! Took me well over a thousand attempts.\nVideo:', parent=Thread(name='Personal Best Demo Thread ← POST YOUR NON-WRs HERE', id=112532, url='https://www.doomworld.com/forum/topic/112532-personal-best-demo-thread-%E2%86%90-post-your-non-wrs-here/', last_post_date=datetime(2020, 4, 11, 3, 4, 56), last_page_num=3))]
-        LOGGER.debug(posts)
 
     demo_jsons = []
     for post in posts:
