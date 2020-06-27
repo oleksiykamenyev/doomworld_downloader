@@ -1,7 +1,7 @@
 [general]
 
-search_start_date = 2020-02-28T00:00:00Z
-search_end_date = 2020-02-28T23:59:59Z
+search_start_date = 2020-06-23T00:00:00Z
+search_end_date = 2020-06-23T23:59:59Z
 
 prboom_plus_directory = d:\\Games\\prboom-plus-2517
 parse_lmp_directory = d:\\MyStuff\\lmp

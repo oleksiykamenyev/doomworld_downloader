@@ -801,6 +801,11 @@
     wad: flotsam
   id: "112922"
   name: Flotsam demos [complevel 9]
+"https://www.doomworld.com/forum/topic/114802-akeldama-demos-complevel-2/":
+  addditional_info:
+    wad: akeldama
+  id: "114802"
+  name: Akeldama demos [-complevel 2]
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/103041-mayhem-2018-purple-and-orange-demos-complevel-9/":
@@ -1005,6 +1010,16 @@
     ignore: true
   id: "112534"
   name: TAS Practice Runs
+"https://www.doomworld.com/forum/topic/49306-first-attempt-demos-never-played-the-map-before/":
+  additional_info:
+    ignore: true
+  id: "49306"
+  name: First attempt demos [never played the map before]
+"https://www.doomworld.com/forum/topic/112535-shons-shamebox-of-cheats/":
+  additional_info:
+    ignore: true
+  id: "112535"
+  name: Shon's Shamebox of Cheats
 
 # Non-finalized WAD threads
 "https://www.doomworld.com/forum/topic/112350-freedoom-2/":
