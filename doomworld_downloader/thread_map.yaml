@@ -802,10 +802,15 @@
   id: "112922"
   name: Flotsam demos [complevel 9]
 "https://www.doomworld.com/forum/topic/114802-akeldama-demos-complevel-2/":
-  addditional_info:
+  additional_info:
     wad: akeldama
   id: "114802"
   name: Akeldama demos [-complevel 2]
+"https://www.doomworld.com/forum/topic/116595-1000-lines-2-community-project-demos-complevel-2/":
+  additional_info:
+    wad: 1klinecp2
+  id: "116595"
+  name: 1000 Lines 2 Community Project demos [-complevel 2]
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/103041-mayhem-2018-purple-and-orange-demos-complevel-9/":
