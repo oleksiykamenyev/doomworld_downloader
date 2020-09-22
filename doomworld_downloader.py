@@ -34,6 +34,7 @@ DOOM_SPEED_DEMOS_URL = 'https://www.doomworld.com/forum/37-doom-speed-demos/?pag
 THREAD_URL = '{base_url}/?page={num}'
 POST_URL = 'https://www.doomworld.com/forum/post/{post_id}'
 DATETIME_FORMAT = 'YYYY'
+CONTENT_FILE = 'post_content.txt'
 METADATA_FILE = 'demo_downloader_meta.txt'
 CATEGORY_REGEXES = [
     re.compile(r'UV[ -_]?Max', re.IGNORECASE),
@@ -244,8 +245,12 @@ def main():
             with open(attach_path, 'wb') as output_file:
                 output_file.write(response.content)
 
+            meta_info = {'url': post.post_url, 'links': post.links}
             with open(os.path.join(attach_dir, METADATA_FILE), 'w') as meta_file:
-                meta_file.write(post.post_url)
+                yaml.dump(meta_info, meta_file)
+
+            with open(os.path.join(attach_dir, CONTENT_FILE), 'w') as content_file:
+                content_file.write(post.post_text)
 
         demo_jsons.append({
             # Get this from the thread map or if the textfile has the TAS string in it.
