@@ -899,6 +899,13 @@
     - hadrone2
   id: "99313"
   name: Return to Hadron demos [-complevel 3]
+"https://www.doomworld.com/forum/topic/117036-64-kb-challenge-demos-complevel-2/":
+  additional_info:
+    wads:
+    - 32of64-v
+    - 32of64-lr
+  id: "117036"
+  name: 64 KB Challenge Demos [-complevel 2]
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":

@@ -35,7 +35,7 @@ THREAD_URL = '{base_url}/?page={num}'
 POST_URL = 'https://www.doomworld.com/forum/post/{post_id}'
 DATETIME_FORMAT = 'YYYY'
 CONTENT_FILE = 'post_content.txt'
-METADATA_FILE = 'demo_downloader_meta.txt'
+METADATA_FILE = 'demo_downloader_meta.yaml'
 CATEGORY_REGEXES = [
     re.compile(r'UV[ -_]?Max', re.IGNORECASE),
     re.compile(r'UV[ -_]?Speed', re.IGNORECASE),
@@ -72,9 +72,11 @@ class Thread:
 @dataclass
 class Post:
     author_name: str
+    author_id: int
     post_date: datetime
     attachments: dict
     links: dict
+    embeds: list
     post_text: str
     post_url: str
     parent: Thread
@@ -156,8 +158,13 @@ def parse_thread_page(base_url, page_number, thread):
         # harder to infer which wad maps to which demos from a multi-wad multi-demo post
         links = get_links(post_content_elem.find_all('a'), extract_link=True)
 
+        embeds = post_content_elem.find_all('iframe')
+        embeds = [embed['src'] for embed in embeds]
+
         author_elem = post.find('aside', class_='ipsComment_author')
         author_name = author_elem.find('h3', class_='cAuthorPane_author').getText().strip()
+        # URL format: https://www.doomworld.com/profile/id-author_name/
+        author_id = int(author_elem.find('a')['href'].rstrip('/').rsplit('/', 1)[-1].split('-')[0])
 
         post_text_elem = post.find('div', class_='ipsColumn')
         post_meta_elem = post_text_elem.find('div', class_='ipsComment_meta')
@@ -167,7 +174,8 @@ def parse_thread_page(base_url, page_number, thread):
         post_text = post_content_elem.getText().strip()
         post_text = '\n'.join([line.strip() for line in post_text.splitlines() if line.strip()])
 
-        posts.append(Post(author_name, post_date, attachments, links, post_text, post_url, thread))
+        posts.append(Post(author_name, author_id, post_date, attachments, links, embeds, post_text,
+                          post_url, thread))
 
     return posts
 
@@ -245,11 +253,13 @@ def main():
             with open(attach_path, 'wb') as output_file:
                 output_file.write(response.content)
 
-            meta_info = {'url': post.post_url, 'links': post.links}
+            meta_info = {'url': post.post_url, 'links': post.links, 'embeds': post.embeds,
+                         'author_id': post.author_id}
             with open(os.path.join(attach_dir, METADATA_FILE), 'w') as meta_file:
                 yaml.dump(meta_info, meta_file)
 
-            with open(os.path.join(attach_dir, CONTENT_FILE), 'w') as content_file:
+            content_file = os.path.join(attach_dir, CONTENT_FILE)
+            with open(content_file, 'w', encoding='utf-8') as content_file:
                 content_file.write(post.post_text)
 
         demo_jsons.append({
