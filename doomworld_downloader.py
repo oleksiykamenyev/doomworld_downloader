@@ -53,6 +53,7 @@ CATEGORY_REGEXES = [
     re.compile(r'(UV)?[ -_]?Stroller', re.IGNORECASE)
 ]
 ZIP_RE = re.compile(r'^.*\.zip$')
+KEEP_CHARS = ['_', ' ', '.', '-']
 
 THREAD_MAP = {}
 THREAD_MAP_KEYED_ON_ID = {}
@@ -242,7 +243,9 @@ def main():
     demo_jsons = []
     for post in posts:
         author_name = post.author_name
-        author_dir = 'demos_for_upload/{}'.format(author_name)
+        author_dir = 'demos_for_upload/{}'.format(
+            ''.join(c for c in author_name if c.isalnum() or c in KEEP_CHARS)
+        )
         for attach_name, attach_url in post.attachments.items():
             parsed_url = urlparse(attach_url)
             attach_id = parse_qs(parsed_url.query, keep_blank_values=True)['id']
