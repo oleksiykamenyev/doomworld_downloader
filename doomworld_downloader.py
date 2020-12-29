@@ -33,6 +33,10 @@ from doomworld_downloader.upload_config import CONFIG
 DOOM_SPEED_DEMOS_URL = 'https://www.doomworld.com/forum/37-doom-speed-demos/?page={num}'
 THREAD_URL = '{base_url}/?page={num}'
 POST_URL = 'https://www.doomworld.com/forum/post/{post_id}'
+ATTACH_URL_RE = re.compile(
+    r'^(https:)?//www.doomworld.com/applications/core/interface/file/attachment.php?id=\d+$'
+)
+HEADER_FILENAME_RE = re.compile(r'filename="(.+)"')
 DATETIME_FORMAT = 'YYYY'
 CONTENT_FILE = 'post_content.txt'
 METADATA_FILE = 'demo_downloader_meta.yaml'
@@ -143,11 +147,13 @@ def parse_thread_page(base_url, page_number, thread):
         for quote in quotes:
             quote.extract()
 
-        attachments = get_links(post_content_elem.find_all('a', class_='ipsAttachLink'),
-                                extract_link=True)
+        attachment_links = [
+            link for link in post_content_elem.find_all('a')
+            if 'ipsAttachLink' in link.get('class', []) or ATTACH_URL_RE.match(link['href'])
+        ]
+        attachments = get_links(attachment_links, extract_link=True)
         # TODO: Consider repackaging rars and 7zs so we don't have to ask the posters to do it
-        attachments = {attach: attach_url for attach, attach_url in attachments.items()
-                       if ZIP_RE.match(attach)}
+        attachments = {attach: attach_url for attach, attach_url in attachments.items()}
         # Skip posts with no attachments as they have no demos to search for
         if not attachments:
             continue
@@ -247,12 +253,20 @@ def main():
             ''.join(c for c in author_name if c.isalnum() or c in KEEP_CHARS)
         )
         for attach_name, attach_url in post.attachments.items():
+            response = requests.get(attach_url)
+            attach_filename = HEADER_FILENAME_RE.findall(response.headers['Content-Disposition'])
+            if len(attach_filename) == 1:
+                attach_filename = attach_filename[0]
+            else:
+                attach_filename = attach_name
+            if not ZIP_RE.match(attach_filename):
+                continue
+
             parsed_url = urlparse(attach_url)
             attach_id = parse_qs(parsed_url.query, keep_blank_values=True)['id']
             attach_dir = os.path.join(author_dir, attach_id[0])
             os.makedirs(attach_dir, exist_ok=True)
-            response = requests.get(attach_url)
-            attach_path = os.path.join(attach_dir, attach_name)
+            attach_path = os.path.join(attach_dir, attach_filename)
             with open(attach_path, 'wb') as output_file:
                 output_file.write(response.content)
 
