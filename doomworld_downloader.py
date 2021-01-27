@@ -254,7 +254,12 @@ def main():
         )
         for attach_name, attach_url in post.attachments.items():
             response = requests.get(attach_url)
-            attach_filename = HEADER_FILENAME_RE.findall(response.headers['Content-Disposition'])
+            if 'Content-Disposition' in response.headers:
+                attach_filename = HEADER_FILENAME_RE.findall(
+                    response.headers['Content-Disposition']
+                )
+            else:
+                attach_filename = []
             if len(attach_filename) == 1:
                 attach_filename = attach_filename[0]
             else:
