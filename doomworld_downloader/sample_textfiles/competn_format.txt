@@ -1,0 +1,24 @@
+| This is a COMPET-N Doom entry | http://www.doom.com.hr/compet-n/   |
+-------------------------------------------------------------------------
+Filename : txt.txt, lmp.lmp
+Date     : 1999-9-19 19:19
+Game     : The Plutonia Experiment
+Client   : doom2.exe v1.9
+Category : UV -respawn
+Map(s)   : MAP01: Congo
+Skill    : 4 (UV)
+-------------------------------------------------------------------------
+Name     : Given Name
+Nickname : Player
+Country  : Phobos
+Email    : email@email.com
+WWW      :
+-------------------------------------------------------------------------
+Kills    : 100%
+Items    : 100%
+Secrets  : 100%
+Time     : 00:01:23
+===================================
+Description:
+
+description

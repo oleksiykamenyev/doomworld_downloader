@@ -1,0 +1,13 @@
+# Players that need to be ignored for demos due to past cheating infractions, etc.
+# Maxine
+31952
+# Creeper2006
+31818
+# Shon_RT
+25640
+# Ray / Rey / Rae
+31258
+# Amicia
+31619
+# CringleChimp
+30772

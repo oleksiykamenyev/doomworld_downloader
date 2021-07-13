@@ -3,6 +3,7 @@
 search_start_date = 2020-06-23T00:00:00Z
 search_end_date = 2020-06-23T23:59:59Z
 
-prboom_plus_directory = d:\\Games\\prboom-plus-2517
+dsda_doom_directory = d:\\Games\\dsda-doom-dsda
 parse_lmp_directory = d:\\MyStuff\\lmp
+demo_download_directory = demos_for_upload
 testing_mode = true

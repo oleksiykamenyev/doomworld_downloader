@@ -8,317 +8,230 @@ Specifically, I see the following structure making sense:
       - get all of the relevant posts using the web parsing module and download demos
       - then use a separate interpolator module that takes the data from all the sources and mushes
         it together
-  - separate module where we can move all of the BeautifulSoup/web parsing crap in here
-    - the download request code can be in there too
 """
 
-import itertools
+import argparse
 import logging
 import os
 import re
+import shutil
 
-from dataclasses import dataclass
 from datetime import datetime
-from urllib.parse import urlparse, parse_qs
+from glob import glob
+from zipfile import ZipFile
 
-import requests
 import yaml
 
-from bs4 import BeautifulSoup
-from lxml import etree
+from doomworld_downloader.data_manager import DataManager
+from doomworld_downloader.demo_json_constructor import DemoJsonConstructor
+from doomworld_downloader.doomworld_data_retriever import get_new_posts, get_new_threads, \
+    download_attachments, Post, Thread
+from doomworld_downloader.lmp_parser import LMPData
+from doomworld_downloader.playback_parser import PlaybackData
+from doomworld_downloader.post_parser import PostData
+from doomworld_downloader.textfile_parser import TextfileData
+from doomworld_downloader.upload_config import CONFIG, set_up_configs
+from doomworld_downloader.utils import get_filename_no_ext
+from doomworld_downloader.wad_guesser import get_wad_guesses
 
-from doomworld_downloader.upload_config import CONFIG
 
-
-DOOM_SPEED_DEMOS_URL = 'https://www.doomworld.com/forum/37-doom-speed-demos/?page={num}'
-THREAD_URL = '{base_url}/?page={num}'
-POST_URL = 'https://www.doomworld.com/forum/post/{post_id}'
-ATTACH_URL_RE = re.compile(
-    r'^(https:)?//www.doomworld.com/applications/core/interface/file/attachment.php?id=\d+$'
-)
+DOWNLOAD_INFO_FILE = 'doomworld_downloader/current_download.txt'
 HEADER_FILENAME_RE = re.compile(r'filename="(.+)"')
 DATETIME_FORMAT = 'YYYY'
-CONTENT_FILE = 'post_content.txt'
-METADATA_FILE = 'demo_downloader_meta.yaml'
-CATEGORY_REGEXES = [
-    re.compile(r'UV[ -_]?Max', re.IGNORECASE),
-    re.compile(r'UV[ -_]?Speed', re.IGNORECASE),
-    re.compile(r'NM[ -_]?Speed', re.IGNORECASE),
-    re.compile(r'NM[ -_]?100s?', re.IGNORECASE),
-    re.compile(r'UV[ -_]?-?fast', re.IGNORECASE),
-    re.compile(r'(UV)?[ -_]?-?respawn', re.IGNORECASE),
-    re.compile(r'(UV)?[ -_]?Pacifist', re.IGNORECASE),
-    re.compile(r'(UV)?[ -_]?Tyson', re.IGNORECASE),
-    # TODO: Either encode regex logic to make this not match nomo100 or have logic later on for that
-    re.compile(r'(UV)?[ -_]?No ?mo(nsters)?', re.IGNORECASE),
-    re.compile(r'(UV)?[ -_]?Nomo100s?', re.IGNORECASE),
-    re.compile(r'Nightmare!?', re.IGNORECASE),
-    re.compile(r'(UV)?[ -_]?Reality', re.IGNORECASE),
-    re.compile(r'(UV)?[ -_]?Stroller', re.IGNORECASE)
-]
-ZIP_RE = re.compile(r'^.*\.zip$')
-KEEP_CHARS = ['_', ' ', '.', '-']
-
-THREAD_MAP = {}
-THREAD_MAP_KEYED_ON_ID = {}
 
 LOGGER = logging.getLogger(__name__)
 
 
-@dataclass
-class Thread:
-    name: str
-    id: int
-    url: str
-    last_post_date: datetime
-    last_page_num: int
+# TODO: Move to util class
+def demo_range_to_string(start_date, end_date):
+    """Convert demo time range to string.
+
+    Uses ~ as a separator since datetimes already have - inside them.
+
+    :param start_date: Start date
+    :param end_date: End date
+    :return: Demo time range as string
+    """
+    return '{}~{}'.format(start_date, end_date)
 
 
-@dataclass
-class Post:
-    author_name: str
-    author_id: int
-    post_date: datetime
-    attachments: dict
-    links: dict
-    embeds: list
-    post_text: str
-    post_url: str
-    parent: Thread
+# TODO: Move to util class.
+def get_log_level(verbose):
+    """Get log level for logging module.
+
+    Verbosity levels:
+        0 = ERROR
+        1 = WARNING
+        2 = INFO
+        3 = DEBUG
+
+    :param verbose: Verbosity level as integer counting number of times the
+                    argument was passed to the script
+    :return: Log level
+    """
+    if verbose >= 3:
+        return logging.DEBUG
+    if verbose == 2:
+        return logging.INFO
+    if verbose == 1:
+        return logging.WARNING
+
+    return logging.ERROR
 
 
-def get_links(link_elems, extract_link=False):
-    links = {}
-    for link_elem in link_elems:
-        link_url = link_elem['href']
-        # The attachment links on Doomworld do not have the protocol info, adding it manually.
-        # Running this for all the links and not just attachments seems safer just in case the link
-        # coding changes on the Doomworld side.
-        if not link_url.startswith('http'):
-            link_url = 'https:' + link_url
-        links[link_elem.getText().strip()] = link_url
-        if extract_link:
-            link_elem.extract()
-    return links
+def parse_args():
+    """Parse arguments to the script.
 
+    :return: Parsed arguments
+    """
+    parser = argparse.ArgumentParser(description='Doomworld demo downloader.')
 
-def get_page(url):
-    request_res = requests.get(url)
-    page_text = str(request_res.text)
-    return BeautifulSoup(page_text, features='lxml')
+    parser.add_argument('-v', '--verbose',
+                        action='count',
+                        default=0,
+                        help='Control verbosity of output.')
 
-
-def parse_thread_list(page_number):
-    soup = get_page(DOOM_SPEED_DEMOS_URL.format(num=page_number))
-    thread_elems = soup.find_all('li', class_='ipsDataItem')
-    threads = []
-    for thread in thread_elems:
-        id = thread['data-rowid']
-        if id in THREAD_MAP_KEYED_ON_ID:
-            if THREAD_MAP_KEYED_ON_ID[id].get('additional_info', {}).get('ignore', False):
-                continue
-        title = thread.find(class_='ipsDataItem_title')
-        title_link = title.find_all('a')[0]
-        pagination = title.find(class_='ipsPagination')
-        if pagination is not None:
-            last_page_num = int(pagination.getText().strip().split()[-1])
-        else:
-            last_page_num = 1
-
-        last_poster = thread.find(class_='ipsDataItem_lastPoster')
-        last_post_date = last_poster.find('time')['datetime']
-        last_post_date = datetime.strptime(last_post_date, '%Y-%m-%dT%H:%M:%SZ')
-        threads.append(Thread(title_link.getText().strip(), int(id), title_link['href'],
-                              last_post_date, last_page_num))
-
-    return threads
-
-
-def parse_thread_page(base_url, page_number, thread):
-    soup = get_page(THREAD_URL.format(base_url=base_url, num=page_number))
-    post_elems = soup.find_all('article', class_='ipsComment')
-    posts = []
-    for post in post_elems:
-        post_content_elem = post.find('div', class_='cPost_contentWrap')
-        post_content_elem = post_content_elem.find('div', attrs={'data-role': 'commentContent'})
-        # Remove all quotes from each post so we don't accidentally parse a different post's
-        # category/other info and don't accidentally get attachments from a different post.
-        quotes = post_content_elem.find_all('blockquote', class_='ipsQuote')
-        for quote in quotes:
-            quote.extract()
-
-        attachment_links = [
-            link for link in post_content_elem.find_all('a')
-            if 'ipsAttachLink' in link.get('class', []) or ATTACH_URL_RE.match(link['href'])
-        ]
-        attachments = get_links(attachment_links, extract_link=True)
-        # TODO: Consider repackaging rars and 7zs so we don't have to ask the posters to do it
-        attachments = {attach: attach_url for attach, attach_url in attachments.items()}
-        # Skip posts with no attachments as they have no demos to search for
-        if not attachments:
-            continue
-
-        post_id = post['id'].split('_')[1]
-        post_url = POST_URL.format(post_id=post_id)
-
-        # TODO: We may not want to extract_link here because that removes the links, so it might be
-        # harder to infer which wad maps to which demos from a multi-wad multi-demo post
-        links = get_links(post_content_elem.find_all('a'), extract_link=True)
-
-        embeds = post_content_elem.find_all('iframe')
-        embeds = [embed['src'] for embed in embeds]
-
-        author_elem = post.find('aside', class_='ipsComment_author')
-        author_name = author_elem.find('h3', class_='cAuthorPane_author').getText().strip()
-        # URL format: https://www.doomworld.com/profile/id-author_name/
-        author_id = int(author_elem.find('a')['href'].rstrip('/').rsplit('/', 1)[-1].split('-')[0])
-
-        post_text_elem = post.find('div', class_='ipsColumn')
-        post_meta_elem = post_text_elem.find('div', class_='ipsComment_meta')
-        post_date = post_meta_elem.find('time')['datetime']
-        post_date = datetime.strptime(post_date, '%Y-%m-%dT%H:%M:%SZ')
-
-        post_text = post_content_elem.getText().strip()
-        post_text = '\n'.join([line.strip() for line in post_text.splitlines() if line.strip()])
-
-        posts.append(Post(author_name, author_id, post_date, attachments, links, embeds, post_text,
-                          post_url, thread))
-
-    return posts
+    return parser.parse_args()
 
 
 def main():
-    # TODO: Probably refactor this to a separate module/class handling configuration
+    """Main function."""
+    args = parse_args()
+    log_level = get_log_level(args.verbose)
+    logging.basicConfig(
+        level=log_level,
+        format='%(asctime)s - %(name)s - %(levelname)s: %(message)s'
+    )
+
     # TODO:
     #   The config files (thread map, upload.ini, etc.) should eventually be moved to be managed by
     #   pkg_resources instead of relative paths
     testing_mode = CONFIG.testing_mode
-    with open('doomworld_downloader/thread_map.yaml', encoding='utf-8') as thread_map_stream:
-        THREAD_MAP.update(yaml.safe_load(thread_map_stream))
-
-    # TODO: I made the map keyed on URL, but depending on how we use it over time, might want to
-    # reformat the YAML to be keyed on ID
-    for url, thread_dict in THREAD_MAP.items():
-        THREAD_MAP_KEYED_ON_ID[thread_dict['id']] = {key: value
-                                                     for key, value in thread_dict.items()}
-        THREAD_MAP_KEYED_ON_ID['url'] = url
+    set_up_configs()
 
     search_start_date = datetime.strptime(CONFIG.search_start_date, '%Y-%m-%dT%H:%M:%SZ')
     search_end_date = datetime.strptime(CONFIG.search_end_date, '%Y-%m-%dT%H:%M:%SZ')
-    threads = []
-    for page_num in itertools.count(1):
-        # In case of testing, use dummy data
-        if testing_mode:
-            break
-        cur_threads = parse_thread_list(page_num)
-        new_threads = [thread for thread in cur_threads
-                       if thread.last_post_date > search_start_date]
-        # If no new threads are found, break out of the loop.
-        if not new_threads:
-            break
+    demo_range = demo_range_to_string(search_start_date, search_end_date)
 
-        threads.extend(new_threads)
-
-    LOGGER.debug(threads)
-    posts = []
-    for thread in threads:
-        # In case of testing, use dummy data
-        if testing_mode:
-            break
-        for page_num in range(thread.last_page_num, 0, -1):
-            cur_posts = parse_thread_page(thread.url, page_num, thread)
-            # If the last post on a page is before the start date, we can break out immediately
-            # since we are going backwards in time from the last page.
-            if cur_posts and cur_posts[-1].post_date < search_start_date:
-                break
-
-            new_posts = [post for post in cur_posts
-                         if search_start_date < post.post_date < search_end_date]
-            posts.extend(new_posts)
-
-    LOGGER.debug(posts)
-    # In case testing, use dummy data
-    # TODO: Generate this in a better way
-    # Long-term we need unit tests, so maybe this mode can be removed entirely in the future, or if
-    # it's needed, we can put the test data into a test input file somewhere instead of directly in
-    # the code
+    with open(DOWNLOAD_INFO_FILE) as current_download_strm:
+        current_download_info = current_download_strm.read().strip()
+    if current_download_info and demo_range == current_download_info:
+        # Use cached stuff if available
+        post_cache_dir = os.path.join(CONFIG.demo_download_directory, 'post_cache')
+        post_info_files = glob(post_cache_dir + '/**/*.yaml', recursive=True)
+        posts = []
+        for post_info_file in post_info_files:
+            with open(post_info_file, encoding='utf-8') as post_info_stream:
+                post_dict = yaml.safe_load(post_info_stream)
+            post_dict['parent'] = Thread(**post_dict['parent'])
+            posts.append(Post(**post_dict))
+    else:
+        threads = get_new_threads(search_start_date, testing_mode)
+        posts = get_new_posts(search_end_date, search_start_date, testing_mode, threads)
+    # TODO: Implement testing mode or unit tests of some sort
+    # In case of testing, use no data for now
     if testing_mode:
-        posts = [
-            Post(author_name='the_kovic', post_date=datetime(2020, 4, 10, 15, 22, 55), attachments={'kovic_e2m1-40.zip': 'https://www.doomworld.com/applications/core/interface/file/attachment.php?id=82293'}, links={'https://www.youtube.com/watch?v=aXyPH0J4BD8': 'https://www.youtube.com/watch?v=aXyPH0J4BD8'}, post_text='Ultimate Doom E2M1 in 40\nPort used: Crispy Doom\nDemo:\nVideo:\nI was inspired to attempt to run something in Doom by a couple of content creators on YT (you probably know which ones), decided to try E2M1. I got 41 in about ten minutes and then spent three more hours grinding 40. It might be bias but for now I think that running Doom is much harder for me than bunnyhopping in Source games (which is what I usually play and run).\nI hope I read all the rules correctly and that the demo works fine.', parent=Thread(name='Personal Best Demo Thread ← POST YOUR NON-WRs HERE', id=112532, url='https://www.doomworld.com/forum/topic/112532-personal-best-demo-thread-%E2%86%90-post-your-non-wrs-here/', last_post_date=datetime(2020, 4, 11, 3, 4, 56), last_page_num=3)), Post(author_name='RobUrHP420', post_date=datetime(2020, 4, 11, 3, 4, 56), attachments={'9.94e1m1(uv  pacifist).zip': 'https://www.doomworld.com/applications/core/interface/file/attachment.php?id=82370'}, links={'https://www.youtube.com/watch?v=2LF_jlA1aLc': 'https://www.youtube.com/watch?v=2LF_jlA1aLc'}, post_text='Finally hit 9s on Hangar (UV Pacifist) So happy rn! Took me well over a thousand attempts.\nVideo:', parent=Thread(name='Personal Best Demo Thread ← POST YOUR NON-WRs HERE', id=112532, url='https://www.doomworld.com/forum/topic/112532-personal-best-demo-thread-%E2%86%90-post-your-non-wrs-here/', last_post_date=datetime(2020, 4, 11, 3, 4, 56), last_page_num=3))]
+        posts = []
 
     demo_jsons = []
     for post in posts:
-        author_name = post.author_name
-        author_dir = 'demos_for_upload/{}'.format(
-            ''.join(c for c in author_name if c.isalnum() or c in KEEP_CHARS)
-        )
-        for attach_name, attach_url in post.attachments.items():
-            response = requests.get(attach_url)
-            if 'Content-Disposition' in response.headers:
-                attach_filename = HEADER_FILENAME_RE.findall(
-                    response.headers['Content-Disposition']
-                )
-            else:
-                attach_filename = []
-            if len(attach_filename) == 1:
-                attach_filename = attach_filename[0]
-            else:
-                attach_filename = attach_name
-            if not ZIP_RE.match(attach_filename):
+        post_data = PostData(post)
+        downloads = download_attachments(post)
+        # TODO: This download section should probably be in some other module
+        for download in downloads:
+            # TODO: Handle demo packs
+            is_demo_pack = False
+            zip_file = ZipFile(download)
+            info_list = zip_file.infolist()
+            lmp_files = {}
+            txt_files = []
+            for zip_file_member in info_list:
+                zip_file_name = zip_file_member.filename
+                if zip_file_name.lower().endswith('.lmp'):
+                    lmp_files[zip_file_name] = datetime(*zip_file_member.date_time)
+                if zip_file_name.lower().endswith('.txt'):
+                    # TODO: Keep track of textfile date; it might be useful if the lmp date needs
+                    #       sanity checking
+                    txt_files.append(zip_file_name)
+
+            if not lmp_files:
+                LOGGER.warning('No lmp files found in download %s.', download)
+                continue
+            if not txt_files:
+                LOGGER.error('No txt files found in download %s.', download)
                 continue
 
-            parsed_url = urlparse(attach_url)
-            attach_id = parse_qs(parsed_url.query, keep_blank_values=True)['id']
-            attach_dir = os.path.join(author_dir, attach_id[0])
-            os.makedirs(attach_dir, exist_ok=True)
-            attach_path = os.path.join(attach_dir, attach_filename)
-            with open(attach_path, 'wb') as output_file:
-                output_file.write(response.content)
+            zip_no_ext = get_filename_no_ext(download)
+            if len(lmp_files) != 1:
+                # TODO: Refactor to separate function with below txt file function
+                main_lmp = None
+                for lmp_file in lmp_files:
+                    lmp_no_ext = get_filename_no_ext(lmp_file)
+                    if lmp_no_ext == zip_no_ext:
+                        LOGGER.debug('Download %s contains multiple demos, parsing just demo '
+                                     'matching the zip name.', download)
+                        main_lmp = lmp_no_ext
+                        break
 
-            meta_info = {'url': post.post_url, 'links': post.links, 'embeds': post.embeds,
-                         'author_id': post.author_id}
-            with open(os.path.join(attach_dir, METADATA_FILE), 'w') as meta_file:
-                yaml.dump(meta_info, meta_file)
+                if main_lmp:
+                    lmp_files = {main_lmp: lmp_files[main_lmp]}
+                else:
+                    is_demo_pack = True
 
-            content_file = os.path.join(attach_dir, CONTENT_FILE)
-            with open(content_file, 'w', encoding='utf-8') as content_file:
-                content_file.write(post.post_text)
+            if len(txt_files) != 1:
+                main_txt = None
+                for txt_file in txt_files:
+                    txt_no_ext = get_filename_no_ext(txt_file)
+                    if txt_no_ext == zip_no_ext:
+                        LOGGER.debug('Download %s contains multiple txts, parsing just txt '
+                                     'matching the zip name.', download)
+                        main_txt = txt_no_ext
+                        break
 
-        demo_jsons.append({
-            # Get this from the thread map or if the textfile has the TAS string in it.
-            'is_tas': None,
-            # Get this from the lmp header?
-            'is_solo_net': None,
-            # Get this from the lmp header
-            'player_count': None,
-            # Get this from the thread map or post URLs or last resort either the demo footer or
-            # textfile
-            'wad_name': None,
-            # This is in the attachments dictionary
-            'zip_name': None,
-            # Get this from the footer/demo analysis preferably, if not then demo
-            'engine': None,
-            # Get this from the levelstat preferably, or the post/textfile
-            'time': None,
-            # Get this from the levelstat
-            'level': None,
-            # Get this from the levelstat
-            'kills': None,
-            # Get this from the levelstat
-            'items': None,
-            # Get this from the levelstat
-            'secrets': None,
-            # Auto-infer this preferably or get from post/textfile
-            'category': None,
-            # Get this from the zip file date
-            'recorded_at': None,
-            # Assume this is the author name unless num_players is more than 1, in which case we
-            # probably will have to fill it in manually
-            'player_list': None,
-            # Update in case of Other category or certain other cases (need to compile a list, not
-            # sure we can cover this automatically)
-            'comment': None
-        })
+                if main_txt:
+                    txt_files = [main_txt]
+                else:
+                    LOGGER.error('Multiple txt files found in download %s with no primary txt '
+                                 'found.', download)
+                    continue
+
+            download_dir = os.path.dirname(download)
+            out_path = os.path.join(download_dir, zip_no_ext)
+            zip_file.extractall(path=out_path, members=list(lmp_files.keys()) + txt_files)
+
+            # There should really be only one textfile at this moment, so will assume this.
+            # TODO: Should just set textfile_data if txtfile list is len 1, otherwise None
+            textfile_data = None
+            for txt_file in txt_files:
+                textfile_data = TextfileData(os.path.join(out_path, txt_file))
+
+            for lmp_file, recorded_date in lmp_files.items():
+                lmp_path = os.path.join(out_path, lmp_file)
+                lmp_data = LMPData(lmp_path, recorded_date)
+                demo_info = {'is_solo_net': lmp_data.data.get('is_solo_net', False),
+                             'is_chex': lmp_data.raw_data.get('is_chex', False),
+                             'is_heretic': lmp_data.raw_data.get('is_heretic', False),
+                             'complevel': lmp_data.raw_data.get('complevel')}
+                wad_guesses = get_wad_guesses(
+                    post_data.raw_data['wad_links'], textfile_data.raw_data['wad_strings'],
+                    lmp_data.raw_data['wad_strings']
+                )
+                playback_data = PlaybackData(lmp_path, wad_guesses, demo_info=demo_info)
+                data_manager = DataManager()
+                post_data.populate_data_manager(data_manager)
+                textfile_data.populate_data_manager(data_manager)
+                lmp_data.populate_data_manager(data_manager)
+                playback_data.populate_data_manager(data_manager)
+                all_note_strings = set().union(post_data.note_strings, textfile_data.note_strings,
+                                               lmp_data.note_strings, playback_data.note_strings)
+                demo_json_constructor = DemoJsonConstructor(data_manager, all_note_strings,
+                                                            download)
+                print(demo_json_constructor.demo_json)
+
+            shutil.rmtree(out_path)
+
+    with open(DOWNLOAD_INFO_FILE, 'w') as current_download_strm:
+        current_download_strm.write(demo_range)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,183 @@
+"""
+Various utilities to parse DSDA pages
+"""
+
+import logging
+import os
+import requests
+
+from urllib.parse import urlparse
+
+from bs4 import BeautifulSoup
+
+from .utils import get_download_filename, download_response
+
+
+LOGGER = logging.getLogger(__name__)
+
+
+# TODO: Move to utils class
+def get_page(url):
+    """Get page at URL as a parsed tree structure using BeautifulSoup.
+
+    :param url: URL to get
+    :return: Parsed tree structure
+    """
+    request_res = requests.get(url)
+    page_text = str(request_res.text)
+    return BeautifulSoup(page_text, features='lxml')
+
+
+def verify_dsda(url):
+    """Verify that given DSDA URL is actually a URL for the DSDA.
+
+    :param url: URL
+    :raises ValueError if provided URL isn't a DSDA URL.
+    """
+    url_parsed = urlparse(url)
+    if url_parsed.netloc.endswith('dsdarchive.com'):
+        raise ValueError('URL {} is not a DSDA URL.')
+
+
+def fix_dsda_link(link_url):
+    """Fix link on DSDA to be full URL path.
+
+    :param link_url: DSDA link URL
+    :return: Fixed DSDA link URL
+    """
+    if link_url.startswith('/'):
+        link_url = 'https://www.dsdarchive.com' + link_url
+    return link_url
+
+
+def parse_dsda_cell(cell):
+    """Parse single cell on DSDA page.
+
+    Parses text out of DSDA URL, mapped to the link URL if the cell is a link.
+
+    :param cell: DSDA cell elem
+    :return: DSDA cell parsed
+    """
+    cell_text = cell.getText().strip()
+    cell_links = cell.find_all('a')
+    if cell_links:
+        for cell_link in cell_links:
+            if cell_link.getText().strip() != cell_text:
+                continue
+
+            # TODO: Does this actually work for video URLs on DSDA?
+            link_url = fix_dsda_link(cell_link['href'])
+            return {cell_text: link_url}
+
+    # Span element info is kept track of for dubious/WR/etc. notes.
+    # TODO: Need to make sure this doesn't actually include the timeline spans for categories.
+    cell_spans = cell.find_all('span')
+    if cell_spans is not None and cell_spans != []:
+        cell_contents = [span['title'] for span in cell_spans if 'title' in span]
+        if cell_contents:
+            if cell_text:
+                cell_contents.append(cell_text)
+            return cell_contents
+
+    return cell_text
+
+
+def dsda_page_to_demo_table(dsda_url):
+    """Convert DSDA page to table of demos.
+
+    :param dsda_url: DSDA URL
+    :return: Table of demos from given DSDA URL
+    """
+    # TODO: What the fuck is this code?
+    verify_dsda(dsda_url)
+    soup = get_page(dsda_url)
+    demo_table = soup.find('table')
+    table_header = demo_table.find('thead')
+    header_cols = table_header.find('tr').find_all('th')
+    col_names = []
+    for col in header_cols:
+        col_span = col.find('span')
+        # Handle columns that are denoted by an icon (e.g., video icon)
+        if col_span is not None:
+            col_names.append(col_span['aria-label'])
+        else:
+            col_names.append(col.getText().strip())
+
+    rows = demo_table.find('tbody').find_all('tr')
+    demo_list = []
+    multi_col_cur_values = []
+    for row in rows:
+        if not row.getText():
+            continue
+
+        cols = row.find_all('td')
+        tag_cols = [col for col in cols if 'tag-text' in col.get('class', '')]
+        if tag_cols:
+            if not demo_list[-1]['Note']:
+                demo_list[-1]['Note'] = []
+            if not isinstance(demo_list[-1]['Note'], list):
+                demo_list[-1]['Note'] = [demo_list[-1]['Note']]
+
+            for col in tag_cols:
+                demo_list[-1]['Note'].append(col.getText().strip())
+            continue
+
+        multi_cols = [col for col in cols if 'no-stripe-panel' in col.get('class', '')]
+        other_cols = [col for col in cols if 'no-stripe-panel' not in col.get('class', '')]
+
+        for idx, col in enumerate(reversed(multi_cols)):
+            col_text = parse_dsda_cell(col)
+            if len(multi_col_cur_values) == idx:
+                multi_col_cur_values.append(col_text)
+            else:
+                multi_col_cur_values[idx] = col_text
+
+        row_values = (list(reversed(multi_col_cur_values)) +
+                      [parse_dsda_cell(col) for col in other_cols])
+        demo_list.append(dict(zip(col_names, row_values)))
+
+    return demo_list
+
+
+def download_wad_from_dsda(dsda_url):
+    """Download WAD from DSDA URL.
+
+    :param dsda_url: DSDA URL
+    :return: Path to local wad download from DSDA
+    :raises ValueError if a non-wad URL is provided to this function
+            RunTimeError if there's an issue getting the wad for a given page
+    """
+    soup = get_page(dsda_url)
+    verify_dsda(dsda_url)
+    if 'dsdarchive.com/wads' not in dsda_url:
+        raise ValueError('{} is not a wad URL on DSDA, nothing to download.'.format(dsda_url))
+    headers = soup.findall('div', {'class': 'center-text'})
+    wad_url = None
+    for header in headers:
+        if not header.getText():
+            continue
+
+        link_elem = header.find('a')
+        if not link_elem:
+            continue
+
+        link_url = link_elem['href']
+        if link_url.startswith('/wads'):
+            LOGGER.info('No link available for page: %s.', dsda_url)
+            LOGGER.info('This should only happen if this is a commercial product.')
+            return
+        elif link_url.startswith('/files'):
+            wad_url = fix_dsda_link(link_url)
+
+    if not wad_url:
+        raise RuntimeError('Unable to find wad for DSDA URL {}.'.format(dsda_url))
+
+    # TODO: Add option to configure the download directory
+    response = requests.get(wad_url)
+    download_filename = get_download_filename(response)
+    # https://www.dsdarchive.com/wads/scythe:
+    #   path: /wads/scythe
+    wad_name = urlparse(dsda_url).path.strip('/').split('/')[1]
+    download_dir = os.path.join('dsda_wads', wad_name)
+    download_response(response, download_dir, download_filename)
+    return os.path.join(download_dir, download_filename)

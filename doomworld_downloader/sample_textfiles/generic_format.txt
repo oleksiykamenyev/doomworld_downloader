@@ -1,0 +1,13 @@
+Doomed Speed Demos Archive
+http://dsdarchive.com
+Iwad: iwad.wad
+Pwad: PWAD
+Pwad name: PWAD Name
+Map: ##
+Skill:  #
+Category:  UV Pacifist
+Exe: PrBoom-Plus 2.5.1.4
+
+Time: 0:01
+
+Author: DoomPlayer420
