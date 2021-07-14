@@ -1,6 +1,7 @@
 """
 WAD guesser.
 """
+
 import logging
 
 from .upload_config import WAD_MAP_BY_DSDA_URL, WAD_MAP_BY_IDGAMES_URL

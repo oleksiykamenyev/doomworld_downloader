@@ -4,10 +4,12 @@ Doomworld data retriever.
 This contains all of the functionality needed to download demos from Doomworld.
 """
 # TODO: Perhaps the retriever should be a class?
+
 import itertools
 import logging
 import os
 import re
+import shutil
 
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -16,10 +18,8 @@ from urllib.parse import urlparse, parse_qs
 import requests
 import yaml
 
-from bs4 import BeautifulSoup
-
 from doomworld_downloader.upload_config import CONFIG, PLAYER_IGNORE_LIST, THREAD_MAP_KEYED_ON_ID
-from doomworld_downloader.utils import get_download_filename, download_response
+from doomworld_downloader.utils import get_download_filename, download_response, get_page
 
 
 DOOM_SPEED_DEMOS_URL = 'https://www.doomworld.com/forum/37-doom-speed-demos/?page={num}'
@@ -32,6 +32,9 @@ KEEP_CHARS = ['_', ' ', '.', '-']
 CONTENT_FILE = 'post_content.txt'
 METADATA_FILE = 'demo_downloader_meta.yaml'
 ZIP_RE = re.compile(r'^.*\.zip$')
+POST_CACHE_DIR = 'post_cache'
+POST_INFO_FILENAME = 'post_info.yaml'
+FAILED_POST_DIR = 'failed_posts'
 
 LOGGER = logging.getLogger(__name__)
 
@@ -59,6 +62,7 @@ class Post:
     post_text: str
     post_url: str
     parent: Thread
+
     cached_downloads: list = field(default_factory=list)
 
 
@@ -82,18 +86,6 @@ def get_links(link_elems, extract_link=False):
         if extract_link:
             link_elem.extract()
     return links
-
-
-# TODO: Move to utils class
-def get_page(url):
-    """Get page at URL as a parsed tree structure using BeautifulSoup.
-
-    :param url: URL to get
-    :return: Parsed tree structure
-    """
-    request_res = requests.get(url)
-    page_text = str(request_res.text)
-    return BeautifulSoup(page_text, features='lxml')
 
 
 def parse_thread_list(page_number):
@@ -138,11 +130,9 @@ def cache_post(post):
 
     :param post: Post data class
     """
-    # TODO: Cache location strings should be global vars
-    post_cache_dir = os.path.join(CONFIG.demo_download_directory, 'post_cache', str(post.id))
+    post_cache_dir = os.path.join(CONFIG.demo_download_directory, POST_CACHE_DIR, str(post.id))
     os.makedirs(post_cache_dir, exist_ok=True)
-    # TODO: Cache location strings should be global vars
-    post_cache_file = os.path.join(post_cache_dir, 'post_info.yaml')
+    post_cache_file = os.path.join(post_cache_dir, POST_INFO_FILENAME)
     # The post dictionary is recreated so we do not modify the class dict of the actual post object
     post_dict = {key: value for key, value in post.__dict__.items()}
     post_dict['parent'] = post.parent.__dict__
@@ -212,8 +202,7 @@ def parse_thread_page(base_url, page_number, thread):
     return posts
 
 
-# TODO: Reorder end and start date to be in order
-def get_new_posts(search_end_date, search_start_date, testing_mode, new_threads):
+def get_new_posts(search_start_date, search_end_date, testing_mode, new_threads):
     """Get new posts from all new threads.
 
     :param search_end_date: Search end datetime
@@ -277,9 +266,8 @@ def update_cache(post, downloads):
     :param post: Post to update cache for
     :param downloads: Downloads for the post
     """
-    # TODO: Cache location strings should be global vars
-    post_cache_file = os.path.join(CONFIG.demo_download_directory, 'post_cache', str(post.id),
-                                   'post_info.yaml')
+    post_cache_file = os.path.join(CONFIG.demo_download_directory, POST_CACHE_DIR, str(post.id),
+                                   POST_INFO_FILENAME)
     with open(post_cache_file, encoding='utf-8') as post_info_stream:
         post_dict = yaml.safe_load(post_info_stream)
 
@@ -332,3 +320,11 @@ def download_attachments(post):
 
     update_cache(post, downloads)
     return downloads
+
+def move_post_cache_to_failed(post):
+    """Move specific post cache dir to failed directory.
+
+    :param post: Post to move cache dir for
+    """
+    post_cache_dir = os.path.join(CONFIG.demo_download_directory, POST_CACHE_DIR, str(post.id))
+    shutil.move(post_cache_dir, FAILED_POST_DIR)

@@ -8,66 +8,6 @@ import re
 
 from .data_manager import DataManager
 
-# TODO: These should probably be class vars
-CATEGORY_REGEXES = {
-    re.compile(r'UV[ -_]?Max', re.IGNORECASE): 'UV Max',
-    re.compile(r'UV[ -_]?Speed', re.IGNORECASE): 'UV Speed',
-    re.compile(r'NM[ -_]?Speed', re.IGNORECASE): 'NM Speed',
-    re.compile(r'NM[ -_]?100s?', re.IGNORECASE): 'NM 100S',
-    re.compile(r'UV[ -_]?-?fast', re.IGNORECASE): 'UV Fast',
-    re.compile(r'(UV)?[ -_]?-?respawn', re.IGNORECASE): 'UV Respawn',
-    re.compile(r'(UV)?[ -_]?Pacifist', re.IGNORECASE): 'Pacifist',
-    re.compile(r'(UV)?[ -_]?Tyson', re.IGNORECASE): 'Tyson',
-    re.compile(r'(UV)?[ -_]?No\s*mo(nsters)?\s*$', re.IGNORECASE): 'NoMo',
-    re.compile(r'(UV)?[ -_]?No\s*mo(nsters)?[ -_]?100s?', re.IGNORECASE): 'NoMo 100S',
-    re.compile(r'(UV)?[ -_]?Stroller', re.IGNORECASE): 'Stroller'
-}
-NOTE_REGEXES = {
-    re.compile(r'(UV|NM)?[ -_]?Reality', re.IGNORECASE): 'Also Reality'
-}
-PORT_REGEXES = {
-    # Vanilla
-
-    # Chocolate family
-    # Chocolate Doom
-    re.compile(r'Chocolate\s*Doom\s*v?(?P<version>\d\.\d\.\d)', re.IGNORECASE): 'Chocolate DooM',
-    # Crispy Doom
-    re.compile(r'Crispy\s*Doom\s*v?(?P<version>\d\.\d\.\d)', re.IGNORECASE): 'Crispy Doom',
-    # CNDoom
-    re.compile(r'CNDoom\s*v?(?P<version>\d\.\d\.\d(\.\d))?', re.IGNORECASE): 'CNDoom',
-
-    # Boom/MBF family
-    # Boom
-    re.compile(r'([\S+])Boom\s*v?(?P<version>2\.0\.[0-2])', re.IGNORECASE): 'Boom',
-    # MBF
-    re.compile(
-        r'[\S+](?P<name>MBF(386|-Sigil|-SNM)?)\s*v?(?P<version>\d\.\d\.\d)', re.IGNORECASE
-    ): None,
-    # TASMBF
-    re.compile(r'TASMBF', re.IGNORECASE): 'TASMBF',
-    # PrBoom
-    re.compile(r'(Pr|GL)Boom^(\+|-plus)\s*v?(?P<version>\d\.\d\.\d)', re.IGNORECASE): 'PrBoom',
-    # PrBoom+
-    re.compile(
-        r'(Pr|GL)Boom(\+|-plus)(\s*|-)?v?(?P<version>\d\.\d\.\d\.\d)\s'
-        r'*-?(complevel|cl)\s*(?P<complevel>\d+)',
-        re.IGNORECASE
-    ): 'PrBoom-plus',
-
-    # ZDoom family
-    # ZDoom
-    re.compile(r'[\S+]ZDoom\s*v?(?P<version>\d\.\d(\.\S+))?', re.IGNORECASE): 'ZDoom',
-    # GZDoom
-    re.compile(r'GZDoom\s*v?(?P<version>\d\.\d\.\d+)', re.IGNORECASE): 'GZDoom',
-    # ZDaemon
-    re.compile(r'ZDaemon\s*v?(?P<version>\d\.\d\.\d+)', re.IGNORECASE): 'ZDaemon',
-    # Zandronum
-    re.compile(r'Zandronum\s*v?(?P<version>\d\.\d(\.\d+)?(\s*Alpha))', re.IGNORECASE): 'Zandronum',
-
-    # Other ports
-    # Strawberry Doom
-    re.compile(r'Strawberry\s*Doom\s*r(?P<version>\d+)', re.IGNORECASE): 'Strawberry Doom',
-}
 
 LOGGER = logging.getLogger(__name__)
 
@@ -85,16 +25,81 @@ class TextfileData:
     CERTAIN_KEYS = ['is_tas']
     POSSIBLE_KEYS = ['category', 'source_port', 'video_link']
 
-    def __init__(self, textfile):
+    CATEGORY_REGEXES = {
+        re.compile(r'UV[ -_]?Max', re.IGNORECASE): 'UV Max',
+        re.compile(r'UV[ -_]?Speed', re.IGNORECASE): 'UV Speed',
+        re.compile(r'NM[ -_]?Speed', re.IGNORECASE): 'NM Speed',
+        re.compile(r'NM[ -_]?100s?', re.IGNORECASE): 'NM 100S',
+        re.compile(r'UV[ -_]?-?fast', re.IGNORECASE): 'UV Fast',
+        re.compile(r'(UV)?[ -_]?-?respawn', re.IGNORECASE): 'UV Respawn',
+        re.compile(r'(UV)?[ -_]?Pacifist', re.IGNORECASE): 'Pacifist',
+        re.compile(r'(UV)?[ -_]?Tyson', re.IGNORECASE): 'Tyson',
+        re.compile(r'(UV)?[ -_]?No\s*mo(nsters)?\s*$', re.IGNORECASE): 'NoMo',
+        re.compile(r'(UV)?[ -_]?No\s*mo(nsters)?[ -_]?100s?', re.IGNORECASE): 'NoMo 100S',
+        re.compile(r'(UV)?[ -_]?Stroller', re.IGNORECASE): 'Stroller'
+    }
+    NOTE_REGEXES = {
+        re.compile(r'(UV|NM)?[ -_]?Reality', re.IGNORECASE): 'Also Reality'
+    }
+    PORT_REGEXES = {
+        # Vanilla
+
+        # Chocolate family
+        # Chocolate Doom
+        re.compile(r'Chocolate\s*Doom\s*v?(?P<version>\d\.\d\.\d)',
+                   re.IGNORECASE): 'Chocolate DooM',
+        # Crispy Doom
+        re.compile(r'Crispy\s*Doom\s*v?(?P<version>\d\.\d\.\d)', re.IGNORECASE): 'Crispy Doom',
+        # CNDoom
+        re.compile(r'CNDoom\s*v?(?P<version>\d\.\d\.\d(\.\d))?', re.IGNORECASE): 'CNDoom',
+
+        # Boom/MBF family
+        # Boom
+        re.compile(r'([\S+])Boom\s*v?(?P<version>2\.0\.[0-2])', re.IGNORECASE): 'Boom',
+        # MBF
+        re.compile(
+            r'[\S+](?P<name>MBF(386|-Sigil|-SNM)?)\s*v?(?P<version>\d\.\d\.\d)', re.IGNORECASE
+        ): None,
+        # TASMBF
+        re.compile(r'TASMBF', re.IGNORECASE): 'TASMBF',
+        # PrBoom
+        re.compile(r'(Pr|GL)Boom^(\+|-plus)\s*v?(?P<version>\d\.\d\.\d)', re.IGNORECASE): 'PrBoom',
+        # PrBoom+
+        re.compile(
+            r'(Pr|GL)Boom(\+|-plus)(\s*|-)?v?(?P<version>\d\.\d\.\d\.\d)\s'
+            r'*-?(complevel|cl)\s*(?P<complevel>\d+)',
+            re.IGNORECASE
+        ): 'PrBoom-plus',
+
+        # ZDoom family
+        # ZDoom
+        re.compile(r'[\S+]ZDoom\s*v?(?P<version>\d\.\d(\.\S+))?', re.IGNORECASE): 'ZDoom',
+        # GZDoom
+        re.compile(r'GZDoom\s*v?(?P<version>\d\.\d\.\d+)', re.IGNORECASE): 'GZDoom',
+        # ZDaemon
+        re.compile(r'ZDaemon\s*v?(?P<version>\d\.\d\.\d+)', re.IGNORECASE): 'ZDaemon',
+        # Zandronum
+        re.compile(r'Zandronum\s*v?(?P<version>\d\.\d(\.\d+)?(\s*Alpha))',
+                   re.IGNORECASE): 'Zandronum',
+
+        # Other ports
+        # Strawberry Doom
+        re.compile(r'Strawberry\s*Doom\s*r(?P<version>\d+)', re.IGNORECASE): 'Strawberry Doom',
+    }
+
+    def __init__(self, textfile_path):
         """Initialize textfile data class.
 
-        :param textfile: Path to textfile on local filesystem.
+        :param textfile_path: Path to textfile on local filesystem.
         """
         self.data = {}
         self.raw_data = {'wad_strings': [], 'video_links': []}
         self.note_strings = set()
+        self.textfile_path = textfile_path
         self._raw_textfile = None
-        self._parse_textfile(textfile)
+
+    def analyze(self):
+        self._parse_textfile()
 
     def populate_data_manager(self, data_manager):
         # The following data points are set for the playback parser:
@@ -108,12 +113,9 @@ class TextfileData:
             else:
                 raise ValueError('Unrecognized key found in data dictionary: {}.'.format(key))
 
-    def _parse_textfile(self, textfile):
-        """Parse textfile path.
-
-        :param textfile: Path to textfile on local filesystem.
-        """
-        with open(textfile) as textfile_stream:
+    def _parse_textfile(self):
+        """Parse textfile path."""
+        with open(self.textfile_path) as textfile_stream:
             self._raw_textfile = textfile_stream.read()
 
         if TextfileData.TAS_STRING in self._raw_textfile.lower():
@@ -146,12 +148,11 @@ class TextfileData:
         if not self.data['source_port']:
             self.data['source_port'] = self._parse_port(self._raw_textfile)
 
-        # TODO: XDRE is probably going to be in the txt with a version, so we need to use a regex
-        #       to check for it probably
-        if self.data['source_port'] in self.TAS_PORTS:
-            self.data['is_tas'] = True
+        for tas_port in TextfileData.TAS_PORTS:
+            if tas_port in self.data['source_port']:
+                self.data['is_tas'] = True
 
-        for note_regex, note in NOTE_REGEXES.items():
+        for note_regex, note in TextfileData.NOTE_REGEXES.items():
             match = note_regex.search(self._raw_textfile)
             if match:
                 self.note_strings.add(note)
@@ -163,7 +164,7 @@ class TextfileData:
         :param text_str: Text string
         :return: Category name if it was possible to parse, else None
         """
-        for category_regex, category_name in CATEGORY_REGEXES.items():
+        for category_regex, category_name in TextfileData.CATEGORY_REGEXES.items():
             match = category_regex.search(text_str)
             if match:
                 return category_name
@@ -177,7 +178,7 @@ class TextfileData:
         :param text_str: Text string
         :return: Port name if it was possible to parse, else None
         """
-        for port_regex, port_name in PORT_REGEXES.items():
+        for port_regex, port_name in TextfileData.PORT_REGEXES.items():
             match = port_regex.search(text_str)
             if match:
                 # A whole bunch of hacky finagling to try to parse all kinds of different formats

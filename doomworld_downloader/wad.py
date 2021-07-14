@@ -1,6 +1,7 @@
 """
 WAD object with supported data values mirroring what is available in the DSDA WAD config.
 """
+
 import logging
 
 from dataclasses import dataclass
@@ -30,3 +31,6 @@ class Wad:
     # Whether the DSDA page for this wad has multiple pages
     dsda_paginated: bool
     doomworld_thread: str
+
+    # DSDA name of the WAD, in cases where the URL doesn't match it
+    dsda_name: str = None

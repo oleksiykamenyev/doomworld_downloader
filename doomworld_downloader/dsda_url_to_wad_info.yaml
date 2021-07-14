@@ -33,7 +33,10 @@
   wad_name: Bourgeois Megawad
   iwad: doom2
   wad_files:
-    bourgfix.wad: "a29c0a8b4406bb970cf22d91ddccd330"
+    bourgfix.wad: {checksum: "a29c0a8b4406bb970cf22d91ddccd330"}
+    bourgfix.deh: {not_required_for_playback: True}
+    bourgdm.wad: {not_required_for_playback: True}
+    bourgdm.deh: {not_required_for_playback: True}
   complevel: 2
   playback_cmd_line: "-file bourgfix"
   map_info:

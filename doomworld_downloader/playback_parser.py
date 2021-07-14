@@ -6,26 +6,15 @@ Parse data out of DSDA-Doom playback of the LMP.
 import logging
 import os
 
-from collections import namedtuple
 from shutil import copyfile, rmtree
 
 from .data_manager import DataManager
-from .dsda import download_wad_from_dsda
-from .upload_config import CONFIG
+from .dsda import download_wad_from_dsda, get_wad_name_from_dsda_url
+from .upload_config import CONFIG, NEEDS_ATTENTION_PLACEHOLDER
 from .utils import checksum, parse_range, run_cmd, zip_extract
 
 
-# TODO: is_certain may not need to be implemented unless we have a way to get the checksums
-WadGuess = namedtuple('WadGuess', ['wad', 'type', 'is_certain'])
-
 LOGGER = logging.getLogger(__name__)
-
-
-# TODO: We probably don't need idgames download; it's safer to just download from DSDA after the
-#       wads are uploaded
-# Dummy idgames download for now
-def download_idgames():
-    pass
 
 
 class PlaybackData:
@@ -105,10 +94,9 @@ class PlaybackData:
         #            for user input
         self.command = '{} -fastdemo {}'.format(PlaybackData.DSDA_DOOM_COMMAND_START, lmp_path)
         self.lmp_path = lmp_path
+        self.playback_failed = False
 
-        self.demo_info = demo_info
-        if not self.demo_info:
-            self.demo_info = {}
+        self.demo_info = demo_info if demo_info else {}
         self._append_misc_args()
 
         self.wad_guesses = wad_guesses
@@ -116,6 +104,7 @@ class PlaybackData:
         self.raw_data = {}
         self.note_strings = set()
 
+    def analyze(self):
         self._playback()
 
     def populate_data_manager(self, data_manager):
@@ -173,15 +162,17 @@ class PlaybackData:
         """
         dsda_doom_dirlist = [file.lower() for file in os.listdir(CONFIG.dsda_doom_directory)]
         local_wad_location = None
-        for wad_file, wad_checksum in wad.files.items():
+        for wad_file, wad_info in wad.files.items():
+            if wad_info.get('not_required_for_playback', False):
+                continue
+
+            wad_checksum = wad_info['checksum']
             if wad_file in dsda_doom_dirlist:
                 if wad_checksum == checksum(os.path.join(CONFIG.dsda_doom_directory, wad_file)):
                     continue
 
             if local_wad_location is None:
-                # TODO: Should check the local download location before trying this
                 zip_location = download_wad_from_dsda(wad.dsda_url) if wad.dsda_url else None
-
                 if not zip_location:
                     raise RuntimeError('Could not download wad {}.'.format(wad.name))
 
@@ -213,10 +204,11 @@ class PlaybackData:
             # TODO: Perhaps a hardcoded exception list for when this guess might not be trusted is
             #       needed (depends how likely the wrong guess is)
             if os.path.isfile(self.LEVELSTAT_FILENAME):
-                # TODO: The URL isn't a great WAD source for setting this due to character encoding.
-                #       An option is adding a dsda_name key to the YAML that would override this
-                #       when needed.
-                self.data['wad'] = wad_guess.dsda_url.split('/')[-1]
+                dsda_wad_name = (
+                    wad_guess.dsda_name
+                    if wad_guess.dsda_name else get_wad_name_from_dsda_url(wad_guess.dsda_url)
+                )
+                self.data['wad'] = dsda_wad_name
                 self._parse_analysis()
                 if self.data['category'] == 'Other':
                     self._get_actual_category()
@@ -232,7 +224,8 @@ class PlaybackData:
                 break
 
         if not wad_guessed:
-            raise RuntimeError('Could not guess wad for demo {}.'.format(self.lmp_path))
+            LOGGER.error('Could not guess wad for demo %s.', self.lmp_path)
+            self.playback_failed = True
 
     def _parse_raw_data(self, wad):
         """Parse additional info available in raw data.
@@ -308,7 +301,7 @@ class PlaybackData:
                     self.data['category'] = PlaybackData.DOOM_CATEGORY_MAP.get(value, value)
                 else:
                     # TODO: Heretic categories still incorrect in analysis, need to add a custom map
-                    self.data['category'] = 'TODO'
+                    self.data['category'] = NEEDS_ATTENTION_PLACEHOLDER
 
             self.raw_data[key] = value
 
@@ -386,9 +379,6 @@ class PlaybackData:
                 self.note_strings.add('Other Movie {} - {}'.format(first_non_secret_map,
                                                                    last_non_secret_map))
         else:
-            # TODO: This will set does not visit secret maps even for runs that don't even go to
-            #       secret exit maps, should fix this (should be trivial by checking if the secret
-            #       exit maps from above are in the map range).
             self.data['level'] = 'Other Movie'
             self.note_strings.add('Other Movie {} - {}'.format(first_non_secret_map,
                                                                last_non_secret_map))
@@ -438,9 +428,9 @@ class PlaybackData:
 
                 self._detect_movie_type(wad, map_list)
             else:
-                self.data['level'] = 'TODO'
-                self.data['time'] = 'TODO'
-                self.data['levelstat'] = 'TODO'
+                self.data['level'] = NEEDS_ATTENTION_PLACEHOLDER
+                self.data['time'] = NEEDS_ATTENTION_PLACEHOLDER
+                self.data['levelstat'] = NEEDS_ATTENTION_PLACEHOLDER
 
     def _get_level(self, levelstat_line_split, wad):
         """Get level from levelstat split into lines.
@@ -466,7 +456,7 @@ class PlaybackData:
 
                 if self._convert_level_to_num(level) not in range(*map_range):
                     self.note_strings.add('Run for map that is not part of the wad.')
-                    return 'TODO'
+                    return NEEDS_ATTENTION_PLACEHOLDER
 
         return level
 

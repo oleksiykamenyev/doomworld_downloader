@@ -1,11 +1,16 @@
 """
 Various utilities for uploader.
 """
+
 import hashlib
 import logging
 import os
 import re
 import subprocess
+
+import requests
+
+from bs4 import BeautifulSoup
 
 from zipfile import ZipFile
 
@@ -130,7 +135,6 @@ def run_cmd(cmd, get_output=False, dryrun=False):
     :param dryrun: Flag indicating whether to run in dryrun mode
     :return: Output from command if get_output and dryrun are turned on else None
     """
-    # TODO: Verify type further?
     if isinstance(cmd, list):
         cmd_str = ' '.join(cmd)
     else:
@@ -200,3 +204,70 @@ def parse_range(range):
         range.extend(range[0])
 
     return [int(elem) for elem in range]
+
+
+def demo_range_to_string(start_date, end_date):
+    """Convert demo time range to string.
+
+    Uses ~ as a separator since datetimes already have - inside them.
+
+    :param start_date: Start date
+    :param end_date: End date
+    :return: Demo time range as string
+    """
+    return '{}~{}'.format(start_date, end_date)
+
+
+def get_log_level(verbose):
+    """Get log level for logging module.
+
+    Verbosity levels:
+        0 = ERROR
+        1 = WARNING
+        2 = INFO
+        3 = DEBUG
+
+    :param verbose: Verbosity level as integer counting number of times the
+                    argument was passed to the script
+    :return: Log level
+    """
+    if verbose >= 3:
+        return logging.DEBUG
+    if verbose == 2:
+        return logging.INFO
+    if verbose == 1:
+        return logging.WARNING
+
+    return logging.ERROR
+
+
+def get_main_file_from_zip(download, file_list, zip_no_ext, file_type):
+    """Get main file from zip file.
+
+    The main file is considered to be any file that matches the zip filename.
+
+    :param download: Download path for logging
+    :param file_list: File list to search through
+    :param zip_no_ext: Zip filename without the .zip extension
+    :param file_type: Type of file for logging
+    :return: Main filename from zip file if available, or None
+    """
+    for cur_file in file_list:
+        file_no_ext = get_filename_no_ext(cur_file)
+        if file_no_ext.lower() == zip_no_ext.lower():
+            LOGGER.debug('Download %s contains multiple files of type %s, parsing just file '
+                         'matching the zip name.', download, file_type)
+            return file_no_ext
+
+    return None
+
+
+def get_page(url):
+    """Get page at URL as a parsed tree structure using BeautifulSoup.
+
+    :param url: URL to get
+    :return: Parsed tree structure
+    """
+    request_res = requests.get(url)
+    page_text = str(request_res.text)
+    return BeautifulSoup(page_text, features='lxml')

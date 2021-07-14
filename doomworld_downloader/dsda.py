@@ -8,24 +8,11 @@ import requests
 
 from urllib.parse import urlparse
 
-from bs4 import BeautifulSoup
-
-from .utils import get_download_filename, download_response
+from .upload_config import CONFIG
+from .utils import get_download_filename, download_response, get_page
 
 
 LOGGER = logging.getLogger(__name__)
-
-
-# TODO: Move to utils class
-def get_page(url):
-    """Get page at URL as a parsed tree structure using BeautifulSoup.
-
-    :param url: URL to get
-    :return: Parsed tree structure
-    """
-    request_res = requests.get(url)
-    page_text = str(request_res.text)
-    return BeautifulSoup(page_text, features='lxml')
 
 
 def verify_dsda(url):
@@ -139,6 +126,17 @@ def dsda_page_to_demo_table(dsda_url):
     return demo_list
 
 
+def get_wad_name_from_dsda_url(dsda_url):
+    """Get WAD name from DSDA URL.
+
+    :param dsda_url: DSDA URL
+    :return: WAD name from DSDA URL
+    """
+    # https://www.dsdarchive.com/wads/scythe:
+    #   path: /wads/scythe
+    return urlparse(dsda_url).path.strip('/').split('/')[1]
+
+
 def download_wad_from_dsda(dsda_url):
     """Download WAD from DSDA URL.
 
@@ -172,12 +170,10 @@ def download_wad_from_dsda(dsda_url):
     if not wad_url:
         raise RuntimeError('Unable to find wad for DSDA URL {}.'.format(dsda_url))
 
-    # TODO: Add option to configure the download directory
     response = requests.get(wad_url)
     download_filename = get_download_filename(response)
-    # https://www.dsdarchive.com/wads/scythe:
-    #   path: /wads/scythe
-    wad_name = urlparse(dsda_url).path.strip('/').split('/')[1]
-    download_dir = os.path.join('dsda_wads', wad_name)
+    wad_name = get_wad_name_from_dsda_url(dsda_url)
+    download_dir = os.path.join(CONFIG.wad_download_directory, wad_name)
+    # TODO: Should we check if the WAD download already exists first?
     download_response(response, download_dir, download_filename)
     return os.path.join(download_dir, download_filename)

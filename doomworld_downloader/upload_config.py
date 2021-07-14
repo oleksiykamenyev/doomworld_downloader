@@ -1,6 +1,7 @@
 """
 Upload configuration class.
 """
+
 from configparser import ConfigParser, NoSectionError, NoOptionError
 
 import yaml
@@ -63,6 +64,19 @@ class UploadConfig:
             return 'demos_for_upload'
 
     @property
+    def wad_download_directory(self):
+        """Get WAD download directory from config (optional).
+
+        Default to ./dsda_wads.
+
+        :return: WAD download directory
+        """
+        try:
+            return self._config.get('general', 'wad_download_directory')
+        except (NoSectionError, NoOptionError):
+            return 'dsda_wads'
+
+    @property
     def testing_mode(self):
         """Get flag indicating testing mode from config (optional).
 
@@ -77,6 +91,8 @@ class UploadConfig:
 
 
 CONFIG = UploadConfig()
+
+NEEDS_ATTENTION_PLACEHOLDER = 'UNKNOWN'
 
 PLAYER_IGNORE_LIST = []
 THREAD_MAP = {}
@@ -102,16 +118,14 @@ def set_up_configs():
     with open('doomworld_downloader/dsda_url_to_wad_info.yaml', encoding='utf-8') as wad_stream:
         wad_map_by_dsda_url_raw = yaml.safe_load(wad_stream)
 
-    # TODO: WAD files in the config should be expanded to have an option of specifying which are
-    #       needed for playback and a full list of files; this will help with guessing WADs while
-    #       not restricting every single WAD/file in a zip to be present in the DSDA-Doom directory
     for url, wad_dict in wad_map_by_dsda_url_raw.items():
         idgames_url = wad_dict['idgames_url']
         wad_info = Wad(
             name=wad_dict['wad_name'], iwad=wad_dict['iwad'], files=wad_dict['wad_files'],
             complevel=wad_dict['complevel'], playback_cmd_line=wad_dict['playback_cmd_line'],
             map_info=wad_dict['map_info'], idgames_url=idgames_url, dsda_url=url, other_url='',
-            dsda_paginated=wad_dict['dsda_paginated'], doomworld_thread=wad_dict['doomworld_thread']
+            dsda_paginated=wad_dict['dsda_paginated'],
+            doomworld_thread=wad_dict['doomworld_thread'], dsda_name=wad_dict.get('dsda_name')
         )
         WAD_MAP_BY_DSDA_URL[url] = wad_info
         WAD_MAP_BY_IDGAMES_URL[wad_dict['idgames_url']] = wad_info

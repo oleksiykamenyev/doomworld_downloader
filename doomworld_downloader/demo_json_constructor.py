@@ -6,8 +6,11 @@ reasonably possible with just the automated process and generate the demo JSON. 
 track of any JSONs that require attention, so that further on they can be stored separately for
 manual inspection.
 """
+
 import logging
 import re
+
+from .upload_config import NEEDS_ATTENTION_PLACEHOLDER
 
 
 LOGGER = logging.getLogger(__name__)
@@ -17,6 +20,7 @@ class DemoJsonConstructor:
     """Construct demo JSON."""
     SKILL_CATEGORY_NOTE_RE = re.compile('^Skill \d .+$')
 
+    MISC_NOTES = ['Also Reality', 'Also Almost Reality', 'Uses turbo', 'Uses longtics']
     # We could have all of these keys consistent with the JSON keys, but I find the verbose names
     # are more useful for searching/debugging.
     KEY_TO_JSON_MAP = {'is_tas': 'tas', 'is_solo_net': 'solo_net', 'num_players': 'guys',
@@ -34,8 +38,13 @@ class DemoJsonConstructor:
         self.note_strings = note_strings
         self.zip_file = zip_file
         self.demo_json = {'file': {'name': zip_file}}
+        self.has_issue = False
 
         self._parse_data_manager()
+
+    def _set_has_issue(self):
+        """Set has_issue flag if there is an issue with the JSON."""
+        self.has_issue = True
 
     def _parse_data_manager(self):
         """Parse data from data manager.
@@ -44,30 +53,17 @@ class DemoJsonConstructor:
         """
         for evaluation in self.data_manager:
             if evaluation.needs_attention:
-                # TODO: Move this to a separate function; this will handle the following cases:
-                #   - Special cases where we can assume one of the sources is correct even if they
-                #     are not certain
-                #   - Setting the final JSON to some placeholder when we are not certain at all
-                if evaluation.key == 'category':
-                    playback_category = None
-                    textfile_category = None
-                    # TODO: Category may come from other sources (the post)
-                    for possible_value, sources in evaluation.possible_values.items():
-                        if 'playback' in sources:
-                            playback_category = possible_value
-                        elif 'textfile' in sources:
-                            textfile_category = possible_value
-
-                    # If the playback showed nomo100s, it's guaranteed to be an accurate category;
-                    # it's safe to assume the textfile specified nomo by error or because of
-                    # unavoidable secrets.
-                    if playback_category == 'NoMo 100S' and textfile_category == 'NoMo':
-                        LOGGER.info('Inferred NoMo 100S category for zip file %s.', self.zip_file)
-                        self.demo_json[evaluation.key] = playback_category
+                self._handle_needs_attention_entries(evaluation)
             else:
                 # Convert to JSON keys, default to value in the map.
                 key_to_insert = self.KEY_TO_JSON_MAP.get(evaluation.key, evaluation.key)
-                self.demo_json[key_to_insert] = next(iter(evaluation.possible_values.keys()))
+                value = next(iter(evaluation.possible_values.keys()))
+                if value == NEEDS_ATTENTION_PLACEHOLDER:
+                    LOGGER.warning('Zip file %s needs attention for following key: "%s". ',
+                                   self.zip_file, key_to_insert)
+                    self._set_has_issue()
+
+                self.demo_json[key_to_insert] = value
 
         for key, default in DemoJsonConstructor.KEY_TO_DEFAULT_MAP.items():
             if key not in self.demo_json:
@@ -79,6 +75,34 @@ class DemoJsonConstructor:
         for key in self.REQUIRED_KEYS:
             if key not in self.demo_json:
                 raise RuntimeError('Key {} not found in final demo JSON.'.format(key))
+
+    def _handle_needs_attention_entries(self, evaluation):
+        """Handle entries that are marked as needing attention.
+
+        :param evaluation: Evaluation requiring attention
+        """
+        if evaluation.key == 'category':
+            playback_category = None
+            textfile_category = None
+            for possible_value, sources in evaluation.possible_values.items():
+                if 'playback' in sources:
+                    playback_category = possible_value
+                elif 'textfile' in sources:
+                    textfile_category = possible_value
+
+            # If the playback showed an all secrets category, it's guaranteed to be an
+            # accurate category; it's safe to assume the textfile specified no secrets by
+            # error or because of unavoidable secrets.
+            if ((playback_category == 'NoMo 100S' and textfile_category == 'NoMo') or
+                    (playback_category == 'NM 100S' and textfile_category == 'NM Speed')):
+                LOGGER.info('Inferred %s category for zip file %s.',
+                            playback_category, self.zip_file)
+                self.demo_json[evaluation.key] = playback_category
+        else:
+            LOGGER.warning('Zip file %s needs attention based on the following '
+                           'evaluation: "%s".', self.zip_file, evaluation)
+            self.demo_json[evaluation.key] = NEEDS_ATTENTION_PLACEHOLDER
+            self._set_has_issue()
 
     def _construct_tags(self):
         """Construct tags array for demo JSON
@@ -136,6 +160,7 @@ class DemoJsonConstructor:
                 category = note_string
             if note_string == 'Incompatible':
                 incompatible = True
+                self.demo_json['category'] = 'Other'
             if note_string in ['-altdeath', '-solo-net', 'fast']:
                 if not additional_info:
                     additional_info = ' with ' + note_string
@@ -162,9 +187,13 @@ class DemoJsonConstructor:
         for note_string in self.note_strings:
             # Note: even though both Reality and Almost Reality are listed here, prior processing
             # should ensure that only one should be added to the notes.
-            # TODO: Update Uses turbo logic to require manual effort to verify turbo value
-            if (note_string in ['Also Reality', 'Also Almost Reality', 'Uses turbo'] or
+            if (note_string in DemoJsonConstructor.MISC_NOTES or
                     note_string.startswith('Recorded in skill ')):
                 misc_tags.append(note_string)
+                if note_string == 'Uses turbo':
+                    LOGGER.warning('Zip file %s due to unclear turbo usage.', self.zip_file)
+                    self._set_has_issue()
+                if note_string == 'Uses longtics':
+                    self.demo_json['category'] = 'Other'
 
         return '\n'.join(sorted(misc_tags))

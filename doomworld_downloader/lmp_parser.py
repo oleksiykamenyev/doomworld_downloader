@@ -20,6 +20,7 @@ class LMPData:
     This is intended to be a very generic storage class that is mostly unaware of intricacies of the
     LMP format like headers, footers, etc. That will be handled by the LMP library used underneath.
     """
+    PORT_FOOTER_TO_DSDA_MAP = {'PrBoom-Plus': 'PrBoom-plus', 'dsda-doom': 'DSDA-Doom'}
     KEY_LIST = [
         'engine', 'version', 'skill', 'episode', 'level', 'play mode', 'respawn', 'fast',
         'nomonsters', 'player 1', 'player 2', 'player 3', 'player 4', 'turbo', 'stroller',
@@ -58,6 +59,8 @@ class LMPData:
         self.raw_data = {'wad_strings': []}
         self._header = None
         self._footer = None
+
+    def analyze(self):
         self._get_header_and_footer()
         # TODO: There are probably other demos that we can't just put into the LMP parser, this
         #       logic may need to be expanded
@@ -121,10 +124,66 @@ class LMPData:
     def _parse_key(self, key, line):
         """Parse key out of a line of parse_lmp output.
 
+        Script output format:
+          --------
+          Details:
+
+          Engine: Doom
+          Version: 109
+          Skill: 4
+          Episode: 1
+          Level: 16
+          Play Mode: single / coop
+          Respawn: 0
+          Fast: 0
+          NoMonsters: 15
+          Point of View: 0
+          Player 1: 1
+          Player 2: 0
+          Player 3: 0
+          Player 4: 0
+          --------
+          Statistics:
+
+          SR40:  32 %
+          SR50:  64 %
+          SR:    96 %
+
+          Run Frequency:
+             50: 1.0
+
+          Strafe Frequency:
+             40: 1.0
+
+          Turn Frequency:
+              2: 1.0
+
+          Average Turn Speed: 2
+          Standard Deviation: 0
+
+          Turbo:           false
+          Stroller:        false
+          SR50 On Turns:   false
+          One Frame Uses:  None / 2
+          One Frame Fires: None / 0
+          One Frame Swaps: None / 0
+          Pauses:          None
+          Saves:           None
+
+          One Frame Turns:
+            None
+
+          Sudden Turns:
+            None
+
+          Bad Straferun:
+            None
+
+          --- END ---
+
         :param key: Key to parse
         :param line: parse_lmp output line
         """
-        # TODO: Add example output from script to documentation
         line = line.strip().lower()
         if ':' in line:
             cur_key, value = [part.strip() for part in line.split(':')]
@@ -154,15 +213,12 @@ class LMPData:
                     line.startswith('Crispy Doom')):
                 self.raw_data['source_port_family'] = line.strip()
             # Detect the command-line section by an argument that should always be there, I think
-            # TODO: Should probably make this a class var
             if '-iwad' in line:
                 line = line.split()
                 for idx, elem in enumerate(line):
                     if elem.startswith('-'):
-                        # TODO: Should probably make these class vars
                         # TODO: Add more possible arguments (spechits numbers, emulate args, etc.)
-                        # TODO: Add example footers somewhere
-                        # TODO: Add dehacked patches
+                        # TODO: Add example footers somewhere in documentation
                         if elem == '-iwad':
                             # WAD files in footers are surrounded with double quotes, removing
                             # those.
@@ -174,6 +230,10 @@ class LMPData:
                                 self.raw_data['is_heretic'] = True
                         if elem == '-file':
                             # WAD files in footers are surrounded with double quotes, removing
+                            # those.
+                            self.raw_data['wad_strings'].append(line[idx + 1].replace('"', ''))
+                        if elem == '-deh':
+                            # DEH files in footers are surrounded with double quotes, removing
                             # those.
                             self.raw_data['wad_strings'].append(line[idx + 1].replace('"', ''))
                         if elem == '-complevel':
@@ -204,11 +264,7 @@ class LMPData:
         if source_port_family:
             port_name, port_version = source_port_family.split()
             # Normalize port names
-            # TODO: Could be dictionary lookup? Or use class vars.
-            if port_name == 'PrBoom-Plus':
-                port_name = 'PrBoom-plus'
-            elif port_name == 'dsda-doom':
-                port_name = 'DSDA-Doom'
+            port_name = LMPData.PORT_FOOTER_TO_DSDA_MAP.get(port_name, port_name)
 
             port_with_version = '{name} v{version}'.format(name=port_name, version=port_version)
             # Infer complevel for any that PrBoom+/DSDA-Doom do not output to the footer
@@ -225,7 +281,6 @@ class LMPData:
                 return
 
         # Up to (and including) Doom 1.2, first byte was skill level, not game/exe version
-        # TODO: Double check if this is worth setting; can any source ports record with 1.2 compat?
         if 0 <= raw_version <= 4:
             if self.check_doom_1_2_or_before():
                 self.data['source_port'] = 'Doom v1.2 or earlier'
@@ -233,9 +288,9 @@ class LMPData:
             self.data['source_port'] = 'TASDoom'
 
         # This isn't 100% part of the port info, but this is the cleanest place to check for this.
-        # TODO: Should probably just make this a note string
         if 111 <= raw_version < 200:
             self.raw_data['is_longtics'] = True
+            self.note_strings.add('Uses -longtics')
 
     def check_doom_1_2_or_before(self):
         """Check if a demo is recorded in a version of Doom 1.2 or prior.

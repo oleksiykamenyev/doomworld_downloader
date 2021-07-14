@@ -29,7 +29,10 @@ class PostData:
         self.data = {}
         self.note_strings = set()
         self.raw_data = {'wad_links': [], 'video_links': []}
-        self._parse_post(post)
+        self.post = post
+
+    def analyze(self):
+        self._parse_post()
 
     def populate_data_manager(self, data_manager):
         # The following data points are set for the playback parser:
@@ -43,14 +46,11 @@ class PostData:
             else:
                 raise ValueError('Unrecognized key found in data dictionary: {}.'.format(key))
 
-    def _parse_post(self, post):
-        """Parse post object.
-
-        :param post: Post object
-        """
+    def _parse_post(self,):
+        """Parse post object."""
         # This is set to a tuple so that it is hashable for the data manager.
-        self.data['player_list'] = (post.author_name,)
-        for link in post.links:
+        self.data['player_list'] = (self.post.author_name,)
+        for link in self.post.links:
             parsed = self._parse_youtube_url(link)
             if not parsed:
                 if 'dsdarchive.com/wads' in link or 'doomworld.com/idgames' in link:
@@ -59,14 +59,14 @@ class PostData:
                     # TODO: Add more wad sites?
                     # TODO: Alert on Dropbox/Drive/other file hosting sites?
                     continue
-        for embed in post.embeds:
+        for embed in self.post.embeds:
             self._parse_youtube_url(embed)
 
         # Assume if there's a single video on the post, that it's the video for the demo attachment.
         if len(self.raw_data['video_links']) == 1:
             self.data['video_link'] = self.raw_data['video_links'][0]
 
-        parent_thread_id = str(post.parent.id)
+        parent_thread_id = str(self.post.parent.id)
         if parent_thread_id in THREAD_MAP_KEYED_ON_ID:
             thread_info = THREAD_MAP_KEYED_ON_ID[parent_thread_id].get('additional_info', {})
             if thread_info.get('wad'):
