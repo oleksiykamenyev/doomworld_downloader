@@ -125,8 +125,20 @@ def handle_downloads(downloads, post_data):
 
             demo_json_constructor = DemoJsonConstructor(data_manager, all_note_strings,
                                                         download)
+            download_split = download.rstrip(os.path.sep).split(os.path.sep)
+            # Download path sample: demos_for_upload/PlayerName/123456/demo.zip
+            # Set json filename to demo_PlayerName_123456
+            # TODO: Consider lumping all of the no issue demos into a single JSON
+            json_filename = '{}_{}_{}'.format(zip_no_ext, download_split[-3], download_split[-2])
             if demo_json_constructor.has_issue:
-                
+                os.makedirs(VALID_ISSUE_DIR, exist_ok=True)
+                json_path = os.path.join(VALID_ISSUE_DIR, json_filename)
+            else:
+                os.makedirs(VALID_NO_ISSUE_DIR, exist_ok=True)
+                json_path = os.path.join(VALID_NO_ISSUE_DIR, json_filename)
+
+            with open(json_path, 'w', encoding='utf-8') as out_stream:
+                json.dump(demo_json_constructor.demo_json, out_stream, indent=4, sort_keys=True)
 
         shutil.rmtree(out_path)
 

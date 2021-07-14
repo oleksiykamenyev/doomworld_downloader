@@ -8,7 +8,7 @@ import subprocess
 
 from .data_manager import DataManager
 from .upload_config import CONFIG
-from .utils import run_cmd
+from .utils import run_cmd, convert_datetime_to_dsda_date
 
 
 LOGGER = logging.getLogger(__name__)
@@ -54,7 +54,7 @@ class LMPData:
         """
         self.lmp_path = lmp_path
         # TODO: We might want some sanity checking on the recording date of the LMP
-        self.data = {'num_players': 0, 'recorded_at': recorded_date}
+        self.data = {'num_players': 0, 'recorded_at': convert_datetime_to_dsda_date(recorded_date)}
         self.note_strings = set()
         self.raw_data = {'wad_strings': []}
         self._header = None
@@ -69,6 +69,8 @@ class LMPData:
             self._parse_footer()
 
         self._get_source_port()
+        # DSDA API expects the num_players (i.e., guys) argument to be a string
+        self.data['num_players'] = str(self.data['num_players'])
 
     def populate_data_manager(self, data_manager):
         for key, value in self.data.items():

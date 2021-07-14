@@ -8,6 +8,8 @@ import os
 import re
 import subprocess
 
+from time import gmtime, strftime
+
 import requests
 
 from bs4 import BeautifulSoup
@@ -271,3 +273,7 @@ def get_page(url):
     request_res = requests.get(url)
     page_text = str(request_res.text)
     return BeautifulSoup(page_text, features='lxml')
+
+
+def convert_datetime_to_dsda_date(datetime_to_convert):
+    return datetime_to_convert.strftime('%Y-%m-%d %H:%M:%S') + ' ' + strftime("%z", gmtime())
