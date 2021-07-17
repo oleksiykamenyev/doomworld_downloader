@@ -6,6 +6,7 @@ import hashlib
 import logging
 import os
 import re
+import shlex
 import subprocess
 
 from time import gmtime, strftime
@@ -91,12 +92,11 @@ def zip_extract(zip_path, extract_dir=None, extract_extension=None):
             IOError if the provided extraction directory already exists and isn't a directory or
                     if the final extraction directory already exists
     """
-    if not extract_extension.startswith('.'):
-        extract_extension = '.{}'.format(extract_extension)
-
     zip_file = ZipFile(zip_path)
     extract_members = []
     if extract_extension:
+        if not extract_extension.startswith('.'):
+            extract_extension = '.{}'.format(extract_extension)
         name_list = zip_file.namelist()
         for zip_file_member in name_list:
             if zip_file_member.lower().endswith(extract_extension):
@@ -141,7 +141,7 @@ def run_cmd(cmd, get_output=False, dryrun=False):
         cmd_str = ' '.join(cmd)
     else:
         cmd_str = cmd
-        cmd = cmd.split()
+        cmd = shlex.split(cmd)
 
     DRYRUN_PREFIX = ''
     if dryrun:
@@ -188,13 +188,14 @@ def get_filename_no_ext(path):
     return os.path.basename(os.path.splitext(path)[0])
 
 
-def parse_range(range):
+def parse_range(range, remove_non_numeric_chars=False):
     """Parse range of integers.
 
     Range provided may either be a list of two integers or a string in the format "#-#".
     Single-value ranges are padded out to two integers.
 
     :param range: Range of integers
+    :param remove_non_numeric_chars: Flag indicating whether to remove non-numeric characters
     :return: Range of integers parsed to int
     :raises ValueError if the range is not defined or too long.
     """
@@ -205,6 +206,9 @@ def parse_range(range):
     if len(range) == 1:
         range.extend(range[0])
 
+    if remove_non_numeric_chars:
+        return [int(''.join(elem_char for elem_char in str(elem) if elem_char.isdigit()))
+                for elem in range]
     return [int(elem) for elem in range]
 
 

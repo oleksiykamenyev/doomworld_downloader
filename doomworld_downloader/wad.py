@@ -20,8 +20,6 @@ class Wad:
     files: dict
     # Complevel needed for the wad (e.g., 2)
     complevel: int
-    # Playback command line for the wad (e.g., "-file scythe")
-    playback_cmd_line: str
     # Special info on the different maps in the wad; for example, whether any maps are nomo, etc.
     map_info: dict
     idgames_url: str
@@ -32,5 +30,7 @@ class Wad:
     dsda_paginated: bool
     doomworld_thread: str
 
+    # Playback command line for the wad (e.g., "-file scythe")
+    playback_cmd_line: str = ''
     # DSDA name of the WAD, in cases where the URL doesn't match it
     dsda_name: str = None

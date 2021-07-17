@@ -66,10 +66,16 @@ class TextfileData:
         re.compile(r'(Pr|GL)Boom^(\+|-plus)\s*v?(?P<version>\d\.\d\.\d)', re.IGNORECASE): 'PrBoom',
         # PrBoom+
         re.compile(
-            r'(Pr|GL)Boom(\+|-plus)(\s*|-)?v?(?P<version>\d\.\d\.\d\.\d)\s'
-            r'*-?(complevel|cl)\s*(?P<complevel>\d+)',
+            r'(Pr|GL)(Boom)?(\+|-plus)(\s*|-)?v?(?P<version>\d\.\d\.\d\.\d)\s'
+            r'*-?((complevel|cl)\s*(?P<complevel>\d+))?',
             re.IGNORECASE
         ): 'PrBoom-plus',
+        # DSDA-Doom
+        re.compile(
+            r'DSDA(\s*|-)Doom(\s*|-)?v?(?P<version>\d\.\d+(\.\d+))?\s'
+            r'*-?((complevel|cl)\s*(?P<complevel>\d+))?',
+            re.IGNORECASE
+        ): 'DSDA-Doom',
 
         # ZDoom family
         # ZDoom
@@ -136,6 +142,13 @@ class TextfileData:
                     self.raw_data['video_links'].append(value)
                 elif key in TextfileData.WAD_KEYS:
                     self.raw_data['wad_strings'].append(value)
+                elif key == 'iwad':
+                    self.raw_data['iwad'] = value
+
+        # TODO: Might want to just extend this with all IWADs to catch textfile errors
+        iwad = self.raw_data.get('iwad')
+        if not self.raw_data['wad_strings'] and iwad:
+            self.raw_data['wad_strings'].append(iwad)
 
         if len(self.raw_data['video_links']) == 1:
             self.data['video_link'] = self.raw_data['video_links'][0]
@@ -145,11 +158,15 @@ class TextfileData:
         # just have a category or port name in their general comments, but better than nothing.
         if not self.data['category']:
             self.data['category'] = self._parse_category(self._raw_textfile)
+            if not self.data['category']:
+                LOGGER.info('Could not parse category from textfile %s.', self.textfile_path)
         if not self.data['source_port']:
             self.data['source_port'] = self._parse_port(self._raw_textfile)
+            if not self.data['source_port']:
+                LOGGER.info('Could not parse source port from textfile %s.', self.textfile_path)
 
         for tas_port in TextfileData.TAS_PORTS:
-            if tas_port in self.data['source_port']:
+            if self.data['source_port'] and tas_port in self.data['source_port']:
                 self.data['is_tas'] = True
 
         for note_regex, note in TextfileData.NOTE_REGEXES.items():
@@ -188,9 +205,18 @@ class TextfileData:
                 if not port_name_final:
                     port_name_final = match.group('name')
 
-                complevel = match.group('complevel')
+                # If someone formats DSDA-Doom version as just #.##, set to #.##.0 by default
+                if port_name_final == 'DSDA-Doom' and version.count('.') == 1:
+                    version = '{}.0'.format(version)
+
+                # No need to fail on this since most ports don't have complevels anyway
+                try:
+                    complevel = match.group('complevel')
+                except IndexError:
+                    complevel = None
                 if complevel:
                     version = 'v{}{}{}'.format(version, 'cl', complevel)
+
                 return '{} {}'.format(port_name_final, version)
 
         return None

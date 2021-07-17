@@ -7,15 +7,22 @@ import logging
 from .upload_config import WAD_MAP_BY_DSDA_URL, WAD_MAP_BY_IDGAMES_URL
 
 
+DEFAULT_WAD_GUESSES = [
+    'https://www.dsdarchive.com/wads/doom', 'https://www.dsdarchive.com/wads/doom2',
+    'https://www.dsdarchive.com/wads/plutonia', 'https://www.dsdarchive.com/wads/tnt'
+]
+
+
 LOGGER = logging.getLogger(__name__)
 
 
-def get_wad_guesses(*args):
+def get_wad_guesses(iwad=None, *args):
     """Get WAD guesses from set of lists of guesses.
 
     Guesses may be DSDA URLs, idgames URLs, or WAD filenames. Guesses must be provided in ascending
     order of likelihood.
 
+    :param iwad: IWAD guess if available
     :param args: Any number of lists of WAD guesses.
     :return: Set of WAD guesses parsed from provided lists
     :raises ValueError if any argument that is provided isn't a list
@@ -42,5 +49,9 @@ def get_wad_guesses(*args):
                     if wad_to_guess_sanitized in wad.files.keys():
                         wad_guesses.append(wad)
                         break
+
+    # If we actually find no guesses, just default to guessing all IWADs.
+    if not wad_guesses:
+        return [WAD_MAP_BY_DSDA_URL[default_wad] for default_wad in DEFAULT_WAD_GUESSES]
 
     return wad_guesses

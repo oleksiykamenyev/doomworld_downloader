@@ -39,12 +39,16 @@ class LMPData:
     # future PrBoom+ versions that require compatibility with an older PrBoom+ would presumable use
     # the next complevel 17 for that. Pre-Boom complevels aren't included as they are present in the
     # footer.
+    # TODO: Update 214 to be 17 instead of -1 since MBF21 is -1 now
     VERSION_COMPLEVEL_MAP = {
         201: '8', 202: '9', 210: '10', 211: '14', 212: '15', 213: '16', 214: '-1'
     }
 
-    CERTAIN_KEYS = ['is_solo_net', 'num_players', 'recorded_at']
-    POSSIBLE_KEYS = ['source_port', 'is_tas']
+    # TODO: We might benefit from certain/possible keys being possible to change as an instance;
+    #       basically, source_port could be guessed fuzzily here or perfectly, and most of the time,
+    #       it is the latter, but might be nice to account for the former
+    CERTAIN_KEYS = ['is_solo_net', 'num_players', 'recorded_at', 'source_port']
+    POSSIBLE_KEYS = ['is_tas']
 
     def __init__(self, lmp_path, recorded_date):
         """Initialize LMP data class.
@@ -71,6 +75,11 @@ class LMPData:
         self._get_source_port()
         # DSDA API expects the num_players (i.e., guys) argument to be a string
         self.data['num_players'] = str(self.data['num_players'])
+
+        # TODO: Might want to just extend this with all IWADs to catch textfile errors
+        iwad = self.raw_data.get('iwad')
+        if not self.raw_data['wad_strings'] and iwad:
+            self.raw_data['wad_strings'].append(iwad)
 
     def populate_data_manager(self, data_manager):
         for key, value in self.data.items():
@@ -101,13 +110,13 @@ class LMPData:
 
     def _parse_lmp(self):
         """Parse LMP file using the parse_lmp Ruby library."""
-        parse_lmp_cmd = '{start} {demo}'.format(start=LMPData.PARSE_LMP_COMMAND_START,
-                                                demo=self.lmp_path)
+        parse_lmp_cmd = '{start} "{demo}"'.format(start=LMPData.PARSE_LMP_COMMAND_START,
+                                                  demo=self.lmp_path)
         parse_lmp_out = None
         try:
             parse_lmp_out = run_cmd(parse_lmp_cmd, get_output=True).splitlines()
         except subprocess.CalledProcessError as cpe:
-            LOGGER.debug('Encountered exception %s when running parse LMP command.', cpe)
+            LOGGER.info('Encountered exception %s when running parse LMP command.', cpe)
             pass
 
         if not parse_lmp_out:
@@ -187,7 +196,9 @@ class LMPData:
         :param line: parse_lmp output line
         """
         line = line.strip().lower()
-        if ':' in line:
+        # We only care about lines with a single ":" character, since those are the top-level keys
+        # in the output
+        if line.count(':') == 1:
             cur_key, value = [part.strip() for part in line.split(':')]
             if cur_key == key:
                 if key in LMPData.PLAYER_KEYS and int(value) != 0:
@@ -210,10 +221,9 @@ class LMPData:
     def _parse_footer(self):
         """Parse footer of LMP."""
         for line in self._footer.splitlines():
-            # Adding a bunch of ports just in case they start supporting the footer...
-            if (line.startswith('PrBoom-Plus') or line.startswith('DSDA-Doom') or
-                    line.startswith('Crispy Doom')):
-                self.raw_data['source_port_family'] = line.strip()
+            for footer_port_start in LMPData.PORT_FOOTER_TO_DSDA_MAP.keys():
+                if line.startswith(footer_port_start):
+                    self.raw_data['source_port_family'] = line.strip()
             # Detect the command-line section by an argument that should always be there, I think
             if '-iwad' in line:
                 line = line.split()
@@ -221,27 +231,37 @@ class LMPData:
                     if elem.startswith('-'):
                         # TODO: Add more possible arguments (spechits numbers, emulate args, etc.)
                         # TODO: Add example footers somewhere in documentation
+                        # TODO: We need to keep track of files that aren't allowed for recording
+                        #       (e.g., most things that aren't part of the WAD being run)
                         if elem == '-iwad':
-                            # WAD files in footers are surrounded with double quotes, removing
-                            # those.
-                            iwad = line[idx + 1].replace('"', '')
-                            self.raw_data['iwad'] = iwad
-                            if iwad == 'chex.wad':
-                                self.raw_data['is_chex'] = True
-                            if iwad == 'heretic.wad':
-                                self.raw_data['is_heretic'] = True
+                            self.raw_data['iwad'] = self._parse_file_in_footer(line[idx + 1],
+                                                                               '.wad')
                         if elem == '-file':
-                            # WAD files in footers are surrounded with double quotes, removing
-                            # those.
-                            self.raw_data['wad_strings'].append(line[idx + 1].replace('"', ''))
+                            self.raw_data['wad_strings'].append(
+                                self._parse_file_in_footer(line[idx + 1], '.wad')
+                            )
                         if elem == '-deh':
-                            # DEH files in footers are surrounded with double quotes, removing
-                            # those.
-                            self.raw_data['wad_strings'].append(line[idx + 1].replace('"', ''))
+                            self.raw_data['wad_strings'].append(
+                                self._parse_file_in_footer(line[idx + 1], '.deh')
+                            )
                         if elem == '-complevel':
                             self.raw_data['complevel'] = line[idx + 1]
                         if elem == '-solo-net':
                             self.data['is_solo_net'] = True
+
+    def _parse_file_in_footer(self, footer_file, extension):
+        """Parse file argument from footer.
+
+        :param footer_file: File argument value
+        :param extension: Extension for file for sanitizing input
+        :return: Parsed file from footer
+        """
+        # Files in footers are surrounded with double quotes, removing those.
+        # Sometimes files are stored in footers as doom2.wad.wad. Fixing, this case, not sure if
+        # the extension could be repeated more times, but if so, this could be updated.
+        return footer_file.replace('"', '').replace(
+            '{extension}{extension}'.format(extension=extension), extension
+        )
 
     def _get_source_port(self):
         """Get full source port info when possible.
@@ -290,6 +310,7 @@ class LMPData:
             self.data['source_port'] = 'TASDoom'
 
         # This isn't 100% part of the port info, but this is the cleanest place to check for this.
+        # TODO: Only 111 is -longtics. 130-150 are Legacy demos.
         if 111 <= raw_version < 200:
             self.raw_data['is_longtics'] = True
             self.note_strings.add('Uses -longtics')

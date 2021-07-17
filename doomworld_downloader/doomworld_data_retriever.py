@@ -283,9 +283,6 @@ def download_attachments(post):
     :return: Download locations on local filesystem
     :raises RuntimeError if the attachment filename for a given post cannot be determined
     """
-    if post.cached_downloads:
-        return post.cached_downloads
-
     # Sanitize author name so that it can be used to create a local directory
     author_dir = os.path.join(
         CONFIG.demo_download_directory,
@@ -319,7 +316,9 @@ def download_attachments(post):
         downloads.append(download)
 
     update_cache(post, downloads)
+    post.cached_downloads = downloads
     return downloads
+
 
 def move_post_cache_to_failed(post):
     """Move specific post cache dir to failed directory.
@@ -327,4 +326,6 @@ def move_post_cache_to_failed(post):
     :param post: Post to move cache dir for
     """
     post_cache_dir = os.path.join(CONFIG.demo_download_directory, POST_CACHE_DIR, str(post.id))
-    shutil.move(post_cache_dir, FAILED_POST_DIR)
+    post_failed_dir = os.path.join(CONFIG.demo_download_directory, FAILED_POST_DIR)
+    os.makedirs(os.path.join(CONFIG.demo_download_directory, FAILED_POST_DIR), exist_ok=True)
+    shutil.move(post_cache_dir, post_failed_dir)

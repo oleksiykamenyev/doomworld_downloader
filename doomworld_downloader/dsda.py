@@ -22,8 +22,8 @@ def verify_dsda(url):
     :raises ValueError if provided URL isn't a DSDA URL.
     """
     url_parsed = urlparse(url)
-    if url_parsed.netloc.endswith('dsdarchive.com'):
-        raise ValueError('URL {} is not a DSDA URL.')
+    if not url_parsed.netloc.endswith('dsdarchive.com'):
+        raise ValueError('URL {} is not a DSDA URL.'.format(url))
 
 
 def fix_dsda_link(link_url):
@@ -149,7 +149,7 @@ def download_wad_from_dsda(dsda_url):
     verify_dsda(dsda_url)
     if 'dsdarchive.com/wads' not in dsda_url:
         raise ValueError('{} is not a wad URL on DSDA, nothing to download.'.format(dsda_url))
-    headers = soup.findall('div', {'class': 'center-text'})
+    headers = soup.findAll('div', {'class': 'center-text'})
     wad_url = None
     for header in headers:
         if not header.getText():
@@ -171,7 +171,8 @@ def download_wad_from_dsda(dsda_url):
         raise RuntimeError('Unable to find wad for DSDA URL {}.'.format(dsda_url))
 
     response = requests.get(wad_url)
-    download_filename = get_download_filename(response)
+    default_filename = urlparse(wad_url).path.strip('/').split('/')[-1]
+    download_filename = get_download_filename(response, default_filename=default_filename)
     wad_name = get_wad_name_from_dsda_url(dsda_url)
     download_dir = os.path.join(CONFIG.wad_download_directory, wad_name)
     # TODO: Should we check if the WAD download already exists first?

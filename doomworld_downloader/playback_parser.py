@@ -75,6 +75,7 @@ class PlaybackData:
         # TODO: This won't actually be accurate until Chex levelstat is fixed
         'chex': [['E1M1', 'E1M5']]
     }
+    ALL_IWADS = ['doom.wad', 'doom2.wad', 'plutonia.wad', 'tnt.wad']
 
     CERTAIN_KEYS = ['levelstat', 'time', 'level', 'kills', 'items', 'secrets', 'secret_exit', 'wad']
     POSSIBLE_KEYS = ['category']
@@ -92,7 +93,7 @@ class PlaybackData:
         # -fastdemo: Play back demo as fast as possible, this is better than timedemo since it does
         #            not display any tic statistics afterwards, so DSDA-Doom doesn't hang waiting
         #            for user input
-        self.command = '{} -fastdemo {}'.format(PlaybackData.DSDA_DOOM_COMMAND_START, lmp_path)
+        self.command = '{} -fastdemo "{}"'.format(PlaybackData.DSDA_DOOM_COMMAND_START, lmp_path)
         self.lmp_path = lmp_path
         self.playback_failed = False
 
@@ -134,11 +135,14 @@ class PlaybackData:
 
         # This may not always be necessary, as later PrBoom+ and DSDA-Doom demos have -solo-net in
         # the footer, but this is necessary for older demos.
+        # TODO: Consider running solo-net even if it's not detected for each demo in case of desync
         if self.demo_info.get('is_solo_net', False):
             self.command = '{} -solo-net'.format(self.command)
-        if self.demo_info.get('is_chex', False):
+
+        iwad = self.demo_info.get('iwad', '').lower()
+        if iwad == 'chex.wad':
             self.command = '{} -iwad chex -exe chex'.format(self.command)
-        if self.demo_info.get('is_heretic', False):
+        if iwad == 'heretic.wad':
             self.command = '{} -iwad heretic -heretic'.format(self.command)
 
     def _check_wad_existence(self, wad):
@@ -196,7 +200,8 @@ class PlaybackData:
                 LOGGER.error('Wad %s not available.', wad_guess.name)
                 continue
 
-            self.command = '{} {}'.format(self.command, wad_guess.playback_cmd_line)
+            self.command = '{} -iwad {} {}'.format(self.command, wad_guess.iwad,
+                                                   wad_guess.playback_cmd_line)
             run_cmd(self.command)
             # Technically, there could be edge cases where a levelstat could be generated even if
             # the wrong WAD is used (e.g., thissuxx). I'm not sure if there's any reasonable way to
@@ -214,6 +219,8 @@ class PlaybackData:
                     self._get_actual_category()
                 self._parse_levelstat(wad_guess)
 
+                # TODO: Additional processing needed for maps that are max exceptions; for a
+                #       complete fix, this will need DSDA-Doom to output missed monster/secret IDs
                 self._parse_raw_data(wad_guess)
                 complevel = self.demo_info.get('complevel')
                 if complevel:
@@ -365,16 +372,18 @@ class PlaybackData:
         has_required_secret_maps = self._has_required_secret_maps(wad, map_list)
         map_range = [first_non_secret_map, last_non_secret_map]
         if has_required_secret_maps:
+            episodes = wad.map_info.get('episodes', PlaybackData.EPISODE_DEFAULTS.get(wad.iwad, []))
             if map_range == wad.map_info.get('d2all', PlaybackData.D2ALL_DEFAULT):
                 self.data['level'] = 'D2All'
             # D2ALLs are set when a Doom 1 wad isn't a complete episode.
             elif map_range == wad.map_info.get('d1all'):
                 self.data['level'] = 'D1All'
-            elif wad.map_info.get('episodes', PlaybackData.EPISODE_DEFAULTS.get(wad.iwad, [])):
-                for idx, episode_range in enumerate(wad.map_info.get('episodes')):
+            elif episodes:
+                for idx, episode_range in enumerate(episodes):
                     if map_range == episode_range:
                         self.data['level'] = 'Episode {}'.format(idx)
-            else:
+
+            if not self.data.get('level'):
                 self.data['level'] = 'Other Movie'
                 self.note_strings.add('Other Movie {} - {}'.format(first_non_secret_map,
                                                                    last_non_secret_map))
@@ -449,16 +458,16 @@ class PlaybackData:
         if map_ranges:
             for map_range in map_ranges:
                 try:
-                    map_range = parse_range(map_range)
+                    map_range = parse_range(map_range, remove_non_numeric_chars=True)
                 except ValueError:
                     LOGGER.error('Issue parsing ranges for WAD %s.', wad.name)
                     raise
 
-                if self._convert_level_to_num(level) not in range(*map_range):
-                    self.note_strings.add('Run for map that is not part of the wad.')
-                    return NEEDS_ATTENTION_PLACEHOLDER
+                if self._convert_level_to_num(level) in range(*map_range):
+                    return level
 
-        return level
+        self.note_strings.add('Run for map that is not part of the wad.')
+        return NEEDS_ATTENTION_PLACEHOLDER
 
     @staticmethod
     def _convert_level_to_dsda_format(level_str):

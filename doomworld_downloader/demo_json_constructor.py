@@ -28,8 +28,8 @@ class DemoJsonConstructor:
     # Note: the version key is required by the uploader spec but is currently always hardcoded to 0.
     KEY_TO_DEFAULT_MAP = {'tas': False, 'solo_net': False, 'version': '0'}
     REQUIRED_KEYS = [
-        'tas', 'solo_net', 'guys', 'version', 'wad', 'file', 'kills', 'items', 'secrets', 'engine',
-        'time', 'level', 'levelstat', 'category', 'secret_exit', 'recorded_at', 'players'
+        'tas', 'solo_net', 'guys', 'version', 'wad', 'file', 'engine', 'time', 'level', 'levelstat',
+        'category', 'secret_exit', 'recorded_at', 'players'
     ]
 
     def __init__(self, data_manager, note_strings, zip_file):
@@ -52,11 +52,11 @@ class DemoJsonConstructor:
         :raises RuntimeError if there are required keys missing in the final demo JSON.
         """
         for evaluation in self.data_manager:
+            # Convert to JSON keys, default to value in the map.
+            key_to_insert = self.KEY_TO_JSON_MAP.get(evaluation.key, evaluation.key)
             if evaluation.needs_attention:
-                self._handle_needs_attention_entries(evaluation)
+                self._handle_needs_attention_entries(key_to_insert, evaluation)
             else:
-                # Convert to JSON keys, default to value in the map.
-                key_to_insert = self.KEY_TO_JSON_MAP.get(evaluation.key, evaluation.key)
                 value = next(iter(evaluation.possible_values.keys()))
                 if value == NEEDS_ATTENTION_PLACEHOLDER:
                     LOGGER.warning('Zip file %s needs attention for following key: "%s". ',
@@ -76,9 +76,10 @@ class DemoJsonConstructor:
             if key not in self.demo_json:
                 raise RuntimeError('Key {} not found in final demo JSON.'.format(key))
 
-    def _handle_needs_attention_entries(self, evaluation):
+    def _handle_needs_attention_entries(self, key_to_insert, evaluation):
         """Handle entries that are marked as needing attention.
 
+        :param key_to_insert: Key to insert into the demo JSON
         :param evaluation: Evaluation requiring attention
         """
         if evaluation.key == 'category':
@@ -97,11 +98,17 @@ class DemoJsonConstructor:
                     (playback_category == 'NM 100S' and textfile_category == 'NM Speed')):
                 LOGGER.info('Inferred %s category for zip file %s.',
                             playback_category, self.zip_file)
-                self.demo_json[evaluation.key] = playback_category
+                self.demo_json[key_to_insert] = playback_category
         else:
             LOGGER.warning('Zip file %s needs attention based on the following '
                            'evaluation: "%s".', self.zip_file, evaluation)
-            self.demo_json[evaluation.key] = NEEDS_ATTENTION_PLACEHOLDER
+            # If there is a single possible evaluation, the data manager will indicate evaluation is
+            # needed, but we should just add it to the JSON by default, in case the evaluation is
+            # correct
+            if len(evaluation.possible_values) == 1:
+                self.demo_json[key_to_insert] = next(iter(evaluation.possible_values.keys()))
+            else:
+                self.demo_json[key_to_insert] = NEEDS_ATTENTION_PLACEHOLDER
             self._set_has_issue()
 
     def _construct_tags(self):

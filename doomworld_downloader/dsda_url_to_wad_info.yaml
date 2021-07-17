@@ -1,8 +1,45 @@
+"https://www.dsdarchive.com/wads/bourgdm":
+  wad_name: Bourgeois Megawad
+  iwad: doom2
+  wad_files:
+    bourgfix.wad: {checksum: "a29c0a8b4406bb970cf22d91ddccd330"}
+    bourgfix.deh: {not_required_for_playback: True, checksum: "604a0b2f27b935becbea704f0b80106d"}
+    bourgdm.wad: {not_required_for_playback: True, checksum: "aae83b7fffbf0df89d689465dfc340df"}
+    bourgdm.deh: {not_required_for_playback: True, checksum: "604a0b2f27b935becbea704f0b80106d"}
+  complevel: 2
+  playback_cmd_line: "-file bourgfix"
+  map_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/deathmatch/megawads/bourgfix"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/119699-bourgeois-megawad-complevel-2/"
+"https://www.dsdarchive.com/wads/doom":
+  wad_name: The Ultimate Doom
+  iwad: doom
+  wad_files:
+    doom.wad: {checksum: "c4fe9fd920207691a9f493668e0a2083"}
+  complevel: 3
+  map_info:
+    map_ranges: [["E1M1", "E1M9"], ["E2M1", "E2M9"], ["E3M1", "E3M9"], ["E4M1", "E4M9"]]
+  idgames_url: null
+  dsda_paginated: true
+  doomworld_thread: "https://www.doomworld.com/forum/topic/55560-ultimate-doom-demos-complevel-3/"
+"https://www.dsdarchive.com/wads/doom2":
+  wad_name: "Doom II: Hell on Earth"
+  iwad: doom2
+  wad_files:
+    doom2.wad: {checksum: "25e1459ca71d321525f84628f45ca8cd"}
+  complevel: 2
+  map_info:
+    map_ranges: [[1, 32]]
+  idgames_url: null
+  dsda_paginated: true
+  doomworld_thread: "https://www.doomworld.com/forum/topic/55589-doom-ii-demos-complevel-2/"
 "https://www.dsdarchive.com/wads/scythe":
   wad_name: Scythe
   iwad: doom2
   wad_files:
-    scythe.wad: "insert MD5 hash here"
+    scythe.wad: {checksum: "3131213a9413a604c5c160848ddb3d9d"}
   complevel: 2
   playback_cmd_line: "-file scythe"
   map_info:
@@ -20,7 +57,7 @@
   wad_name: Scythe 2
   iwad: doom2
   wad_files:
-    scythe2.wad: "insert MD5 hash here"
+    scythe2.wad: {checksum: "1f939d6bcc6175eb9830645d7acb8aa9"}
   complevel: 2
   playback_cmd_line: "-file scythe2"
   map_info:
@@ -29,18 +66,3 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/scythe2"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/vb/doom-speed-demos/47020-new-scythe-2b-demos-complevel-2/"
-"https://www.dsdarchive.com/wads/bourgdm":
-  wad_name: Bourgeois Megawad
-  iwad: doom2
-  wad_files:
-    bourgfix.wad: {checksum: "a29c0a8b4406bb970cf22d91ddccd330"}
-    bourgfix.deh: {not_required_for_playback: True}
-    bourgdm.wad: {not_required_for_playback: True}
-    bourgdm.deh: {not_required_for_playback: True}
-  complevel: 2
-  playback_cmd_line: "-file bourgfix"
-  map_info:
-    map_ranges: [[1, 32]]
-  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/deathmatch/megawads/bourgfix"
-  dsda_paginated: false
-  doomworld_thread: "https://www.doomworld.com/forum/topic/119699-bourgeois-megawad-complevel-2/"

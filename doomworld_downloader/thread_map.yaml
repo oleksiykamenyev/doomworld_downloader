@@ -807,6 +807,16 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/bourgdm
   id: '119699'
   name: Bourgeois Megawad [-complevel 2]
+"https://www.doomworld.com/forum/topic/122131-micro-slaughter-community-project-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/mscp_v1a
+  id: '122131'
+  name: Micro Slaughter Community Project demos [-complevel 9]
+"https://www.doomworld.com/forum/topic/123192-doom-ii-25-years-on-earth-one-year-late-edition-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ph_25yoe
+  id: '123192'
+  name: "Doom II: 25 Years on Earth (One Year Late Edition) [-complevel 2]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/103041-mayhem-2018-purple-and-orange-demos-complevel-9/":

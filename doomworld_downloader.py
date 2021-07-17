@@ -98,10 +98,10 @@ def handle_downloads(downloads, post_data):
             lmp_path = os.path.join(out_path, lmp_file)
             lmp_data = LMPData(lmp_path, recorded_date)
             lmp_data.analyze()
+            # TODO: We can also try guessing this in the textfile
             demo_info = {'is_solo_net': lmp_data.data.get('is_solo_net', False),
-                         'is_chex': lmp_data.raw_data.get('is_chex', False),
-                         'is_heretic': lmp_data.raw_data.get('is_heretic', False),
-                         'complevel': lmp_data.raw_data.get('complevel')}
+                         'complevel': lmp_data.raw_data.get('complevel'),
+                         'iwad': lmp_data.raw_data.get('iwad', '')}
             wad_guesses = get_wad_guesses(
                 post_data.raw_data['wad_links'], textfile_data.raw_data['wad_strings'],
                 lmp_data.raw_data['wad_strings']
@@ -174,8 +174,8 @@ def main():
     # TODO:
     #   The config files (thread map, upload.ini, etc.) should eventually be moved to be managed by
     #   pkg_resources instead of relative paths
-    testing_mode = CONFIG.testing_mode
     set_up_configs()
+    testing_mode = CONFIG.testing_mode
 
     search_start_date = datetime.strptime(CONFIG.search_start_date, '%Y-%m-%dT%H:%M:%SZ')
     search_end_date = datetime.strptime(CONFIG.search_end_date, '%Y-%m-%dT%H:%M:%SZ')
@@ -183,7 +183,9 @@ def main():
 
     with open(DOWNLOAD_INFO_FILE) as current_download_strm:
         current_download_info = current_download_strm.read().strip()
-    if current_download_info and demo_range == current_download_info:
+
+    use_cached_downloads = current_download_info and demo_range == current_download_info
+    if use_cached_downloads:
         # Use cached stuff if available
         post_cache_dir = os.path.join(CONFIG.demo_download_directory, 'post_cache')
         post_info_files = glob(post_cache_dir + '/**/*.yaml', recursive=True)
@@ -201,16 +203,19 @@ def main():
     if testing_mode:
         posts = []
 
-    for post in posts:
-        post_data = PostData(post)
-        post_data.analyze()
-        downloads = download_attachments(post)
-        downloads_handled = handle_downloads(downloads, post_data)
-        if not downloads_handled:
-            move_post_cache_to_failed(post)
+    if use_cached_downloads:
+        for post in posts:
+            download_attachments(post)
 
     with open(DOWNLOAD_INFO_FILE, 'w') as current_download_strm:
         current_download_strm.write(demo_range)
+
+    for post in posts:
+        post_data = PostData(post)
+        post_data.analyze()
+        downloads_handled = handle_downloads(post.cached_downloads, post_data)
+        if not downloads_handled:
+            move_post_cache_to_failed(post)
 
 
 if __name__ == '__main__':

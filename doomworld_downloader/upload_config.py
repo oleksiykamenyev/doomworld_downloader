@@ -122,10 +122,12 @@ def set_up_configs():
         idgames_url = wad_dict['idgames_url']
         wad_info = Wad(
             name=wad_dict['wad_name'], iwad=wad_dict['iwad'], files=wad_dict['wad_files'],
-            complevel=wad_dict['complevel'], playback_cmd_line=wad_dict['playback_cmd_line'],
-            map_info=wad_dict['map_info'], idgames_url=idgames_url, dsda_url=url, other_url='',
+            complevel=wad_dict['complevel'], map_info=wad_dict['map_info'],
+            idgames_url=idgames_url, dsda_url=url, other_url='',
             dsda_paginated=wad_dict['dsda_paginated'],
-            doomworld_thread=wad_dict['doomworld_thread'], dsda_name=wad_dict.get('dsda_name')
+            doomworld_thread=wad_dict['doomworld_thread'],
+            playback_cmd_line=wad_dict.get('playback_cmd_line', ''),
+            dsda_name=wad_dict.get('dsda_name')
         )
         WAD_MAP_BY_DSDA_URL[url] = wad_info
         WAD_MAP_BY_IDGAMES_URL[wad_dict['idgames_url']] = wad_info
