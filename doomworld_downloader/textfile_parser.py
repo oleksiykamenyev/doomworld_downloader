@@ -14,9 +14,10 @@ LOGGER = logging.getLogger(__name__)
 
 class TextfileData:
     """Store all uploader-relevant data for a demo textfile."""
-    CATEGORY_KEY = 'category'
-    PORT_KEYS = ['builtusing', 'builtwith', 'client', 'engine', 'exe', 'port', 'recordedusing',
-                 'recordedwith', 'sourceport']
+    CATEGORY_KEYS = ['category', 'discipline']
+    PORT_KEYS = ['builtusing', 'builtwith', 'client', 'engine', 'exe', 'port', 'portused',
+                 'recordedusing', 'recordedwith', 'sourceport', 'sourceportused', 'usingport',
+                 'usingsourceport']
     TAS_PORTS = ['DRE', 'TASDoom', 'TASMBF', 'XDRE']
     TAS_STRING = 'this is a tools-assisted demo'
     VIDEO_KEYS = ['video', 'videolink', 'youtube', 'youtubelink', 'yt', 'ytlink']
@@ -46,10 +47,12 @@ class TextfileData:
 
         # Chocolate family
         # Chocolate Doom
-        re.compile(r'Chocolate\s*Doom\s*v?(?P<version>\d\.\d\.\d)',
+        re.compile(r'Chocolate\s*Doom(\s*|-)?v?(?P<version>\d\.\d+\.\d+)',
                    re.IGNORECASE): 'Chocolate DooM',
         # Crispy Doom
-        re.compile(r'Crispy\s*Doom\s*v?(?P<version>\d\.\d\.\d)', re.IGNORECASE): 'Crispy Doom',
+        re.compile(
+            r'Crispy\s*Doom(\s*|-)?v?(?P<version>\d\.\d+\.\d+)', re.IGNORECASE
+        ): 'Crispy Doom',
         # CNDoom
         re.compile(r'CNDoom\s*v?(?P<version>\d\.\d\.\d(\.\d))?', re.IGNORECASE): 'CNDoom',
 
@@ -72,8 +75,8 @@ class TextfileData:
         ): 'PrBoom-plus',
         # DSDA-Doom
         re.compile(
-            r'DSDA(\s*|-)Doom(\s*|-)?v?(?P<version>\d\.\d+(\.\d+))?\s'
-            r'*-?((complevel|cl)\s*(?P<complevel>\d+))?',
+            r'DSDA(\s*|-)Doom(\s*|-)?v?(?P<version>\d\.\d+(\.\d+)?)\s*'
+            r'-?((complevel|cl)\s*(?P<complevel>\d+))?',
             re.IGNORECASE
         ): 'DSDA-Doom',
 
@@ -134,7 +137,7 @@ class TextfileData:
                 key = ''.join(key.lower().split())
                 value = value.lower().strip()
 
-                if key == TextfileData.CATEGORY_KEY:
+                if key in TextfileData.CATEGORY_KEYS:
                     self.data['category'] = self._parse_category(value)
                 elif key in TextfileData.PORT_KEYS:
                     self.data['source_port'] = self._parse_port(value)
@@ -156,18 +159,21 @@ class TextfileData:
         # If we were unable to parse the category or source port from key/value pairs in the
         # textfile, we just try the entire textfile; this is likely to be wrong since someone could
         # just have a category or port name in their general comments, but better than nothing.
-        if not self.data['category']:
+        if not self.data.get('category'):
             self.data['category'] = self._parse_category(self._raw_textfile)
-            if not self.data['category']:
+            if not self.data.get('category'):
                 LOGGER.info('Could not parse category from textfile %s.', self.textfile_path)
-        if not self.data['source_port']:
+                self.data.pop('category')
+        if not self.data.get('source_port'):
             self.data['source_port'] = self._parse_port(self._raw_textfile)
-            if not self.data['source_port']:
+            if not self.data.get('source_port'):
                 LOGGER.info('Could not parse source port from textfile %s.', self.textfile_path)
+                self.data.pop('source_port')
 
-        for tas_port in TextfileData.TAS_PORTS:
-            if self.data['source_port'] and tas_port in self.data['source_port']:
-                self.data['is_tas'] = True
+        if self.data.get('source_port'):
+            for tas_port in TextfileData.TAS_PORTS:
+                if tas_port in self.data['source_port']:
+                    self.data['is_tas'] = True
 
         for note_regex, note in TextfileData.NOTE_REGEXES.items():
             match = note_regex.search(self._raw_textfile)

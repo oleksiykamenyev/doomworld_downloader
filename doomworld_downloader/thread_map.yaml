@@ -1,3 +1,4 @@
+# TODO: Might be worth updating this to be based on the ID because the thread name and URL can change
 # Keyset:
 # {'additional_info': {'wad': 'wad', 'wads': 'wads', 'solo-net': 'solo-net', 'category': 'category', 'tas_only': 'tas_only', 'note': 'note', 'source_port': 'source_port', 'ignore': 'ignore', 'nomonsters': 'nomonsters'}, 'id': 'id', 'name': 'name'}
 
@@ -1096,6 +1097,16 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     ignore: true
   id: "111006"
   name: Similarities between speedrunning and musical performance
+"https://www.doomworld.com/forum/topic/118074-dsda-doom-source-port-v0210/":
+  additional_info:
+    ignore: true
+  id: "118074"
+  name: dsda-doom source port [v0.21.0]
+"https://www.doomworld.com/forum/topic/116534-dsda-doom-guide-usage-recording-demos-and-some-extra-info/":
+  additional_info:
+    ignore: true
+  id: "116534"
+  name: dsda-doom guide [Usage, recording demos, and some extra info]
 
 # Miscellanous threads
 # Ignored because this is not the correct thread for NRFTL, and the one demo post in here was duped

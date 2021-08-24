@@ -168,6 +168,7 @@ def main():
     """Main function."""
     args = parse_args()
     log_level = get_log_level(args.verbose)
+    # TODO: Skip noisy messages in underlying url libraries unless in very verbose mode
     logging.basicConfig(level=log_level,
                         format='%(asctime)s - %(name)s - %(levelname)s: %(message)s')
 

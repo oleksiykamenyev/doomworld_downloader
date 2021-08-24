@@ -3,7 +3,7 @@
   iwad: doom2
   wad_files:
     bourgfix.wad: {checksum: "a29c0a8b4406bb970cf22d91ddccd330"}
-    bourgfix.deh: {not_required_for_playback: True, checksum: "604a0b2f27b935becbea704f0b80106d"}
+    bourgfix.deh: {not_required_for_playback: True, checksum: "a320b5173b496eec55f6d97fa8585ba0"}
     bourgdm.wad: {not_required_for_playback: True, checksum: "aae83b7fffbf0df89d689465dfc340df"}
     bourgdm.deh: {not_required_for_playback: True, checksum: "604a0b2f27b935becbea704f0b80106d"}
   complevel: 2
@@ -35,6 +35,17 @@
   idgames_url: null
   dsda_paginated: true
   doomworld_thread: "https://www.doomworld.com/forum/topic/55589-doom-ii-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/plutonia":
+  wad_name: "Final Doom: The Plutonia Experiment"
+  iwad: plutonia
+  wad_files:
+    plutonia.wad: {checksum: "75c8cf89566741fa9d22447604053bd7"}
+  complevel: 4
+  map_info:
+    map_ranges: [[1, 32]]
+  idgames_url: null
+  dsda_paginated: true
+  doomworld_thread: "https://www.doomworld.com/forum/topic/55558-final-doom-demos-complevel-4/"
 "https://www.dsdarchive.com/wads/scythe":
   wad_name: Scythe
   iwad: doom2
@@ -53,6 +64,18 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/scythe"
   dsda_paginated: true
   doomworld_thread: "https://www.doomworld.com/forum/topic/38372-scythe-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/tnt":
+  wad_name: "Final Doom: TNT Evilution"
+  iwad: tnt
+  wad_files:
+    tnt.wad: {checksum: "4e158d9953c79ccf97bd0663244cc6b6"}
+    tnt31.wad: {checksum: "7a77ee148fd9ee5bc599356218f6f6b5"}
+  complevel: 4
+  map_info:
+    map_ranges: [[1, 32]]
+  idgames_url: null
+  dsda_paginated: true
+  doomworld_thread: "https://www.doomworld.com/forum/topic/55558-final-doom-demos-complevel-4/"
 "https://www.dsdarchive.com/wads/scythe2":
   wad_name: Scythe 2
   iwad: doom2
@@ -66,3 +89,55 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/scythe2"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/vb/doom-speed-demos/47020-new-scythe-2b-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/ztheresa":
+  wad_name: screen night of the thunderstorm and the central heating
+  iwad: doom2
+  wad_files:
+    ztheresa.wad: {checksum: "f14651615c190a6d63c9c5a5ef9bd14d"}
+  complevel: 2
+  playback_cmd_line: "-file ztheresa"
+  map_info:
+    map_ranges: [[1, 6]]
+    d2all: ['Map 01', 'Map 06']
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/v-z/ztheresa"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/end1":
+  wad_name: The Beginning of the End (part 1)
+  iwad: doom
+  wad_files:
+    end1.wad: {checksum: "1a8be1769981816e8b107a974550ab93"}
+    end_snd.wad: {checksum: "f82ec5a08ee07c74f8d7ee8237aa6c40"}
+  complevel: 3
+  playback_cmd_line: "-file end1"
+  map_info:
+    map_ranges: [["E1M1", "E1M9"], ["E2M1", "E2M9"]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/d-f/end1"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/valiant":
+  wad_name: Valiant
+  iwad: doom2
+  wad_files:
+    valiant.wad: {checksum: "c9f7a89627a307e4075834ee8a05d817"}
+  complevel: 11
+  playback_cmd_line: "-file valiant"
+  map_info:
+    map_ranges: [[1, 32]]
+    episodes: [["Map 01", "Map 07"], ["Map 08", "Map 13"], ["Map 14", "Map 18"], ["Map 19", "Map 24"], ["Map 25", "Map 30"]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/valiant"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72445-valiant-sawdust-demos-complevel-11/"
+"https://www.dsdarchive.com/wads/mscp_v1a":
+  wad_name: Micro-Slaughter Community Project
+  iwad: doom2
+  wad_files:
+    mscp_v1a.wad: {checksum: "fe86128f6c452038833578457602709e"}
+  complevel: 9
+  playback_cmd_line: "-file mscp_v1a"
+  map_info:
+    map_ranges: [[1, 18]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/mscp_v1a"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/122131-micro-slaughter-community-project-demos-complevel-9/"

@@ -5,6 +5,7 @@ Parse data out of DSDA-Doom playback of the LMP.
 
 import logging
 import os
+import subprocess
 
 from shutil import copyfile, rmtree
 
@@ -182,7 +183,8 @@ class PlaybackData:
 
                 local_wad_location = zip_extract(zip_location)
 
-            copyfile(os.path.join(local_wad_location, wad_file), CONFIG.dsda_doom_directory)
+            copyfile(os.path.join(local_wad_location, wad_file),
+                     os.path.join(CONFIG.dsda_doom_directory, wad_file))
 
         if local_wad_location:
             rmtree(local_wad_location)
@@ -200,9 +202,18 @@ class PlaybackData:
                 LOGGER.error('Wad %s not available.', wad_guess.name)
                 continue
 
+            # TODO: Some WADs have fix files and optional files that may or may not be needed for
+            #       loading for playback; we need to account for this, probably as follows:
+            #         - if demo has a footer, use the fixfiles present there
+            #         - if not, try all combos of fix files
             self.command = '{} -iwad {} {}'.format(self.command, wad_guess.iwad,
                                                    wad_guess.playback_cmd_line)
-            run_cmd(self.command)
+            LOGGER.info(self.command)
+            try:
+                run_cmd(self.command)
+            except subprocess.CalledProcessError as e:
+                LOGGER.warning('Failed to play back demo %s.', self.lmp_path)
+                LOGGER.debug('Error message: %s.', e)
             # Technically, there could be edge cases where a levelstat could be generated even if
             # the wrong WAD is used (e.g., thissuxx). I'm not sure if there's any reasonable way to
             # fix this, though.
@@ -381,7 +392,7 @@ class PlaybackData:
             elif episodes:
                 for idx, episode_range in enumerate(episodes):
                     if map_range == episode_range:
-                        self.data['level'] = 'Episode {}'.format(idx)
+                        self.data['level'] = 'Episode {}'.format(idx + 1)
 
             if not self.data.get('level'):
                 self.data['level'] = 'Other Movie'

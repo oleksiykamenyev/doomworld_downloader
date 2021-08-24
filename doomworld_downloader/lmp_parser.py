@@ -233,6 +233,7 @@ class LMPData:
                         # TODO: Add example footers somewhere in documentation
                         # TODO: We need to keep track of files that aren't allowed for recording
                         #       (e.g., most things that aren't part of the WAD being run)
+                        # TODO: Parse mouselook data
                         if elem == '-iwad':
                             self.raw_data['iwad'] = self._parse_file_in_footer(line[idx + 1],
                                                                                '.wad')
@@ -292,7 +293,7 @@ class LMPData:
             # Infer complevel for any that PrBoom+/DSDA-Doom do not output to the footer
             if not complevel:
                 if raw_version == 203:
-                    first_character = self.raw_data['engine'][0]
+                    first_character = chr(self._header[2])
                     if first_character == "M":
                         complevel = '11'
                 else:

@@ -16,14 +16,14 @@ DEFAULT_WAD_GUESSES = [
 LOGGER = logging.getLogger(__name__)
 
 
-def get_wad_guesses(iwad=None, *args):
+def get_wad_guesses(*args, iwad=None):
     """Get WAD guesses from set of lists of guesses.
 
     Guesses may be DSDA URLs, idgames URLs, or WAD filenames. Guesses must be provided in ascending
     order of likelihood.
 
-    :param iwad: IWAD guess if available
     :param args: Any number of lists of WAD guesses.
+    :param iwad: IWAD guess if available
     :return: Set of WAD guesses parsed from provided lists
     :raises ValueError if any argument that is provided isn't a list
     """
@@ -46,7 +46,8 @@ def get_wad_guesses(iwad=None, *args):
                 else:
                     wad_to_guess_sanitized = wad_to_guess
                 for url, wad in WAD_MAP_BY_DSDA_URL.items():
-                    if wad_to_guess_sanitized in wad.files.keys():
+                    if wad_to_guess_sanitized.lower() in [wad_file.upper()
+                                                          for wad_file in wad.files.keys()]:
                         wad_guesses.append(wad)
                         break
 

@@ -5,6 +5,8 @@ Parse data out of Doomworld demo post.
 
 import logging
 
+from urllib.parse import urlparse
+
 from .data_manager import DataManager
 from .upload_config import THREAD_MAP_KEYED_ON_ID
 
@@ -100,7 +102,10 @@ class PostData:
         :return: Whether the link was parsed as a YouTube URL
         """
         parsed = False
-        if 'youtube.com/' in link:
+        if 'youtube.com/embed' in link:
+            self.raw_data['video_links'].append(urlparse(link).path.strip('/').split('/')[-1])
+            parsed = True
+        elif 'youtube.com/' in link:
             self.raw_data['video_links'].append(link.split('watch?v=')[1])
             parsed = True
         elif 'youtu.be/' in link:
