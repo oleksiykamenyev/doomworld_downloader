@@ -28,6 +28,7 @@ def get_wad_guesses(*args, iwad=None):
     :raises ValueError if any argument that is provided isn't a list
     """
     wad_guesses = []
+    # LOGGER.info(args)
     for arg in args:
         if not isinstance(arg, list):
             raise ValueError('Wads to guess must be passed as a list, received: "{}".'.format(
@@ -46,7 +47,7 @@ def get_wad_guesses(*args, iwad=None):
                 else:
                     wad_to_guess_sanitized = wad_to_guess
                 for url, wad in WAD_MAP_BY_DSDA_URL.items():
-                    if wad_to_guess_sanitized.lower() in [wad_file.upper()
+                    if wad_to_guess_sanitized.lower() in [wad_file.lower()
                                                           for wad_file in wad.files.keys()]:
                         wad_guesses.append(wad)
                         break

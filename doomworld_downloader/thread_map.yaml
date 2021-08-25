@@ -818,6 +818,16 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/ph_25yoe
   id: '123192'
   name: "Doom II: 25 Years on Earth (One Year Late Edition) [-complevel 2]"
+"https://www.doomworld.com/forum/topic/118660-nosp2-demos-cl-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/nosp2
+  id: '118660'
+  name: "NoSp2 Demos -Cl 9"
+"https://www.doomworld.com/forum/topic/123590-zone-400-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/zone400
+  id: '123590'
+  name: "Zone 400 demos [-complevel 2]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/103041-mayhem-2018-purple-and-orange-demos-complevel-9/":

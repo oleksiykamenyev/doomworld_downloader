@@ -8,6 +8,7 @@ manual inspection.
 """
 
 import logging
+import os
 import re
 
 from .upload_config import NEEDS_ATTENTION_PLACEHOLDER
@@ -37,9 +38,11 @@ class DemoJsonConstructor:
         self.data_manager = data_manager
         self.note_strings = note_strings
         self.zip_file = zip_file
-        self.demo_json = {'file': {'name': zip_file}}
+        # Use "/" separator for path since the DSDA client prefers it
+        self.demo_json = {'file': {'name': '/'.join(os.path.split(zip_file))}}
         self.has_issue = False
 
+        # TODO: This should probably be a public method called externally
         self._parse_data_manager()
 
     def _set_has_issue(self):
@@ -74,7 +77,14 @@ class DemoJsonConstructor:
         self.demo_json['players'] = list(self.demo_json['players'])
         for key in self.REQUIRED_KEYS:
             if key not in self.demo_json:
-                raise RuntimeError('Key {} not found in final demo JSON.'.format(key))
+                LOGGER.error('Key %s not found in final demo JSON.', key)
+                self._set_has_issue()
+                self.demo_json[key] = NEEDS_ATTENTION_PLACEHOLDER
+
+        # TODO: Should probably format it this way by default
+        # Correct format for demo JSON
+        self.demo_json = {'demo': self.demo_json}
+        # TODO: If category is Other should just mark as has issue
 
     def _handle_needs_attention_entries(self, key_to_insert, evaluation):
         """Handle entries that are marked as needing attention.
@@ -99,17 +109,18 @@ class DemoJsonConstructor:
                 LOGGER.info('Inferred %s category for zip file %s.',
                             playback_category, self.zip_file)
                 self.demo_json[key_to_insert] = playback_category
+                return
+
+        LOGGER.warning('Zip file %s needs attention based on the following '
+                       'evaluation: "%s".', self.zip_file, evaluation)
+        # If there is a single possible evaluation, the data manager will indicate evaluation is
+        # needed, but we should just add it to the JSON by default, in case the evaluation is
+        # correct
+        if len(evaluation.possible_values) == 1:
+            self.demo_json[key_to_insert] = next(iter(evaluation.possible_values.keys()))
         else:
-            LOGGER.warning('Zip file %s needs attention based on the following '
-                           'evaluation: "%s".', self.zip_file, evaluation)
-            # If there is a single possible evaluation, the data manager will indicate evaluation is
-            # needed, but we should just add it to the JSON by default, in case the evaluation is
-            # correct
-            if len(evaluation.possible_values) == 1:
-                self.demo_json[key_to_insert] = next(iter(evaluation.possible_values.keys()))
-            else:
-                self.demo_json[key_to_insert] = NEEDS_ATTENTION_PLACEHOLDER
-            self._set_has_issue()
+            self.demo_json[key_to_insert] = NEEDS_ATTENTION_PLACEHOLDER
+        self._set_has_issue()
 
     def _construct_tags(self):
         """Construct tags array for demo JSON

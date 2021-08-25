@@ -7,6 +7,7 @@ import logging
 import re
 
 from .data_manager import DataManager
+from .utils import parse_youtube_url
 
 
 LOGGER = logging.getLogger(__name__)
@@ -47,14 +48,16 @@ class TextfileData:
 
         # Chocolate family
         # Chocolate Doom
-        re.compile(r'Chocolate\s*Doom(\s*|-)?v?(?P<version>\d\.\d+\.\d+)',
+        re.compile(r'Chocolate(\s*|-)?Doom(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+\.\d+)',
                    re.IGNORECASE): 'Chocolate DooM',
         # Crispy Doom
         re.compile(
-            r'Crispy\s*Doom(\s*|-)?v?(?P<version>\d\.\d+\.\d+)', re.IGNORECASE
+            r'Crispy(\s*|-)?Doom(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+\.\d+)', re.IGNORECASE
         ): 'Crispy Doom',
         # CNDoom
-        re.compile(r'CNDoom\s*v?(?P<version>\d\.\d\.\d(\.\d))?', re.IGNORECASE): 'CNDoom',
+        re.compile(
+            r'CNDoom(\.exe)?\s*v?\.?(?P<version>\d\.\d\.\d(\.\d))?', re.IGNORECASE
+        ): 'CNDoom',
 
         # Boom/MBF family
         # Boom
@@ -66,13 +69,15 @@ class TextfileData:
         # TASMBF
         re.compile(r'TASMBF', re.IGNORECASE): 'TASMBF',
         # PrBoom
-        re.compile(r'(Pr|GL)Boom^(\+|-plus)\s*v?(?P<version>\d\.\d\.\d)', re.IGNORECASE): 'PrBoom',
+        re.compile(
+            r'(Pr|GL)Boom(\.exe)?^(\+|-plus)\s*v?\.?(?P<version>\d\.\d\.\d)', re.IGNORECASE
+        ): 'PRBoom',
         # PrBoom+
         re.compile(
-            r'(Pr|GL)(Boom)?(\+|-plus)(\s*|-)?v?(?P<version>\d\.\d\.\d\.\d)\s'
+            r'(Pr|GL)(Boom)?(\+|-plus)?(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d\.\d\.\d)\s'
             r'*-?((complevel|cl)\s*(?P<complevel>\d+))?',
             re.IGNORECASE
-        ): 'PrBoom-plus',
+        ): 'PRBoom',
         # DSDA-Doom
         re.compile(
             r'DSDA(\s*|-)Doom(\s*|-)?v?(?P<version>\d\.\d+(\.\d+)?)\s*'
@@ -135,18 +140,19 @@ class TextfileData:
             if ':' in line:
                 key, value = line.split(':', 1)
                 key = ''.join(key.lower().split())
-                value = value.lower().strip()
+                value_lowercase = value.lower().strip()
 
                 if key in TextfileData.CATEGORY_KEYS:
-                    self.data['category'] = self._parse_category(value)
+                    self.data['category'] = self._parse_category(value_lowercase)
                 elif key in TextfileData.PORT_KEYS:
-                    self.data['source_port'] = self._parse_port(value)
+                    self.data['source_port'] = self._parse_port(value_lowercase)
                 elif key in TextfileData.VIDEO_KEYS:
-                    self.raw_data['video_links'].append(value)
+                    youtube_url_key = parse_youtube_url(value)
+                    self.raw_data['video_links'].append(youtube_url_key)
                 elif key in TextfileData.WAD_KEYS:
-                    self.raw_data['wad_strings'].append(value)
+                    self.raw_data['wad_strings'].append(value_lowercase)
                 elif key == 'iwad':
-                    self.raw_data['iwad'] = value
+                    self.raw_data['iwad'] = value_lowercase
 
         # TODO: Might want to just extend this with all IWADs to catch textfile errors
         iwad = self.raw_data.get('iwad')
@@ -221,7 +227,10 @@ class TextfileData:
                 except IndexError:
                     complevel = None
                 if complevel:
-                    version = 'v{}{}{}'.format(version, 'cl', complevel)
+                    version = '{}{}{}'.format(version, 'cl', complevel)
+
+                if not version.startswith('v'):
+                    version = 'v{}'.format(version)
 
                 return '{} {}'.format(port_name_final, version)
 

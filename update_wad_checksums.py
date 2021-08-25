@@ -1,3 +1,6 @@
+"""
+Update WAD checksums from DSDA in the DSDA URL to WAD info YAML.
+"""
 
 import argparse
 import logging
@@ -22,7 +25,7 @@ def parse_args():
 
     :return: Parsed arguments
     """
-    parser = argparse.ArgumentParser(description='Doomworld demo downloader.')
+    parser = argparse.ArgumentParser(description='Update WAD checksums.')
 
     parser.add_argument('-v', '--verbose',
                         action='count',

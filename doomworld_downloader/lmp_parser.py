@@ -20,7 +20,7 @@ class LMPData:
     This is intended to be a very generic storage class that is mostly unaware of intricacies of the
     LMP format like headers, footers, etc. That will be handled by the LMP library used underneath.
     """
-    PORT_FOOTER_TO_DSDA_MAP = {'PrBoom-Plus': 'PrBoom-plus', 'dsda-doom': 'DSDA-Doom'}
+    PORT_FOOTER_TO_DSDA_MAP = {'PrBoom-Plus': 'PRBoom', 'dsda-doom': 'DSDA-Doom'}
     KEY_LIST = [
         'engine', 'version', 'skill', 'episode', 'level', 'play mode', 'respawn', 'fast',
         'nomonsters', 'player 1', 'player 2', 'player 3', 'player 4', 'turbo', 'stroller',
@@ -285,23 +285,28 @@ class LMPData:
         # This value, along with complevel, could already be obtained from the footer, in which case
         # we can just use that.
         if source_port_family:
-            port_name, port_version = source_port_family.split()
-            # Normalize port names
-            port_name = LMPData.PORT_FOOTER_TO_DSDA_MAP.get(port_name, port_name)
+            port_split = source_port_family.split(maxsplit=2)
+            # Later versions of XDRE output source port as "PrBoom-Plus 2.5.1.4 (XDRE 2.20)"
+            if 'XDRE' in source_port_family:
+                self.data['source_port'] = port_split[-1].replace('(', '').replace(')', '')
+            else:
+                port_name, port_version = port_split
+                # Normalize port names
+                port_name = LMPData.PORT_FOOTER_TO_DSDA_MAP.get(port_name, port_name)
 
-            port_with_version = '{name} v{version}'.format(name=port_name, version=port_version)
-            # Infer complevel for any that PrBoom+/DSDA-Doom do not output to the footer
-            if not complevel:
-                if raw_version == 203:
-                    first_character = chr(self._header[2])
-                    if first_character == "M":
-                        complevel = '11'
-                else:
-                    complevel = LMPData.VERSION_COMPLEVEL_MAP.get(raw_version)
-            if complevel:
-                self.data['source_port'] = '{name}cl{complevel}'.format(name=port_with_version,
-                                                                        complevel=complevel)
-                return
+                port_with_version = '{name} v{version}'.format(name=port_name, version=port_version)
+                # Infer complevel for any that PrBoom+/DSDA-Doom do not output to the footer
+                if not complevel:
+                    if raw_version == 203:
+                        first_character = chr(self._header[2])
+                        if first_character == "M":
+                            complevel = '11'
+                    else:
+                        complevel = LMPData.VERSION_COMPLEVEL_MAP.get(raw_version)
+                if complevel:
+                    self.data['source_port'] = '{name}cl{complevel}'.format(name=port_with_version,
+                                                                            complevel=complevel)
+                    return
 
         # Up to (and including) Doom 1.2, first byte was skill level, not game/exe version
         if 0 <= raw_version <= 4:

@@ -208,7 +208,7 @@ class PlaybackData:
             #         - if not, try all combos of fix files
             self.command = '{} -iwad {} {}'.format(self.command, wad_guess.iwad,
                                                    wad_guess.playback_cmd_line)
-            LOGGER.info(self.command)
+            # LOGGER.info(self.command)
             try:
                 run_cmd(self.command)
             except subprocess.CalledProcessError as e:
@@ -419,6 +419,7 @@ class PlaybackData:
         levelstat = levelstat.splitlines()
         # IL run case
         if len(levelstat) == 1:
+            # TODO: Add logic to override secret exit marker (e.g., Sunlust map 31)
             levelstat_line_split = levelstat[0].split()
             self.data['level'] = self._get_level(levelstat_line_split, wad)
             self.data['secret_exit'] = self.data['level'].endswith('s')
@@ -467,6 +468,7 @@ class PlaybackData:
         )
         map_ranges = wad.map_info.get('map_ranges')
         if map_ranges:
+            level_num = self._convert_level_to_num(level)
             for map_range in map_ranges:
                 try:
                     map_range = parse_range(map_range, remove_non_numeric_chars=True)
@@ -474,7 +476,8 @@ class PlaybackData:
                     LOGGER.error('Issue parsing ranges for WAD %s.', wad.name)
                     raise
 
-                if self._convert_level_to_num(level) in range(*map_range):
+                map_range[1] += 1
+                if level_num in range(*map_range):
                     return level
 
         self.note_strings.add('Run for map that is not part of the wad.')

@@ -10,6 +10,7 @@ import shlex
 import subprocess
 
 from time import gmtime, strftime
+from urllib.parse import urlparse
 
 import requests
 
@@ -147,7 +148,7 @@ def run_cmd(cmd, get_output=False, dryrun=False):
     if dryrun:
         DRYRUN_PREFIX = '[DRYRUN] '
 
-    LOGGER.debug('%sRunning command "%s"', DRYRUN_PREFIX, cmd_str)
+    LOGGER.info('%sRunning command "%s"', DRYRUN_PREFIX, cmd_str)
     if not dryrun:
         if get_output:
             return subprocess.check_output(cmd).decode('utf-8')
@@ -204,7 +205,7 @@ def parse_range(range, remove_non_numeric_chars=False):
     if not range or len(range) > 2:
         raise ValueError('Invalid range {}.'.format(range))
     if len(range) == 1:
-        range.extend(range[0])
+        range.append(range[0])
 
     if remove_non_numeric_chars:
         return [int(''.join(elem_char for elem_char in str(elem) if elem_char.isdigit()))
@@ -281,3 +282,22 @@ def get_page(url):
 
 def convert_datetime_to_dsda_date(datetime_to_convert):
     return datetime_to_convert.strftime('%Y-%m-%d %H:%M:%S') + ' ' + strftime("%z", gmtime())
+
+
+def parse_youtube_url(url):
+    """Parse YouTube URLs from a URL.
+
+    Return whether or not the URL is parsed so that if the URL wasn't a YT URL, it can be
+    checked against other websites of interet.
+
+    :param url: URL
+    :return: YouTube URL code if it the URL was detected as a YouTube URL, else None
+    """
+    if 'youtube.com/embed' in url:
+        return urlparse(url).path.strip('/').split('/')[-1]
+    elif 'youtube.com/' in url:
+        return url.split('watch?v=')[1]
+    elif 'youtu.be/' in url:
+        return url.split('youtu.be/')[1]
+
+    return None

@@ -48,7 +48,14 @@ def handle_downloads(downloads, post_data):
     """
     for download in downloads:
         # TODO: Handle demo packs
-        zip_file = ZipFile(download)
+        zip_no_ext = get_filename_no_ext(download)
+        download_dir = os.path.dirname(download)
+        # Rename zip to account for any whitespace in the filename
+        out_path = os.path.join(download_dir, zip_no_ext).replace(' ', '_')
+        renamed_zip = '{}.zip'.format(out_path)
+        shutil.move(download, renamed_zip)
+
+        zip_file = ZipFile(renamed_zip)
         info_list = zip_file.infolist()
         lmp_files = {}
         txt_files = []
@@ -62,30 +69,27 @@ def handle_downloads(downloads, post_data):
                 txt_files.append(zip_file_name)
 
         if not lmp_files:
-            LOGGER.warning('No lmp files found in download %s.', download)
+            LOGGER.warning('No lmp files found in download %s.', renamed_zip)
             continue
         if not txt_files:
-            LOGGER.error('No txt files found in download %s.', download)
+            LOGGER.error('No txt files found in download %s.', renamed_zip)
             continue
 
         is_demo_pack = False
-        zip_no_ext = get_filename_no_ext(download)
         if len(lmp_files) != 1:
-            main_lmp = get_main_file_from_zip(download, lmp_files, zip_no_ext, file_type='lmp')
+            main_lmp = get_main_file_from_zip(renamed_zip, lmp_files, zip_no_ext, file_type='lmp')
             if main_lmp:
                 lmp_files = {main_lmp: lmp_files[main_lmp]}
             else:
                 is_demo_pack = True
         if len(txt_files) != 1:
-            main_txt = get_main_file_from_zip(download, txt_files, zip_no_ext, file_type='txt')
+            main_txt = get_main_file_from_zip(renamed_zip, txt_files, zip_no_ext, file_type='txt')
             if main_txt:
                 txt_files = [main_txt]
             else:
                 LOGGER.warning('Multiple txt files found in download %s with no primary txt '
-                               'found, skipping textfile parsing.', download)
+                               'found, skipping textfile parsing.', renamed_zip)
 
-        download_dir = os.path.dirname(download)
-        out_path = os.path.join(download_dir, zip_no_ext)
         zip_file.extractall(path=out_path, members=list(lmp_files.keys()) + txt_files)
 
         # There should really be only one textfile at this moment, so will assume this.
@@ -110,7 +114,7 @@ def handle_downloads(downloads, post_data):
             playback_data.analyze()
             if playback_data.playback_failed:
                 LOGGER.info('Skipping post with zip %s due to issues with playback.',
-                            download)
+                            renamed_zip)
                 return False
 
             data_manager = DataManager()
@@ -124,8 +128,8 @@ def handle_downloads(downloads, post_data):
                 all_note_strings = all_note_strings.union(textfile_data.note_strings)
 
             demo_json_constructor = DemoJsonConstructor(data_manager, all_note_strings,
-                                                        download)
-            download_split = download.rstrip(os.path.sep).split(os.path.sep)
+                                                        renamed_zip)
+            download_split = renamed_zip.rstrip(os.path.sep).split(os.path.sep)
             # Download path sample: demos_for_upload/PlayerName/123456/demo.zip
             # Set json filename to demo_PlayerName_123456
             # TODO: Consider lumping all of the no issue demos into a single JSON

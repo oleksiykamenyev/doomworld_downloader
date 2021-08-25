@@ -141,3 +141,147 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/mscp_v1a"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/122131-micro-slaughter-community-project-demos-complevel-9/"
+"https://www.dsdarchive.com/wads/sunlust":
+  wad_name: Sunlust
+  iwad: doom2
+  wad_files:
+    sunlust.wad: {checksum: "72bdb54a847e42d71be4535c52f90731"}
+  complevel: 9
+  playback_cmd_line: "-file sunlust"
+  map_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/sunlust"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/74096-sunlust-summer-of-69-demos-complevel-9/"
+"https://www.dsdarchive.com/wads/magnolia":
+  wad_name: Magnolia
+  iwad: doom2
+  wad_files:
+    magnolia.wad: {checksum: "4fc271c17702a5a70437adf0c16fe028"}
+  complevel: 9
+  playback_cmd_line: "-file magnolia"
+  map_info:
+    map_ranges: [[1, 4]]
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/86724-demos-for-miscellaneous-ribbiks-maps/"
+"https://www.dsdarchive.com/wads/oceansde":
+  wad_name: Oceanside
+  iwad: doom2
+  wad_files:
+    oceansde.wad: {checksum: "be5cd9b0a4a191995894ebc0c2e1d682"}
+  complevel: 2
+  playback_cmd_line: "-file oceansde"
+  map_info:
+    map_ranges: [[1, 3]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/m-o/oceansde"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/sinergy":
+  wad_name: SINERGY
+  iwad: doom
+  wad_files:
+    sinergy.wad: {checksum: "20e6fa34868f2791fe3cc9fd08903a58"}
+  complevel: 3
+  playback_cmd_line: "-file sinergy"
+  map_info:
+    map_ranges: [["E1M1", "E1M9"], ["E2M1", "E2M9"], ["E3M1", "E3M9"], ["E4M1", "E4M9"]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/Ports/megawads/sinergy"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/nosp2":
+  wad_name: NoReason's Speedmaps 2
+  iwad: doom2
+  wad_files:
+    nosp2.wad: {checksum: "2618e4eec8765fa7cbef1c66e98a6c00"}
+  complevel: 9
+  playback_cmd_line: "-file nosp2"
+  map_info:
+    map_ranges: [[1, 34]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/nosp2"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/118660-nosp2-demos-cl-9/"
+"https://www.dsdarchive.com/wads/sunder":
+  wad_name: Sunder
+  iwad: doom2
+  wad_files:
+    sunder.wad: {checksum: "441b22376dd190240586518bd19fa23e"}
+  complevel: 9
+  playback_cmd_line: "-file sunder"
+  map_info:
+    map_ranges: [[1, 14]]
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/53682-sunder-demos/"
+"https://www.dsdarchive.com/wads/zone300":
+  wad_name: Zone 300
+  iwad: doom2
+  wad_files:
+    zone300.wad: {checksum: "9dbc1f3e6a21840973502772087b726a"}
+  complevel: 2
+  playback_cmd_line: "-file zone300"
+  map_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/zone300"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/65776-zone-300-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/aaliens":
+  wad_name: Ancient Aliens
+  iwad: doom2
+  wad_files:
+    aaliens.wad: {checksum: "af650f84863308868c85b22dcbe911cd"}
+  complevel: 9
+  playback_cmd_line: "-file aaliens"
+  map_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/aaliens"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/89728-ancient-aliens-proofs-complevel-9/"
+"https://www.dsdarchive.com/wads/nova3":
+  wad_name: Nova III
+  iwad: doom2
+  wad_files:
+    nova3.wad: {checksum: "3631f99e9c13b7548aa8bd142a016298"}
+  complevel: 9
+  playback_cmd_line: "-file nova3"
+  map_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/nova3"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/112725-nova-iii-demos-complevel-9/"
+"https://www.dsdarchive.com/wads/boomedit":
+  wad_name: Boom Edit Example Wad
+  iwad: doom2
+  wad_files:
+    boomedit.wad: {checksum: "8b81578ba565585f90d5cf0ade10183c"}
+  complevel: 9
+  playback_cmd_line: "-file boomedit"
+  map_info:
+    map_ranges: [[1]]
+  idgames_url: "https://www.doomworld.com/idgames/themes/TeamTNT/boom/boomedit"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/area51":
+  wad_name: Area 51
+  iwad: doom2
+  wad_files:
+    area51.wad: {checksum: "0153b950f92a36ed2c69bcf04eb6af1e"}
+  complevel: 2
+  playback_cmd_line: "-file area51"
+  map_info:
+    map_ranges: [[1, 2]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/a-c/area51"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/zone400":
+  wad_name: Zone 400
+  iwad: doom2
+  wad_files:
+    zone400.wad: {checksum: "d472517ef4670a1f7f90c823effc30da"}
+  complevel: 2
+  playback_cmd_line: "-file zone400"
+  map_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/zone400"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123590-zone-400-demos-complevel-2/"

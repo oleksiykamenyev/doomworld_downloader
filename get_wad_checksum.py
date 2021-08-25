@@ -1,3 +1,7 @@
+"""
+Get WAD checksum manually.
+"""
+
 from doomworld_downloader.utils import checksum
 
 # For manual checksums (IWADs, etc.), just use this. Could take an argument, but too lazy for now,
