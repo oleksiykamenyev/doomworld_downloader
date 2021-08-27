@@ -53,36 +53,39 @@ def main():
     cur_wad_url = None
     new_wad_map_lines = []
     for line in wad_map_lines:
-        if line.startswith('"'):
-            cur_wad_url = line.rstrip(':').replace('"', '')
-            wad_download = download_wad_from_dsda(cur_wad_url)
-            if not wad_download:
-                LOGGER.warning('Could not download WAD %s.', cur_wad_url)
-                local_wad_location = None
+        line_strip = line.strip()
+        if line_strip and not line_strip.startswith('#'):
+            if line.startswith('"'):
+                cur_wad_url = line.rstrip(':').replace('"', '')
+                wad_download = download_wad_from_dsda(cur_wad_url)
+                if not wad_download:
+                    LOGGER.warning('Could not download WAD %s.', cur_wad_url)
+                    local_wad_location = None
+                    new_wad_map_lines.append(line)
+                    continue
+                local_wad_location = zip_extract(wad_download, overwrite=True)
+
+            if line == '  wad_files:':
+                in_wad_files = True
                 new_wad_map_lines.append(line)
                 continue
-            local_wad_location = zip_extract(wad_download)
+            if in_wad_files and not line.startswith('    '):
+                in_wad_files = False
+                if local_wad_location and os.path.exists(local_wad_location):
+                    rmtree(local_wad_location)
+            if in_wad_files and local_wad_location:
+                wad_file, _ = line.split(':', 1)
+                wad_file = wad_file.strip()
+                wad_file_path = os.path.join(local_wad_location, wad_file)
+                if not os.path.isfile(wad_file_path):
+                    LOGGER.warning('Could not find WAD %s in download from %s.', wad_file,
+                                   cur_wad_url)
+                    new_wad_map_lines.append(line)
+                    continue
 
-        if line == '  wad_files:':
-            in_wad_files = True
-            new_wad_map_lines.append(line)
-            continue
-        if in_wad_files and not line.startswith('    '):
-            in_wad_files = False
-            if local_wad_location and os.path.exists(local_wad_location):
-                rmtree(local_wad_location)
-        if in_wad_files and local_wad_location:
-            wad_file, _ = line.split(':', 1)
-            wad_file = wad_file.strip()
-            wad_file_path = os.path.join(local_wad_location, wad_file)
-            if not os.path.isfile(wad_file_path):
-                LOGGER.warning('Could not find WAD %s in download from %s.', wad_file, cur_wad_url)
-                new_wad_map_lines.append(line)
-                continue
+                new_checksum = checksum(wad_file_path)
 
-            new_checksum = checksum(wad_file_path)
-
-            line = CHECKSUM_RE.sub('checksum: "{}"'.format(new_checksum), line)
+                line = CHECKSUM_RE.sub('checksum: "{}"'.format(new_checksum), line)
 
         new_wad_map_lines.append(line)
 

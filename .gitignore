@@ -152,3 +152,4 @@ cur_log.txt
 failed_uploads.json
 .token
 jsons_complete/
+tmp_demos_for_upload/

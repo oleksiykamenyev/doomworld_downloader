@@ -114,20 +114,22 @@ class LMPData:
                                                   demo=self.lmp_path)
         parse_lmp_out = None
         try:
-            parse_lmp_out = run_cmd(parse_lmp_cmd, get_output=True).splitlines()
+            parse_lmp_out = run_cmd(parse_lmp_cmd, get_output=True)
         except subprocess.CalledProcessError as cpe:
             LOGGER.info('Encountered exception %s when running parse LMP command.', cpe)
             pass
 
-        if not parse_lmp_out:
+        # Heretic LMP analysis won't fail but instead output Unknown engine to stdout
+        if not parse_lmp_out or 'Unknown engine' in parse_lmp_out:
             # For now, we have no clear indicator that a demo is Heretic or not at this point, so
             # the easiest approach is trying it both ways and seeing which one works.
             # TODO: Probably need a better approach here, although not sure there is anything great
             LOGGER.debug('Trying parse LMP command with Heretic.')
             parse_lmp_cmd = '{} --engine=heretic'.format(parse_lmp_cmd)
-            parse_lmp_out = run_cmd(parse_lmp_cmd, get_output=True).splitlines()
-            self.raw_data['is_heretic'] = True
+            parse_lmp_out = run_cmd(parse_lmp_cmd, get_output=True)
+            self.raw_data['iwad'] = 'heretic'
 
+        parse_lmp_out = parse_lmp_out.splitlines()
         for key in LMPData.KEY_LIST:
             for line in parse_lmp_out:
                 self._parse_key(key, line)
@@ -205,7 +207,8 @@ class LMPData:
                     self.data['num_players'] += 1
                 if key == 'sr50 on turns' and value.lower() == 'true':
                     self.data['is_tas'] = True
-                if key in self.BOOLEAN_INT_KEYS:
+                # For Heretic demos, these keys are just output as "true"/"false" strings
+                if not self.raw_data.get('iwad') == 'heretic' and key in self.BOOLEAN_INT_KEYS:
                     value = False if int(value) == 0 else True
                 self.raw_data[key] = value
 
@@ -281,7 +284,8 @@ class LMPData:
 
         source_port_family = self.raw_data.get('source_port_family', '')
         complevel = self.raw_data.get('complevel')
-        raw_version = int(self.raw_data['version'])
+        # Heretic does not have the version flag set, so default to non-existent version
+        raw_version = int(self.raw_data.get('version', -1))
         # This value, along with complevel, could already be obtained from the footer, in which case
         # we can just use that.
         if source_port_family:

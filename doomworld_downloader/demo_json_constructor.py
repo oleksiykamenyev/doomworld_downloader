@@ -81,6 +81,8 @@ class DemoJsonConstructor:
                 self._set_has_issue()
                 self.demo_json[key] = NEEDS_ATTENTION_PLACEHOLDER
 
+        # TODO: Anything with tags should be placed in a separate dir for manual inspection
+        self._construct_tags()
         # TODO: Should probably format it this way by default
         # Correct format for demo JSON
         self.demo_json = {'demo': self.demo_json}
@@ -136,7 +138,7 @@ class DemoJsonConstructor:
         final_tag = self._construct_other_movie_tag()
         final_tag += self._construct_skill_tag()
         final_tag += self._construct_misc_tags()
-        self.demo_json['tags'] = {'show': True, 'text': final_tag}
+        self.demo_json['tags'] = [{'show': True, 'text': final_tag.rstrip('\n')}]
 
     def _construct_other_movie_tag(self):
         """Construct other movie tag.
@@ -151,12 +153,15 @@ class DemoJsonConstructor:
                 # level info; it is included so this note is more easy to detect in this function.
                 other_movie = note_string.split('Other Movie ')[1]
             if note_string == 'Does not visit secret maps.':
-                no_secret_maps = note_string + '\n'
+                no_secret_maps = note_string
 
-        if other_movie and not no_secret_maps:
-            other_movie += '\n'
+        if other_movie:
+            if no_secret_maps:
+                return other_movie + '. ' + no_secret_maps + '\n'
 
-        return other_movie + '. ' + no_secret_maps
+            return other_movie + '\n'
+
+        return ''
 
     def _construct_skill_tag(self):
         """Construct skill tag.
@@ -189,10 +194,12 @@ class DemoJsonConstructor:
            category = 'Incompatible {}'.format(category)
 
         skill_tag = category + additional_info
-        if skill_tag:
+        # If we didn't modify the tag at all from the original category, there was no new info
+        # added, so we can skip adding this tag.
+        if skill_tag and skill_tag != self.demo_json['category']:
             return skill_tag + '\n'
 
-        return skill_tag
+        return ''
 
     def _construct_misc_tags(self):
         """Construct misc tags.

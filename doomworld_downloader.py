@@ -48,10 +48,10 @@ def handle_downloads(downloads, post_data):
     """
     for download in downloads:
         # TODO: Handle demo packs
-        zip_no_ext = get_filename_no_ext(download)
-        download_dir = os.path.dirname(download)
         # Rename zip to account for any whitespace in the filename
-        out_path = os.path.join(download_dir, zip_no_ext).replace(' ', '_')
+        zip_no_ext = get_filename_no_ext(download).replace(' ', '_')
+        download_dir = os.path.dirname(download)
+        out_path = os.path.join(download_dir, zip_no_ext)
         renamed_zip = '{}.zip'.format(out_path)
         shutil.move(download, renamed_zip)
 
@@ -102,13 +102,14 @@ def handle_downloads(downloads, post_data):
             lmp_path = os.path.join(out_path, lmp_file)
             lmp_data = LMPData(lmp_path, recorded_date)
             lmp_data.analyze()
+            iwad = lmp_data.raw_data.get('iwad', '')
             # TODO: We can also try guessing this in the textfile
             demo_info = {'is_solo_net': lmp_data.data.get('is_solo_net', False),
                          'complevel': lmp_data.raw_data.get('complevel'),
-                         'iwad': lmp_data.raw_data.get('iwad', '')}
+                         'iwad': iwad}
             wad_guesses = get_wad_guesses(
                 post_data.raw_data['wad_links'], textfile_data.raw_data['wad_strings'],
-                lmp_data.raw_data['wad_strings']
+                lmp_data.raw_data['wad_strings'], iwad=iwad
             )
             playback_data = PlaybackData(lmp_path, wad_guesses, demo_info=demo_info)
             playback_data.analyze()
@@ -208,10 +209,8 @@ def main():
     if testing_mode:
         posts = []
 
-    if use_cached_downloads:
-        for post in posts:
-            download_attachments(post)
-
+    for post in posts:
+        download_attachments(post)
     with open(DOWNLOAD_INFO_FILE, 'w') as current_download_strm:
         current_download_strm.write(demo_range)
 

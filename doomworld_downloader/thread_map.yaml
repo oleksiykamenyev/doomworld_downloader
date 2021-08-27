@@ -828,6 +828,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/zone400
   id: '123590'
   name: "Zone 400 demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/123072-gottagofast-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ggfast01
+  id: '123072'
+  name: "GottaGoFast Demos [-complevel 2]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/103041-mayhem-2018-purple-and-orange-demos-complevel-9/":

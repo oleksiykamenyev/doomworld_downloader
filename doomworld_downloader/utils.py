@@ -9,6 +9,7 @@ import re
 import shlex
 import subprocess
 
+from shutil import rmtree
 from time import gmtime, strftime
 from urllib.parse import urlparse
 
@@ -81,13 +82,14 @@ def download_response(response, download_dir, download_filename):
     return download_path
 
 
-def zip_extract(zip_path, extract_dir=None, extract_extension=None):
+def zip_extract(zip_path, extract_dir=None, extract_extension=None, overwrite=False):
     """Extract zipfile.
 
     :param zip_path: Path to zip that should be extracted
     :param extract_dir: Directory to extract to (default to the zip name)
     :param extract_extension: Can be set to limit which extension should be extracted from the zip,
                               default to all
+    :param overwrite: Flag indicating to overwrite extraction directory
     :return: Directory of extracted contents
     :raises RuntimeError if there are no files to extract from directory with provided extension
             IOError if the provided extraction directory already exists and isn't a directory or
@@ -119,7 +121,10 @@ def zip_extract(zip_path, extract_dir=None, extract_extension=None):
         extract_dir = os.path.join(extract_dir, zip_filename)
 
     if os.path.exists(extract_dir):
-        raise IOError('Extraction directory {} already exists.'.format(extract_dir))
+        if overwrite:
+            rmtree(extract_dir)
+        else:
+            raise IOError('Extraction directory {} already exists.'.format(extract_dir))
 
     if extract_members:
         zip_file.extractall(path=extract_dir, members=extract_members)
@@ -144,12 +149,11 @@ def run_cmd(cmd, get_output=False, dryrun=False):
         cmd_str = cmd
         cmd = shlex.split(cmd)
 
-    DRYRUN_PREFIX = ''
     if dryrun:
-        DRYRUN_PREFIX = '[DRYRUN] '
-
-    LOGGER.info('%sRunning command "%s"', DRYRUN_PREFIX, cmd_str)
-    if not dryrun:
+        LOGGER.info('[DRYRUN] Running command "%s"', cmd_str)
+    else:
+        # Debug instead of info to minimize noise when running the script
+        LOGGER.debug('Running command "%s"', cmd_str)
         if get_output:
             return subprocess.check_output(cmd).decode('utf-8')
 
@@ -264,7 +268,7 @@ def get_main_file_from_zip(download, file_list, zip_no_ext, file_type):
         if file_no_ext.lower() == zip_no_ext.lower():
             LOGGER.debug('Download %s contains multiple files of type %s, parsing just file '
                          'matching the zip name.', download, file_type)
-            return file_no_ext
+            return cur_file
 
     return None
 

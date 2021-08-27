@@ -28,7 +28,6 @@ def get_wad_guesses(*args, iwad=None):
     :raises ValueError if any argument that is provided isn't a list
     """
     wad_guesses = []
-    # LOGGER.info(args)
     for arg in args:
         if not isinstance(arg, list):
             raise ValueError('Wads to guess must be passed as a list, received: "{}".'.format(
@@ -54,6 +53,8 @@ def get_wad_guesses(*args, iwad=None):
 
     # If we actually find no guesses, just default to guessing all IWADs.
     if not wad_guesses:
+        if iwad == 'heretic':
+            return [WAD_MAP_BY_DSDA_URL['https://www.dsdarchive.com/wads/heretic']]
         return [WAD_MAP_BY_DSDA_URL[default_wad] for default_wad in DEFAULT_WAD_GUESSES]
 
     return wad_guesses

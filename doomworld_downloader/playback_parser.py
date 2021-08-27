@@ -39,6 +39,8 @@ class PlaybackData:
     LEVELSTAT_LINE_KILLS_IDX = 5
     LEVELSTAT_LINE_ITEMS_IDX = 7
     LEVELSTAT_LINE_SECRETS_IDX = 9
+    LEVELSTAT_LINE_ITEMS_COOP_IDX = 8
+    LEVELSTAT_LINE_SECRETS_COOP_IDX = 11
 
     ALL_SECRETS_CATEGORIES = [
         'UV Max', 'UV Fast', 'UV Respawn', 'NM 100S', 'NoMo 100S', 'SM Max', 'BP Max',
@@ -53,15 +55,16 @@ class PlaybackData:
     ]
     # TODO: Fix this in DSDA-Doom
     DOOM_CATEGORY_MAP = {'UV Tyson': 'Tyson'}
-    BOOLEAN_INT_KEYS = ['nomonsters', 'respawn', 'fast', 'pacifist', 'stroller', 'almost_reality'
-                        '100k', '100s', 'weapon_collector', 'tyson_weapons', 'turbo']
+    BOOLEAN_INT_KEYS = ['nomonsters', 'respawn', 'fast', 'pacifist', 'stroller', 'almost_reality',
+                        '100k', '100s', 'weapon_collector', 'tyson_weapons', 'turbo', 'reality']
 
     IWAD_TO_SECRET_EXIT_MAP = {
         'doom': {'E1M3': 'E1M9', 'E2M5': 'E2M9', 'E3M6': 'E3M9', 'E4M2': 'E4M9'},
         'doom2': {'Map 15': 'Map 31', 'Map 31': 'Map 32'},
         'plutonia': {'Map 15': 'Map 31', 'Map 31': 'Map 32'},
         'tnt': {'Map 15': 'Map 31', 'Map 31': 'Map 32'},
-        'heretic': {'E1M6': 'E1M9', 'E2M4': 'E2M9', 'E3M4': 'E3M9', 'E4M4': 'E4M9', 'E5M3': 'E5M9'}
+        'heretic': {'E1M6': 'E1M9', 'E2M4': 'E2M9', 'E3M4': 'E3M9', 'E4M4': 'E4M9', 'E5M3': 'E5M9'},
+        'chex': {}
     }
     D2ALL_DEFAULT = ['Map 01', 'Map 30']
     EPISODE_DEFAULTS = {
@@ -232,6 +235,8 @@ class PlaybackData:
 
                 # TODO: Additional processing needed for maps that are max exceptions; for a
                 #       complete fix, this will need DSDA-Doom to output missed monster/secret IDs
+                # TODO: If tyson_weapons is true, category is UV-Max, and map has non-Tyson weps,
+                #       need to switch category to Tyson
                 self._parse_raw_data(wad_guess)
                 complevel = self.demo_info.get('complevel')
                 if complevel:
@@ -315,11 +320,8 @@ class PlaybackData:
                 # performed, which will be handled later.
                 self.note_strings.add('Uses turbo')
             if key == 'category':
-                if not self.demo_info.get('is_heretic', False):
-                    self.data['category'] = PlaybackData.DOOM_CATEGORY_MAP.get(value, value)
-                else:
-                    # TODO: Heretic categories still incorrect in analysis, need to add a custom map
-                    self.data['category'] = NEEDS_ATTENTION_PLACEHOLDER
+                # TODO: Heretic categories still incorrect in analysis, need DSDA-Doom fix
+                self.data['category'] = PlaybackData.DOOM_CATEGORY_MAP.get(value, value)
 
             self.raw_data[key] = value
 
@@ -383,10 +385,19 @@ class PlaybackData:
         has_required_secret_maps = self._has_required_secret_maps(wad, map_list)
         map_range = [first_non_secret_map, last_non_secret_map]
         if has_required_secret_maps:
-            episodes = wad.map_info.get('episodes', PlaybackData.EPISODE_DEFAULTS.get(wad.iwad, []))
-            if map_range == wad.map_info.get('d2all', PlaybackData.D2ALL_DEFAULT):
+            # If the config sets these settings, use them even if they evaluate to None/empty
+            if 'episodes' in wad.map_info:
+                episodes = wad.map_info['episodes']
+            else:
+                episodes = PlaybackData.EPISODE_DEFAULTS.get(wad.iwad, [])
+            if 'd2all' in wad.map_info:
+                d2all = wad.map_info['d2all']
+            else:
+                d2all = PlaybackData.D2ALL_DEFAULT
+
+            if map_range == d2all:
                 self.data['level'] = 'D2All'
-            # D2ALLs are set when a Doom 1 wad isn't a complete episode.
+            # D1ALLs are set when a Doom 1 wad isn't a complete episode.
             elif map_range == wad.map_info.get('d1all'):
                 self.data['level'] = 'D1All'
             elif episodes:
@@ -410,6 +421,8 @@ class PlaybackData:
         Levelstat format:
           MAP01 - 1:23.00 (1:23)  K: 1337/1337  I: 69/69  S: 420/420
           MAP02 - 1:11.97 (2:34)  K: 0/0  I: 0/0  S: 0/0
+        In case of co-op:
+          E3M7 - 0:26.97 (0:26)  K: 3/38 (3+0)  I: 0/8 (0+0)  S: 0/4  (0+0)
 
         :param wad: WAD object
         """
@@ -424,11 +437,22 @@ class PlaybackData:
             self.data['level'] = self._get_level(levelstat_line_split, wad)
             self.data['secret_exit'] = self.data['level'].endswith('s')
             time = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_TIME_IDX]
+            # TODO: Remove s for categories that are not split by secret exit
             self.data['time'] = time
             self.data['levelstat'] = time
             self.data['kills'] = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_KILLS_IDX]
-            self.data['items'] = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_ITEMS_IDX]
-            self.data['secrets'] = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_SECRETS_IDX]
+            if len(levelstat_line_split) == 10:
+                self.data['items'] = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_ITEMS_IDX]
+                self.data['secrets'] = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_SECRETS_IDX]
+            elif len(levelstat_line_split) == 13:
+                self.data['items'] = levelstat_line_split[
+                    PlaybackData.LEVELSTAT_LINE_ITEMS_COOP_IDX
+                ]
+                self.data['secrets'] = levelstat_line_split[
+                    PlaybackData.LEVELSTAT_LINE_SECRETS_COOP_IDX
+                ]
+            else:
+                raise RuntimeError('Unrecognized levelstat line format: {}.'.format(levelstat[0]))
         else:
             self.data['secret_exit'] = False
             if not self.demo_info.get('is_chex', False):
@@ -469,6 +493,8 @@ class PlaybackData:
         map_ranges = wad.map_info.get('map_ranges')
         if map_ranges:
             level_num = self._convert_level_to_num(level)
+            # TODO: For episodic wads, if there were E1M10 and later, this wouldn't work, might
+            #       want to address that in the future
             for map_range in map_ranges:
                 try:
                     map_range = parse_range(map_range, remove_non_numeric_chars=True)

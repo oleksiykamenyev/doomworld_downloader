@@ -53,7 +53,7 @@ class PostData:
         """Parse post object."""
         # This is set to a tuple so that it is hashable for the data manager.
         self.data['player_list'] = (self.post.author_name,)
-        for link in self.post.links:
+        for link_text, link in self.post.links.items():
             youtube_url_key = parse_youtube_url(link)
             if youtube_url_key:
                 self.raw_data['video_links'].append(youtube_url_key)
