@@ -353,6 +353,8 @@ class LMPData:
                 if complevel:
                     self.data['source_port'] = '{name}cl{complevel}'.format(name=port_with_version,
                                                                             complevel=complevel)
+                    # Update the raw complevel setting with the final guess
+                    self.raw_data['complevel'] = complevel
                     return
 
         # Up to (and including) Doom 1.2, first byte was skill level, not game/exe version

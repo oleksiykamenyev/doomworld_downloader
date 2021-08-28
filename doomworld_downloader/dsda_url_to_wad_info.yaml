@@ -978,3 +978,164 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom/0-9/01fava"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/65024-fava-beans-demos-complevel-3/"
+"https://www.dsdarchive.com/wads/stuff2":
+  wad_name: stuff2.wad
+  iwad: doom2
+  wad_files:
+    stuff2.wad: {checksum: "01f0dcea78cfd78cedc22fe1fa8e99b5"}
+  complevel: 2
+  playback_cmd_line: "-file stuff2"
+  map_info:
+    map_ranges: [[1, 3]]
+    d2all: ["Map 01", "Map 03"]
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/at":
+  wad_name: at.wad
+  iwad: doom
+  wad_files:
+    at.wad: {checksum: "c1d5f77ee3978fcea71d2ccc27ef91f0"}
+  complevel: 3
+  playback_cmd_line: "-file at"
+  map_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/Ports/a-c/at"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/elysion":
+  wad_name: elysion.wad
+  iwad: doom2
+  wad_files:
+    elysion.wad: {checksum: "6b41cb0869ed3c3f8e0151a4103fb472"}
+  complevel: 9
+  playback_cmd_line: "-file elysion"
+  map_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/elysion"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/italo":
+  wad_name: italo.wad
+  iwad: doom2
+  wad_files:
+    italo.wad: {checksum: "4e2792e374f07981f168b0190f827f8d"}
+  complevel: 9
+  playback_cmd_line: "-file italo"
+  map_info:
+    map_ranges: [[1, 20]]
+    d2all: ["Map 01", "Map 20"]
+    episodes: [["Map 01", "Map 10", "Map 01", "Map 20"]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/italo"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/85607-italo-doom-demos-complevel-9/"
+"https://www.dsdarchive.com/wads/equinox":
+  wad_name: equinox.wad
+  iwad: doom2
+  wad_files:
+    equinox.wad: {checksum: "8be936d185681f3a3769ccdb715f6e16"}
+  complevel: 2
+  playback_cmd_line: "-file equinox"
+  map_info:
+    map_ranges: [[1, 13]]
+    d2all: ["Map 01", "Map 13"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/equinox"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/59348-equinox-demos/"
+"https://www.dsdarchive.com/wads/nerve":
+  wad_name: No Rest for the Living
+  iwad: doom2
+  wad_files:
+    nerve.wad: {checksum: "f98f0a9f611cbc615405b74df9e5fa23"}
+  complevel: 2
+  playback_cmd_line: "-file nerve_compat"
+  map_info:
+    map_ranges: [[1, 9]]
+    d2all: ["Map 01", "Map 09"]
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/51245-no-rest-for-the-living-demos/"
+"https://www.dsdarchive.com/wads/strg":
+  wad_name: Struggle - Antaresian Legacy
+  iwad: doom2
+  wad_files:
+    strg.wad: {checksum: "1f3653c4c3928a578aff9ac685ed402a"}
+  complevel: 2
+  playback_cmd_line: "-file strg"
+  map_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/strg"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/124095-struggle-antaresian-legacy-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/rod1":
+  wad_name: Rooms of Doom 1
+  iwad: doom
+  wad_files:
+    rod1.wad: {checksum: "6556518e8a7f3a1d933342841a98d084"}
+  complevel: 3
+  playback_cmd_line: "-file rod1"
+  map_info:
+    map_ranges: [["E1M1", "E1M8"]]
+    episodes: [["E1M1", "E1M8"]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/p-r/rod1"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/t-maya":
+  wad_name: Mayan Mishap
+  iwad: doom2
+  wad_files:
+    t-maya.wad: {checksum: "6ca48524770a1cff9089d6ff9a4c64e9"}
+  complevel: 11
+  playback_cmd_line: "-file t-maya"
+  map_info:
+    map_ranges: [[1, 4], [31]]
+    episodes: [["Map 01", "Map 04"]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/s-u/t-maya"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/eternal":
+  wad_name: Eternal Doom
+  iwad: doom2
+  wad_files:
+    eternall.wad: {checksum: "e8683fd3bf9af11859c8b2fe48a2cf7f"}
+  complevel: 2
+  playback_cmd_line: "-file eternall"
+  map_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/themes/TeamTNT/eternal/eternal"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/40384-eternal-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/joi_lstcv15":
+  wad_name: Lost civilization
+  iwad: doom2
+  wad_files:
+    joi_lstcv15.wad: {checksum: "9ba560f24722c7cd3140af5be5e54104"}
+  complevel: 9
+  playback_cmd_line: "-file joi_lstcv15"
+  map_info:
+    map_ranges: [[1, 21], [31]]
+    d2all: ["Map 01", "Map 21"]
+    # TODO: Confirm that map 15 in this wad has a secret exit
+    secret_exits: {'Map 15': 'Map 31'}
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/joi_lstcv15"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/124136-lost-civilization-complevel-9/"
+"https://www.dsdarchive.com/wads/attack-on-io":
+  wad_name: Attack on IO
+  iwad: doom2
+  wad_files:
+    attackonio.wad: {checksum: "07dc8bac5b8887688538f4e87ff0c6ef"}
+  complevel: 9
+  playback_cmd_line: "-file attackonio"
+  map_info:
+    map_ranges: [[1, 7]]
+    d2all: ["Map 01", "Map 7"]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/attack-on-io"
+  dsda_paginated: false
+  doomworld_thread: null

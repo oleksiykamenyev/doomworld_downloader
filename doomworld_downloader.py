@@ -115,10 +115,15 @@ def handle_downloads(downloads, post_data):
             demo_info = {'is_solo_net': lmp_data.data.get('is_solo_net', False),
                          'complevel': lmp_data.raw_data.get('complevel'),
                          'iwad': iwad, 'footer_files': lmp_data.raw_data['wad_strings']}
-            wad_guesses = get_wad_guesses(
-                post_data.raw_data['wad_links'], textfile_data.raw_data['wad_strings'],
-                lmp_data.raw_data['wad_strings'], iwad=iwad
-            )
+            if textfile_data:
+                wad_guesses = get_wad_guesses(
+                    post_data.raw_data['wad_links'], textfile_data.raw_data['wad_strings'],
+                    lmp_data.raw_data['wad_strings'], iwad=iwad
+                )
+            else:
+                wad_guesses = get_wad_guesses(
+                    post_data.raw_data['wad_links'], lmp_data.raw_data['wad_strings'], iwad=iwad
+                )
             playback_data = PlaybackData(lmp_path, wad_guesses, demo_info=demo_info)
             playback_data.analyze()
             if playback_data.playback_failed:

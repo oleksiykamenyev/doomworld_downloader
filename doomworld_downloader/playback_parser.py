@@ -358,6 +358,7 @@ class PlaybackData:
                 category not in PlaybackData.ALL_KILLS_CATEGORIES):
             return True
 
+        # TODO: Instead of get, take whatever the config has if it defines this key
         secret_exits = wad.map_info.get('secret_exits',
                                         PlaybackData.IWAD_TO_SECRET_EXIT_MAP.get(wad.iwad))
         if not secret_exits:
