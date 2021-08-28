@@ -90,23 +90,31 @@ def handle_downloads(downloads, post_data):
                 LOGGER.warning('Multiple txt files found in download %s with no primary txt '
                                'found, skipping textfile parsing.', renamed_zip)
 
+        if is_demo_pack:
+            LOGGER.warning('Download %s is a demo pack zip.', renamed_zip)
+
         zip_file.extractall(path=out_path, members=list(lmp_files.keys()) + txt_files)
 
         # There should really be only one textfile at this moment, so will assume this.
         textfile_data = (TextfileData(os.path.join(out_path, txt_files[0]))
                          if len(txt_files) == 1 else None)
+        lmp_demo_info = {}
         if textfile_data:
             textfile_data.analyze()
 
+            textfile_iwad = textfile_data.raw_data.get('iwad')
+            if textfile_iwad:
+                lmp_demo_info = {'iwad': textfile_iwad}
+
         for lmp_file, recorded_date in lmp_files.items():
             lmp_path = os.path.join(out_path, lmp_file)
-            lmp_data = LMPData(lmp_path, recorded_date)
+            lmp_data = LMPData(lmp_path, recorded_date, demo_info=lmp_demo_info)
             lmp_data.analyze()
             iwad = lmp_data.raw_data.get('iwad', '')
             # TODO: We can also try guessing this in the textfile
             demo_info = {'is_solo_net': lmp_data.data.get('is_solo_net', False),
                          'complevel': lmp_data.raw_data.get('complevel'),
-                         'iwad': iwad}
+                         'iwad': iwad, 'footer_files': lmp_data.raw_data['wad_strings']}
             wad_guesses = get_wad_guesses(
                 post_data.raw_data['wad_links'], textfile_data.raw_data['wad_strings'],
                 lmp_data.raw_data['wad_strings'], iwad=iwad

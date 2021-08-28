@@ -210,6 +210,8 @@ class DemoJsonConstructor:
         """
         misc_tags = []
         for note_string in self.note_strings:
+            if note_string.startswith('Hexen class: '):
+                misc_tags.append(note_string.split('Hexen class: ')[1])
             # Note: even though both Reality and Almost Reality are listed here, prior processing
             # should ensure that only one should be added to the notes.
             if (note_string in DemoJsonConstructor.MISC_NOTES or

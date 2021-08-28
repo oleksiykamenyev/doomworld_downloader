@@ -4,6 +4,7 @@ Parse data out of LMP header, footer, and other parts of the file (no playback).
 # TODO: All of the parser classes can have stuff abstracted out.
 
 import logging
+import re
 import subprocess
 
 from .data_manager import DataManager
@@ -23,10 +24,10 @@ class LMPData:
     PORT_FOOTER_TO_DSDA_MAP = {'PrBoom-Plus': 'PRBoom', 'dsda-doom': 'DSDA-Doom'}
     KEY_LIST = [
         'engine', 'version', 'skill', 'episode', 'level', 'play mode', 'respawn', 'fast',
-        'nomonsters', 'player 1', 'player 2', 'player 3', 'player 4', 'turbo', 'stroller',
-        'sr50 on turns'
+        'nomonsters', 'player 1', 'player 2', 'player 3', 'player 4', 'player 5', 'player 6',
+        'player 7', 'player 8', 'turbo', 'stroller', 'sr50 on turns'
     ]
-    PLAYER_KEYS = ['player 1', 'player 2', 'player 3', 'player 4']
+    PLAYER_RE = re.compile(r'^player \d$', re.IGNORECASE)
     BOOLEAN_INT_KEYS = ['respawn', 'fast', 'nomonsters']
     # -d: Print demo (header) details
     # -s: Print demo statistics
@@ -50,7 +51,10 @@ class LMPData:
     CERTAIN_KEYS = ['is_solo_net', 'num_players', 'recorded_at', 'source_port']
     POSSIBLE_KEYS = ['is_tas']
 
-    def __init__(self, lmp_path, recorded_date):
+    ADDITIONAL_IWADS = ['heretic', 'hexen']
+    HEXEN_CLASS_MAPPING = {0: 'Fighter', 1: 'Cleric', 2: 'Mage'}
+
+    def __init__(self, lmp_path, recorded_date, demo_info=None):
         """Initialize LMP data class.
 
         :param lmp_path: Path to the LMP file
@@ -60,9 +64,10 @@ class LMPData:
         # TODO: We might want some sanity checking on the recording date of the LMP
         self.data = {'num_players': 0, 'recorded_at': convert_datetime_to_dsda_date(recorded_date)}
         self.note_strings = set()
-        self.raw_data = {'wad_strings': []}
+        self.raw_data = {'player_classes': [], 'wad_strings': []}
         self._header = None
         self._footer = None
+        self.demo_info = demo_info if demo_info else {}
 
     def analyze(self):
         self._get_header_and_footer()
@@ -80,6 +85,9 @@ class LMPData:
         iwad = self.raw_data.get('iwad')
         if not self.raw_data['wad_strings'] and iwad:
             self.raw_data['wad_strings'].append(iwad)
+
+        if self.raw_data['player_classes']:
+            self.note_strings.add('Hexen class: ' + ', '.join(self.raw_data['player_classes']))
 
     def populate_data_manager(self, data_manager):
         for key, value in self.data.items():
@@ -112,27 +120,45 @@ class LMPData:
         """Parse LMP file using the parse_lmp Ruby library."""
         parse_lmp_cmd = '{start} "{demo}"'.format(start=LMPData.PARSE_LMP_COMMAND_START,
                                                   demo=self.lmp_path)
-        parse_lmp_out = None
+        parse_lmp_out = ''
         try:
-            parse_lmp_out = run_cmd(parse_lmp_cmd, get_output=True)
+            parse_lmp_out = run_cmd('{}'.format(parse_lmp_cmd), get_output=True)
         except subprocess.CalledProcessError as cpe:
-            LOGGER.info('Encountered exception %s when running parse LMP command.', cpe)
-            pass
+            LOGGER.info('Encountered exception %s when running parse LMP command for LMP %s.',
+                        cpe, self.lmp_path)
 
-        # Heretic LMP analysis won't fail but instead output Unknown engine to stdout
         if not parse_lmp_out or 'Unknown engine' in parse_lmp_out:
-            # For now, we have no clear indicator that a demo is Heretic or not at this point, so
-            # the easiest approach is trying it both ways and seeing which one works.
-            # TODO: Probably need a better approach here, although not sure there is anything great
-            LOGGER.debug('Trying parse LMP command with Heretic.')
-            parse_lmp_cmd = '{} --engine=heretic'.format(parse_lmp_cmd)
-            parse_lmp_out = run_cmd(parse_lmp_cmd, get_output=True)
-            self.raw_data['iwad'] = 'heretic'
+            upstream_iwad = self.demo_info.get('iwad')
+            # Default to Heretic which receives more demos than Hexen
+            engine_option = 'heretic'
+            for additional_iwad in LMPData.ADDITIONAL_IWADS:
+                if self._compare_iwad(upstream_iwad, additional_iwad):
+                    engine_option = additional_iwad
+                    break
+
+            try:
+                parse_lmp_out = run_cmd('{} --engine={}'.format(parse_lmp_cmd, engine_option),
+                                        get_output=True)
+            except subprocess.CalledProcessError as cpe:
+                LOGGER.info('Encountered exception %s when running parse LMP command for LMP %s.',
+                            cpe, self.lmp_path)
+
+            self.raw_data['iwad'] = engine_option
 
         parse_lmp_out = parse_lmp_out.splitlines()
         for key in LMPData.KEY_LIST:
             for line in parse_lmp_out:
                 self._parse_key(key, line)
+
+    # TODO: Commonize this code
+    def _compare_iwad(self, demo_iwad, cmp_iwad):
+        """Compare demo IWAD to given comparison IWAD.
+
+        :param demo_iwad: Demo IWAD
+        :param cmp_iwad: Comparison IWAD, passed in without the ".wad" extension
+        :return: True if the IWADs are the same, false otherwise
+        """
+        return demo_iwad == cmp_iwad or demo_iwad == '{}.wad'.format(cmp_iwad)
 
     def _parse_key(self, key, line):
         """Parse key out of a line of parse_lmp output.
@@ -203,12 +229,28 @@ class LMPData:
         if line.count(':') == 1:
             cur_key, value = [part.strip() for part in line.split(':')]
             if cur_key == key:
-                if key in LMPData.PLAYER_KEYS and int(value) != 0:
-                    self.data['num_players'] += 1
+                iwad = self.raw_data.get('iwad')
+                if LMPData.PLAYER_RE.match(key):
+                    if iwad == 'hexen':
+                        player_value, class_value = value.split()
+                        # Hexen player line would look like the following (first value is the
+                        # player existence value, second value in parens is the class):
+                        #   Player 1: 1 (0)
+                        class_value = int(class_value.replace('(', '').replace(')', ''))
+                    else:
+                        player_value = value
+                        class_value = None
+
+                    if int(player_value) != 0:
+                        self.data['num_players'] += 1
+                        if class_value is not None:
+                            self.raw_data['player_classes'].append(
+                                LMPData.HEXEN_CLASS_MAPPING[class_value]
+                            )
                 if key == 'sr50 on turns' and value.lower() == 'true':
                     self.data['is_tas'] = True
-                # For Heretic demos, these keys are just output as "true"/"false" strings
-                if not self.raw_data.get('iwad') == 'heretic' and key in self.BOOLEAN_INT_KEYS:
+                # For Heretic/Hexen demos, these keys are just output as "true"/"false" strings
+                if not iwad == 'heretic' and not iwad == 'hexen' and key in self.BOOLEAN_INT_KEYS:
                     value = False if int(value) == 0 else True
                 self.raw_data[key] = value
 
@@ -237,6 +279,7 @@ class LMPData:
                         # TODO: We need to keep track of files that aren't allowed for recording
                         #       (e.g., most things that aren't part of the WAD being run)
                         # TODO: Parse mouselook data
+                        # TODO: Support -coop_spawns
                         if elem == '-iwad':
                             self.raw_data['iwad'] = self._parse_file_in_footer(line[idx + 1],
                                                                                '.wad')

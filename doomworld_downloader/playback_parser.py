@@ -144,10 +144,21 @@ class PlaybackData:
             self.command = '{} -solo-net'.format(self.command)
 
         iwad = self.demo_info.get('iwad', '').lower()
-        if iwad == 'chex.wad':
+        if self._compare_iwad(iwad, 'chex'):
             self.command = '{} -iwad chex -exe chex'.format(self.command)
-        if iwad == 'heretic.wad':
+        if self._compare_iwad(iwad, 'heretic'):
             self.command = '{} -iwad heretic -heretic'.format(self.command)
+        if self._compare_iwad(iwad, 'hexen'):
+            self.command = '{} -iwad hexen -hexen'.format(self.command)
+
+    def _compare_iwad(self, demo_iwad, cmp_iwad):
+        """Compare demo IWAD to given comparison IWAD.
+
+        :param demo_iwad: Demo IWAD
+        :param cmp_iwad: Comparison IWAD, passed in without the ".wad" extension
+        :return: True if the IWADs are the same, false otherwise
+        """
+        return demo_iwad == cmp_iwad or demo_iwad == '{}.wad'.format(cmp_iwad)
 
     def _check_wad_existence(self, wad):
         """Check that the WAD exists locally.
@@ -223,6 +234,16 @@ class PlaybackData:
             # TODO: Perhaps a hardcoded exception list for when this guess might not be trusted is
             #       needed (depends how likely the wrong guess is)
             if os.path.isfile(self.LEVELSTAT_FILENAME):
+                wad_guessed = True
+                wad_files = [wad_file.lower() for wad_file in wad_guess.files.keys()]
+                for footer_file in self.data.get('footer_files', []):
+                    if footer_file.lower() not in wad_files:
+                        LOGGER.error('Unexpected file %s found in footer for WAD %s.', footer_file,
+                                     wad_guess.name)
+                        self.playback_failed = True
+                if self.playback_failed:
+                    break
+
                 dsda_wad_name = (
                     wad_guess.dsda_name
                     if wad_guess.dsda_name else get_wad_name_from_dsda_url(wad_guess.dsda_url)
@@ -243,7 +264,6 @@ class PlaybackData:
                     if int(wad_guess.complevel) != int(complevel):
                         self.note_strings.add('Incompatible')
 
-                wad_guessed = True
                 break
 
         if not wad_guessed:
