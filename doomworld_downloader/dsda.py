@@ -175,6 +175,5 @@ def download_wad_from_dsda(dsda_url):
     download_filename = get_download_filename(response, default_filename=default_filename)
     wad_name = get_wad_name_from_dsda_url(dsda_url)
     download_dir = os.path.join(CONFIG.wad_download_directory, wad_name)
-    # TODO: Should we check if the WAD download already exists first?
-    download_response(response, download_dir, download_filename)
+    download_response(response, download_dir, download_filename, overwrite=True)
     return os.path.join(download_dir, download_filename)

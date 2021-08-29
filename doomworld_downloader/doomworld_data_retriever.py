@@ -162,7 +162,7 @@ def parse_thread_page(base_url, page_number, thread):
 
         attachment_links = [
             link for link in post_content_elem.find_all('a')
-            if 'ipsAttachLink' in link.get('class', []) or ATTACH_URL_RE.match(link['href'])
+            if 'ipsAttachLink' in link.get('class', []) or ATTACH_URL_RE.match(link.get('href', ''))
         ]
         attachments = get_links(attachment_links, extract_link=True)
         # TODO: Consider repackaging rars and 7zs so we don't have to ask the posters to do it

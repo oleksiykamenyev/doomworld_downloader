@@ -39,6 +39,19 @@ VALID_NO_ISSUE_DIR = 'no_issue_jsons'
 LOGGER = logging.getLogger(__name__)
 
 
+def set_up_demo_json_file(json_filename, json_dir):
+    """Set up demo JSON file creation.
+
+    :param json_filename: JSON filename
+    :param json_dir: Directory to create JSON under
+    :return: Path to JSON file to create
+    """
+    json_dir = os.path.join(CONFIG.demo_download_directory, json_dir)
+    os.makedirs(json_dir, exist_ok=True)
+    json_path = os.path.join(json_dir, json_filename)
+    return json_path
+
+
 def handle_downloads(downloads, post_data):
     """Handle all downloads for post.
 
@@ -111,7 +124,6 @@ def handle_downloads(downloads, post_data):
             lmp_data = LMPData(lmp_path, recorded_date, demo_info=lmp_demo_info)
             lmp_data.analyze()
             iwad = lmp_data.raw_data.get('iwad', '')
-            # TODO: We can also try guessing this in the textfile
             demo_info = {'is_solo_net': lmp_data.data.get('is_solo_net', False),
                          'complevel': lmp_data.raw_data.get('complevel'),
                          'iwad': iwad, 'footer_files': lmp_data.raw_data['wad_strings']}
@@ -146,18 +158,11 @@ def handle_downloads(downloads, post_data):
             download_split = renamed_zip.rstrip(os.path.sep).split(os.path.sep)
             # Download path sample: demos_for_upload/PlayerName/123456/demo.zip
             # Set json filename to demo_PlayerName_123456
-            # TODO: Consider lumping all of the no issue demos into a single JSON
             json_filename = '{}_{}_{}.json'.format(zip_no_ext, download_split[-3],
                                                    download_split[-2])
-            # TODO: The two conditionals here are similar, could be made into a function
-            if demo_json_constructor.has_issue:
-                json_dir = os.path.join(CONFIG.demo_download_directory, VALID_ISSUE_DIR)
-                os.makedirs(json_dir, exist_ok=True)
-                json_path = os.path.join(json_dir, json_filename)
-            else:
-                json_dir = os.path.join(CONFIG.demo_download_directory, VALID_NO_ISSUE_DIR)
-                os.makedirs(json_dir, exist_ok=True)
-                json_path = os.path.join(json_dir, json_filename)
+            json_path = (set_up_demo_json_file(json_filename, VALID_ISSUE_DIR)
+                         if demo_json_constructor.has_issue
+                         else set_up_demo_json_file(json_filename, VALID_NO_ISSUE_DIR))
 
             with open(json_path, 'w', encoding='utf-8') as out_stream:
                 json.dump(demo_json_constructor.demo_json, out_stream, indent=4, sort_keys=True)
@@ -174,6 +179,9 @@ def parse_args():
     """
     parser = argparse.ArgumentParser(description='Doomworld demo downloader.')
 
+    parser.add_argument('-c', '--upload-config',
+                        dest='upload_config',
+                        help='Path to the upload configuration for the downloader.')
     parser.add_argument('-v', '--verbose',
                         action='count',
                         default=0,
@@ -190,10 +198,7 @@ def main():
     logging.basicConfig(level=log_level,
                         format='%(asctime)s - %(name)s - %(levelname)s: %(message)s')
 
-    # TODO:
-    #   The config files (thread map, upload.ini, etc.) should eventually be moved to be managed by
-    #   pkg_resources instead of relative paths
-    set_up_configs()
+    set_up_configs(upload_config_path=args.upload_config)
     testing_mode = CONFIG.testing_mode
 
     search_start_date = datetime.strptime(CONFIG.search_start_date, '%Y-%m-%dT%H:%M:%SZ')

@@ -1139,3 +1139,40 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/attack-on-io"
   dsda_paginated: false
   doomworld_thread: null
+"https://www.dsdarchive.com/wads/speezdec":
+  wad_name: Speezdec
+  iwad: doom2
+  wad_files:
+    speezdec.wad: {checksum: "abbaddf959fc2db205cfd8f4757446b1"}
+  complevel: 9
+  playback_cmd_line: "-file speezdec"
+  map_info:
+    map_ranges: [[1, 32]]
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/104884-speedzec-demos-complevel-9/"
+"https://www.dsdarchive.com/wads/2002ado":
+  wad_name: 2002 A DOOM ODYSSEY
+  iwad: doom
+  wad_files:
+    2002ado.wad: {checksum: "54bd9e6461523378a862632d87d5f733"}
+  complevel: 3
+  playback_cmd_line: "-file 2002ado"
+  map_info:
+    map_ranges: [["E1M1", "E1M9"], ["E2M1", "E2M9"], ["E3M1", "E3M9"], ["E4M1", "E4M9"]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/Ports/megawads/2002ado"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/97080-2002ado-demos-complevel-3/"
+"https://www.dsdarchive.com/wads/hr":
+  wad_name: Hell Revealed
+  iwad: doom2
+  wad_files:
+    hr.wad: {checksum: "bb04d6c30c4bbee580063808828ea2da"}
+    hrmus.wad: {not_required_for_playback: true, checksum: "b80ebf10d3504742faa756ff705375ee"}
+  complevel: 2
+  playback_cmd_line: "-file hr"
+  map_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/themes/hr/hr"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/39985-hell-revealed-demos-complevel-2/"

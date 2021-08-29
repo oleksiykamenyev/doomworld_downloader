@@ -66,16 +66,24 @@ def get_download_filename(response, default_filename=None):
             )
 
 
-def download_response(response, download_dir, download_filename):
+def download_response(response, download_dir, download_filename, overwrite=False):
     """Download file from response.
 
     :param response: Responseto download file from
     :param download_dir: Download directory to place download to
     :param download_filename: Download filename
+    :param overwrite: Flag indicating whether to overwrite the local path if it exists
     :return: Path to local download
     """
     os.makedirs(download_dir, exist_ok=True)
     download_path = os.path.join(download_dir, download_filename)
+
+    if os.path.exists(download_path):
+        if overwrite:
+            LOGGER.debug('Overwrite local download path %s.', download_path)
+        else:
+            raise OSError('Local download path {} already exists.'.format(download_path))
+
     with open(download_path, 'wb') as output_file:
         output_file.write(response.content)
 
@@ -305,3 +313,13 @@ def parse_youtube_url(url):
         return url.split('youtu.be/')[1]
 
     return None
+
+
+def compare_iwad(demo_iwad, cmp_iwad):
+    """Compare demo IWAD to given comparison IWAD.
+
+    :param demo_iwad: Demo IWAD
+    :param cmp_iwad: Comparison IWAD, passed in without the ".wad" extension
+    :return: True if the IWADs are the same, false otherwise
+    """
+    return demo_iwad == cmp_iwad or demo_iwad == '{}.wad'.format(cmp_iwad)

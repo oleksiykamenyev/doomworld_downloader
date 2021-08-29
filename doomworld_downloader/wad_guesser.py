@@ -55,6 +55,11 @@ def get_wad_guesses(*args, iwad=None):
     if not wad_guesses:
         if iwad == 'heretic':
             return [WAD_MAP_BY_DSDA_URL['https://www.dsdarchive.com/wads/heretic']]
+        if iwad == 'hexen':
+            return [WAD_MAP_BY_DSDA_URL['https://www.dsdarchive.com/wads/hexen']]
+        if iwad == 'chex':
+            return [WAD_MAP_BY_DSDA_URL['https://www.dsdarchive.com/wads/chex']]
+
         return [WAD_MAP_BY_DSDA_URL[default_wad] for default_wad in DEFAULT_WAD_GUESSES]
 
     return wad_guesses

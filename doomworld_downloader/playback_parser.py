@@ -12,7 +12,7 @@ from shutil import copyfile, rmtree
 from .data_manager import DataManager
 from .dsda import download_wad_from_dsda, get_wad_name_from_dsda_url
 from .upload_config import CONFIG, NEEDS_ATTENTION_PLACEHOLDER
-from .utils import checksum, parse_range, run_cmd, zip_extract
+from .utils import checksum, parse_range, run_cmd, zip_extract, compare_iwad
 
 
 LOGGER = logging.getLogger(__name__)
@@ -144,21 +144,12 @@ class PlaybackData:
             self.command = '{} -solo-net'.format(self.command)
 
         iwad = self.demo_info.get('iwad', '').lower()
-        if self._compare_iwad(iwad, 'chex'):
+        if compare_iwad(iwad, 'chex'):
             self.command = '{} -iwad chex -exe chex'.format(self.command)
-        if self._compare_iwad(iwad, 'heretic'):
+        if compare_iwad(iwad, 'heretic'):
             self.command = '{} -iwad heretic -heretic'.format(self.command)
-        if self._compare_iwad(iwad, 'hexen'):
+        if compare_iwad(iwad, 'hexen'):
             self.command = '{} -iwad hexen -hexen'.format(self.command)
-
-    def _compare_iwad(self, demo_iwad, cmp_iwad):
-        """Compare demo IWAD to given comparison IWAD.
-
-        :param demo_iwad: Demo IWAD
-        :param cmp_iwad: Comparison IWAD, passed in without the ".wad" extension
-        :return: True if the IWADs are the same, false otherwise
-        """
-        return demo_iwad == cmp_iwad or demo_iwad == '{}.wad'.format(cmp_iwad)
 
     def _check_wad_existence(self, wad):
         """Check that the WAD exists locally.
@@ -299,13 +290,6 @@ class PlaybackData:
             #       is really needed.
             # Will not add Almost Reality in nomo for now
             self.note_strings.add('Also Almost Reality')
-
-    def _get_actual_category(self):
-        """Stub for getting actual category for other skills; this might duplicate DSDA-Doom's
-           category logic, so it might not belong here."""
-        if int(self.raw_data['skill']) != 4:
-            # TODO: maybe this should be in the port?
-            pass
 
     def _parse_analysis(self):
         """Parse analysis info.
@@ -457,8 +441,11 @@ class PlaybackData:
             levelstat_line_split = levelstat[0].split()
             self.data['level'] = self._get_level(levelstat_line_split, wad)
             self.data['secret_exit'] = self.data['level'].endswith('s')
+            if (self.data['category'] in PlaybackData.ALL_KILLS_CATEGORIES or
+                    self.data['category'] in PlaybackData.ALL_SECRETS_CATEGORIES):
+                self.data['level'] = self.data['level'].rstrip('s')
+
             time = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_TIME_IDX]
-            # TODO: Remove s for categories that are not split by secret exit
             self.data['time'] = time
             self.data['levelstat'] = time
             self.data['kills'] = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_KILLS_IDX]

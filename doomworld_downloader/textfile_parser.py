@@ -159,7 +159,6 @@ class TextfileData:
                 elif key == 'iwad':
                     self.raw_data['iwad'] = value_lowercase
 
-        # TODO: Might want to just extend this with all IWADs to catch textfile errors
         iwad = self.raw_data.get('iwad')
         if not self.raw_data['wad_strings'] and iwad:
             self.raw_data['wad_strings'].append(iwad)

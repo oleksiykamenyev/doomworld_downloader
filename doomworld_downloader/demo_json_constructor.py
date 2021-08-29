@@ -22,6 +22,9 @@ class DemoJsonConstructor:
     SKILL_CATEGORY_NOTE_RE = re.compile('^Skill \d .+$')
 
     MISC_NOTES = ['Also Reality', 'Also Almost Reality', 'Uses turbo', 'Uses longtics']
+    MISC_CATEGORY_NOTES = [
+        '-altdeath', '-coop_spawns', '-fast', '-nomonsters', '-respawn', '-solo-net'
+    ]
     # We could have all of these keys consistent with the JSON keys, but I find the verbose names
     # are more useful for searching/debugging.
     KEY_TO_JSON_MAP = {'is_tas': 'tas', 'is_solo_net': 'solo_net', 'num_players': 'guys',
@@ -184,7 +187,7 @@ class DemoJsonConstructor:
             if note_string == 'Incompatible':
                 incompatible = True
                 self.demo_json['category'] = 'Other'
-            if note_string in ['-altdeath', '-solo-net', 'fast']:
+            if note_string in DemoJsonConstructor.MISC_CATEGORY_NOTES:
                 if not additional_info:
                     additional_info = ' with ' + note_string
                 else:

@@ -9,7 +9,7 @@ import subprocess
 
 from .data_manager import DataManager
 from .upload_config import CONFIG
-from .utils import run_cmd, convert_datetime_to_dsda_date
+from .utils import run_cmd, convert_datetime_to_dsda_date, compare_iwad
 
 
 LOGGER = logging.getLogger(__name__)
@@ -40,9 +40,8 @@ class LMPData:
     # future PrBoom+ versions that require compatibility with an older PrBoom+ would presumable use
     # the next complevel 17 for that. Pre-Boom complevels aren't included as they are present in the
     # footer.
-    # TODO: Update 214 to be 17 instead of -1 since MBF21 is -1 now
     VERSION_COMPLEVEL_MAP = {
-        201: '8', 202: '9', 210: '10', 211: '14', 212: '15', 213: '16', 214: '-1'
+        201: '8', 202: '9', 210: '10', 211: '14', 212: '15', 213: '16', 214: '17'
     }
 
     # TODO: We might benefit from certain/possible keys being possible to change as an instance;
@@ -81,7 +80,6 @@ class LMPData:
         # DSDA API expects the num_players (i.e., guys) argument to be a string
         self.data['num_players'] = str(self.data['num_players'])
 
-        # TODO: Might want to just extend this with all IWADs to catch textfile errors
         iwad = self.raw_data.get('iwad')
         if not self.raw_data['wad_strings'] and iwad:
             self.raw_data['wad_strings'].append(iwad)
@@ -132,7 +130,7 @@ class LMPData:
             # Default to Heretic which receives more demos than Hexen
             engine_option = 'heretic'
             for additional_iwad in LMPData.ADDITIONAL_IWADS:
-                if self._compare_iwad(upstream_iwad, additional_iwad):
+                if compare_iwad(upstream_iwad, additional_iwad):
                     engine_option = additional_iwad
                     break
 
@@ -149,16 +147,6 @@ class LMPData:
         for key in LMPData.KEY_LIST:
             for line in parse_lmp_out:
                 self._parse_key(key, line)
-
-    # TODO: Commonize this code
-    def _compare_iwad(self, demo_iwad, cmp_iwad):
-        """Compare demo IWAD to given comparison IWAD.
-
-        :param demo_iwad: Demo IWAD
-        :param cmp_iwad: Comparison IWAD, passed in without the ".wad" extension
-        :return: True if the IWADs are the same, false otherwise
-        """
-        return demo_iwad == cmp_iwad or demo_iwad == '{}.wad'.format(cmp_iwad)
 
     def _parse_key(self, key, line):
         """Parse key out of a line of parse_lmp output.
@@ -276,8 +264,6 @@ class LMPData:
                     if elem.startswith('-'):
                         # TODO: Add more possible arguments (spechits numbers, emulate args, etc.)
                         # TODO: Add example footers somewhere in documentation
-                        # TODO: We need to keep track of files that aren't allowed for recording
-                        #       (e.g., most things that aren't part of the WAD being run)
                         # TODO: Parse mouselook data
                         # TODO: Support -coop_spawns
                         if elem == '-iwad':
@@ -295,6 +281,8 @@ class LMPData:
                             self.raw_data['complevel'] = line[idx + 1]
                         if elem == '-solo-net':
                             self.data['is_solo_net'] = True
+                        if elem == '-coop_spawns':
+                            self.note_strings.add('-coop_spawns')
 
     def _parse_file_in_footer(self, footer_file, extension):
         """Parse file argument from footer.
