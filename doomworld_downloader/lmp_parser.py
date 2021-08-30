@@ -260,8 +260,12 @@ class LMPData:
             # Detect the command-line section by an argument that should always be there, I think
             if '-iwad' in line:
                 line = line.split()
+                in_wad_args = False
+                in_deh_args = False
                 for idx, elem in enumerate(line):
                     if elem.startswith('-'):
+                        in_wad_args = False
+                        in_deh_args = False
                         # TODO: Add more possible arguments (spechits numbers, emulate args, etc.)
                         # TODO: Add example footers somewhere in documentation
                         # TODO: Parse mouselook data
@@ -270,19 +274,25 @@ class LMPData:
                             self.raw_data['iwad'] = self._parse_file_in_footer(line[idx + 1],
                                                                                '.wad')
                         if elem == '-file':
-                            self.raw_data['wad_strings'].append(
-                                self._parse_file_in_footer(line[idx + 1], '.wad')
-                            )
+                            # There may be multiple WAD files passed in, so check all of them
+                            in_wad_args = True
                         if elem == '-deh':
-                            self.raw_data['wad_strings'].append(
-                                self._parse_file_in_footer(line[idx + 1], '.deh')
-                            )
+                            # There may be multiple DEH files passed in, so check all of them
+                            in_deh_args = True
                         if elem == '-complevel':
                             self.raw_data['complevel'] = line[idx + 1]
                         if elem == '-solo-net':
                             self.data['is_solo_net'] = True
                         if elem == '-coop_spawns':
                             self.note_strings.add('-coop_spawns')
+                    elif in_wad_args:
+                        self.raw_data['wad_strings'].append(
+                            self._parse_file_in_footer(line[idx], '.wad')
+                        )
+                    elif in_deh_args:
+                        self.raw_data['wad_strings'].append(
+                            self._parse_file_in_footer(line[idx], '.deh')
+                        )
 
     def _parse_file_in_footer(self, footer_file, extension):
         """Parse file argument from footer.

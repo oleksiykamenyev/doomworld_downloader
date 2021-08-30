@@ -213,7 +213,6 @@ class PlaybackData:
             #         - if not, try all combos of fix files
             self.command = '{} -iwad {} {}'.format(self.command, wad_guess.iwad,
                                                    wad_guess.playback_cmd_line)
-            # LOGGER.info(self.command)
             try:
                 run_cmd(self.command)
             except subprocess.CalledProcessError as e:
@@ -227,7 +226,7 @@ class PlaybackData:
             if os.path.isfile(self.LEVELSTAT_FILENAME):
                 wad_guessed = True
                 wad_files = [wad_file.lower() for wad_file in wad_guess.files.keys()]
-                for footer_file in self.data.get('footer_files', []):
+                for footer_file in self.demo_info.get('footer_files', []):
                     if footer_file.lower() not in wad_files:
                         LOGGER.error('Unexpected file %s found in footer for WAD %s.', footer_file,
                                      wad_guess.name)
@@ -241,8 +240,6 @@ class PlaybackData:
                 )
                 self.data['wad'] = dsda_wad_name
                 self._parse_analysis()
-                if self.data['category'] == 'Other':
-                    self._get_actual_category()
                 self._parse_levelstat(wad_guess)
 
                 # TODO: Additional processing needed for maps that are max exceptions; for a

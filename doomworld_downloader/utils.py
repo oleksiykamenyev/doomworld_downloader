@@ -69,7 +69,7 @@ def get_download_filename(response, default_filename=None):
 def download_response(response, download_dir, download_filename, overwrite=False):
     """Download file from response.
 
-    :param response: Responseto download file from
+    :param response: Response to download file from
     :param download_dir: Download directory to place download to
     :param download_filename: Download filename
     :param overwrite: Flag indicating whether to overwrite the local path if it exists

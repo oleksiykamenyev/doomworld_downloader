@@ -10,6 +10,7 @@ import logging
 import os
 import re
 import shutil
+import sys
 
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -18,13 +19,15 @@ from urllib.parse import urlparse, parse_qs
 import requests
 import yaml
 
-from doomworld_downloader.upload_config import CONFIG, PLAYER_IGNORE_LIST, THREAD_MAP_KEYED_ON_ID
+from doomworld_downloader.upload_config import CONFIG, PLAYER_IGNORE_LIST, THREAD_MAP_KEYED_ON_ID, \
+    AD_HOC_UPLOAD_CONFIG
 from doomworld_downloader.utils import get_download_filename, download_response, get_page
 
 
 DOOM_SPEED_DEMOS_URL = 'https://www.doomworld.com/forum/37-doom-speed-demos/?page={num}'
-THREAD_URL = '{base_url}/?page={num}'
-POST_URL = 'https://www.doomworld.com/forum/post/{post_id}'
+THREAD_URL_FMT = '{base_url}/?page={num}'
+POST_URL_FMT = 'https://www.doomworld.com/forum/post/{post_id}'
+DOOMWORLD_URL_FMT = 'https://www.doomworld.com/{}'
 ATTACH_URL_RE = re.compile(
     r'^(https:)?//www.doomworld.com/applications/core/interface/file/attachment.php?id=\d+$'
 )
@@ -45,8 +48,8 @@ class Thread:
     name: str
     id: int
     url: str
-    last_post_date: datetime
-    last_page_num: int
+    last_post_date: datetime or None
+    last_page_num: int or None
 
 
 @dataclass
@@ -140,16 +143,38 @@ def cache_post(post):
         yaml.dump(post_dict, post_info_stream)
 
 
-def parse_thread_page(base_url, page_number, thread):
+def get_thread_base_url(thread_url):
+    """Get thread base URL.
+
+    :param thread_url: Thread URL.
+    :return: Base URL for thread.
+    """
+    return DOOMWORLD_URL_FMT.format(urlparse(thread_url.rstrip('/')).path.strip('/'))
+
+
+def parse_thread_page(thread_url, thread=None):
     """Parse specific thread page.
 
-    :param base_url: Base thread URL
-    :param page_number: Page number
-    :param thread: Thread object
+    If the thread object is not provided, it will be created during this function.
+
+    :param thread_url: Thread URL
+    :param thread: Thread object, if available
     :return: All posts on specific thread page
     """
-    soup = get_page(THREAD_URL.format(base_url=base_url, num=page_number))
+    soup = get_page(thread_url)
     post_elems = soup.find_all('article', class_='ipsComment')
+    if not thread:
+        thread_title_elem = soup.find('h1', class_='ipsType_pageTitle')
+        # Sample thread URL: https://www.doomworld.com/forum/topic/70300-sample-3/?page=68
+        #   base: https://www.doomworld.com/forum/topic/70300-sample-3
+        #   ID: 70300
+        thread_base_url = get_thread_base_url(thread_url)
+        thread_id = thread_base_url.split('/')[-1].split('-')[0]
+        # We don't need the last post date or page number since this case is for ad-hoc thread/post
+        # downloads
+        thread = Thread(thread_title_elem.getText().strip(), int(thread_id), thread_base_url,
+                        last_post_date=None, last_page_num=None)
+
     posts = []
     for post in post_elems:
         post_content_elem = post.find('div', class_='cPost_contentWrap')
@@ -172,7 +197,7 @@ def parse_thread_page(base_url, page_number, thread):
             continue
 
         post_id = post['id'].split('_')[1]
-        post_url = POST_URL.format(post_id=post_id)
+        post_url = POST_URL_FMT.format(post_id=post_id)
 
         # TODO: We may not want to extract_link here because that removes the links, so it might be
         # harder to infer which wad maps to which demos from a multi-wad multi-demo post
@@ -202,22 +227,96 @@ def parse_thread_page(base_url, page_number, thread):
     return posts
 
 
-def get_new_posts(search_start_date, search_end_date, testing_mode, new_threads):
+def parse_ad_hoc_post(post):
+    """Get post ID and URL From post in ad-hoc config.
+
+    :param post: Post ID or full post URL
+    :return: Post ID, post URL as a tuple
+    """
+    try:
+        post_id = int(post)
+    except ValueError:
+        post_url = post
+        post_id = int(urlparse(post).path.strip('/').split('/')[-1])
+    else:
+        post_url = POST_URL_FMT.format(post)
+
+    return post_id, post_url
+
+
+def get_ad_hoc_posts():
+    """Get ad-hoc posts.
+
+    :return: Ad-hoc post list
+    """
+    ad_hoc_posts = []
+    for post in AD_HOC_UPLOAD_CONFIG.get('posts', []):
+        post_id, post_url = parse_ad_hoc_post(post)
+
+        cur_posts = parse_thread_page(post_url, thread=None)
+        ad_hoc_posts.extend([post for post in cur_posts if post.id == post_id])
+
+    for thread in AD_HOC_UPLOAD_CONFIG.get('threads', []):
+        if isinstance(thread, dict):
+            # Just take the first element, since we expect this to be a single key/value dict
+            thread_base_url, thread_map = list(thread.items())[0]
+        else:
+            thread_base_url = thread
+            thread_map = {}
+
+        thread_base_url = thread_base_url.rstrip('/')
+        pages_to_get = thread_map.get('pages', [])
+        if not pages_to_get:
+            # This is safe because pages past the last on Doomworld overflow to the last page.
+            pages_to_get = itertools.count(start=1)
+        else:
+            pages_to_get = iter(pages_to_get)
+
+        posts_to_get = [parse_ad_hoc_post(post)[0] for post in thread_map.get('posts', [])]
+        prev_page_num = None
+        for page_num in pages_to_get:
+            thread_url = THREAD_URL_FMT.format(base_url=thread_base_url, num=page_num)
+            # Default value here is ['1'] because, even in the case of single query param values,
+            # parse_qs returns a list
+            cur_page_num = parse_qs(urlparse(requests.get(thread_url).url).query,
+                                    keep_blank_values=True).get('page', ['1'])
+            # In case the thread is included in full, we will detect the last page if we see the
+            # same list of posts more than once (which is what happens when we overflow pages on
+            # Doomworld).
+            if prev_page_num and cur_page_num == prev_page_num:
+                break
+            prev_page_num = cur_page_num
+
+            cur_posts = parse_thread_page(
+                THREAD_URL_FMT.format(base_url=thread_base_url, num=page_num), thread=None
+            )
+            if posts_to_get:
+                for post_to_get in posts_to_get:
+                    for cur_post in cur_posts:
+                        if cur_post.id == post_to_get:
+                            ad_hoc_posts.append(cur_post)
+            else:
+                ad_hoc_posts.extend(cur_posts)
+
+    LOGGER.debug(ad_hoc_posts)
+    for post in ad_hoc_posts:
+        cache_post(post)
+    return ad_hoc_posts
+
+
+def get_new_posts(search_start_date, search_end_date, new_threads):
     """Get new posts from all new threads.
 
     :param search_end_date: Search end datetime
     :param search_start_date: Search start datetime
-    :param testing_mode: Flag indicating that testing mode is on
     :param new_threads: New thread list
     :return: New post list
     """
     posts = []
     for thread in new_threads:
-        # In case of testing, use dummy data
-        if testing_mode:
-            break
         for page_num in range(thread.last_page_num, 0, -1):
-            cur_posts = parse_thread_page(thread.url, page_num, thread)
+            cur_posts = parse_thread_page(THREAD_URL_FMT.format(base_url=thread.url, num=page_num),
+                                          thread)
             # If the last post on a page is before the start date, we can break out immediately
             # since we are going backwards in time from the last page.
             if cur_posts and cur_posts[-1].post_date < search_start_date:
@@ -233,18 +332,14 @@ def get_new_posts(search_start_date, search_end_date, testing_mode, new_threads)
     return posts
 
 
-def get_new_threads(search_start_date, testing_mode):
+def get_new_threads(search_start_date):
     """Get new threads.
 
     :param search_start_date: Search start date
-    :param testing_mode: Flag indicating that testing mode is on
     :return: New threads
     """
     threads = []
     for page_num in itertools.count(1):
-        # In case of testing, use dummy data
-        if testing_mode:
-            break
         cur_threads = parse_thread_list(page_num)
         new_threads = [thread for thread in cur_threads
                        if thread.last_post_date > search_start_date]
@@ -303,7 +398,7 @@ def download_attachments(post):
         parsed_url = urlparse(attach_url)
         attach_id = parse_qs(parsed_url.query, keep_blank_values=True)['id']
         attach_dir = os.path.join(author_dir, attach_id[0])
-        download = download_response(response, attach_dir, attach_filename)
+        download = download_response(response, attach_dir, attach_filename, overwrite=True)
 
         # Additional metadata info about post saved for debugging
         meta_info = {'url': post.post_url}

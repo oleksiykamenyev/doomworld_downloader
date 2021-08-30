@@ -10,6 +10,7 @@ from .utils import parse_list_file
 from .wad import Wad
 
 
+AD_HOC_UPLOAD_CONFIG_PATH = 'doomworld_downloader/ad_hoc_upload_config.yaml'
 DEFAULT_UPLOAD_CONFIG_PATH = 'doomworld_downloader/upload.ini'
 IGNORE_LIST_PATH = 'doomworld_downloader/player_ignore_list.txt'
 THREAD_MAP_PATH = 'doomworld_downloader/thread_map.yaml'
@@ -17,6 +18,7 @@ WAD_MAP_PATH = 'doomworld_downloader/dsda_url_to_wad_info.yaml'
 
 NEEDS_ATTENTION_PLACEHOLDER = 'UNKNOWN'
 
+AD_HOC_UPLOAD_CONFIG = {}
 PLAYER_IGNORE_LIST = []
 THREAD_MAP = {}
 THREAD_MAP_KEYED_ON_ID = {}
@@ -29,17 +31,7 @@ class UploadConfig:
     def __init__(self):
         """Initialize upload config class."""
         self._config = ConfigParser()
-
-    def parse_config_file(self, upload_config_path=None):
-        """Parse config file.
-
-        Parses provided path if available, else uses default path.
-
-        :param upload_config_path: Upload config path
-        """
-        upload_config_path = (upload_config_path if upload_config_path
-                              else DEFAULT_UPLOAD_CONFIG_PATH)
-        self._config.read(upload_config_path)
+        self._config.read(DEFAULT_UPLOAD_CONFIG_PATH)
 
     @property
     def search_start_date(self):
@@ -100,15 +92,28 @@ class UploadConfig:
             return 'dsda_wads'
 
     @property
-    def testing_mode(self):
-        """Get flag indicating testing mode from config (optional).
+    def download_type(self):
+        """Get download type from config (optional).
 
-        Default to False.
+        Default to date-based.
 
-        :return: Flag indicating testing mode
+        :return: Download type
         """
         try:
-            return self._config.getboolean('general', 'testing_mode')
+            return self._config.get('general', 'download_type')
+        except (NoSectionError, NoOptionError):
+            return 'date-based'
+
+    @property
+    def ignore_cache(self):
+        """Ignore cache when doing the uploads (optional).
+
+        Default to false, should only be on while testing.
+
+        :return: Flag indicating whether to ignore cache when doing the uploads
+        """
+        try:
+            return self._config.getboolean('general', 'ignore_cache')
         except (NoSectionError, NoOptionError):
             return False
 
@@ -124,8 +129,6 @@ def set_up_configs(upload_config_path=None):
     # TODO:
     #   The config files (thread map, upload.ini, etc.) should eventually be moved to be managed by
     #   pkg_resources instead of relative paths
-    CONFIG.parse_config_file(upload_config_path=upload_config_path)
-
     with open(THREAD_MAP_PATH, encoding='utf-8') as thread_map_stream:
         THREAD_MAP.update(yaml.safe_load(thread_map_stream))
     # TODO: I made the map keyed on URL, but depending on how we use it over time, might want to
@@ -153,3 +156,9 @@ def set_up_configs(upload_config_path=None):
         )
         WAD_MAP_BY_DSDA_URL[url] = wad_info
         WAD_MAP_BY_IDGAMES_URL[wad_dict['idgames_url']] = wad_info
+
+
+def set_up_ad_hoc_config():
+    """Set up ad-hoc upload config."""
+    with open(AD_HOC_UPLOAD_CONFIG_PATH, encoding='utf-8') as ad_hoc_config_stream:
+        AD_HOC_UPLOAD_CONFIG.update(yaml.safe_load(ad_hoc_config_stream))

@@ -1,6 +1,7 @@
 """
 Update WAD checksums from DSDA in the DSDA URL to WAD info YAML.
 """
+# TODO: Write utility to sort the WAD YAML
 
 import argparse
 import logging

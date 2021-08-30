@@ -44,15 +44,13 @@ class DemoJsonConstructor:
         # Use "/" separator for path since the DSDA client prefers it
         self.demo_json = {'file': {'name': '/'.join(os.path.split(zip_file))}}
         self.has_issue = False
-
-        # TODO: This should probably be a public method called externally
-        self._parse_data_manager()
+        self.has_tags = False
 
     def _set_has_issue(self):
         """Set has_issue flag if there is an issue with the JSON."""
         self.has_issue = True
 
-    def _parse_data_manager(self):
+    def parse_data_manager(self):
         """Parse data from data manager.
 
         :raises RuntimeError if there are required keys missing in the final demo JSON.
@@ -84,12 +82,13 @@ class DemoJsonConstructor:
                 self._set_has_issue()
                 self.demo_json[key] = NEEDS_ATTENTION_PLACEHOLDER
 
-        # TODO: Anything with tags should be placed in a separate dir for manual inspection
+        if self.demo_json.get('category') == 'Other':
+            self._set_has_issue()
+
         self._construct_tags()
         # TODO: Should probably format it this way by default
         # Correct format for demo JSON
         self.demo_json = {'demo': self.demo_json}
-        # TODO: If category is Other should just mark as has issue
 
     def _handle_needs_attention_entries(self, key_to_insert, evaluation):
         """Handle entries that are marked as needing attention.
@@ -142,6 +141,7 @@ class DemoJsonConstructor:
         final_tag += self._construct_skill_tag()
         final_tag += self._construct_misc_tags()
         self.demo_json['tags'] = [{'show': True, 'text': final_tag.rstrip('\n')}]
+        self.has_tags = True
 
     def _construct_other_movie_tag(self):
         """Construct other movie tag.

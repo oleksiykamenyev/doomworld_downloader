@@ -19,14 +19,15 @@ import yaml
 from doomworld_downloader.data_manager import DataManager
 from doomworld_downloader.demo_json_constructor import DemoJsonConstructor
 from doomworld_downloader.doomworld_data_retriever import get_new_posts, get_new_threads, \
-    download_attachments, move_post_cache_to_failed, Post, Thread
+    download_attachments, move_post_cache_to_failed, get_ad_hoc_posts, Post, Thread
 from doomworld_downloader.lmp_parser import LMPData
 from doomworld_downloader.playback_parser import PlaybackData
 from doomworld_downloader.post_parser import PostData
 from doomworld_downloader.textfile_parser import TextfileData
-from doomworld_downloader.upload_config import CONFIG, set_up_configs
+from doomworld_downloader.upload_config import CONFIG, set_up_configs, set_up_ad_hoc_config, \
+    AD_HOC_UPLOAD_CONFIG_PATH
 from doomworld_downloader.utils import get_filename_no_ext, demo_range_to_string, get_log_level, \
-    get_main_file_from_zip
+    get_main_file_from_zip, checksum
 from doomworld_downloader.wad_guesser import get_wad_guesses
 
 
@@ -35,6 +36,7 @@ HEADER_FILENAME_RE = re.compile(r'filename="(.+)"')
 DATETIME_FORMAT = 'YYYY'
 VALID_ISSUE_DIR = 'issue_jsons'
 VALID_NO_ISSUE_DIR = 'no_issue_jsons'
+VALID_TAGS_DIR = 'tags_jsons'
 
 LOGGER = logging.getLogger(__name__)
 
@@ -141,7 +143,8 @@ def handle_downloads(downloads, post_data):
             if playback_data.playback_failed:
                 LOGGER.info('Skipping post with zip %s due to issues with playback.',
                             renamed_zip)
-                return False
+                # return False
+                pass
 
             data_manager = DataManager()
             post_data.populate_data_manager(data_manager)
@@ -155,14 +158,19 @@ def handle_downloads(downloads, post_data):
 
             demo_json_constructor = DemoJsonConstructor(data_manager, all_note_strings,
                                                         renamed_zip)
+            demo_json_constructor.parse_data_manager()
+
             download_split = renamed_zip.rstrip(os.path.sep).split(os.path.sep)
             # Download path sample: demos_for_upload/PlayerName/123456/demo.zip
             # Set json filename to demo_PlayerName_123456
             json_filename = '{}_{}_{}.json'.format(zip_no_ext, download_split[-3],
                                                    download_split[-2])
-            json_path = (set_up_demo_json_file(json_filename, VALID_ISSUE_DIR)
-                         if demo_json_constructor.has_issue
-                         else set_up_demo_json_file(json_filename, VALID_NO_ISSUE_DIR))
+            if demo_json_constructor.has_issue:
+                json_path = set_up_demo_json_file(json_filename, VALID_ISSUE_DIR)
+            elif demo_json_constructor.has_tags:
+                json_path = set_up_demo_json_file(json_filename, VALID_TAGS_DIR)
+            else:
+                json_path = set_up_demo_json_file(json_filename, VALID_NO_ISSUE_DIR)
 
             with open(json_path, 'w', encoding='utf-8') as out_stream:
                 json.dump(demo_json_constructor.demo_json, out_stream, indent=4, sort_keys=True)
@@ -179,9 +187,6 @@ def parse_args():
     """
     parser = argparse.ArgumentParser(description='Doomworld demo downloader.')
 
-    parser.add_argument('-c', '--upload-config',
-                        dest='upload_config',
-                        help='Path to the upload configuration for the downloader.')
     parser.add_argument('-v', '--verbose',
                         action='count',
                         default=0,
@@ -192,23 +197,31 @@ def parse_args():
 
 def main():
     """Main function."""
+    # TODO: Implement unit tests of some sort
     args = parse_args()
     log_level = get_log_level(args.verbose)
     # TODO: Skip noisy messages in underlying url libraries unless in very verbose mode
     logging.basicConfig(level=log_level,
                         format='%(asctime)s - %(name)s - %(levelname)s: %(message)s')
 
-    set_up_configs(upload_config_path=args.upload_config)
-    testing_mode = CONFIG.testing_mode
+    set_up_configs()
+    if CONFIG.download_type == 'date-based':
+        search_start_date = datetime.strptime(CONFIG.search_start_date, '%Y-%m-%dT%H:%M:%SZ')
+        search_end_date = datetime.strptime(CONFIG.search_end_date, '%Y-%m-%dT%H:%M:%SZ')
+        current_download_info = demo_range_to_string(search_start_date, search_end_date)
+    else:
+        set_up_ad_hoc_config()
+        current_download_info = checksum(AD_HOC_UPLOAD_CONFIG_PATH)
 
-    search_start_date = datetime.strptime(CONFIG.search_start_date, '%Y-%m-%dT%H:%M:%SZ')
-    search_end_date = datetime.strptime(CONFIG.search_end_date, '%Y-%m-%dT%H:%M:%SZ')
-    demo_range = demo_range_to_string(search_start_date, search_end_date)
+        # Setting these variables so linting tools don't get angry :p
+        search_start_date = None
+        search_end_date = None
 
-    with open(DOWNLOAD_INFO_FILE) as current_download_strm:
-        current_download_info = current_download_strm.read().strip()
+    with open(DOWNLOAD_INFO_FILE) as cached_download_strm:
+        cached_download_info = cached_download_strm.read().strip()
 
-    use_cached_downloads = current_download_info and demo_range == current_download_info
+    use_cached_downloads = (not CONFIG.ignore_cache and cached_download_info and
+                            current_download_info == cached_download_info)
     if use_cached_downloads:
         # Use cached stuff if available
         post_cache_dir = os.path.join(CONFIG.demo_download_directory, 'post_cache')
@@ -220,17 +233,16 @@ def main():
             post_dict['parent'] = Thread(**post_dict['parent'])
             posts.append(Post(**post_dict))
     else:
-        threads = get_new_threads(search_start_date, testing_mode)
-        posts = get_new_posts(search_start_date, search_end_date, testing_mode, threads)
-    # TODO: Implement testing mode or unit tests of some sort
-    # In case of testing, use no data for now
-    if testing_mode:
-        posts = []
+        if CONFIG.download_type == 'date-based':
+            threads = get_new_threads(search_start_date)
+            posts = get_new_posts(search_start_date, search_end_date, threads)
+        else:
+            posts = get_ad_hoc_posts()
 
     for post in posts:
         download_attachments(post)
     with open(DOWNLOAD_INFO_FILE, 'w') as current_download_strm:
-        current_download_strm.write(demo_range)
+        current_download_strm.write(current_download_info)
 
     for post in posts:
         post_data = PostData(post)

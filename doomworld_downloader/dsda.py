@@ -60,7 +60,11 @@ def parse_dsda_cell(cell):
     # TODO: Need to make sure this doesn't actually include the timeline spans for categories.
     cell_spans = cell.find_all('span')
     if cell_spans is not None and cell_spans != []:
-        cell_contents = [span['title'] for span in cell_spans if 'title' in span]
+        cell_contents = []
+        for span in cell_spans:
+            span_title = span.get('title')
+            if span_title:
+                cell_contents.append(span_title)
         if cell_contents:
             if cell_text:
                 cell_contents.append(cell_text)

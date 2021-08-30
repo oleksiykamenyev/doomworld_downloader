@@ -10,3 +10,5 @@ demo_download_directory = demos_for_upload
 wad_download_directory = dsda_wads
 
 testing_mode = true
+
+download_type = date_based|ad_hoc

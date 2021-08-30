@@ -1135,7 +1135,7 @@
   playback_cmd_line: "-file attackonio"
   map_info:
     map_ranges: [[1, 7]]
-    d2all: ["Map 01", "Map 7"]
+    d2all: ["Map 01", "Map 07"]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/attack-on-io"
   dsda_paginated: false
   doomworld_thread: null
@@ -1176,3 +1176,68 @@
   idgames_url: "https://www.doomworld.com/idgames/themes/hr/hr"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/39985-hell-revealed-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/glaive":
+  wad_name: Glaive
+  iwad: doom2
+  wad_files:
+    glaive.wad: {checksum: "203d83100605000812e5c283a8c2f7b9"}
+  complevel: 2
+  playback_cmd_line: "-file glaive"
+  map_info:
+    map_ranges: [[1, 9]]
+    d2all: ["Map 01", "Map 09"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/g-i/glaive"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/base3":
+  wad_name: Base3
+  iwad: doom
+  wad_files:
+    base3.wad: {checksum: "857e15796d19ad256ada6f2eb67347a8"}
+  complevel: 3
+  playback_cmd_line: "-file base3"
+  map_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/a-c/base3"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/halfmoon1":
+  wad_name: '"Half Moon" Part 1'
+  iwad: doom2
+  wad_files:
+    halfmoon1.wad: {checksum: "57cad4fd0b3977d88d98407bb8869d53"}
+  complevel: 9
+  playback_cmd_line: "-file halfmoon1"
+  map_info:
+    map_ranges: [[1, 32]]
+    d2all: ["Map 01", "Map 32"]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/halfmoon1"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/122868-half-moon-1-2-demos-complevel-9/"
+"https://www.dsdarchive.com/wads/halfmoon2":
+  wad_name: '"Half Moon" Part 2'
+  iwad: doom2
+  wad_files:
+    halfmoon2.wad: {checksum: "6487b7d5acc02ed1cdcc6ea517241be5"}
+  complevel: 9
+  playback_cmd_line: "-file halfmoon2"
+  map_info:
+    map_ranges: [[1, 32]]
+    d2all: ["Map 01", "Map 32"]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/halfmoon2"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/122868-half-moon-1-2-demos-complevel-9/"
+"https://www.dsdarchive.com/wads/projectunity":
+  wad_name: Project Unity
+  iwad: doom2
+  wad_files:
+    projectunity.wad: {checksum: "fc2d3885b1e8f9e146065ed852ce73f5"}
+  complevel: 2
+  playback_cmd_line: "-file projectunity"
+  map_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/projectunity"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/121571-project-unity-demos-complevel-2/"
