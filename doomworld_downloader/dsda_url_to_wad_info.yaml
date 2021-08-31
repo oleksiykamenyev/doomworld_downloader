@@ -1241,3 +1241,29 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/projectunity"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/121571-project-unity-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/dbp25_dbd":
+  wad_name: "DBP25: Dead, But Dreaming"
+  iwad: doom2
+  wad_files:
+    dbp25-dead_but_dreaming.wad: {checksum: "5187d0fcfefeb1a50f230734f292e6f1"}
+  complevel: 2
+  playback_cmd_line: "-file dbp25-dead_but_dreaming"
+  map_info:
+    map_ranges: [[1, 11], [33]]
+    d2all: ["Map 01", "Map 11"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/dbp25_dbd"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/jpcp":
+  wad_name: Japanese Community Project
+  iwad: doom2
+  wad_files:
+    jpcp.wad: {checksum: "b0bfbdff7785da02b0fa6721dbccecd2"}
+  complevel: 2
+  playback_cmd_line: "-file jpcp"
+  map_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/jpcp"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/91937-japanese-community-project-demos-complevel-2/"

@@ -143,8 +143,9 @@ def handle_downloads(downloads, post_data):
             if playback_data.playback_failed:
                 LOGGER.info('Skipping post with zip %s due to issues with playback.',
                             renamed_zip)
-                # return False
-                pass
+                # TODO: Add an option to parse such posts anyway to support ZDoom/etc. (preferably
+                #       per demo)
+                return False
 
             data_manager = DataManager()
             post_data.populate_data_manager(data_manager)

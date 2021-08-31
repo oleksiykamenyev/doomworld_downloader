@@ -384,6 +384,11 @@ class PlaybackData:
 
             last_non_secret_map = cur_map
 
+        # In case a WAD is restricted to the secret maps (e.g., teeth.wad, maps 31-32) :^)
+        if not first_non_secret_map and not last_non_secret_map:
+            first_non_secret_map = map_list[0]
+            last_non_secret_map = map_list[-1]
+
         has_required_secret_maps = self._has_required_secret_maps(wad, map_list)
         map_range = [first_non_secret_map, last_non_secret_map]
         if has_required_secret_maps:
@@ -474,7 +479,7 @@ class PlaybackData:
                 map_list = []
                 for line in levelstat:
                     level = self._get_level(line.split(), wad)
-                    map_list.append(level)
+                    map_list.append(level.rstrip('s'))
 
                 self._detect_movie_type(wad, map_list)
             else:
