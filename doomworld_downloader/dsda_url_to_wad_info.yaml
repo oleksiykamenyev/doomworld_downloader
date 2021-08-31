@@ -789,6 +789,7 @@
   iwad: doom2
   wad_files:
     av.wad: {checksum: "6006c3a370aa1dc0be04e0f3976f1ca4"}
+    av.deh: {not_required_for_playback: true, checksum: "9e3073749f59fc3afeea48faa967a332"}
   complevel: 2
   playback_cmd_line: "-file av"
   map_info:
