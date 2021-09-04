@@ -134,7 +134,8 @@ class TextfileData:
 
     def _parse_textfile(self):
         """Parse textfile path."""
-        with open(self.textfile_path) as textfile_stream:
+        # TODO: Try at least once without errors='ignore'?
+        with open(self.textfile_path, encoding='utf-8', errors='ignore') as textfile_stream:
             self._raw_textfile = textfile_stream.read()
 
         if TextfileData.TAS_STRING in self._raw_textfile.lower():

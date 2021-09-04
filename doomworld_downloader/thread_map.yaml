@@ -770,7 +770,7 @@ https://www.doomworld.com/forum/topic/96954-dimensions-demos-complevel-9/:
   name: Dimensions demos [-complevel 9]
 https://www.doomworld.com/forum/topic/97057-300-minutes-of-vr-demos-complevel-2/:
   additional_info:
-    wad: https://www.dsdarchive.com/wads/200minvr
+    wad: https://www.dsdarchive.com/wads/300minvr
   id: '97057'
   name: 300 minutes of /vr/ demos [-complevel 2]
 https://www.doomworld.com/forum/topic/97058-moonblood-demos-complevel-9/:
@@ -843,6 +843,26 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/projectunity
   id: '121571'
   name: "Project Unity demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/119367-this-suxx-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/thissuxx
+  id: '119367'
+  name: "This SUXX demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/118467-deathless-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/deathless
+  id: '118467'
+  name: "Deathless demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/37458-new-vile-flesh-demos/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/vile
+  id: '37458'
+  name: "New Vile Flesh demos"
+"https://www.doomworld.com/forum/topic/121163-sargasso-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/sargasso
+  id: '121163'
+  name: "Sargasso demos [-complevel 9]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/103041-mayhem-2018-purple-and-orange-demos-complevel-9/":

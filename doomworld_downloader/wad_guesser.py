@@ -35,16 +35,17 @@ def get_wad_guesses(*args, iwad=None):
             ))
         for wad_to_guess in arg:
             if 'dsdarchive.com/wads' in wad_to_guess:
+                # TODO: Support all URL styles (e.g., "https://dsdarchive.com/wads/proj-x" should
+                #       still be possible to look up on)
                 if wad_to_guess in WAD_MAP_BY_DSDA_URL:
                     wad_guesses.append(WAD_MAP_BY_DSDA_URL[wad_to_guess])
             elif 'doomworld.com/idgames' in wad_to_guess:
                 if wad_to_guess in WAD_MAP_BY_IDGAMES_URL:
                     wad_guesses.append(WAD_MAP_BY_IDGAMES_URL[wad_to_guess])
             else:
-                if not wad_to_guess.endswith('.wad'):
-                    wad_to_guess_sanitized = '{}.wad'.join(wad_to_guess)
-                else:
-                    wad_to_guess_sanitized = wad_to_guess
+                wad_to_guess_sanitized = wad_to_guess.lower()
+                if not wad_to_guess_sanitized.endswith('.wad'):
+                    wad_to_guess_sanitized = '{}.wad'.format(wad_to_guess_sanitized)
                 for url, wad in WAD_MAP_BY_DSDA_URL.items():
                     if wad_to_guess_sanitized.lower() in [wad_file.lower()
                                                           for wad_file in wad.files.keys()]:
