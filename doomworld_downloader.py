@@ -12,7 +12,7 @@ import shutil
 
 from datetime import datetime
 from glob import glob
-from zipfile import ZipFile
+from zipfile import ZipFile, BadZipFile
 
 import yaml
 
@@ -70,7 +70,11 @@ def handle_downloads(downloads, post_data):
         renamed_zip = '{}.zip'.format(out_path)
         shutil.move(download, renamed_zip)
 
-        zip_file = ZipFile(renamed_zip)
+        try:
+            zip_file = ZipFile(renamed_zip)
+        except BadZipFile as bad_zip_err:
+            LOGGER.error('Zip %s is a bad zip file, error message %s.', renamed_zip, bad_zip_err)
+            continue
         info_list = zip_file.infolist()
         lmp_files = {}
         txt_files = []

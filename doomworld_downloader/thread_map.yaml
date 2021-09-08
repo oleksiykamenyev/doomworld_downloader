@@ -863,6 +863,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/sargasso
   id: '121163'
   name: "Sargasso demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/121408-tenth-gear-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/tenthgear
+  id: '121408'
+  name: "Tenth Gear [-complevel 9]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/103041-mayhem-2018-purple-and-orange-demos-complevel-9/":
@@ -1024,6 +1029,23 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
   additional_info:
     source_port: Mandoom v1.17
     category: Stupid difficulty.
+# Compet-N
+"https://www.doomworld.com/forum/topic/62327-compet-n-incoming-and-discussion-part-2-post-compet-n-entries-here/":
+  id: "62327"
+  name: "Compet-N: incoming and discussion, part 2 [post Compet-N entries here]"
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/doom
+      - https://www.dsdarchive.com/wads/doom2
+      - https://www.dsdarchive.com/wads/plutonia
+      - https://www.dsdarchive.com/wads/tnt
+      - https://www.dsdarchive.com/wads/av
+      - https://www.dsdarchive.com/wads/class_ep
+      - https://www.dsdarchive.com/wads/hr
+      - https://www.dsdarchive.com/wads/mm
+      - https://www.dsdarchive.com/wads/mm2
+      - https://www.dsdarchive.com/wads/requiem
+      - https://www.dsdarchive.com/wads/scythe
 
 ### THREADS BELOW ARE LIMITED USE BUT DO NOT HAVE ANY ADDITIONAL INFO SINCE THE USE CASES ARE TOO
 ### BROAD
