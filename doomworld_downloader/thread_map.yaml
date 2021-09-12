@@ -868,6 +868,22 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/tenthgear
   id: '121408'
   name: "Tenth Gear [-complevel 9]"
+"https://www.doomworld.com/forum/topic/120954-running-late-2-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/rl2
+  id: '120954'
+  name: "Running Late 2 Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/48482-mapgame-demos/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/mapgame
+  id: '48482'
+  name: "Mapgame demos"
+"https://www.doomworld.com/forum/topic/120959-syringe-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/syringe
+  id: '120959'
+  name: "Syringe demos [-complevel 2]"
+
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/103041-mayhem-2018-purple-and-orange-demos-complevel-9/":

@@ -80,7 +80,7 @@ def handle_downloads(downloads, post_data):
         txt_files = []
         for zip_file_member in info_list:
             zip_file_name = zip_file_member.filename
-            if zip_file_name.lower().endswith('.lmp'):
+            if zip_file_name.lower().endswith('.lmp') or zip_file_name.endswith('.cdm'):
                 lmp_files[zip_file_name] = datetime(*zip_file_member.date_time)
             if zip_file_name.lower().endswith('.txt'):
                 # TODO: Keep track of textfile date; it might be useful if the lmp date needs
@@ -96,6 +96,7 @@ def handle_downloads(downloads, post_data):
 
         is_demo_pack = False
         if len(lmp_files) != 1:
+            # TODO: Support .cdm and other lmp extension files
             main_lmp = get_main_file_from_zip(renamed_zip, lmp_files, zip_no_ext, file_type='lmp')
             if main_lmp:
                 lmp_files = {main_lmp: lmp_files[main_lmp]}

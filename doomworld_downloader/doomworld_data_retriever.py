@@ -29,7 +29,7 @@ THREAD_URL_FMT = '{base_url}/?page={num}'
 POST_URL_FMT = 'https://www.doomworld.com/forum/post/{post_id}'
 DOOMWORLD_URL_FMT = 'https://www.doomworld.com/{}'
 ATTACH_URL_RE = re.compile(
-    r'^(https:)?//www.doomworld.com/applications/core/interface/file/attachment.php?id=\d+$'
+    r'^(https:)?//www\.doomworld\.com/applications/core/interface/file/attachment\.php\?id=\d+$'
 )
 KEEP_CHARS = ['_', ' ', '.', '-']
 CONTENT_FILE = 'post_content.txt'
