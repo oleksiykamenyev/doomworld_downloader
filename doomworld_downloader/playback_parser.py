@@ -188,6 +188,8 @@ class PlaybackData:
 
                 local_wad_location = zip_extract(zip_location)
 
+            # TODO: We need to be careful here not to remove WADs that don't have downloads on DSDA
+            #       (e.g., IWADs)
             copyfile(os.path.join(local_wad_location, wad_file),
                      os.path.join(CONFIG.dsda_doom_directory, wad_file))
 
