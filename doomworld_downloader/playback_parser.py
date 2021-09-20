@@ -411,6 +411,8 @@ class PlaybackData:
                 self.data['level'] = 'D1All'
             elif episodes:
                 for idx, episode_range in enumerate(episodes):
+                    # TODO: For Doom 1 episodes, this will return the wrong number, need to take
+                    #       from the map values
                     if map_range == episode_range:
                         self.data['level'] = 'Episode {}'.format(idx + 1)
 

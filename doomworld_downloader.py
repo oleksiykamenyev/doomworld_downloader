@@ -80,7 +80,9 @@ def handle_downloads(downloads, post_data):
         txt_files = []
         for zip_file_member in info_list:
             zip_file_name = zip_file_member.filename
-            if zip_file_name.lower().endswith('.lmp') or zip_file_name.endswith('.cdm'):
+            # TODO: Comment what these extensions are
+            if (zip_file_name.lower().endswith('.lmp') or zip_file_name.endswith('.cdm') or
+                    zip_file_name.endswith('.zdd')):
                 lmp_files[zip_file_name] = datetime(*zip_file_member.date_time)
             if zip_file_name.lower().endswith('.txt'):
                 # TODO: Keep track of textfile date; it might be useful if the lmp date needs

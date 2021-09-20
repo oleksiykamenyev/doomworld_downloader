@@ -883,6 +883,21 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/syringe
   id: '120959'
   name: "Syringe demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/117817-180-minutes-pour-vivre-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/180mpv
+  id: '117817'
+  name: "180 Minutes Pour Vivre demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/31526-crimson-canyon-demos/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/crmsn37
+  id: '31526'
+  name: "Crimson Canyon demos"
+"https://www.doomworld.com/forum/topic/19394-mock2-demos/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/mock2
+  id: '19394'
+  name: "Mock2 demos"
 
 
 # Multi-WAD threads
@@ -1078,6 +1093,9 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
 "https://www.doomworld.com/forum/topic/92251-doomworld-mega-project-series-demos/":
   id: "92251"
   name: Doomworld Mega Project Series Demos
+"https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/":
+  id: "123364"
+  name: DBP Demo Thread
 
 # WAD Author threads
 "https://www.doomworld.com/forum/topic/86724-demos-for-miscellaneous-ribbiks-maps/":
@@ -1089,6 +1107,9 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
 "https://www.doomworld.com/forum/topic/90295-timeofdeath-wads-and-their-demos/":
   id: "90295"
   name: TimeOfDeath wads and their demos
+"https://www.doomworld.com/forum/topic/121232-doomshack-plays-various-works-of-doomkid/":
+  id: "121232"
+  name: Doomshack Plays (various works of Doomkid)
 
 # Misc specialized threads
 "https://www.doomworld.com/forum/topic/94942-misc-heretic-hexen-demos/":

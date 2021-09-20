@@ -141,7 +141,7 @@ class LMPData:
                 LOGGER.info('Encountered exception %s when running parse LMP command for LMP %s.',
                             cpe, self.lmp_path)
 
-            self.raw_data['iwad'] = engine_option
+            self.raw_data['iwad'] = f'{engine_option}.wad'
 
         parse_lmp_out = parse_lmp_out.splitlines()
         for key in LMPData.KEY_LIST:
