@@ -238,7 +238,8 @@ class LMPData:
                 if key == 'sr50 on turns' and value.lower() == 'true':
                     self.data['is_tas'] = True
                 # For Heretic/Hexen demos, these keys are just output as "true"/"false" strings
-                if not iwad == 'heretic' and not iwad == 'hexen' and key in self.BOOLEAN_INT_KEYS:
+                if (not iwad == 'heretic.wad' and not iwad == 'hexen.wad' and
+                        key in self.BOOLEAN_INT_KEYS):
                     value = False if int(value) == 0 else True
                 self.raw_data[key] = value
 

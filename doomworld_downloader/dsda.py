@@ -141,10 +141,11 @@ def get_wad_name_from_dsda_url(dsda_url):
     return urlparse(dsda_url).path.strip('/').split('/')[1]
 
 
-def download_wad_from_dsda(dsda_url):
+def download_wad_from_dsda(dsda_url, overwrite=True):
     """Download WAD from DSDA URL.
 
     :param dsda_url: DSDA URL
+    :param overwrite: Flag indicating whether to overwrite the local path if it exists
     :return: Path to local wad download from DSDA
     :raises ValueError if a non-wad URL is provided to this function
             RunTimeError if there's an issue getting the wad for a given page
@@ -179,5 +180,5 @@ def download_wad_from_dsda(dsda_url):
     download_filename = get_download_filename(response, default_filename=default_filename)
     wad_name = get_wad_name_from_dsda_url(dsda_url)
     download_dir = os.path.join(CONFIG.wad_download_directory, wad_name)
-    download_response(response, download_dir, download_filename, overwrite=True)
+    download_response(response, download_dir, download_filename, overwrite=overwrite)
     return os.path.join(download_dir, download_filename)

@@ -793,6 +793,8 @@
   wad_files:
     av.wad: {checksum: "6006c3a370aa1dc0be04e0f3976f1ca4"}
     av.deh: {not_required_for_playback: true, checksum: "9e3073749f59fc3afeea48faa967a332"}
+    # Technically this would desync map 20, but that would be caught by the playback..
+    avmovfix.wad: {not_required_for_playback: true, checksum: "8b841a6de9869c793a8ceb34c175797c"}
   complevel: 2
   playback_cmd_line: "-file av"
   map_info:
@@ -7020,3 +7022,97 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/hellbnd"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/69815-hellbound-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/abyspe33":
+  wad_name: "Abyssal Speedmapping Sessions: Session 33"
+  iwad: doom2
+  wad_files:
+    abyspe33.wad: {checksum: "a7d4bf26bd2719dad3424a065f7a90ef"}
+  complevel: 9
+  playback_cmd_line: "-file abyspe33"
+  map_info:
+    map_ranges: [[1, 13]]
+    d2all: ["Map 01", "Map 13"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe33"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/abyspe40":
+  wad_name: "Abyssal Speedmapping Sessions: Session 40"
+  iwad: doom2
+  wad_files:
+    abyspe40.wad: {checksum: "a7d4bf26bd2719dad3424a065f7a90ef"}
+  complevel: 9
+  playback_cmd_line: "-file abyspe40"
+  map_info:
+    map_ranges: [[1, 11]]
+    d2all: ["Map 01", "Map 11"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe40"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/abyspe53":
+  wad_name: "Abyssal Speedmapping Sessions: Session 53"
+  iwad: doom2
+  wad_files:
+    abyspe53.wad: {checksum: "a7d4bf26bd2719dad3424a065f7a90ef"}
+  complevel: 9
+  playback_cmd_line: "-file abyspe53"
+  map_info:
+    map_ranges: [[1, 17]]
+    d2all: ["Map 01", "Map 17"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe53"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/abyspe54":
+  wad_name: "Abyssal Speedmapping Session 54: dead.ass"
+  iwad: doom2
+  wad_files:
+    abyspe54.wad: {checksum: "a7d4bf26bd2719dad3424a065f7a90ef"}
+  complevel: 9
+  playback_cmd_line: "-file abyspe54"
+  map_info:
+    map_ranges: [[1, 18]]
+    d2all: ["Map 01", "Map 18"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe54"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/pillars":
+  wad_name: PILLARS.WAD
+  iwad: doom
+  wad_files:
+    pillars.wad: {checksum: "a7d4bf26bd2719dad3424a065f7a90ef"}
+  complevel: 3
+  playback_cmd_line: "-file pillars"
+  map_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/p-r/pillars"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/caverns":
+  wad_name: CAVERNS
+  iwad: doom
+  wad_files:
+    caverns.wad: {checksum: "a7d4bf26bd2719dad3424a065f7a90ef"}
+  complevel: 3
+  playback_cmd_line: "-file caverns"
+  map_info:
+    map_ranges: [["E1M2"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/a-c/caverns"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/inva2_09b":
+  wad_name: Invasion II v.1.0b
+  iwad: doom2
+  wad_files:
+    invasio2.wad: {checksum: "a7d4bf26bd2719dad3424a065f7a90ef"}
+  complevel: 2
+  playback_cmd_line: "-file invasio2"
+  map_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/inva2_09b"
+  dsda_paginated: false
+  doomworld_thread: null

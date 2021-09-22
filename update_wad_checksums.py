@@ -32,6 +32,10 @@ def parse_args():
                         action='count',
                         default=0,
                         help='Control verbosity of output.')
+    parser.add_argument('-s', '--skip-existing',
+                        dest='skip_existing',
+                        action='store_true',
+                        help='Skip existing WAD downloads.')
 
     return parser.parse_args()
 
@@ -58,7 +62,16 @@ def main():
         if line_strip and not line_strip.startswith('#'):
             if line.startswith('"'):
                 cur_wad_url = line.rstrip(':').replace('"', '')
-                wad_download = download_wad_from_dsda(cur_wad_url)
+                try:
+                    wad_download = download_wad_from_dsda(cur_wad_url, not args.skip_existing)
+                except OSError:
+                    if args.skip_existing:
+                        LOGGER.debug('Skip existing WAD %s.', cur_wad_url)
+                        new_wad_map_lines.append(line)
+                        continue
+
+                    raise
+
                 if not wad_download:
                     LOGGER.warning('Could not download WAD %s.', cur_wad_url)
                     local_wad_location = None
@@ -74,6 +87,7 @@ def main():
                 in_wad_files = False
                 if local_wad_location and os.path.exists(local_wad_location):
                     rmtree(local_wad_location)
+
             if in_wad_files and local_wad_location:
                 wad_file, _ = line.split(':', 1)
                 wad_file = wad_file.strip()
