@@ -1002,6 +1002,13 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     - https://www.dsdarchive.com/wads/fffart03
   id: "53786"
   name: fffart demos (Boom, -complevel 9)
+"https://www.doomworld.com/forum/topic/97486-newdoom-community-project-ndcpndcp2-demos/":
+  additional_info:
+    wads:
+    - https://www.dsdarchive.com/wads/ndcp
+    - https://www.dsdarchive.com/wads/ndcp2_2010
+  id: '97486'
+  name: "NewDoom Community Project (NDCP/NDCP2) demos"
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":

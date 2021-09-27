@@ -229,7 +229,14 @@ class LMPData:
                         player_value = value
                         class_value = None
 
-                    if int(player_value) != 0:
+                    try:
+                        player_value = int(player_value)
+                    except ValueError:
+                        LOGGER.warning(
+                            "Player value provided isn't int, demo %s is likely a Hexen demo.",
+                            self.lmp_path
+                        )
+                    if player_value != 0:
                         self.data['num_players'] += 1
                         if class_value is not None:
                             self.raw_data['player_classes'].append(

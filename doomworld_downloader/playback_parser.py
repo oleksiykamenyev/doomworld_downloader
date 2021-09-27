@@ -64,6 +64,8 @@ class PlaybackData:
         'plutonia': {'Map 15': 'Map 31', 'Map 31': 'Map 32'},
         'tnt': {'Map 15': 'Map 31', 'Map 31': 'Map 32'},
         'heretic': {'E1M6': 'E1M9', 'E2M4': 'E2M9', 'E3M4': 'E3M9', 'E4M4': 'E4M9', 'E5M3': 'E5M9'},
+        # TODO: Handle Hexen
+        'hexen': {},
         'chex': {}
     }
     D2ALL_DEFAULT = ['Map 01', 'Map 30']
@@ -76,7 +78,8 @@ class PlaybackData:
         # TODO: Handle this better
         'heretic': [['E1M1', 'E1M8'], ['E2M1', 'E2M8'], ['E3M1', 'E3M8'], ['E4M1', 'E4M8'],
                     ['E5M1', 'E5M8'], ['E6M1', 'E6M2']],
-        # TODO: This won't actually be accurate until Chex levelstat is fixed
+        # TODO: Handle Hexen
+        'hexen': [[]],
         'chex': [['E1M1', 'E1M5']]
     }
     ALL_IWADS = ['doom.wad', 'doom2.wad', 'plutonia.wad', 'tnt.wad']

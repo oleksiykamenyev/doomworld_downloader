@@ -10,7 +10,8 @@ import re
 
 from shutil import rmtree
 
-from doomworld_downloader.dsda import download_wad_from_dsda
+from doomworld_downloader.dsda import download_wad_from_dsda, get_wad_name_from_dsda_url
+from doomworld_downloader.upload_config import CONFIG
 from doomworld_downloader.utils import checksum, get_log_level, zip_extract
 
 
@@ -62,22 +63,27 @@ def main():
         if line_strip and not line_strip.startswith('#'):
             if line.startswith('"'):
                 cur_wad_url = line.rstrip(':').replace('"', '')
-                try:
-                    wad_download = download_wad_from_dsda(cur_wad_url, not args.skip_existing)
-                except OSError:
-                    if args.skip_existing:
-                        LOGGER.debug('Skip existing WAD %s.', cur_wad_url)
-                        new_wad_map_lines.append(line)
-                        continue
+                wad_name = get_wad_name_from_dsda_url(cur_wad_url)
+                download_dir = os.path.join(CONFIG.wad_download_directory, wad_name)
+                if args.skip_existing and os.path.isdir(download_dir):
+                    LOGGER.debug('Skip existing WAD %s.', cur_wad_url)
+                    local_wad_location = None
+                    new_wad_map_lines.append(line)
+                    continue
 
-                    raise
-
+                wad_download = download_wad_from_dsda(cur_wad_url)
                 if not wad_download:
                     LOGGER.warning('Could not download WAD %s.', cur_wad_url)
                     local_wad_location = None
                     new_wad_map_lines.append(line)
                     continue
-                local_wad_location = zip_extract(wad_download, overwrite=True)
+                try:
+                    local_wad_location = zip_extract(wad_download, overwrite=True)
+                except NotImplementedError:
+                    LOGGER.error('Issue extracting zip for WAD %s.', cur_wad_url)
+                    local_wad_location = None
+                    new_wad_map_lines.append(line)
+                    continue
 
             if line == '  wad_files:':
                 in_wad_files = True

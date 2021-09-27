@@ -247,8 +247,8 @@ def main():
         else:
             posts = get_ad_hoc_posts()
 
-    for post in posts:
-        download_attachments(post)
+        for post in posts:
+            download_attachments(post)
     with open(DOWNLOAD_INFO_FILE, 'w') as current_download_strm:
         current_download_strm.write(current_download_info)
 
