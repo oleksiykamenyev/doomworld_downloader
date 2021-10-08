@@ -898,6 +898,16 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/mock2
   id: '19394'
   name: "Mock2 demos"
+"https://www.doomworld.com/forum/topic/122628-plutonia-7-demos-complevel-7-i-mean-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/plut7
+  id: '122628'
+  name: "Plutonia 7+ demos [complevel -7, I mean 9]"
+"https://www.doomworld.com/forum/topic/124883-sol-ank-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/solank
+  id: '124883'
+  name: "Sol Ank demos [-complevel 9]"
 
 
 # Multi-WAD threads
