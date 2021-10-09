@@ -9,6 +9,8 @@ parse_lmp_directory = d:\\MyStuff\\lmp
 demo_download_directory = demos_for_upload
 wad_download_directory = dsda_wads
 
-testing_mode = true
+download_type = date-based|ad-hoc
+ignore_cache = FALSE|true
 
-download_type = date_based|ad_hoc
+skip_playback = false|TRUE
+skip_playback_for_demo_packs = false|TRUE

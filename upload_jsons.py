@@ -40,8 +40,8 @@ def main():
         upload_cmd = 'ruby d:/MyStuff/dsda3/dsda-r-api-client/dsda-client.rb "{}"'.format(
             json_path
         )
+        # TODO: Keep track of failed_uploads.json files since otherwise they could be overwritten
         run_cmd(upload_cmd, dryrun=args.dryrun)
-
 
 
 if __name__ == '__main__':

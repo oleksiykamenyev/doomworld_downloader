@@ -4,7 +4,9 @@ WAD guesser.
 
 import logging
 
+from .dsda import conform_dsda_wad_url
 from .upload_config import WAD_MAP_BY_DSDA_URL, WAD_MAP_BY_IDGAMES_URL
+from .utils import conform_url, conform_idgames_url
 
 
 DEFAULT_WAD_GUESSES = [
@@ -35,11 +37,11 @@ def get_wad_guesses(*args, iwad=None):
             ))
         for wad_to_guess in arg:
             if 'dsdarchive.com/wads' in wad_to_guess:
-                # TODO: Support all URL styles (e.g., "https://dsdarchive.com/wads/proj-x" should
-                #       still be possible to look up on)
+                wad_to_guess = conform_dsda_wad_url(conform_url(wad_to_guess))
                 if wad_to_guess in WAD_MAP_BY_DSDA_URL:
                     wad_guesses.append(WAD_MAP_BY_DSDA_URL[wad_to_guess])
             elif 'doomworld.com/idgames' in wad_to_guess:
+                wad_to_guess = conform_idgames_url(conform_url(wad_to_guess))
                 if wad_to_guess in WAD_MAP_BY_IDGAMES_URL:
                     wad_guesses.append(WAD_MAP_BY_IDGAMES_URL[wad_to_guess])
             else:

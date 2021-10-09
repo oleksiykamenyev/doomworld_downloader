@@ -7,11 +7,15 @@ track of any JSONs that require attention, so that further on they can be stored
 manual inspection.
 """
 
+import json
 import logging
 import os
 import re
 
-from .upload_config import NEEDS_ATTENTION_PLACEHOLDER
+from collections import defaultdict
+
+from .upload_config import CONFIG, NEEDS_ATTENTION_PLACEHOLDER
+from .utils import freeze_obj
 
 
 LOGGER = logging.getLogger(__name__)
@@ -32,17 +36,25 @@ class DemoJsonConstructor:
     # Note: the version key is required by the uploader spec but is currently always hardcoded to 0.
     KEY_TO_DEFAULT_MAP = {'tas': False, 'solo_net': False, 'version': '0'}
     REQUIRED_KEYS = [
-        'tas', 'solo_net', 'guys', 'version', 'wad', 'file', 'engine', 'time', 'level', 'levelstat',
+        'tas', 'solo_net', 'guys', 'version', 'wad', 'engine', 'time', 'level', 'levelstat',
         'category', 'secret_exit', 'recorded_at', 'players'
     ]
 
-    def __init__(self, data_manager, note_strings, zip_file):
-        """Initialized demo JSON constructor."""
-        self.data_manager = data_manager
-        self.note_strings = note_strings
+    VALID_ISSUE_DIR = 'issue_jsons'
+    VALID_NO_ISSUE_DIR = 'no_issue_jsons'
+    VALID_TAGS_DIR = 'tags_jsons'
+
+    def __init__(self, zip_file, zip_no_ext):
+        """Initialize demo JSON constructor.
+
+        :param zip_file: Zip file path
+        :param zip_no_ext: Zip filename with no extension for constructing the JSON filename
+        """
         self.zip_file = zip_file
+        self.zip_no_ext = zip_no_ext
         # Use "/" separator for path since the DSDA client prefers it
-        self.demo_json = {'file': {'name': '/'.join(os.path.split(zip_file))}}
+        self.file_entry = {'file': {'name': '/'.join(os.path.split(zip_file))}}
+        self.demo_jsons = {}
         self.has_issue = False
         self.has_tags = False
 
@@ -50,51 +62,131 @@ class DemoJsonConstructor:
         """Set has_issue flag if there is an issue with the JSON."""
         self.has_issue = True
 
-    def parse_data_manager(self):
+    def parse_data_manager(self, data_manager, note_strings, lmp_file):
         """Parse data from data manager.
 
+        :param data_manager: Data manager object
+        :param note_strings: List of note strings to parse into demo tags
+        :param lmp_file: LMP file that is being parsed for
         :raises RuntimeError if there are required keys missing in the final demo JSON.
         """
-        for evaluation in self.data_manager:
+        demo_json = {}
+        for evaluation in data_manager:
             # Convert to JSON keys, default to value in the map.
             key_to_insert = self.KEY_TO_JSON_MAP.get(evaluation.key, evaluation.key)
             if evaluation.needs_attention:
-                self._handle_needs_attention_entries(key_to_insert, evaluation)
+                self._handle_needs_attention_entries(key_to_insert, evaluation, lmp_file, demo_json)
             else:
                 value = next(iter(evaluation.possible_values.keys()))
                 if value == NEEDS_ATTENTION_PLACEHOLDER:
-                    LOGGER.warning('Zip file %s needs attention for following key: "%s". ',
-                                   self.zip_file, key_to_insert)
+                    LOGGER.warning('LMP % in zip file %s needs attention for following key: "%s".',
+                                   lmp_file, self.zip_file, key_to_insert)
                     self._set_has_issue()
 
-                self.demo_json[key_to_insert] = value
+                demo_json[key_to_insert] = value
 
         for key, default in DemoJsonConstructor.KEY_TO_DEFAULT_MAP.items():
-            if key not in self.demo_json:
-                self.demo_json[key] = default
+            if key not in demo_json:
+                demo_json[key] = default
 
         # The players list is set to a tuple in the data manager so that it is a hashable type; we
         # need to convert it to a list to match the JSON spec.
-        self.demo_json['players'] = list(self.demo_json['players'])
+        demo_json['players'] = list(demo_json['players'])
         for key in self.REQUIRED_KEYS:
-            if key not in self.demo_json:
+            if key not in demo_json:
                 LOGGER.error('Key %s not found in final demo JSON.', key)
                 self._set_has_issue()
-                self.demo_json[key] = NEEDS_ATTENTION_PLACEHOLDER
+                demo_json[key] = NEEDS_ATTENTION_PLACEHOLDER
 
-        if self.demo_json.get('category') == 'Other':
+        if demo_json.get('category') == 'Other':
             self._set_has_issue()
 
-        self._construct_tags()
-        # TODO: Should probably format it this way by default
-        # Correct format for demo JSON
-        self.demo_json = {'demo': self.demo_json}
+        self._construct_tags(note_strings, lmp_file, demo_json)
+        self.demo_jsons[lmp_file] = demo_json
 
-    def _handle_needs_attention_entries(self, key_to_insert, evaluation):
+    def dump_demo_jsons(self):
+        """Parse data from data manager.
+
+        :raises RuntimeError if there are no demos to dump.
+        """
+        if not self.demo_jsons:
+            raise RuntimeError('No demo JSONs to dump!')
+
+        # Before outputting, we need to dedupe the JSONs. This is important in cases where co-op
+        # demos with multiple perspectives are present in the zip file, all of which would have the
+        # same time and functionally be one demo. Alternatively, if someone were to include two
+        # demos with the same exact time to the tic, there's no reason to display both.
+        demo_jsons_prune = {}
+        for lmp_file, json_dict in self.demo_jsons.items():
+            # TODO: It might make sense to prune kills/items/secrets as well?
+            # Prune the recording date from the deduping since, we don't really care about it
+            demo_jsons_prune[lmp_file] = {key: value for key, value in json_dict.items()
+                                          if key != 'recorded_at'}
+
+        json_counts = defaultdict(list)
+        for lmp_file, json_dict in demo_jsons_prune.items():
+            json_counts[freeze_obj(json_dict)].append(lmp_file)
+
+        for json_dict, lmp_files in json_counts.items():
+            if len(lmp_files) > 1:
+                # Prune LMP files based on their recorded date, since it makes sense to take the
+                # earliest date of the same time if we have multiple. In case recorded_date comes
+                # up as UNKNOWN for any of the lmps, it should be sorted after actual dates, so I
+                # think this should work.
+                lmp_files = sorted(lmp_files, key=lambda lmp: self.demo_jsons[lmp]['recorded_date'])
+                lmp_file_kept = lmp_files[0]
+                for lmp_file in lmp_files[:1]:
+                    LOGGER.warning('Pruning LMP file %s in favor of matching category LMP %s.',
+                                   lmp_file, lmp_file_kept)
+                    self.demo_jsons.pop(lmp_file)
+
+        demo_jsons = list(self.demo_jsons.values())
+        if len(demo_jsons) > 1:
+            demo_list_entry = {'demos': demo_jsons}
+            demo_list_entry.update(self.file_entry)
+            final_demo_json = {'demo_pack': demo_list_entry}
+        else:
+            demo_list_entry = demo_jsons[0]
+            demo_list_entry.update(self.file_entry)
+            final_demo_json = {'demo': demo_list_entry}
+
+        zip_file_strip = self.zip_file.rstrip(os.path.sep).split(os.path.sep)
+        # Download path sample: demos_for_upload/PlayerName/123456/demo.zip
+        # Set json filename to demo_PlayerName_123456
+        json_filename = f'{self.zip_no_ext}_{zip_file_strip[-3]}_{zip_file_strip[-2]}.json'
+        if self.has_issue:
+            json_path = self._set_up_demo_json_file(json_filename,
+                                                    DemoJsonConstructor.VALID_ISSUE_DIR)
+        elif self.has_tags:
+            json_path = self._set_up_demo_json_file(json_filename,
+                                                    DemoJsonConstructor.VALID_TAGS_DIR)
+        else:
+            json_path = self._set_up_demo_json_file(json_filename,
+                                                    DemoJsonConstructor.VALID_NO_ISSUE_DIR)
+
+        with open(json_path, 'w', encoding='utf-8') as out_stream:
+            json.dump(final_demo_json, out_stream, indent=4, sort_keys=True)
+
+    @staticmethod
+    def _set_up_demo_json_file(json_filename, json_dir):
+        """Set up demo JSON file creation.
+
+        :param json_filename: JSON filename
+        :param json_dir: Directory to create JSON under
+        :return: Path to JSON file to create
+        """
+        json_dir = os.path.join(CONFIG.demo_download_directory, json_dir)
+        os.makedirs(json_dir, exist_ok=True)
+        json_path = os.path.join(json_dir, json_filename)
+        return json_path
+
+    def _handle_needs_attention_entries(self, key_to_insert, evaluation, lmp_file, demo_json):
         """Handle entries that are marked as needing attention.
 
         :param key_to_insert: Key to insert into the demo JSON
         :param evaluation: Evaluation requiring attention
+        :param lmp_file: LMP file that is being parsed for
+        :param demo_json: JSON for the current demo
         """
         if evaluation.key == 'category':
             playback_category = None
@@ -112,45 +204,51 @@ class DemoJsonConstructor:
                     (playback_category == 'NM 100S' and textfile_category == 'NM Speed')):
                 LOGGER.info('Inferred %s category for zip file %s.',
                             playback_category, self.zip_file)
-                self.demo_json[key_to_insert] = playback_category
+                demo_json[key_to_insert] = playback_category
                 return
 
-        LOGGER.warning('Zip file %s needs attention based on the following '
-                       'evaluation: "%s".', self.zip_file, evaluation)
+        LOGGER.warning('LMP %s in zip file %s needs attention based on the following evaluation: '
+                       '"%s".', lmp_file, self.zip_file, evaluation)
         # If there is a single possible evaluation, the data manager will indicate evaluation is
         # needed, but we should just add it to the JSON by default, in case the evaluation is
         # correct
         if len(evaluation.possible_values) == 1:
-            self.demo_json[key_to_insert] = next(iter(evaluation.possible_values.keys()))
+            demo_json[key_to_insert] = next(iter(evaluation.possible_values.keys()))
         else:
-            self.demo_json[key_to_insert] = NEEDS_ATTENTION_PLACEHOLDER
+            demo_json[key_to_insert] = NEEDS_ATTENTION_PLACEHOLDER
         self._set_has_issue()
 
-    def _construct_tags(self):
+    def _construct_tags(self, note_strings, lmp_file, demo_json):
         """Construct tags array for demo JSON
 
         Does nothing if there are no note strings passed to the constructor.
+
+        :param note_strings: List of note strings to parse into demo tags
+        :param lmp_file: LMP file that is being parsed for
+        :param demo_json: JSON for the current demo
         """
-        if not self.note_strings:
+        if not note_strings:
             return
 
         # This is inherently a bit wonky code, but I would prefer that all of the tags are
         # consistently placed in each entry, and there's no real way to do that without iterating
         # the note strings multiple times.
-        final_tag = self._construct_other_movie_tag()
-        final_tag += self._construct_skill_tag()
-        final_tag += self._construct_misc_tags()
-        self.demo_json['tags'] = [{'show': True, 'text': final_tag.rstrip('\n')}]
+        final_tag = self._construct_other_movie_tag(note_strings)
+        final_tag += self._construct_skill_tag(note_strings, lmp_file, demo_json)
+        final_tag += self._construct_misc_tags(note_strings, lmp_file, demo_json)
+        demo_json['tags'] = [{'show': True, 'text': final_tag.rstrip('\n')}]
         self.has_tags = True
 
-    def _construct_other_movie_tag(self):
+    @staticmethod
+    def _construct_other_movie_tag(note_strings):
         """Construct other movie tag.
 
+        :param note_strings: List of note strings to parse into demo tags
         :return: Other movie tag.
         """
         other_movie = ''
         no_secret_maps = ''
-        for note_string in self.note_strings:
+        for note_string in note_strings:
             if note_string.startswith('Other Movie '):
                 # We don't actually need the "Other Movie" part, as that info is present in the
                 # level info; it is included so this note is more easy to detect in this function.
@@ -166,27 +264,29 @@ class DemoJsonConstructor:
 
         return ''
 
-    def _construct_skill_tag(self):
+    def _construct_skill_tag(self, note_strings, lmp_file, demo_json):
         """Construct skill tag.
 
+        :param note_strings: List of note strings to parse into demo tags
+        :param lmp_file: LMP file that is being parsed for
+        :param demo_json: JSON for the current demo
         :return: Skill tag.
         :raises RuntimeError if there are mismatches between notes and other info in the class
         """
-        category = self.demo_json['category']
+        category = demo_json['category']
         incompatible = False
         additional_info = ''
-        for note_string in self.note_strings:
+        for note_string in note_strings:
             if DemoJsonConstructor.SKILL_CATEGORY_NOTE_RE.match('note_string'):
                 # Override category in case the category is Other and there's a note string that
                 # indicates the actual category (e.g., in cases of wrong skill level).
                 if category != 'Other':
-                    raise RuntimeError('Other skill run found without Other category: {}.'.format(
-                        self.zip_file
-                    ))
+                    raise RuntimeError(f'Other skill run found without Other category: {lmp_file} '
+                                       f'in {self.zip_file}.')
                 category = note_string
             if note_string == 'Incompatible':
                 incompatible = True
-                self.demo_json['category'] = 'Other'
+                demo_json['category'] = 'Other'
             if note_string in DemoJsonConstructor.MISC_CATEGORY_NOTES:
                 if not additional_info:
                     additional_info = ' with ' + note_string
@@ -199,20 +299,23 @@ class DemoJsonConstructor:
         skill_tag = category + additional_info
         # If we didn't modify the tag at all from the original category, there was no new info
         # added, so we can skip adding this tag.
-        if skill_tag and skill_tag != self.demo_json['category']:
+        if skill_tag and skill_tag != demo_json['category']:
             return skill_tag + '\n'
 
         return ''
 
-    def _construct_misc_tags(self):
+    def _construct_misc_tags(self, note_strings, lmp_file, demo_json):
         """Construct misc tags.
 
         All misc tags are just appended in alphabetical order and separated by newlines.
 
+        :param note_strings: List of note strings to parse into demo tags
+        :param lmp_file: LMP file that is being parsed for
+        :param demo_json: JSON for the current demo
         :return: Misc tag.
         """
         misc_tags = []
-        for note_string in self.note_strings:
+        for note_string in note_strings:
             if note_string.startswith('Hexen class: '):
                 misc_tags.append(note_string.split('Hexen class: ')[1])
             # Note: even though both Reality and Almost Reality are listed here, prior processing
@@ -221,9 +324,10 @@ class DemoJsonConstructor:
                     note_string.startswith('Recorded in skill ')):
                 misc_tags.append(note_string)
                 if note_string == 'Uses turbo':
-                    LOGGER.warning('Zip file %s due to unclear turbo usage.', self.zip_file)
+                    LOGGER.warning('LMP %s in zip file %s due to unclear turbo usage.', lmp_file,
+                                   self.zip_file)
                     self._set_has_issue()
                 if note_string == 'Uses longtics':
-                    self.demo_json['category'] = 'Other'
+                    demo_json['category'] = 'Other'
 
         return '\n'.join(sorted(misc_tags))

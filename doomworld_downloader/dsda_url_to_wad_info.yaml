@@ -8452,3 +8452,45 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/a-c/bdoom"
   dsda_paginated: false
   doomworld_thread: null
+"https://www.dsdarchive.com/wads/dbp20_dnd":
+  wad_name: "DBP20: Dungeons and Demons"
+  iwad: doom2
+  wad_files:
+    dbp20_dnd.wad: {checksum: "1d58a2e9c946bac6c21ebda7aded9af1"}
+  complevel: 2
+  playback_cmd_line: "-file dbp20_dnd"
+  map_info:
+    map_ranges: [[1, 9]]
+    d2all: ["Map 01", "Map 09"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp20_dnd"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/terrain2":
+  wad_name: TERRAIN
+  iwad: doom2
+  wad_files:
+    terrain.wad: {checksum: "dc120946b69ce0cc3b03bb54bb48a2e2"}
+  complevel: 2
+  playback_cmd_line: "-file terrain"
+  map_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/s-u/terrain2"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/dbp_02":
+  wad_name: "DBP02: Circle of Caina"
+  iwad: doom2
+  wad_files:
+    dbp_02.wad: {checksum: "a231307ed33d85b6e2d51cf1e960c752"}
+  complevel: 2
+  playback_cmd_line: "-file dbp_02"
+  map_info:
+    map_ranges: [[1, 8]]
+    d2all: ["Map 01", "Map 08"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp_02"
+  dsda_paginated: false
+  doomworld_thread: null

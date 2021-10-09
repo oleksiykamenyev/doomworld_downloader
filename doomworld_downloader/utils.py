@@ -11,7 +11,7 @@ import subprocess
 
 from shutil import rmtree
 from time import gmtime, strftime
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlunparse
 
 import requests
 
@@ -20,7 +20,9 @@ from bs4 import BeautifulSoup
 from zipfile import ZipFile
 
 
+HTTP_RE = re.compile(r'^https?://.+')
 HEADER_FILENAME_RE = re.compile(r'filename="(.+)"')
+IDGAMES_ID_URL_RE = re.compile(r'^https://www.doomworld.com/idgames/\?id=\d+$')
 
 LOGGER = logging.getLogger(__name__)
 
@@ -260,7 +262,7 @@ def get_log_level(verbose):
     return logging.ERROR
 
 
-def get_main_file_from_zip(download, file_list, zip_no_ext, file_type):
+def get_main_file_from_zip(download, file_list, zip_no_ext, file_types):
     """Get main file from zip file.
 
     The main file is considered to be any file that matches the zip filename.
@@ -268,14 +270,15 @@ def get_main_file_from_zip(download, file_list, zip_no_ext, file_type):
     :param download: Download path for logging
     :param file_list: File list to search through
     :param zip_no_ext: Zip filename without the .zip extension
-    :param file_type: Type of file for logging
+    :param file_types: Type of file for logging, could be string with a single file type or list of
+                       types
     :return: Main filename from zip file if available, or None
     """
     for cur_file in file_list:
         file_no_ext = get_filename_no_ext(cur_file)
         if file_no_ext.lower() == zip_no_ext.lower():
             LOGGER.debug('Download %s contains multiple files of type %s, parsing just file '
-                         'matching the zip name.', download, file_type)
+                         'matching the zip name.', download, file_types)
             return cur_file
 
     return None
@@ -323,3 +326,58 @@ def compare_iwad(demo_iwad, cmp_iwad):
     :return: True if the IWADs are the same, false otherwise
     """
     return demo_iwad == cmp_iwad or demo_iwad == '{}.wad'.format(cmp_iwad)
+
+
+def freeze_obj(obj):
+    """Freeze object for hashing into a dictionary.
+
+    :param obj: Object to freeze
+    :return: Frozen object
+    """
+    if isinstance(obj, dict):
+        return frozenset((key, freeze_obj(value)) for key, value in obj.items())
+    elif isinstance(obj, list):
+        return tuple(freeze_obj(elem) for elem in obj)
+
+    return obj
+
+
+def conform_url(url):
+    """Conform URL to pre-defined standard.
+
+    Make sure all of the parts of the URL are present to the following standard:
+      https://www.website.domain/path/to/wherever?url=arg
+
+    :param url: URL to conform
+    :return: Conformed URL
+    """
+    # Assume scheme is https if not provided
+    if not HTTP_RE.match(url):
+        url = f'https://{url}'
+
+    # Assume we always need to add "www." to URLs
+    url_parse = urlparse(url)
+    if not url_parse.netloc.startswith('www.'):
+        url_parse = url_parse._replace(netloc=f'www.{url_parse.netloc}')
+
+    return urlunparse(url_parse)
+
+
+def conform_idgames_url(idgames_url):
+    """Conform idgames URL.
+
+    If the idgames URL is provided as an ID-based URL, this will try to access it and return the
+    redirect URL (e.g., https://www.doomworld.com/idgames/?id=1234).
+
+    For beta downloads URLs from Doomworld, they are so broken that I don't think there's any way to
+    map them to legacy idgames URLs.
+
+    :param url: Idgames URL
+    :return: Conformed idgames URL
+    """
+    if IDGAMES_ID_URL_RE.match(idgames_url):
+        response = requests.get(idgames_url)
+        # Add an extra conform call just in case
+        return conform_url(response.url)
+
+    return idgames_url

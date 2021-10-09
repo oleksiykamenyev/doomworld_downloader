@@ -117,6 +117,33 @@ class UploadConfig:
         except (NoSectionError, NoOptionError):
             return False
 
+    @property
+    def skip_playback(self):
+        """Skip playback when doing the uploads (optional).
+
+        Default to false, this will result in potentially incomplete JSONs output by the script,
+        which will require manual processing.
+
+        :return: Flag indicating whether to skip playback when doing the uploads
+        """
+        try:
+            return self._config.getboolean('general', 'skip_playback')
+        except (NoSectionError, NoOptionError):
+            return False
+
+    @property
+    def skip_demo_pack_issues(self):
+        """Skip demos with issues in demo packs (optional).
+
+        Default to false, this will result in faulty demos within the demo pack being ignored.
+
+        :return: Flag indicating whether to skip demos with issues in demo packs
+        """
+        try:
+            return self._config.getboolean('general', 'skip_demo_pack_issues')
+        except (NoSectionError, NoOptionError):
+            return False
+
 
 CONFIG = UploadConfig()
 

@@ -50,11 +50,11 @@ class TextfileData:
                    re.IGNORECASE): 'Chocolate DooM',
         # Crispy Doom
         re.compile(
-            r'Crispy(\s*|-)?Doom(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+\.\d+)', re.IGNORECASE
+            r'Crispy(\s*|-)?Doom(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+(\.\d+)?)', re.IGNORECASE
         ): 'Crispy Doom',
         # Crispy Heretic
         re.compile(
-            r'Crispy(\s*|-)?Heretic(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+\.\d+)', re.IGNORECASE
+            r'Crispy(\s*|-)?Heretic(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+(\.\d+)?)', re.IGNORECASE
         ): 'Crispy Heretic',
         # CNDoom
         re.compile(
@@ -72,11 +72,11 @@ class TextfileData:
         re.compile(r'TASMBF', re.IGNORECASE): 'TASMBF',
         # PrBoom
         re.compile(
-            r'(Pr|GL)Boom(\.exe)?^(\+|-plus)\s*v?\.?(?P<version>\d\.\d\.\d)', re.IGNORECASE
+            r'(Pr|GL)Boom(\.exe)?^(\+|-?plus)\s*v?\.?(?P<version>\d\.\d\.\d)', re.IGNORECASE
         ): 'PRBoom',
         # PrBoom+
         re.compile(
-            r'(Pr|GL)(Boom)?(\+|-plus)?(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d\.\d\.\d)\s'
+            r'(Pr|GL)(Boom)?\s*(\+|-?plus)?(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d\.\d\.\d)\s'
             r'*-?((complevel|cl)\s*(?P<complevel>\d+))?',
             re.IGNORECASE
         ): 'PRBoom',

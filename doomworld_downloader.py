@@ -34,24 +34,8 @@ from doomworld_downloader.wad_guesser import get_wad_guesses
 DOWNLOAD_INFO_FILE = 'doomworld_downloader/current_download.txt'
 HEADER_FILENAME_RE = re.compile(r'filename="(.+)"')
 DATETIME_FORMAT = 'YYYY'
-VALID_ISSUE_DIR = 'issue_jsons'
-VALID_NO_ISSUE_DIR = 'no_issue_jsons'
-VALID_TAGS_DIR = 'tags_jsons'
 
 LOGGER = logging.getLogger(__name__)
-
-
-def set_up_demo_json_file(json_filename, json_dir):
-    """Set up demo JSON file creation.
-
-    :param json_filename: JSON filename
-    :param json_dir: Directory to create JSON under
-    :return: Path to JSON file to create
-    """
-    json_dir = os.path.join(CONFIG.demo_download_directory, json_dir)
-    os.makedirs(json_dir, exist_ok=True)
-    json_path = os.path.join(json_dir, json_filename)
-    return json_path
 
 
 def handle_downloads(downloads, post_data):
@@ -80,7 +64,9 @@ def handle_downloads(downloads, post_data):
         txt_files = []
         for zip_file_member in info_list:
             zip_file_name = zip_file_member.filename
-            # TODO: Comment what these extensions are
+            # LMP: Standard demo file format (vanilla, Boom, MBF, (G)ZDoom, etc.)
+            # CDM: Doomsday demo format
+            # ZDD: ZDaemon new-style demo format
             if (zip_file_name.lower().endswith('.lmp') or zip_file_name.endswith('.cdm') or
                     zip_file_name.endswith('.zdd')):
                 lmp_files[zip_file_name] = datetime(*zip_file_member.date_time)
@@ -98,14 +84,14 @@ def handle_downloads(downloads, post_data):
 
         is_demo_pack = False
         if len(lmp_files) != 1:
-            # TODO: Support .cdm and other lmp extension files
-            main_lmp = get_main_file_from_zip(renamed_zip, lmp_files, zip_no_ext, file_type='lmp')
+            main_lmp = get_main_file_from_zip(renamed_zip, lmp_files, zip_no_ext,
+                                              file_types=['cdm', 'lmp', 'zdd'])
             if main_lmp:
                 lmp_files = {main_lmp: lmp_files[main_lmp]}
             else:
                 is_demo_pack = True
         if len(txt_files) != 1:
-            main_txt = get_main_file_from_zip(renamed_zip, txt_files, zip_no_ext, file_type='txt')
+            main_txt = get_main_file_from_zip(renamed_zip, txt_files, zip_no_ext, file_types='txt')
             if main_txt:
                 txt_files = [main_txt]
             else:
@@ -128,6 +114,7 @@ def handle_downloads(downloads, post_data):
             if textfile_iwad:
                 lmp_demo_info = {'iwad': textfile_iwad}
 
+        demo_json_constructor = DemoJsonConstructor(renamed_zip, zip_no_ext)
         for lmp_file, recorded_date in lmp_files.items():
             lmp_path = os.path.join(out_path, lmp_file)
             lmp_data = LMPData(lmp_path, recorded_date, demo_info=lmp_demo_info)
@@ -147,11 +134,12 @@ def handle_downloads(downloads, post_data):
                 )
             playback_data = PlaybackData(lmp_path, wad_guesses, demo_info=demo_info)
             playback_data.analyze()
-            if playback_data.playback_failed:
-                LOGGER.info('Skipping post with zip %s due to issues with playback.',
-                            renamed_zip)
-                # TODO: Add an option to parse such posts anyway to support ZDoom/etc. (preferably
-                #       per demo)
+            if not CONFIG.skip_playback and playback_data.playback_failed:
+                LOGGER.info('Skipping post with zip %s due to issues with playback.', renamed_zip)
+                return False
+            if is_demo_pack and CONFIG.skip_demo_pack_issues:
+                LOGGER.info('Skipping demo %s in demo pack %s due to issues with playback.',
+                            lmp_file, renamed_zip)
                 return False
 
             data_manager = DataManager()
@@ -164,25 +152,9 @@ def handle_downloads(downloads, post_data):
                 textfile_data.populate_data_manager(data_manager)
                 all_note_strings = all_note_strings.union(textfile_data.note_strings)
 
-            demo_json_constructor = DemoJsonConstructor(data_manager, all_note_strings,
-                                                        renamed_zip)
-            demo_json_constructor.parse_data_manager()
+            demo_json_constructor.parse_data_manager(data_manager, all_note_strings, lmp_file)
 
-            download_split = renamed_zip.rstrip(os.path.sep).split(os.path.sep)
-            # Download path sample: demos_for_upload/PlayerName/123456/demo.zip
-            # Set json filename to demo_PlayerName_123456
-            json_filename = '{}_{}_{}.json'.format(zip_no_ext, download_split[-3],
-                                                   download_split[-2])
-            if demo_json_constructor.has_issue:
-                json_path = set_up_demo_json_file(json_filename, VALID_ISSUE_DIR)
-            elif demo_json_constructor.has_tags:
-                json_path = set_up_demo_json_file(json_filename, VALID_TAGS_DIR)
-            else:
-                json_path = set_up_demo_json_file(json_filename, VALID_NO_ISSUE_DIR)
-
-            with open(json_path, 'w', encoding='utf-8') as out_stream:
-                json.dump(demo_json_constructor.demo_json, out_stream, indent=4, sort_keys=True)
-
+        demo_json_constructor.dump_demo_jsons()
         shutil.rmtree(out_path)
 
     return True

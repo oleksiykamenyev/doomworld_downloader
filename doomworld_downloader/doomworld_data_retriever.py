@@ -10,7 +10,6 @@ import logging
 import os
 import re
 import shutil
-import sys
 
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -190,7 +189,6 @@ def parse_thread_page(thread_url, thread=None):
             if 'ipsAttachLink' in link.get('class', []) or ATTACH_URL_RE.match(link.get('href', ''))
         ]
         attachments = get_links(attachment_links, extract_link=True)
-        # TODO: Consider repackaging rars and 7zs so we don't have to ask the posters to do it
         attachments = {attach: attach_url for attach, attach_url in attachments.items()}
         # Skip posts with no attachments as they have no demos to search for
         if not attachments:
@@ -200,7 +198,7 @@ def parse_thread_page(thread_url, thread=None):
         post_url = POST_URL_FMT.format(post_id=post_id)
 
         # TODO: We may not want to extract_link here because that removes the links, so it might be
-        # harder to infer which wad maps to which demos from a multi-wad multi-demo post
+        #       harder to infer which wad maps to which demos from a multi-wad multi-demo post
         links = get_links(post_content_elem.find_all('a'), extract_link=True)
 
         embeds = post_content_elem.find_all('iframe')
@@ -392,6 +390,7 @@ def download_attachments(post):
             LOGGER.error('Could not get attachment filename for attachment name %s, URL %s.',
                          attach_name, attach_url)
             raise
+        # TODO: Consider repackaging rars and 7zs so we don't have to ask the posters to do it
         if not ZIP_RE.match(attach_filename):
             continue
 

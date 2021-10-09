@@ -6,7 +6,7 @@ import logging
 import os
 import requests
 
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlunparse
 
 from .upload_config import CONFIG
 from .utils import get_download_filename, download_response, get_page
@@ -182,3 +182,21 @@ def download_wad_from_dsda(dsda_url, overwrite=True):
     download_dir = os.path.join(CONFIG.wad_download_directory, wad_name)
     download_response(response, download_dir, download_filename, overwrite=overwrite)
     return os.path.join(download_dir, download_filename)
+
+
+def conform_dsda_wad_url(dsda_wad_url):
+    """Conform DSDA WAD URL.
+
+    Limit path to first two parts (up to the WAD name) and remove any query/fragment/etc. Assume
+    that the URL is already conformed to include a scheme, so the urllib parse library parses it
+    correctly.
+
+    :param dsda_wad_url: DSAD WAD URL
+    :return: Conformed DSDA WAD URL
+    """
+    parsed_url = urlparse(dsda_wad_url)
+    # Do not strip URL because it will be prepended with "/" and we need to retain that, so we go
+    # to the 3rd element even though the wad name is second.
+    parsed_url = parsed_url._replace(path='/'.join(parsed_url.path.split('/')[:3]))
+    parsed_url = parsed_url._replace(params='')._replace(query='')._replace(fragment='')
+    return urlunparse(parsed_url)
