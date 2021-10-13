@@ -21,7 +21,7 @@ class LMPData:
     This is intended to be a very generic storage class that is mostly unaware of intricacies of the
     LMP format like headers, footers, etc. That will be handled by the LMP library used underneath.
     """
-    PORT_FOOTER_TO_DSDA_MAP = {'PrBoom-Plus': 'PRBoom', 'dsda-doom': 'DSDA-Doom'}
+    PORT_FOOTER_TO_DSDA_MAP = {'PrBoom-Plus': 'PRBoom', 'dsda-doom': 'DSDA-Doom', 'Woof': 'Woof'}
     KEY_LIST = [
         'engine', 'version', 'skill', 'episode', 'level', 'play mode', 'respawn', 'fast',
         'nomonsters', 'player 1', 'player 2', 'player 3', 'player 4', 'player 5', 'player 6',
@@ -41,7 +41,7 @@ class LMPData:
     # the next complevel 17 for that. Pre-Boom complevels aren't included as they are present in the
     # footer.
     VERSION_COMPLEVEL_MAP = {
-        201: '8', 202: '9', 210: '10', 211: '14', 212: '15', 213: '16', 214: '17'
+        201: '8', 202: '9', 210: '10', 211: '14', 212: '15', 213: '16', 214: '17', 221: '21'
     }
 
     # TODO: We might benefit from certain/possible keys being possible to change as an instance;
@@ -277,7 +277,6 @@ class LMPData:
                         # TODO: Add more possible arguments (spechits numbers, emulate args, etc.)
                         # TODO: Add example footers somewhere in documentation
                         # TODO: Parse mouselook data
-                        # TODO: Support -coop_spawns
                         if elem == '-iwad':
                             self.raw_data['iwad'] = self._parse_file_in_footer(line[idx + 1],
                                                                                '.wad')
@@ -322,6 +321,7 @@ class LMPData:
         In most cases, unless we have a footer, this function will be unable to retrive any port
         info.
         """
+        # TODO: 130-150 are Legacy demos.
         if self._is_zdoom_or_gzdoom():
             # Based on the code and there doesn't seem to be any way to discern ZDoom from GZDoom
             # from the demo file. Demo compatibility version for the very first version of ZDoom
@@ -371,8 +371,7 @@ class LMPData:
             self.data['source_port'] = 'TASDoom'
 
         # This isn't 100% part of the port info, but this is the cleanest place to check for this.
-        # TODO: Only 111 is -longtics. 130-150 are Legacy demos.
-        if 111 <= raw_version < 200:
+        if raw_version == 111:
             self.raw_data['is_longtics'] = True
             self.note_strings.add('Uses -longtics')
 

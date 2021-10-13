@@ -203,28 +203,32 @@ def get_filename_no_ext(path):
     return os.path.basename(os.path.splitext(path)[0])
 
 
-def parse_range(range, remove_non_numeric_chars=False):
+def parse_range(range_to_parse, remove_non_numeric_chars=False):
     """Parse range of integers.
 
-    Range provided may either be a list of two integers or a string in the format "#-#".
-    Single-value ranges are padded out to two integers.
+    Range provided may either be a list of one or two integers, a string in the format "#-#", or
+    a single string/integer value. Single-value ranges are padded out to two integers.
 
-    :param range: Range of integers
+    :param range_to_parse: Range of integers
     :param remove_non_numeric_chars: Flag indicating whether to remove non-numeric characters
     :return: Range of integers parsed to int
     :raises ValueError if the range is not defined or too long.
     """
-    if not isinstance(range, list):
-        range = range.split('-')
-    if not range or len(range) > 2:
-        raise ValueError('Invalid range {}.'.format(range))
-    if len(range) == 1:
-        range.append(range[0])
+    if not isinstance(range_to_parse, list):
+        if '-' in range_to_parse:
+            range_to_parse = range_to_parse.split('-')
+        else:
+            range_to_parse = [range_to_parse]
+
+    if not range_to_parse or len(range_to_parse) > 2:
+        raise ValueError('Invalid range {}.'.format(range_to_parse))
+    if len(range_to_parse) == 1:
+        range_to_parse.append(range_to_parse[0])
 
     if remove_non_numeric_chars:
         return [int(''.join(elem_char for elem_char in str(elem) if elem_char.isdigit()))
-                for elem in range]
-    return [int(elem) for elem in range]
+                for elem in range_to_parse]
+    return [int(elem) for elem in range_to_parse]
 
 
 def demo_range_to_string(start_date, end_date):
@@ -381,3 +385,23 @@ def conform_idgames_url(idgames_url):
         return conform_url(response.url)
 
     return idgames_url
+
+
+def get_single_key_value_dict(dict_obj):
+    """Get single key and its value from dictionary.
+
+    Hack to get a single key and its value from a dictionary, intended for use with single-key
+    dictionary configs where the key is treated as the name of the config mapped to its properties.
+
+    If multiple keys are in the provided dictionary, any single key from the dictionary will be
+    returned with no guarantee of consistency across different calls to the function.
+
+    :param dict_obj: Dictionary
+    :return: Single key, value pair out of the dictionary
+    :raises: ValueError if an empty or null dictionary is passed in
+    """
+    if not dict_obj:
+        raise ValueError('Empty or None config dictionary passed!')
+
+    key = next(iter(dict_obj))
+    return key, dict_obj[key]

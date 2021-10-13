@@ -86,6 +86,12 @@ class TextfileData:
             r'-?((complevel|cl)\s*(?P<complevel>\d+))?',
             re.IGNORECASE
         ): 'DSDA-Doom',
+        # Woof
+        re.compile(
+            r'Woof!?(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+(\.\d+)?)\s*'
+            r'-?((complevel|cl)\s*(?P<complevel>\d+))?',
+            re.IGNORECASE
+        ): 'Woof',
 
         # ZDoom family
         # ZDoom
@@ -134,9 +140,15 @@ class TextfileData:
 
     def _parse_textfile(self):
         """Parse textfile path."""
-        # TODO: Try at least once without errors='ignore'?
-        with open(self.textfile_path, encoding='utf-8', errors='ignore') as textfile_stream:
-            self._raw_textfile = textfile_stream.read()
+        # TODO: Try to detect Compet-N style textfiles
+        try:
+            with open(self.textfile_path, encoding='utf-8') as textfile_stream:
+                self._raw_textfile = textfile_stream.read()
+        except ValueError as value_error:
+            LOGGER.warning('Caught error %s reading textfile %s, ignoring.', value_error,
+                           self.textfile_path)
+            with open(self.textfile_path, encoding='utf-8', errors='ignore') as textfile_stream:
+                self._raw_textfile = textfile_stream.read()
 
         if TextfileData.TAS_STRING in self._raw_textfile.lower():
             self.data['is_tas'] = True
