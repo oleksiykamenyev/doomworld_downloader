@@ -52,7 +52,8 @@ def handle_downloads(downloads, post_data):
         download_dir = os.path.dirname(download)
         out_path = os.path.join(download_dir, zip_no_ext)
         renamed_zip = '{}.zip'.format(out_path)
-        shutil.move(download, renamed_zip)
+        if renamed_zip != download:
+            shutil.move(download, renamed_zip)
 
         try:
             zip_file = ZipFile(renamed_zip)

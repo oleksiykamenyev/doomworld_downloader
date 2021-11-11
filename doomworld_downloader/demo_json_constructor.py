@@ -79,7 +79,7 @@ class DemoJsonConstructor:
             else:
                 value = next(iter(evaluation.possible_values.keys()))
                 if value == NEEDS_ATTENTION_PLACEHOLDER:
-                    LOGGER.warning('LMP % in zip file %s needs attention for following key: "%s".',
+                    LOGGER.warning('LMP %s in zip file %s needs attention for following key: "%s".',
                                    lmp_file, self.zip_file, key_to_insert)
                     self._set_has_issue()
 
@@ -133,7 +133,7 @@ class DemoJsonConstructor:
                 # earliest date of the same time if we have multiple. In case recorded_date comes
                 # up as UNKNOWN for any of the lmps, it should be sorted after actual dates, so I
                 # think this should work.
-                lmp_files = sorted(lmp_files, key=lambda lmp: self.demo_jsons[lmp]['recorded_date'])
+                lmp_files = sorted(lmp_files, key=lambda lmp: self.demo_jsons[lmp]['recorded_at'])
                 lmp_file_kept = lmp_files[0]
                 for lmp_file in lmp_files[:1]:
                     LOGGER.warning('Pruning LMP file %s in favor of matching category LMP %s.',
@@ -321,7 +321,8 @@ class DemoJsonConstructor:
             # Note: even though both Reality and Almost Reality are listed here, prior processing
             # should ensure that only one should be added to the notes.
             if (note_string in DemoJsonConstructor.MISC_NOTES or
-                    note_string.startswith('Recorded in skill ')):
+                    note_string.startswith('Recorded in skill ') or
+                    note_string.startswith('Plays back with ')):
                 misc_tags.append(note_string)
                 if note_string == 'Uses turbo':
                     LOGGER.warning('LMP %s in zip file %s due to unclear turbo usage.', lmp_file,

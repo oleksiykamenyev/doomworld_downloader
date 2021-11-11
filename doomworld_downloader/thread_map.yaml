@@ -908,6 +908,21 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/solank
   id: '124883'
   name: "Sol Ank demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/125138-axolotl-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/axolotl
+  id: '125138'
+  name: "Axolotl Demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/125345-donuts-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/donuts
+  id: '125345'
+  name: "Donuts Demos [complevel 9]"
+"https://www.doomworld.com/forum/topic/120870-boaty-mcboatwad-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/boatyboat
+  id: '120870'
+  name: "Boaty McBoatwad demos [-complevel 9]"
 
 
 # Multi-WAD threads
@@ -1135,6 +1150,20 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
 "https://www.doomworld.com/forum/topic/112532-personal-best-demo-thread-%E2%86%90-post-your-non-wrs-here/":
   id: "112532"
   name: "Personal Best Demo Thread ← POST YOUR NON-WRs HERE"
+"https://www.doomworld.com/forum/topic/125196-misc-deathmatchduel-map-demos/":
+  id: "125196"
+  name: Misc. Deathmatch/Duel Map Demos
+
+# Global miscellaneous threads:
+"https://www.doomworld.com/forum/topic/70300-miscellaneous-demos-part-3/":
+  id: "70300"
+  name: Miscellaneous demos (part 3)
+"https://www.doomworld.com/vb/doom-speed-demos/59122-miscellaneous-demos-part-2-please-post-in-part-3-instead/":
+  id: "59122"
+  name: Miscellaneous demos (part 2) [please post in part 3 instead]
+"https://www.doomworld.com/vb/doom-speed-demos/23669-miscellaneous-demos-part-1-please-post-in-part-3-instead/":
+  id: "23669"
+  name: Miscellaneous demos (part 1) [please post in part 3 instead]
 
 ### IGNORED THREADS FOR UPDATES
 # Non-speedrun demo threads

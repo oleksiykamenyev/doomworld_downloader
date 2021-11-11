@@ -103,7 +103,8 @@ class PlaybackData:
         # -fastdemo: Play back demo as fast as possible, this is better than timedemo since it does
         #            not display any tic statistics afterwards, so DSDA-Doom doesn't hang waiting
         #            for user input
-        self.command = '{} -fastdemo "{}"'.format(PlaybackData.DSDA_DOOM_COMMAND_START, lmp_path)
+        self.base_command = '{} -fastdemo "{}"'.format(PlaybackData.DSDA_DOOM_COMMAND_START,
+                                                       lmp_path)
         self.lmp_path = lmp_path
         self.playback_failed = False
 
@@ -147,15 +148,15 @@ class PlaybackData:
         # the footer, but this is necessary for older demos.
         # TODO: Consider running solo-net even if it's not detected for each demo in case of desync
         if self.demo_info.get('is_solo_net', False):
-            self.command = '{} -solo-net'.format(self.command)
+            self.base_command = '{} -solo-net'.format(self.base_command)
 
         iwad = self.demo_info.get('iwad', '').lower()
         if compare_iwad(iwad, 'chex'):
-            self.command = '{} -iwad chex -exe chex'.format(self.command)
+            self.base_command = '{} -iwad chex -exe chex'.format(self.base_command)
         if compare_iwad(iwad, 'heretic'):
-            self.command = '{} -iwad heretic -heretic'.format(self.command)
+            self.base_command = '{} -iwad heretic -heretic'.format(self.base_command)
         if compare_iwad(iwad, 'hexen'):
-            self.command = '{} -iwad hexen -hexen'.format(self.command)
+            self.base_command = '{} -iwad hexen -hexen'.format(self.base_command)
 
     @staticmethod
     def _check_wad_existence(wad):
@@ -221,9 +222,9 @@ class PlaybackData:
             playback_cmd_lines = ([wad_guess.playback_cmd_line] +
                                   list(wad_guess.alt_playback_cmd_lines.keys()))
             for cmd_line in playback_cmd_lines:
-                self.command = '{} -iwad {} {}'.format(self.command, wad_guess.iwad, cmd_line)
+                command = '{} -iwad {} {}'.format(self.base_command, wad_guess.iwad, cmd_line)
                 try:
-                    run_cmd(self.command)
+                    run_cmd(command)
                 except subprocess.CalledProcessError as e:
                     LOGGER.warning('Failed to play back demo %s.', self.lmp_path)
                     LOGGER.debug('Error message: %s.', e)

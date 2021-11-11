@@ -44,6 +44,7 @@ class TextfileData:
         re.compile(r'(UV|NM)?[ -_]?Reality', re.IGNORECASE): 'Also Reality'
     }
     PORT_REGEXES = {
+        # TODO: Add Sprinkled Doom
         # Chocolate family
         # Chocolate Doom
         re.compile(r'Chocolate(\s*|-)?Doom(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+\.\d+)',
