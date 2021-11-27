@@ -21,7 +21,10 @@ class TextfileData:
                  'usingsourceport']
     TAS_PORTS = ['DRE', 'TASDoom', 'TASMBF', 'XDRE']
     TAS_STRING = 'this is a tools-assisted demo'
-    VIDEO_KEYS = ['video', 'videolink', 'youtube', 'youtubelink', 'yt', 'ytlink']
+    VIDEO_KEYS = [
+        'video', 'videolink', 'youtube', 'youtubelink', 'youtubevideo', 'youtubevideolink', 'yt',
+        'ytlink', 'ytvideo', 'ytvideolink'
+    ]
     WAD_KEYS = ['mapset', 'pwad', 'pwadfile', 'wad']
 
     CERTAIN_KEYS = ['is_tas']
@@ -159,7 +162,8 @@ class TextfileData:
             if ':' in line:
                 key, value = line.split(':', 1)
                 key = ''.join(key.lower().split())
-                value_lowercase = value.lower().strip()
+                value = value.strip()
+                value_lowercase = value.lower()
 
                 if key in TextfileData.CATEGORY_KEYS:
                     self.data['category'] = self._parse_category(value_lowercase)

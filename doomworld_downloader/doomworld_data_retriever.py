@@ -84,7 +84,8 @@ def get_links(link_elems, extract_link=False):
         # coding changes on the Doomworld side.
         if not link_url.startswith('http'):
             link_url = 'https:' + link_url
-        links[link_elem.getText().strip()] = link_url
+        # Key on URL so that links with the same text can be kept track of.
+        links[link_url] = link_elem.getText().strip()
         if extract_link:
             link_elem.extract()
     return links
@@ -189,7 +190,6 @@ def parse_thread_page(thread_url, thread=None):
             if 'ipsAttachLink' in link.get('class', []) or ATTACH_URL_RE.match(link.get('href', ''))
         ]
         attachments = get_links(attachment_links, extract_link=True)
-        attachments = {attach: attach_url for attach, attach_url in attachments.items()}
         # Skip posts with no attachments as they have no demos to search for
         if not attachments:
             continue
@@ -382,7 +382,7 @@ def download_attachments(post):
         '{}'.format(''.join(c for c in post.author_name if c.isalnum() or c in KEEP_CHARS))
     )
     downloads = []
-    for attach_name, attach_url in post.attachments.items():
+    for attach_url, attach_name in post.attachments.items():
         response = requests.get(attach_url)
         try:
             attach_filename = get_download_filename(response, default_filename=attach_name)

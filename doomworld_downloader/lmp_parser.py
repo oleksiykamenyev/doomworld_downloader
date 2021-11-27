@@ -137,11 +137,10 @@ class LMPData:
             try:
                 parse_lmp_out = run_cmd('{} --engine={}'.format(parse_lmp_cmd, engine_option),
                                         get_output=True)
+                self.raw_data['iwad'] = f'{engine_option}.wad'
             except subprocess.CalledProcessError as cpe:
                 LOGGER.info('Encountered exception %s when running parse LMP command for LMP %s.',
                             cpe, self.lmp_path)
-
-            self.raw_data['iwad'] = f'{engine_option}.wad'
 
         parse_lmp_out = parse_lmp_out.splitlines()
         for key in LMPData.KEY_LIST:

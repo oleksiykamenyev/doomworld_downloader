@@ -260,7 +260,7 @@ https://www.doomworld.com/forum/topic/53814-arch-vile-jump-megawad-demos-complev
   name: Arch-Vile Jump (megawad) demos [-complevel 2]
 https://www.doomworld.com/forum/topic/54092-whitemare-demos-complevel-2-recommended-for-most-maps/:
   additional_info:
-    wad: https://www.dsdarchive.com/wads/white2
+    wad: https://www.dsdarchive.com/wads/whitemar
   id: '54092'
   name: Whitemare demos [-complevel 2 recommended for most maps]
 https://www.doomworld.com/forum/topic/54395-jenesis-demos-boom-complevel-9/:
@@ -923,6 +923,31 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/boatyboat
   id: '120870'
   name: "Boaty McBoatwad demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/24453-endgame-demos/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/endgame
+  id: '24453'
+  name: "Endgame demos"
+"https://www.doomworld.com/forum/topic/123000-full-moon-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/fullmoon
+  id: '123000'
+  name: "Full Moon Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/124095-struggle-antaresian-legacy-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/strg
+  id: '124095'
+  name: "Struggle: Antaresian Legacy demos (-complevel 2)"
+"https://www.doomworld.com/forum/topic/125749-nosp3-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/nosp3
+  id: '125749'
+  name: "NoSp3 Demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/125807-cpd-by-cheesewheel-proofs-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/cpd
+  id: '125807'
+  name: "CPD by Cheesewheel Proofs (complevel 2)"
 
 
 # Multi-WAD threads
@@ -1034,6 +1059,27 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     - https://www.dsdarchive.com/wads/ndcp2_2010
   id: '97486'
   name: "NewDoom Community Project (NDCP/NDCP2) demos"
+"https://www.doomworld.com/forum/topic/123785-sucker-punch-series-complevel-9/":
+  additional_info:
+    wads:
+    - https://www.dsdarchive.com/wads/sckrpnch
+    - https://www.dsdarchive.com/wads/sckrpnch2
+  id: '123785'
+  name: "Sucker Punch series [-cl2/-cl9]"
+"https://www.doomworld.com/forum/topic/122868-half-moon-1-2-demos-complevel-9/":
+  additional_info:
+    wads:
+    - https://www.dsdarchive.com/wads/halfmoon1
+    - https://www.dsdarchive.com/wads/halfmoon2
+  id: '122868'
+  name: "Half Moon 1 & 2 demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/117894-2048-units-of-vr-demos-complevel-9-clean-complevel-11-dehacked/":
+  additional_info:
+    wads:
+    - https://www.dsdarchive.com/wads/2048vr_v1_6
+    - https://www.dsdarchive.com/wads/2048vr_v1_6g
+  id: '117894'
+  name: "2048 Units of /vr/ demos [-complevel 9 (clean) -complevel 11 (dehacked)]"
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
@@ -1158,10 +1204,10 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
 "https://www.doomworld.com/forum/topic/70300-miscellaneous-demos-part-3/":
   id: "70300"
   name: Miscellaneous demos (part 3)
-"https://www.doomworld.com/vb/doom-speed-demos/59122-miscellaneous-demos-part-2-please-post-in-part-3-instead/":
+"https://www.doomworld.com/forum/topic/59122-miscellaneous-demos-part-2-please-post-in-part-3-instead/":
   id: "59122"
   name: Miscellaneous demos (part 2) [please post in part 3 instead]
-"https://www.doomworld.com/vb/doom-speed-demos/23669-miscellaneous-demos-part-1-please-post-in-part-3-instead/":
+"https://www.doomworld.com/forum/topic/23669-miscellaneous-demos-part-1-please-post-in-part-3-instead/":
   id: "23669"
   name: Miscellaneous demos (part 1) [please post in part 3 instead]
 
@@ -1202,7 +1248,6 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
 "https://www.doomworld.com/forum/topic/112350-freedoom-2/":
   additional_info:
     ignore: true
-    wad: freedoom2
   id: "112350"
   name: Freedoom 2
 

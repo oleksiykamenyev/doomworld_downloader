@@ -44,21 +44,10 @@ class Wad:
 
 class WadMapListInfo:
     """WAD map list info object handler."""
-    GAME_MODE_OPTIONS = ['single_player', 'coop']
-    SKILL_OPTIONS = ['easy', 'medium', 'hard']
-    TOP_LEVEL_KEYS = ['complevel', 'd1all', 'd2all', 'episodes', 'map_info', 'map_ranges',
-                      'secret_exits']
-    IWAD_TO_SECRET_EXIT_MAP = {
-        'doom': {'E1M3': 'E1M9', 'E2M5': 'E2M9', 'E3M6': 'E3M9', 'E4M2': 'E4M9'},
-        'doom2': {'Map 15': 'Map 31', 'Map 31': 'Map 32'},
-        'plutonia': {'Map 15': 'Map 31', 'Map 31': 'Map 32'},
-        'tnt': {'Map 15': 'Map 31', 'Map 31': 'Map 32'},
-        'heretic': {'E1M6': 'E1M9', 'E2M4': 'E2M9', 'E3M4': 'E3M9', 'E4M4': 'E4M9', 'E5M3': 'E5M9'},
-        # TODO: Handle Hexen
-        'hexen': {},
-        'chex': {}
-    }
+    TOP_LEVEL_KEYS = ['complevel', 'd2all', 'episodes', 'map_info', 'map_ranges', 'secret_exits']
+
     D2ALL_DEFAULT = ['Map 01', 'Map 30']
+    D2ALL_IWADS = ['doom2', 'plutonia', 'tnt']
     EPISODE_DEFAULTS = {
         'doom': [['E1M1', 'E1M8'], ['E2M1', 'E2M8'], ['E3M1', 'E3M8'], ['E4M1', 'E4M8']],
         'doom2': [['Map 01', 'Map 10'], ['Map 11', 'Map 20'], ['Map 21', 'Map 30']],
@@ -72,36 +61,78 @@ class WadMapListInfo:
         'hexen': [[]],
         'chex': [['E1M1', 'E1M5']]
     }
+    SECRET_EXIT_DEFAULTS = {
+        'doom': {'E1M3': 'E1M9', 'E2M5': 'E2M9', 'E3M6': 'E3M9', 'E4M2': 'E4M9'},
+        'doom2': {'Map 15': 'Map 31', 'Map 31': 'Map 32'},
+        'plutonia': {'Map 15': 'Map 31', 'Map 31': 'Map 32'},
+        'tnt': {'Map 15': 'Map 31', 'Map 31': 'Map 32'},
+        'heretic': {'E1M6': 'E1M9', 'E2M4': 'E2M9', 'E3M4': 'E3M9', 'E4M4': 'E4M9', 'E5M3': 'E5M9'},
+        # TODO: Handle Hexen
+        'hexen': {},
+        'chex': {}
+    }
 
-    def __init__(self, map_list_info_dict, wad_name, skip_validation=False):
+    def __init__(self, map_list_info_dict, wad_name, iwad, fail_on_error=True):
         """Initialize WAD list map info object.
 
         :param map_list_info_dict: WAD map list info dictionary
         :param wad_name: WAD name for error logging purposes
-        :param skip_validation: Flag indicating whether to skip validation of WAD map info object
+        :param iwad: IWAD the WAD belongs to
+        :param fail_on_error: Flag indicating whether to fail on error when parsing map list info
         """
         self.map_list_info_dict = map_list_info_dict
         self.wad_name = wad_name
-        parsed_map_infos = [WadMapInfo(map_info, wad_name, skip_validation=skip_validation)
-                            for map_info in map_list_info_dict.get('map_info', {})]
+        parsed_map_infos = [
+            WadMapInfo(map_name, map_info, wad_name, fail_on_error=fail_on_error)
+            for map_name, map_info in map_list_info_dict.get('map_info', {}).items()
+        ]
         self.map_info = {wad_map_info.map: wad_map_info for wad_map_info in parsed_map_infos}
-        if not skip_validation:
-            self._validate()
+        self.iwad = iwad
+        self._fail_on_error = fail_on_error
+        self._validate()
 
     def _validate(self):
         """Validate WadMapListInfo object.
 
         :raises ValueError if unrecognized keys are found in the dictionary.
         """
+        pass_validation = True
         for key, value in self.map_list_info_dict.items():
             if key not in WadMapListInfo.TOP_LEVEL_KEYS:
-                raise ValueError(f'Unexpected key found for WAD {self.wad_name}.')
+                LOGGER.error('Unexpected key %s found for WAD %s.', key, self.wad_name)
+                pass_validation = False
 
-    def get_key(self, key):
-        
-        return self.map_list_info_dict.get(key)
+        if not pass_validation and self._fail_on_error:
+            raise ValueError(f'Error parsing WAD map list info for WAD "{self.wad_name}".')
+
+    def get_key(self, key, use_builtin_defaults=True):
+        """Get value for provided key.
+
+        :param key: Key to get value for
+        :param use_builtin_defaults: Flag indicating to use built-in defaults for keys that support
+                                     default values
+        :return: Value for provided key
+        """
+        # If we shouldn't use the built-in defaults or the key is set in the config (regardless of
+        # whether it has a null/empty value), get the key from the config
+        if not use_builtin_defaults or key in self:
+            return self.map_list_info_dict.get(key)
+
+        if key == 'd2all' and self.iwad in WadMapListInfo.D2ALL_IWADS:
+            return self.D2ALL_DEFAULT
+        if key == 'episodes':
+            return WadMapListInfo.EPISODE_DEFAULTS.get(self.iwad)
+        if key == 'secret_exits':
+            return WadMapListInfo.SECRET_EXIT_DEFAULTS.get(self.iwad)
+
+        return None
 
     def has_key(self, key):
+        """Get flag indicating whether the provided key is set.
+
+        :param key: Key
+        :return: Flag indicating whether the provided key is set
+        """
         return key in self.map_list_info_dict
 
     def get_map_info(self, level):
@@ -111,6 +142,13 @@ class WadMapListInfo:
         :return: WadMapInfo for provided level
         """
         return self.map_info.get(level)
+
+    def keys(self):
+        """Return all keys for the WAD map list info.
+
+        :return: All keys for the WAD map list info
+        """
+        return self.map_list_info_dict.keys()
 
 
 class WadMapInfo:
@@ -133,17 +171,18 @@ class WadMapInfo:
         'skip_almost_reality': False, 'skip_reality': False, 'tyson_only': False
     }
 
-    def __init__(self, map_info_dict, wad_name, skip_validation=False):
+    def __init__(self, map_name, map_info_dict, wad_name, fail_on_error=False):
         """Initialize WAD map info object.
 
         :param map_info_dict: WAD map info dictionary
         :param wad_name: WAD name for error logging purposes
-        :param skip_validation: Flag indicating whether to skip validation of WAD map info object
+        :param fail_on_error: Flag indicating whether to fail on error when parsing map info
         """
-        self.map, self.map_info_dict = get_single_key_value_dict(map_info_dict)
+        self.map = map_name
+        self.map_info_dict = map_info_dict
         self.wad_name = wad_name
-        if not skip_validation:
-            self._validate()
+        self._fail_on_error = fail_on_error
+        self._validate()
 
     def _validate(self):
         """Validate WadMapInfo object.
@@ -152,41 +191,53 @@ class WadMapInfo:
         """
         found_game_mode = False
         found_skill = False
+        pass_validation = True
         for top_level_key, top_level_value in self.map_info_dict.items():
-            if top_level_key in WadMapListInfo.GAME_MODE_OPTIONS:
+            if top_level_key in WadMapInfo.GAME_MODE_OPTIONS:
                 found_game_mode = True
                 for game_key, game_value in top_level_value.items():
-                    if game_key in WadMapListInfo.SKILL_OPTIONS:
+                    if game_key in WadMapInfo.SKILL_OPTIONS:
                         for key in game_value:
-                            self._validate_other_key(key)
+                            pass_validation = pass_validation and self._validate_other_key(key)
                     else:
-                        self._validate_other_key(game_key)
-            elif top_level_key in WadMapListInfo.SKILL_OPTIONS:
+                        pass_validation = pass_validation and self._validate_other_key(game_key)
+            elif top_level_key in WadMapInfo.SKILL_OPTIONS:
                 found_skill = True
                 for skill_key, skill_key in top_level_value.items():
-                    if skill_key in WadMapListInfo.GAME_MODE_OPTIONS:
+                    if skill_key in WadMapInfo.GAME_MODE_OPTIONS:
                         for key in skill_key:
-                            self._validate_other_key(key)
+                            pass_validation = pass_validation and self._validate_other_key(key)
                     else:
-                        self._validate_other_key(skill_key)
+                        pass_validation = pass_validation and self._validate_other_key(skill_key)
             else:
-                self._validate_other_key(top_level_key)
+                pass_validation = pass_validation and self._validate_other_key(top_level_key)
 
+        # If both game mode and skill elements are found at the top level of a WAD map info config,
+        # we fail the validation
         if found_game_mode and found_skill:
             LOGGER.error('Game mode and skill must be at separate hierarchies for a single map '
                          'info object.')
-            raise ValueError(f'Issue parsing map info for WAD {self.wad_name}.')
+            pass_validation = False
+
+        if not pass_validation and self._fail_on_error:
+            raise ValueError(
+                f'Error parsing WAD map info for map {self.map} of WAD "{self.wad_name}".'
+            )
 
     def _validate_other_key(self, key):
         """Validate any key other than the skill/game_mode keys.
 
         :param key: Key to validate
-        :raises ValueError if the key is invalid
+        :return: True if validation succeeded, false otherwise
         """
         if key not in WadMapInfo.VALID_KEYS:
-            raise ValueError(f'Unrecognized option {key} provided for WAD {self.wad_name}.')
+            LOGGER.error('Unrecognized option %s provided for map %s of WAD "%s".', key, self.map,
+                         self.wad_name)
+            return False
 
-    def get_single_key_for_map(self, key, skill=None, game_mode=None):
+        return True
+
+    def get_single_key_for_map(self, key, skill=None, game_mode=None, use_builtin_defaults=True):
         """Get value of single key for the map info object.
 
         If skill and/or game_mode are provided, it will return the value for those arguments, else
@@ -195,6 +246,8 @@ class WadMapInfo:
         :param key: Key to get
         :param skill: Skill level (accepted options: easy, medium, hard)
         :param game_mode: Game mode (accepted options: single_player, coop)
+        :param use_builtin_defaults: Flag indicating to use built-in defaults for keys that support
+                                     default values
         :return: Value for requested key
         :raises ValueError if invalid key, skill, or game_mode are passed in
         """
@@ -207,19 +260,24 @@ class WadMapInfo:
             raise ValueError(f'Invalid game mode {game_mode} requested for wad {self.wad_name}.')
 
         # Each key may be specified under any level of the hierarchy; we will want to take the
-        # deepest place it is defined as a non-null value within the hiearachy, else use whatever
+        # deepest place it is defined as a non-null value within the hierarchy, else use whatever
         # the default value is for it. Both skill and game_mode may be defined at the top of the
         # hierarchy, and if either is at the top, the other one must be below it.
         if skill in self.map_info_dict:
             value_preferences = [self.map_info_dict.get(skill).get(game_mode, {}).get(key),
                                  self.map_info_dict.get(skill).get(key)]
-        else:
+        elif game_mode in self.map_info_dict:
             value_preferences = [self.map_info_dict.get(game_mode).get(skill, {}).get(key),
                                  self.map_info_dict.get(game_mode).get(key)]
+        else:
+            value_preferences = []
 
         value_preferences.append(self.map_info_dict.get(key))
         for possible_value in value_preferences:
             if possible_value is not None:
                 return possible_value
 
-        return self.VALID_KEYS[key]
+        if use_builtin_defaults:
+            return self.VALID_KEYS[key]
+
+        return None

@@ -4,7 +4,6 @@ Doomworld downloader.
 # TODO: Consider defining custom exceptions everywhere
 
 import argparse
-import json
 import logging
 import os
 import re
