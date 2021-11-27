@@ -1001,7 +1001,7 @@
   dsda_paginated: false
   doomworld_thread: null
 "https://www.dsdarchive.com/wads/at":
-  wad_name: at.wad
+  wad_name: Atomic Tomb
   iwad: doom
   wad_files:
     at.wad: {checksum: "c1d5f77ee3978fcea71d2ccc27ef91f0"}
@@ -1014,7 +1014,7 @@
   dsda_paginated: false
   doomworld_thread: null
 "https://www.dsdarchive.com/wads/elysion":
-  wad_name: elysion.wad
+  wad_name: Elysion
   iwad: doom2
   wad_files:
     elysion.wad: {checksum: "6b41cb0869ed3c3f8e0151a4103fb472"}
@@ -1028,7 +1028,7 @@
   dsda_paginated: false
   doomworld_thread: null
 "https://www.dsdarchive.com/wads/italo":
-  wad_name: italo.wad
+  wad_name: Italo-Doom
   iwad: doom2
   wad_files:
     italo.wad: {checksum: "4e2792e374f07981f168b0190f827f8d"}
@@ -1042,7 +1042,7 @@
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/85607-italo-doom-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/equinox":
-  wad_name: equinox.wad
+  wad_name: Equinox
   iwad: doom2
   wad_files:
     equinox.wad: {checksum: "8be936d185681f3a3769ccdb715f6e16"}

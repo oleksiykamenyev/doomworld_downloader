@@ -487,18 +487,14 @@ class PlaybackData:
 
             if map_range == d2all:
                 self.data['level'] = 'D2All'
-            # D1ALLs are set when a Doom 1 wad isn't a complete episode.
-            # TODO: Should we just call these ep runs?
-            elif map_range == wad.map_list_info.get('d1all'):
-                self.data['level'] = 'D1All'
             elif episodes:
                 for idx, episode_range in enumerate(episodes):
                     if map_range == episode_range:
                         doom_1_map_match = PlaybackData.DOOM_1_MAP_RE.match(map_range[0])
-                        level_num = (doom_1_map_match.group('episode_num') if doom_1_map_match
-                                     else idx + 1)
+                        episode_num = (doom_1_map_match.group('episode_num') if doom_1_map_match
+                                       else idx + 1)
 
-                        self.data['level'] = 'Episode {}'.format(level_num)
+                        self.data['level'] = 'Episode {}'.format(episode_num)
 
             if not self.data.get('level'):
                 self.data['level'] = 'Other Movie'

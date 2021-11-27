@@ -47,23 +47,27 @@ class TextfileData:
         re.compile(r'(UV|NM)?[ -_]?Reality', re.IGNORECASE): 'Also Reality'
     }
     PORT_REGEXES = {
-        # TODO: Add Sprinkled Doom
         # Chocolate family
         # Chocolate Doom
-        re.compile(r'Chocolate(\s*|-)?Doom(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+\.\d+)',
+        re.compile(r'Chocolate(\s*|-|_)?Doom(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+\.\d+)',
                    re.IGNORECASE): 'Chocolate DooM',
         # Crispy Doom
         re.compile(
-            r'Crispy(\s*|-)?Doom(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+(\.\d+)?)', re.IGNORECASE
+            r'Crispy(\s*|-|_)?Doom(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+(\.\d+)?)', re.IGNORECASE
         ): 'Crispy Doom',
         # Crispy Heretic
         re.compile(
-            r'Crispy(\s*|-)?Heretic(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+(\.\d+)?)', re.IGNORECASE
+            r'Crispy(\s*|-|_)?Heretic(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+(\.\d+)?)',
+            re.IGNORECASE
         ): 'Crispy Heretic',
         # CNDoom
         re.compile(
             r'CNDoom(\.exe)?\s*v?\.?(?P<version>\d\.\d\.\d(\.\d))?', re.IGNORECASE
         ): 'CNDoom',
+        # Sprinkled Doom
+        re.compile(
+            r'Sprinkled(\s*|-|_)?Doom(\.exe)?\s*v?\.?(?P<version>\d\.\d\.\d(\.\d))?', re.IGNORECASE
+        ): 'Sprinkled Doom',
 
         # Boom/MBF family
         # Boom
@@ -86,7 +90,7 @@ class TextfileData:
         ): 'PRBoom',
         # DSDA-Doom
         re.compile(
-            r'DSDA(\s*|-)Doom(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+(\.\d+)?)\s*'
+            r'DSDA(\s*|-|_)?Doom(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+(\.\d+)?)\s*'
             r'-?((complevel|cl)\s*(?P<complevel>\d+))?',
             re.IGNORECASE
         ): 'DSDA-Doom',
@@ -110,7 +114,8 @@ class TextfileData:
 
         # Other ports
         # Strawberry Doom
-        re.compile(r'Strawberry\s*Doom\s*r(?P<version>\d+)', re.IGNORECASE): 'Strawberry Doom',
+        re.compile(r'Strawberry(\s*|-|_)?Doom\s*r(?P<version>\d+)',
+                   re.IGNORECASE): 'Strawberry Doom',
 
         # TAS
         re.compile(r'XDRE(\.exe)?(\s*|-)?v?\.?(?P<version>\d.\d+)', re.IGNORECASE): 'XDRE',
