@@ -9535,3 +9535,48 @@
   dsda_paginated: false
   doomworld_thread: null
   commercial: true
+"https://www.dsdarchive.com/wads/abyspe31":
+  wad_name: "Abyssal Speedmapping Sessions: Session 31"
+  iwad: doom2
+  wad_files:
+    abyspe31.wad: {checksum: "e788d222eee3b4babc4525c9325faaa2"}
+  complevel: 9
+  playback_cmd_line: "-file abyspe31"
+  map_list_info:
+    map_ranges: [[1, 10]]
+    d2all: ["Map 01", "Map 10"]
+    episodes: []
+    map_info:
+      "Map 10":
+        tyson_only: true
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe31"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/abyspe58":
+  wad_name: "Abyssal Speedmapping Sessions: Session 58"
+  iwad: doom2
+  wad_files:
+    abyspe58.wad: {checksum: "e81f020ee5907617b1486aeaa937a24a"}
+  complevel: 9
+  playback_cmd_line: "-file abyspe58"
+  map_list_info:
+    map_ranges: [[1, 11]]
+    d2all: ["Map 01", "Map 11"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe58"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/cldfrnt":
+  wad_name: Cold Front
+  iwad: doom2
+  wad_files:
+    cldfrnt.wad: {checksum: "6dc6d7d5042597b9de1ae936ea6de80b"}
+  complevel: 2
+  playback_cmd_line: "-file cldfrnt"
+  map_list_info:
+    map_ranges: [[1, 5]]
+    d2all: ["Map 01", "Map 05"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/cldfrnt"
+  dsda_paginated: false
+  doomworld_thread: null
