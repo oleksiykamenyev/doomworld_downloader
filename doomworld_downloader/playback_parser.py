@@ -59,33 +59,8 @@ class PlaybackData:
     BOOLEAN_INT_KEYS = ['nomonsters', 'respawn', 'fast', 'pacifist', 'stroller', 'almost_reality',
                         '100k', '100s', 'weapon_collector', 'tyson_weapons', 'turbo', 'reality']
 
-    IWAD_TO_SECRET_EXIT_MAP = {
-        'doom': {'E1M3': 'E1M9', 'E2M5': 'E2M9', 'E3M6': 'E3M9', 'E4M2': 'E4M9'},
-        'doom2': {'Map 15': 'Map 31', 'Map 31': 'Map 32'},
-        'plutonia': {'Map 15': 'Map 31', 'Map 31': 'Map 32'},
-        'tnt': {'Map 15': 'Map 31', 'Map 31': 'Map 32'},
-        'heretic': {'E1M6': 'E1M9', 'E2M4': 'E2M9', 'E3M4': 'E3M9', 'E4M4': 'E4M9', 'E5M3': 'E5M9'},
-        # TODO: Handle Hexen
-        'hexen': {},
-        'chex': {}
-    }
-    D2ALL_DEFAULT = ['Map 01', 'Map 30']
-    EPISODE_DEFAULTS = {
-        'doom': [['E1M1', 'E1M8'], ['E2M1', 'E2M8'], ['E3M1', 'E3M8'], ['E4M1', 'E4M8']],
-        'doom2': [['Map 01', 'Map 10'], ['Map 11', 'Map 20'], ['Map 21', 'Map 30']],
-        'plutonia': [['Map 01', 'Map 10'], ['Map 11', 'Map 20'], ['Map 21', 'Map 30']],
-        'tnt': [['Map 01', 'Map 10'], ['Map 11', 'Map 20'], ['Map 21', 'Map 30']],
-        # One less map for episode 6 since E6M1 won't appear in the levelstat due to having no exit
-        # TODO: Need to update DSDA-Doom to optionally force-levelstat for maps with no exit
-        'heretic': [['E1M1', 'E1M8'], ['E2M1', 'E2M8'], ['E3M1', 'E3M8'], ['E4M1', 'E4M8'],
-                    ['E5M1', 'E5M8'], ['E6M1', 'E6M2']],
-        # TODO: Handle Hexen
-        'hexen': [[]],
-        'chex': [['E1M1', 'E1M5']]
-    }
-    ALL_IWADS = ['doom.wad', 'doom2.wad', 'plutonia.wad', 'tnt.wad']
-
-    CERTAIN_KEYS = ['levelstat', 'time', 'level', 'kills', 'items', 'secrets', 'secret_exit', 'wad']
+    CERTAIN_KEYS = ['levelstat', 'time', 'level', 'kills', 'items', 'secrets', 'secret_exit', 'wad',
+                    'is_solo_net']
     POSSIBLE_KEYS = ['category']
 
     DOOM_1_MAP_RE = re.compile(r'^E(?P<episode_num>\d)M\ds?$')
@@ -146,17 +121,34 @@ class PlaybackData:
 
         # This may not always be necessary, as later PrBoom+ and DSDA-Doom demos have -solo-net in
         # the footer, but this is necessary for older demos.
-        # TODO: Consider running solo-net even if it's not detected for each demo in case of desync
-        if self.demo_info.get('is_solo_net', False):
+        is_solo_net = self.demo_info.get('is_solo_net', False)
+        if is_solo_net:
             self.base_command = '{} -solo-net'.format(self.base_command)
+        num_players = self.demo_info.get('num_players')
+        if is_solo_net or (num_players and num_players > 1):
+            self.demo_info['game_mode'] = 'coop'
+        else:
+            self.demo_info['game_mode'] = 'single_player'
+
+        raw_skill = self.demo_info['skill']
+        if raw_skill:
+            raw_skill = int(raw_skill)
+            if 0 < raw_skill < 3:
+                self.demo_info['skill'] = 'easy'
+            elif raw_skill == 3:
+                self.demo_info['skill'] = 'medium'
+            elif 3 < raw_skill < 6:
+                self.demo_info['skill'] = 'hard'
+            else:
+                raise ValueError(f'Invalid skill {raw_skill} passed to playback parser.')
 
         iwad = self.demo_info.get('iwad', '').lower()
         if compare_iwad(iwad, 'chex'):
             self.base_command = '{} -iwad chex -exe chex'.format(self.base_command)
         if compare_iwad(iwad, 'heretic'):
-            self.base_command = '{} -iwad heretic -heretic'.format(self.base_command)
+            self.base_command = '{} -iwad commercial/heretic -heretic'.format(self.base_command)
         if compare_iwad(iwad, 'hexen'):
-            self.base_command = '{} -iwad hexen -hexen'.format(self.base_command)
+            self.base_command = '{} -iwad commercial/hexen -hexen'.format(self.base_command)
 
     @staticmethod
     def _check_wad_existence(wad):
@@ -196,8 +188,6 @@ class PlaybackData:
 
                 local_wad_location = zip_extract(zip_location)
 
-            # TODO: We need to be careful here not to remove WADs that don't have downloads on DSDA
-            #       (e.g., IWADs)
             copyfile(os.path.join(local_wad_location, wad_file),
                      os.path.join(CONFIG.dsda_doom_directory, wad_file))
 
@@ -221,8 +211,14 @@ class PlaybackData:
             # alternatives
             playback_cmd_lines = ([wad_guess.playback_cmd_line] +
                                   list(wad_guess.alt_playback_cmd_lines.keys()))
+            if CONFIG.always_try_solonet:
+                if '-solo-net' not in self.base_command:
+                    playback_cmd_lines.extend(
+                        [f'{cmd} -solo-net' for cmd in playback_cmd_lines]
+                    )
             for cmd_line in playback_cmd_lines:
-                command = '{} -iwad {} {}'.format(self.base_command, wad_guess.iwad, cmd_line)
+                command = '{} -iwad commercial/{} {}'.format(self.base_command, wad_guess.iwad,
+                                                             cmd_line)
                 try:
                     run_cmd(command)
                 except subprocess.CalledProcessError as e:
@@ -232,9 +228,10 @@ class PlaybackData:
                 # if the wrong WAD is used (e.g., thissuxx). I'm not sure if there's any reasonable
                 # way to fix this, though.
                 # TODO: Perhaps a hardcoded exception list for when this guess might not be trusted
-                #       is needed (depends how likely the wrong guess is)
-                # TODO: Alternatively, perhaps check against all possible command lines and try to
-                #       infer which one is correct by taking the best-seeming one?
+                #       is needed (depends how likely the wrong guess is). Alternatively, perhaps
+                #       check against all possible command lines and try to infer which one is
+                #       correct by taking the best-seeming one?
+                # TODO: Handle maps with no exits (requires DSDA-Doom fix)
                 if os.path.isfile(PlaybackData.LEVELSTAT_FILENAME):
                     wad_guessed = True
                     wad_files = [wad_file.lower() for wad_file in wad_guess.files.keys()]
@@ -246,6 +243,9 @@ class PlaybackData:
                     if self.playback_failed:
                         break
 
+                    if '-solo-net' in command:
+                        self.data['is_solo_net'] = True
+
                     dsda_wad_name = (
                         wad_guess.dsda_name
                         if wad_guess.dsda_name else get_wad_name_from_dsda_url(wad_guess.dsda_url)
@@ -253,12 +253,6 @@ class PlaybackData:
                     self.data['wad'] = dsda_wad_name
                     self._parse_analysis()
                     self._parse_levelstat(wad_guess)
-
-                    # TODO: Additional processing needed for maps that are max exceptions; for a
-                    #       complete fix, this will need DSDA-Doom to output missed monster/secret
-                    #       IDs
-                    # TODO: If tyson_weapons is true, category is UV-Max, and map has non-Tyson
-                    #       weps, need to switch category to Tyson
                     self._parse_raw_data(wad_guess)
                     complevel = self.demo_info.get('complevel')
                     if complevel:
@@ -286,27 +280,49 @@ class PlaybackData:
 
         :param wad: WAD object
         """
-        is_nomo = self.raw_data.get('nomonsters', False)
-        # TODO: This won't work for multi-level runs
-        level_info = wad.map_list_info.get(self.data['level'], {})
-        if is_nomo:
-            # In some cases, we might actually want to default nomo to have Reality tags (e.g.,
-            # Doom 2 map 25 or All Hell map 3 which has lost souls on nomo due to Dehacked).
-            if not level_info.get('add_reality_in_nomo', False):
-                return
-
-        # Some maps don't need a Reality marker if it is trivial (e.g., many nomonsters maps).
-        # TODO: This setting might not be right on different skill levels, co-op, solo-net
-        if level_info.get('skip_reality'):
+        # TODO: Skipping multi-level runs for now, this needs to be refactored a bit to be cleaner
+        #       first
+        # TODO: Additional processing needed for maps that are max exceptions; for a
+        #       complete fix, this will need DSDA-Doom to output missed monster/secret
+        #       IDs
+        if len(self.raw_data['affected_levels']) > 1:
             return
 
+        map_info = wad.map_list_info.get_map_info(self.raw_data['affected_levels'][0])
+        skill = self.demo_info.get('skill')
+        game_mode = self.demo_info.get('game_mode')
+        is_nomo = self.raw_data.get('nomonsters', False)
+        skip_reality = map_info.get_single_key_for_map('skip_reality', skill=skill,
+                                                       game_mode=game_mode)
         if self.raw_data.get('reality', False):
-            self.note_strings.add('Also Reality')
-        elif not is_nomo and self.raw_data.get('almost_reality', False):
-            # TODO: This probably should be configurable, but I'm not sure of any cases where this
-            #       is really needed.
-            # Will not add Almost Reality in nomo for now
-            self.note_strings.add('Also Almost Reality')
+            add_reality_tag = True
+            if is_nomo and not map_info.get_single_key_for_map('add_reality_in_nomo', skill=skill,
+                                                               game_mode=game_mode):
+                add_reality_tag = False
+            if skip_reality:
+                add_reality_tag = False
+
+            if add_reality_tag:
+                self.note_strings.add('Also Reality')
+        elif self.raw_data.get('almost_reality', False):
+            add_almost_reality_tag = True
+            if is_nomo and not map_info.get_single_key_for_map('add_almost_reality_in_nomo',
+                                                               skill=skill, game_mode=game_mode):
+                add_almost_reality_tag = False
+            if skip_reality or map_info.get_single_key_for_map('skip_almost_reality', skill=skill,
+                                                               game_mode=game_mode):
+                add_almost_reality_tag = False
+
+            if add_almost_reality_tag:
+                self.note_strings.add('Also Almost Reality')
+
+        # If a run was a valid Tyson (only Tyson weapons used and 100% kills) and the map is not
+        # Tyson-only, we always choose the Tyson category for the final run instead of UV Max.
+        if self.raw_data.get('tyson_weapons', False) and self.raw_data.get('100k', False):
+            tyson_only = map_info.get_single_key_for_map('tyson_only', skill=skill,
+                                                         game_mode=game_mode)
+            if not tyson_only and self.data['category'] == 'UV Max':
+                self.data['category'] = 'Tyson'
 
     def _parse_analysis(self):
         """Parse analysis info.
@@ -361,14 +377,20 @@ class PlaybackData:
             levelstat = levelstat_strm.read()
 
         levelstat = levelstat.splitlines()
+        skill = self.demo_info.get('skill')
+        game_mode = self.demo_info.get('game_mode')
         # IL run case
         if len(levelstat) == 1:
-            # TODO: Add logic to override secret exit marker (e.g., Sunlust map 31)
             levelstat_line_split = levelstat[0].split()
             self.data['level'] = self._get_level(levelstat_line_split, wad)
             self.data['secret_exit'] = self.data['level'].endswith('s')
+            level_no_secret_exit_marker = self.data['level'].rstrip('s')
+            map_info = wad.map_list_info.get_map_info(level_no_secret_exit_marker)
+            self.raw_data['affected_levels'] = [level_no_secret_exit_marker]
             if (self.data['category'] in PlaybackData.ALL_KILLS_CATEGORIES or
-                    self.data['category'] in PlaybackData.ALL_SECRETS_CATEGORIES):
+                    self.data['category'] in PlaybackData.ALL_SECRETS_CATEGORIES or
+                    map_info.get_single_key_for_map('mark_secret_exit_as_normal', skill=skill,
+                                                    game_mode=game_mode)):
                 self.data['level'] = self.data['level'].rstrip('s')
 
             time = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_TIME_IDX]
@@ -405,6 +427,7 @@ class PlaybackData:
                 map_list.append(level.rstrip('s'))
 
             self._detect_movie_type(wad, map_list)
+            self.raw_data['affected_levels'] = map_list
 
     def _get_level(self, levelstat_line_split, wad):
         """Get level from levelstat split into lines.
@@ -419,7 +442,7 @@ class PlaybackData:
         level = self._convert_level_to_dsda_format(
             levelstat_line_split[PlaybackData.LEVELSTAT_LINE_LEVEL_IDX]
         )
-        map_ranges = wad.map_list_info.get('map_ranges')
+        map_ranges = wad.map_list_info.get_key('map_ranges')
         if map_ranges:
             level_num = self._convert_level_to_num(level)
             # TODO: For episodic wads, if there were E1M10 and later, this wouldn't work, might
@@ -450,10 +473,7 @@ class PlaybackData:
         # TODO: This won't work for Hexen
         # Note that while this pulls from the secret exits dictionary, it is actually the exits
         # mapped to the maps they go to, and this pulls the values only
-        # TODO: Instead of get, take whatever the config has if it defines this key
-        secret_maps = wad.map_list_info.get(
-            'secret_exits', PlaybackData.IWAD_TO_SECRET_EXIT_MAP.get(wad.iwad)
-        ).values()
+        secret_maps = wad.map_list_info.get_key('secret_exits').values()
         # Technically a WAD can start or end on secret maps, and it's unclear in cases like that if
         # UV-Speeds should start/visit those, but for the sake of consistency, will keep it this
         # way for now.
@@ -476,15 +496,8 @@ class PlaybackData:
         map_range = [first_non_secret_map, last_non_secret_map]
         if has_required_secret_maps:
             # If the config sets these settings, use them even if they evaluate to None/empty
-            if 'episodes' in wad.map_list_info:
-                episodes = wad.map_list_info['episodes']
-            else:
-                episodes = PlaybackData.EPISODE_DEFAULTS.get(wad.iwad, [])
-            if 'd2all' in wad.map_list_info:
-                d2all = wad.map_list_info['d2all']
-            else:
-                d2all = PlaybackData.D2ALL_DEFAULT
-
+            episodes = wad.map_list_info.get_key('episodes')
+            d2all = wad.map_list_info.get_key('d2all')
             if map_range == d2all:
                 self.data['level'] = 'D2All'
             elif episodes:
@@ -518,12 +531,12 @@ class PlaybackData:
                 category not in PlaybackData.ALL_KILLS_CATEGORIES):
             return True
 
-        # TODO: Instead of get, take whatever the config has if it defines this key
-        secret_exits = wad.map_list_info.get('secret_exits',
-                                             PlaybackData.IWAD_TO_SECRET_EXIT_MAP.get(wad.iwad))
+        secret_exits = wad.map_list_info.get_key('secret_exits')
         if not secret_exits:
             return True
 
+        skill = self.demo_info.get('skill')
+        game_mode = self.demo_info.get('game_mode')
         secret_maps = []
         for secret_exit, secret_map in secret_exits.items():
             if secret_exit in map_list:
@@ -531,8 +544,9 @@ class PlaybackData:
                     secret_maps.append(secret_map)
                 else:
                     # Categories that do not require secrets do not need to visit nomonster maps.
-                    # TODO: Switch to WadMapInfo object
-                    if not wad.map_list_info.get(secret_map, {}).get('has_no_kills', False):
+                    map_info = wad.map_list_info.get_map_info(secret_map)
+                    if not map_info.get_single_key_for_map('has_no_kills', skill=skill,
+                                                           game_mode=game_mode):
                         secret_maps.append(secret_map)
 
         for map in secret_maps:

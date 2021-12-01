@@ -7,6 +7,8 @@ import logging
 import re
 import subprocess
 
+from datetime import datetime, timedelta
+
 from .data_manager import DataManager
 from .upload_config import CONFIG
 from .utils import run_cmd, convert_datetime_to_dsda_date, compare_iwad
@@ -53,6 +55,9 @@ class LMPData:
     ADDITIONAL_IWADS = ['heretic', 'hexen']
     HEXEN_CLASS_MAPPING = {0: 'Fighter', 1: 'Cleric', 2: 'Mage'}
 
+    DEMO_DATE_CUTOFF = datetime.strptime(CONFIG.demo_date_cutoff, '%Y-%m-%dT%H:%M:%SZ')
+    FUTURE_CUTOFF = datetime.today() + timedelta(days=1)
+
     def __init__(self, lmp_path, recorded_date, demo_info=None):
         """Initialize LMP data class.
 
@@ -60,8 +65,11 @@ class LMPData:
         :param recorded_date: Date the LMP was recorded
         """
         self.lmp_path = lmp_path
-        # TODO: We might want some sanity checking on the recording date of the LMP
-        self.data = {'num_players': 0, 'recorded_at': convert_datetime_to_dsda_date(recorded_date)}
+        dsda_date = convert_datetime_to_dsda_date(recorded_date)
+        if not LMPData.DEMO_DATE_CUTOFF < recorded_date < LMPData.FUTURE_CUTOFF:
+            LOGGER.error('Found possibly incorrect date, setting to UNKNOWN: "%s".', dsda_date)
+            dsda_date = 'UNKNOWN'
+        self.data = {'num_players': 0, 'recorded_at': dsda_date}
         self.note_strings = set()
         self.raw_data = {'player_classes': [], 'wad_strings': []}
         self._header = None

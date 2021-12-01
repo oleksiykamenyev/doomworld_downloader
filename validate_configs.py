@@ -236,7 +236,8 @@ def validate_dsda_wad_map():
 
         for cmd_line in all_cmd_lines:
             for arg in cmd_line.split():
-                if arg not in ALLOWED_CMD_LINE_ARGS and arg not in wad_files_with_no_ext:
+                if (arg not in ALLOWED_CMD_LINE_ARGS and
+                        os.path.basename(arg) not in wad_files_with_no_ext):
                     LOGGER.error(
                         'Invalid arg %s found for cmd line %s for WAD %s in DSDA WAD config.',
                         arg, cmd_line, wad

@@ -45,7 +45,6 @@ def handle_downloads(downloads, post_data):
     :return: Flag indicating whether all demos were parsed from all downloads
     """
     for download in downloads:
-        # TODO: Handle demo packs
         # Rename zip to account for any whitespace in the filename
         zip_no_ext = get_filename_no_ext(download).replace(' ', '_')
         download_dir = os.path.dirname(download)
@@ -120,9 +119,13 @@ def handle_downloads(downloads, post_data):
             lmp_data = LMPData(lmp_path, recorded_date, demo_info=lmp_demo_info)
             lmp_data.analyze()
             iwad = lmp_data.raw_data.get('iwad', '')
-            demo_info = {'is_solo_net': lmp_data.data.get('is_solo_net', False),
-                         'complevel': lmp_data.raw_data.get('complevel'),
-                         'iwad': iwad, 'footer_files': lmp_data.raw_data['wad_strings']}
+            demo_info = {
+                'is_solo_net': lmp_data.data.get('is_solo_net', False),
+                'complevel': lmp_data.raw_data.get('complevel'), 'iwad': iwad,
+                'footer_files': lmp_data.raw_data['wad_strings'],
+                'skill': lmp_data.raw_data.get('skill'),
+                'num_players': lmp_data.raw_data.get('num_players')
+            }
             if textfile_data:
                 wad_guesses = get_wad_guesses(
                     post_data.raw_data['wad_links'], textfile_data.raw_data['wad_strings'],

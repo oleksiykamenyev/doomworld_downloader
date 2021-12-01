@@ -24,6 +24,7 @@
   idgames_url: null
   dsda_paginated: true
   doomworld_thread: "https://www.doomworld.com/forum/topic/55560-ultimate-doom-demos-complevel-3/"
+  commercial: true
 "https://www.dsdarchive.com/wads/doom2":
   wad_name: "Doom II: Hell on Earth"
   iwad: doom2
@@ -35,6 +36,7 @@
   idgames_url: null
   dsda_paginated: true
   doomworld_thread: "https://www.doomworld.com/forum/topic/55589-doom-ii-demos-complevel-2/"
+  commercial: true
 "https://www.dsdarchive.com/wads/plutonia":
   wad_name: "Final Doom: The Plutonia Experiment"
   iwad: plutonia
@@ -47,6 +49,7 @@
   idgames_url: null
   dsda_paginated: true
   doomworld_thread: "https://www.doomworld.com/forum/topic/55558-final-doom-demos-complevel-4/"
+  commercial: true
 "https://www.dsdarchive.com/wads/scythe":
   wad_name: Scythe
   iwad: doom2
@@ -73,12 +76,13 @@
     tnt.wad: {checksum: "4e158d9953c79ccf97bd0663244cc6b6"}
     tnt31.wad: {checksum: "7a77ee148fd9ee5bc599356218f6f6b5"}
   complevel: 4
-  playback_cmd_line: "-file tnt31"
+  playback_cmd_line: "-file commercial/tnt31"
   map_list_info:
     map_ranges: [[1, 32]]
   idgames_url: null
   dsda_paginated: true
   doomworld_thread: "https://www.doomworld.com/forum/topic/55558-final-doom-demos-complevel-4/"
+  commercial: true
 "https://www.dsdarchive.com/wads/scythe2":
   wad_name: Scythe 2
   iwad: doom2
@@ -452,12 +456,12 @@
   dsda_paginated: false
   doomworld_thread: null
 "https://www.dsdarchive.com/wads/nessus":
-  wad_name: Nessus
+  wad_name: Nessus (Master Levels)
   iwad: doom2
   wad_files:
     nessus.wad: {checksum: "46f58580e7792f486c747cf1117c4ca1"}
   complevel: 2
-  playback_cmd_line: "-file nessus"
+  playback_cmd_line: "-file commercial/nessus"
   map_list_info:
     map_ranges: [[7]]
     d2all: null
@@ -465,6 +469,7 @@
   idgames_url: null
   dsda_paginated: false
   doomworld_thread: null
+  commercial: true
 "https://www.dsdarchive.com/wads/ggfast01":
   wad_name: GOTTAGOFAST
   iwad: doom2
@@ -503,6 +508,7 @@
   idgames_url: null
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/39179-heretic-demos-non-demopack-and-nm/"
+  commercial: true
 "https://www.dsdarchive.com/wads/sd20x7":
   wad_name: Stardate 20x7
   iwad: doom2
@@ -560,7 +566,7 @@
   dsda_paginated: false
   doomworld_thread: null
 "https://www.dsdarchive.com/wads/fistula":
-  wad_name: Fistula
+  wad_name: The Fistula (Master Levels)
   iwad: doom2
   wad_files:
     fistula.wad: {checksum: "cbf714b499ebdef2682990eaf93fdb5f"}
@@ -573,6 +579,7 @@
   idgames_url: null
   dsda_paginated: false
   doomworld_thread: null
+  commercial: true
 "https://www.dsdarchive.com/wads/cryogenics":
   wad_name: Cryogenics
   iwad: doom2
@@ -628,12 +635,12 @@
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/43850-chex-quest-demos/"
 "https://www.dsdarchive.com/wads/geryon":
-  wad_name: Geryon
+  wad_name: Geryon (Master Levels)
   iwad: doom2
   wad_files:
     geryon.wad: {checksum: "a1efff02df6d873762ebac6b12358bbc"}
   complevel: 2
-  playback_cmd_line: "-file geryon"
+  playback_cmd_line: "-file commercial/geryon"
   map_list_info:
     map_ranges: [[8]]
     d2all: null
@@ -641,13 +648,14 @@
   idgames_url: null
   dsda_paginated: false
   doomworld_thread: null
+  commercial: true
 "https://www.dsdarchive.com/wads/garrison":
-  wad_name: Garrison
+  wad_name: The Garrison (Master Levels)
   iwad: doom2
   wad_files:
     garrison.wad: {checksum: "f000701a3ed1f49249ee08550c03dfa5"}
   complevel: 2
-  playback_cmd_line: "-file garrison"
+  playback_cmd_line: "-file commercial/garrison"
   map_list_info:
     map_ranges: [[1]]
     d2all: null
@@ -655,6 +663,7 @@
   idgames_url: null
   dsda_paginated: false
   doomworld_thread: null
+  commercial: true
 "https://www.dsdarchive.com/wads/resurge":
   wad_name: Resurgence
   iwad: doom2
@@ -695,12 +704,12 @@
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/49909-deus-vult-and-deus-vult-2-demos/"
 "https://www.dsdarchive.com/wads/teeth":
-  wad_name: TEETH.WAD
+  wad_name: The Express Elevator to Hell (Master Levels)
   iwad: doom2
   wad_files:
     teeth.wad: {checksum: "65b4abcb74e7a386d5c024cf250d6336"}
   complevel: 2
-  playback_cmd_line: "-file teeth"
+  playback_cmd_line: "-file commercial/teeth"
   map_list_info:
     map_ranges: [[31, 32]]
     d2all: ["Map 31", "Map 32"]
@@ -708,6 +717,7 @@
   idgames_url: null
   dsda_paginated: false
   doomworld_thread: null
+  commercial: true
 "https://www.dsdarchive.com/wads/sckrpnch":
   wad_name: Sucker Punch
   iwad: doom2
@@ -895,6 +905,7 @@
   idgames_url: null
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/94942-misc-heretic-hexen-demos/"
+  commercial: true
 "https://www.dsdarchive.com/wads/sodfinal":
   wad_name: Speed of Doom
   iwad: doom2
@@ -920,12 +931,12 @@
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/123000-full-moon-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/subterra":
-  wad_name: Subterra
+  wad_name: Subterra (Master Levels)
   iwad: doom2
   wad_files:
     subterra.wad: {checksum: "bb417f07804373415a6ed8e533242c3c"}
   complevel: 2
-  playback_cmd_line: "-file subterra"
+  playback_cmd_line: "-file commercial/subterra"
   map_list_info:
     map_ranges: [[1, 1]]
     d2all: null
@@ -933,6 +944,7 @@
   idgames_url: null
   dsda_paginated: false
   doomworld_thread: null
+  commercial: true
 "https://www.dsdarchive.com/wads/cchest":
   wad_name: The Community Chest Project
   iwad: doom2
@@ -2422,12 +2434,12 @@
   dsda_paginated: false
   doomworld_thread: null
 "https://www.dsdarchive.com/wads/vesperas":
-  wad_name: Vesperas
+  wad_name: Vesperas (Master Levels)
   iwad: doom2
   wad_files:
     vesperas.wad: {checksum: "a49dccebb5f32307246b7f32da121cf7"}
   complevel: 2
-  playback_cmd_line: "-file vesperas"
+  playback_cmd_line: "-file commercial/vesperas"
   map_list_info:
     map_ranges: [[9]]
     d2all: null
@@ -2435,6 +2447,7 @@
   idgames_url: null
   dsda_paginated: false
   doomworld_thread: null
+  commercial: true
 "https://www.dsdarchive.com/wads/wd13":
   wad_name: Wonderful Doom, v.1.3
   iwad: doom
@@ -5486,7 +5499,7 @@
   wad_files:
     minos.wad: {checksum: "aea597159dee96bcc58f3f9e3e586182"}
   complevel: 2
-  playback_cmd_line: "-file minos"
+  playback_cmd_line: "-file commercial/minos"
   map_list_info:
     map_ranges: [[5]]
     d2all: null
@@ -5494,6 +5507,7 @@
   idgames_url: null
   dsda_paginated: false
   doomworld_thread: null
+  commercial: true
 "https://www.dsdarchive.com/wads/dmp2013l":
   wad_name: Doomworld Mega Project 2013 (Vanilla and Limit-removing)
   iwad: doom2
@@ -5961,7 +5975,7 @@
   wad_files:
     subspace.wad: {checksum: "b572d518d564c7d7b6b259a726538cbb"}
   complevel: 2
-  playback_cmd_line: "-file subspace"
+  playback_cmd_line: "-file commercial/subspace"
   map_list_info:
     map_ranges: [[1]]
     d2all: null
@@ -5969,6 +5983,7 @@
   idgames_url: null
   dsda_paginated: false
   doomworld_thread: null
+  commercial: true
 "https://www.dsdarchive.com/wads/dslvl2":
   wad_name: "DSLVL2: Lost Mining Base"
   iwad: doom2
@@ -7756,7 +7771,7 @@
   wad_files:
     ttrap.wad: {checksum: "8474f6d663f04630de05ecac36b574d1"}
   complevel: 2
-  playback_cmd_line: "-file ttrap"
+  playback_cmd_line: "-file commercial/ttrap"
   map_list_info:
     map_ranges: [[1]]
     d2all: null
@@ -7764,6 +7779,7 @@
   idgames_url: null
   dsda_paginated: false
   doomworld_thread: null
+  commercial: true
 "https://www.dsdarchive.com/wads/breathlessv2":
   wad_name: Breathless_v2
   iwad: doom2
@@ -7908,7 +7924,7 @@
   wad_files:
     mephisto.wad: {checksum: "b4eaf844b135cc2a0058c6e0149b4408"}
   complevel: 2
-  playback_cmd_line: "-file mephisto"
+  playback_cmd_line: "-file commercial/mephisto"
   map_list_info:
     map_ranges: [[7]]
     d2all: null
@@ -7916,6 +7932,7 @@
   idgames_url: null
   dsda_paginated: false
   doomworld_thread: null
+  commercial: true
 "https://www.dsdarchive.com/wads/cosmogenesis":
   wad_name: Cosmogenesis
   iwad: doom2
@@ -8933,7 +8950,7 @@
   wad_files:
     attack.wad: {checksum: "cb03fd0cd84b10579c2b2b313199d4c1"}
   complevel: 2
-  playback_cmd_line: "-file attack"
+  playback_cmd_line: "-file commercial/attack"
   map_list_info:
     map_ranges: [[1]]
     d2all: null
@@ -8941,13 +8958,14 @@
   idgames_url: null
   dsda_paginated: false
   doomworld_thread: null
+  commercial: true
 "https://www.dsdarchive.com/wads/canyon_ml":
   wad_name: Canyon (Master Levels)
   iwad: doom2
   wad_files:
     canyon.wad: {checksum: "33493942592d764e7787fb0ad7d03044"}
   complevel: 2
-  playback_cmd_line: "-file canyon"
+  playback_cmd_line: "-file commercial/canyon"
   map_list_info:
     map_ranges: [[1]]
     d2all: null
@@ -8955,6 +8973,7 @@
   idgames_url: null
   dsda_paginated: false
   doomworld_thread: null
+  commercial: true
 "https://www.dsdarchive.com/wads/rekkr":
   wad_name: "Abyssal Speedmapping Sessions: Session 57"
   iwad: doom
@@ -9411,3 +9430,108 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/p-r/qrumpi"
   dsda_paginated: false
   doomworld_thread: null
+"https://www.dsdarchive.com/wads/blacktwr":
+  wad_name: Black Tower (Master Levels)
+  iwad: doom2
+  wad_files:
+    blacktwr.wad: {checksum: "a421ca18cea00a2696162f8d2a2beeca"}
+  complevel: 2
+  playback_cmd_line: "-file commercial/blacktwr"
+  map_list_info:
+    map_ranges: [[25]]
+    d2all: null
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+  commercial: true
+"https://www.dsdarchive.com/wads/bloodsea":
+  wad_name: Blood Sea Keep (Master Levels)
+  iwad: doom2
+  wad_files:
+    bloodsea.wad: {checksum: "18eb4ffb3094ddb690e62211dc6169a1"}
+  complevel: 2
+  playback_cmd_line: "-file commercial/bloodsea"
+  map_list_info:
+    map_ranges: [[7]]
+    d2all: null
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+  commercial: true
+"https://www.dsdarchive.com/wads/catwalk":
+  wad_name: The Catwalk (Master Levels)
+  iwad: doom2
+  wad_files:
+    catwalk.wad: {checksum: "e7c273033376824edf95e1328261e7de"}
+  complevel: 2
+  playback_cmd_line: "-file commercial/catwalk"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+  commercial: true
+"https://www.dsdarchive.com/wads/combine":
+  wad_name: The Combine (Master Levels)
+  iwad: doom2
+  wad_files:
+    combine.wad: {checksum: "77c179948df47a7a613bd1181c959892"}
+  complevel: 2
+  playback_cmd_line: "-file commercial/combine"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+  commercial: true
+"https://www.dsdarchive.com/wads/manor_ml":
+  wad_name: Titan Manor (Master Levels)
+  iwad: doom2
+  wad_files:
+    manor.wad: {checksum: "787fa80fe9665c322f853b74838e77cc"}
+  complevel: 2
+  playback_cmd_line: "-file commercial/manor"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+  commercial: true
+"https://www.dsdarchive.com/wads/paradox_ml":
+  wad_name: Paradox (Master Levels)
+  iwad: doom2
+  wad_files:
+    paradox.wad: {checksum: "d560abb6d5719d46ebb47b27d7813a4b"}
+  complevel: 2
+  playback_cmd_line: "-file commercial/paradox"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+  commercial: true
+"https://www.dsdarchive.com/wads/virgil":
+  wad_name: "Virgil's Lead (Master Levels)"
+  iwad: doom2
+  wad_files:
+    virgil.wad: {checksum: "3c0874f2df3c06a002ee2a18aba0f0e8"}
+  complevel: 2
+  playback_cmd_line: "-file commercial/virgil"
+  map_list_info:
+    map_ranges: [[3]]
+    d2all: null
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+  commercial: true

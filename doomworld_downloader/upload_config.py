@@ -7,7 +7,7 @@ from configparser import ConfigParser, NoSectionError, NoOptionError
 import yaml
 
 from .utils import parse_list_file
-from .wad import Wad
+from .wad import Wad, WadMapListInfo
 
 
 AD_HOC_UPLOAD_CONFIG_PATH = 'doomworld_downloader/ad_hoc_upload_config.yaml'
@@ -144,6 +144,33 @@ class UploadConfig:
         except (NoSectionError, NoOptionError):
             return False
 
+    @property
+    def demo_date_cutoff(self):
+        """Cutoff date for demo recorded_at info (optional).
+
+        If demos have dates older than this date, the date will be treated as incorrect. Default to
+        the 1994-01-01, i.e. around the time the first demos are expected to appear.
+
+        :return: Cutoff date for demo recorded_at info
+        """
+        try:
+            return self._config.get('general', 'demo_date_cutoff')
+        except (NoSectionError, NoOptionError):
+            return '1994-01-01T00:00:00Z'
+
+    @property
+    def always_try_solonet(self):
+        """Always try to play demos back with -solo-net (optional).
+
+        Default to false.
+
+        :return: Flag indicating whether always try to play demos back with -solo-net
+        """
+        try:
+            return self._config.getboolean('general', 'always_try_solonet')
+        except (NoSectionError, NoOptionError):
+            return False
+
 
 CONFIG = UploadConfig()
 
@@ -172,15 +199,18 @@ def set_up_configs(upload_config_path=None):
 
     for url, wad_dict in wad_map_by_dsda_url_raw.items():
         idgames_url = wad_dict['idgames_url']
+        wad_name = wad_dict['wad_name']
+        iwad = wad_dict['iwad']
+        map_list_info = WadMapListInfo(wad_dict['map_list_info'], wad_name, iwad,
+                                       fail_on_error=True)
         wad_info = Wad(
-            name=wad_dict['wad_name'], iwad=wad_dict['iwad'], files=wad_dict['wad_files'],
-            complevel=wad_dict['complevel'], map_list_info=wad_dict['map_list_info'],
-            idgames_url=idgames_url, dsda_url=url, other_url='',
+            name=wad_name, iwad=iwad, files=wad_dict['wad_files'], complevel=wad_dict['complevel'],
+            map_list_info=map_list_info, idgames_url=idgames_url, dsda_url=url, other_url='',
             dsda_paginated=wad_dict['dsda_paginated'],
             doomworld_thread=wad_dict['doomworld_thread'],
             playback_cmd_line=wad_dict.get('playback_cmd_line', ''),
             alt_playback_cmd_lines=wad_dict.get('alt_playback_cmd_lines', {}),
-            dsda_name=wad_dict.get('dsda_name')
+            dsda_name=wad_dict.get('dsda_name'), commercial=wad_dict.get('commercial', False)
         )
         WAD_MAP_BY_DSDA_URL[url] = wad_info
         WAD_MAP_BY_IDGAMES_URL[wad_dict['idgames_url']] = wad_info
