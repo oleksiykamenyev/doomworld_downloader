@@ -43,7 +43,8 @@ THREAD_MAP_STR_KEYS = ['category', 'note', 'source_port']
 
 ALLOWED_WAD_KEYS = [
     'wad_name', 'iwad', 'wad_files', 'complevel', 'playback_cmd_line', 'map_list_info',
-    'idgames_url', 'dsda_paginated', 'doomworld_thread', 'alt_playback_cmd_lines', 'dsda_name'
+    'idgames_url', 'dsda_paginated', 'doomworld_thread', 'alt_playback_cmd_lines', 'dsda_name',
+    'commercial'
 ]
 ALLOWED_WAD_FILE_KEYS = ['checksum', 'not_required_for_playback', 'dupe_checksum', 'shared_wad']
 ALLOWED_CMD_LINE_ARGS = ['-file', '-deh']

@@ -148,7 +148,6 @@ def download_wad_from_dsda(dsda_url, overwrite=True):
     :param overwrite: Flag indicating whether to overwrite the local path if it exists
     :return: Path to local wad download from DSDA
     :raises ValueError if a non-wad URL is provided to this function
-            RunTimeError if there's an issue getting the wad for a given page
     """
     soup = get_page(dsda_url)
     verify_dsda(dsda_url)
@@ -166,14 +165,14 @@ def download_wad_from_dsda(dsda_url, overwrite=True):
 
         link_url = link_elem['href']
         if link_url.startswith('/wads'):
-            LOGGER.info('No link available for page: %s.', dsda_url)
-            LOGGER.info('This should only happen if this is a commercial product.')
-            return
+            continue
         elif link_url.startswith('/files'):
             wad_url = fix_dsda_link(link_url)
 
     if not wad_url:
-        raise RuntimeError('Unable to find wad for DSDA URL {}.'.format(dsda_url))
+        LOGGER.info('No link available for page: %s.', dsda_url)
+        LOGGER.info('This should only happen if this is a commercial product.')
+        return
 
     response = requests.get(wad_url)
     default_filename = urlparse(wad_url).path.strip('/').split('/')[-1]

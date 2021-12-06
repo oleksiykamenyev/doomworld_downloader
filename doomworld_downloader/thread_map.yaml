@@ -333,11 +333,6 @@ https://www.doomworld.com/forum/topic/55589-doom-ii-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/doom2
   id: '55589'
   name: DOOM II demos [-complevel 2]
-https://www.doomworld.com/forum/topic/56037-5-minute-map-megawad-demos-clvl-9/:
-  additional_info:
-    wad: https://www.dsdarchive.com/wads/5minmap
-  id: '56037'
-  name: 5 minute map megawad demos -clvl 9
 https://www.doomworld.com/forum/topic/56108-doom-core-demos-complevel-2/:
   additional_info:
     wad: https://www.dsdarchive.com/wads/dcv
@@ -758,11 +753,6 @@ https://www.doomworld.com/forum/topic/94963-tntr-demos-complevel-4/:
     wad: https://www.dsdarchive.com/wads/tntr
   id: '94963'
   name: TNTR demos [-complevel 4]
-https://www.doomworld.com/forum/topic/95228-experiencing-nirvana-demos-complevel-9/:
-  additional_info:
-    wad: https://www.dsdarchive.com/wads/enirvana
-  id: '95228'
-  name: Experiencing Nirvana demos [-complevel 9]
 https://www.doomworld.com/forum/topic/96954-dimensions-demos-complevel-9/:
   additional_info:
     wad: https://www.dsdarchive.com/wads/dmnsns
@@ -948,6 +938,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/cpd
   id: '125807'
   name: "CPD by Cheesewheel Proofs (complevel 2)"
+"https://www.doomworld.com/forum/topic/118584-h2h-xmas-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/h2h-xmas
+  id: '118584'
+  name: "H2H XMas demos [-complevel 2]"
 
 
 # Multi-WAD threads
@@ -1080,6 +1075,20 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     - https://www.dsdarchive.com/wads/2048vr_v1_6g
   id: '117894'
   name: "2048 Units of /vr/ demos [-complevel 9 (clean) -complevel 11 (dehacked)]"
+"https://www.doomworld.com/forum/topic/95228-experiencing-nirvana-demos-complevel-9/":
+  additional_info:
+    wads:
+    - https://www.dsdarchive.com/wads/enirvana
+    - https://www.dsdarchive.com/wads/btnx_e1
+  id: '95228'
+  name: Experiencing Nirvana demos [-complevel 9]
+"https://www.doomworld.com/forum/topic/56037-5-minute-map-megawad-demos-clvl-9/":
+  additional_info:
+    wads:
+    - https://www.dsdarchive.com/wads/5minmap
+    - https://www.dsdarchive.com/wads/5mnmayh
+  id: '56037'
+  name: 5 minute map megawad demos -clvl 9
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":

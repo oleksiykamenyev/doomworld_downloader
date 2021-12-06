@@ -6,6 +6,9 @@
     bourgfix.deh: {not_required_for_playback: true, checksum: "a320b5173b496eec55f6d97fa8585ba0"}
     bourgdm.wad: {not_required_for_playback: true, checksum: "aae83b7fffbf0df89d689465dfc340df"}
     bourgdm.deh: {not_required_for_playback: true, checksum: "604a0b2f27b935becbea704f0b80106d"}
+    bourgfix_unity.wad: {not_required_for_playback: true, checksum: "8e12a4b75c517fc2982ffa08bef52e32"}
+    mus_pack/bourgdm_oda_zd_mus3.wad: {not_required_for_playback: true, checksum: "f186e74ad8144f682b7de87a9a8597b2"}
+    mus_pack/bourgdm_zan_gzdoom_mus.pk3: {not_required_for_playback: true, checksum: "4833c9f24f6622c22ded3841c27c3416"}
   complevel: 2
   playback_cmd_line: "-file bourgfix"
   map_list_info:
@@ -220,6 +223,7 @@
   iwad: doom2
   wad_files:
     sunder.wad: {checksum: "441b22376dd190240586518bd19fa23e"}
+    sunder_old.wad: {not_required_for_playback: true, checksum: "dc68e2e4c40f1551f35e5d6d6f775c61"}
   complevel: 9
   playback_cmd_line: "-file sunder"
   map_list_info:
@@ -297,7 +301,7 @@
   wad_name: Zone 400
   iwad: doom2
   wad_files:
-    zone400.wad: {checksum: "d472517ef4670a1f7f90c823effc30da"}
+    zone400.wad: {checksum: "7913cd9027fda6351693b310d03dade5"}
   complevel: 2
   playback_cmd_line: "-file zone400"
   map_list_info:
@@ -448,6 +452,7 @@
   iwad: plutonia
   wad_files:
     plut4.wad: {checksum: "e01c2e0a502a90d5a3276f2472dc1fc4"}
+    plut4.deh: {not_required_for_playback: true, checksum: "e41c0cee81debb25ba36094d9c9ca16c"}
   complevel: 4
   playback_cmd_line: "-file plut4"
   map_list_info:
@@ -527,7 +532,7 @@
   wad_name: Stardate 20X6
   iwad: doom2
   wad_files:
-    stardate20x6.wad: {checksum: "a064a60cd6c7f1ebff8265629a6e7860"}
+    stardate20x6/stardate20x6.wad: {not_required_for_playback: true, checksum: "a064a60cd6c7f1ebff8265629a6e7860"}
   complevel: 9
   playback_cmd_line: "-file stardate20x6"
   map_list_info:
@@ -542,6 +547,7 @@
   iwad: doom2
   wad_files:
     frog_and_toad.wad: {checksum: "ec791dedeb248cd7748ca83b13e12972"}
+    __macosx/._frog_and_toad.wad: {not_required_for_playback: true, checksum: "7283d470e58e9674ab7a2f7018385d04"}
   complevel: 9
   playback_cmd_line: "-file frog_and_toad"
   map_list_info:
@@ -627,6 +633,7 @@
   iwad: chex
   wad_files:
     chex.wad: {checksum: "25485721882b050afa96a56e5758dd52"}
+    chex.deh: {not_required_for_playback: true, checksum: "928cc1593cda42b78c8326807d5c80b6"}
   complevel: 3
   map_list_info:
     map_ranges: [["E1M1", "E1M5"]]
@@ -695,7 +702,9 @@
   wad_name: Deus Vult II
   iwad: doom2
   wad_files:
-    dvii-1i.wad: {checksum: "d6a747dda9ee26737b9213d3ba852b73"}
+    data/dvii-1i.wad: {checksum: "d6a747dda9ee26737b9213d3ba852b73"}
+    data/brightmaps.pk3: {not_required_for_playback: true, checksum: "ec6478d1a6e977aeac030f167e15f817"}
+    data/gzdoom.pk3: {not_required_for_playback: true, checksum: "cfc3c76eee6a3edf99864c6ca3c5824d"}
   complevel: 9
   playback_cmd_line: "-file dvii-1i"
   map_list_info:
@@ -767,6 +776,7 @@
   wad_files:
     jenesis.wad: {checksum: "de7e807124b9eb4ae058e4ade34c37a4"}
     jenefix.wad: {checksum: "bcffc9a97e593aa42f0152090a09334b"}
+    jen_old.wad: {not_required_for_playback: true, checksum: "cc02ca714e705bbc45d3bc14ab87b1ca"}
   complevel: 9
   playback_cmd_line: "-file jenesis"
   map_list_info:
@@ -832,6 +842,7 @@
   iwad: doom2
   wad_files:
     c-shock2.wad: {checksum: "d18684db2d9c5aa77a17107dd68dffcb"}
+    cs2_old.wad: {not_required_for_playback: true, checksum: "ea6299713ee16497970a35dde8e70260"}
   complevel: 9
   playback_cmd_line: "-file c-shock2"
   map_list_info:
@@ -964,6 +975,7 @@
   iwad: doom2
   wad_files:
     ngmvmt1.wad: {checksum: "75383d875d361fcf2f0a4e429c7e3384"}
+    ng_old.wad: {not_required_for_playback: true, checksum: "025f281583a135e7cc5f74e5c0c423a8"}
   complevel: 9
   playback_cmd_line: "-file ngmvmt1"
   map_list_info:
@@ -990,6 +1002,7 @@
     fava.wad: {dupe_checksum: true, checksum: "619a7190ab91ae6b71e12d95c773007a"}
     # In case someone renames their WAD...
     favabeans.wad: {dupe_checksum: true, not_required_for_playback: true, checksum: "619a7190ab91ae6b71e12d95c773007a"}
+    crap115.wad: {not_required_for_playback: true, checksum: "679d2565b8d251ed9574f7082c4509a5"}
   complevel: 3
   playback_cmd_line: "-file fava"
   map_list_info:
@@ -1074,7 +1087,7 @@
     nerve.wad: {dupe_checksum: true, checksum: "f98f0a9f611cbc615405b74df9e5fa23"}
     nerve_compat.wad: {dupe_checksum: true, checksum: "f98f0a9f611cbc615405b74df9e5fa23"}
   complevel: 2
-  playback_cmd_line: "-file nerve_compat"
+  playback_cmd_line: "-file commercial/nerve_compat"
   map_list_info:
     map_ranges: [[1, 9]]
     d2all: ["Map 01", "Map 09"]
@@ -1082,13 +1095,16 @@
   idgames_url: null
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/51245-no-rest-for-the-living-demos/"
+  commercial: true
 "https://www.dsdarchive.com/wads/strg":
   wad_name: Struggle - Antaresian Legacy
   iwad: doom2
   wad_files:
     strg.wad: {checksum: "1f3653c4c3928a578aff9ac685ed402a"}
+    strg_m28.wad: {checksum: "fe74e5eb0e5f79e9c17b3a6f73a93bbd"}
   complevel: 2
   playback_cmd_line: "-file strg"
+  alt_playback_cmd_lines: {"-file strg strg_m28": "Plays back with strg_m28.wad."}
   map_list_info:
     map_ranges: [[1, 32]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/strg"
@@ -1127,6 +1143,9 @@
     eternall.wad: {dupe_checksum: true, checksum: "e8683fd3bf9af11859c8b2fe48a2cf7f"}
     # In case someone renames their WAD file...
     eternal.wad: {dupe_checksum: true, not_required_for_playback: true, checksum: "e8683fd3bf9af11859c8b2fe48a2cf7f"}
+    credits.wad: {not_required_for_playback: true, checksum: "02b1ecb55727ef0beb31f3caf7f74a81"}
+    csweeper.wad: {not_required_for_playback: true, checksum: "c5decb049e4771cb72431ec4f3e2d786"}
+    null.wad: {not_required_for_playback: true, checksum: "d5cc99b8d3179ecaef7d6cd6e03d6d53"}
   complevel: 2
   playback_cmd_line: "-file eternall"
   map_list_info:
@@ -1153,7 +1172,7 @@
   wad_name: Attack on IO
   iwad: doom2
   wad_files:
-    attackonio.wad: {checksum: "07dc8bac5b8887688538f4e87ff0c6ef"}
+    attack-on-io/attackonio.wad: {checksum: "07dc8bac5b8887688538f4e87ff0c6ef"}
   complevel: 9
   playback_cmd_line: "-file attackonio"
   map_list_info:
@@ -1230,7 +1249,7 @@
   wad_name: '"Half Moon" Part 1'
   iwad: doom2
   wad_files:
-    halfmoon1.wad: {checksum: "57cad4fd0b3977d88d98407bb8869d53"}
+    halfmoon1/halfmoon1.wad: {checksum: "57cad4fd0b3977d88d98407bb8869d53"}
   complevel: 9
   playback_cmd_line: "-file halfmoon1"
   map_list_info:
@@ -1242,7 +1261,7 @@
   wad_name: '"Half Moon" Part 2'
   iwad: doom2
   wad_files:
-    halfmoon2.wad: {checksum: "6487b7d5acc02ed1cdcc6ea517241be5"}
+    halfmoon2/halfmoon2.wad: {checksum: "6487b7d5acc02ed1cdcc6ea517241be5"}
   complevel: 9
   playback_cmd_line: "-file halfmoon2"
   map_list_info:
@@ -1284,6 +1303,7 @@
   iwad: doom2
   wad_files:
     jpcp.wad: {checksum: "b0bfbdff7785da02b0fa6721dbccecd2"}
+    jpcp_hud.wad: {not_required_for_playback: true, checksum: "4529b299f25b7a14100da930e80c4c8d"}
   complevel: 2
   playback_cmd_line: "-file jpcp"
   map_list_info:
@@ -1362,6 +1382,7 @@
   iwad: doom2
   wad_files:
     avj.wad: {checksum: "75bff58e7db5c2f4dedeccabad5314f5"}
+    avj32fix.wad: {not_required_for_playback: true, checksum: "9755218384fb0c1faf4c510e6afcd6ac"}
   complevel: 2
   playback_cmd_line: "-file avj"
   map_list_info:
@@ -1616,6 +1637,7 @@
   iwad: doom2
   wad_files:
     nitelife.wad: {checksum: "940a30c5b0b38665b108ec5c2a9f5d5d"}
+    novelty.wad: {not_required_for_playback: true, checksum: "72a4ca1bea04d66af72d40e3aef38428"}
   complevel: 2
   playback_cmd_line: "-file nitelife"
   map_list_info:
@@ -1673,6 +1695,7 @@
   wad_files:
     100wave.wad: {checksum: "808dfe7fe71de1ce25552952aa3d7aa4"}
     100wave.deh: {checksum: "6be91184e4265b47eca43d0807063084"}
+    100wave_old.wad: {not_required_for_playback: true, checksum: "129de74d8bbcc785fb2fe9012ee8522d"}
   complevel: 2
   playback_cmd_line: "-file 100wave -deh 100wave"
   map_list_info:
@@ -1712,6 +1735,7 @@
   iwad: doom2
   wad_files:
     squadron.wad: {checksum: "c279c465f7290ab383bc86e70a6258f2"}
+    sq17fix.wad: {not_required_for_playback: true, checksum: "7731b31d42ec914c36d84d8cffd4fa67"}
   complevel: 2
   playback_cmd_line: "-file squadron"
   map_list_info:
@@ -1794,6 +1818,8 @@
   wad_files:
     prcp.wad: {checksum: "5c6919bee4708e0924bcd3dcb564008b"}
     prcp.deh: {not_required_for_playback: true, checksum: "041688173c70e787da7fe4b5c00fd61e"}
+    prcpfix.wad: {not_required_for_playback: true, checksum: "29ac85d6eeb886725805f37cfafb2490"}
+    prcp_old.wad: {not_required_for_playback: true, checksum: "ff6f8d6af8f7fe5a59bf918b026a7742"}
   complevel: 4
   playback_cmd_line: "-file prcp"
   map_list_info:
@@ -1882,6 +1908,7 @@
   iwad: doom2
   wad_files:
     hg.wad: {checksum: "1b24a08f7c52e89938bc87f4e1d42585"}
+    hg_lights.pk3: {not_required_for_playback: true, checksum: "7ed38eb95d4fd10e3b7bb82deeb249c0"}
   complevel: 9
   playback_cmd_line: "-file hg"
   map_list_info:
@@ -2058,6 +2085,7 @@
   wad_files:
     reverie.wad: {checksum: "491d37845775cabdc06b138246ade4dd"}
     reverie.deh: {not_required_for_playback: true, checksum: "7f1b907a623b49e16433f34aa7325ecd"}
+    rev_old.wad: {not_required_for_playback: true, checksum: "535cd20a46553a408b6d057870af7520"}
   complevel: 2
   playback_cmd_line: "-file reverie"
   map_list_info:
@@ -2190,6 +2218,7 @@
   iwad: doom
   wad_files:
     return01.wad: {checksum: "ca0d74b77ebeaf924ced10a272943e1a"}
+    tink.wad: {not_required_for_playback: true, checksum: "909258911ae482c731fecf7ef1a03529"}
   complevel: 3
   playback_cmd_line: "-file return01"
   map_list_info:
@@ -2261,9 +2290,10 @@
   wad_name: The Darkening
   iwad: doom2
   wad_files:
-    darken.wad: {checksum: "4950d0990c576157b585c3e88c2d83c8"}
-    resource.wad: {checksum: "95a86e7a6da646099d3e63dfb8232069"}
-    dark.deh: {checksum: "0121cb02ea3d991ecd2085f111d82f96"}
+    darken/dark.deh: {checksum: "0121cb02ea3d991ecd2085f111d82f96"}
+    darken/darken.wad: {checksum: "4950d0990c576157b585c3e88c2d83c8"}
+    darken/resource.wad: {checksum: "95a86e7a6da646099d3e63dfb8232069"}
+    darken/darkdm.wad: {not_required_for_playback: true, checksum: "fe8084d63ca1bf142604c68e1020d8a1"}
   complevel: 2
   playback_cmd_line: "-file darken resource -deh dark"
   map_list_info:
@@ -2291,6 +2321,7 @@
   iwad: doom2
   wad_files:
     32of64-lr.wad: {checksum: "7b9c2e00ae30d1b899b535ddd9be7e6e"}
+    32of64-lr.deh: {not_required_for_playback: true, checksum: "0ff9a8d57ff34a7e197170c4d1e01315"}
   complevel: 2
   playback_cmd_line: "-file 32of64-lr"
   map_list_info:
@@ -2331,6 +2362,7 @@
   iwad: doom2
   wad_files:
     doom404.wad: {checksum: "5a3f4f0178102deceadfeabe1beae25b"}
+    doom404.deh: {not_required_for_playback: true, checksum: "8f0de739f72e6155b4565beda41d85d8"}
   complevel: 2
   playback_cmd_line: "-file doom404"
   map_list_info:
@@ -2358,6 +2390,7 @@
   wad_files:
     dtwid.wad: {checksum: "8430cd2081be435f1320772227263ced"}
     dtwid.deh: {not_required_for_playback: true, checksum: "28266c6405a5f7c026a52143a686da2d"}
+    dtwid_old.wad: {not_required_for_playback: true, checksum: "59295fb790d50188fa7eb5189fdfd054"}
   complevel: 3
   playback_cmd_line: "-file dtwid"
   map_list_info:
@@ -2453,6 +2486,8 @@
   iwad: doom
   wad_files:
     wd13.wad: {checksum: "a03e4e35ead7472ae0d2b636bf17d6a1"}
+    wd_akse.wad: {not_required_for_playback: true, checksum: "de565416dd2ae4c7289fe84849c71c79"}
+    wd_old.wad: {not_required_for_playback: true, checksum: "a5ddd2abac05c65e68b987f09b36cf8e"}
   complevel: 3
   playback_cmd_line: "-file wd13"
   map_list_info:
@@ -2577,6 +2612,7 @@
     sf2011v8.wad: {dupe_checksum: true, checksum: "f889ca6be912e703fb4dec4b709bf31a"}
     # In case someone renames their WAD...
     sf2011.wad: {dupe_checksum: true, not_required_for_playback: true, checksum: "f889ca6be912e703fb4dec4b709bf31a"}
+    mixednuts.wad: {not_required_for_playback: true, checksum: "8bb4b8deced5a6538bba5289e431e307"}
   complevel: 9
   playback_cmd_line: "-file sf2011v8"
   map_list_info:
@@ -2641,11 +2677,15 @@
   wad_name: 5 Minute Map Collection
   iwad: doom2
   wad_files:
-    5minmap.wad: {checksum: "110cc0446a39433ad7136352818e049e"}
+    5minmap.wad: {dupe_checksum: true, checksum: "110cc0446a39433ad7136352818e049e"}
+    5mnmayh.wad: {dupe_checksum: true, not_required_for_playback: true, checksum: "e1983b4d308dffb89dddb6e9befe51e8"}
   complevel: 9
   playback_cmd_line: "-file 5minmap"
   map_list_info:
     map_ranges: [[1, 33]]
+    map_info:
+      "Map 30":
+        tyson_only: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/0-9/5minmap"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/56037-5-minute-map-megawad-demos-clvl-9/"
@@ -2802,10 +2842,13 @@
   wad_name: Hell to Pay
   iwad: doom2
   wad_files:
+    # The DSDA download contains htp-ltd.wad, which is fine for the maps that are present in the
+    # WAD, but people should use htp-raw.wad.
     htp-raw.wad: {dupe_checksum: true, checksum: "ba4d2564c72f7ec963be2f02c3c3e5f5"}
     htp-ltd.wad: {not_required_for_playback: true, checksum: "b739291c2cb37dd1722b2eeffebe3353"}
     # In case someone renames their WAD file...
     hell2pay.wad: {dupe_checksum: true, not_required_for_playback: true, checksum: "ba4d2564c72f7ec963be2f02c3c3e5f5"}
+    htpdemos.wad: {not_required_for_playback: true, checksum: "0f10b8635b1999fb29b8f4245ed941bd"}
   complevel: 2
   playback_cmd_line: "-file htp-raw"
   map_list_info:
@@ -2954,6 +2997,7 @@
   iwad: doom2
   wad_files:
     helinhel.wad: {checksum: "62c7a961121a9979907c96d4292fe5f6"}
+    helinhel30.wad: {not_required_for_playback: true, checksum: "8ab2ecdda0e2ffc510fc9d7206c3c6bd"}
   complevel: 2
   playback_cmd_line: "-file helinhel"
   map_list_info:
@@ -3046,6 +3090,7 @@
   iwad: doom2
   wad_files:
     abyspe30.wad: {checksum: "fe1c54ba7f02a941f22ec321a0fa717c"}
+    gritty.wad: {not_required_for_playback: true, checksum: "049bc586053b9945a27c0ab948dc1a07"}
   complevel: 9
   playback_cmd_line: "-file abyspe30"
   map_list_info:
@@ -3073,8 +3118,10 @@
   iwad: doom2
   wad_files:
     bcsmw.wad: {checksum: "472a350363bdef36164e14e8da68265b"}
+    bcsmw29.wad: {checksum: "56aef5d4531ca39db4911f6846632905"}
   complevel: 2
   playback_cmd_line: "-file bcsmw"
+  alt_playback_cmd_lines: {"-file bcsmw bcsmw29": "Plays back with bcsmw29.wad."}
   map_list_info:
     map_ranges: [[1, 32]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/bcsmw"
@@ -3259,6 +3306,7 @@
   iwad: doom2
   wad_files:
     cchest4.wad: {checksum: "4f634afbe8b57d1b6eb71d7338c68626"}
+    cchest4_old.wad: {not_required_for_playback: true, checksum: "d15abed5b28062ecdb13d047ba56785f"}
   complevel: 9
   playback_cmd_line: "-file cchest4"
   map_list_info:
@@ -3394,8 +3442,10 @@
   wad_name: DSV3-War
   iwad: doom2
   wad_files:
-    war_3.wad: {checksum: "72547daaa4e5ac7599fcc52bd012f38c"}
-    warscript.deh: {not_required_for_playback: true, checksum: "e944fb11d9c706eb114070e6ea677918"}
+    war_3/war_3.wad: {checksum: "72547daaa4e5ac7599fcc52bd012f38c"}
+    war_3/warscript.deh: {not_required_for_playback: true, checksum: "e944fb11d9c706eb114070e6ea677918"}
+    war_3/options/warallies.wad: {not_required_for_playback: true, checksum: "ec46fadedf0a4b978de8a2ba89c76afc"}
+    war_3/skins/stealfka.wad: {not_required_for_playback: true, checksum: "8e17c1d99abb20a5a6af23ea600b7665"}
   complevel: 9
   playback_cmd_line: "-file war_3"
   map_list_info:
@@ -3651,6 +3701,7 @@
   iwad: doom
   wad_files:
     swtchrm.wad: {checksum: "5cee5791d7e868e93b8b9d11d70bbcdc"}
+    swtchrm.deh: {not_required_for_playback: true, checksum: "804e1c4f92c3a9f3a197b31e21b5495a"}
   complevel: 3
   playback_cmd_line: "-file swtchrm"
   map_list_info:
@@ -3824,8 +3875,15 @@
   wad_name: Perdition's Gate
   iwad: doom2
   wad_files:
-    pg-raw.wad: {checksum: "22bde2b7714c4e059a557c009666265f"}
-    pg-raw-x.wad: {not_required_for_playback: true, checksum: "2e179a5aa598f02e9ef132c9cfed7a1a"}
+    pg/pg-raw.wad: {checksum: "22bde2b7714c4e059a557c009666265f"}
+    pg/pg-raw-x.wad: {not_required_for_playback: true, checksum: "2e179a5aa598f02e9ef132c9cfed7a1a"}
+    pg/pgdemo16.wad: {not_required_for_playback: true, checksum: "a1bf1cb53930441663231701d5dce766"}
+    pg/pgdemo17.wad: {not_required_for_playback: true, checksum: "38718a9618f38b78ba30c7f8892dec31"}
+    pg/pgdemo18.wad: {not_required_for_playback: true, checksum: "43fe4c4fef6ececfe8eecb4a618eab07"}
+    pg/pgdemo19.wad: {not_required_for_playback: true, checksum: "0219f6c19d35c7c99168bb16cc653950"}
+    # This isn't actually inside the DSDA download, but if someone were to record with the limited
+    # version, the demos should sync with the latest version of the WAD (provided, they record on
+    # the maps that are present inside the limited version of the WAD).
     pg-ltd.wad: {not_required_for_playback: true, checksum: "7d1f8cba50cfc0f9334ad5950604c80c"}
   complevel: 2
   playback_cmd_line: "-file pg-raw"
@@ -3894,6 +3952,7 @@
   iwad: doom
   wad_files:
     spit.wad: {checksum: "f986cc7f3b35a6bfffe8cdb8f78e1d2a"}
+    dmatch.wad: {not_required_for_playback: true, checksum: "b598fa92216a4af28b87a35b67514ddd"}
   complevel: 3
   playback_cmd_line: "-file spit"
   map_list_info:
@@ -3907,6 +3966,7 @@
   iwad: doom
   wad_files:
     wadpak2.wad: {checksum: "9dd2fd1cfb6806aa02c06923c15a5aa4"}
+    wp233fix.wad: {not_required_for_playback: true, checksum: "0d53baaea2709f428d83d88a0bab2658"}
   complevel: 3
   playback_cmd_line: "-file wadpak2"
   map_list_info:
@@ -3947,6 +4007,7 @@
   iwad: doom2
   wad_files:
     armadosia.wad: {checksum: "9aa49f87ec0f14ed3f5ad5f5fac0c190"}
+    arma-old.wad: {not_required_for_playback: true, checksum: "6acdb916892d39d37483d0067ca20254"}
   complevel: 2
   playback_cmd_line: "-file armadosia"
   map_list_info:
@@ -4344,8 +4405,11 @@
   iwad: doom2
   wad_files:
     mordeth.wad: {checksum: "db99fee82e9124ed6e1f009151589f73"}
-    mdeugrap.wad: {checksum: "43552a15fcb1606268d69bd32af65120"}
     mordeth.deh: {checksum: "beaef0277e84744e9d94a143be452592"}
+    fixed/mdeugrap.wad: {checksum: "43552a15fcb1606268d69bd32af65120"}
+    morgrap0.wad: {not_required_for_playback: true, checksum: "bb63601a03f1f3720cdc6fcd333a16aa"}
+    fixed/mordeth.wad: {dupe_checksum: true, not_required_for_playback: true, checksum: "db99fee82e9124ed6e1f009151589f73"}
+    fixed/mordeth.deh: {dupe_checksum: true, not_required_for_playback: true, checksum: "beaef0277e84744e9d94a143be452592"}
   complevel: 2
   playback_cmd_line: "-file mordeth mdeugrap -deh mordeth"
   map_list_info:
@@ -4425,7 +4489,7 @@
   wad_name: final
   iwad: doom
   wad_files:
-    final.wad: {checksum: "34d5e0436f145bf8ca0f1fcbaeec1e76"}
+    final.wad: {checksum: "54550d169706d7bf788e279a53917a8a"}
   complevel: 3
   playback_cmd_line: "-file final"
   map_list_info:
@@ -4480,6 +4544,7 @@
   iwad: doom2
   wad_files:
     sbspd002.wad: {checksum: "9a217c9818d0bb8e23d3014c57691735"}
+    zarcyb.wad: {not_required_for_playback: true, checksum: "b3675e7f0471ba15af241d50d1e87493"}
   complevel: 9
   playback_cmd_line: "-file sbspd002"
   map_list_info:
@@ -5188,6 +5253,7 @@
   iwad: doom2
   wad_files:
     eviltech.wad: {checksum: "f87c1f262595f9d6bb15df1950a544c5"}
+    et_old.wad: {not_required_for_playback: true, checksum: "2db1e22495643e868727669be2231577"}
   complevel: 2
   playback_cmd_line: "-file eviltech"
   map_list_info:
@@ -5389,7 +5455,7 @@
   wad_name: Cleimos 2
   iwad: doom2
   wad_files:
-    cleim20.wad: {checksum: "d009de001d63f37069f198ee906ca7c6"}
+    fixed/cleim20.wad: {checksum: "d009de001d63f37069f198ee906ca7c6"}
   complevel: 2
   playback_cmd_line: "-file cleim20"
   map_list_info:
@@ -6300,6 +6366,8 @@
   iwad: doom2
   wad_files:
     op-lite2.wad: {checksum: "4c3fb4fb4c045025146cb71211839753"}
+    ol2sky-l.wad: {not_required_for_playback: true, checksum: "be4b2110725872aa83898121b138fde2"}
+    op-lite2.deh: {not_required_for_playback: true, checksum: "b257d75cdacda372e1a01456055a3aaa"}
   complevel: 2
   playback_cmd_line: "-file op-lite2"
   map_list_info:
@@ -6408,6 +6476,7 @@
   iwad: doom
   wad_files:
     d4a.wad: {checksum: "1f87ba630bd08b1dd84e8be6f0109be2"}
+    d4.deh: {not_required_for_playback: true, checksum: "f56aaa8136376b649445c91a165995ed"}
   complevel: 3
   playback_cmd_line: "-file d4a"
   map_list_info:
@@ -6518,6 +6587,7 @@
   wad_files:
     180mpv.wad: {checksum: "ee36cd2776bdb7d1f8e4dcd126a84168"}
     180mpv_deh.deh: {checksum: "9379bed6e44347f2f5dd001b725ac11e"}
+    180mpv_b.wad: {not_required_for_playback: true, checksum: "a508ab423068f2f698de1d8fff7bda07"}
   complevel: 2
   playback_cmd_line: "-file 180mpv -deh 180mpv_deh"
   map_list_info:
@@ -6742,8 +6812,8 @@
   wad_name: The Quest for Necronomicon
   iwad: doom
   wad_files:
-    nec_19.wad: {checksum: "25c3911852e486a904d0cc7288784cd0"}
-    nec_19.deh: {checksum: "288e0639a4af679487338dfb0f96f227"}
+    fixed/nec_19.wad: {checksum: "25c3911852e486a904d0cc7288784cd0"}
+    fixed/nec_19.deh: {checksum: "288e0639a4af679487338dfb0f96f227"}
     nec_lvls.wad: {not_required_for_playback: true, checksum: "930669a442e7e29344b0522e383a5962"}
     nec_raw.wad: {not_required_for_playback: true, checksum: "8b832a21f81d1787d6cfcb9843910962"}
     nec_snds.wad: {not_required_for_playback: true, checksum: "53f71d708cf34cc7cd27b6569152f857"}
@@ -7224,6 +7294,7 @@
   iwad: doom2
   wad_files:
     tde.wad: {checksum: "804326ca2918db778ea2e80d6801ef1d"}
+    tde_old.wad: {not_required_for_playback: true, checksum: "600982dee2a4ea0261d1a97f32cabad3"}
   complevel: 9
   playback_cmd_line: "-file tde"
   map_list_info:
@@ -7528,6 +7599,7 @@
   iwad: doom2
   wad_files:
     dmp2012.wad: {checksum: "1cf4869981d465719f313c13458ff436"}
+    dmp2012_old.wad: {not_required_for_playback: true, checksum: "d24a2ac74789a752633403dbde14bd66"}
   complevel: 9
   playback_cmd_line: "-file dmp2012"
   map_list_info:
@@ -7731,6 +7803,8 @@
     vilecore1.0.wad: {checksum: "966eff0e4e2d0f6e6ec706c0cf2cab2e"}
     vilecore.deh: {not_required_for_playback: true, checksum: "eb1564c4e163f9b7699ab6f6d323d132"}
     map32.wad: {not_required_for_playback: true, checksum: "233c25d47ca607a889062a89ea8cc844"}
+    old/vilcore.wad: {not_required_for_playback: true, checksum: "2ecd6e86f80f33c879d637ac51f235ab"}
+    old/vilecore.deh: {not_required_for_playback: true, checksum: "0cdbd0b6aac393e2e93029863932e589"}
   complevel: 2
   playback_cmd_line: "-file vilecore1.0.wad"
   map_list_info:
@@ -8061,6 +8135,7 @@
   iwad: doom2
   wad_files:
     hellcore.wad: {checksum: "a9cf938dfc6dc36b174b547e9edf19c4"}
+    hcmus.wad: {not_required_for_playback: true, checksum: "2d79926c6937817b71d0bde517d38ff9"}
   complevel: 2
   playback_cmd_line: "-file hellcore"
   map_list_info:
@@ -8208,6 +8283,7 @@
   iwad: doom2
   wad_files:
     datacntr.wad: {checksum: "eaf1b2335e017271fd4796b8047f20cd"}
+    datacntr.deh: {not_required_for_playback: true, checksum: "574b6d070ea474160fcd375ac24753a3"}
   complevel: 2
   playback_cmd_line: "-file datacntr"
   map_list_info:
@@ -8514,7 +8590,8 @@
   wad_name: Axolotl
   iwad: doom2
   wad_files:
-    axolotl.wad: {checksum: "ba17a289ecb71021c3980a6a7c801811"}
+    axolotl/axolotl.wad: {checksum: "ba17a289ecb71021c3980a6a7c801811"}
+    axolotl/__macosx/._axolotl.wad: {not_required_for_playback: true, checksum: "65455a230873864877d8e587620d36bd"}
   complevel: 21
   playback_cmd_line: "-file axolotl"
   map_list_info:
@@ -8660,14 +8737,21 @@
   wad_name: Obituary 1.1, updated version
   iwad: doom2
   wad_files:
-    obtic.wad: {checksum: "c46ac9623d3d4cb987bee815d37f8881"}
-    obticwep.wad: {checksum: "562a18200c213061a0e283b36b5af39f"}
-    remnants.wad: {checksum: "aca56d73d246fe00d523607460f960fb"}
-    obtic.deh: {checksum: "3bd6e04f9fb9aafb48c56761327dfd72"}
-    obticwep.deh: {checksum: "05714dc49dee4ef80962f7a0c3e3a7a8"}
+    fixed/obtic.wad: {checksum: "c46ac9623d3d4cb987bee815d37f8881"}
+    fixed/obtic.deh: {dupe_checksum: true, checksum: "3bd6e04f9fb9aafb48c56761327dfd72"}
+    fixed/obticwep.wad: {checksum: "562a18200c213061a0e283b36b5af39f"}
+    fixed/obticwep.deh: {dupe_checksum: true, checksum: "05714dc49dee4ef80962f7a0c3e3a7a8"}
+    fixed/remnants.wad: {checksum: "aca56d73d246fe00d523607460f960fb"}
     # In case someone has differently-named WADs
     obticfix.wad: {dupe_checksum: true, not_required_for_playback: true, checksum: "c46ac9623d3d4cb987bee815d37f8881"}
     obticfix.deh: {dupe_checksum: true, not_required_for_playback: true, checksum: "3bd6e04f9fb9aafb48c56761327dfd72"}
+    obdeath1.wad: {not_required_for_playback: true, checksum: "107252fb2c3586c119e6c94b99ac558d"}
+    obdeath2.wad: {not_required_for_playback: true, checksum: "0e9ce7f436100d87f0912227d8f25c66"}
+    obtic1.deh: {dupe_checksum: true, not_required_for_playback: true, checksum: "3bd6e04f9fb9aafb48c56761327dfd72"}
+    obtic1.wad: {not_required_for_playback: true, checksum: "779ab2642f61db55c655a4af2f80bff4"}
+    obtic2.deh: {dupe_checksum: true, not_required_for_playback: true, checksum: "05714dc49dee4ef80962f7a0c3e3a7a8"}
+    obtic2.wad: {not_required_for_playback: true, checksum: "4ffb9f7967f95fde755c155ed8e4a75d"}
+    obtic3.wad: {not_required_for_playback: true, checksum: "c4c86cb40a92cfa2b2ac6a773aa71c1e"}
   complevel: 2
   playback_cmd_line: "-file obtic -deh obtic"
   alt_playback_cmd_lines: {"-file obtic obticwep -deh obticwep": "Plays back with obticwep WAD and DEH."}
@@ -8726,9 +8810,9 @@
   wad_name: "Monroe's Killer"
   iwad: doom
   wad_files:
-    MonroesKiller.wad: {checksum: "b9065c9963989002db9c55fef457f1df"}
+    monroeskiller.wad: {checksum: "b9065c9963989002db9c55fef457f1df"}
   complevel: 3
-  playback_cmd_line: "-file MonroesKiller"
+  playback_cmd_line: "-file monroeskiller"
   map_list_info:
     map_ranges: [["E1M1"]]
     episodes: []
@@ -8992,7 +9076,7 @@
   wad_name: "Wormwood ]|[ - The Horror"
   iwad: doom2
   wad_files:
-    wormwood3.wad: {checksum: "98f8d4303587418c8812e716fed4b2ed"}
+    wormwood3/wormwood3.wad: {checksum: "98f8d4303587418c8812e716fed4b2ed"}
   complevel: 9
   playback_cmd_line: "-file wormwood3"
   map_list_info:
@@ -9283,6 +9367,7 @@
   iwad: doom2
   wad_files:
     2048vr_v1.6.wad: {checksum: "fe0791fbbe5ec705e1029a92724d36cb"}
+    2048ex_v1.4.wad: {not_required_for_playback: true, checksum: "569021d4aebb96a8aa564a2213e7ed92"}
   complevel: 9
   playback_cmd_line: "-file 2048vr_v1.6.wad"
   map_list_info:
@@ -9578,5 +9663,70 @@
     d2all: ["Map 01", "Map 05"]
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/cldfrnt"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/btnx_e1":
+  wad_name: "Back to Nirvana X: Episode One"
+  iwad: doom2
+  wad_files:
+    btnx_e1.wad: {checksum: "30c37fa726edecc00472d75ad1e34cd0"}
+  complevel: 9
+  playback_cmd_line: "-file btnx_e1"
+  map_list_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/btnx_e1"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/95228-experiencing-nirvana-demos-complevel-9/"
+"https://www.dsdarchive.com/wads/5mnmayh":
+  wad_name: 5 Minute Map Collection (TrueDude maps)
+  iwad: doom2
+  wad_files:
+    5mnmayh.wad: {dupe_checksum: true, checksum: "e1983b4d308dffb89dddb6e9befe51e8"}
+    5minmap.wad: {dupe_checksum: true, not_required_for_playback: true, checksum: "110cc0446a39433ad7136352818e049e"}
+  complevel: 9
+  playback_cmd_line: "-file 5mnmayh"
+  map_list_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/0-9/5minmap"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/56037-5-minute-map-megawad-demos-clvl-9/"
+"https://www.dsdarchive.com/wads/h2h-xmas":
+  wad_name: H2H-Xmas.wad
+  iwad: doom2
+  wad_files:
+    h2h-xmas.wad: {checksum: "42be2765705c06d417da85b5fdc37f68"}
+  complevel: 2
+  playback_cmd_line: "-file h2h-xmas"
+  map_list_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/themes/xmas/h2h-xmas"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/118584-h2h-xmas-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/dbp_06":
+  wad_name: "DBP06: Vicarious Reality"
+  iwad: doom2
+  wad_files:
+    dbp_06.wad: {checksum: "55459ccaa46b112b177af3b81509c280"}
+  complevel: 2
+  playback_cmd_line: "-file dbp_06"
+  map_list_info:
+    map_ranges: [[1, 6], [30]]
+    d2all: ["Map 01", "Map 06"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp_06"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/mek-dom1":
+  wad_name: Dominion of Madess
+  iwad: doom2
+  wad_files:
+    mek-dom1.wad: {checksum: "30d5af642a99e54fc6029db5a44c1ce3"}
+  complevel: 9
+  playback_cmd_line: "-file mek-dom1"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/m-o/mek-dom1"
   dsda_paginated: false
   doomworld_thread: null
