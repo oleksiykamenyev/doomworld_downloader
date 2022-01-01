@@ -161,10 +161,6 @@ class PlaybackData:
         a problem but out of scope of this script). Additionally, a single download location is
         simpler.
 
-        For WADs that could not be guessed or are not on DSDA, the script will have a separate
-        output location where it will list what it could determine about the WADs, which could then
-        be manually uploaded. (TODO)
-
         Mismatches between idgames and DSDA will need to be handled by a separate utility. (TODO)
 
         :param wad: WAD object to check for
@@ -189,7 +185,7 @@ class PlaybackData:
                 local_wad_location = zip_extract(zip_location)
 
             copyfile(os.path.join(local_wad_location, wad_file),
-                     os.path.join(CONFIG.dsda_doom_directory, wad_file))
+                     os.path.join(CONFIG.dsda_doom_directory, os.path.basename(wad_file)))
 
         if local_wad_location:
             rmtree(local_wad_location)
@@ -234,7 +230,8 @@ class PlaybackData:
                 # TODO: Handle maps with no exits (requires DSDA-Doom fix)
                 if os.path.isfile(PlaybackData.LEVELSTAT_FILENAME):
                     wad_guessed = True
-                    wad_files = [wad_file.lower() for wad_file in wad_guess.files.keys()]
+                    wad_files = [os.path.basename(wad_file.lower())
+                                 for wad_file in wad_guess.files.keys()]
                     for footer_file in self.demo_info.get('footer_files', []):
                         if footer_file.lower() not in wad_files:
                             LOGGER.error('Unexpected file %s found in footer for WAD %s.',

@@ -2,6 +2,7 @@
 Parse data out of LMP header, footer, and other parts of the file (no playback).
 """
 # TODO: All of the parser classes can have stuff abstracted out.
+# TODO: Write LMP Python parsing library
 
 import logging
 import re
@@ -49,6 +50,7 @@ class LMPData:
     # TODO: We might benefit from certain/possible keys being possible to change as an instance;
     #       basically, source_port could be guessed fuzzily here or perfectly, and most of the time,
     #       it is the latter, but might be nice to account for the former
+    #       Maybe an override certainty dictionary is a way to do this?
     CERTAIN_KEYS = ['is_solo_net', 'num_players', 'recorded_at', 'source_port']
     POSSIBLE_KEYS = ['is_tas']
 
@@ -294,7 +296,18 @@ class LMPData:
                             # There may be multiple DEH files passed in, so check all of them
                             in_deh_args = True
                         if elem == '-complevel':
-                            self.raw_data['complevel'] = line[idx + 1]
+                            complevel = line[idx + 1]
+                            # TODO: Use the gameversion value instead of the IWAD:
+                            #         - possible values: 1.9/ultimate/final/chex
+                            if complevel == 'vanilla':
+                                if self.raw_data['iwad'] == 'doom2.wad':
+                                    complevel = '2'
+                                elif self.raw_data['iwad'] in ('chex.wad', 'doom.wad'):
+                                    complevel = '3'
+                                elif self.raw_data['iwad'] in ('plutonia.wad', 'tnt.wad'):
+                                    complevel = '4'
+
+                            self.raw_data['complevel'] = complevel
                         if elem == '-solo-net':
                             self.data['is_solo_net'] = True
                         if elem == '-coop_spawns':

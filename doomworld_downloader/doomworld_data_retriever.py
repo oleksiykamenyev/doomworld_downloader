@@ -33,6 +33,7 @@ ATTACH_URL_RE = re.compile(
 KEEP_CHARS = ['_', ' ', '.', '-']
 CONTENT_FILE = 'post_content.txt'
 METADATA_FILE = 'demo_downloader_meta.yaml'
+RAR_7Z_RE = re.compile(r'^.*\.(rar|7z)$')
 ZIP_RE = re.compile(r'^.*\.zip$')
 POST_CACHE_DIR = 'post_cache'
 POST_INFO_FILENAME = 'post_info.yaml'
@@ -197,8 +198,6 @@ def parse_thread_page(thread_url, thread=None):
         post_id = post['id'].split('_')[1]
         post_url = POST_URL_FMT.format(post_id=post_id)
 
-        # TODO: We may not want to extract_link here because that removes the links, so it might be
-        #       harder to infer which wad maps to which demos from a multi-wad multi-demo post
         links = get_links(post_content_elem.find_all('a'), extract_link=True)
 
         embeds = post_content_elem.find_all('iframe')
@@ -390,7 +389,9 @@ def download_attachments(post):
             LOGGER.error('Could not get attachment filename for attachment name %s, URL %s.',
                          attach_name, attach_url)
             raise
-        # TODO: Consider repackaging rars and 7zs so we don't have to ask the posters to do it
+
+        if RAR_7Z_RE.match(attach_filename):
+            LOGGER.warning('Rar or 7z file %s detected for post %s.', attach_name, post.post_url)
         if not ZIP_RE.match(attach_filename):
             continue
 

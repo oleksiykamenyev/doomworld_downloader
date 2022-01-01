@@ -70,8 +70,6 @@ def handle_downloads(downloads, post_data):
                     zip_file_name.endswith('.zdd')):
                 lmp_files[zip_file_name] = datetime(*zip_file_member.date_time)
             if zip_file_name.lower().endswith('.txt'):
-                # TODO: Keep track of textfile date; it might be useful if the lmp date needs
-                #       sanity checking
                 txt_files.append(zip_file_name)
 
         if not lmp_files:

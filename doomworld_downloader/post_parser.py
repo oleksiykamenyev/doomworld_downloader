@@ -61,8 +61,6 @@ class PostData:
                 if 'dsdarchive.com/wads' in link or 'doomworld.com/idgames' in link:
                     self.raw_data['wad_links'].append(link)
                 else:
-                    # TODO: Add more wad sites?
-                    # TODO: Alert on Dropbox/Drive/other file hosting sites?
                     continue
 
         for embed in self.post.embeds:

@@ -15,15 +15,42 @@ from .utils import get_download_filename, download_response, get_page
 LOGGER = logging.getLogger(__name__)
 
 
-def verify_dsda(url):
+def verify_dsda_url(url, page_types=None):
     """Verify that given DSDA URL is actually a URL for the DSDA.
 
+    Supported page type options:
+      - wad: check if it is a WAD URL (note: only default view).
+      - player: check if it is a player URL (note: excluding stats view).
+
     :param url: URL
-    :raises ValueError if provided URL isn't a DSDA URL.
+    :param page_types: Page types to check for
+    :raises ValueError if provided URL isn't a DSDA URL of the requested type.
+    :return Actual type of URL found
     """
     url_parsed = urlparse(url)
     if not url_parsed.netloc.endswith('dsdarchive.com'):
-        raise ValueError('URL {} is not a DSDA URL.'.format(url))
+        raise ValueError(f'URL "{url}" is not a DSDA URL.')
+
+    if page_types:
+        path_split = url_parsed.path.strip('/').split('/')
+        path_split_len = len(path_split)
+        actual_type = 'UNKNOWN'
+        if path_split_len >= 2:
+            if path_split[0] == 'wads':
+                if path_split_len > 2:
+                    raise ValueError(f'Only WAD URLs in default view supported, got "{url}".')
+                actual_type = 'wad'
+            elif path_split[0] == 'players':
+                if path_split_len > 2 and path_split[2] not in ['history', 'record_view']:
+                    raise ValueError(f'Unsupported player URL view for URL "{url}".')
+                actual_type = 'player'
+
+        if actual_type not in page_types:
+            raise ValueError(
+                f'Incorrect DSDA URL {url}; wanted one of {page_types}, got {actual_type}.'
+            )
+
+        return actual_type
 
 
 def fix_dsda_link(link_url):
@@ -73,14 +100,52 @@ def parse_dsda_cell(cell):
     return cell_text
 
 
-def dsda_page_to_demo_table(dsda_url):
-    """Convert DSDA page to table of demos.
+def parse_demo_page_headers(page_soup):
+    """Parse headers for a demo page on DSDA.
+
+    Empty headers are skipped. All other headers are returned with relevant info:
+      - main header (player name, wad name) returned, with wad name as dictionary mapping name to
+        ink
+      - other headers returned and parsed accordingly
+
+    :param page_soup: DSDA page soup
+    :return: Parsed demo page headers
+    """
+    headers = page_soup.findAll('div', {'class': 'center-text'})
+    parsed_headers = {}
+    for header in headers:
+        # All DSDA demo pages have a single empty header for some reason.
+        header_text = header.getText().strip()
+        if not header_text:
+            continue
+
+        link_elem = header.find('a')
+        # WAD pages always have the primary header link somewhere, so we can assume if there's a
+        # a link, it must be a WAD page, otherwise, it is a player page.
+        if link_elem:
+            link_url = link_elem['href']
+            # WADs that are marked deprecated have this header text. Otherwise, assume any link is
+            # a link to the WAD download (or page/additional files in cases that the WAD is
+            # commercial).
+            if header_text == 'This wad has a more recent version':
+                parsed_headers['new_wad_url'] = link_url
+            else:
+                parsed_headers['wad_name'] = header_text
+                parsed_headers['wad_url'] = link_url
+        else:
+            parsed_headers['player_name'] = header_text
+
+    return parsed_headers
+
+
+def dsda_demo_page_to_json(dsda_url):
+    """Convert DSDA demo page to JSON.
 
     :param dsda_url: DSDA URL
-    :return: Table of demos from given DSDA URL
+    :return: JSON of demos from given DSDA URL
     """
     # TODO: What the fuck is this code?
-    verify_dsda(dsda_url)
+    url_type = verify_dsda_url(dsda_url, page_types=['player', 'wad'])
     soup = get_page(dsda_url)
     demo_table = soup.find('table')
     table_header = demo_table.find('thead')
@@ -149,31 +214,15 @@ def download_wad_from_dsda(dsda_url, overwrite=True):
     :return: Path to local wad download from DSDA
     :raises ValueError if a non-wad URL is provided to this function
     """
+    verify_dsda_url(dsda_url, page_types=['wad'])
     soup = get_page(dsda_url)
-    verify_dsda(dsda_url)
-    if 'dsdarchive.com/wads' not in dsda_url:
-        raise ValueError('{} is not a wad URL on DSDA, nothing to download.'.format(dsda_url))
-    headers = soup.findAll('div', {'class': 'center-text'})
-    wad_url = None
-    for header in headers:
-        if not header.getText():
-            continue
-
-        link_elem = header.find('a')
-        if not link_elem:
-            continue
-
-        link_url = link_elem['href']
-        if link_url.startswith('/wads'):
-            continue
-        elif link_url.startswith('/files'):
-            wad_url = fix_dsda_link(link_url)
-
-    if not wad_url:
+    wad_url = parse_demo_page_headers(soup).get('wad_url')
+    if not wad_url or not wad_url.startswith('/files'):
         LOGGER.info('No link available for page: %s.', dsda_url)
         LOGGER.info('This should only happen if this is a commercial product.')
         return
 
+    wad_url = fix_dsda_link(wad_url)
     response = requests.get(wad_url)
     default_filename = urlparse(wad_url).path.strip('/').split('/')[-1]
     download_filename = get_download_filename(response, default_filename=default_filename)

@@ -3,6 +3,7 @@ WAD guesser.
 """
 
 import logging
+import os
 
 from .dsda import conform_dsda_wad_url
 from .upload_config import WAD_MAP_BY_DSDA_URL, WAD_MAP_BY_IDGAMES_URL
@@ -49,7 +50,7 @@ def get_wad_guesses(*args, iwad=None):
                 if not wad_to_guess_sanitized.endswith('.wad'):
                     wad_to_guess_sanitized = '{}.wad'.format(wad_to_guess_sanitized)
                 for url, wad in WAD_MAP_BY_DSDA_URL.items():
-                    if wad_to_guess_sanitized.lower() in [wad_file.lower()
+                    if wad_to_guess_sanitized.lower() in [os.path.basename(wad_file.lower())
                                                           for wad_file in wad.files.keys()]:
                         wad_guesses.append(wad)
                         break

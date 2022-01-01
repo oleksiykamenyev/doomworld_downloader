@@ -68,11 +68,6 @@ https://www.doomworld.com/forum/topic/114802-akeldama-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/akeldama
   id: '114802'
   name: Akeldama demos [-complevel 2]
-https://www.doomworld.com/forum/topic/116595-1000-lines-2-community-project-demos-complevel-2/:
-  additional_info:
-    wad: https://www.dsdarchive.com/wads/1klinecp2
-  id: '116595'
-  name: 1000 Lines 2 Community Project demos [-complevel 2]
 https://www.doomworld.com/forum/topic/20357-icarus-demos-complevel-2/:
   additional_info:
     wad: https://www.dsdarchive.com/wads/icarus
@@ -943,7 +938,26 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/h2h-xmas
   id: '118584'
   name: "H2H XMas demos [-complevel 2]"
-
+"https://www.doomworld.com/forum/topic/126158-fractured-worlds-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/fw
+  id: '126158'
+  name: "Fractured Worlds demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/126308-down-the-drain-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/drn
+  id: '126308'
+  name: "Down the Drain Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/126326-dubzzzs-5minute-design-assembly-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/d5da
+  id: '126326'
+  name: "Dubzzz's 5Minute Design Assembly [-complevel 9]"
+"https://www.doomworld.com/forum/topic/126431-ray-mohawk-2-demos-cl2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/mohawks2
+  id: '126431'
+  name: "Ray Mohawk 2 demos [-cl2]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/103041-mayhem-2018-purple-and-orange-demos-complevel-9/":
@@ -1089,6 +1103,14 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     - https://www.dsdarchive.com/wads/5mnmayh
   id: '56037'
   name: 5 minute map megawad demos -clvl 9
+"https://www.doomworld.com/forum/topic/126248-1000-lines-series-megathread-complevel-2/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/1klinecp
+      - https://www.dsdarchive.com/wads/1klinecp2
+      - https://www.dsdarchive.com/wads/1klinecp3
+  id: '126248'
+  name: 1000 Lines Series Megathread [-complevel 2]
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
