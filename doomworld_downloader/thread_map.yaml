@@ -958,6 +958,26 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/mohawks2
   id: '126431'
   name: "Ray Mohawk 2 demos [-cl2]"
+"https://www.doomworld.com/forum/topic/126536-1-bad-wad-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/1badwad
+  id: '126536'
+  name: "1 Bad Wad demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/126637-practice-hub-demos-boom-compat-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/practicehub
+  id: '126637'
+  name: "Practice Hub demos [Boom compat, -complevel 9]"
+"https://www.doomworld.com/forum/topic/126762-dark-scythe-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/dscythe
+  id: '126762'
+  name: "Dark Scythe Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/126811-haste-demos-complevel-09/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/haste
+  id: '126811'
+  name: "Haste demos [-complevel 09]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/103041-mayhem-2018-purple-and-orange-demos-complevel-9/":
@@ -1333,6 +1353,16 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     ignore: true
   id: "116534"
   name: dsda-doom guide [Usage, recording demos, and some extra info]
+"https://www.doomworld.com/forum/topic/126619-notable-2021-demos/":
+  additional_info:
+    ignore: true
+  id: "126619"
+  name: Notable 2021 demos
+"https://www.doomworld.com/forum/topic/126257-max-exceptions-debate-thread/":
+  additional_info:
+    ignore: true
+  id: "126257"
+  name: Max Exceptions Debate Thread
 
 # Miscellanous threads
 # Ignored because this is not the correct thread for NRFTL, and the one demo post in here was duped
