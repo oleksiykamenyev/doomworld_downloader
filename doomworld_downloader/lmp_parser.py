@@ -6,6 +6,7 @@ Parse data out of LMP header, footer, and other parts of the file (no playback).
 
 import logging
 import re
+import shlex
 import subprocess
 
 from datetime import datetime, timedelta
@@ -46,6 +47,7 @@ class LMPData:
     VERSION_COMPLEVEL_MAP = {
         201: '8', 202: '9', 210: '10', 211: '14', 212: '15', 213: '16', 214: '17', 221: '21'
     }
+    WOOF_GAMEVERSION_TO_COMPLEVEL_MAP = {'1.9': '2', 'ultimate': '3', 'final': '4', 'chex': '3'}
 
     # TODO: We might benefit from certain/possible keys being possible to change as an instance;
     #       basically, source_port could be guessed fuzzily here or perfectly, and most of the time,
@@ -276,9 +278,10 @@ class LMPData:
                     self.raw_data['source_port_family'] = line.strip()
             # Detect the command-line section by an argument that should always be there, I think
             if '-iwad' in line:
-                line = line.split()
+                line = shlex.split(line)
                 in_wad_args = False
                 in_deh_args = False
+                gameversion = None
                 for idx, elem in enumerate(line):
                     if elem.startswith('-'):
                         in_wad_args = False
@@ -296,22 +299,13 @@ class LMPData:
                             # There may be multiple DEH files passed in, so check all of them
                             in_deh_args = True
                         if elem == '-complevel':
-                            complevel = line[idx + 1]
-                            # TODO: Use the gameversion value instead of the IWAD:
-                            #         - possible values: 1.9/ultimate/final/chex
-                            if complevel == 'vanilla':
-                                if self.raw_data['iwad'] == 'doom2.wad':
-                                    complevel = '2'
-                                elif self.raw_data['iwad'] in ('chex.wad', 'doom.wad'):
-                                    complevel = '3'
-                                elif self.raw_data['iwad'] in ('plutonia.wad', 'tnt.wad'):
-                                    complevel = '4'
-
-                            self.raw_data['complevel'] = complevel
+                            self.raw_data['complevel'] = line[idx + 1]
                         if elem == '-solo-net':
                             self.data['is_solo_net'] = True
                         if elem == '-coop_spawns':
                             self.note_strings.add('-coop_spawns')
+                        if elem == '-gameversion':
+                            gameversion = line[idx + 1]
                     elif in_wad_args:
                         self.raw_data['wad_strings'].append(
                             self._parse_file_in_footer(line[idx], '.wad')
@@ -320,6 +314,10 @@ class LMPData:
                         self.raw_data['wad_strings'].append(
                             self._parse_file_in_footer(line[idx], '.deh')
                         )
+                if self.raw_data.get('complevel') == 'vanilla' and gameversion:
+                    self.raw_data['complevel'] = LMPData.WOOF_GAMEVERSION_TO_COMPLEVEL_MAP.get(
+                        gameversion, self.raw_data['complevel']
+                    )
 
     def _parse_file_in_footer(self, footer_file, extension):
         """Parse file argument from footer.

@@ -978,6 +978,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/haste
   id: '126811'
   name: "Haste demos [-complevel 09]"
+"https://www.doomworld.com/forum/topic/53752-teaming-up-inferno-by-chris-lutz-done/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/inf-lutz
+  id: '53752'
+  name: "Teaming up - Inferno by Chris Lutz [done!!!]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/103041-mayhem-2018-purple-and-orange-demos-complevel-9/":
@@ -1131,6 +1136,14 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/1klinecp3
   id: '126248'
   name: 1000 Lines Series Megathread [-complevel 2]
+"https://www.doomworld.com/forum/topic/108513-dyingcamels-demons-demos/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/dyincam1
+      - https://www.dsdarchive.com/wads/dyincam2
+      - https://www.dsdarchive.com/wads/dyincam3
+  id: '108513'
+  name: "DyingCamel's Demons demos"
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
