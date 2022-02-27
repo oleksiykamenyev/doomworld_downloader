@@ -65,6 +65,8 @@ class PlaybackData:
 
     DOOM_1_MAP_RE = re.compile(r'^E(?P<episode_num>\d)M\ds?$')
 
+    ALLOWED_FOOTER_FILES = ['doom widescreen hud.wad']
+
     def __init__(self, lmp_path, wad_guesses, demo_info=None):
         """Initialize playback data class.
 
@@ -233,7 +235,10 @@ class PlaybackData:
                     wad_files = [os.path.basename(wad_file.lower())
                                  for wad_file in wad_guess.files.keys()]
                     for footer_file in self.demo_info.get('footer_files', []):
-                        if footer_file.lower() not in wad_files:
+                        footer_lower = os.path.basename(footer_file.lower())
+                        if (footer_lower not in wad_files and
+                                footer_lower != f'{wad_guess.iwad}.wad' and
+                                footer_lower not in PlaybackData.ALLOWED_FOOTER_FILES):
                             LOGGER.error('Unexpected file %s found in footer for WAD %s.',
                                          footer_file, wad_guess.name)
                             self.playback_failed = True

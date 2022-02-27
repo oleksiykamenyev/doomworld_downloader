@@ -25,7 +25,8 @@ class LMPData:
     This is intended to be a very generic storage class that is mostly unaware of intricacies of the
     LMP format like headers, footers, etc. That will be handled by the LMP library used underneath.
     """
-    PORT_FOOTER_TO_DSDA_MAP = {'PrBoom-Plus': 'PRBoom', 'dsda-doom': 'DSDA-Doom', 'Woof': 'Woof'}
+    PORT_FOOTER_TO_DSDA_MAP = {'PrBoom-Plus': 'PRBoom', 'dsda-doom': 'DSDA-Doom', 'Woof': 'Woof',
+                               'Nugget Doom': 'Nugget Doom'}
     KEY_LIST = [
         'engine', 'version', 'skill', 'episode', 'level', 'play mode', 'respawn', 'fast',
         'nomonsters', 'player 1', 'player 2', 'player 3', 'player 4', 'player 5', 'player 6',

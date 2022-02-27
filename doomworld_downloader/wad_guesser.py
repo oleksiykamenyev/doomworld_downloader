@@ -46,7 +46,7 @@ def get_wad_guesses(*args, iwad=None):
                 if wad_to_guess in WAD_MAP_BY_IDGAMES_URL:
                     wad_guesses.append(WAD_MAP_BY_IDGAMES_URL[wad_to_guess])
             else:
-                wad_to_guess_sanitized = wad_to_guess.lower()
+                wad_to_guess_sanitized = os.path.basename(wad_to_guess.lower())
                 if not wad_to_guess_sanitized.endswith('.wad'):
                     wad_to_guess_sanitized = '{}.wad'.format(wad_to_guess_sanitized)
                 for url, wad in WAD_MAP_BY_DSDA_URL.items():

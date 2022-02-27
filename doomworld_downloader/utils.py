@@ -312,12 +312,16 @@ def parse_youtube_url(url):
     :param url: URL
     :return: YouTube URL code if it the URL was detected as a YouTube URL, else None
     """
+    url_split = None
     if 'youtube.com/embed' in url:
         return urlparse(url).path.strip('/').split('/')[-1]
     elif 'youtube.com/' in url:
-        return url.split('watch?v=')[1]
+        url_split = url.split('watch?v=')
     elif 'youtu.be/' in url:
-        return url.split('youtu.be/')[1]
+        url_split = url.split('youtu.be/')
+
+    if url_split and len(url_split) > 1:
+        return url_split[1]
 
     return None
 

@@ -983,6 +983,21 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/inf-lutz
   id: '53752'
   name: "Teaming up - Inferno by Chris Lutz [done!!!]"
+"https://www.doomworld.com/forum/topic/127337-rocky-learned-doom-builder-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/rldb
+  id: '127337'
+  name: 'Rocky "Learned" Doom Builder Demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/127422-cydonia-demos-complevel-4/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/cydonia
+  id: '127422'
+  name: "Cydonia Demos (complevel 4)"
+"https://www.doomworld.com/forum/topic/127598-bijou-doom-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/bijou
+  id: '127598'
+  name: "Bijou Doom Demos [complevel 3]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/103041-mayhem-2018-purple-and-orange-demos-complevel-9/":
@@ -1238,6 +1253,9 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
 "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/":
   id: "123364"
   name: DBP Demo Thread
+"https://www.doomworld.com/forum/topic/127478-mayhem-demo-thread-complevel-9/":
+  id: "127478"
+  name: MAYhem demo thread [-complevel 9]
 
 # WAD Author threads
 "https://www.doomworld.com/forum/topic/86724-demos-for-miscellaneous-ribbiks-maps/":
@@ -1252,6 +1270,9 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
 "https://www.doomworld.com/forum/topic/121232-doomshack-plays-various-works-of-doomkid/":
   id: "121232"
   name: Doomshack Plays (various works of Doomkid)
+"https://www.doomworld.com/forum/topic/127472-various-decay-wads/":
+  id: "127472"
+  name: Various Decay wads
 
 # Misc specialized threads
 "https://www.doomworld.com/forum/topic/94942-misc-heretic-hexen-demos/":
@@ -1265,9 +1286,12 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
   name: Misc. Deathmatch/Duel Map Demos
 
 # Global miscellaneous threads:
-"https://www.doomworld.com/forum/topic/70300-miscellaneous-demos-part-3/":
+"https://www.doomworld.com/forum/topic/126957-miscellaneous-demos-part-4/":
+  id: "126957"
+  name: Miscellaneous demos (part 4)
+"https://www.doomworld.com/forum/topic/70300-miscellaneous-demos-part-3-please-post-in-part-4-instead/":
   id: "70300"
-  name: Miscellaneous demos (part 3)
+  name: Miscellaneous demos (part 3) [please post in part 4 instead]
 "https://www.doomworld.com/forum/topic/59122-miscellaneous-demos-part-2-please-post-in-part-3-instead/":
   id: "59122"
   name: Miscellaneous demos (part 2) [please post in part 3 instead]

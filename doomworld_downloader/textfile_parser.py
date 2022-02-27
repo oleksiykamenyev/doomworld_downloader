@@ -100,6 +100,12 @@ class TextfileData:
             r'-?((complevel|cl)\s*(?P<complevel>\d+))?',
             re.IGNORECASE
         ): 'Woof',
+        # Nugget Doom
+        re.compile(
+            r'Nugget(\s*|-|_)?Doom(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+(\.\d+)?)\s*'
+            r'-?((complevel|cl)\s*(?P<complevel>\d+))?',
+            re.IGNORECASE
+        ): 'Woof',
 
         # ZDoom family
         # ZDoom
