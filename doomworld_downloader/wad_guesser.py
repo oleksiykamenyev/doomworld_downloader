@@ -37,14 +37,15 @@ def get_wad_guesses(*args, iwad=None):
                 arg
             ))
         for wad_to_guess in arg:
+            cur_wad_guesses = []
             if 'dsdarchive.com/wads' in wad_to_guess:
                 wad_to_guess = conform_dsda_wad_url(conform_url(wad_to_guess))
                 if wad_to_guess in WAD_MAP_BY_DSDA_URL:
-                    wad_guesses.append(WAD_MAP_BY_DSDA_URL[wad_to_guess])
+                    cur_wad_guesses.append(WAD_MAP_BY_DSDA_URL[wad_to_guess])
             elif 'doomworld.com/idgames' in wad_to_guess:
                 wad_to_guess = conform_idgames_url(conform_url(wad_to_guess))
                 if wad_to_guess in WAD_MAP_BY_IDGAMES_URL:
-                    wad_guesses.append(WAD_MAP_BY_IDGAMES_URL[wad_to_guess])
+                    cur_wad_guesses.append(WAD_MAP_BY_IDGAMES_URL[wad_to_guess])
             else:
                 wad_to_guess_sanitized = os.path.basename(wad_to_guess.lower())
                 if not wad_to_guess_sanitized.endswith('.wad'):
@@ -52,8 +53,12 @@ def get_wad_guesses(*args, iwad=None):
                 for url, wad in WAD_MAP_BY_DSDA_URL.items():
                     if wad_to_guess_sanitized.lower() in [os.path.basename(wad_file.lower())
                                                           for wad_file in wad.files.keys()]:
-                        wad_guesses.append(wad)
-                        break
+                        cur_wad_guesses.append(wad)
+
+            for wad_guess in cur_wad_guesses:
+                if wad_guess.parent:
+                    wad_guesses.append(WAD_MAP_BY_DSDA_URL[wad_guess.parent])
+                wad_guesses.append(wad_guess)
 
     # If we actually find no guesses, just default to guessing all IWADs.
     if not wad_guesses:

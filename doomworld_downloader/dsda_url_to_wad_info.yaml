@@ -241,7 +241,7 @@
   complevel: 2
   playback_cmd_line: "-file zone300"
   map_list_info:
-    map_ranges: [[1, 32]]
+    map_ranges: [[1, 33]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/zone300"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/65776-zone-300-demos-complevel-2/"
@@ -838,9 +838,12 @@
     av.wad: {checksum: "6006c3a370aa1dc0be04e0f3976f1ca4"}
     av.deh: {not_required_for_playback: true, checksum: "9e3073749f59fc3afeea48faa967a332"}
     # Technically this would desync map 20, but that would be caught by the playback..
-    avmovfix.wad: {not_required_for_playback: true, checksum: "8b841a6de9869c793a8ceb34c175797c"}
+    avmovfix.wad: {checksum: "8b841a6de9869c793a8ceb34c175797c"}
+    avmidi.wad: {not_required_for_playback: true, checksum: "f3f2a5f4bbff22be7ebf0cdfca646764"}
+    avmidi-np.wad: {not_required_for_playback: true, checksum: "d704c63aba34b24051f0103c2da556cf"}
   complevel: 2
   playback_cmd_line: "-file av"
+  alt_playback_cmd_lines: {"-file av avmovfix": "Plays back with avmovfix.wad."}
   map_list_info:
     map_ranges: [[1, 32]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/av"
@@ -10475,6 +10478,10 @@
       "Map 01":
         skip_reality: true
         tyson_only: true
+      "Map 10":
+        skip_reality: true
+      "Map 32":
+        skip_reality: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/hoe64"
   dsda_paginated: false
   doomworld_thread: null
@@ -10482,7 +10489,7 @@
   wad_name: "DBP14: After the Fall"
   iwad: doom2
   wad_files:
-    dbp14atf.wad: {checksum: "68c64656506fdfa504e3fd2cd4e1d358"}
+    dbp14atf.wad: {checksum: "f9b1e123af097b586b668b10ab53106c"}
   complevel: 2
   playback_cmd_line: "-file dbp14atf"
   map_list_info:
@@ -11618,7 +11625,7 @@
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/74484-sector-666-demos-complevel-2/"
 "https://www.dsdarchive.com/wads/yeehaw":
-  wad_name: YEEEEEEEEEEEEEEEEEEEEEEEE 
+  wad_name: YEEEEEEEEEEEEEEEEEEEEEEEE
   iwad: doom2
   wad_files:
     yeehaw.wad: {checksum: "3ccc87635fc7a6fd7aefb407f544eec2"}
@@ -12031,6 +12038,294 @@
     map_ranges: [[1]]
     d2all: null
     episodes: []
+    map_info:
+      "Map 01":
+        tyson_only: true
+        skip_reality: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/dmp2021"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/mnltdst":
+  wad_name: Moonlit District
+  iwad: doom2
+  wad_files:
+    mnltdst.wad: {checksum: "ebafb000dbd360ccbf0ea3fdcbf65301"}
+    mnltdst.deh: {checksum: "b3e54d447cdf7fac83eb9698e2fbafd4"}
+    mnltdst_rc2.wad: {not_required_for_playback: true, checksum: "3a3327dafa1ce27c2482f21d443e85fb"}
+  complevel: 2
+  playback_cmd_line: "-file mnltdst -deh mnltdst"
+  map_list_info:
+    map_ranges: [[1, 7]]
+    d2all: ["Map 01", "Map 07"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/m-o/mnltdst"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/2oberon":
+  wad_name: OBERON BASE
+  iwad: doom2
+  wad_files:
+    2oberon.wad: {checksum: "3f0c6375a9ab7ebe3cc0e8365944ddd5"}
+  complevel: 2
+  playback_cmd_line: "-file 2oberon"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/0-9/2oberon"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/bauhaus":
+  wad_name: B/\|_||-|/\|_|S
+  iwad: doom2
+  wad_files:
+    bauhaus.wad: {checksum: "2db74c52ecd5cae256f3beb4d0f006e9"}
+  complevel: 9
+  playback_cmd_line: "-file bauhaus"
+  map_list_info:
+    map_ranges: [[1, 4]]
+    d2all: ["Map 01", "Map 04"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/bauhaus"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/pizzas":
+  wad_name: Pizza Steve
+  iwad: doom2
+  wad_files:
+    pizzas.wad: {checksum: "3e1a099d42b35aea4849936d963bc074"}
+  complevel: 9
+  playback_cmd_line: "-file pizzas"
+  map_list_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/pizzas"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/thinker":
+  wad_name: thinker.wad
+  iwad: doom
+  wad_files:
+    thinker.wad: {checksum: "20aba99cfc586e68a94857073f556d8b"}
+  complevel: 3
+  playback_cmd_line: "-file thinker"
+  map_list_info:
+    map_ranges: [["E1M1", "E1M8"]]
+    episodes: [["E1M1", "E1M8"]]
+    secret_exits: {}
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/s-u/thinker"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/dbp_45":
+  wad_name: "DBP45: Vrack Botanicals"
+  iwad: doom2
+  wad_files:
+    dbp_45.wad: {checksum: "7908c587bb6e60d570658abf71f9a4df"}
+  complevel: 2
+  playback_cmd_line: "-file dbp_45"
+  map_list_info:
+    map_ranges: [[1, 10]]
+    d2all: ["Map 01", "Map 10"]
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/one-humanity":
+  wad_name: One Humanity
+  iwad: doom2
+  wad_files:
+    one-humanity.wad: {checksum: "e7a6bfa5829f02aa94052c8ad0a51f3e"}
+  complevel: 2
+  playback_cmd_line: "-file commercial/one-humanity"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+  commercial: true
+"https://www.dsdarchive.com/wads/arx":
+  wad_name: Arxangels
+  iwad: doom2
+  wad_files:
+    arx.wad: {checksum: "7e7fbd88c88a84716863d848cc928327"}
+  complevel: 2
+  playback_cmd_line: "-file arx"
+  map_list_info:
+    map_ranges: [[1, 12]]
+    d2all: ["Map 01", "Map 12"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/arx"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/89070-arxangels-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/rapidfire2":
+  wad_name: "Jazzmaster's Rapidfire 2: True Colors"
+  iwad: doom2
+  wad_files:
+    rapidfire2.wad: {checksum: "83fe2b6327b27b332df9853c35f71b88"}
+    rapidfire2.deh: {not_required_for_playback: true, checksum: "38454e27ef5c704cfe69e2dd05b3e67a"}
+  complevel: 2
+  playback_cmd_line: "-file rapidfire2"
+  map_list_info:
+    map_ranges: [[1, 6]]
+    d2all: ["Map 01", "Map 06"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/p-r/rapidfire2"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/mnltdst_rc2":
+  wad_name: Moonlit District
+  iwad: doom2
+  wad_files:
+    mnltdst_rc2.wad: {checksum: "3a3327dafa1ce27c2482f21d443e85fb"}
+  complevel: 2
+  playback_cmd_line: "-file mnltdst_rc2"
+  map_list_info:
+    map_ranges: [[1, 7]]
+    d2all: ["Map 01", "Map 07"]
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+  parent: "https://www.dsdarchive.com/wads/mnltdst"
+"https://www.dsdarchive.com/wads/havitetty":
+  wad_name: Havitetty
+  iwad: doom2
+  wad_files:
+    havitetty.wad: {checksum: "6eb8f4da7c0cb4de6d020c406ef74853"}
+    dehacked.deh: {not_required_for_playback: true, checksum: "1bb4a797d9d03520edad5dcb160db53a"}
+  complevel: 2
+  playback_cmd_line: "-file havitetty"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/g-i/havitetty"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/castevil":
+  wad_name: CASTEVIL.WAD
+  iwad: doom
+  wad_files:
+    castevil.wad: {checksum: "dae656f8460200633c534ead9cd63e76"}
+  complevel: 3
+  playback_cmd_line: "-file castevil"
+  map_list_info:
+    map_ranges: [["E2M5"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/a-c/castevil"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/helevtor":
+  wad_name: Hellevator
+  iwad: doom2
+  wad_files:
+    helevtor.wad: {checksum: "03476f7bbbee491daab6a483f475dae8"}
+  complevel: 9
+  playback_cmd_line: "-file helevtor"
+  map_list_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/helevtor"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/wormwood_eu":
+  wad_name: "Wormwood: Expanded Universe"
+  iwad: doom2
+  wad_files:
+    wormwood_eu/wormwood_eu.wad: {checksum: "ed57147eefad19814cf48c13721c1b46"}
+  complevel: 9
+  playback_cmd_line: "-file wormwood_eu"
+  map_list_info:
+    map_ranges: [[1, 4], [31, 33]]
+    d2all: ["Map 01", "Map 04"]
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/betray":
+  wad_name: BETRAY.WAD / BETRAYXB.WAD
+  iwad: doom2
+  wad_files:
+    betray.wad: {checksum: "2bb99c282627b58ef3c753a9544255b9"}
+    betrayxb.wad: {checksum: "589da6964b0148cce6472d3e3b9e8c29"}
+  complevel: 2
+  playback_cmd_line: "-file betray"
+  alt_playback_cmd_lines: {"-file betrayxb": "Plays back with betrayxb.wad."}
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/sewers":
+  wad_name: SEWERS.WAD / SEWERSXB.WAD
+  iwad: doom
+  wad_files:
+    sewers.wad: {checksum: "7b30cba8c9a79405a7240fd68eb013a5"}
+    sewersxb.wad: {checksum: "293240d48a1f924f4f8e91c0282f9fbd"}
+  complevel: 3
+  playback_cmd_line: "-file sewers"
+  alt_playback_cmd_lines: {"-file sewersxb": "Plays back with sewersxb.wad."}
+  map_list_info:
+    map_ranges: [["E3M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/s-u/sewers2"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/nuts2":
+  wad_name: NUTS2 - 2nd and/or 1st Anniversary Gold Plated Plutonic Aloy Coated Eight volume Nuclear Donkey Edit
+  iwad: doom2
+  wad_files:
+    nuts2.wad: {checksum: "9c945597fa569d5ebde868d986e08f3c"}
+  complevel: 2
+  playback_cmd_line: "-file nuts2"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/m-o/nuts2"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/huac1":
+  wad_name: Hallways of UAC
+  iwad: doom
+  wad_files:
+    huac1.wad: {checksum: "d4c7369d7231e83d1b65a097ae1fc642"}
+  complevel: 3
+  playback_cmd_line: "-file huac1"
+  map_list_info:
+    map_ranges: [["E1M1", "E1M8"]]
+    episodes: [["E1M1", "E1M8"]]
+    secret_exits: {}
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/Ports/g-i/huac1"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/sawdust":
+  wad_name: Sawdust
+  iwad: doom2
+  wad_files:
+    sawdust.wad: {checksum: "ccc48c84da96e90ea423afbcabbde996"}
+  complevel: 11
+  playback_cmd_line: "-file sawdust"
+  map_list_info:
+    map_ranges: [[1, 7]]
+    d2all: ["Map 01", "Map 07"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/s-u/sawdust"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72445-valiant-sawdust-demos-complevel-11/"
+"https://www.dsdarchive.com/wads/endpoint":
+  wad_name: END POINT
+  iwad: doom2
+  wad_files:
+    endpoint.wad: {checksum: "f839175014c1fa5057c0516af7edea43"}
+  complevel: 2
+  playback_cmd_line: "-file endpoint"
+  map_list_info:
+    map_ranges: [[1, 7]]
+    d2all: ["Map 01", "Map 07"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/endpoint"
   dsda_paginated: false
   doomworld_thread: null

@@ -277,3 +277,6 @@ class Wad:
     dsda_name: str = None
     # Whether or not a WAD is commercial (AKA, whether it is possible to download from DSDA)
     commercial: bool = False
+    # Parent WAD if it is applicable; if a WAD has a parent, its parent will be used to test syncing
+    # before the WAD itself
+    parent: str = None

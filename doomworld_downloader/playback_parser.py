@@ -65,7 +65,7 @@ class PlaybackData:
 
     DOOM_1_MAP_RE = re.compile(r'^E(?P<episode_num>\d)M\ds?$')
 
-    ALLOWED_FOOTER_FILES = ['doom widescreen hud.wad']
+    ALLOWED_FOOTER_FILES = ['bloodcolor.deh', 'doom widescreen hud.wad']
 
     def __init__(self, lmp_path, wad_guesses, demo_info=None):
         """Initialize playback data class.
@@ -199,11 +199,12 @@ class PlaybackData:
         """
         wad_guessed = False
         for wad_guess in self.wad_guesses:
-            try:
-                self._check_wad_existence(wad_guess)
-            except RuntimeError:
-                LOGGER.error('Wad %s not available.', wad_guess.name)
-                continue
+            if not wad_guess.commercial:
+                try:
+                    self._check_wad_existence(wad_guess)
+                except RuntimeError:
+                    LOGGER.error('Wad %s not available.', wad_guess.name)
+                    continue
 
             # Prefer the primary playback CMD line; if it doesn't work, look through the
             # alternatives

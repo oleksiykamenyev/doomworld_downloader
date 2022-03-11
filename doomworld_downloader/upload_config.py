@@ -210,7 +210,8 @@ def set_up_configs(upload_config_path=None):
             doomworld_thread=wad_dict['doomworld_thread'],
             playback_cmd_line=wad_dict.get('playback_cmd_line', ''),
             alt_playback_cmd_lines=wad_dict.get('alt_playback_cmd_lines', {}),
-            dsda_name=wad_dict.get('dsda_name'), commercial=wad_dict.get('commercial', False)
+            dsda_name=wad_dict.get('dsda_name'), commercial=wad_dict.get('commercial', False),
+            parent=wad_dict.get('parent')
         )
         WAD_MAP_BY_DSDA_URL[url] = wad_info
         WAD_MAP_BY_IDGAMES_URL[wad_dict['idgames_url']] = wad_info
