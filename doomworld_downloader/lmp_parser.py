@@ -362,7 +362,8 @@ class LMPData:
             if 'XDRE' in source_port_family:
                 self.data['source_port'] = port_split[-1].replace('(', '').replace(')', '')
             else:
-                port_name, port_version = port_split
+                port_name = ' '.join(port_split[:-1])
+                port_version = port_split[-1]
                 # Normalize port names
                 port_name = LMPData.PORT_FOOTER_TO_DSDA_MAP.get(port_name, port_name)
 

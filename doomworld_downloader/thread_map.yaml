@@ -998,6 +998,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/bijou
   id: '127598'
   name: "Bijou Doom Demos [complevel 3]"
+"https://www.doomworld.com/forum/topic/128568-tnt-threevilution-tnt3-demos-iwad-tntwad-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/tntthree
+  id: '128568'
+  name: "TNT: Threevilution (TNT3) demos [-iwad tnt.wad -complevel 9]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/103041-mayhem-2018-purple-and-orange-demos-complevel-9/":

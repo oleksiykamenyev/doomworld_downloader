@@ -49,73 +49,77 @@ class TextfileData:
     PORT_REGEXES = {
         # Chocolate family
         # Chocolate Doom
-        re.compile(r'Chocolate(\s*|-|_)?Doom(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+\.\d+)',
-                   re.IGNORECASE): 'Chocolate DooM',
+        re.compile(r'Chocolate(\s*|-|_)?Doom(\.exe)?(\s*|-)?'
+                   r'(v|version)?\.?(?P<version>\d\.\d+\.\d+)', re.IGNORECASE): 'Chocolate DooM',
         # Crispy Doom
         re.compile(
-            r'Crispy(\s*|-|_)?Doom(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+(\.\d+)?)', re.IGNORECASE
+            r'Crispy(\s*|-|_)?Doom(\.exe)?(\s*|-)?'
+            r'(v|version)?\.?(?P<version>\d\.\d+(\.\d+)?)', re.IGNORECASE
         ): 'Crispy Doom',
         # Crispy Heretic
         re.compile(
-            r'Crispy(\s*|-|_)?Heretic(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+(\.\d+)?)',
-            re.IGNORECASE
+            r'Crispy(\s*|-|_)?Heretic(\.exe)?(\s*|-)?'
+            r'(v|version)?\.?(?P<version>\d\.\d+(\.\d+)?)', re.IGNORECASE
         ): 'Crispy Heretic',
         # CNDoom
         re.compile(
-            r'CNDoom(\.exe)?\s*v?\.?(?P<version>\d\.\d\.\d(\.\d))?', re.IGNORECASE
+            r'CNDoom(\.exe)?\s*(v|version)?\.?(?P<version>\d\.\d\.\d(\.\d))?', re.IGNORECASE
         ): 'CNDoom',
         # Sprinkled Doom
         re.compile(
-            r'Sprinkled(\s*|-|_)?Doom(\.exe)?\s*v?\.?(?P<version>\d\.\d\.\d(\.\d))?', re.IGNORECASE
+            r'Sprinkled(\s*|-|_)?Doom(\.exe)?\s*'
+            r'(v|version)?\.?(?P<version>\d\.\d\.\d(\.\d))?', re.IGNORECASE
         ): 'Sprinkled Doom',
 
         # Boom/MBF family
         # Boom
-        re.compile(r'([\S+])Boom\s*v?(?P<version>2\.0\.[0-2])', re.IGNORECASE): 'Boom',
+        re.compile(r'([\S+])Boom\s*(v|version)?(?P<version>2\.0\.[0-2])', re.IGNORECASE): 'Boom',
         # MBF
         re.compile(
-            r'[\S+](?P<name>MBF(386|-Sigil|-SNM)?)\s*v?(?P<version>\d\.\d\.\d)', re.IGNORECASE
+            r'[\S+](?P<name>MBF(386|-Sigil|-SNM)?)\s*(v|version)?(?P<version>\d\.\d\.\d)',
+            re.IGNORECASE
         ): None,
         # TASMBF
         re.compile(r'TASMBF', re.IGNORECASE): 'TASMBF',
         # PrBoom
         re.compile(
-            r'(Pr|GL)Boom(\.exe)?^(\+|-?plus)\s*v?\.?(?P<version>\d\.\d\.\d)', re.IGNORECASE
+            r'(Pr|GL)Boom(\.exe)?^(\+|-?plus)\s*(v|version)?\.?(?P<version>\d\.\d\.\d)',
+            re.IGNORECASE
         ): 'PRBoom',
         # PrBoom+
         re.compile(
-            r'(Pr|GL)(Boom)?\s*(\+|-?plus)?(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d\.\d\.\d)\s'
-            r'*-?((complevel|cl)\s*(?P<complevel>\d+))?',
-            re.IGNORECASE
+            r'(Pr|GL)(Boom)?\s*(\+|-?plus)?(\.exe)?(\s*|-)?'
+            r'(v|version)?\.?(?P<version>\d\.\d\.\d\.\d)\s'
+            r'*-?((complevel|cl)\s*(?P<complevel>\d+))?', re.IGNORECASE
         ): 'PRBoom',
         # DSDA-Doom
         re.compile(
-            r'DSDA(\s*|-|_)?Doom(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+(\.\d+)?)\s*'
+            r'DSDA(\s*|-|_)?Doom(\.exe)?(\s*|-)?(v|version)?\.?(?P<version>\d\.\d+(\.\d+)?)\s*'
             r'-?((complevel|cl)\s*(?P<complevel>\d+))?',
             re.IGNORECASE
         ): 'DSDA-Doom',
         # Woof
         re.compile(
-            r'Woof!?(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+(\.\d+)?)\s*'
+            r'Woof!?(\.exe)?(\s*|-)?(v|version)?\.?(?P<version>\d\.\d+(\.\d+)?)\s*'
             r'-?((complevel|cl)\s*(?P<complevel>\d+))?',
             re.IGNORECASE
         ): 'Woof',
         # Nugget Doom
         re.compile(
-            r'Nugget(\s*|-|_)?Doom(\.exe)?(\s*|-)?v?\.?(?P<version>\d\.\d+(\.\d+)?)\s*'
+            r'Nugget(\s*|-|_)?Doom(\.exe)?(\s*|-)?(v|version)?\.?(?P<version>\d\.\d+(\.\d+)?)\s*'
             r'-?((complevel|cl)\s*(?P<complevel>\d+))?',
             re.IGNORECASE
         ): 'Woof',
 
         # ZDoom family
         # ZDoom
-        re.compile(r'[\S+]ZDoom\s*v?(?P<version>\d\.\d(\.\S+))?', re.IGNORECASE): 'ZDoom',
+        re.compile(r'[\S+]ZDoom\s*(v|version)?(?P<version>\d\.\d(\.\S+))?', re.IGNORECASE): 'ZDoom',
         # GZDoom
-        re.compile(r'GZDoom\s*v?(?P<version>\d\.\d\.\d+)', re.IGNORECASE): 'GZDoom',
+        re.compile(r'GZDoom\s*(v|version)?(?P<version>\d\.\d\.\d+)', re.IGNORECASE): 'GZDoom',
         # ZDaemon
-        re.compile(r'ZDaemon\s*v?(?P<version>\d\.\d\.\d+)', re.IGNORECASE): 'ZDaemon',
+        re.compile(r'ZDaemon\s*(v|version)?(?P<version>\d\.\d\.\d+)', re.IGNORECASE): 'ZDaemon',
         # Zandronum
-        re.compile(r'Zandronum\s*v?(?P<version>\d\.\d(\.\d+)?(\s*Alpha))',
+        re.compile(r'Zandronum\s*(v|version)?(?P<version>\d\.\d(\.\d+)?(\s*Alpha))',
                    re.IGNORECASE): 'Zandronum',
 
         # Other ports
@@ -124,7 +128,8 @@ class TextfileData:
                    re.IGNORECASE): 'Strawberry Doom',
 
         # TAS
-        re.compile(r'XDRE(\.exe)?(\s*|-)?v?\.?(?P<version>\d.\d+)', re.IGNORECASE): 'XDRE',
+        re.compile(r'XDRE(\.exe)?(\s*|-)?(v|version)?\.?(?P<version>\d.\d+)',
+                   re.IGNORECASE): 'XDRE',
     }
 
     def __init__(self, textfile_path):
@@ -178,6 +183,8 @@ class TextfileData:
 
                 if key in TextfileData.CATEGORY_KEYS:
                     self.data['category'] = self._parse_category(value_lowercase)
+                    if 'tas' in value_lowercase.split():
+                        self.data['is_tas'] = True
                 elif key in TextfileData.PORT_KEYS:
                     self.data['source_port'] = self._parse_port(value_lowercase)
                 elif key in TextfileData.VIDEO_KEYS:

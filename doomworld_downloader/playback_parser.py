@@ -65,7 +65,8 @@ class PlaybackData:
 
     DOOM_1_MAP_RE = re.compile(r'^E(?P<episode_num>\d)M\ds?$')
 
-    ALLOWED_FOOTER_FILES = ['bloodcolor.deh', 'doom widescreen hud.wad']
+    ALLOWED_FOOTER_FILES = ['bloodcolor.deh', 'doom widescreen hud.wad',
+                            'doom 2 widescreen assets.wad']
 
     def __init__(self, lmp_path, wad_guesses, demo_info=None):
         """Initialize playback data class.
@@ -237,6 +238,8 @@ class PlaybackData:
                                  for wad_file in wad_guess.files.keys()]
                     for footer_file in self.demo_info.get('footer_files', []):
                         footer_lower = os.path.basename(footer_file.lower())
+                        if not os.path.splitext(footer_lower)[1]:
+                            footer_lower = f'{footer_lower}.wad'
                         if (footer_lower not in wad_files and
                                 footer_lower != f'{wad_guess.iwad}.wad' and
                                 footer_lower not in PlaybackData.ALLOWED_FOOTER_FILES):

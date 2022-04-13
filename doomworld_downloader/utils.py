@@ -165,7 +165,11 @@ def run_cmd(cmd, get_output=False, dryrun=False):
         # Debug instead of info to minimize noise when running the script
         LOGGER.debug('Running command "%s"', cmd_str)
         if get_output:
-            return subprocess.check_output(cmd).decode('utf-8')
+            try:
+                return subprocess.check_output(cmd).decode('utf-8')
+            except UnicodeDecodeError:
+                LOGGER.error('Command "%s" produced error.', cmd_str)
+                return subprocess.check_output(cmd).decode('utf-8', errors='ignore')
 
         subprocess.check_call(cmd)
 
