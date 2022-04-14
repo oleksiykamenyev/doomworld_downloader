@@ -1120,12 +1120,13 @@
   wad_name: No Rest for the Living
   iwad: doom2
   wad_files:
-    nerve.wad: {dupe_checksum: true, checksum: "f98f0a9f611cbc615405b74df9e5fa23"}
-    nerve_compat.wad: {dupe_checksum: true, checksum: "f98f0a9f611cbc615405b74df9e5fa23"}
+    nerve.wad: {checksum: "967d5ae23daf45196212ae1b605da3b0"}
+    nerve_compat.wad: {checksum: "f98f0a9f611cbc615405b74df9e5fa23"}
     nervenew.wad: {checksum: "1933fe15f11538bceeada51dd5d342a6"}
   complevel: 2
   playback_cmd_line: "-file commercial/nerve"
-  alt_playback_cmd_lines: {"-file commercial/nervenew": "Plays back with nervenew.wad."}
+  alt_playback_cmd_lines: {"-file commercial/nerve_compat": "Plays back with nerve_compat.wad.",
+                           "-file commercial/nervenew": "Plays back with nervenew.wad."}
   map_list_info:
     map_ranges: [[1, 9]]
     d2all: ["Map 01", "Map 09"]
@@ -12914,6 +12915,11 @@
   playback_cmd_line: "-file tntthree"
   map_list_info:
     map_ranges: [[1, 32]]
+    map_info:
+      "Map 14":
+        skip_reality: true
+      "Map 27":
+        skip_reality: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/tntthree"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/128568-tnt-threevilution-tnt3-demos-iwad-tntwad-complevel-9/"
@@ -12928,5 +12934,47 @@
     map_ranges: [["E1M1"]]
     episodes: []
   idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/abysped6":
+  wad_name: "Abyssal Speedmapping Sessions: Session 6"
+  iwad: doom2
+  wad_files:
+    abysped6.wad: {checksum: "dc6a8f151311ce2690d5e7482703f81a"}
+  complevel: 9
+  playback_cmd_line: "-file abysped6"
+  map_list_info:
+    map_ranges: [[1, 11]]
+    d2all: ["Map 01", "Map 11"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abysped6"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/abysped9":
+  wad_name: "Abyssal Speedmapping Sessions: Session 9"
+  iwad: doom2
+  wad_files:
+    abysped9.wad: {checksum: "493268eba4a10abca3b681259de89691"}
+  complevel: 9
+  playback_cmd_line: "-file abysped9"
+  map_list_info:
+    map_ranges: [[1, 7]]
+    d2all: ["Map 01", "Map 07"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abysped9"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/punishr":
+  wad_name: PUNISHER.WAD
+  iwad: doom2
+  wad_files:
+    punisher.wad: {checksum: "407424b75169f81d9ce2bf535b8e2472"}
+  complevel: 2
+  playback_cmd_line: "-file punisher"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/p-r/punishr"
   dsda_paginated: false
   doomworld_thread: null
