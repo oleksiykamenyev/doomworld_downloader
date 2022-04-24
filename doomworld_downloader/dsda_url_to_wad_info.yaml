@@ -450,7 +450,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/die"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128676-death-in-excess-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/aa_e1":
   wad_name: "Alpha Accident: Terra Nova"
   iwad: doom
@@ -592,6 +592,10 @@
     map_ranges: [[1, 3], [31]]
     d2all: ["Map 01", "Map 03"]
     episodes: []
+    map_info:
+      "Map 01":
+        "coop":
+          tyson_only: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/s-u/swtw"
   dsda_paginated: false
   doomworld_thread: null
@@ -885,7 +889,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/c-shock2"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128795-combat-shock-combat-shock-2-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/resonance":
   wad_name: Resonance
   iwad: doom2
@@ -1339,7 +1343,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/dbp25_dbd"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/jpcp":
   wad_name: Japanese Community Project
   iwad: doom2
@@ -1503,7 +1507,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp8_mbg"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/32of64-v":
   wad_name: "The 64 kb challenge: Vanilla selection"
   iwad: doom2
@@ -1531,7 +1535,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp36"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/deathless":
   wad_name: Deathless (v1.1)
   iwad: doom
@@ -1630,7 +1634,7 @@
     secret_exits: {}
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe26"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/tormen01":
   wad_name: Tormentum
   iwad: doom
@@ -1694,7 +1698,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abysped3"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/nitelife":
   wad_name: NITELIFE.WAD
   iwad: doom2
@@ -2077,6 +2081,9 @@
   playback_cmd_line: "-file proj-x"
   map_list_info:
     map_ranges: [[1, 32]]
+    map_info:
+      "Map 21":
+        skip_reality: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/proj-x"
   dsda_paginated: false
   doomworld_thread: null
@@ -2105,7 +2112,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/s-u/tntresist"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128727-tnt-resistance-demos-complevel-4/"
 "https://www.dsdarchive.com/wads/rampage2":
   wad_name: Massacre in Deimos
   iwad: doom
@@ -2238,7 +2245,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/0-9/32in24-d"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/48828-diet-32in24-demos/"
 "https://www.dsdarchive.com/wads/a41_spdm":
   wad_name: All for One - the First Co-op Only Episode Single-player/deathmatch version
   iwad: doom
@@ -2351,7 +2358,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/mayhem18o"
   dsda_paginated: false
-  doomworld_thread: "https://www.doomworld.com/forum/topic/103041-mayhem-2018-purple-and-orange-demos-complevel-9/"
+  doomworld_thread: "https://www.doomworld.com/forum/topic/127478-mayhem-demo-thread-complevel-9/"
 "https://www.dsdarchive.com/wads/darken":
   wad_name: The Darkening
   iwad: doom2
@@ -2807,7 +2814,7 @@
     episodes: [["Map 01", "Map 10"], ["Map 11", "Map 20"]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/mayhem18p"
   dsda_paginated: false
-  doomworld_thread: "https://www.doomworld.com/forum/topic/103041-mayhem-2018-purple-and-orange-demos-complevel-9/"
+  doomworld_thread: "https://www.doomworld.com/forum/topic/127478-mayhem-demo-thread-complevel-9/"
 "https://www.dsdarchive.com/wads/pnano18":
   wad_name: Nanopineapple 2018
   iwad: doom2
@@ -2900,7 +2907,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe15"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/medley":
   wad_name: "Hell Medley (original: Pekelna vsehochut)"
   iwad: doom
@@ -3175,7 +3182,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe30"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/lake":
   wad_name: LAKEDOOM
   iwad: doom
@@ -3352,7 +3359,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe13"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/raven":
   wad_name: The Complete RAVEN SERIES Maps 1-11
   iwad: doom2
@@ -3545,7 +3552,7 @@
     map_ranges: [[1, 32]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/10secto2"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128696-10-sectors-part-2-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/dwspd003":
   wad_name: "Doomworld Speedmapping Compilation #3"
   iwad: doom2
@@ -3559,7 +3566,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dwspd003"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128765-doomworld-speedmapping-compilation-demos/"
 "https://www.dsdarchive.com/wads/higherv2":
   wad_name: Higher (latest)
   iwad: doom2
@@ -3721,7 +3728,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/3x3"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128680-3x3-and-take-two-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/3ha2":
   wad_name: 3 Heures d'agonie 2
   iwad: doom2
@@ -3843,7 +3850,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abysped5"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/connex2":
   wad_name: Connex 2
   iwad: doom2
@@ -4139,7 +4146,7 @@
     map_ranges: [[1, 33]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/gmp"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128726-good-morning-phobos-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/vali":
   wad_name: Val
   iwad: doom2
@@ -4205,7 +4212,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/1337"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128773-1337-demos-complevel-2/"
 "https://www.dsdarchive.com/wads/radplant":
   wad_name: Radiation Processing Plant
   iwad: doom2
@@ -4233,7 +4240,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe36"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/rot_e2m1":
   wad_name: ROT_E2M1.WAD
   iwad: doom
@@ -4298,7 +4305,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe27"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/rage_11":
   wad_name: Rage_11.WAD
   iwad: doom
@@ -4416,7 +4423,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/legher":
   wad_name: Legacy of Heroes
   iwad: doom2
@@ -4597,7 +4604,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe19"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/abyspe24":
   wad_name: Abyssal Speedmapping Session 24
   iwad: doom2
@@ -4611,7 +4618,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe24"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/flash":
   wad_name: flash.wad
   iwad: doom
@@ -4726,7 +4733,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe11"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/abyspe25":
   wad_name: Abyssal Speedmapping Session 25
   iwad: doom2
@@ -4740,7 +4747,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe25"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/smfsp2":
   wad_name: Short maps for short people 2
   iwad: doom2
@@ -4955,7 +4962,7 @@
     map_ranges: [[1, 32]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/5room"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128729-five-rooms-of-doom-complevel-9/"
 "https://www.dsdarchive.com/wads/dbp_23_v2":
   wad_name: "DBP23: Evil Egypt"
   iwad: doom2
@@ -4969,7 +4976,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp_23_v2"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/dbp11":
   wad_name: "DBP11: Lilywhite Lilith"
   iwad: doom2
@@ -4983,7 +4990,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp11"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/dem":
   wad_name: DEM.WAD
   iwad: doom2
@@ -5080,7 +5087,7 @@
         tyson_only: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/mayhem16"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/127478-mayhem-demo-thread-complevel-9/"
 "https://www.dsdarchive.com/wads/abyspe18":
   wad_name: "Abyssal Speedmapping Sessions: Session 18"
   iwad: doom2
@@ -5094,7 +5101,7 @@
     episodes: [["Map 01", "Map 10"], ["Map 11", "Map 20"]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe18"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/abyspe21":
   wad_name: "Abyssal Speedmapping Sessions: Session 21"
   iwad: doom2
@@ -5108,7 +5115,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe21"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/abyspe34":
   wad_name: "Abyssal Speedmapping Sessions: Session 34"
   iwad: doom2
@@ -5122,7 +5129,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe34"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/abyspe35":
   wad_name: "Abyssal Speedmapping Sessions: Session 35"
   iwad: doom2
@@ -5136,7 +5143,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe35"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/s2pv":
   wad_name: Sparta 2 - Project vesuvius
   iwad: doom2
@@ -5297,7 +5304,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/dmp2014"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/92251-doomworld-mega-project-series-demos/"
 "https://www.dsdarchive.com/wads/caslevel":
   wad_name: Caslevel.wad
   iwad: doom2
@@ -5363,7 +5370,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/dmp2015"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/92251-doomworld-mega-project-series-demos/"
 "https://www.dsdarchive.com/wads/skylab":
   wad_name: Skylab
   iwad: doom2
@@ -5469,7 +5476,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dwspd019"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128765-doomworld-speedmapping-compilation-demos/"
 "https://www.dsdarchive.com/wads/dwspd002":
   wad_name: "Doomworld Speedmapping Compilation #2"
   iwad: doom2
@@ -5483,7 +5490,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dwspd002"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128765-doomworld-speedmapping-compilation-demos/"
 "https://www.dsdarchive.com/wads/20dnhell":
   wad_name: 20 Days in Hell
   iwad: plutonia
@@ -5619,7 +5626,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe55"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/dmp2015a":
   wad_name: Doomworld Mega Project 2015 (DMP15A)
   iwad: doom2
@@ -5633,7 +5640,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/dmp2015"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/92251-doomworld-mega-project-series-demos/"
 "https://www.dsdarchive.com/wads/sci":
   wad_name: SCIENTIST
   iwad: doom2
@@ -5676,7 +5683,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/dmp2013"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/92251-doomworld-mega-project-series-demos/"
 "https://www.dsdarchive.com/wads/river2":
   wad_name: RIVER.WAD (River to Hell)
   iwad: doom2
@@ -5704,7 +5711,7 @@
     episodes: [["Map 01", "Map 10"], ["Map 11", "Map 20"]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe38"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/rh21a":
   wad_name: RH21A.WAD
   iwad: doom
@@ -5758,7 +5765,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe46"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/intime":
   wad_name: Somewhere in Time
   iwad: doom2
@@ -5801,7 +5808,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe49"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/blt":
   wad_name: BLT.WAD
   iwad: doom
@@ -5828,7 +5835,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe50"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/abyspe51":
   wad_name: "Abyssal Speedmapping Sessions: Session 51"
   iwad: doom2
@@ -5842,7 +5849,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe51"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/syringe":
   wad_name: "Abyssal Speedmapping Sessions: Session 51"
   iwad: doom2
@@ -5870,7 +5877,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe56"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/abyspe52":
   wad_name: "Abyssal Speedmapping Sessions: Session 52"
   iwad: doom2
@@ -5884,7 +5891,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe52"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/rane1m1":
   wad_name: "Chris's Hangar"
   iwad: doom
@@ -6081,7 +6088,7 @@
     map_ranges: [[1, 32]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/alt"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128678-alt-demos-complevel-2/"
 "https://www.dsdarchive.com/wads/tdevil2":
   wad_name: The Devilz Work
   iwad: doom2
@@ -6803,7 +6810,7 @@
     map_ranges: [[1, 48]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/mayhem20"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/127478-mayhem-demo-thread-complevel-9/"
 "https://www.dsdarchive.com/wads/ht":
   wad_name: "Heroes' Tales"
   iwad: tnt
@@ -7066,7 +7073,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/j-l/lunatic"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128732-lunatic-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/refuse":
   wad_name: REFUSE
   iwad: doom
@@ -7229,7 +7236,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe33"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/abyspe40":
   wad_name: "Abyssal Speedmapping Sessions: Session 40"
   iwad: doom2
@@ -7243,7 +7250,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe40"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/abyspe53":
   wad_name: "Abyssal Speedmapping Sessions: Session 53"
   iwad: doom2
@@ -7257,7 +7264,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe53"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/abyspe54":
   wad_name: "Abyssal Speedmapping Session 54: dead.ass"
   iwad: doom2
@@ -7271,7 +7278,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe54"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/pillars":
   wad_name: PILLARS.WAD
   iwad: doom
@@ -7478,7 +7485,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/cafebrk1":
   wad_name: Coffee Break Episode 1
   iwad: doom2
@@ -7709,7 +7716,7 @@
     map_ranges: [[1, 40]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/dmp2012"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/92251-doomworld-mega-project-series-demos/"
 "https://www.dsdarchive.com/wads/tekrkbrn":
   wad_name: "?"
   iwad: doom2
@@ -7764,7 +7771,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/m-o/mayhem12"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/127478-mayhem-demo-thread-complevel-9/"
 "https://www.dsdarchive.com/wads/twzone":
   wad_name: The Twilight Zone (version 5 released to ftp)
   iwad: doom2
@@ -7817,7 +7824,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp01"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/teutic":
   wad_name: The Evil Unleashed
   iwad: doom
@@ -8511,7 +8518,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abysped4"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/hellbas2":
   wad_name: Dead Outpost
   iwad: doom2
@@ -8623,7 +8630,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe42"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/darkwave32":
   wad_name: Darkwave32
   iwad: doom2
@@ -8665,7 +8672,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp20_dnd"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/terrain2":
   wad_name: TERRAIN
   iwad: doom2
@@ -8693,7 +8700,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp_02"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/axolotl":
   wad_name: Axolotl
   iwad: doom2
@@ -8726,7 +8733,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe48"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/rapidfire":
   wad_name: "Jazzmaster's Rapidfire"
   iwad: doom2
@@ -8790,7 +8797,7 @@
         skip_reality: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/dbp37_augzen"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/dbp_03":
   wad_name: "DBP03: Forest Swords"
   iwad: doom2
@@ -8804,7 +8811,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp_03"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/abyspe12":
   wad_name: "Abyssal Speedmapping Sessions: Session 12"
   iwad: doom2
@@ -8818,7 +8825,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe12"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/abyspe32":
   wad_name: "Abyssal Speedmapping Sessions: Session 32"
   iwad: doom2
@@ -8832,7 +8839,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe32"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/abyspe43":
   wad_name: "Abyssal Speedmapping Sessions: Session 43"
   iwad: doom2
@@ -8846,7 +8853,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe43"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/obtic11":
   wad_name: Obituary 1.1, updated version
   iwad: doom2
@@ -8891,7 +8898,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp_04"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/ohgodwhat":
   wad_name: ohgodwhat
   iwad: doom2
@@ -8919,7 +8926,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp_05"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/monkill":
   wad_name: "Monroe's Killer"
   iwad: doom
@@ -9029,7 +9036,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/s-u/totg"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128693-toilet-of-the-gods-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/donuts":
   wad_name: Donuts
   iwad: doom2
@@ -9057,7 +9064,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp15"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/meangre2":
   wad_name: The Mean Green 2
   iwad: doom2
@@ -9141,7 +9148,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe57"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/attack_ml":
   wad_name: Attack (Master Levels)
   iwad: doom2
@@ -9410,7 +9417,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/cpd":
   wad_name: CPD
   iwad: doom2
@@ -9753,7 +9760,7 @@
         tyson_only: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe31"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/abyspe58":
   wad_name: "Abyssal Speedmapping Sessions: Session 58"
   iwad: doom2
@@ -9767,7 +9774,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe58"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/cldfrnt":
   wad_name: Cold Front
   iwad: doom2
@@ -9835,7 +9842,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp_06"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/mek-dom1":
   wad_name: Dominion of Madess
   iwad: doom2
@@ -9936,7 +9943,7 @@
         tyson_only: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/10m"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128780-10-monsters-demos-complevel-2/"
 "https://www.dsdarchive.com/wads/mmm":
   wad_name: Malevolent Murder Machine
   iwad: doom2
@@ -10006,9 +10013,9 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/themes/xmas/dbp7xmas"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/drn":
-  wad_name: "DBP07: The Merry Christmassy Doom Project"
+  wad_name: Down the Drain
   iwad: doom2
   wad_files:
     drn.wad: {checksum: "9d221ea4c777ded26eb3e78aa72c0c7f"}
@@ -10203,7 +10210,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/mayhem17"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/127478-mayhem-demo-thread-complevel-9/"
 "https://www.dsdarchive.com/wads/post-man":
   wad_name: when the postman strikes back...
   iwad: doom2
@@ -10516,7 +10523,7 @@
         skip_reality: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/hoe64"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128725-hell-on-earth-super-tiny-edition-hoe64-complevel-2/"
 "https://dsdarchive.com/wads/dbp14atf":
   wad_name: "DBP14: After the Fall"
   iwad: doom2
@@ -10530,7 +10537,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp14atf"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://dsdarchive.com/wads/summer69":
   wad_name: "Summer of '69"
   iwad: doom2
@@ -10579,6 +10586,7 @@
         tyson_only: true
       "Map 06":
         skip_reality: true
+        tyson_only: true
       "Map 07":
         skip_reality: true
         tyson_only: true
@@ -10966,7 +10974,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp_09"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/pwacp":
   wad_name: 'Problem With a Capital "P"'
   iwad: doom2
@@ -11126,7 +11134,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp17_alone"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/dbp18_up":
   wad_name: "DBP18: UMBRAL PLATINUM (Version 2.1)"
   iwad: doom2
@@ -11140,7 +11148,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp18_up"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/allempor":
   wad_name: All the Little Emperors
   iwad: doom2
@@ -11168,7 +11176,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe10"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/dbp13":
   wad_name: "DBP13: Alien Bastards!"
   iwad: doom2
@@ -11182,7 +11190,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp13"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/1so":
   wad_name: One Sector Collection
   iwad: doom2
@@ -11196,7 +11204,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/0-9/1so"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128692-one-sector-collection-complevel-9/"
 "https://www.dsdarchive.com/wads/abyspe37":
   wad_name: "Abyssal Speedmapping Sessions: Session 37"
   iwad: doom2
@@ -11211,7 +11219,7 @@
     secret_exits: {}
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe37"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/ittu":
   wad_name: Into the Unknown
   iwad: doom
@@ -11255,7 +11263,7 @@
         skip_reality: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp24_sb"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/s_mario":
   wad_name: Super Mario 8-Bit
   iwad: doom2
@@ -11396,7 +11404,7 @@
         skip_reality: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe59"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/abyspe60":
   wad_name: "Abyssal Speedmapping Sessions: Session 60"
   iwad: doom2
@@ -11416,7 +11424,7 @@
         skip_reality: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe60"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/abyspe23":
   wad_name: Abyssal Speedmapping Session 23 (XXIII)
   iwad: doom2
@@ -11431,7 +11439,7 @@
     secret_exits: {}
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe23"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/abyspe29":
   wad_name: Abyssal Speedmapping Session 29 (XXIX)
   iwad: doom2
@@ -11445,7 +11453,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe29"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/mayan667":
   wad_name: Mayan Temple
   iwad: doom
@@ -11486,7 +11494,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abysped1"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/rldb":
   wad_name: 'Rocky "Learned" Doom Builder'
   iwad: doom2
@@ -11579,7 +11587,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp26_tcodc"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/3x3ttwo":
   wad_name: "3x3: Take Two"
   iwad: doom2
@@ -11593,7 +11601,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/3x3ttwo"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128680-3x3-and-take-two-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/rylayeh":
   wad_name: RYLAYEH
   iwad: doom2
@@ -11628,7 +11636,7 @@
         skip_reality: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe61"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/cternity":
   wad_name: Crypts of Eternity
   iwad: doom2
@@ -11684,7 +11692,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/mayhem19"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/127478-mayhem-demo-thread-complevel-9/"
 "https://www.dsdarchive.com/wads/nevermo2":
   wad_name: Castle Nevermore
   iwad: doom2
@@ -11865,7 +11873,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe28"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/nhfl":
   wad_name: "No Hope For Life Epsiode 1: Back To the Fight."
   iwad: doom
@@ -11943,7 +11951,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/dmp2021"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/92251-doomworld-mega-project-series-demos/"
 "https://www.dsdarchive.com/wads/dmp2021_7soul":
   wad_name: A Bullet Foreheld (DMP2021)
   iwad: doom2
@@ -11957,7 +11965,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/dmp2021"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/92251-doomworld-mega-project-series-demos/"
 "https://www.dsdarchive.com/wads/dmp2021_duckreconmajor":
   wad_name: Deli Rub (DMP2021)
   iwad: doom2
@@ -11971,7 +11979,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/dmp2021"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/92251-doomworld-mega-project-series-demos/"
 "https://www.dsdarchive.com/wads/dmp2021_em":
   wad_name: "TimeOfDeath's Diarrhea Dilemma (DMP2021)"
   iwad: doom2
@@ -11985,7 +11993,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/dmp2021"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/92251-doomworld-mega-project-series-demos/"
 "https://www.dsdarchive.com/wads/dmp2021_endingghost":
   wad_name: Eternal Leap (DMP2021)
   iwad: doom2
@@ -12001,7 +12009,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/dmp2021"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/92251-doomworld-mega-project-series-demos/"
 "https://www.dsdarchive.com/wads/dmp2021_general_roasterock":
   wad_name: Sleeping in Solitude (DMP2021)
   iwad: doom2
@@ -12015,7 +12023,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/dmp2021"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/92251-doomworld-mega-project-series-demos/"
 "https://www.dsdarchive.com/wads/dmp2021_midnightmage":
   wad_name: Haunted Corridors (DMP2021)
   iwad: doom2
@@ -12029,7 +12037,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/dmp2021"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/92251-doomworld-mega-project-series-demos/"
 "https://www.dsdarchive.com/wads/dmp2021_obsidian":
   wad_name: Broken Tooth (DMP2021)
   iwad: doom2
@@ -12045,7 +12053,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/dmp2021"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/92251-doomworld-mega-project-series-demos/"
 "https://www.dsdarchive.com/wads/dmp2021_pegleg":
   wad_name: The Black and the Gray (DMP2021)
   iwad: doom2
@@ -12059,7 +12067,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/dmp2021"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/92251-doomworld-mega-project-series-demos/"
 "https://www.dsdarchive.com/wads/dmp2021_timeofdeath":
   wad_name: kdshubnweope9548yhremn87hjnerdsoiwenbn347834hgndsfkyj (DMP2021)
   iwad: doom2
@@ -12077,7 +12085,7 @@
         skip_reality: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/dmp2021"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/92251-doomworld-mega-project-series-demos/"
 "https://www.dsdarchive.com/wads/mnltdst":
   wad_name: Moonlit District
   iwad: doom2
@@ -12161,7 +12169,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/one-humanity":
   wad_name: One Humanity
   iwad: doom2
@@ -12377,7 +12385,7 @@
     secret_exits: {"Map 15": "Map 31"}
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/mutiny"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: ""https://www.doomworld.com/forum/topic/128722-mutiny-demos-complevel-2/""
 "https://www.dsdarchive.com/wads/btsx_e1":
   wad_name: Mutiny (A Doomworld Community Project)
   iwad: doom2
@@ -12433,7 +12441,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/32in2414"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128728-32in24-14-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/dwspd001":
   wad_name: "Doomworld Speedmapping Compilation #1"
   iwad: doom2
@@ -12447,7 +12455,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dwspd001"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128765-doomworld-speedmapping-compilation-demos/"
 "https://www.dsdarchive.com/wads/zap07":
   wad_name: "UNCONDITIONAL ELIMINATION Map7: HIGHGROUND"
   iwad: doom2
@@ -12507,7 +12515,7 @@
         tyson_only: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe62"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/fellowze1m1":
   wad_name: Fellowz E1M1 from Memory
   iwad: doom
@@ -12738,7 +12746,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abysped2"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/100linen":
   wad_name: 100 Lines (Non-Traditional)
   iwad: doom2
@@ -12920,6 +12928,7 @@
         skip_reality: true
       "Map 27":
         skip_reality: true
+        tyson_only: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/tntthree"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/128568-tnt-threevilution-tnt3-demos-iwad-tntwad-complevel-9/"
@@ -12949,7 +12958,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abysped6"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/abysped9":
   wad_name: "Abyssal Speedmapping Sessions: Session 9"
   iwad: doom2
@@ -12963,7 +12972,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abysped9"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/punishr":
   wad_name: PUNISHER.WAD
   iwad: doom2
@@ -12978,3 +12987,142 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/p-r/punishr"
   dsda_paginated: false
   doomworld_thread: null
+"https://www.dsdarchive.com/wads/fistful3":
+  wad_name: A FISTFUL OF DOOM
+  iwad: doom2
+  wad_files:
+    fistful.wad: {checksum: "252d7f7612017232f6f9b8e7c948e2a5"}
+    fistfix.wad: {checksum: "708313db5e39b8405a67574f1ace9a68"}
+  complevel: 2
+  playback_cmd_line: "-file fistful"
+  alt_playback_cmd_lines: {"-file fistful fistfix": "Plays back with fistfix.wad."}
+  map_list_info:
+    map_ranges: [[1, 2]]
+    d2all: ["Map 01", "Map 02"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/d-f/fistful3"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/monsters":
+  wad_name: Monsters
+  iwad: doom2
+  wad_files:
+    monsters.wad: {checksum: "ff43c1bfbc9098fdc6d39a834c7b8d46"}
+  complevel: 2
+  playback_cmd_line: "-file monsters"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/m-o/monsters"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/scragadelica":
+  wad_name: Scragadelica
+  iwad: doom2
+  wad_files:
+    scragadelica.wad: {checksum: "40d8a86503479f2a84929b0a8da4c9b8"}
+  complevel: 2
+  playback_cmd_line: "-file scragadelica"
+  map_list_info:
+    map_ranges: [[7]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/s-u/scragadelica"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/terrere1":
+  wad_name: Terrere1.wad
+  iwad: doom2
+  wad_files:
+    terrere1.wad: {checksum: "1be900904f6acb7faba787136cc15e9f"}
+  complevel: 9
+  playback_cmd_line: "-file terrere1"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/s-u/terrere1"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/tredsoft":
+  wad_name: Tread Softly!
+  iwad: doom2
+  wad_files:
+    tredsoft.wad: {checksum: "ce4ebc2042d9a5a97693e0be5c32d60a"}
+  complevel: 2
+  playback_cmd_line: "-file tredsoft"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/s-u/tredsoft"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/avd1":
+  wad_name: avd1
+  iwad: doom
+  wad_files:
+    avd1.wad: {checksum: "f28697b3c1080e18eb9165ae8187d0a1"}
+  complevel: 9
+  playback_cmd_line: "-file avd1"
+  map_list_info:
+    map_ranges: [["E1M1", "E1M9"]]
+    episodes: [["E1M1", "E1M8"]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/Ports/a-c/avd1"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/angryquilt3":
+  wad_name: "Angry Quilt III: Big Game Hunter"
+  iwad: doom2
+  wad_files:
+    angryquilt3.wad: {checksum: "ab63b75ba64ea1da269201d682fd92c2"}
+  complevel: 2
+  playback_cmd_line: "-file angryquilt3"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/angryquilt3"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/wetlands":
+  wad_name: Wetlands
+  iwad: doom2
+  wad_files:
+    wetlands.wad: {checksum: "c4fe19f2bed9d90e2b2ba3e3914b6432"}
+  complevel: 2
+  playback_cmd_line: "-file wetlands"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/v-z/wetlands"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/protosis":
+  wad_name: "Liberosis: Protosis"
+  iwad: doom2
+  wad_files:
+    protosis.wad: {checksum: "b297c7dd1c9e60f833376053352cc444"}
+  complevel: 2
+  playback_cmd_line: "-file protosis"
+  map_list_info:
+    map_ranges: [[1, 2]]
+    d2all: ["Map 01", "Map 02"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/p-r/protosis"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/200minvr":
+  wad_name: 200 minutes of /vr/
+  iwad: doom2
+  wad_files:
+    200minvr.wad: {checksum: "064aa95d78ad123dc2bd7a34deff768f"}
+  complevel: 2
+  playback_cmd_line: "-file 200minvr"
+  map_list_info:
+    map_ranges: [[1, 33]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/200minvr"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128749-200-minutes-of-vr-demos-complevel-2/"

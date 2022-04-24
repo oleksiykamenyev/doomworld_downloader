@@ -20,7 +20,8 @@ import yaml
 
 from doomworld_downloader.upload_config import CONFIG, PLAYER_IGNORE_LIST, THREAD_MAP_KEYED_ON_ID, \
     AD_HOC_UPLOAD_CONFIG
-from doomworld_downloader.utils import get_download_filename, download_response, get_page
+from doomworld_downloader.utils import get_download_filename, download_response, get_page, \
+    strip_accents
 
 
 DOOM_SPEED_DEMOS_URL = 'https://www.doomworld.com/forum/37-doom-speed-demos/?page={num}'
@@ -380,6 +381,7 @@ def download_attachments(post):
         CONFIG.demo_download_directory,
         '{}'.format(''.join(c for c in post.author_name if c.isalnum() or c in KEEP_CHARS))
     )
+    author_dir = strip_accents(author_dir)
     downloads = []
     for attach_url, attach_name in post.attachments.items():
         response = requests.get(attach_url)

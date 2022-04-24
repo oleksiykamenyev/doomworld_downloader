@@ -8,6 +8,7 @@ import os
 import re
 import shlex
 import subprocess
+import unicodedata
 
 from shutil import rmtree
 from time import gmtime, strftime
@@ -413,3 +414,13 @@ def get_single_key_value_dict(dict_obj):
 
     key = next(iter(dict_obj))
     return key, dict_obj[key]
+
+
+def strip_accents(text):
+    """Strip accents from string for safe directory creation.
+
+    :param text: Text to strip accents from
+    :return: Sanitized string
+    """
+    text = unicodedata.normalize('NFD', text).encode('ascii', 'ignore').decode('utf-8')
+    return str(text)

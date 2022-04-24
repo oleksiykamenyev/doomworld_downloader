@@ -8,6 +8,7 @@ import os
 import re
 import subprocess
 
+from collections import Counter
 from shutil import copyfile, rmtree
 
 from .data_manager import DataManager
@@ -89,7 +90,7 @@ class PlaybackData:
         self.demo_info = demo_info if demo_info else {}
         self._append_misc_args()
 
-        self.wad_guesses = wad_guesses
+        self.wad_guesses = Counter(wad_guesses)
         self.data = {}
         self.raw_data = {}
         self.note_strings = set()
@@ -143,7 +144,8 @@ class PlaybackData:
             elif 3 < raw_skill < 6:
                 self.demo_info['skill'] = 'hard'
             else:
-                raise ValueError(f'Invalid skill {raw_skill} passed to playback parser.')
+                LOGGER.error('Invalid skill %s passed to playback parser.', raw_skill)
+                self.demo_info['skill'] = None
 
         iwad = self.demo_info.get('iwad', '').lower()
         if compare_iwad(iwad, 'chex'):
@@ -199,7 +201,7 @@ class PlaybackData:
         :raises RuntimeError if the WAD could not be guessed for this demo
         """
         wad_guessed = False
-        for wad_guess in self.wad_guesses:
+        for wad_guess, _ in self.wad_guesses.most_common():
             if not wad_guess.commercial:
                 try:
                     self._check_wad_existence(wad_guess)
