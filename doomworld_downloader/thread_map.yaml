@@ -1093,6 +1093,46 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/hoe64
   id: '128725'
   name: "Hell on Earth: Super Tiny Edition (hoe64) [-complevel 2]"
+"https://www.doomworld.com/forum/topic/128838-five-minutes-to-kill-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/5min2kil
+  id: '128838'
+  name: "Five Minutes to Kill demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/128839-doom-64-for-doom-ii-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/d64d2
+  id: '128839'
+  name: "Doom 64 for Doom II [-complevel 2]"
+"https://www.doomworld.com/forum/topic/128840-endpoint-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/endpoint
+  id: '128840'
+  name: "Endpoint demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/128841-dark-covenant-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/darkcvnt
+  id: '128841'
+  name: "Dark Covenant demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/128842-cybercontrol-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/cybercon
+  id: '128842'
+  name: "Cybercontrol Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/128843-osiris-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/osiris
+  id: '128843'
+  name: "Osiris demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/128844-the-128-kb-mapping-extravagant-challenge-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/128k_ud
+  id: '128844'
+  name: 'The 128 KB Mapping Extravagant "Challenge" demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/128845-congestion-64-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/64
+  id: '128845'
+  name: 'Congestion 64 demos [-complevel 2]'
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":

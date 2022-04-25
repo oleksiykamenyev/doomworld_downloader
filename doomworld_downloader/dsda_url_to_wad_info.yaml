@@ -3431,7 +3431,7 @@
     map_ranges: [[1, 33]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/d64d2"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128839-doom-64-for-doom-ii-complevel-2/"
 "https://www.dsdarchive.com/wads/robv":
   wad_name: ROBV.WAD
   iwad: doom2
@@ -6992,7 +6992,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/m-o/osiris"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128843-osiris-demos-complevel-2/"
 "https://www.dsdarchive.com/wads/1klinecp2":
   wad_name: 1000 Lines 2 - Community Project 1.0
   iwad: doom2
@@ -7141,7 +7141,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128842-cybercontrol-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/emergent":
   wad_name: Emergent
   iwad: doom2
@@ -11789,7 +11789,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/d-f/darkcvnt"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128841-dark-covenant-demos-complevel-2/"
 "https://www.dsdarchive.com/wads/aarrghh":
   wad_name: Aarrghh!
   iwad: doom
@@ -11859,7 +11859,7 @@
         skip_reality: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/64"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128845-congestion-64-demos-complevel-2/"
 "https://www.dsdarchive.com/wads/abyspe28":
   wad_name: Abyssal Speedmapping Session 28 (XXVIII)
   iwad: doom2
@@ -12369,7 +12369,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/endpoint"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128840-endpoint-demos-complevel-2/"
 "https://www.dsdarchive.com/wads/mutiny":
   wad_name: Mutiny (A Doomworld Community Project)
   iwad: doom2
@@ -12704,7 +12704,7 @@
         tyson_only: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/5min2kil"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128838-five-minutes-to-kill-demos-complevel-2/"
 "https://www.dsdarchive.com/wads/mynrnlds":
   wad_name: Mayan Reynolds
   iwad: doom2
@@ -12912,7 +12912,7 @@
     episodes: [["E1M1", "E1M8"], ["E2M1", "E2M8"], ["E3M1", "E3M9"], ["E4M1", "E4M9"]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom/Ports/megawads/128k_ud"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128844-the-128-kb-mapping-extravagant-challenge-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/tntthree":
   wad_name: "TNT: Threevilution"
   iwad: tnt
