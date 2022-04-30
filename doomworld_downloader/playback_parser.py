@@ -90,7 +90,8 @@ class PlaybackData:
         self.demo_info = demo_info if demo_info else {}
         self._append_misc_args()
 
-        self.wad_guesses = Counter(wad_guesses)
+        self.url_to_wad = {wad.dsda_url: wad for wad in wad_guesses}
+        self.wad_guesses = Counter([wad.dsda_url for wad in wad_guesses])
         self.data = {}
         self.raw_data = {}
         self.note_strings = set()
@@ -201,7 +202,8 @@ class PlaybackData:
         :raises RuntimeError if the WAD could not be guessed for this demo
         """
         wad_guessed = False
-        for wad_guess, _ in self.wad_guesses.most_common():
+        for url, _ in self.wad_guesses.most_common():
+            wad_guess = self.url_to_wad[url]
             if not wad_guess.commercial:
                 try:
                     self._check_wad_existence(wad_guess)

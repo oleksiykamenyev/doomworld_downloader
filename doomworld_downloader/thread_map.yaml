@@ -963,11 +963,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/haste
   id: '126811'
   name: "Haste demos [-complevel 09]"
-"https://www.doomworld.com/forum/topic/53752-teaming-up-inferno-by-chris-lutz-done/":
+"https://www.doomworld.com/forum/topic/128939-christopher-lutzs-inferno-demos-complevel-3/":
   additional_info:
     wad: https://www.dsdarchive.com/wads/inf-lutz
-  id: '53752'
-  name: "Teaming up - Inferno by Chris Lutz [done!!!]"
+  id: '128939'
+  name: "Christopher Lutz's Inferno demos [-complevel 3]"
 "https://www.doomworld.com/forum/topic/127337-rocky-learned-doom-builder-demos-complevel-9/":
   additional_info:
     wad: https://www.dsdarchive.com/wads/rldb
@@ -1133,6 +1133,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/64
   id: '128845'
   name: 'Congestion 64 demos [-complevel 2]'
+"https://www.doomworld.com/forum/topic/128882-a-lost-world-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/alostworld
+  id: '128882'
+  name: 'A Lost World demos [-complevel 9]'
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -1301,6 +1306,13 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/c-shock2
   id: '128795'
   name: "Combat Shock + Combat Shock 2 demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/128875-cleimos-and-cleimos-2-demos-complevel-2/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/cleim10
+      - https://www.dsdarchive.com/wads/cleim20
+  id: '128875'
+  name: "Cleimos and Cleimos 2 demos [-complevel 2]"
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":

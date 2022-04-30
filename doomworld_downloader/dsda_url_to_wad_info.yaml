@@ -2391,7 +2391,7 @@
         skip_reality: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom/g-i/inf-lutz"
   dsda_paginated: false
-  doomworld_thread: "https://www.doomworld.com/forum/topic/53752-teaming-up-inferno-by-chris-lutz-done/"
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128939-christopher-lutzs-inferno-demos-complevel-3/"
 "https://www.dsdarchive.com/wads/32of64-lr":
   wad_name: "The 64 kb challenge: Limitless Selection"
   iwad: doom2
@@ -5558,7 +5558,7 @@
     map_ranges: [[1, 32]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/cleim20p"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128875-cleimos-and-cleimos-2-demos-complevel-2/"
 "https://www.dsdarchive.com/wads/hendv2":
   wad_name: "Hell's End V2"
   iwad: doom2
@@ -10582,6 +10582,7 @@
         skip_reality: true
       "Map 04":
         skip_reality: true
+        tyson_only: true
       "Map 05":
         tyson_only: true
       "Map 06":
@@ -12385,7 +12386,7 @@
     secret_exits: {"Map 15": "Map 31"}
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/mutiny"
   dsda_paginated: false
-  doomworld_thread: ""https://www.doomworld.com/forum/topic/128722-mutiny-demos-complevel-2/""
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128722-mutiny-demos-complevel-2/"
 "https://www.dsdarchive.com/wads/btsx_e1":
   wad_name: Mutiny (A Doomworld Community Project)
   iwad: doom2
@@ -13126,3 +13127,140 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/200minvr"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/128749-200-minutes-of-vr-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/100lnm":
+  wad_name: 100 Line Massacre
+  iwad: doom2
+  wad_files:
+    100lnm.wad: {checksum: "5fe45e81555718e441a3a3e5e546765e"}
+    100lnm.deh: {not_required_for_playback: true, checksum: "c6e246e03b5a78e6f984e2bbcf89e323"}
+    100lnm_ws.wad: {not_required_for_playback: true, checksum: "7ad621bc405433e0cb3f7012ed3e23b9"}
+  complevel: 2
+  playback_cmd_line: "-file 100lnm"
+  map_list_info:
+    map_ranges: [[1, 35]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/100lnm"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128826-100-line-massacre-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/d5da2":
+  wad_name: "\"Dubzzz's 5Minute Design Assembly #2 \""
+  iwad: doom2
+  wad_files:
+    d5da2.wad: {checksum: "2aa25862e2453bb05d492c80bc8d54d7"}
+  complevel: 9
+  playback_cmd_line: "-file d5da2"
+  map_list_info:
+    map_ranges: [[1, 60]]
+    d2all: ["Map 01", "Map 60"]
+    episodes: [["Map 01", "Map 10"], ["Map 11", "Map 20"], ["Map 21", "Map 30"], ["Map 31", "Map 40"], ["Map 41", "Map 50"], ["Map 51", "Map 60"]]
+    secret_exits: {}
+    map_info:
+      "Map 02":
+        skip_reality: true
+        tyson_only: true
+      "Map 04":
+        skip_reality: true
+        tyson_only: true
+      "Map 07":
+        skip_reality: true
+        tyson_only: true
+      "Map 10":
+        skip_reality: true
+        tyson_only: true
+      "Map 11":
+        tyson_only: true
+      "Map 12":
+        skip_reality: true
+      "Map 18":
+        skip_reality: true
+      "Map 25":
+        tyson_only: true
+      "Map 33":
+        tyson_only: true
+      "Map 34":
+        tyson_only: true
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/d5da2"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128832-dubzzzs-5minute-design-assembly-2-complevel-9/"
+"https://www.dsdarchive.com/wads/cybersky":
+  wad_name: XXXI CyberSky
+  iwad: doom2
+  wad_files:
+    cybersky.wad: {checksum: "ee788f1fb722217130f635a7b9db214c"}
+  complevel: 2
+  playback_cmd_line: "-file cybersky"
+  map_list_info:
+    map_ranges: [[31]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/cybersky"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/fastwada":
+  wad_name: Fast.wad
+  iwad: doom2
+  wad_files:
+    fast.wad: {checksum: "50ef7b3d0f327d3e4b8b2cc919203711"}
+  complevel: 2
+  playback_cmd_line: "-file fast"
+  map_list_info:
+    map_ranges: [[2]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/d-f/fastwada"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/zzone":
+  wad_name: ZZONE.WAD
+  iwad: doom
+  wad_files:
+    zzone.wad: {checksum: "9cacf44c6d45184f4c0442251e3fbb6d"}
+  complevel: 3
+  playback_cmd_line: "-file zzone"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/v-z/zzone"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/alostworld":
+  wad_name: A Lost World
+  iwad: doom2
+  wad_files:
+    alostworld/alostworld.wad: {checksum: "c982cb71bdca97f3df5cc0bc1538adcd"}
+  complevel: 9
+  playback_cmd_line: "-file alostworld"
+  map_list_info:
+    map_ranges: [[1, 11]]
+    d2all: ["Map 01", "Map 11"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/alostworld"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128882-a-lost-world-demos-complevel-9/"
+"https://www.dsdarchive.com/wads/silver":
+  wad_name: Silver Edge
+  iwad: doom2
+  wad_files:
+    silver.wad: {checksum: "db5ce789304a38e1c7490ff8d170a022"}
+  complevel: 9
+  playback_cmd_line: "-file silver"
+  map_list_info:
+    map_ranges: [[1, 2]]
+    d2all: ["Map 01", "Map 02"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/s-u/silver"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/droom":
+  wad_name: Darkest Room
+  iwad: doom2
+  wad_files:
+    droom.wad: {checksum: "46a3c92a0438ce56e089ddc7128ee462"}
+  complevel: 9
+  playback_cmd_line: "-file droom"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/droom"
+  dsda_paginated: false
+  doomworld_thread: null
