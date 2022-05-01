@@ -491,7 +491,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128958-master-levels-for-doom-ii-demos-complevel-2/"
   commercial: true
 "https://www.dsdarchive.com/wads/ggfast01":
   wad_name: GOTTAGOFAST
@@ -612,7 +612,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128958-master-levels-for-doom-ii-demos-complevel-2/"
   commercial: true
 "https://www.dsdarchive.com/wads/cryogenics":
   wad_name: Cryogenics
@@ -685,7 +685,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128958-master-levels-for-doom-ii-demos-complevel-2/"
   commercial: true
 "https://www.dsdarchive.com/wads/garrison":
   wad_name: The Garrison (Master Levels)
@@ -700,7 +700,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128958-master-levels-for-doom-ii-demos-complevel-2/"
   commercial: true
 "https://www.dsdarchive.com/wads/resurge":
   wad_name: Resurgence
@@ -756,7 +756,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128958-master-levels-for-doom-ii-demos-complevel-2/"
   commercial: true
 "https://www.dsdarchive.com/wads/sckrpnch":
   wad_name: Sucker Punch
@@ -989,12 +989,12 @@
   complevel: 2
   playback_cmd_line: "-file commercial/subterra"
   map_list_info:
-    map_ranges: [[1, 1]]
+    map_ranges: [[1]]
     d2all: null
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128958-master-levels-for-doom-ii-demos-complevel-2/"
   commercial: true
 "https://www.dsdarchive.com/wads/cchest":
   wad_name: The Community Chest Project
@@ -2556,7 +2556,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128958-master-levels-for-doom-ii-demos-complevel-2/"
   commercial: true
 "https://www.dsdarchive.com/wads/wd13":
   wad_name: Wonderful Doom, v.1.3
@@ -5668,7 +5668,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128958-master-levels-for-doom-ii-demos-complevel-2/"
   commercial: true
 "https://www.dsdarchive.com/wads/dmp2013l":
   wad_name: Doomworld Mega Project 2013 (Vanilla and Limit-removing)
@@ -6144,7 +6144,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128958-master-levels-for-doom-ii-demos-complevel-2/"
   commercial: true
 "https://www.dsdarchive.com/wads/dslvl2":
   wad_name: "DSLVL2: Lost Mining Base"
@@ -7962,7 +7962,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128958-master-levels-for-doom-ii-demos-complevel-2/"
   commercial: true
 "https://www.dsdarchive.com/wads/breathlessv2":
   wad_name: Breathless_v2
@@ -8117,7 +8117,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128958-master-levels-for-doom-ii-demos-complevel-2/"
   commercial: true
 "https://www.dsdarchive.com/wads/cosmogenesis":
   wad_name: Cosmogenesis
@@ -9162,7 +9162,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128958-master-levels-for-doom-ii-demos-complevel-2/"
   commercial: true
 "https://www.dsdarchive.com/wads/canyon_ml":
   wad_name: Canyon (Master Levels)
@@ -9177,7 +9177,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128958-master-levels-for-doom-ii-demos-complevel-2/"
   commercial: true
 "https://www.dsdarchive.com/wads/rekkr":
   wad_name: "Abyssal Speedmapping Sessions: Session 57"
@@ -9652,7 +9652,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128958-master-levels-for-doom-ii-demos-complevel-2/"
   commercial: true
 "https://www.dsdarchive.com/wads/bloodsea":
   wad_name: Blood Sea Keep (Master Levels)
@@ -9682,7 +9682,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128958-master-levels-for-doom-ii-demos-complevel-2/"
   commercial: true
 "https://www.dsdarchive.com/wads/combine":
   wad_name: The Combine (Master Levels)
@@ -9697,7 +9697,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128958-master-levels-for-doom-ii-demos-complevel-2/"
   commercial: true
 "https://www.dsdarchive.com/wads/manor_ml":
   wad_name: Titan Manor (Master Levels)
@@ -9712,7 +9712,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128958-master-levels-for-doom-ii-demos-complevel-2/"
   commercial: true
 "https://www.dsdarchive.com/wads/paradox_ml":
   wad_name: Paradox (Master Levels)
@@ -9727,7 +9727,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128958-master-levels-for-doom-ii-demos-complevel-2/"
   commercial: true
 "https://www.dsdarchive.com/wads/virgil":
   wad_name: "Virgil's Lead (Master Levels)"
@@ -9742,7 +9742,7 @@
     episodes: []
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128958-master-levels-for-doom-ii-demos-complevel-2/"
   commercial: true
 "https://www.dsdarchive.com/wads/abyspe31":
   wad_name: "Abyssal Speedmapping Sessions: Session 31"
@@ -13177,6 +13177,9 @@
       "Map 33":
         tyson_only: true
       "Map 34":
+        tyson_only: true
+      "Map 60":
+        skip_reality: true
         tyson_only: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/d5da2"
   dsda_paginated: false
