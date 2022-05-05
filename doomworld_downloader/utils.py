@@ -10,6 +10,7 @@ import shlex
 import subprocess
 import unicodedata
 
+from datetime import datetime
 from shutil import rmtree
 from time import gmtime, strftime
 from urllib.parse import urlparse, urlunparse
@@ -308,6 +309,10 @@ def convert_datetime_to_dsda_date(datetime_to_convert):
     return datetime_to_convert.strftime('%Y-%m-%d %H:%M:%S') + ' ' + strftime("%z", gmtime())
 
 
+def convert_dsda_date_to_datetime(dsda_date):
+    return datetime.strptime(' '.join(dsda_date.split()[:-1]), '%Y-%m-%d %H:%M:%S')
+
+
 def parse_youtube_url(url):
     """Parse YouTube URLs from a URL.
 
@@ -424,3 +429,17 @@ def strip_accents(text):
     """
     text = unicodedata.normalize('NFD', text).encode('ascii', 'ignore').decode('utf-8')
     return str(text)
+
+
+def is_demo_filename(demo):
+    """Check if provided demo has a supported filename.
+
+    :param demo: Demo to check
+    :return: True if provided demo has a supported filename, False otherwise
+    """
+    demo = demo.lower()
+
+    # LMP: Standard demo file format (vanilla, Boom, MBF, (G)ZDoom, etc.)
+    # CDM: Doomsday demo format
+    # ZDD: ZDaemon new-style demo format
+    return demo.endswith('.lmp') or demo.endswith('.cdm') or demo.endswith('.zdd')

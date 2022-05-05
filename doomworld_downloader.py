@@ -24,9 +24,9 @@ from doomworld_downloader.playback_parser import PlaybackData
 from doomworld_downloader.post_parser import PostData
 from doomworld_downloader.textfile_parser import TextfileData
 from doomworld_downloader.upload_config import CONFIG, set_up_configs, set_up_ad_hoc_config, \
-    AD_HOC_UPLOAD_CONFIG_PATH
+    AD_HOC_UPLOAD_CONFIG_PATH, DEMO_PACK_ADDITIONAL_INFO_MAP, DEMO_PACK_USER_MAP
 from doomworld_downloader.utils import get_filename_no_ext, demo_range_to_string, get_log_level, \
-    get_main_file_from_zip, checksum
+    get_main_file_from_zip, checksum, is_demo_filename, convert_dsda_date_to_datetime
 from doomworld_downloader.wad_guesser import get_wad_guesses
 
 
@@ -37,83 +37,98 @@ DATETIME_FORMAT = 'YYYY'
 LOGGER = logging.getLogger(__name__)
 
 
-def handle_downloads(downloads, post_data):
-    """Handle all downloads for post.
+def handle_demos(demos, post_data=None, demo_info_map=None):
+    """Handle all demos for a particular upload.
 
-    :param downloads: List of downloads to handle
-    :param post_data: Post data info
+    The upload could be a part of a post, demo pack, etc.
+
+    :param demos: List of demos to handle
+    :param post_data: Post data info if available
+    :param demo_info_map: Demo info map for additional demo information during demo pack uploads
     :return: Flag indicating whether all demos were parsed from all downloads
     """
-    for download in downloads:
-        # Rename zip to account for any whitespace in the filename
-        zip_no_ext = get_filename_no_ext(download).replace(' ', '_')
-        download_dir = os.path.dirname(download)
-        out_path = os.path.join(download_dir, zip_no_ext)
-        renamed_zip = '{}.zip'.format(out_path)
-        if renamed_zip != download and not os.path.exists(renamed_zip):
-            shutil.move(download, renamed_zip)
-
-        try:
-            zip_file = ZipFile(renamed_zip)
-        except BadZipFile as bad_zip_err:
-            LOGGER.error('Zip %s is a bad zip file, error message %s.', renamed_zip, bad_zip_err)
-            continue
-        info_list = zip_file.infolist()
-        lmp_files = {}
-        txt_files = []
-        for zip_file_member in info_list:
-            zip_file_name = zip_file_member.filename
-            # LMP: Standard demo file format (vanilla, Boom, MBF, (G)ZDoom, etc.)
-            # CDM: Doomsday demo format
-            # ZDD: ZDaemon new-style demo format
-            if (zip_file_name.lower().endswith('.lmp') or zip_file_name.endswith('.cdm') or
-                    zip_file_name.endswith('.zdd')):
-                lmp_files[zip_file_name] = datetime(*zip_file_member.date_time)
-            if zip_file_name.lower().endswith('.txt'):
-                txt_files.append(zip_file_name)
-
-        if not lmp_files:
-            LOGGER.warning('No lmp files found in download %s.', renamed_zip)
-            continue
-        if not txt_files:
-            LOGGER.error('No txt files found in download %s.', renamed_zip)
-            continue
-
-        is_demo_pack = False
-        if len(lmp_files) != 1:
-            main_lmp = get_main_file_from_zip(renamed_zip, lmp_files, zip_no_ext,
-                                              file_types=['cdm', 'lmp', 'zdd'])
-            if main_lmp:
-                lmp_files = {main_lmp: lmp_files[main_lmp]}
-            else:
-                is_demo_pack = True
-        if len(txt_files) != 1:
-            main_txt = get_main_file_from_zip(renamed_zip, txt_files, zip_no_ext, file_types='txt')
-            if main_txt:
-                txt_files = [main_txt]
-            else:
-                LOGGER.warning('Multiple txt files found in download %s with no primary txt '
-                               'found, skipping textfile parsing.', renamed_zip)
-
-        if is_demo_pack:
-            LOGGER.warning('Download %s is a demo pack zip.', renamed_zip)
-
-        zip_file.extractall(path=out_path, members=list(lmp_files.keys()) + txt_files)
-
-        # There should really be only one textfile at this moment, so will assume this.
-        textfile_data = (TextfileData(os.path.join(out_path, txt_files[0]))
-                         if len(txt_files) == 1 else None)
+    for demo in demos:
+        textfile_data = None
         lmp_demo_info = {}
-        if textfile_data:
-            textfile_data.analyze()
+        is_demo_pack = False
+        if demo.endswith('.zip'):
+            # Rename zip to account for any whitespace in the filename
+            demo_location_filename = get_filename_no_ext(demo).replace(' ', '_')
+            download_dir = os.path.dirname(demo)
+            out_path = os.path.join(download_dir, demo_location_filename)
+            demo_location = '{}.zip'.format(out_path)
+            if demo_location != demo and not os.path.exists(demo_location):
+                shutil.move(demo, demo_location)
 
-            textfile_iwad = textfile_data.raw_data.get('iwad')
-            if textfile_iwad:
-                lmp_demo_info = {'iwad': textfile_iwad}
+            try:
+                zip_file = ZipFile(demo_location)
+            except BadZipFile as bad_zip_err:
+                LOGGER.error('Zip %s is a bad zip file, error message %s.', demo_location,
+                             bad_zip_err)
+                continue
+            info_list = zip_file.infolist()
+            lmp_files = {}
+            txt_files = []
+            for zip_file_member in info_list:
+                zip_file_name = zip_file_member.filename
+                if is_demo_filename(zip_file_name):
+                    lmp_files[zip_file_name] = datetime(*zip_file_member.date_time)
+                if zip_file_name.lower().endswith('.txt'):
+                    txt_files.append(zip_file_name)
 
-        demo_json_constructor = DemoJsonConstructor(renamed_zip, zip_no_ext)
+            if not lmp_files:
+                LOGGER.warning('No lmp files found in download %s.', demo_location)
+                continue
+            if not txt_files:
+                LOGGER.error('No txt files found in download %s.', demo_location)
+                continue
+
+            if len(lmp_files) != 1:
+                main_lmp = get_main_file_from_zip(demo_location, lmp_files, demo_location_filename,
+                                                  file_types=['cdm', 'lmp', 'zdd'])
+                if main_lmp:
+                    lmp_files = {main_lmp: lmp_files[main_lmp]}
+                else:
+                    is_demo_pack = True
+            if len(txt_files) != 1:
+                main_txt = get_main_file_from_zip(demo_location, txt_files, demo_location_filename,
+                                                  file_types='txt')
+                if main_txt:
+                    txt_files = [main_txt]
+                else:
+                    LOGGER.warning('Multiple txt files found in download %s with no primary txt '
+                                   'found, skipping textfile parsing.', demo_location)
+
+            if is_demo_pack:
+                LOGGER.warning('Download %s is a demo pack zip.', demo_location)
+
+            zip_file.extractall(path=out_path, members=list(lmp_files.keys()) + txt_files)
+
+            # There should really be only one textfile at this moment, so will assume this.
+            if len(txt_files) == 1:
+                textfile_data = TextfileData(os.path.join(out_path, txt_files[0]))
+                if textfile_data:
+                    textfile_data.analyze()
+
+                    textfile_iwad = textfile_data.raw_data.get('iwad')
+                    if textfile_iwad:
+                        lmp_demo_info = {'iwad': textfile_iwad}
+        elif is_demo_filename(demo):
+            if not demo_info_map:
+                raise RuntimeError(f'Non-zipped LMP {demo} requires date to be provided.')
+            lmp_files = {demo: demo_info_map[demo].get('recorded_date')}
+            out_path = None
+            demo_location = demo
+            demo_location_filename = get_filename_no_ext(demo).replace(' ', '_')
+        else:
+            raise RuntimeError(f'Demo {demo} provided that is an unsupported filetype.')
+
+        if not demo_location or not demo_location_filename:
+            raise RuntimeError('No zip to upload provided!')
+
+        demo_json_constructor = DemoJsonConstructor(demo_location, demo_location_filename)
         for lmp_file, recorded_date in lmp_files.items():
-            lmp_path = os.path.join(out_path, lmp_file)
+            lmp_path = os.path.join(out_path, lmp_file) if out_path else lmp_file
             lmp_data = LMPData(lmp_path, recorded_date, demo_info=lmp_demo_info)
             lmp_data.analyze()
             iwad = lmp_data.raw_data.get('iwad', '')
@@ -124,39 +139,41 @@ def handle_downloads(downloads, post_data):
                 'skill': lmp_data.raw_data.get('skill'),
                 'num_players': lmp_data.raw_data.get('num_players')
             }
-            if textfile_data:
-                wad_guesses = get_wad_guesses(
-                    post_data.raw_data['wad_links'], textfile_data.raw_data['wad_strings'],
-                    lmp_data.raw_data['wad_strings'], iwad=iwad
-                )
-            else:
-                wad_guesses = get_wad_guesses(
-                    post_data.raw_data['wad_links'], lmp_data.raw_data['wad_strings'], iwad=iwad
-                )
+            post_wad_links = post_data.raw_data['wad_links'] if post_data else []
+            textfile_wad_links = textfile_data.raw_data['wad_strings'] if textfile_data else []
+            wad_guesses = get_wad_guesses(
+                post_wad_links, textfile_wad_links, lmp_data.raw_data['wad_strings'], iwad=iwad
+            )
+
             playback_data = PlaybackData(lmp_path, wad_guesses, demo_info=demo_info)
             playback_data.analyze()
             if not CONFIG.skip_playback and playback_data.playback_failed:
-                LOGGER.info('Skipping post with zip %s due to issues with playback.', renamed_zip)
+                LOGGER.info('Skipping post with zip %s due to issues with playback.', demo_location)
                 return False
             if is_demo_pack and CONFIG.skip_demo_pack_issues:
                 LOGGER.info('Skipping demo %s in demo pack %s due to issues with playback.',
-                            lmp_file, renamed_zip)
+                            lmp_file, demo_location)
                 return False
 
             data_manager = DataManager()
-            post_data.populate_data_manager(data_manager)
             lmp_data.populate_data_manager(data_manager)
             playback_data.populate_data_manager(data_manager)
-            all_note_strings = set().union(post_data.note_strings, lmp_data.note_strings,
-                                           playback_data.note_strings)
+            all_note_strings = set().union(lmp_data.note_strings, playback_data.note_strings)
             if textfile_data:
                 textfile_data.populate_data_manager(data_manager)
                 all_note_strings = all_note_strings.union(textfile_data.note_strings)
+            if post_data:
+                post_data.populate_data_manager(data_manager)
+                all_note_strings = all_note_strings.union(post_data.note_strings)
+            if demo_info_map:
+                data_manager.insert('player_list', demo_info_map[demo]['player_list'],
+                                    DataManager.CERTAIN, source='extra_info')
 
             demo_json_constructor.parse_data_manager(data_manager, all_note_strings, lmp_file)
 
         demo_json_constructor.dump_demo_jsons()
-        shutil.rmtree(out_path)
+        if out_path:
+            shutil.rmtree(out_path)
 
     return True
 
@@ -186,51 +203,120 @@ def main():
                         format='%(asctime)s - %(name)s - %(levelname)s: %(message)s')
 
     set_up_configs()
+    # Setting these variables always so linting tools don't get angry :p
+    search_start_date = None
+    search_end_date = None
     if CONFIG.download_type == 'date-based':
         search_start_date = datetime.strptime(CONFIG.search_start_date, '%Y-%m-%dT%H:%M:%SZ')
         search_end_date = datetime.strptime(CONFIG.search_end_date, '%Y-%m-%dT%H:%M:%SZ')
         current_download_info = demo_range_to_string(search_start_date, search_end_date)
-    else:
+    elif CONFIG.download_type == 'ad-hoc':
         set_up_ad_hoc_config()
         current_download_info = checksum(AD_HOC_UPLOAD_CONFIG_PATH)
-
-        # Setting these variables so linting tools don't get angry :p
-        search_start_date = None
-        search_end_date = None
+    elif CONFIG.download_type == 'demo_pack':
+        current_download_info = None
+        if not CONFIG.demo_pack_input_folder or not CONFIG.demo_pack_output_folder:
+            raise ValueError('Demo pack input and output folders must be set for demo_pack mode.')
+    else:
+        raise ValueError(f'Unknown demo processing type {CONFIG.download_type} passed.')
 
     with open(DOWNLOAD_INFO_FILE) as cached_download_strm:
         cached_download_info = cached_download_strm.read().strip()
 
-    use_cached_downloads = (not CONFIG.ignore_cache and cached_download_info and
-                            current_download_info == cached_download_info)
-    if use_cached_downloads:
-        # Use cached stuff if available
-        post_cache_dir = os.path.join(CONFIG.demo_download_directory, 'post_cache')
-        post_info_files = glob(post_cache_dir + '/**/*.yaml', recursive=True)
-        posts = []
-        for post_info_file in post_info_files:
-            with open(post_info_file, encoding='utf-8') as post_info_stream:
-                post_dict = yaml.safe_load(post_info_stream)
-            post_dict['parent'] = Thread(**post_dict['parent'])
-            posts.append(Post(**post_dict))
+    if CONFIG.download_type == 'demo_pack':
+        input_folder_dirname = os.path.basename(CONFIG.demo_pack_input_folder)
+        demo_pack_demos = {}
+        for path, _, files in os.walk(CONFIG.demo_pack_input_folder):
+            player_name = os.path.basename(path)
+            # Skip top-level directory
+            if player_name == input_folder_dirname:
+                continue
+
+            player_info = DEMO_PACK_USER_MAP.get(player_name, {})
+            player_discord_name = player_info.get('discord', player_name)
+            player_dsda_name = player_info.get('dsda', player_name)
+            player_attach_infos = DEMO_PACK_ADDITIONAL_INFO_MAP.get(player_discord_name)
+            if not player_attach_infos:
+                LOGGER.error('Player %s found with no attachments.', player_name)
+                continue
+
+            player_attachments = {}
+            for attach_info in player_attach_infos:
+                attach_name = attach_info['attach_name']
+                if attach_info.get('ignore', False):
+                    continue
+                if attach_name.endswith('.zip') or is_demo_filename(attach_name):
+                    final_filenames = attach_info.get('final_filenames')
+                    final_filename = attach_info.get('final_filename')
+                    if final_filenames:
+                        for final_filename in final_filenames:
+                            player_attachments[final_filename] = attach_info['time']
+                    elif final_filename:
+                        player_attachments[final_filename] = attach_info['time']
+                    else:
+                        player_attachments[attach_name.lower()] = attach_info['time']
+            if player_name != '4shockblast_GarrettChan':
+                for demo_file in player_attachments:
+                    if demo_file not in files:
+                        LOGGER.error(
+                            "Demo %s found in player's attachments not in player folder, player: %s.",
+                            demo_file, player_name
+                        )
+
+            if isinstance(player_dsda_name, list):
+                player_dsda_name = tuple(player_dsda_name)
+            else:
+                player_dsda_name = (player_dsda_name,)
+
+            for demo_file in files:
+                if demo_file.endswith('.zip') or is_demo_filename(demo_file):
+                    demo_info = {
+                        'player_list': player_dsda_name
+                    }
+                    if demo_file not in player_attachments:
+                        LOGGER.error(
+                            "Demo %s found in player folder not in player's attachments, player: %s.",
+                            demo_file, player_name
+                        )
+                    else:
+                        demo_info['recorded_date'] = convert_dsda_date_to_datetime(
+                            player_attachments[demo_file]
+                        )
+
+                    demo_pack_demos[os.path.join(path, demo_file)] = demo_info
+
+        handle_demos(list(demo_pack_demos.keys()), demo_info_map=demo_pack_demos)
     else:
-        if CONFIG.download_type == 'date-based':
-            threads = get_new_threads(search_start_date)
-            posts = get_new_posts(search_start_date, search_end_date, threads)
+        use_cached_downloads = (not CONFIG.ignore_cache and cached_download_info and
+                                current_download_info == cached_download_info)
+        if use_cached_downloads:
+            # Use cached stuff if available
+            post_cache_dir = os.path.join(CONFIG.demo_download_directory, 'post_cache')
+            post_info_files = glob(post_cache_dir + '/**/*.yaml', recursive=True)
+            posts = []
+            for post_info_file in post_info_files:
+                with open(post_info_file, encoding='utf-8') as post_info_stream:
+                    post_dict = yaml.safe_load(post_info_stream)
+                post_dict['parent'] = Thread(**post_dict['parent'])
+                posts.append(Post(**post_dict))
         else:
-            posts = get_ad_hoc_posts()
+            if CONFIG.download_type == 'date-based':
+                threads = get_new_threads(search_start_date)
+                posts = get_new_posts(search_start_date, search_end_date, threads)
+            else:
+                posts = get_ad_hoc_posts()
+
+            for post in posts:
+                download_attachments(post)
+        with open(DOWNLOAD_INFO_FILE, 'w') as current_download_strm:
+            current_download_strm.write(current_download_info)
 
         for post in posts:
-            download_attachments(post)
-    with open(DOWNLOAD_INFO_FILE, 'w') as current_download_strm:
-        current_download_strm.write(current_download_info)
-
-    for post in posts:
-        post_data = PostData(post)
-        post_data.analyze()
-        downloads_handled = handle_downloads(post.cached_downloads, post_data)
-        if not downloads_handled:
-            move_post_cache_to_failed(post)
+            post_data = PostData(post)
+            post_data.analyze()
+            downloads_handled = handle_demos(post.cached_downloads, post_data=post_data)
+            if not downloads_handled:
+                move_post_cache_to_failed(post)
 
 
 if __name__ == '__main__':

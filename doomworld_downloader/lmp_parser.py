@@ -11,6 +11,7 @@ import subprocess
 
 from datetime import datetime, timedelta
 
+from .cheat_detection import check_tas
 from .data_manager import DataManager
 from .upload_config import CONFIG
 from .utils import run_cmd, convert_datetime_to_dsda_date, compare_iwad
@@ -100,6 +101,8 @@ class LMPData:
         if self.raw_data['player_classes']:
             self.note_strings.add('Hexen class: ' + ', '.join(self.raw_data['player_classes']))
 
+        is_tas = check_tas(self.lmp_path, self.data, self.raw_data)
+
     def populate_data_manager(self, data_manager):
         for key, value in self.data.items():
             if key in LMPData.CERTAIN_KEYS:
@@ -141,7 +144,7 @@ class LMPData:
         if not parse_lmp_out or 'Unknown engine' in parse_lmp_out:
             upstream_iwad = self.demo_info.get('iwad')
             # Default to Heretic which receives more demos than Hexen
-            engine_option = 'heretic'
+            engine_option = 'hexen'
             for additional_iwad in LMPData.ADDITIONAL_IWADS:
                 if compare_iwad(upstream_iwad, additional_iwad):
                     engine_option = additional_iwad

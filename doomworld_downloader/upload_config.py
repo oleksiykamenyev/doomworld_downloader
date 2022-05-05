@@ -4,6 +4,8 @@ Upload configuration class.
 
 from configparser import ConfigParser, NoSectionError, NoOptionError
 
+from collections import defaultdict
+
 import yaml
 
 from .utils import parse_list_file
@@ -24,6 +26,9 @@ THREAD_MAP = {}
 THREAD_MAP_KEYED_ON_ID = {}
 WAD_MAP_BY_DSDA_URL = {}
 WAD_MAP_BY_IDGAMES_URL = {}
+
+DEMO_PACK_ADDITIONAL_INFO_MAP = defaultdict(list)
+DEMO_PACK_USER_MAP = {}
 
 
 class UploadConfig:
@@ -171,6 +176,60 @@ class UploadConfig:
         except (NoSectionError, NoOptionError):
             return False
 
+    @property
+    def demo_pack_input_folder(self):
+        """Demo pack input folder.
+
+        Required for demo packs.
+
+        :return: Demo pack input folder
+        """
+        try:
+            return self._config.get('demo_pack', 'input_folder')
+        except (NoSectionError, NoOptionError):
+            return None
+
+    @property
+    def demo_pack_output_folder(self):
+        """Demo pack output folder.
+
+        Required for demo packs.
+
+        :return: Demo pack output folder
+        """
+        try:
+            return self._config.get('demo_pack', 'output_folder')
+        except (NoSectionError, NoOptionError):
+            return None
+
+    @property
+    def demo_pack_user_map(self):
+        """Demo pack user map.
+
+        Optional for demo packs. Maps username from folder to player name for final JSON to upload
+        to DSDA.
+
+        :return: Demo pack output folder
+        """
+        try:
+            return self._config.get('demo_pack', 'user_map')
+        except (NoSectionError, NoOptionError):
+            return None
+
+    @property
+    def demo_pack_additional_info_map(self):
+        """Demo pack output folder.
+
+        Optional for demo packs. Maps username from folder to player name for final JSON to upload
+        to DSDA.
+
+        :return: Demo pack output folder
+        """
+        try:
+            return self._config.get('demo_pack', 'additional_info_map')
+        except (NoSectionError, NoOptionError):
+            return None
+
 
 CONFIG = UploadConfig()
 
@@ -196,6 +255,16 @@ def set_up_configs(upload_config_path=None):
 
     with open(WAD_MAP_PATH, encoding='utf-8') as wad_stream:
         wad_map_by_dsda_url_raw = yaml.safe_load(wad_stream)
+
+    if CONFIG.demo_pack_additional_info_map:
+        with open(CONFIG.demo_pack_additional_info_map, encoding='utf-8') as info_map_stream:
+            demo_pack_additional_info_raw = yaml.safe_load(info_map_stream)
+
+        for attach_info in demo_pack_additional_info_raw['attachments']:
+            DEMO_PACK_ADDITIONAL_INFO_MAP[attach_info['author']].append(attach_info)
+    if CONFIG.demo_pack_user_map:
+        with open(CONFIG.demo_pack_user_map, encoding='utf-8') as user_map_stream:
+            DEMO_PACK_USER_MAP.update(yaml.safe_load(user_map_stream))
 
     for url, wad_dict in wad_map_by_dsda_url_raw.items():
         idgames_url = wad_dict['idgames_url']

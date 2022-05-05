@@ -40,23 +40,29 @@ class DemoJsonConstructor:
         'category', 'secret_exit', 'recorded_at', 'players'
     ]
 
+    MAYBE_CHEATED_DIR = 'maybe_cheated_jsons'
+    VALID_DEMO_PACK_DIR = 'tmp_demo_pack_jsons'
     VALID_ISSUE_DIR = 'issue_jsons'
     VALID_NO_ISSUE_DIR = 'no_issue_jsons'
     VALID_TAGS_DIR = 'tags_jsons'
 
-    def __init__(self, zip_file, zip_no_ext):
+    def __init__(self, demo_location, demo_location_filename):
         """Initialize demo JSON constructor.
 
-        :param zip_file: Zip file path
-        :param zip_no_ext: Zip filename with no extension for constructing the JSON filename
+        :param demo_location: Demo location (either zip file or lmp file directly)
+        :param demo_location_filename: Location filename with no extension for constructing the JSON
+                                       filename
         """
-        self.zip_file = zip_file
-        self.zip_no_ext = zip_no_ext
-        # Use "/" separator for path since the DSDA client prefers it
-        self.file_entry = {'file': {'name': '/'.join(os.path.split(zip_file))}}
+        self.demo_location = demo_location
+        self.demo_location_filename = demo_location_filename
+        # Use "/" separator for path since the DSDA client prefers the paths provided this way.
+        # If in demo pack mode, this may be incorrect as it could be an lmp alone; this is OK as a
+        # separate utility will handle such files later.
+        self.file_entry = {'file': {'name': '/'.join(os.path.split(demo_location))}}
         self.demo_jsons = {}
         self.has_issue = False
         self.has_tags = False
+        self.maybe_cheated = False
 
     def _set_has_issue(self):
         """Set has_issue flag if there is an issue with the JSON."""
@@ -79,8 +85,8 @@ class DemoJsonConstructor:
             else:
                 value = next(iter(evaluation.possible_values.keys()))
                 if value == NEEDS_ATTENTION_PLACEHOLDER:
-                    LOGGER.warning('LMP %s in zip file %s needs attention for following key: "%s".',
-                                   lmp_file, self.zip_file, key_to_insert)
+                    LOGGER.warning('LMP %s (location: %s) needs attention for following key: "%s".',
+                                   lmp_file, self.demo_location, key_to_insert)
                     self._set_has_issue()
 
                 demo_json[key_to_insert] = value
@@ -150,19 +156,29 @@ class DemoJsonConstructor:
             demo_list_entry.update(self.file_entry)
             final_demo_json = {'demo': demo_list_entry}
 
-        zip_file_strip = self.zip_file.rstrip(os.path.sep).split(os.path.sep)
-        # Download path sample: demos_for_upload/PlayerName/123456/demo.zip
+        loc_strip = self.demo_location.rstrip(os.path.sep).split(os.path.sep)
+        # Doomworld download path sample: demos_for_upload/PlayerName/123456/demo.zip
         # Set json filename to demo_PlayerName_123456
-        json_filename = f'{self.zip_no_ext}_{zip_file_strip[-3]}_{zip_file_strip[-2]}.json'
-        if self.has_issue:
+        json_filename = f'{self.demo_location_filename}_{loc_strip[-3]}_{loc_strip[-2]}.json'
+        if self.maybe_cheated:
+            json_path = self._set_up_demo_json_file(json_filename,
+                                                    DemoJsonConstructor.MAYBE_CHEATED_DIR)
+        elif self.has_issue:
             json_path = self._set_up_demo_json_file(json_filename,
                                                     DemoJsonConstructor.VALID_ISSUE_DIR)
         elif self.has_tags:
             json_path = self._set_up_demo_json_file(json_filename,
                                                     DemoJsonConstructor.VALID_TAGS_DIR)
+        elif CONFIG.download_type == 'demo_pack':
+            json_path = self._set_up_demo_json_file(json_filename,
+                                                    DemoJsonConstructor.VALID_DEMO_PACK_DIR)
         else:
             json_path = self._set_up_demo_json_file(json_filename,
                                                     DemoJsonConstructor.VALID_NO_ISSUE_DIR)
+
+        # If we are in demo pack mode, we should never overwrite any JSONs
+        if CONFIG.download_type == 'demo_pack' and os.path.exists(json_path):
+            raise RuntimeError(f'Demo pack JSON {json_path} will be ovewritten!')
 
         with open(json_path, 'w', encoding='utf-8') as out_stream:
             json.dump(final_demo_json, out_stream, indent=4, sort_keys=True)
@@ -203,12 +219,12 @@ class DemoJsonConstructor:
             if ((playback_category == 'NoMo 100S' and textfile_category == 'NoMo') or
                     (playback_category == 'NM 100S' and textfile_category == 'NM Speed')):
                 LOGGER.info('Inferred %s category for zip file %s.',
-                            playback_category, self.zip_file)
+                            playback_category, self.demo_location)
                 demo_json[key_to_insert] = playback_category
                 return
 
-        LOGGER.warning('LMP %s in zip file %s needs attention based on the following evaluation: '
-                       '"%s".', lmp_file, self.zip_file, evaluation)
+        LOGGER.warning('LMP %s (location: %s) needs attention based on the following evaluation: '
+                       '"%s".', lmp_file, self.demo_location, evaluation)
         # If there is a single possible evaluation, the data manager will indicate evaluation is
         # needed, but we should just add it to the JSON by default, in case the evaluation is
         # correct
@@ -217,6 +233,13 @@ class DemoJsonConstructor:
         else:
             demo_json[key_to_insert] = NEEDS_ATTENTION_PLACEHOLDER
         self._set_has_issue()
+
+        # If we aren't sure this is a TAS (i.e., it's not in the TAS thread and not clearly marked
+        # in the txt), the demo potentially needs investigation for cheating.
+        if evaluation.key == 'is_tas':
+            LOGGER.warning('LMP %s (location: %s) may need to be investigated for cheating.',
+                           lmp_file, self.demo_location)
+            self.maybe_cheated = True
 
     def _construct_tags(self, note_strings, lmp_file, demo_json):
         """Construct tags array for demo JSON
@@ -282,7 +305,7 @@ class DemoJsonConstructor:
                 # indicates the actual category (e.g., in cases of wrong skill level).
                 if category != 'Other':
                     raise RuntimeError(f'Other skill run found without Other category: {lmp_file} '
-                                       f'in {self.zip_file}.')
+                                       f'(location: {self.demo_location}).')
                 category = note_string
             if note_string == 'Incompatible':
                 incompatible = True
@@ -325,8 +348,8 @@ class DemoJsonConstructor:
                     note_string.startswith('Plays back with ')):
                 misc_tags.append(note_string)
                 if note_string == 'Uses turbo':
-                    LOGGER.warning('LMP %s in zip file %s due to unclear turbo usage.', lmp_file,
-                                   self.zip_file)
+                    LOGGER.warning('LMP %s (location: %s) has issue due to unclear turbo usage.',
+                                   lmp_file, self.demo_location)
                     self._set_has_issue()
                 if note_string == 'Uses longtics':
                     demo_json['category'] = 'Other'

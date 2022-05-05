@@ -142,6 +142,9 @@ dsda_wads/
 failed_posts/
 completed_jsons
 
+# THIS SHOULD NEVER BE PUBLIC
+cheat_detection.py
+
 # 4shockblast: will use this for any tmp code I write to auto-generate/fix configs and stuff
 tmp_code.py
 analysis.txt
@@ -154,3 +157,6 @@ failed_uploads.json
 jsons_complete/
 tmp_demos_for_upload/
 sample_scripts/
+additional_pack_info.yaml
+user_map.yaml
+demo_pack_tmp/

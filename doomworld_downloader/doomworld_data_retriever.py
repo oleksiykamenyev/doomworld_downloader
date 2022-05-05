@@ -170,7 +170,7 @@ def parse_thread_page(thread_url, thread=None):
         # Sample thread URL: https://www.doomworld.com/forum/topic/70300-sample-3/?page=68
         #   base: https://www.doomworld.com/forum/topic/70300-sample-3
         #   ID: 70300
-        thread_base_url = get_thread_base_url(thread_url)
+        thread_base_url = get_thread_base_url(requests.get(thread_url).url)
         thread_id = thread_base_url.split('/')[-1].split('-')[0]
         # We don't need the last post date or page number since this case is for ad-hoc thread/post
         # downloads

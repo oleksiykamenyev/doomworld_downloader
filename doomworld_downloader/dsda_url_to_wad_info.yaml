@@ -1207,7 +1207,7 @@
     map_ranges: [[1, 21], [31]]
     d2all: ["Map 01", "Map 21"]
     # TODO: Confirm that map 15 in this wad has a secret exit
-    secret_exits: {'Map 15': 'Map 31'}
+    secret_exits: {"Map 15": "Map 31"}
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/joi_lstcv15"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/124136-lost-civilization-complevel-9/"
@@ -3209,7 +3209,7 @@
     map_ranges: [[1, 32]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/bcsmw"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128964-big-crappy-shit-megawad-demos-complevel-2/"
 "https://www.dsdarchive.com/wads/cchest3":
   wad_name: Community Chest 3
   iwad: doom2
@@ -6076,7 +6076,7 @@
     episodes: [["E1M1", "E1M8"], ["E2M1", "E2M8"], ["E3M1", "E3M8"]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom/d-f/extremal"
   dsda_paginated: false
-  doomworld_thread: "https://www.doomworld.com/forum/topic/35723-extremal-doom-demos/"
+  doomworld_thread: ""https://www.doomworld.com/forum/topic/129022-extremal-doom-demos-complevel-2/""
 "https://www.dsdarchive.com/wads/alt_2012-12":
   wad_name: A.L.T.
   iwad: doom2
@@ -13265,5 +13265,79 @@
     d2all: null
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/droom"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/wormwood":
+  wad_name: Wormwood
+  iwad: doom2
+  wad_files:
+    wormwood.wad: {checksum: "ec24121ad9559c9280879e67ac0770ee"}
+    __macosx/._wormwood.wad: {not_required_for_playback: true, checksum: "8b5b316fd4a41a690363cc3c15b72925"}
+  complevel: 9
+  playback_cmd_line: "-file wormwood"
+  map_list_info:
+    map_ranges: [[1, 2]]
+    d2all: ["Map 01", "Map 02"]
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/dwspd004":
+  wad_name: "Doomworld Speedmapping Compilation #4"
+  iwad: doom2
+  wad_files:
+    dwspd004.wad: {checksum: "e2b20417b66275ad839be11fbefc9043"}
+  complevel: 9
+  playback_cmd_line: "-file dwspd004"
+  map_list_info:
+    map_ranges: [[1, 17]]
+    d2all: ["Map 01", "Map 17"]
+    episodes: []
+    secret_exits: {}
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dwspd004"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128765-doomworld-speedmapping-compilation-demos/"
+"https://www.dsdarchive.com/wads/ezekiel1":
+  wad_name: Ezekiel (Abridged version)
+  iwad: doom2
+  wad_files:
+    ezekiel1.wad: {checksum: "9f579d04e5995d3252ad58f875733051"}
+    ezekiel2.wad: {checksum: "ef6cd244fa37f4b9323ab69ded0179a4"}
+    ezekiel3.wad: {checksum: "f17842f48715a8df11422403e5cf8d6e"}
+  complevel: 2
+  playback_cmd_line: "-file ezekiel1 ezekiel2 ezekiel3"
+  map_list_info:
+    map_ranges: [[1, 9]]
+    d2all: ["Map 01", "Map 09"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/ezekiel1"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/judgment":
+  wad_name: Judgment
+  iwad: doom2
+  wad_files:
+    judgment.wad: {checksum: "a5bb9a326f6b5daf4e0960bcbc5ecb6b"}
+  complevel: 21
+  playback_cmd_line: "-file judgment"
+  map_list_info:
+    map_ranges: [[1, 34]]
+    episodes: [["Map 01", "Map 06"], ["Map 07", "Map 11"], ["Map 12", "Map 15"], ["Map 16", "Map 20"], ["Map 21", "Map 25"], ["Map 26", "Map 30"]]
+    secret_exits: {"Map 08": "Map 33", "Map 15": "Map 31", "Map 31": "Map 32", "Map 24": "Map 34"}
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/judgment"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/casty_b":
+  wad_name: Casting of Bones
+  iwad: doom2
+  wad_files:
+    casty_b.wad: {checksum: "1735c91a006e855cba16c97002d81f1d"}
+  complevel: 2
+  playback_cmd_line: "-file casty_b"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/a-c/casty_b"
   dsda_paginated: false
   doomworld_thread: null

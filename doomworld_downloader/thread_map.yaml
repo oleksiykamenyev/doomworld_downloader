@@ -93,11 +93,11 @@ https://www.doomworld.com/forum/topic/35633-revolution-demos/:
     wad: https://www.dsdarchive.com/wads/tvr
   id: '35633'
   name: Revolution! demos
-https://www.doomworld.com/forum/topic/35723-extremal-doom-demos/:
+"https://www.doomworld.com/forum/topic/129022-extremal-doom-demos-complevel-2/":
   additional_info:
     wad: https://www.dsdarchive.com/wads/extremal
-  id: '35723'
-  name: Extremal Doom Demos
+  id: '129022'
+  name: Extremal Doom Demos [-complevel 2]
 https://www.doomworld.com/forum/topic/36275-nilla-demos/:
   additional_info:
     wad: https://www.dsdarchive.com/wads/nilla
@@ -1138,6 +1138,16 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/alostworld
   id: '128882'
   name: 'A Lost World demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/128964-big-crappy-shit-megawad-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/bcsmw
+  id: '128964'
+  name: 'Big Crappy Shit Megawad demos [-complevel 2]'
+"https://www.doomworld.com/forum/topic/129040-zodiac-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/zodiac
+  id: '129040'
+  name: 'Zodiac demos [-complevel 9]'
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
