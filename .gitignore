@@ -160,3 +160,5 @@ sample_scripts/
 additional_pack_info.yaml
 user_map.yaml
 demo_pack_tmp/
+idgames_api/levels/
+wad_upload_config.yaml

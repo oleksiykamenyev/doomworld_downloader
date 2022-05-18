@@ -71,6 +71,17 @@ class UploadConfig:
         return self._config.get('general', 'parse_lmp_directory')
 
     @property
+    def dsda_api_directory(self):
+        """Get DSDA API directory (required).
+
+        :return: DSDA API directory
+        """
+        try:
+            return self._config.get('general', 'dsda_api_directory')
+        except (NoSectionError, NoOptionError):
+            return None
+
+    @property
     def demo_download_directory(self):
         """Get demo download directory from config (optional).
 
@@ -178,7 +189,7 @@ class UploadConfig:
 
     @property
     def demo_pack_input_folder(self):
-        """Demo pack input folder.
+        """Get demo pack input folder.
 
         Required for demo packs.
 
@@ -191,7 +202,7 @@ class UploadConfig:
 
     @property
     def demo_pack_output_folder(self):
-        """Demo pack output folder.
+        """Get demo pack output folder.
 
         Required for demo packs.
 
@@ -204,7 +215,7 @@ class UploadConfig:
 
     @property
     def demo_pack_user_map(self):
-        """Demo pack user map.
+        """Get demo pack user map.
 
         Optional for demo packs. Maps username from folder to player name for final JSON to upload
         to DSDA.
@@ -218,7 +229,7 @@ class UploadConfig:
 
     @property
     def demo_pack_additional_info_map(self):
-        """Demo pack output folder.
+        """Get demo pack output folder.
 
         Optional for demo packs. Maps username from folder to player name for final JSON to upload
         to DSDA.

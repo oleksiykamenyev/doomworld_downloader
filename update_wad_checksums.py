@@ -41,6 +41,11 @@ def parse_args():
                         dest='skip_existing',
                         action='store_true',
                         help='Skip existing WAD downloads.')
+    parser.add_argument('-o', '--update-specified-wads',
+                        dest='update_specified_wads',
+                        action='store_true',
+                        help='Update only specified WADs. These can be marked in the YAML with the '
+                             'key update: true.')
 
     return parser.parse_args()
 
@@ -76,7 +81,9 @@ def main():
                 in_commercial_wad = cur_wad_entry.get('commercial', False)
                 wad_name = get_wad_name_from_dsda_url(cur_wad_url)
                 cur_download_dir = os.path.join(CONFIG.wad_download_directory, wad_name)
-                if args.skip_existing and os.path.isdir(cur_download_dir) or in_commercial_wad:
+                update_wad = cur_wad_entry.get('update', False)
+                if (in_commercial_wad or (args.skip_existing and os.path.isdir(cur_download_dir)) or
+                        (args.update_specified_wads and not update_wad)):
                     LOGGER.debug('Skip existing WAD %s.', cur_wad_url)
                     local_wad_location = None
                     new_wad_map_lines.append(line)

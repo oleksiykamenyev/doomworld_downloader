@@ -5,6 +5,7 @@ search_end_date = 2020-06-23T23:59:59Z
 
 dsda_doom_directory = d:\\Games\\dsda-doom-dsda
 parse_lmp_directory = d:\\MyStuff\\lmp
+dsda_api_directory = d:\\MyStuff\\dsda3\\dsda-r-api-client
 
 demo_download_directory = demos_for_upload
 wad_download_directory = dsda_wads
@@ -12,8 +13,8 @@ wad_download_directory = dsda_wads
 download_type = date-based|ad-hoc|demo_pack
 ignore_cache = FALSE|true
 
-skip_playback = false|TRUE
-skip_playback_for_demo_packs = false|TRUE
+skip_playback = TRUE|false
+skip_playback_for_demo_packs = FALSE|true
 
 demo_date_cutoff = 2021-01-01T00:00:00Z
 always_try_solonet = FALSE|true

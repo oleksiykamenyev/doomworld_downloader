@@ -2,6 +2,7 @@ import argparse
 import logging
 import os
 
+from doomworld_downloader.upload_config import CONFIG
 from doomworld_downloader.utils import get_log_level, run_cmd
 
 NO_ISSUE_JSON_DIR = 'demos_for_upload/no_issue_jsons'
@@ -37,9 +38,7 @@ def main():
 
     for json_file in os.listdir(NO_ISSUE_JSON_DIR):
         json_path = os.path.join(NO_ISSUE_JSON_DIR, json_file)
-        upload_cmd = 'ruby d:/MyStuff/dsda3/dsda-r-api-client/dsda-client.rb "{}"'.format(
-            json_path
-        )
+        upload_cmd = f'ruby {CONFIG.dsda_api_directory}/dsda-client.rb "{json_path}"'
         # TODO: Keep track of failed_uploads.json files since otherwise they could be overwritten
         run_cmd(upload_cmd, dryrun=args.dryrun)
 
