@@ -9,8 +9,18 @@ parse_lmp_directory = d:\\MyStuff\\lmp
 demo_download_directory = demos_for_upload
 wad_download_directory = dsda_wads
 
-download_type = date-based|ad-hoc
+download_type = date-based|ad-hoc|demo_pack
 ignore_cache = FALSE|true
 
 skip_playback = false|TRUE
 skip_playback_for_demo_packs = false|TRUE
+
+demo_date_cutoff = 2021-01-01T00:00:00Z
+always_try_solonet = FALSE|true
+
+[demo_pack]
+
+input_folder = d:\\demo_pack_input
+output_folder = d:\\demo_pack_output
+user_map = doomworld_downloader\\user_map.yaml
+additional_info_map = doomworld_downloader\\additional_pack_info.yaml

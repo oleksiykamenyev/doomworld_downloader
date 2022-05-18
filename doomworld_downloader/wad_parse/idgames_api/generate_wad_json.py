@@ -167,7 +167,7 @@ def main():
             'single_map': num_maps == 1,
             'iwad': file_info['dir'].split('/')[1],
             'name': file_info['title'],
-            'short_name': file_info['filename'].split('.')[0],
+            'short_name': os.path.splitext(file_info['filename'])[0],
             'year': wad_year,
             'file': {
                 'name': local_file_path,

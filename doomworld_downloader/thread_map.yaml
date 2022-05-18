@@ -1148,6 +1148,26 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/zodiac
   id: '129040'
   name: 'Zodiac demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/129141-judgment-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/judgment
+  id: '129141'
+  name: 'Judgment Demos [-complevel 21]'
+"https://www.doomworld.com/forum/topic/129231-cyberdreams-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/cydreams
+  id: '129231'
+  name: 'Cyberdreams demos [-complevel 2]'
+"https://www.doomworld.com/forum/topic/129232-violence-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/violence
+  id: '129232'
+  name: 'Violence demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/129232-dimensions-of-time-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/dot
+  id: '129232'
+  name: 'Dimensions of Time demos [-complevel 2]'
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -1323,6 +1343,13 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/cleim20
   id: '128875'
   name: "Cleimos and Cleimos 2 demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/129264-the-darkening-demos-both-episodes-complevel-2/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/darken
+      - https://www.dsdarchive.com/wads/darken2
+  id: '129264'
+  name: "The Darkening Demos (both episodes) [-complevel 2]"
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":

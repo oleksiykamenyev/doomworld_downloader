@@ -347,6 +347,8 @@ class IdgamesAPI():
                 LOGGER.exception('Request to idgames mirror unsuccessful: %s.', wad_url)
                 continue
 
+            break
+
         if not file_download:
             raise RuntimeError('Could not download file from any of the known mirrors!')
 
@@ -381,7 +383,8 @@ def get_file_id_from_idgames_url(idgames_url):
 
         file_path = url_parsed.path[9:]
         for file_info in files_info:
-            if file_path == os.path.join(file_info['dir'], file_info['filename'].split('.')[0]):
+            if file_path == os.path.join(file_info['dir'],
+                                         os.path.splitext(file_info['filename'])[0]):
                 return file_info['id']
 
         LOGGER.error('Could not find matching wad ID in file info list. File info list:\n',
