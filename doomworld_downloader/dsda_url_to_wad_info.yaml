@@ -13500,3 +13500,45 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom/s-u/sector66"
   dsda_paginated: false
   doomworld_thread: null
+"https://www.dsdarchive.com/wads/supjosh":
+  wad_name: SUPJOSH
+  iwad: doom2
+  wad_files:
+    supjosh.wad: {checksum: "ce5063404fcaf057822e306229eea646"}
+  complevel: 2
+  playback_cmd_line: "-file supjosh"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/s-u/supjosh"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/ehorizon":
+  wad_name: Circle Strafe
+  iwad: doom2
+  wad_files:
+    ehorizon.wad: {checksum: "ddb4bc04bb25f467bba3c31babaff23f"}
+  complevel: 9
+  playback_cmd_line: "-file ehorizon"
+  map_list_info:
+    map_ranges: [[1, 2], [31, 32]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/ehorizon"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/lotbos":
+  wad_name: Legion of the Balls of Steel
+  iwad: doom2
+  wad_files:
+    lotbos.wad: {checksum: "94703c2b957eb53ee428901833105429"}
+  complevel: 9
+  playback_cmd_line: "-file lotbos"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/j-l/lotbos"
+  dsda_paginated: false
+  doomworld_thread: null
