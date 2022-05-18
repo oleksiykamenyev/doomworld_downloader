@@ -1,0 +1,63 @@
+DSDA uploads notes:
+  - first script to run: doomworld_downloader with -vv
+    - this will log a bunch of warnings and stuff like that; it's good to read thru that, it will explain some of the issues with the JSONs, and some other info will be logged (e.g., if someone used 7z or rar, it will be logged only there)
+    - this will produce one directory for sure and up to four more:
+	  - post_cache: this is where cached post info resides so that subsequent runs of the script don't hit DW and redownload again
+	  - failed_posts: this is posts that failed on playback, there are a few reasons for this with different ways of handling:
+	    - missing wads:
+		  - this is the most common reason and can be fixed by just adding the wad to the dsda_url_to_wad_info.yaml
+		    - the wad may need to be uploaded first, more on that later
+			- adding wads is largely manual since that's the easiest way to go about it
+			  - checking idgames, DSDA, and the wad in UDB is useful for map ranges
+			  - the wad_name is taken from idgames/DSDA directly
+			  - the wad files don't have to be exact, though; a separate script described below will determine that
+			  - there are some keys that will only be seen occasionally:
+			    - d2all
+				  - set to null if it's a one-map wad, first and last map if it's multiple maps, can ignore for 32-map wads)
+				- episodes
+				  - set to empty list for most wads; if they are explicitly defined on a wad (e.g., Scythe 2), or a wad is a multiple of 10 long, these can be set
+				- secret_exits
+				  - only really needs to be set if the D2ALL includes maps that could have secret exits and doesn't have them (e.g., a run from maps 1 to 16 but no 31-32) or for UMAPINFO shenanigans
+				- alt_playback_cmd_lines
+				  - fixwads, etc.: this can be mapped from a separate command line to a tag that needs to be set for the wad (e.g., "Plays back with "avmovfix.wad.")
+				- dsda_paginated
+				  - almost always false (only set for wads that have multiple pages of demos on DSDA)
+				- commercial
+				  - almost always false (only set for wads that shouldn't have DSDA downloads)
+				- parent
+				  - if a wad has a newer version, that version will be checked for syncing before anything that has it set as a parent; this is important if a wad had an update to it but no name change, otherwise you might end up uploading demos for the old version of the wad even if they sync with the new version
+		- extraneous footer files:
+		  - need to contact the post author usually, but sometimes they are "OK" ones like HUD modifications, or the IWAD or something that doesn't actually break anything; these can be handled manually
+		- ZDoom/GZDoom/ZDaemon/Doomsday/WhateverFuckingWeirdDoomPort runs:
+		  - will need to be rerun with playback skipped; modify skip_playback to true for these to work in upload.ini
+		  - when this happens, the JSONs will be missing a lot of info; this needs to be input manually based on txt, etc.
+		- in all cases, failed_posts should either be deleted (if they are not to be uploaded) or moved back to post_cache after a fix if they need to be uploaded (don't forget to delete any already uploaded posts from post_cache if there are any)
+	  - no_issue_jsons: these are safe to upload without checking
+	  - issue_jsons: need to be checked, following reasons could require this (note: demos that have tags that also have issues also end up here):
+	    - Missing info in the JSON: should be always set to UNKNOWN, this could be an issue with the scripts or the txt; in the former, let me know, in the latter, the poster should be notified to add extra info.
+		  - exception: if the txt has the wrong category, but the port got the right one, for example, can just ignore and upload since these are extremely common and fixing all of this would be way too much effort
+		  - in case the category is UNKNOWN and playback says UV-Speed/txt says UV-Max, it could be that the demo is invalid or that it skips unobtainable stuff; just check txt to confirm if not, ask the player or investigate the map/other demos for it
+	    - Crispy Doom demos: these only get port info from the txt, not the lmp, they always end up here as a result. If they look sane, can just upload.
+		- video_links: always end up here unless a video is linked both in the post and the txt; if the video linked is correct, doesn't have extra commentary or other substantial effects, and isn't in 16p resolution, keep the link
+	  - tags_jsons: may need to be checked, these demos receive tags (e.g., "Also Reality") that may either be incorrect, unnecessary, or invalidate the run:
+	    -
+    - before actually uploading, I move everything to no_issue_jsons and I like searching all files in the directory for Other, tags, or UNKNOWN just to make sure that I didn't miss any issues
+  - upload script: upload_jsons -vv
+    - this can be run as many times as possible and will just upload everything in no_issue_jsons; you can fix every post above before running this or just do it incrementally (upload whatever worked, then fix failed posts and upload again)
+	- after uploading, I like moving out the completed JSONs to a separate directory, at least for a time, to keep track of uploads; eventually, you can clean this out
+	- it's also good to check the feed (https://www.dsdarchive.com/feed) once you upload; use the date on the left and check everything with the date so that at least at a high-level there are no obvious errors
+  - update_wad_checksums -vv --skip-existing:
+    - will update all newer wads in the YAML
+	  - note: newer is currently defined as already downloaded locally, so this could take awhile first run. Will need a fix for this.
+	- it will find any .wad files under the zip that aren't already defined in the config file; sometimes the main wad file for a wad will differ from the zip filename, so if you made an assumption of that when creating the entry originally, this will fix it and you should use that file
+	- it will also find extra stuff that was missed; whether or not it is important for actually running the wad requires manual verification
+  - generate_wad_json wad_list.yaml
+    - generate wads to upload to DSDA; this only works with stuff on idgames, anything else you will need to manually create stuff for (copying an existing file and changing stuff works)
+	  - caveat; it won't work with wads that are 2 characters or fewer in length due to a limitation on the idgames API side
+	  - there will be some useful info in the log, but little; mostly, in the cases of year mismatch between idgames and zip, that info will be output, and typically, I just take the zip date, which is defaulted to by the script
+	  - the IWAD info may be wrong in a couple cases:
+	    - if the wad is for Final Doom (or Chex, etc.), it will probably choose doom2 as idgames does not differentiate between doom and doom2 iwads
+		- if the wad is in an unusual directory (e.g., themes), it won't figure out the iwad
+		- the resulting file can be sent to the DSDA API like any other JSON
+	  - author info:
+	    - idgames sometimes has junk here; for example, in case of community projects, it might list every author. If there are more than like three authors, IMO, just write Various.
