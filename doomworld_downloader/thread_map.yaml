@@ -1168,6 +1168,26 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/dot
   id: '129232'
   name: 'Dimensions of Time demos [-complevel 2]'
+"https://www.doomworld.com/forum/topic/129330-fruit-salad-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/fruitsalad
+  id: '129330'
+  name: 'Fruit Salad demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/129320-anomaly-report-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ar_2022
+  id: '129320'
+  name: 'Anomaly Report demos [-complevel 2]'
+"https://www.doomworld.com/forum/topic/129373-confinement-256-vanilla-version-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/conf265v
+  id: '129373'
+  name: 'Confinement 256 (vanilla version) demos [-complevel 2]'
+"https://www.doomworld.com/forum/topic/129374-preacher-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/preacher
+  id: '129374'
+  name: 'Preacher demos [-complevel 9]'
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":

@@ -160,6 +160,8 @@ sample_scripts/
 additional_pack_info.yaml
 user_map.yaml
 demo_pack_tmp/
+doomworld_downloader/wad_parse/idgames_api/completed_jsons/
 doomworld_downloader/wad_parse/idgames_api/levels/
 doomworld_downloader/wad_parse/idgames_api/*.json
+doomworld_downloader/wad_parse/idgames_api/*.zip
 wad_upload_config.yaml

@@ -12,7 +12,8 @@
   complevel: 2
   playback_cmd_line: "-file bourgfix"
   map_list_info:
-    map_ranges: [[1, 32]]
+    map_ranges: [[1, 30]]
+    secret_exits: {}
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/deathmatch/megawads/bourgfix"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/119699-bourgeois-megawad-complevel-2/"
@@ -10200,7 +10201,7 @@
         tyson_only: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/conf256v"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/129373-confinement-256-vanilla-version-demos-complevel-2/"
 "https://www.dsdarchive.com/wads/mayhem17":
   wad_name: Super MAYhem 17 (v1.1)
   iwad: doom2
@@ -12850,7 +12851,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/p-r/preacher"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/129374-preacher-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/ccenter":
   wad_name: Communications Center
   iwad: doom2
@@ -13540,5 +13541,177 @@
     d2all: null
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/j-l/lotbos"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/aztec01":
+  wad_name: "Aztec: Land of the Demons"
+  iwad: doom2
+  wad_files:
+    aztec01.wad: {checksum: "eb603ad08ffd10c75661cbee341abb19"}
+  complevel: 2
+  playback_cmd_line: "-file aztec01"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/a-c/aztec01"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/deadmap":
+  wad_name: Small but Deadly map
+  iwad: doom2
+  wad_files:
+    deadmap.wad: {checksum: "a2fc50a79ca2267f6c62193b95616715"}
+  complevel: 2
+  playback_cmd_line: "-file deadmap"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/deadmap"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/pamela_a":
+  wad_name: PAMELA ANDERSON in DOOM
+  iwad: doom2
+  wad_files:
+    pamela.wad: {checksum: "3769b63304d721915a71998f7a9627cb"}
+  complevel: 2
+  playback_cmd_line: "-file pamela"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/themes/x-rated/i_am_old_enough_to_look_at_this/pamela_a"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/wille1m1":
+  wad_name: WILLE1M1.WAD
+  iwad: doom
+  wad_files:
+    wille1m1.wad: {checksum: "a475daabc2824077f8b7adcd2de7a06a"}
+  complevel: 3
+  playback_cmd_line: "-file wille1m1"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/v-z/wille1m1"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/aqueous":
+  wad_name: The aqueous rise and fall.
+  iwad: plutonia
+  wad_files:
+    aqueous.wad: {checksum: "ec970425f68c6581ae606667ac30a894"}
+  complevel: 4
+  playback_cmd_line: "-file aqueous"
+  map_list_info:
+    map_ranges: [[13]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/a-c/aqueous"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/punkwad":
+  wad_name: PuNk DoOm
+  iwad: doom2
+  wad_files:
+    punk.wad: {checksum: "d27d68008066e68d15c66044a81d2dd4"}
+  complevel: 2
+  playback_cmd_line: "-file punk"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/p-r/punkwad"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/the_best":
+  wad_name: The best level in the world!
+  iwad: doom2
+  wad_files:
+    the_best.wad: {checksum: "74bfe3a03d90bf6fc2238c79c7d3ef31"}
+  complevel: 2
+  playback_cmd_line: "-file the_best"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+    map_info:
+      "Map 01":
+        skip_reality: true
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/s-u/the_best"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/ar_2022":
+  wad_name: Anomaly Report
+  iwad: doom2
+  wad_files:
+    ar.wad: {checksum: "54a76897a5d37ea8584f0e4b6c5ce745"}
+    ar.deh: {checksum: "fce7cce3a0c0e606a056930e043d888e"}
+    ar_wide.wad: {not_required_for_playback: true, checksum: "f40295378a3f91e866316aa498d314be"}
+  complevel: 2
+  playback_cmd_line: "-file ar -deh ar"
+  map_list_info:
+    map_ranges: [[1, 33]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/ar"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/129320-anomaly-report-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/batman_1999":
+  wad_name: Batman DOOM
+  iwad: doom2
+  wad_files:
+    batman.wad: {checksum: "c4686776cb6e36100e232be914950b99"}
+    batman.deh: {checksum: "0373cea0cecb6ad203cb99290b857133"}
+  complevel: 2
+  playback_cmd_line: "-file batman -deh batman"
+  map_list_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/themes/batman/batman"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/fruitsalad":
+  wad_name: Fruit Salad
+  iwad: doom2
+  wad_files:
+    "fruit salad.wad": {checksum: "fca751fca521412df8f4261213270411"}
+    # In case someone renames their WAD...
+    fruitsalad.wad: {dupe_checksum: true, not_required_for_playback: true, checksum: "1f939d6bcc6175eb9830645d7acb8aa9"}
+    fs_pinkpalette.wad: {not_required_for_playback: true, checksum: "626875a7efa6db71fd97a8852c4b530d"}
+  complevel: 9
+  playback_cmd_line: '-file "fruit salad.wad"'
+  map_list_info:
+    map_ranges: [[1, 6]]
+    d2all: ["Map 01", "Map 06"]
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/129330-fruit-salad-demos-complevel-9/"
+"https://www.dsdarchive.com/wads/zeramida":
+  wad_name: Zeramida
+  iwad: doom2
+  wad_files:
+    zeramida.wad: {checksum: "3f2728bd9d234dfe47610cecfc95869a"}
+  complevel: 2
+  playback_cmd_line: "-file zeramida"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/v-z/zeramida"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/rustbase":
+  wad_name: Rust Base
+  iwad: doom2
+  wad_files:
+    rustbase.wad: {checksum: "9f5a3297c0b19543f5a40b0fbffc617c"}
+  complevel: 2
+  playback_cmd_line: "-file rustbase"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: null
   dsda_paginated: false
   doomworld_thread: null
