@@ -217,6 +217,10 @@ def main():
         current_download_info = None
         if not CONFIG.demo_pack_input_folder or not CONFIG.demo_pack_output_folder:
             raise ValueError('Demo pack input and output folders must be set for demo_pack mode.')
+    elif CONFIG.download_type == 'dsda':
+        current_download_info = None
+        if not CONFIG.dsda_mode_dsda_page:
+            raise ValueError('DSDA page must be set for DSDA mode.')
     else:
         raise ValueError(f'Unknown demo processing type {CONFIG.download_type} passed.')
 

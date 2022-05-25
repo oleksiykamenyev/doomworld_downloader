@@ -6,13 +6,26 @@ import logging
 import os
 import requests
 
+from dataclasses import dataclass
+
 from urllib.parse import urlparse, urlunparse
 
-from .upload_config import CONFIG
-from .utils import get_download_filename, download_response, get_page
+from doomworld_downloader.upload_config import CONFIG
+from doomworld_downloader.utils import get_download_filename, download_response, get_page
 
 
 LOGGER = logging.getLogger(__name__)
+
+
+@dataclass
+class DSDACell:
+    """DSDA cell data class."""
+    # Cell text
+    text: str
+    # Cell links, as a dictionary mapping the link text or info to the link
+    links: dict
+    # Cell labels (i.e., record, dubious, etc.)
+    labels: list
 
 
 def verify_dsda_url(url, page_types=None):
@@ -67,73 +80,74 @@ def fix_dsda_link(link_url):
 def parse_dsda_cell(cell):
     """Parse single cell on DSDA page.
 
-    Parses text out of DSDA URL, mapped to the link URL if the cell is a link.
-
-    :param cell: DSDA cell elem
-    :return: DSDA cell parsed
+    :param cell: DSDA cell element
+    :return: DSDA cell object
     """
     cell_text = cell.getText().strip()
     cell_links = cell.find_all('a')
+    links = {}
     if cell_links:
         for cell_link in cell_links:
-            if cell_link.getText().strip() != cell_text:
-                continue
+            link_text = cell_link.getText().strip()
+            if not link_text:
+                link_span = cell_link.find('span')
+                link_text = link_span.get('aria-label').lower()
 
-            # TODO: Does this actually work for video URLs on DSDA?
+            if not link_text:
+                raise ValueError(f'Cell {cell} has link with unclear info.')
             link_url = fix_dsda_link(cell_link['href'])
-            return {cell_text: link_url}
+            links[link_text] = link_url
 
     # Span element info is kept track of for dubious/WR/etc. notes.
-    # TODO: Need to make sure this doesn't actually include the timeline spans for categories.
     cell_spans = cell.find_all('span')
-    if cell_spans is not None and cell_spans != []:
-        cell_contents = []
-        for span in cell_spans:
-            span_title = span.get('title')
-            if span_title:
-                cell_contents.append(span_title)
-        if cell_contents:
-            if cell_text:
-                cell_contents.append(cell_text)
-            return cell_contents
-
-    return cell_text
+    labels = [span.get('aria-label') for span in cell_spans] if cell_spans else []
+    return DSDACell(text=cell_text, links=links, labels=labels)
 
 
-def parse_demo_page_headers(page_soup):
-    """Parse headers for a demo page on DSDA.
+def parse_page_top(page_soup):
+    """Parse top of a demo page on DSDA.
 
-    Empty headers are skipped. All other headers are returned with relevant info:
-      - main header (player name, wad name) returned, with wad name as dictionary mapping name to
-        ink
-      - other headers returned and parsed accordingly
+    The following info is parsed:
+      - WAD/player name
+      - WAD link
+      - WAD author
+      - New WAD link for deprecated pages
+      - Total demo count/total time
 
     :param page_soup: DSDA page soup
-    :return: Parsed demo page headers
+    :return: Parsed top of a demo pag
     """
-    headers = page_soup.findAll('div', {'class': 'center-text'})
+    divs = page_soup.findAll('div', {'class': 'center-text'})
     parsed_headers = {}
-    for header in headers:
+    for div in divs:
         # All DSDA demo pages have a single empty header for some reason.
-        header_text = header.getText().strip()
-        if not header_text:
+        div_text = div.getText().strip()
+        if not div_text:
             continue
 
-        link_elem = header.find('a')
+        page_title = div.find('h1')
+        title_link = page_title.find('a')
         # WAD pages always have the primary header link somewhere, so we can assume if there's a
-        # a link, it must be a WAD page, otherwise, it is a player page.
-        if link_elem:
-            link_url = link_elem['href']
-            # WADs that are marked deprecated have this header text. Otherwise, assume any link is
-            # a link to the WAD download (or page/additional files in cases that the WAD is
-            # commercial).
-            if header_text == 'This wad has a more recent version':
-                parsed_headers['new_wad_url'] = link_url
-            else:
-                parsed_headers['wad_name'] = header_text
-                parsed_headers['wad_url'] = link_url
+        # link, it must be a WAD page, otherwise, it is a player page.
+        if title_link:
+            parsed_headers['wad_name'] = title_link.getText().strip()
+            parsed_headers['wad_url'] = title_link['href']
+            parsed_headers['wad_author'] = page_title.find('small').getText().strip()
         else:
-            parsed_headers['player_name'] = header_text
+            parsed_headers['player_name'] = page_title.getText().strip()
+
+        # WADs with newer versions will have an alert div at the top of the page linking to the new
+        # version of the WAD.
+        deprecated_wad_info = div.find('div', {'class': 'alert-danger'})
+        if deprecated_wad_info:
+            parsed_headers['new_wad_url'] = deprecated_wad_info.find('a')['href']
+
+        # Sample text:
+        #   2 demos, 3:27.91 | Table View | Leaderboard | Stats | Map Select
+        table_info = div.find('p', {'class': 'p-short'})
+        stats = table_info.getText().split('|')[0].split(',')
+        parsed_headers['demo_count'] = int(stats[0].split(' ')[0].strip())
+        parsed_headers['demo_time'] = int(stats[1].strip())
 
     return parsed_headers
 
@@ -144,53 +158,46 @@ def dsda_demo_page_to_json(dsda_url):
     :param dsda_url: DSDA URL
     :return: JSON of demos from given DSDA URL
     """
-    # TODO: What the fuck is this code?
-    url_type = verify_dsda_url(dsda_url, page_types=['player', 'wad'])
+    verify_dsda_url(dsda_url, page_types=['player', 'wad'])
     soup = get_page(dsda_url)
     demo_table = soup.find('table')
     table_header = demo_table.find('thead')
     header_cols = table_header.find('tr').find_all('th')
     col_names = []
     for col in header_cols:
-        col_span = col.find('span')
+        header_cell = parse_dsda_cell(col)
         # Handle columns that are denoted by an icon (e.g., video icon)
-        if col_span is not None:
-            col_names.append(col_span['aria-label'])
+        if header_cell.text:
+            col_names.append(header_cell.text)
+        elif header_cell.labels:
+            col_names.append(header_cell.labels[0])
         else:
-            col_names.append(col.getText().strip())
+            raise ValueError(f'Unclear header cell {col} found on page {dsda_url}.')
 
     rows = demo_table.find('tbody').find_all('tr')
+    col_len = len(col_names)
     demo_list = []
-    multi_col_cur_values = []
     for row in rows:
         if not row.getText():
             continue
 
         cols = row.find_all('td')
+        # Tag columns are placed in a row after the previous demo; in this case, we need to modify
+        # the previous element in the list.
         tag_cols = [col for col in cols if 'tag-text' in col.get('class', '')]
         if tag_cols:
-            if not demo_list[-1]['Note']:
-                demo_list[-1]['Note'] = []
-            if not isinstance(demo_list[-1]['Note'], list):
-                demo_list[-1]['Note'] = [demo_list[-1]['Note']]
-
-            for col in tag_cols:
-                demo_list[-1]['Note'].append(col.getText().strip())
-            continue
-
-        multi_cols = [col for col in cols if 'no-stripe-panel' in col.get('class', '')]
-        other_cols = [col for col in cols if 'no-stripe-panel' not in col.get('class', '')]
-
-        for idx, col in enumerate(reversed(multi_cols)):
-            col_text = parse_dsda_cell(col)
-            if len(multi_col_cur_values) == idx:
-                multi_col_cur_values.append(col_text)
+            demo_list[-1]['Tags'] = [parse_dsda_cell(col) for col in tag_cols]
+        else:
+            # Some columns will apply to a number of demos; in these cases, the row will only have
+            # a subset of the columns, so we place those at the end of the row, and fill the
+            # beginning with the previous row's values up to the number of columns.
+            cur_row_values = [parse_dsda_cell(col) for col in cols]
+            if demo_list:
+                shared_values = list(demo_list[-1].values())[:col_len - len(cur_row_values)]
+                row_values = shared_values + cur_row_values
             else:
-                multi_col_cur_values[idx] = col_text
-
-        row_values = (list(reversed(multi_col_cur_values)) +
-                      [parse_dsda_cell(col) for col in other_cols])
-        demo_list.append(dict(zip(col_names, row_values)))
+                row_values = cur_row_values
+            demo_list.append(dict(zip(col_names, row_values)))
 
     return demo_list
 
@@ -216,7 +223,7 @@ def download_wad_from_dsda(dsda_url, overwrite=True):
     """
     verify_dsda_url(dsda_url, page_types=['wad'])
     soup = get_page(dsda_url)
-    wad_url = parse_demo_page_headers(soup).get('wad_url')
+    wad_url = parse_page_top(soup).get('wad_url')
     if not wad_url or not wad_url.startswith('/files'):
         LOGGER.info('No link available for page: %s.', dsda_url)
         LOGGER.info('This should only happen if this is a commercial product.')

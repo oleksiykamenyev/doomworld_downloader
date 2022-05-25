@@ -31,11 +31,11 @@ class TextfileData:
     POSSIBLE_KEYS = ['category', 'source_port', 'video_link']
 
     CATEGORY_REGEXES = {
-        re.compile(r'UV[ -_]?Max', re.IGNORECASE): 'UV Max',
+        re.compile(r'(UV)?[ -_]?Max', re.IGNORECASE): 'UV Max',
         re.compile(r'UV[ -_]?Speed', re.IGNORECASE): 'UV Speed',
         re.compile(r'NM[ -_]?Speed', re.IGNORECASE): 'NM Speed',
         re.compile(r'NM[ -_]?100s?', re.IGNORECASE): 'NM 100S',
-        re.compile(r'UV[ -_]?-?fast', re.IGNORECASE): 'UV Fast',
+        re.compile(r'(UV)?[ -_]?-?fast', re.IGNORECASE): 'UV Fast',
         re.compile(r'(UV)?[ -_]?-?respawn', re.IGNORECASE): 'UV Respawn',
         re.compile(r'(UV)?[ -_]?Pacifist', re.IGNORECASE): 'Pacifist',
         re.compile(r'(UV)?[ -_]?Tyson', re.IGNORECASE): 'Tyson',

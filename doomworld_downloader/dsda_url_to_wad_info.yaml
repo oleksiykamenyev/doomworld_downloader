@@ -2893,10 +2893,30 @@
   map_list_info:
     map_ranges: [[1, 32]]
     map_info:
+      "Map 07":
+        tyson_only: true
       "Map 08":
         tyson_only: true
         skip_almost_reality: true
+      "Map 10":
+        tyson_only: true
+        skip_reality: true
       "Map 11":
+        tyson_only: true
+      "Map 12":
+        tyson_only: true
+      "Map 15":
+        tyson_only: true
+        skip_reality: true
+      "Map 17":
+        tyson_only: true
+      "Map 19":
+        tyson_only: true
+      "Map 20":
+        tyson_only: true
+      "Map 24":
+        tyson_only: true
+      "Map 29":
         tyson_only: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/cydreams"
   dsda_paginated: false
@@ -13713,5 +13733,171 @@
     d2all: null
     episodes: []
   idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/1-tower":
+  update: true
+  wad_name: _1-tower
+  iwad: doom2
+  wad_files:
+    _1-tower.wad: {checksum: "5616d2408a32ff4bd68d36006699d72f"}
+  complevel: 2
+  playback_cmd_line: "-file _1-tower"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/deathmatch/Ports/_1-tower"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/batman_1994":
+  update: true
+  wad_name: BATMAN.WAD
+  iwad: doom
+  wad_files:
+    batman.wad: {checksum: "153ce77f3f8574ca2e45eef2193964bc"}
+  complevel: 3
+  playback_cmd_line: "-file batman"
+  map_list_info:
+    map_ranges: [["E2M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/deathmatch/a-c/batman"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/pleasure":
+  update: true
+  wad_name: PLEASURE.WAD
+  iwad: doom
+  wad_files:
+    pleasure.wad: {checksum: "4d7e36964e46acaeb2f5d2abb9ee0780"}
+  complevel: 3
+  playback_cmd_line: "-file pleasure"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/p-r/pleasure"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/taschal2":
+  update: true
+  wad_name: TAS CHALLENGE 2
+  iwad: doom2
+  wad_files:
+    taschal2.wad: {checksum: "ad3743f447c4a46062bcea9a92c7cc7a"}
+  complevel: 2
+  playback_cmd_line: "-file taschal2"
+  map_list_info:
+    map_ranges: [[20]]
+    d2all: null
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/bloodcor":
+  update: true
+  wad_name: The Bloody Corridor
+  iwad: doom2
+  wad_files:
+    bloodcor.wad: {checksum: "21454c4111ce14a93020e2804e97cb9a"}
+  complevel: 2
+  playback_cmd_line: "-file bloodcor"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/a-c/bloodcor"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/apocaclips":
+  update: true
+  wad_name: Anomaly Report
+  iwad: doom2
+  wad_files:
+    apocaclips.wad: {checksum: "1f903df1f90e8c18ca4c2f2c70d6f002"}
+  complevel: 2
+  playback_cmd_line: "-file apocaclips"
+  map_list_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/apocaclips"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/129362-apocaclips-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/1badmap":
+  update: true
+  wad_name: 1 Bad Map
+  iwad: doom2
+  wad_files:
+    1badmap/1badmap.wad: {checksum: "d992f54b0d2fd121ebb46c36bddac594"}
+  complevel: 9
+  playback_cmd_line: "-file 1badmap"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/0-9/1badmap"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/pc_brut":
+  update: true
+  wad_name: Brutana
+  iwad: doom2
+  wad_files:
+    pc_brut.wad: {checksum: "b3e67160cc19d817ed8c936e36ea3d4b"}
+  complevel: 2
+  playback_cmd_line: "-file pc_brut"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/p-r/pc_brut"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/enemybfg":
+  update: true
+  wad_name: A lesson of ducking BFG9000!
+  iwad: doom2
+  wad_files:
+    enemybfg.wad: {checksum: "1bc5ebec738fa24018a137111d315618"}
+    enemybfg.deh: {checksum: "b9ba64611321930cb70a62d86065cfed"}
+  complevel: 2
+  playback_cmd_line: "-file enemybfg -deh enemybfg"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/d-f/enemybfg"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/wax2":
+  update: true
+  wad_name: wax2.zip
+  iwad: doom2
+  wad_files:
+    wax2.wad: {checksum: "dd091d4e5c835c077061d0a90234be59"}
+    kokoguns.deh: {checksum: "252287f6ecae0af22b0e1539b074b56a"}
+  complevel: 2
+  playback_cmd_line: "-file wax2 -deh kokoguns"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/deathmatch/v-z/wax2"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/ars_r":
+  update: true
+  wad_name: Ars Doom (repackaged edition)
+  iwad: doom2
+  wad_files:
+    ars_r.wad: {checksum: "fe3b289599512889cd90d1df6ebf7bfb"}
+  complevel: 2
+  playback_cmd_line: "-file ars_r"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+    map_info:
+      "Map 01":
+        skip_reality: true
+  idgames_url: "https://www.doomworld.com/idgames/themes/x-rated/i_am_old_enough_to_look_at_this/ars_r"
   dsda_paginated: false
   doomworld_thread: null

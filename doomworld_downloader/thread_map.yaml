@@ -1188,6 +1188,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/preacher
   id: '129374'
   name: 'Preacher demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/129362-apocaclips-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/apocaclips
+  id: '129362'
+  name: 'Apocaclips demos [-complevel 2]'
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
