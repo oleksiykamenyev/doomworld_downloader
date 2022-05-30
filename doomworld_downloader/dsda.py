@@ -147,7 +147,7 @@ def parse_page_top(page_soup):
         table_info = div.find('p', {'class': 'p-short'})
         stats = table_info.getText().split('|')[0].split(',')
         parsed_headers['demo_count'] = int(stats[0].split(' ')[0].strip())
-        parsed_headers['demo_time'] = int(stats[1].strip())
+        parsed_headers['demo_time'] = stats[1].strip()
 
     return parsed_headers
 

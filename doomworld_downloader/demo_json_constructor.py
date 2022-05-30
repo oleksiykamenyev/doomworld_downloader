@@ -25,7 +25,8 @@ class DemoJsonConstructor:
     """Construct demo JSON."""
     SKILL_CATEGORY_NOTE_RE = re.compile('^Skill \d .+$')
 
-    MISC_NOTES = ['Also Reality', 'Also Almost Reality', 'Uses turbo', 'Uses longtics']
+    MISC_NOTES = ['Also Reality', 'Also Almost Reality', 'Uses turbo', 'Uses longtics',
+                  'Also Pacifist']
     MISC_CATEGORY_NOTES = [
         '-altdeath', '-coop_spawns', '-fast', '-nomonsters', '-respawn', '-solo-net'
     ]
@@ -217,7 +218,8 @@ class DemoJsonConstructor:
             # accurate category; it's safe to assume the textfile specified no secrets by
             # error or because of unavoidable secrets.
             if ((playback_category == 'NoMo 100S' and textfile_category == 'NoMo') or
-                    (playback_category == 'NM 100S' and textfile_category == 'NM Speed')):
+                    (playback_category == 'NM 100S' and textfile_category == 'NM Speed') or
+                    (playback_category == 'Pacifist' and textfile_category == 'UV Speed')):
                 LOGGER.info('Inferred %s category for zip file %s.',
                             playback_category, self.demo_location)
                 demo_json[key_to_insert] = playback_category

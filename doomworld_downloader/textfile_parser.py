@@ -49,48 +49,51 @@ class TextfileData:
     PORT_REGEXES = {
         # Chocolate family
         # Chocolate Doom
-        re.compile(r'Chocolate(\s*|-|_)?Doom(\.exe)?(\s*|-)?'
-                   r'(v|version)?\.?(?P<version>\d\.\d+\.\d+)', re.IGNORECASE): 'Chocolate DooM',
+        re.compile(
+            r'Chocolate(\s*|-|_)?Doom(\.exe)?(\s*|-)?'
+            r'(v|version)?(\s*|\.)?(?P<version>\d\.\d+\.\d+)', re.IGNORECASE
+        ): 'Chocolate DooM',
         # Crispy Doom
         re.compile(
             r'Crispy(\s*|-|_)?Doom(\.exe)?(\s*|-)?'
-            r'(v|version)?\.?(?P<version>\d\.\d+(\.\d+)?)', re.IGNORECASE
+            r'(v|version)?(\s*|\.)?(?P<version>\d\.\d+(\.\d+)?)', re.IGNORECASE
         ): 'Crispy Doom',
         # Crispy Heretic
         re.compile(
             r'Crispy(\s*|-|_)?Heretic(\.exe)?(\s*|-)?'
-            r'(v|version)?\.?(?P<version>\d\.\d+(\.\d+)?)', re.IGNORECASE
+            r'(v|version)?(\s*|\.)?(?P<version>\d\.\d+(\.\d+)?)', re.IGNORECASE
         ): 'Crispy Heretic',
         # CNDoom
         re.compile(
-            r'CNDoom(\.exe)?\s*(v|version)?\.?(?P<version>\d\.\d\.\d(\.\d))?', re.IGNORECASE
+            r'CNDoom(\.exe)?\s*(v|version)?(\s*|\.)?(?P<version>\d\.\d\.\d(\.\d))?', re.IGNORECASE
         ): 'CNDoom',
         # Sprinkled Doom
         re.compile(
             r'Sprinkled(\s*|-|_)?Doom(\.exe)?\s*'
-            r'(v|version)?\.?(?P<version>\d\.\d\.\d(\.\d))?', re.IGNORECASE
+            r'(v|version)?\.?(?P<version>\d\.\d\.\d(\.\d)?)?', re.IGNORECASE
         ): 'Sprinkled Doom',
 
         # Boom/MBF family
         # Boom
-        re.compile(r'([\S+])Boom\s*(v|version)?(?P<version>2\.0\.[0-2])', re.IGNORECASE): 'Boom',
+        re.compile(r'([\S+])Boom\s*(v|version)?(\s*|\.)?(?P<version>2\.0\.[0-2])',
+                   re.IGNORECASE): 'Boom',
         # MBF
         re.compile(
-            r'[\S+](?P<name>MBF(386|-Sigil|-SNM)?)\s*(v|version)?(?P<version>\d\.\d\.\d)',
+            r'[\S+](?P<name>MBF(386|-Sigil|-SNM)?)\s*(v|version)?(\s*|\.)?(?P<version>\d\.\d\.\d)',
             re.IGNORECASE
         ): None,
         # TASMBF
         re.compile(r'TASMBF', re.IGNORECASE): 'TASMBF',
         # PrBoom
         re.compile(
-            r'(Pr|GL)Boom(\.exe)?^(\+|-?plus)\s*(v|version)?\.?(?P<version>\d\.\d\.\d)',
+            r'(Pr|GL)Boom(\.exe)?^(\+|-?plus)\s*(v|version)?(\s*|\.)?(?P<version>\d\.\d\.\d)',
             re.IGNORECASE
         ): 'PRBoom',
         # PrBoom+
         re.compile(
             r'(Pr|GL)(Boom)?\s*(\+|-?plus)?(\.exe)?(\s*|-)?'
-            r'(v|version)?\.?(?P<version>\d\.\d\.\d\.\d)\s'
-            r'*-?((complevel|cl)\s*(?P<complevel>\d+))?', re.IGNORECASE
+            r'(v|version)?(\s*|\.)?(?P<version>\d\.\d\.\d\.\d)\s*'
+            r'-?((complevel|cl)\s*(?P<complevel>\d+))?', re.IGNORECASE
         ): 'PRBoom',
         # DSDA-Doom
         re.compile(
@@ -100,26 +103,30 @@ class TextfileData:
         ): 'DSDA-Doom',
         # Woof
         re.compile(
-            r'Woof!?(\.exe)?(\s*|-)?(v|version)?\.?(?P<version>\d\.\d+(\.\d+)?)\s*'
+            r'Woof!?(\.exe)?(\s*|-)?(v|version)?(\s*|\.)?(?P<version>\d\.\d+(\.\d+)?)\s*'
             r'-?((complevel|cl)\s*(?P<complevel>\d+))?',
             re.IGNORECASE
         ): 'Woof',
         # Nugget Doom
         re.compile(
-            r'Nugget(\s*|-|_)?Doom(\.exe)?(\s*|-)?(v|version)?\.?(?P<version>\d\.\d+(\.\d+)?)\s*'
+            r'Nugget(\s*|-|_)?Doom(\.exe)?(\s*|-)?'
+            r'(v|version)?(\s*|\.)?(?P<version>\d\.\d+(\.\d+)?)\s*'
             r'-?((complevel|cl)\s*(?P<complevel>\d+))?',
             re.IGNORECASE
         ): 'Woof',
 
         # ZDoom family
         # ZDoom
-        re.compile(r'[\S+]ZDoom\s*(v|version)?(?P<version>\d\.\d(\.\S+))?', re.IGNORECASE): 'ZDoom',
+        re.compile(r'[\S+]ZDoom\s*(v|version)?(\s*|\.)?(?P<version>\d\.\d(\.\S+))?',
+                   re.IGNORECASE): 'ZDoom',
         # GZDoom
-        re.compile(r'GZDoom\s*(v|version)?(?P<version>\d\.\d\.\d+)', re.IGNORECASE): 'GZDoom',
+        re.compile(r'GZDoom\s*(v|version)?(\s*|\.)?(?P<version>\d\.\d\.\d+)',
+                   re.IGNORECASE): 'GZDoom',
         # ZDaemon
-        re.compile(r'ZDaemon\s*(v|version)?(?P<version>\d\.\d\.\d+)', re.IGNORECASE): 'ZDaemon',
+        re.compile(r'ZDaemon\s*(v|version)?(\s*|\.)?(?P<version>\d\.\d\.\d+)',
+                   re.IGNORECASE): 'ZDaemon',
         # Zandronum
-        re.compile(r'Zandronum\s*(v|version)?(?P<version>\d\.\d(\.\d+)?(\s*Alpha))',
+        re.compile(r'Zandronum\s*(v|version)?(\s*|\.)?(?P<version>\d\.\d(\.\d+)?(\s*Alpha))',
                    re.IGNORECASE): 'Zandronum',
 
         # Other ports
@@ -128,7 +135,7 @@ class TextfileData:
                    re.IGNORECASE): 'Strawberry Doom',
 
         # TAS
-        re.compile(r'XDRE(\.exe)?(\s*|-)?(v|version)?\.?(?P<version>\d.\d+)',
+        re.compile(r'XDRE(\.exe)?(\s*|-)?(v|version)?(\s*|\.)?(?P<version>\d.\d+)',
                    re.IGNORECASE): 'XDRE',
     }
 
@@ -257,21 +264,26 @@ class TextfileData:
                 if not port_name_final:
                     port_name_final = match.group('name')
 
-                # If someone formats DSDA-Doom version as just #.##, set to #.##.0 by default
-                if port_name_final == 'DSDA-Doom' and version.count('.') == 1:
-                    version = '{}.0'.format(version)
+                if version:
+                    # If someone formats DSDA-Doom version as just #.##, set to #.##.0 by default
+                    if port_name_final == 'DSDA-Doom' and version.count('.') == 1:
+                        version = f'{version}.0'
 
-                # No need to fail on this since most ports don't have complevels anyway
-                try:
-                    complevel = match.group('complevel')
-                except IndexError:
-                    complevel = None
-                if complevel:
-                    version = '{}{}{}'.format(version, 'cl', complevel)
+                    # No need to fail on this since most ports don't have complevels anyway
+                    try:
+                        complevel = match.group('complevel')
+                    except IndexError:
+                        complevel = None
+                    if complevel:
+                        version = f'{version}cl{complevel}'
 
-                if not version.startswith('v'):
-                    version = 'v{}'.format(version)
+                    if not version.startswith('v'):
+                        version = f'v{version}'
 
-                return '{} {}'.format(port_name_final, version)
+                    version = f' {version}'
+                else:
+                    version = ''
+
+                return f'{port_name_final}{version}'
 
         return None

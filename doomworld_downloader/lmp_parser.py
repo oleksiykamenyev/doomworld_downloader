@@ -363,7 +363,10 @@ class LMPData:
             port_split = source_port_family.split(maxsplit=2)
             # Later versions of XDRE output source port as "PrBoom-Plus 2.5.1.4 (XDRE 2.20)"
             if 'XDRE' in source_port_family:
-                self.data['source_port'] = port_split[-1].replace('(', '').replace(')', '')
+                port_name, port_version = port_split[-1].replace('(', '').replace(')', '').split()
+                if not port_version.startswith('v'):
+                    port_version = f'v{port_version}'
+                self.data['source_port'] = ' '.join([port_name, port_version])
             else:
                 port_name = ' '.join(port_split[:-1])
                 port_version = port_split[-1]

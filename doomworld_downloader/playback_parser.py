@@ -334,6 +334,11 @@ class PlaybackData:
             if not tyson_only and self.data['category'] == 'UV Max':
                 self.data['category'] = 'Tyson'
 
+        # If a run is not UV-Speed/Pacifist or on nomonsters, add tag for Also Pacifist
+        if (self.raw_data.get('pacifist', False) and not self.raw_data.get('nomonsters', False) and
+                self.data['category'] not in ['Pacifist', 'Stroller', 'UV Speed']):
+            self.note_strings.add('Also Pacifist')
+
     def _parse_analysis(self):
         """Parse analysis info.
 

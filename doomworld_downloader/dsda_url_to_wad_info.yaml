@@ -1419,8 +1419,9 @@
   complevel: 3
   playback_cmd_line: "-file 9ring666"
   map_list_info:
-    map_ranges: [["E2M1", "E2M9"]]
-    episodes: [["E2M1", "E2M9"]]
+    map_ranges: [["E2M1", "E2M8"]]
+    episodes: [["E2M1", "E2M8"]]
+    secret_exits: {}
   idgames_url: "https://www.doomworld.com/idgames/levels/doom/0-9/9ring666"
   dsda_paginated: false
   doomworld_thread: null
@@ -13736,7 +13737,6 @@
   dsda_paginated: false
   doomworld_thread: null
 "https://www.dsdarchive.com/wads/1-tower":
-  update: true
   wad_name: _1-tower
   iwad: doom2
   wad_files:
@@ -13751,7 +13751,6 @@
   dsda_paginated: false
   doomworld_thread: null
 "https://www.dsdarchive.com/wads/batman_1994":
-  update: true
   wad_name: BATMAN.WAD
   iwad: doom
   wad_files:
@@ -13765,7 +13764,6 @@
   dsda_paginated: false
   doomworld_thread: null
 "https://www.dsdarchive.com/wads/pleasure":
-  update: true
   wad_name: PLEASURE.WAD
   iwad: doom
   wad_files:
@@ -13779,7 +13777,6 @@
   dsda_paginated: false
   doomworld_thread: null
 "https://www.dsdarchive.com/wads/taschal2":
-  update: true
   wad_name: TAS CHALLENGE 2
   iwad: doom2
   wad_files:
@@ -13794,7 +13791,6 @@
   dsda_paginated: false
   doomworld_thread: null
 "https://www.dsdarchive.com/wads/bloodcor":
-  update: true
   wad_name: The Bloody Corridor
   iwad: doom2
   wad_files:
@@ -13809,7 +13805,6 @@
   dsda_paginated: false
   doomworld_thread: null
 "https://www.dsdarchive.com/wads/apocaclips":
-  update: true
   wad_name: Anomaly Report
   iwad: doom2
   wad_files:
@@ -13822,7 +13817,6 @@
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/129362-apocaclips-demos-complevel-2/"
 "https://www.dsdarchive.com/wads/1badmap":
-  update: true
   wad_name: 1 Bad Map
   iwad: doom2
   wad_files:
@@ -13837,7 +13831,6 @@
   dsda_paginated: false
   doomworld_thread: null
 "https://www.dsdarchive.com/wads/pc_brut":
-  update: true
   wad_name: Brutana
   iwad: doom2
   wad_files:
@@ -13852,7 +13845,6 @@
   dsda_paginated: false
   doomworld_thread: null
 "https://www.dsdarchive.com/wads/enemybfg":
-  update: true
   wad_name: A lesson of ducking BFG9000!
   iwad: doom2
   wad_files:
@@ -13868,7 +13860,6 @@
   dsda_paginated: false
   doomworld_thread: null
 "https://www.dsdarchive.com/wads/wax2":
-  update: true
   wad_name: wax2.zip
   iwad: doom2
   wad_files:
@@ -13884,7 +13875,6 @@
   dsda_paginated: false
   doomworld_thread: null
 "https://www.dsdarchive.com/wads/ars_r":
-  update: true
   wad_name: Ars Doom (repackaged edition)
   iwad: doom2
   wad_files:
@@ -13901,3 +13891,44 @@
   idgames_url: "https://www.doomworld.com/idgames/themes/x-rated/i_am_old_enough_to_look_at_this/ars_r"
   dsda_paginated: false
   doomworld_thread: null
+"https://www.dsdarchive.com/wads/kkb":
+  wad_name: Kit Kat Bar
+  iwad: doom2
+  wad_files:
+    kkb.wad: {checksum: "e620585251858e06a00ceac36022e06c"}
+  complevel: 17
+  playback_cmd_line: "-file kkb"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/j-l/kkb"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/crudream":
+  wad_name: Crucified Dreams
+  iwad: doom2
+  wad_files:
+    crudream.wad: {checksum: "9ce262488f40b2f9029c25a64900d98b"}
+  complevel: 9
+  playback_cmd_line: "-file crudream"
+  map_list_info:
+    map_ranges: [[1, 41]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/deathmatch/Ports/megawads/crudream"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/pagodia":
+  wad_name: Pagodia
+  iwad: doom2
+  wad_files:
+    pagodia.wad: {checksum: "c4b3580bc583f36ed32e28974a317e75"}
+    pagodia.deh: {checksum: "023c6733f24634729e8c69cba7c0d4af"}
+  complevel: 2
+  playback_cmd_line: "-file pagodia"
+  map_list_info:
+    map_ranges: [[1, 9]]
+    d2all: ["Map 01", "Map 09"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/p-r/pagodia"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128699-miscellaneous-squonker-wads-demos-complevel-2/"
