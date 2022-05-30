@@ -626,9 +626,9 @@
     map_ranges: [[1, 4]]
     d2all: ["Map 01", "Map 04"]
     episodes: []
-  idgames_url: null
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/cryogenics"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/129498-cryogenics-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/neis":
   wad_name: No End in Sight
   iwad: doom
@@ -910,6 +910,7 @@
   iwad: doom2
   wad_files:
     sf2012.wad: {checksum: "a4a9f43a5529578a6df6d58c516822bc"}
+    sf2012_final.wad: {not_required_for_playback: true, dupe_checksum: true, checksum: "a4a9f43a5529578a6df6d58c516822bc"}
   complevel: 9
   playback_cmd_line: "-file sf2012"
   map_list_info:
@@ -8161,7 +8162,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/cosmogenesis"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/129499-cosmogenesis-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/pe4_dt2":
   wad_name: Death Tormention II
   iwad: doom
@@ -13934,7 +13935,6 @@
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/128699-miscellaneous-squonker-wads-demos-complevel-2/"
 "https://www.dsdarchive.com/wads/phobos-v":
-  update: true
   wad_name: Phobos Revisited
   iwad: doom
   wad_files:
@@ -13945,5 +13945,98 @@
     map_ranges: [["E1M1", "E1M9"]]
     episodes: [["E1M1", "E1M8"]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom/p-r/phobos-v"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/gg_1994":
+  wad_name: GG
+  iwad: doom
+  wad_files:
+    e2m2.wad: {checksum: "79edcfd356add51024c81c971ba472b2"}
+  complevel: 3
+  playback_cmd_line: "-file e2m2"
+  map_list_info:
+    map_ranges: [["E2M2"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/g-i/gg"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/bridge_1994":
+  wad_name: The Bridge
+  iwad: doom
+  wad_files:
+    bridge.wad: {checksum: "11deedab749914d5916a68f51343ff65"}
+  complevel: 3
+  playback_cmd_line: "-file bridge"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/a-c/bridge"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/goomba":
+  wad_name: Goomba
+  iwad: doom
+  wad_files:
+    goomba.wad: {checksum: "698267017f080ce3b707ada5b1a86865"}
+  complevel: 3
+  playback_cmd_line: "-file goomba"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/g-i/goomba"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/iepiss":
+  wad_name: "The Imp's Episode Starter Kit"
+  iwad: doom
+  wad_files:
+    iepiss.wad: {checksum: "81ac2b676a83234381c2b7b5cf784675"}
+  complevel: 3
+  playback_cmd_line: "-file iepiss"
+  map_list_info:
+    map_ranges: [["E1M1"], ["E2M1"], ["E3M1"], ["E4M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/Ports/g-i/iepiss"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/ore15":
+  wad_name: ORE15.WAD
+  iwad: doom2
+  wad_files:
+    ore15.wad: {checksum: "3055184dde1201bc664da758458ffc57"}
+  complevel: 2
+  playback_cmd_line: "-file ore15"
+  map_list_info:
+    map_ranges: [[15]]
+    d2all: null
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/quagmire_1995":
+  wad_name: Cry.wad
+  iwad: doom2
+  wad_files:
+    quagmire.wad: {checksum: "78b12eea9dfef5b50d9b1866103cfa37"}
+  complevel: 2
+  playback_cmd_line: "-file quagmire"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/p-r/quagmire"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/race":
+  wad_name: Race.WAD
+  iwad: doom
+  wad_files:
+    race.wad: {checksum: "8c4589dc2db6b3d8ca873984959c53f9"}
+  complevel: 3
+  playback_cmd_line: "-file race"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/p-r/race"
   dsda_paginated: false
   doomworld_thread: null

@@ -1193,6 +1193,16 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/apocaclips
   id: '129362'
   name: 'Apocaclips demos [-complevel 2]'
+"https://www.doomworld.com/forum/topic/129499-cosmogenesis-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/cosmogenesis
+  id: '129499'
+  name: 'Cosmogenesis demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/129498-cryogenics-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/cryogenics
+  id: '129498'
+  name: 'Cryogenics demos [-complevel 9]'
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
