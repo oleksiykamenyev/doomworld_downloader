@@ -2745,6 +2745,7 @@
   wad_files:
     d2twid.wad: {checksum: "0c69aae8fba0372cbab9df41e6b7ac29"}
     d2twid.deh: {not_required_for_playback: true, checksum: "c01bc801f478cda1bdef00438b82a302"}
+    midtwid2.wad: {not_required_for_playback: true, checksum: "3f80e8b53030c814acf0ecb3a69bb70f"}
   complevel: 2
   playback_cmd_line: "-file d2twid"
   map_list_info:
@@ -13932,3 +13933,17 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/p-r/pagodia"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/128699-miscellaneous-squonker-wads-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/phobos-v":
+  update: true
+  wad_name: Phobos Revisited
+  iwad: doom
+  wad_files:
+    phobos-v.wad: {checksum: "a336476fc14321b81ab07873660c24d3"}
+  complevel: 3
+  playback_cmd_line: "-file phobos-v"
+  map_list_info:
+    map_ranges: [["E1M1", "E1M9"]]
+    episodes: [["E1M1", "E1M8"]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/p-r/phobos-v"
+  dsda_paginated: false
+  doomworld_thread: null
