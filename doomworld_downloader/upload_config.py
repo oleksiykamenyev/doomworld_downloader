@@ -262,7 +262,7 @@ def set_up_configs(upload_config_path=None):
                                                      for key, value in thread_dict.items()}
         THREAD_MAP_KEYED_ON_ID['url'] = url
 
-    PLAYER_IGNORE_LIST.extend(parse_list_file(IGNORE_LIST_PATH))
+    PLAYER_IGNORE_LIST.extend([int(player_id) for player_id in parse_list_file(IGNORE_LIST_PATH)])
 
     with open(WAD_MAP_PATH, encoding='utf-8') as wad_stream:
         wad_map_by_dsda_url_raw = yaml.safe_load(wad_stream)

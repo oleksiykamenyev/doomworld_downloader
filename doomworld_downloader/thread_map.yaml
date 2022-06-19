@@ -338,7 +338,7 @@ https://www.doomworld.com/forum/topic/57027-1994-tune-up-demos-complevel-9/:
     wad: https://www.dsdarchive.com/wads/1994tu
   id: '57027'
   name: 1994 Tune-up Demos [-complevel 9]
-https://www.doomworld.com/forum/topic/57324-congestion-384-demos/:
+"https://www.doomworld.com/forum/topic/57324-congestion-384-demos-complevel-2/":
   additional_info:
     wad: https://www.dsdarchive.com/wads/cyc-384
   id: '57324'
@@ -1203,6 +1203,31 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/cryogenics
   id: '129498'
   name: 'Cryogenics demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/129506-400-minutes-of-vr-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/400minvr
+  id: '129506'
+  name: '400 minutes of /vr/ demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/129514-pizza-steve-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/pizzas
+  id: '129514'
+  name: 'Pizza Steve demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/129580-elegy-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/elegy
+  id: '129580'
+  name: 'Elegy demos [-complevel 2]'
+"https://www.doomworld.com/forum/topic/129473-poogerswad-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/poogers
+  id: '129473'
+  name: 'POOGERS.wad Demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/129598-ems-10-monster-pack-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/em10mon
+  id: '129598'
+  name: "E.M.'s 10 Monster Pack demos [-complevel 2]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -1560,6 +1585,8 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/abyspe62
       - https://www.dsdarchive.com/wads/abyspe63
       - https://www.dsdarchive.com/wads/abyspe64
+      - https://www.dsdarchive.com/wads/abyspe65
+      - https://www.dsdarchive.com/wads/abyspe66
 "https://www.doomworld.com/forum/topic/92251-doomworld-mega-project-series-demos/":
   id: "92251"
   name: Doomworld Mega Project Series Demos
