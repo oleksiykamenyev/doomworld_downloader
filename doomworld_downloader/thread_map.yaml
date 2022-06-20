@@ -578,11 +578,6 @@ https://www.doomworld.com/forum/topic/72941-armadosia-v21-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/armadosia
   id: '72941'
   name: Armadosia v2.1 demos [-complevel 2]
-https://www.doomworld.com/forum/topic/73086-chex-quest-series-demos-complevel-3/:
-  additional_info:
-    wad: https://www.dsdarchive.com/wads/chex
-  id: '73086'
-  name: Chex Quest series demos [-complevel 3]
 https://www.doomworld.com/forum/topic/73809-whitemare-2-demos-complevel-9/:
   additional_info:
     wad: https://www.dsdarchive.com/wads/white2
@@ -1228,6 +1223,56 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/em10mon
   id: '129598'
   name: "E.M.'s 10 Monster Pack demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/129704-hell-ground-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/hg
+  id: '129704'
+  name: "Hell Ground demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/129705-bakers-dozen-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/bd
+  id: '129705'
+  name: "Baker's Dozen demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/129706-tnt-renascence-demos-complevel-4/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/tnt-ren
+  id: '129706'
+  name: "TNT: Renascence demos [-complevel 4]"
+"https://www.doomworld.com/forum/topic/129784-jumpwad-demos-complevel-11/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/jumpwad
+  id: '129784'
+  name: "Jumpwad demos [-complevel 11]"
+"https://www.doomworld.com/forum/topic/129820-project-space-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/psp
+  id: '129820'
+  name: "Project Space demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/129829-enslavement-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/enslave
+  id: '129829'
+  name: "Enslavement [-complevel 2]"
+"https://www.doomworld.com/forum/topic/129831-biotech2-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/biotech2
+  id: '129831'
+  name: "Biotech2 [-complevel 2]"
+"https://www.doomworld.com/forum/topic/129786-v64-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/v64
+  id: '129786'
+  name: "v64 demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/129844-slayer-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/slayer
+  id: '129844'
+  name: "Slayer Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/129851-crusades-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/crusades
+  id: '129851'
+  name: "Crusades demos [-complevel 3]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -1410,6 +1455,14 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/darken2
   id: '129264'
   name: "The Darkening Demos (both episodes) [-complevel 2]"
+"https://www.doomworld.com/forum/topic/73086-chex-quest-series-demos-complevel-3/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/chex
+      - https://www.dsdarchive.com/wads/chex2
+      - https://www.dsdarchive.com/wads/chex3
+  id: '73086'
+  name: Chex Quest series demos [-complevel 3]
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
@@ -1874,6 +1927,26 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/mnltdst
       - https://www.dsdarchive.com/wads/mnltdst_rc2
       - https://www.dsdarchive.com/wads/pagodia
+"https://www.doomworld.com/forum/topic/129607-various-eternal-wads-demos/":
+  id: "129607"
+  name: 'Various "Eternal" Wads demos'
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/eden_2007
+      - https://www.dsdarchive.com/wads/g_o_evil
+      - https://www.dsdarchive.com/wads/napalm
+      - https://www.dsdarchive.com/wads/nhell_d2
+      - https://www.dsdarchive.com/wads/bbb
+      - https://www.dsdarchive.com/wads/cybersky
+      - https://www.dsdarchive.com/wads/32innail
+      - https://www.dsdarchive.com/wads/gravity
+      - https://www.dsdarchive.com/wads/eclipse
+      - https://www.dsdarchive.com/wads/nightomb
+      - https://www.dsdarchive.com/wads/longdays
+      - https://www.dsdarchive.com/wads/vg
+      - https://www.dsdarchive.com/wads/moonston
+      - https://www.dsdarchive.com/wads/frozent
+      - https://www.dsdarchive.com/wads/icar2015
 
 # Misc specialized threads
 "https://www.doomworld.com/forum/topic/94942-misc-heretic-hexen-demos/":
