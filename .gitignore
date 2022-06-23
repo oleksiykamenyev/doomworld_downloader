@@ -138,6 +138,7 @@ upload.ini
 # Uploader working files/directories
 # These are automatically created by the upload process.
 demos_for_upload/
+dsda_demos/
 dsda_wads/
 failed_posts/
 completed_jsons

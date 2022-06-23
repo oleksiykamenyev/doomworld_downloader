@@ -1,12 +1,10 @@
 """
 Parse data out of Doomworld demo post.
 """
-# TODO: All of the parser classes can have stuff abstracted out.
 
 import logging
 
-from urllib.parse import urlparse
-
+from .base_parser import BaseData
 from .data_manager import DataManager
 from .upload_config import THREAD_MAP_KEYED_ON_ID
 from .utils import parse_youtube_url
@@ -15,7 +13,7 @@ from .utils import parse_youtube_url
 LOGGER = logging.getLogger(__name__)
 
 
-class PostData:
+class PostData(BaseData):
     """Store all uploader-relevant data for a Doomworld post.
 
     This includes parsing the post based on the thread it was taken from.
@@ -29,18 +27,21 @@ class PostData:
 
         :param post: Post object.
         """
+        super().__init__()
         self.data = {}
         self.note_strings = set()
         self.raw_data = {'wad_links': [], 'video_links': []}
         self.post = post
 
     def analyze(self):
+        """Analyze info provided to post parser."""
         self._parse_post()
 
     def populate_data_manager(self, data_manager):
-        # The following data points are set for the playback parser:
-        #   - Certain: levelstat, time, level, kills, items, secrets, wad
-        #   - Somewhat certain: category
+        """Populate data manager with info from post.
+
+        :param data_manager: Data manager to populate
+        """
         for key, value in self.data.items():
             if key in PostData.CERTAIN_KEYS:
                 data_manager.insert(key, value, DataManager.CERTAIN, source='post')

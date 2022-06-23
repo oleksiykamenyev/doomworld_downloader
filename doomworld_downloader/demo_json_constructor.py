@@ -47,12 +47,13 @@ class DemoJsonConstructor:
     VALID_NO_ISSUE_DIR = 'no_issue_jsons'
     VALID_TAGS_DIR = 'tags_jsons'
 
-    def __init__(self, demo_location, demo_location_filename):
+    def __init__(self, demo_location, demo_location_filename, demo_id):
         """Initialize demo JSON constructor.
 
         :param demo_location: Demo location (either zip file or lmp file directly)
         :param demo_location_filename: Location filename with no extension for constructing the JSON
                                        filename
+        :param demo_id: Demo unique ID For demo storage
         """
         self.demo_location = demo_location
         self.demo_location_filename = demo_location_filename
@@ -64,6 +65,7 @@ class DemoJsonConstructor:
         self.has_issue = False
         self.has_tags = False
         self.maybe_cheated = False
+        self.demo_id = demo_id
 
     def _set_has_issue(self):
         """Set has_issue flag if there is an issue with the JSON."""
@@ -157,10 +159,9 @@ class DemoJsonConstructor:
             demo_list_entry.update(self.file_entry)
             final_demo_json = {'demo': demo_list_entry}
 
-        loc_strip = self.demo_location.rstrip(os.path.sep).split(os.path.sep)
-        # Doomworld download path sample: demos_for_upload/PlayerName/123456/demo.zip
-        # Set json filename to demo_PlayerName_123456
-        json_filename = f'{self.demo_location_filename}_{loc_strip[-3]}_{loc_strip[-2]}.json'
+        # Set json filename to filename_playername_demoid
+        player_info = '_'.join(demo_jsons[0]['players'])
+        json_filename = f'{self.demo_location_filename}_{player_info}_{self.demo_id}.json'
         if self.maybe_cheated:
             json_path = self._set_up_demo_json_file(json_filename,
                                                     DemoJsonConstructor.MAYBE_CHEATED_DIR)

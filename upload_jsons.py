@@ -5,6 +5,7 @@ import os
 from doomworld_downloader.upload_config import CONFIG
 from doomworld_downloader.utils import get_log_level, run_cmd
 
+
 NO_ISSUE_JSON_DIR = 'demos_for_upload/no_issue_jsons'
 
 LOGGER = logging.getLogger(__name__)

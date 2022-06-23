@@ -1,7 +1,6 @@
 """
 Parse data out of LMP header, footer, and other parts of the file (no playback).
 """
-# TODO: All of the parser classes can have stuff abstracted out.
 # TODO: Write LMP Python parsing library
 
 import logging
@@ -11,6 +10,7 @@ import subprocess
 
 from datetime import datetime, timedelta
 
+from .base_parser import BaseData
 from .cheat_detection import check_tas
 from .data_manager import DataManager
 from .upload_config import CONFIG
@@ -20,7 +20,7 @@ from .utils import run_cmd, convert_datetime_to_dsda_date, compare_iwad
 LOGGER = logging.getLogger(__name__)
 
 
-class LMPData:
+class LMPData(BaseData):
     """Store all uploader-relevant data for an LMP file.
 
     This is intended to be a very generic storage class that is mostly unaware of intricacies of the
@@ -70,6 +70,7 @@ class LMPData:
         :param lmp_path: Path to the LMP file
         :param recorded_date: Date the LMP was recorded
         """
+        super().__init__()
         self.lmp_path = lmp_path
         dsda_date = convert_datetime_to_dsda_date(recorded_date)
         if not LMPData.DEMO_DATE_CUTOFF < recorded_date < LMPData.FUTURE_CUTOFF:
@@ -83,6 +84,7 @@ class LMPData:
         self.demo_info = demo_info if demo_info else {}
 
     def analyze(self):
+        """Analyze info provided to post parser."""
         self._get_header_and_footer()
         # TODO: There are probably other demos that we can't just put into the LMP parser, this
         #       logic may need to be expanded
@@ -104,6 +106,10 @@ class LMPData:
         is_tas = check_tas(self.lmp_path, self.data, self.raw_data)
 
     def populate_data_manager(self, data_manager):
+        """Populate data manager with info from lmp.
+
+        :param data_manager: Data manager to populate
+        """
         for key, value in self.data.items():
             if key in LMPData.CERTAIN_KEYS:
                 data_manager.insert(key, value, DataManager.CERTAIN, source='lmp')

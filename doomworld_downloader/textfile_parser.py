@@ -1,11 +1,11 @@
 """
 Parse data out of demo textfile.
 """
-# TODO: All of the parser classes can have stuff abstracted out.
 
 import logging
 import re
 
+from .base_parser import BaseData
 from .data_manager import DataManager
 from .utils import parse_youtube_url
 
@@ -13,7 +13,7 @@ from .utils import parse_youtube_url
 LOGGER = logging.getLogger(__name__)
 
 
-class TextfileData:
+class TextfileData(BaseData):
     """Store all uploader-relevant data for a demo textfile."""
     CATEGORY_KEYS = ['category', 'discipline']
     PORT_KEYS = ['builtusing', 'builtwith', 'client', 'engine', 'exe', 'port', 'portused',
@@ -144,6 +144,7 @@ class TextfileData:
 
         :param textfile_path: Path to textfile on local filesystem.
         """
+        super().__init__()
         self.data = {}
         self.raw_data = {'wad_strings': [], 'video_links': []}
         self.note_strings = set()
@@ -151,12 +152,14 @@ class TextfileData:
         self._raw_textfile = None
 
     def analyze(self):
+        """Analyze info provided to playback parser."""
         self._parse_textfile()
 
     def populate_data_manager(self, data_manager):
-        # The following data points are set for the playback parser:
-        #   - Certain: levelstat, time, level, kills, items, secrets, wad
-        #   - Somewhat certain: category
+        """Populate data manager with info from textfile.
+
+        :param data_manager: Data manager to populate
+        """
         for key, value in self.data.items():
             if key in TextfileData.CERTAIN_KEYS:
                 data_manager.insert(key, value, DataManager.CERTAIN, source='textfile')

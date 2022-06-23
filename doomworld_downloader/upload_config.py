@@ -180,7 +180,7 @@ class UploadConfig:
 
         Default to false.
 
-        :return: Flag indicating whether always try to play demos back with -solo-net
+        :return: Flag indicating whether to always try to play demos back with -solo-net
         """
         try:
             return self._config.getboolean('general', 'always_try_solonet')
@@ -238,6 +238,43 @@ class UploadConfig:
         """
         try:
             return self._config.get('demo_pack', 'additional_info_map')
+        except (NoSectionError, NoOptionError):
+            return None
+
+    @property
+    def dsda_mode_page(self):
+        """Get DSDA page to check demos for.
+
+        :return: DSDA page to check demos for
+        """
+        try:
+            return self._config.get('dsda_mode', 'page')
+        except (NoSectionError, NoOptionError):
+            return None
+
+    @property
+    def dsda_mode_download_directory(self):
+        """Get download directory for DSDA mode demos.
+
+        Default to ./dsda_demos.
+
+        :return: Download directory for DSDA mode demos.
+        """
+        try:
+            return self._config.get('demo_pack', 'download_directory')
+        except (NoSectionError, NoOptionError):
+            return 'dsda_demos'
+
+    @property
+    def dsda_mode_sync_only(self):
+        """Check only whether demos sync on page.
+
+        Alternative WADs for sync testing may be provided.
+
+        :return: Flag indicating whether to check only whether demos sync
+        """
+        try:
+            return self._config.get('demo_pack', 'sync_only')
         except (NoSectionError, NoOptionError):
             return None
 

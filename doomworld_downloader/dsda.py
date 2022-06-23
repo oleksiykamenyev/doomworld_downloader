@@ -16,6 +16,9 @@ from doomworld_downloader.utils import get_download_filename, download_response,
 
 LOGGER = logging.getLogger(__name__)
 
+DSDA_START = 'https://www.dsdarchive.com'
+DSDA_PLAYER_URL = f'{DSDA_START}/players'
+
 
 @dataclass
 class DSDACell:
@@ -73,7 +76,7 @@ def fix_dsda_link(link_url):
     :return: Fixed DSDA link URL
     """
     if link_url.startswith('/'):
-        link_url = 'https://www.dsdarchive.com' + link_url
+        link_url = DSDA_START + link_url
     return link_url
 
 
@@ -239,6 +242,20 @@ def download_wad_from_dsda(dsda_url, overwrite=True):
     return os.path.join(download_dir, download_filename)
 
 
+def download_demo_from_dsda(dsda_demo_url, download_dir, overwrite=True):
+    """Download demo from DSDA.
+
+    :param dsda_demo_url: DSDA demo URL
+    :param overwrite: Flag indicating whether to overwrite the local path if it exists
+    :return: Path to local demo download from DSDA
+    """
+    response = requests.get(dsda_demo_url)
+    default_filename = urlparse(dsda_demo_url).path.strip('/').split('/')[-1]
+    download_filename = get_download_filename(response, default_filename=default_filename)
+    download_response(response, download_dir, download_filename, overwrite=overwrite)
+    return os.path.join(download_dir, download_filename)
+
+
 def conform_dsda_wad_url(dsda_wad_url):
     """Conform DSDA WAD URL.
 
@@ -255,3 +272,40 @@ def conform_dsda_wad_url(dsda_wad_url):
     parsed_url = parsed_url._replace(path='/'.join(parsed_url.path.split('/')[:3]))
     parsed_url = parsed_url._replace(params='')._replace(query='')._replace(fragment='')
     return urlunparse(parsed_url)
+
+
+def get_players():
+    """Get dictionary of player names mapped to player URLs.
+
+    :return: Player names mapped to player URLs
+    """
+    soup = get_page(DSDA_PLAYER_URL)
+    player_table = soup.find('table')
+    rows = player_table.find('tbody').find_all('tr')
+    players = {}
+    for row in rows:
+        first_col = row.find('td')
+        dsda_cell = parse_dsda_cell(first_col)
+        players[dsda_cell.text] = next(iter(dsda_cell.links.values()))
+
+    return players
+
+
+def get_player_stats(player_url):
+    """Get player stats.
+
+    :return: Player stats
+    """
+    verify_dsda_url(player_url, page_types=['player'])
+    player_stats_page = f'{player_url}/stats'
+    soup = get_page(player_stats_page)
+    player_stats_elems = soup.find_all('h4')
+    player_stats = {}
+    for elem in player_stats_elems:
+        elem_text = elem.getText()
+        key, value = elem_text.split('=', 1)
+        key = key.lower().strip().replace(' ', '_')
+        value = value.strip()
+        player_stats[key] = value
+
+    return player_stats

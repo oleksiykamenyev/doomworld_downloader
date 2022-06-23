@@ -1,7 +1,6 @@
 """
 Parse data out of DSDA-Doom playback of the LMP.
 """
-# TODO: All of the parser classes can have stuff abstracted out.
 
 import logging
 import os
@@ -11,6 +10,7 @@ import subprocess
 from collections import Counter
 from shutil import copyfile, rmtree
 
+from .base_parser import BaseData
 from .data_manager import DataManager
 from .dsda import download_wad_from_dsda, get_wad_name_from_dsda_url
 from .upload_config import CONFIG, NEEDS_ATTENTION_PLACEHOLDER
@@ -20,7 +20,7 @@ from .utils import checksum, parse_range, run_cmd, zip_extract, compare_iwad
 LOGGER = logging.getLogger(__name__)
 
 
-class PlaybackData:
+class PlaybackData(BaseData):
     """Store all uploader-relevant data obtainable using DSDA-Doom.
 
     This includes data from levelstat.txt as well as the analysis.txt files.
@@ -77,6 +77,7 @@ class PlaybackData:
         :param demo_info: Miscellaneous additional info about the demo useful for demo playback and
                           categorization
         """
+        super().__init__()
         self._cleanup()
 
         # -fastdemo: Play back demo as fast as possible, this is better than timedemo since it does
@@ -97,12 +98,14 @@ class PlaybackData:
         self.note_strings = set()
 
     def analyze(self):
+        """Analyze info provided to playback parser."""
         self._playback()
 
     def populate_data_manager(self, data_manager):
-        # The following data points are set for the playback parser:
-        #   - Certain: levelstat, time, level, kills, items, secrets, wad
-        #   - Somewhat certain: category
+        """Populate data manager with info from post.
+
+        :param data_manager: Data manager to populate
+        """
         for key, value in self.data.items():
             if key in PlaybackData.CERTAIN_KEYS:
                 data_manager.insert(key, value, DataManager.CERTAIN, source='playback')
@@ -269,9 +272,14 @@ class PlaybackData:
                         if int(wad_guess.complevel) != int(complevel):
                             self.note_strings.add('Incompatible')
 
-                    cmd_line_note = wad_guess.alt_playback_cmd_lines.get(cmd_line)
-                    if cmd_line_note:
-                        self.note_strings.add(cmd_line_note)
+                    alt_action = wad_guess.alt_playback_cmd_lines.get(cmd_line)
+                    if alt_action:
+                        if isinstance(alt_action, dict):
+                            wad_update = alt_action.get('update_wad')
+                            if wad_update:
+                                self.data['wad'] = wad_update
+                        else:
+                            self.note_strings.add(alt_action)
 
                     break
 
