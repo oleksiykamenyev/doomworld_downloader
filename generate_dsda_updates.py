@@ -14,23 +14,15 @@ import argparse
 import json
 import logging
 import os
-import re
-
-from shutil import rmtree
 
 import yaml
 
 from doomworld_downloader.upload_config import CONFIG
-from doomworld_downloader.utils import checksum, get_log_level, zip_extract
+from doomworld_downloader.utils import get_log_level
 
 
 NO_ISSUE_JSON_DIR = 'demos_for_upload/no_issue_jsons'
-
-CHECKSUM_RE = re.compile(r'checksum: (null|\".*\")')
-WAD_FILE_EXTENSIONS = ['.bex', '.deh', '.pk3', '.pk7', '.wad']
-
-DSDA_URL_TO_WAD_INFO_FILE = 'doomworld_downloader/dsda_url_to_wad_info.yaml'
-DSDA_URL_TO_WAD_INFO_BACKUP = 'doomworld_downloader/backup_dsda_url_to_wad_info.yaml'
+UPDATE_JSON_DIR = 'demos_for_upload/update_jsons'
 
 LOGGER = logging.getLogger(__name__)
 
@@ -70,6 +62,7 @@ def main():
         demo_filename = demo_json['demo']['file']['name'].replace('\\', '/')
         demo_json_map[demo_filename] = demo_json
 
+    demo_updates = []
     for demo, demo_dict in cache_dict.items():
         demo_info = demo_dict['dsda_info']
         demo = demo.replace('\\', '/')
@@ -78,11 +71,14 @@ def main():
             LOGGER.error('Could not find demo %s in demo JSONs.', demo)
             continue
 
+        demo_update = {}
         for key, value in demo_info.items():
             test_value = value
+            final_key = key
             if key == 'note':
                 test_value = value == 'TAS'
                 json_value = demo_json['demo']['tas']
+                final_key = 'tas'
             elif key == 'tags':
                 json_value = demo_json['demo'].get(key, {})['text']
             else:
@@ -90,6 +86,24 @@ def main():
 
             if test_value and json_value and test_value != json_value:
                 LOGGER.debug('Difference for demo %s found in key %s!.', demo, key)
+
+                demo_update[final_key] = demo_json['demo'].get(final_key, {})
+
+        if demo_update:
+            demo_update['match_details'] = {
+                'category': demo_info['category'], 'level': demo_info['level'],
+                'wad': demo_info['wad'], 'time': demo_info['time']
+            }
+            if len(demo_dict['player_list']) == 1:
+                demo_update['match_details']['player'] = demo_dict['player_list'][0]
+
+            demo_updates.append(demo_update)
+
+    if demo_updates:
+        os.makedirs(UPDATE_JSON_DIR, exist_ok=True)
+        update_json = os.path.join(UPDATE_JSON_DIR, 'update.json')
+        with open(update_json, 'w', encoding='utf-8') as update_stream:
+            json.dump({'demo_updates': demo_updates}, update_stream, indent=4, sort_keys=True)
 
 
 if __name__ == '__main__':

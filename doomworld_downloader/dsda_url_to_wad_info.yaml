@@ -10996,18 +10996,23 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom/Ports/a-c/blabs2"
   dsda_paginated: false
   doomworld_thread: null
-"https://www.dsdarchive.com/wads/dbp_09":
+"https://www.dsdarchive.com/wads/dbp_09_2019_03_09":
+  parent: "https://www.dsdarchive.com/wads/dbp_09"
   wad_name: "DBP09: Legend of the Hidden Tech"
   iwad: doom2
   wad_files:
     dbp_09.wad: {checksum: "235b1bbc0966e5caebd605e28689c16c"}
+    __macosx/._dbp_09.wad: {not_required_for_playback: true, checksum: "4c060b97bbf89db41e4ff4a1f3b5c092"}
   complevel: 2
   playback_cmd_line: "-file dbp_09"
   map_list_info:
     map_ranges: [[1, 9]]
     d2all: ["Map 01", "Map 09"]
     episodes: []
-  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp_09"
+    map_info:
+      "Map 08":
+        skip_reality: true
+  idgames_url: null
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
 "https://www.dsdarchive.com/wads/pwacp":
@@ -14826,6 +14831,7 @@
   iwad: doom2
   wad_files:
     rawakening.wad: {checksum: "4b1ee2249a5db37e5c4f62cb23f321a4"}
+    rudeawakening.wad: {not_required_for_playback: true, dupe_checksum: true, checksum: "4b1ee2249a5db37e5c4f62cb23f321a4"}
   complevel: 2
   playback_cmd_line: "-file rawakening"
   map_list_info:
@@ -14863,3 +14869,20 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dynacrium"
   dsda_paginated: false
   doomworld_thread: null
+"https://www.dsdarchive.com/wads/dbp_09":
+  wad_name: "DBP09: Legend of the Hidden Tech"
+  iwad: doom2
+  wad_files:
+    dbp_09.wad: {checksum: "0ff11b4046bd1004cd7ceee4ae6b1651"}
+  complevel: 2
+  playback_cmd_line: "-file dbp_09"
+  map_list_info:
+    map_ranges: [[1, 9]]
+    d2all: ["Map 01", "Map 09"]
+    episodes: []
+    map_info:
+      "Map 08":
+        skip_reality: true
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp_09"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"

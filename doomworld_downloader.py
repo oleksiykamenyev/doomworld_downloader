@@ -17,7 +17,8 @@ from zipfile import ZipFile, BadZipFile
 import yaml
 
 from doomworld_downloader.data_manager import DataManager
-from doomworld_downloader.dsda import dsda_demo_page_to_json, download_demo_from_dsda
+from doomworld_downloader.dsda import dsda_demo_page_to_json, download_demo_from_dsda, \
+    get_wad_name_from_dsda_url
 from doomworld_downloader.demo_json_constructor import DemoJsonConstructor
 from doomworld_downloader.doomworld_data_retriever import get_new_posts, get_new_threads, \
     download_attachments, move_post_cache_to_failed, get_ad_hoc_posts, Post, Thread
@@ -126,7 +127,7 @@ def handle_demos(demos, post_data=None, demo_info_map=None):
         else:
             raise RuntimeError(f'Demo {demo} provided that is an unsupported filetype.')
 
-        if demo_info_map.get(demo, {}).get('demo_id'):
+        if demo_info_map and demo_info_map.get(demo, {}).get('demo_id'):
             demo_id = demo_info_map[demo]['demo_id']
         else:
             demo_id = demo_location.rstrip(os.path.sep).split(os.path.sep)[-2]
@@ -170,7 +171,7 @@ def handle_demos(demos, post_data=None, demo_info_map=None):
             if post_data:
                 post_data.populate_data_manager(data_manager)
                 all_note_strings = all_note_strings.union(post_data.note_strings)
-            if demo_info_map.get(demo, {}).get('player_list'):
+            if demo_info_map and demo_info_map.get(demo, {}).get('player_list'):
                 data_manager.insert('player_list', demo_info_map[demo]['player_list'],
                                     DataManager.CERTAIN, source='extra_info')
 
@@ -254,8 +255,8 @@ def get_dsda_demos(use_cached_downloads):
         with open(dsda_mode_cache) as cache_stream:
             dsda_mode_demos = yaml.safe_load(cache_stream)
 
-        for demo in dsda_mode_demos:
-            demo['player_list'] = tuple(demo['player_list'])
+        for demo, demo_dict in dsda_mode_demos.items():
+            demo_dict['player_list'] = tuple(demo_dict['player_list'])
     else:
         dsda_page_info = dsda_demo_page_to_json(CONFIG.dsda_mode_page)
         for dsda_row in dsda_page_info:
@@ -268,6 +269,8 @@ def get_dsda_demos(use_cached_downloads):
             if dsda_row['video'].links:
                 video_link = next(iter(dsda_row['video'].links.values()))
                 dsda_info['video_link'] = video_link.split('=')[1]
+            if not dsda_info.get('wad'):
+                dsda_info['wad'] = get_wad_name_from_dsda_url(CONFIG.dsda_mode_page)
             demo_info_map = {'player_list': tuple(dsda_row['Player(s)'].text.split('\n')),
                              'demo_id': urlparse(download_link).path.strip('/').split('/')[-2],
                              'dsda_info': dsda_info}
