@@ -67,7 +67,7 @@ class PlaybackData(BaseData):
     DOOM_1_MAP_RE = re.compile(r'^E(?P<episode_num>\d)M\ds?$')
 
     ALLOWED_FOOTER_FILES = ['bloodcolor.deh', 'doom widescreen hud.wad',
-                            'doom 2 widescreen assets.wad']
+                            'doom 2 widescreen assets.wad', 'dsda-doom.wad', 'prboom-plus.wad']
 
     def __init__(self, lmp_path, wad_guesses, demo_info=None):
         """Initialize playback data class.

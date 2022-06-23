@@ -165,12 +165,16 @@ class UploadConfig:
         """Cutoff date for demo recorded_at info (optional).
 
         If demos have dates older than this date, the date will be treated as incorrect. Default to
-        the 1994-01-01, i.e. around the time the first demos are expected to appear.
+        the 1994-01-01, i.e. around the time the first demos are expected to appear. For DSDA mode,
+        it is possible to override this cutoff date separately.
 
         :return: Cutoff date for demo recorded_at info
         """
         try:
-            return self._config.get('general', 'demo_date_cutoff')
+            if self.download_type == 'dsda':
+                return self._config.get('dsda_mode', 'demo_date_cutoff')
+            else:
+                return self._config.get('general', 'demo_date_cutoff')
         except (NoSectionError, NoOptionError):
             return '1994-01-01T00:00:00Z'
 
@@ -261,7 +265,7 @@ class UploadConfig:
         :return: Download directory for DSDA mode demos.
         """
         try:
-            return self._config.get('demo_pack', 'download_directory')
+            return self._config.get('dsda_mode', 'download_directory')
         except (NoSectionError, NoOptionError):
             return 'dsda_demos'
 
@@ -274,9 +278,39 @@ class UploadConfig:
         :return: Flag indicating whether to check only whether demos sync
         """
         try:
-            return self._config.get('demo_pack', 'sync_only')
+            return self._config.getboolean('dsda_mode', 'sync_only')
         except (NoSectionError, NoOptionError):
             return None
+
+    @property
+    def dsda_mode_replace_zips(self):
+        """Replace zips mode.
+
+        If set, this will look for all the zips in the replace_zips_dir location and generate delete
+        JSONs for them on DSDA then create replacement upload JSONs.
+
+        Only matching zip filenames will be tested, and only the replacement ones; the DSDA ones
+        will be cross-verified based on the info available on DSDA but not run in this mode.
+
+        :return: Flag indicating whether to use replace zips mode
+        """
+        try:
+            return self._config.getboolean('dsda_mode', 'replace_zips')
+        except (NoSectionError, NoOptionError):
+            return None
+
+    @property
+    def dsda_mode_replace_zips_dir(self):
+        """Replace zips directory.
+
+        Default to ./replace_zips.
+
+        :return: Flag indicating whether to use replace zips mode
+        """
+        try:
+            return self._config.get('dsda_mode', 'replace_zips_dir')
+        except (NoSectionError, NoOptionError):
+            return 'replace_zips'
 
 
 CONFIG = UploadConfig()

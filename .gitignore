@@ -145,6 +145,7 @@ completed_jsons
 
 # THIS SHOULD NEVER BE PUBLIC
 cheat_detection.py
+otp.txt
 
 # 4shockblast: will use this for any tmp code I write to auto-generate/fix configs and stuff
 tmp_code.py

@@ -251,6 +251,11 @@ def get_dsda_demos(use_cached_downloads):
     """
     dsda_mode_demos = {}
     dsda_mode_cache = os.path.join(CONFIG.dsda_mode_download_directory, 'demo_info.yaml')
+
+    replacement_zips = []
+    if CONFIG.dsda_mode_replace_zips:
+        replacement_zips = [filename for filename in os.listdir(CONFIG.dsda_mode_replace_zips_dir)]
+
     if use_cached_downloads:
         with open(dsda_mode_cache) as cache_stream:
             dsda_mode_demos = yaml.safe_load(cache_stream)
@@ -261,16 +266,34 @@ def get_dsda_demos(use_cached_downloads):
         dsda_page_info = dsda_demo_page_to_json(CONFIG.dsda_mode_page)
         for dsda_row in dsda_page_info:
             download_link = next(iter(dsda_row['Time'].links.values()))
-            local_path = download_demo_from_dsda(download_link,
-                                                 CONFIG.dsda_mode_download_directory,
-                                                 overwrite=True)
-            dsda_info = {key.lower(): cell.text for key, cell in dsda_row.items()
-                         if key != 'Player(s)'}
+            download_filename = urlparse(download_link).path.strip('/').split('/')[-1]
+            if not replacement_zips or download_filename in replacement_zips:
+                local_path = download_demo_from_dsda(download_link,
+                                                     CONFIG.dsda_mode_download_directory,
+                                                     overwrite=True)
+                if download_filename in replacement_zips:
+                    local_path = os.path.join(CONFIG.dsda_mode_replace_zips_dir, download_filename)
+            else:
+                continue
+
+            dsda_info = {}
+            for key, value in dsda_row.items():
+                if key == 'Player(s)':
+                    continue
+
+                if isinstance(value, list):
+                    text = '\n'.join(cell.text for cell in value)
+                else:
+                    text = value.text
+
+                dsda_info[key.lower()] = text
+
             if dsda_row['video'].links:
                 video_link = next(iter(dsda_row['video'].links.values()))
                 dsda_info['video_link'] = video_link.split('=')[1]
             if not dsda_info.get('wad'):
                 dsda_info['wad'] = get_wad_name_from_dsda_url(CONFIG.dsda_mode_page)
+
             demo_info_map = {'player_list': tuple(dsda_row['Player(s)'].text.split('\n')),
                              'demo_id': urlparse(download_link).path.strip('/').split('/')[-2],
                              'dsda_info': dsda_info}

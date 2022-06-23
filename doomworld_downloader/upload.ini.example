@@ -31,3 +31,5 @@ additional_info_map = doomworld_downloader\\additional_pack_info.yaml
 page = https://www.dsdarchive.com/wads/d5da2
 download_directory = dsda_demos
 sync_only = true|FALSE
+replace_zips = true|FALSE
+replace_zips_dir = replace_zips

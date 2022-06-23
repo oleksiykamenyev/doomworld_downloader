@@ -21,6 +21,7 @@ from doomworld_downloader.upload_config import CONFIG
 from doomworld_downloader.utils import get_log_level
 
 
+DELETE_JSON_DIR = 'demos_for_upload/delete_jsons'
 NO_ISSUE_JSON_DIR = 'demos_for_upload/no_issue_jsons'
 UPDATE_JSON_DIR = 'demos_for_upload/update_jsons'
 
@@ -62,7 +63,7 @@ def main():
         demo_filename = demo_json['demo']['file']['name'].replace('\\', '/')
         demo_json_map[demo_filename] = demo_json
 
-    demo_updates = []
+    demo_changes = []
     for demo, demo_dict in cache_dict.items():
         demo_info = demo_dict['dsda_info']
         demo = demo.replace('\\', '/')
@@ -87,9 +88,10 @@ def main():
             if test_value and json_value and test_value != json_value:
                 LOGGER.debug('Difference for demo %s found in key %s!.', demo, key)
 
-                demo_update[final_key] = demo_json['demo'].get(final_key, {})
+                if not CONFIG.dsda_mode_replace_zips:
+                    demo_update[final_key] = demo_json['demo'].get(final_key, {})
 
-        if demo_update:
+        if CONFIG.dsda_mode_replace_zips or demo_update:
             demo_update['match_details'] = {
                 'category': demo_info['category'], 'level': demo_info['level'],
                 'wad': demo_info['wad'], 'time': demo_info['time']
@@ -97,13 +99,25 @@ def main():
             if len(demo_dict['player_list']) == 1:
                 demo_update['match_details']['player'] = demo_dict['player_list'][0]
 
-            demo_updates.append(demo_update)
+            demo_changes.append(demo_update)
 
-    if demo_updates:
-        os.makedirs(UPDATE_JSON_DIR, exist_ok=True)
-        update_json = os.path.join(UPDATE_JSON_DIR, 'update.json')
-        with open(update_json, 'w', encoding='utf-8') as update_stream:
-            json.dump({'demo_updates': demo_updates}, update_stream, indent=4, sort_keys=True)
+    if demo_changes:
+        if CONFIG.dsda_mode_replace_zips:
+            os.makedirs(DELETE_JSON_DIR, exist_ok=True)
+            header = 'demo_delete'
+        else:
+            os.makedirs(UPDATE_JSON_DIR, exist_ok=True)
+            header = 'demo_updates'
+
+        if header == 'demo_delete':
+            for idx, delete in enumerate(demo_changes):
+                delete_json = os.path.join(DELETE_JSON_DIR, f'delete_{str(idx).zfill(5)}.json')
+                with open(delete_json, 'w', encoding='utf-8') as update_stream:
+                    json.dump({header: delete}, update_stream, indent=4, sort_keys=True)
+        else:
+            update_json = os.path.join(UPDATE_JSON_DIR, 'update.json')
+            with open(update_json, 'w', encoding='utf-8') as update_stream:
+                json.dump({header: demo_changes}, update_stream, indent=4, sort_keys=True)
 
 
 if __name__ == '__main__':
