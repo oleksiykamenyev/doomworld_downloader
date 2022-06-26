@@ -18,7 +18,7 @@ import yaml
 
 from doomworld_downloader.data_manager import DataManager
 from doomworld_downloader.dsda import dsda_demo_page_to_json, download_demo_from_dsda, \
-    get_wad_name_from_dsda_url
+    get_wad_name_from_dsda_url, verify_dsda_url, conform_dsda_wad_url
 from doomworld_downloader.demo_json_constructor import DemoJsonConstructor
 from doomworld_downloader.doomworld_data_retriever import get_new_posts, get_new_threads, \
     download_attachments, move_post_cache_to_failed, get_ad_hoc_posts, Post, Thread
@@ -40,7 +40,7 @@ DATETIME_FORMAT = 'YYYY'
 LOGGER = logging.getLogger(__name__)
 
 
-def handle_demos(demos, post_data=None, demo_info_map=None):
+def handle_demos(demos, post_data=None, demo_info_map=None, extra_wad_guess=None):
     """Handle all demos for a particular upload.
 
     The upload could be a part of a post, demo pack, etc.
@@ -48,6 +48,7 @@ def handle_demos(demos, post_data=None, demo_info_map=None):
     :param demos: List of demos to handle
     :param post_data: Post data info if available
     :param demo_info_map: Demo info map for additional demo information during demo pack uploads
+    :param extra_wad_guess: Extra WAD guess for demo playback
     :return: Flag indicating whether all demos were parsed from all downloads
     """
     for demo in demos:
@@ -56,11 +57,12 @@ def handle_demos(demos, post_data=None, demo_info_map=None):
         textfile_data = None
         if demo.endswith('.zip'):
             # Rename zip to account for any whitespace in the filename
-            demo_location = demo.replace(' ', '_')
-            demo_location_filename = get_filename_no_ext(demo_location)
             download_dir = os.path.dirname(demo)
+            demo_location_filename = get_filename_no_ext(demo).replace(' ', '_')
+            demo_location = os.path.join(download_dir, f'{demo_location_filename}.zip')
             zip_extract_dir = os.path.join(download_dir, demo_location_filename)
             if demo_location != demo and not os.path.exists(demo_location):
+                os.makedirs(download_dir, exist_ok=True)
                 shutil.move(demo, demo_location)
 
             try:
@@ -82,7 +84,7 @@ def handle_demos(demos, post_data=None, demo_info_map=None):
             if not lmp_files:
                 LOGGER.warning('No lmp files found in download %s.', demo_location)
                 continue
-            if not txt_files:
+            if CONFIG.download_type != 'dsda' and not txt_files:
                 LOGGER.error('No txt files found in download %s.', demo_location)
                 continue
 
@@ -143,12 +145,15 @@ def handle_demos(demos, post_data=None, demo_info_map=None):
                 'complevel': lmp_data.raw_data.get('complevel'), 'iwad': iwad,
                 'footer_files': lmp_data.raw_data['wad_strings'],
                 'skill': lmp_data.raw_data.get('skill'),
-                'num_players': lmp_data.raw_data.get('num_players')
+                'num_players': lmp_data.raw_data.get('num_players'),
+                'source_port': lmp_data.data.get('source_port')
             }
             post_wad_links = post_data.raw_data['wad_links'] if post_data else []
             textfile_wad_links = textfile_data.raw_data['wad_strings'] if textfile_data else []
+            extra_wad_guesses = [extra_wad_guess] if extra_wad_guess else []
             wad_guesses = get_wad_guesses(
-                post_wad_links, textfile_wad_links, lmp_data.raw_data['wad_strings'], iwad=iwad
+                post_wad_links, textfile_wad_links, lmp_data.raw_data['wad_strings'],
+                extra_wad_guesses, iwad=iwad
             )
 
             playback_data = PlaybackData(lmp_path, wad_guesses, demo_info=demo_info)
@@ -293,6 +298,8 @@ def get_dsda_demos(use_cached_downloads):
                 dsda_info['video_link'] = video_link.split('=')[1]
             if not dsda_info.get('wad'):
                 dsda_info['wad'] = get_wad_name_from_dsda_url(CONFIG.dsda_mode_page)
+            if not dsda_info.get('tags'):
+                dsda_info['tags'] = None
 
             demo_info_map = {'player_list': tuple(dsda_row['Player(s)'].text.split('\n')),
                              'demo_id': urlparse(download_link).path.strip('/').split('/')[-2],
@@ -390,7 +397,11 @@ def main():
         handle_demos(list(demo_pack_demos.keys()), demo_info_map=demo_pack_demos)
     elif CONFIG.download_type == 'dsda':
         dsda_mode_demos = get_dsda_demos(use_cached_downloads)
-        handle_demos(list(dsda_mode_demos.keys()), demo_info_map=dsda_mode_demos)
+        extra_wad_guess = None
+        if verify_dsda_url(CONFIG.dsda_mode_page, page_types=['player', 'wad']) == 'wad':
+            extra_wad_guess = conform_dsda_wad_url(CONFIG.dsda_mode_page)
+        handle_demos(list(dsda_mode_demos.keys()), demo_info_map=dsda_mode_demos,
+                     extra_wad_guess=extra_wad_guess)
     else:
         posts = get_doomworld_posts(search_end_date, search_start_date, use_cached_downloads)
         for post in posts:

@@ -16,9 +16,14 @@ LOGGER = logging.getLogger(__name__)
 class TextfileData(BaseData):
     """Store all uploader-relevant data for a demo textfile."""
     CATEGORY_KEYS = ['category', 'discipline']
-    PORT_KEYS = ['builtusing', 'builtwith', 'client', 'engine', 'exe', 'port', 'portused',
-                 'recordedusing', 'recordedwith', 'sourceport', 'sourceportused', 'usingport',
-                 'usingsourceport']
+    PORT_KEYS = ['client', 'engine', 'exe', 'port', 'portused', 'sourceport', 'sourceportused',
+                 'usingport', 'usingsourceport']
+    # These port keys could be placed at the start of a line with no colon (i.e., in cases of
+    # Compet-N-style textfiles. In this case, the script will still parse them.
+    NON_COLON_PORT_REGEX = re.compile(
+        r'^\s*(Recorded|Built)\s*(using|with)\s*(source)?\s*(port)?\s*:?\s*(?P<value>.+)\s*',
+        re.IGNORECASE
+    )
     TAS_PORTS = ['DRE', 'TASDoom', 'TASMBF', 'XDRE']
     TAS_STRING = 'this is a tools-assisted demo'
     VIDEO_KEYS = [
@@ -139,6 +144,27 @@ class TextfileData(BaseData):
                    re.IGNORECASE): 'XDRE',
     }
 
+    VANILLA_PORT_REGEXES = {
+        re.compile(
+            r'((The\s+)?Ultimate\s*)?Doom(\.exe)?\s+(v|version)?\s*(?P<version>\d.\d+(\.\d+)?)',
+            re.IGNORECASE
+        ): 'DooM',
+        re.compile(r'(The\s+)?Doom\s*2(\.exe)?\s+(v|version)?\s*(?P<version>\d.\d+(\.\d+)?)',
+                   re.IGNORECASE): 'DooM2',
+
+        # Both of these regexes go to Final Doom, but if both Final and f are marked optional, it
+        # could match Doom2.exe, so splitting into two. Final Doom demos will require special logic
+        # as the port name is marked identically on DSDA, just the version has f appended.
+        re.compile(
+            r'(The\s+)?Final\s*Doom(\s*2)?(\.exe)?\s+(v|version)?\s*(?P<version>\d.\d+(\.\d+)?)f?',
+            re.IGNORECASE
+        ): 'Final Doom',
+        re.compile(
+            r'(The\s+)?(Final\s*)?Doom(\s*2)?(\.exe)?\s+'
+            r'(v|version)?\s*(?P<version>\d.\d+(\.\d+)?)f', re.IGNORECASE
+        ): 'Final Doom'
+    }
+
     def __init__(self, textfile_path):
         """Initialize textfile data class.
 
@@ -170,7 +196,6 @@ class TextfileData(BaseData):
 
     def _parse_textfile(self):
         """Parse textfile path."""
-        # TODO: Try to detect Compet-N style textfiles
         try:
             with open(self.textfile_path, encoding='utf-8') as textfile_stream:
                 self._raw_textfile = textfile_stream.read()
@@ -185,25 +210,31 @@ class TextfileData(BaseData):
 
         text_lines = self._raw_textfile.splitlines()
         for line in text_lines:
+            non_colon_port_match = TextfileData.NON_COLON_PORT_REGEX.match(line)
             if ':' in line:
                 key, value = line.split(':', 1)
                 key = ''.join(key.lower().split())
                 value = value.strip()
-                value_lowercase = value.lower()
+            elif non_colon_port_match:
+                key = 'engine'
+                value = non_colon_port_match.group('value')
+            else:
+                continue
 
-                if key in TextfileData.CATEGORY_KEYS:
-                    self.data['category'] = self._parse_category(value_lowercase)
-                    if 'tas' in value_lowercase.split():
-                        self.data['is_tas'] = True
-                elif key in TextfileData.PORT_KEYS:
-                    self.data['source_port'] = self._parse_port(value_lowercase)
-                elif key in TextfileData.VIDEO_KEYS:
-                    youtube_url_key = parse_youtube_url(value)
-                    self.raw_data['video_links'].append(youtube_url_key)
-                elif key in TextfileData.WAD_KEYS:
-                    self.raw_data['wad_strings'].append(value_lowercase)
-                elif key == 'iwad':
-                    self.raw_data['iwad'] = value_lowercase
+            value_lowercase = value.lower()
+            if key in TextfileData.CATEGORY_KEYS:
+                self.data['category'] = self._parse_category(value_lowercase)
+                if 'tas' in value_lowercase.split():
+                    self.data['is_tas'] = True
+            elif key in TextfileData.PORT_KEYS:
+                self.data['source_port'] = self._parse_port(value_lowercase)
+            elif key in TextfileData.VIDEO_KEYS:
+                youtube_url_key = parse_youtube_url(value)
+                self.raw_data['video_links'].append(youtube_url_key)
+            elif key in TextfileData.WAD_KEYS:
+                self.raw_data['wad_strings'].append(value_lowercase)
+            elif key == 'iwad':
+                self.raw_data['iwad'] = value_lowercase
 
         iwad = self.raw_data.get('iwad')
         if not self.raw_data['wad_strings'] and iwad:
@@ -222,14 +253,14 @@ class TextfileData(BaseData):
                 self.data.pop('category')
         if not self.data.get('source_port'):
             self.data['source_port'] = self._parse_port(self._raw_textfile)
-            if not self.data.get('source_port'):
-                LOGGER.info('Could not parse source port from textfile %s.', self.textfile_path)
-                self.data.pop('source_port')
 
         if self.data.get('source_port'):
             for tas_port in TextfileData.TAS_PORTS:
                 if tas_port in self.data['source_port']:
                     self.data['is_tas'] = True
+        else:
+            LOGGER.info('Could not parse source port from textfile %s.', self.textfile_path)
+            self.data.pop('source_port')
 
         for note_regex, note in TextfileData.NOTE_REGEXES.items():
             match = note_regex.search(self._raw_textfile)
@@ -257,6 +288,7 @@ class TextfileData(BaseData):
         :param text_str: Text string
         :return: Port name if it was possible to parse, else None
         """
+        port_found = None
         for port_regex, port_name in TextfileData.PORT_REGEXES.items():
             match = port_regex.search(text_str)
             if match:
@@ -287,6 +319,30 @@ class TextfileData(BaseData):
                 else:
                     version = ''
 
-                return f'{port_name_final}{version}'
+                port_found = f'{port_name_final}{version}'
+                break
 
-        return None
+        if port_found:
+            return port_found
+        else:
+            for port_regex, port_name in TextfileData.VANILLA_PORT_REGEXES.items():
+                match = port_regex.search(text_str)
+                if match:
+                    # Vanilla port without version is useless info.
+                    version = match.group('version')
+                    if not version:
+                        continue
+
+                    if not version.startswith('v'):
+                        version = f'v{version}'
+
+                    if port_name == 'Final Doom':
+                        port_name_final = 'DooM2'
+                        version = f'{version}f'
+                    else:
+                        port_name_final = port_name
+
+                    port_found = f'{port_name_final} {version}'
+                    break
+
+        return port_found

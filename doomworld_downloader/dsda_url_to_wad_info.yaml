@@ -7811,7 +7811,8 @@
   wad_files:
     twzone.wad: {checksum: "646197997357375f8b49e692c2c06eb6"}
   complevel: 2
-  playback_cmd_line: "-file twzone"
+  playback_cmd_line: "-file update/twzone"
+  alt_playback_cmd_lines: {"-file twzone": {update_wad: "twzone_old"}}
   map_list_info:
     map_ranges: [[1, 32]]
   idgames_url: null
@@ -13229,6 +13230,8 @@
         tyson_only: true
       "Map 34":
         tyson_only: true
+      "Map 39":
+        skip_reality: true
       "Map 60":
         skip_reality: true
         tyson_only: true
@@ -15004,3 +15007,17 @@
   idgames_url: null
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/57826-strain-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/skipper":
+  wad_name: Skipper
+  iwad: doom2
+  wad_files:
+    skipper.wad: {checksum: "057795f4bfcde64b36929dda61584ff9"}
+  complevel: 9
+  playback_cmd_line: "-file skipper"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/86724-demos-for-miscellaneous-ribbiks-maps/"

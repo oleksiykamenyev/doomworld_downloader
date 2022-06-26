@@ -81,11 +81,15 @@ def main():
                 json_value = demo_json['demo']['tas']
                 final_key = 'tas'
             elif key == 'tags':
-                json_value = demo_json['demo'].get(key, {})['text']
+                json_tags = demo_json['demo'].get(key)
+                if json_tags:
+                    json_value = json_tags[0]['text']
+                else:
+                    json_value = None
             else:
                 json_value = demo_json['demo'].get(key)
 
-            if test_value and json_value and test_value != json_value:
+            if (test_value or json_value) and test_value != json_value:
                 LOGGER.debug('Difference for demo %s found in key %s!.', demo, key)
 
                 if not CONFIG.dsda_mode_replace_zips:

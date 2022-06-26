@@ -223,6 +223,13 @@ class PlaybackData(BaseData):
                     playback_cmd_lines.extend(
                         [f'{cmd} -solo-net' for cmd in playback_cmd_lines]
                     )
+
+            # TASDooM demos sometimes require manually providing the complevel
+            if self.demo_info.get('source_port') == 'TASDooM':
+                playback_cmd_lines.extend(
+                    [f'{cmd} -complevel 5' for cmd in playback_cmd_lines]
+                )
+
             for cmd_line in playback_cmd_lines:
                 command = '{} -iwad commercial/{} {}'.format(self.base_command, wad_guess.iwad,
                                                              cmd_line)
@@ -280,6 +287,9 @@ class PlaybackData(BaseData):
                                 self.data['wad'] = wad_update
                         else:
                             self.note_strings.add(alt_action)
+
+                    if '-complevel 5' in cmd_line:
+                        self.note_strings.add('Plays back with forced -complevel 5')
 
                     break
 

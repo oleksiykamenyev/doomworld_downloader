@@ -26,7 +26,7 @@ class DemoJsonConstructor:
     SKILL_CATEGORY_NOTE_RE = re.compile('^Skill \d .+$')
 
     MISC_NOTES = ['Also Reality', 'Also Almost Reality', 'Uses turbo', 'Uses longtics',
-                  'Also Pacifist']
+                  'Also Pacifist', 'Plays back with forced -complevel 5']
     MISC_CATEGORY_NOTES = [
         '-altdeath', '-coop_spawns', '-fast', '-nomonsters', '-respawn', '-solo-net'
     ]

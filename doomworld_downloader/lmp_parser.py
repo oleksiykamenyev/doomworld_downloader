@@ -104,6 +104,8 @@ class LMPData(BaseData):
             self.note_strings.add('Hexen class: ' + ', '.join(self.raw_data['player_classes']))
 
         is_tas = check_tas(self.lmp_path, self.data, self.raw_data)
+        if is_tas:
+            self.data['is_tas'] = is_tas
 
     def populate_data_manager(self, data_manager):
         """Populate data manager with info from lmp.
@@ -263,8 +265,6 @@ class LMPData(BaseData):
                             self.raw_data['player_classes'].append(
                                 LMPData.HEXEN_CLASS_MAPPING[class_value]
                             )
-                if key == 'sr50 on turns' and value.lower() == 'true':
-                    self.data['is_tas'] = True
                 # For Heretic/Hexen demos, these keys are just output as "true"/"false" strings
                 if (not iwad == 'heretic.wad' and not iwad == 'hexen.wad' and
                         key in self.BOOLEAN_INT_KEYS):
@@ -400,7 +400,7 @@ class LMPData(BaseData):
             if self.check_doom_1_2_or_before():
                 self.data['source_port'] = 'Doom v1.2 or earlier'
         elif raw_version == 110:
-            self.data['source_port'] = 'TASDoom'
+            self.data['source_port'] = 'TASDooM'
 
         # This isn't 100% part of the port info, but this is the cleanest place to check for this.
         if raw_version == 111:
