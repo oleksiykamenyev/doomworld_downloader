@@ -225,7 +225,7 @@ class PlaybackData(BaseData):
                     )
 
             # TASDooM demos sometimes require manually providing the complevel
-            if self.demo_info.get('source_port') == 'TASDooM':
+            if self.demo_info.get('source_port') == 'TASDooM' or True:
                 playback_cmd_lines.extend(
                     [f'{cmd} -complevel 5' for cmd in playback_cmd_lines]
                 )
@@ -322,23 +322,35 @@ class PlaybackData(BaseData):
         is_nomo = self.raw_data.get('nomonsters', False)
         skip_reality = map_info.get_single_key_for_map('skip_reality', skill=skill,
                                                        game_mode=game_mode)
+        skip_reality_categories = map_info.get_single_key_for_map('skip_reality_categories',
+                                                                  skill=skill, game_mode=game_mode)
+        skip_reality_final = skip_reality and (skip_reality_categories is None or
+                                               self.data['category'] in skip_reality_categories)
         if self.raw_data.get('reality', False):
             add_reality_tag = True
             if is_nomo and not map_info.get_single_key_for_map('add_reality_in_nomo', skill=skill,
                                                                game_mode=game_mode):
                 add_reality_tag = False
-            if skip_reality:
+            if skip_reality_final:
                 add_reality_tag = False
 
             if add_reality_tag:
                 self.note_strings.add('Also Reality')
         elif self.raw_data.get('almost_reality', False):
             add_almost_reality_tag = True
+            skip_almost_reality = map_info.get_single_key_for_map('skip_almost_reality',
+                                                                  skill=skill, game_mode=game_mode)
+            skip_almost_reality_categories = map_info.get_single_key_for_map(
+                'skip_almost_reality_categories', skill=skill, game_mode=game_mode
+            )
+            skip_almost_reality_final = (
+                skip_almost_reality and (skip_almost_reality_categories is None or
+                                         self.data['category'] in skip_almost_reality_categories)
+            )
             if is_nomo and not map_info.get_single_key_for_map('add_almost_reality_in_nomo',
                                                                skill=skill, game_mode=game_mode):
                 add_almost_reality_tag = False
-            if skip_reality or map_info.get_single_key_for_map('skip_almost_reality', skill=skill,
-                                                               game_mode=game_mode):
+            if skip_reality_final or skip_almost_reality_final:
                 add_almost_reality_tag = False
 
             if add_almost_reality_tag:

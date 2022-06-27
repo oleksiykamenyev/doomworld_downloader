@@ -597,6 +597,8 @@
       "Map 01":
         "coop":
           tyson_only: true
+        "single_player":
+          skip_reality: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/s-u/swtw"
   dsda_paginated: false
   doomworld_thread: null
@@ -7805,16 +7807,19 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/m-o/mayhem12"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/127478-mayhem-demo-thread-complevel-9/"
-"https://www.dsdarchive.com/wads/twzone":
+"https://www.dsdarchive.com/wads/twzone_1998":
+  parent: "https://www.dsdarchive.com/wads/twzone"
   wad_name: The Twilight Zone (version 5 released to ftp)
   iwad: doom2
   wad_files:
     twzone.wad: {checksum: "646197997357375f8b49e692c2c06eb6"}
   complevel: 2
-  playback_cmd_line: "-file update/twzone"
-  alt_playback_cmd_lines: {"-file twzone": {update_wad: "twzone_old"}}
+  playback_cmd_line: "-file twzone"
   map_list_info:
     map_ranges: [[1, 32]]
+    map_info:
+      "Map 20":
+        skip_almost_reality: true
   idgames_url: null
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/56158-twilight-zone-1-amp-2-demos-complevel-2/"
@@ -15021,3 +15026,29 @@
   idgames_url: null
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/86724-demos-for-miscellaneous-ribbiks-maps/"
+"https://www.dsdarchive.com/wads/twzone":
+  wad_name: The Twilight Zone
+  iwad: doom2
+  wad_files:
+    twzone.wad: {checksum: "8602a3d474f65779ed9ca7913bd20e26"}
+  complevel: 2
+  playback_cmd_line: "-file twzone"
+  map_list_info:
+    map_ranges: [[1, 32], ["E1M1", "E1M3"]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/twzone"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/56158-twilight-zone-1-amp-2-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/dotw":
+  wad_name: Dance on the Water
+  iwad: doom2
+  wad_files:
+    dotw.wad: {checksum: "74789b88c64f59fd1a948e6aeed2f34d"}
+  complevel: 9
+  playback_cmd_line: "-file dotw"
+  map_list_info:
+    map_ranges: [[1, 7], [31, 33]]
+    d2all: ["Map 01", "Map 07"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dotw"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/129947-dance-on-the-water-demos-complevel-9/"

@@ -1273,6 +1273,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/crusades
   id: '129851'
   name: "Crusades demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/129947-dance-on-the-water-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/dotw
+  id: '129947'
+  name: "Dance on the Water demos (-complevel 9)"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -1310,7 +1315,7 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wads:
     - https://www.dsdarchive.com/wads/twzone
     - https://www.dsdarchive.com/wads/twzone2
-    - https://www.dsdarchive.com/wads/twzonev2
+    - https://www.dsdarchive.com/wads/twzone_1998
   id: "56158"
   name: Twilight Zone 1 & 2 demos [-complevel 2]
 "https://www.doomworld.com/forum/topic/65028-real-world-1-amp-2-demos-complevel-2/":

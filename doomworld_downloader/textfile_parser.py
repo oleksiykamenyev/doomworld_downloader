@@ -36,7 +36,7 @@ class TextfileData(BaseData):
     POSSIBLE_KEYS = ['category', 'source_port', 'video_link']
 
     CATEGORY_REGEXES = {
-        re.compile(r'(UV)?[ -_]?Max', re.IGNORECASE): 'UV Max',
+        re.compile(r'(UV)?[ -_]?(Max|100%)', re.IGNORECASE): 'UV Max',
         re.compile(r'UV[ -_]?Speed', re.IGNORECASE): 'UV Speed',
         re.compile(r'NM[ -_]?Speed', re.IGNORECASE): 'NM Speed',
         re.compile(r'NM[ -_]?100s?', re.IGNORECASE): 'NM 100S',
@@ -230,7 +230,10 @@ class TextfileData(BaseData):
                 self.data['source_port'] = self._parse_port(value_lowercase)
             elif key in TextfileData.VIDEO_KEYS:
                 youtube_url_key = parse_youtube_url(value)
-                self.raw_data['video_links'].append(youtube_url_key)
+                # Some YouTube URLs won't produce any value here (e.g., channel pages). Ignore
+                # these.
+                if youtube_url_key:
+                    self.raw_data['video_links'].append(youtube_url_key)
             elif key in TextfileData.WAD_KEYS:
                 self.raw_data['wad_strings'].append(value_lowercase)
             elif key == 'iwad':
@@ -252,7 +255,7 @@ class TextfileData(BaseData):
                 LOGGER.info('Could not parse category from textfile %s.', self.textfile_path)
                 self.data.pop('category')
         if not self.data.get('source_port'):
-            self.data['source_port'] = self._parse_port(self._raw_textfile)
+            self.data['source_port'] = self._parse_port(self._raw_textfile, skip_vanilla_check=True)
 
         if self.data.get('source_port'):
             for tas_port in TextfileData.TAS_PORTS:
@@ -282,10 +285,11 @@ class TextfileData(BaseData):
         return None
 
     @staticmethod
-    def _parse_port(text_str):
+    def _parse_port(text_str, skip_vanilla_check=False):
         """Parse port from a provided text string.
 
         :param text_str: Text string
+        :param skip_vanilla_check: Skip checking for vanilla ports
         :return: Port name if it was possible to parse, else None
         """
         port_found = None
@@ -324,7 +328,7 @@ class TextfileData(BaseData):
 
         if port_found:
             return port_found
-        else:
+        elif not skip_vanilla_check:
             for port_regex, port_name in TextfileData.VANILLA_PORT_REGEXES.items():
                 match = port_regex.search(text_str)
                 if match:

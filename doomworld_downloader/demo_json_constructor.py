@@ -84,7 +84,8 @@ class DemoJsonConstructor:
             # Convert to JSON keys, default to value in the map.
             key_to_insert = self.KEY_TO_JSON_MAP.get(evaluation.key, evaluation.key)
             if evaluation.needs_attention:
-                self._handle_needs_attention_entries(key_to_insert, evaluation, lmp_file, demo_json)
+                self._handle_needs_attention_entries(key_to_insert, evaluation, lmp_file, demo_json,
+                                                     data_manager)
             else:
                 value = next(iter(evaluation.possible_values.keys()))
                 if value == NEEDS_ATTENTION_PLACEHOLDER:
@@ -98,14 +99,16 @@ class DemoJsonConstructor:
             if key not in demo_json:
                 demo_json[key] = default
 
-        # The players list is set to a tuple in the data manager so that it is a hashable type; we
-        # need to convert it to a list to match the JSON spec.
-        demo_json['players'] = list(demo_json['players'])
         for key in self.REQUIRED_KEYS:
             if key not in demo_json:
                 LOGGER.error('Key %s not found in final demo JSON.', key)
                 self._set_has_issue()
-                demo_json[key] = NEEDS_ATTENTION_PLACEHOLDER
+                demo_json[key] = ([NEEDS_ATTENTION_PLACEHOLDER]
+                                  if key == 'players' else NEEDS_ATTENTION_PLACEHOLDER)
+
+        # The players list is set to a tuple in the data manager so that it is a hashable type; we
+        # need to convert it to a list to match the JSON spec.
+        demo_json['players'] = list(demo_json['players'])
 
         if demo_json.get('category') == 'Other':
             self._set_has_issue()
@@ -198,13 +201,15 @@ class DemoJsonConstructor:
         json_path = os.path.join(json_dir, json_filename)
         return json_path
 
-    def _handle_needs_attention_entries(self, key_to_insert, evaluation, lmp_file, demo_json):
+    def _handle_needs_attention_entries(self, key_to_insert, evaluation, lmp_file, demo_json,
+                                        data_manager):
         """Handle entries that are marked as needing attention.
 
         :param key_to_insert: Key to insert into the demo JSON
         :param evaluation: Evaluation requiring attention
         :param lmp_file: LMP file that is being parsed for
         :param demo_json: JSON for the current demo
+        :param data_manager: Full data manager object
         """
         if evaluation.key == 'category':
             playback_category = None
@@ -215,12 +220,41 @@ class DemoJsonConstructor:
                 elif 'textfile' in sources:
                     textfile_category = possible_value
 
-            # If the playback showed an all secrets category, it's guaranteed to be an
-            # accurate category; it's safe to assume the textfile specified no secrets by
-            # error or because of unavoidable secrets.
+            # If the playback showed an all secrets category, it's guaranteed to be an accurate
+            # category; it's safe to assume the textfile specified no secrets by error or because of
+            # unavoidable secrets. Additionally, if the textfile indicated UV-Speed, but DSDA-Doom
+            # confidently indicated Pacifist, we can assume Pacifist is correct.
             if ((playback_category == 'NoMo 100S' and textfile_category == 'NoMo') or
                     (playback_category == 'NM 100S' and textfile_category == 'NM Speed') or
                     (playback_category == 'Pacifist' and textfile_category == 'UV Speed')):
+                LOGGER.info('Inferred %s category for zip file %s.',
+                            playback_category, self.demo_location)
+                demo_json[key_to_insert] = playback_category
+                return
+
+            kills_eval = data_manager.evaluate('kills')
+            no_kills = (kills_eval.possible_values and kills_eval.possible_values[0] == '0/0' and
+                        not kills_eval.needs_attention)
+            secrets_eval = data_manager.evaluate('secrets')
+            no_secrets = (secrets_eval.possible_values and
+                          secrets_eval.possible_values[0] == '0/0' and
+                          not secrets_eval.needs_attention)
+
+            # If the playback showed a no secrets category, and the map has no secrets, then we take
+            # the playback value as the two categories are identical.
+            if no_secrets and (
+                    (playback_category == 'NoMo' and textfile_category == 'NoMo 100S') or
+                    (playback_category == 'NM Speed' and textfile_category == 'NM 100S')
+            ):
+                LOGGER.info('Inferred %s category for zip file %s.',
+                            playback_category, self.demo_location)
+                demo_json[key_to_insert] = playback_category
+                return
+
+            # If the playback showed UV Speed and textfile showed UV Max, and the map has no kills
+            # or secrets, the two categories are identical so we take the playback value.
+            if (no_secrets and no_kills and
+                    playback_category == 'UV Speed' and textfile_category == 'UV Max'):
                 LOGGER.info('Inferred %s category for zip file %s.',
                             playback_category, self.demo_location)
                 demo_json[key_to_insert] = playback_category

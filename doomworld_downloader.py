@@ -129,8 +129,19 @@ def handle_demos(demos, post_data=None, demo_info_map=None, extra_wad_guess=None
         else:
             raise RuntimeError(f'Demo {demo} provided that is an unsupported filetype.')
 
-        if demo_info_map and demo_info_map.get(demo, {}).get('demo_id'):
-            demo_id = demo_info_map[demo]['demo_id']
+        demo_info = {}
+        if demo_info_map:
+            demo_info = demo_info_map.get(demo, {})
+            if isinstance(demo_info, list):
+                # Only get demo ID from demo info if this is a demo pack.
+                if len(demo_info) > 1:
+                    demo_info = {key: value
+                                 for key, value in demo_info[0].items() if key == 'demo_id'}
+                else:
+                    demo_info = demo_info[0]
+
+        if demo_info.get('demo_id'):
+            demo_id = demo_info['demo_id']
         else:
             demo_id = demo_location.rstrip(os.path.sep).split(os.path.sep)[-2]
 
@@ -140,7 +151,7 @@ def handle_demos(demos, post_data=None, demo_info_map=None, extra_wad_guess=None
             lmp_data = LMPData(lmp_path, recorded_date, demo_info=lmp_demo_info)
             lmp_data.analyze()
             iwad = lmp_data.raw_data.get('iwad', '')
-            demo_info = {
+            demo_info_from_lmp = {
                 'is_solo_net': lmp_data.data.get('is_solo_net', False),
                 'complevel': lmp_data.raw_data.get('complevel'), 'iwad': iwad,
                 'footer_files': lmp_data.raw_data['wad_strings'],
@@ -156,7 +167,7 @@ def handle_demos(demos, post_data=None, demo_info_map=None, extra_wad_guess=None
                 extra_wad_guesses, iwad=iwad
             )
 
-            playback_data = PlaybackData(lmp_path, wad_guesses, demo_info=demo_info)
+            playback_data = PlaybackData(lmp_path, wad_guesses, demo_info=demo_info_from_lmp)
             playback_data.analyze()
             if not CONFIG.skip_playback and playback_data.playback_failed:
                 LOGGER.info('Skipping post with zip %s due to issues with playback.', demo_location)
@@ -176,8 +187,8 @@ def handle_demos(demos, post_data=None, demo_info_map=None, extra_wad_guess=None
             if post_data:
                 post_data.populate_data_manager(data_manager)
                 all_note_strings = all_note_strings.union(post_data.note_strings)
-            if demo_info_map and demo_info_map.get(demo, {}).get('player_list'):
-                data_manager.insert('player_list', demo_info_map[demo]['player_list'],
+            if demo_info.get('player_list'):
+                data_manager.insert('player_list', demo_info['player_list'],
                                     DataManager.CERTAIN, source='extra_info')
 
             demo_json_constructor.parse_data_manager(data_manager, all_note_strings, lmp_file)
@@ -256,7 +267,6 @@ def get_dsda_demos(use_cached_downloads):
     """
     dsda_mode_demos = {}
     dsda_mode_cache = os.path.join(CONFIG.dsda_mode_download_directory, 'demo_info.yaml')
-
     replacement_zips = []
     if CONFIG.dsda_mode_replace_zips:
         replacement_zips = [filename for filename in os.listdir(CONFIG.dsda_mode_replace_zips_dir)]
@@ -265,8 +275,9 @@ def get_dsda_demos(use_cached_downloads):
         with open(dsda_mode_cache) as cache_stream:
             dsda_mode_demos = yaml.safe_load(cache_stream)
 
-        for demo, demo_dict in dsda_mode_demos.items():
-            demo_dict['player_list'] = tuple(demo_dict['player_list'])
+        for demo, demo_list in dsda_mode_demos.items():
+            for demo_dict in demo_list:
+                demo_dict['player_list'] = tuple(demo_dict['player_list'])
     else:
         dsda_page_info = dsda_demo_page_to_json(CONFIG.dsda_mode_page)
         for dsda_row in dsda_page_info:
@@ -304,7 +315,10 @@ def get_dsda_demos(use_cached_downloads):
             demo_info_map = {'player_list': tuple(dsda_row['Player(s)'].text.split('\n')),
                              'demo_id': urlparse(download_link).path.strip('/').split('/')[-2],
                              'dsda_info': dsda_info}
-            dsda_mode_demos[local_path] = demo_info_map
+            if local_path in dsda_mode_demos:
+                dsda_mode_demos[local_path].append(demo_info_map)
+            else:
+                dsda_mode_demos[local_path] = [demo_info_map]
 
         with open(dsda_mode_cache, 'w', encoding='utf-8') as cache_stream:
             yaml.safe_dump(dsda_mode_demos, cache_stream)
