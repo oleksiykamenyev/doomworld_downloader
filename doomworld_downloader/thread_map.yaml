@@ -178,11 +178,6 @@ https://www.doomworld.com/forum/topic/48343-heroes-tales-demos-complevel-4/:
     wad: https://www.dsdarchive.com/wads/ht
   id: '48343'
   name: Heroes' Tales Demos [-complevel 4]
-https://www.doomworld.com/forum/topic/49373-new-twilight-zone-demos/:
-  additional_info:
-    wad: https://www.dsdarchive.com/wads/twzone
-  id: '49373'
-  name: New Twilight Zone demos
 https://www.doomworld.com/forum/topic/49374-claustrophobia-1024-2-demos-thread-complevel-9/:
   additional_info:
     wad: https://www.dsdarchive.com/wads/1024cla2
@@ -328,9 +323,9 @@ https://www.doomworld.com/forum/topic/56108-doom-core-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/dcv
   id: '56108'
   name: Doom Core Demos [-complevel 2]
-https://www.doomworld.com/forum/topic/56348-chillax-demos-complevel-2/:
+"https://www.doomworld.com/forum/topic/56348-chillax-demos-complevel-9/":
   additional_info:
-    wad: https://www.dsdarchive.com/wads/chillax_2013
+    wad: https://www.dsdarchive.com/wads/chillax
   id: '56348'
   name: Chillax Demos [-complevel 2]
 https://www.doomworld.com/forum/topic/57027-1994-tune-up-demos-complevel-9/:
@@ -1278,6 +1273,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/dotw
   id: '129947'
   name: "Dance on the Water demos (-complevel 9)"
+"https://www.doomworld.com/forum/topic/129979-rekkr-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/rekkr
+  id: '129979'
+  name: "Rekkr Demos [-complevel 3]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":

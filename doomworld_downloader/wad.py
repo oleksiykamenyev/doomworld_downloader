@@ -20,7 +20,8 @@ class WadMapInfo:
         'allowed_missed_monsters': [], 'allowed_missed_secrets': [],
         'mark_secret_exit_as_normal': False, 'no_exit': False, 'nomo_map': False,
         'skip_almost_reality': False, 'skip_reality': False, 'tyson_only': False,
-        'skip_reality_categories': None, 'skip_almost_reality_categories': None
+        'skip_reality_categories': None, 'skip_almost_reality_categories': None,
+        'skip_also_pacifist': False
     }
 
     def __init__(self, map_name, map_info_dict, wad_name, fail_on_error=False):
@@ -273,7 +274,7 @@ class Wad:
     # Alternative command lines (e.g., for fixwad cases like "-file tnt tnt31")
     # This is a dict as each playback command line is mapped to an optional note to include in case
     # it is needed. If no note is needed, the cmd line option should be mapped to none.
-    alt_playback_cmd_lines: dict = field(default_factory=dict)
+    alt_playback_cmd_lines: list = field(default_factory=list)
     # DSDA name of the WAD, in cases where the URL doesn't match it
     dsda_name: str = None
     # Whether or not a WAD is commercial (AKA, whether it is possible to download from DSDA)

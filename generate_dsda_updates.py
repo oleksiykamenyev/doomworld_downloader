@@ -58,10 +58,14 @@ def check_demo_for_updates(demo_name, demo_json, demo_dict):
             json_value = demo_json.get(key)
 
         if (test_value or json_value) and test_value != json_value:
-            LOGGER.debug('Difference for demo %s found in key %s!.', demo_name, key)
+            # We shouldn't override video links obtained from DSDA with nothing.
+            if not json_value and test_value and key == 'video_link':
+                pass
+            else:
+                LOGGER.debug('Difference for demo %s found in key %s!.', demo_name, key)
 
-            if not CONFIG.dsda_mode_replace_zips:
-                demo_update[final_key] = demo_json.get(final_key, {})
+                if not CONFIG.dsda_mode_replace_zips:
+                    demo_update[final_key] = demo_json.get(final_key, {})
 
     if CONFIG.dsda_mode_replace_zips or demo_update:
         demo_update['match_details'] = {
@@ -149,9 +153,15 @@ def main():
                     for demo_json in demo_jsons:
                         found_match = True
                         for idx, value in enumerate(match_key):
-                            if demo_json[MATCH_KEY_MAPPING[idx]] != value:
-                                found_match = False
-                                break
+                            json_key = MATCH_KEY_MAPPING[idx]
+                            json_value = demo_json[json_key]
+                            if json_value != value:
+                                # In case of the time, also check if cutting out the tics in the
+                                # JSON value will provide a match; this is possible if a demo on
+                                # DSDA has no tics and the updater added tics.
+                                if json_key == 'time' and json_value.split('.')[0] != value:
+                                    found_match = False
+                                    break
 
                         if found_match:
                             matching_demo_json = demo_json

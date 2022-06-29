@@ -191,7 +191,10 @@ def handle_demos(demos, post_data=None, demo_info_map=None, extra_wad_guess=None
                 data_manager.insert('player_list', demo_info['player_list'],
                                     DataManager.CERTAIN, source='extra_info')
 
-            demo_json_constructor.parse_data_manager(data_manager, all_note_strings, lmp_file)
+            demo_json_constructor.parse_data_manager(
+                data_manager, all_note_strings, lmp_file,
+                extra_data={'stats': playback_data.raw_data.get('stats', {})}
+            )
 
         demo_json_constructor.dump_demo_jsons()
         if zip_extract_dir:

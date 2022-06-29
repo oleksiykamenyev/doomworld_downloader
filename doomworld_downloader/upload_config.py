@@ -360,7 +360,7 @@ def set_up_configs(upload_config_path=None):
             dsda_paginated=wad_dict['dsda_paginated'],
             doomworld_thread=wad_dict['doomworld_thread'],
             playback_cmd_line=wad_dict.get('playback_cmd_line', ''),
-            alt_playback_cmd_lines=wad_dict.get('alt_playback_cmd_lines', {}),
+            alt_playback_cmd_lines=wad_dict.get('alt_playback_cmd_lines', []),
             dsda_name=wad_dict.get('dsda_name'), commercial=wad_dict.get('commercial', False),
             parent=wad_dict.get('parent')
         )

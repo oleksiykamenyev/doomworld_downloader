@@ -71,12 +71,13 @@ class DemoJsonConstructor:
         """Set has_issue flag if there is an issue with the JSON."""
         self.has_issue = True
 
-    def parse_data_manager(self, data_manager, note_strings, lmp_file):
+    def parse_data_manager(self, data_manager, note_strings, lmp_file, extra_data={}):
         """Parse data from data manager.
 
         :param data_manager: Data manager object
         :param note_strings: List of note strings to parse into demo tags
         :param lmp_file: LMP file that is being parsed for
+        :param extra_data: Extra data for verification
         :raises RuntimeError if there are required keys missing in the final demo JSON.
         """
         demo_json = {}
@@ -85,7 +86,7 @@ class DemoJsonConstructor:
             key_to_insert = self.KEY_TO_JSON_MAP.get(evaluation.key, evaluation.key)
             if evaluation.needs_attention:
                 self._handle_needs_attention_entries(key_to_insert, evaluation, lmp_file, demo_json,
-                                                     data_manager)
+                                                     extra_data=extra_data)
             else:
                 value = next(iter(evaluation.possible_values.keys()))
                 if value == NEEDS_ATTENTION_PLACEHOLDER:
@@ -202,14 +203,14 @@ class DemoJsonConstructor:
         return json_path
 
     def _handle_needs_attention_entries(self, key_to_insert, evaluation, lmp_file, demo_json,
-                                        data_manager):
+                                        extra_data={}):
         """Handle entries that are marked as needing attention.
 
         :param key_to_insert: Key to insert into the demo JSON
         :param evaluation: Evaluation requiring attention
         :param lmp_file: LMP file that is being parsed for
         :param demo_json: JSON for the current demo
-        :param data_manager: Full data manager object
+        :param extra_data: Extra data for verification
         """
         if evaluation.key == 'category':
             playback_category = None
@@ -232,13 +233,16 @@ class DemoJsonConstructor:
                 demo_json[key_to_insert] = playback_category
                 return
 
-            kills_eval = data_manager.evaluate('kills')
-            no_kills = (kills_eval.possible_values and kills_eval.possible_values[0] == '0/0' and
-                        not kills_eval.needs_attention)
-            secrets_eval = data_manager.evaluate('secrets')
-            no_secrets = (secrets_eval.possible_values and
-                          secrets_eval.possible_values[0] == '0/0' and
-                          not secrets_eval.needs_attention)
+            no_kills = True
+            no_secrets = True
+            for stats in extra_data['stats']:
+                if stats['kills'] != '0/0':
+                    no_kills = False
+                if stats['secrets'] != '0/0':
+                    no_secrets = False
+
+                if not no_kills and not no_secrets:
+                    break
 
             # If the playback showed a no secrets category, and the map has no secrets, then we take
             # the playback value as the two categories are identical.

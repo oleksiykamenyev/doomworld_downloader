@@ -14,7 +14,7 @@ from .base_parser import BaseData
 from .data_manager import DataManager
 from .dsda import download_wad_from_dsda, get_wad_name_from_dsda_url
 from .upload_config import CONFIG, NEEDS_ATTENTION_PLACEHOLDER
-from .utils import checksum, parse_range, run_cmd, zip_extract, compare_iwad
+from .utils import checksum, parse_range, run_cmd, zip_extract, compare_iwad, get_single_key_value_dict
 
 
 LOGGER = logging.getLogger(__name__)
@@ -43,6 +43,7 @@ class PlaybackData(BaseData):
     LEVELSTAT_LINE_SECRETS_IDX = 9
     LEVELSTAT_LINE_ITEMS_COOP_IDX = 8
     LEVELSTAT_LINE_SECRETS_COOP_IDX = 11
+    PAREN_WITH_OFFSET_RE = re.compile(r'\(\s+')
 
     ALL_SECRETS_CATEGORIES = [
         'UV Max', 'UV Fast', 'UV Respawn', 'NM 100S', 'NoMo 100S', 'SM Max', 'BP Max',
@@ -216,8 +217,7 @@ class PlaybackData(BaseData):
 
             # Prefer the primary playback CMD line; if it doesn't work, look through the
             # alternatives
-            playback_cmd_lines = ([wad_guess.playback_cmd_line] +
-                                  list(wad_guess.alt_playback_cmd_lines.keys()))
+            playback_cmd_lines = [wad_guess.playback_cmd_line] + wad_guess.alt_playback_cmd_lines
             if CONFIG.always_try_solonet:
                 if '-solo-net' not in self.base_command:
                     playback_cmd_lines.extend(
@@ -225,12 +225,17 @@ class PlaybackData(BaseData):
                     )
 
             # TASDooM demos sometimes require manually providing the complevel
-            if self.demo_info.get('source_port') == 'TASDooM' or True:
+            if self.demo_info.get('source_port') == 'TASDooM':
                 playback_cmd_lines.extend(
                     [f'{cmd} -complevel 5' for cmd in playback_cmd_lines]
                 )
 
             for cmd_line in playback_cmd_lines:
+                if isinstance(cmd_line, dict):
+                    cmd_line, cmd_line_info = get_single_key_value_dict(cmd_line)
+                else:
+                    cmd_line_info = None
+
                 command = '{} -iwad commercial/{} {}'.format(self.base_command, wad_guess.iwad,
                                                              cmd_line)
                 try:
@@ -279,14 +284,13 @@ class PlaybackData(BaseData):
                         if int(wad_guess.complevel) != int(complevel):
                             self.note_strings.add('Incompatible')
 
-                    alt_action = wad_guess.alt_playback_cmd_lines.get(cmd_line)
-                    if alt_action:
-                        if isinstance(alt_action, dict):
-                            wad_update = alt_action.get('update_wad')
+                    if cmd_line_info:
+                        if isinstance(cmd_line_info, dict):
+                            wad_update = cmd_line_info.get('update_wad')
                             if wad_update:
                                 self.data['wad'] = wad_update
                         else:
-                            self.note_strings.add(alt_action)
+                            self.note_strings.add(cmd_line_info)
 
                     if '-complevel 5' in cmd_line:
                         self.note_strings.add('Plays back with forced -complevel 5')
@@ -364,10 +368,30 @@ class PlaybackData(BaseData):
             if not tyson_only and self.data['category'] == 'UV Max':
                 self.data['category'] = 'Tyson'
 
+        skip_also_pacifist = map_info.get_single_key_for_map('skip_also_pacifist', skill=skill,
+                                                             game_mode=game_mode)
         # If a run is not UV-Speed/Pacifist or on nomonsters, add tag for Also Pacifist
-        if (self.raw_data.get('pacifist', False) and not self.raw_data.get('nomonsters', False) and
-                self.data['category'] not in ['Pacifist', 'Stroller', 'UV Speed']):
+        if not skip_also_pacifist and (self.raw_data.get('pacifist', False)
+                                       and not self.raw_data.get('nomonsters', False) and
+                                       self.data['category'] not in ['Pacifist', 'Stroller',
+                                                                     'UV Speed']):
             self.note_strings.add('Also Pacifist')
+
+        # Jumpwad has special rules for categories:
+        #   - Pacifist doesn't exist.
+        #   - UV-Max requires items.
+        if self.data['wad'] == 'jumpwad':
+            all_items = True
+            for stats in self.raw_data['stats']:
+                items_gotten, total_items = stats['items'].split('/')
+                if items_gotten != total_items:
+                    all_items = False
+                    break
+
+            if not all_items and self.data['category'] == 'UV Max':
+                self.data['category'] = 'UV Speed'
+            elif self.data['category'] == 'Pacifist':
+                self.data['category'] = 'UV Speed'
 
     def _parse_analysis(self):
         """Parse analysis info.
@@ -441,19 +465,11 @@ class PlaybackData(BaseData):
             time = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_TIME_IDX]
             self.data['time'] = time
             self.data['levelstat'] = time
-            self.data['kills'] = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_KILLS_IDX]
-            if len(levelstat_line_split) == 10:
-                self.data['items'] = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_ITEMS_IDX]
-                self.data['secrets'] = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_SECRETS_IDX]
-            elif len(levelstat_line_split) == 13:
-                self.data['items'] = levelstat_line_split[
-                    PlaybackData.LEVELSTAT_LINE_ITEMS_COOP_IDX
-                ]
-                self.data['secrets'] = levelstat_line_split[
-                    PlaybackData.LEVELSTAT_LINE_SECRETS_COOP_IDX
-                ]
-            else:
-                raise RuntimeError(f'Unrecognized levelstat line format: {levelstat[0]}.')
+            stats_dict = PlaybackData._get_stats_from_levelstat_line(levelstat[0])
+            self.raw_data['stats'] = [stats_dict]
+            self.data['kills'] = stats_dict['kills']
+            self.data['items'] = stats_dict['items']
+            self.data['secrets'] = stats_dict['secrets']
         else:
             self.data['secret_exit'] = False
             # Final time will be printed in parens on the last line of the levelstat.
@@ -467,12 +483,41 @@ class PlaybackData(BaseData):
             )
 
             map_list = []
+            self.raw_data['stats'] = []
             for line in levelstat:
                 level = self._get_level(line.split(), wad)
                 map_list.append(level.rstrip('s'))
+                self.raw_data['stats'].append(PlaybackData._get_stats_from_levelstat_line(line))
 
             self._detect_movie_type(wad, map_list)
             self.raw_data['affected_levels'] = map_list
+
+    @staticmethod
+    def _get_stats_from_levelstat_line(levelstat_line):
+        """Get kills/items/secrets stats from levelstat line.
+
+        :param levelstat_line: Levelstat line
+        :return: Levelstat line stats as a dictionary
+        """
+        stats_dict = {}
+        # For movie runs, the open parentheses get offset with whitespace, which messes with
+        # splitting the line, so we need to remove the whitespace before splitting.
+        levelstat_line = PlaybackData.PAREN_WITH_OFFSET_RE.sub('(', levelstat_line)
+        levelstat_line_split = levelstat_line.split()
+        stats_dict['kills'] = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_KILLS_IDX]
+        levelstat_split_len = len(levelstat_line_split)
+        if levelstat_split_len == 10:
+            stats_dict['items'] = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_ITEMS_IDX]
+            stats_dict['secrets'] = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_SECRETS_IDX]
+        elif levelstat_split_len == 13:
+            stats_dict['items'] = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_ITEMS_COOP_IDX]
+            stats_dict['secrets'] = levelstat_line_split[
+                PlaybackData.LEVELSTAT_LINE_SECRETS_COOP_IDX
+            ]
+        else:
+            raise RuntimeError(f'Unrecognized levelstat line format: {levelstat_line}.')
+
+        return stats_dict
 
     def _get_level(self, levelstat_line_split, wad):
         """Get level from levelstat split into lines.
