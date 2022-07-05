@@ -169,3 +169,4 @@ doomworld_downloader/wad_parse/idgames_api/themes/
 doomworld_downloader/wad_parse/idgames_api/*.json
 doomworld_downloader/wad_parse/idgames_api/*.zip
 wad_upload_config.yaml
+record_index_info.txt

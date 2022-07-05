@@ -1278,6 +1278,21 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/rekkr
   id: '129979'
   name: "Rekkr Demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/130104-slugfest-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/slugfest
+  id: '130104'
+  name: "Slugfest demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/130105-dsnacks-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/dsnacks
+  id: '130105'
+  name: "dsnacks demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/130106-ch-retro-episode-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/retroeps
+  id: '130106'
+  name: "CH Retro Episode demos [-complevel 3]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
