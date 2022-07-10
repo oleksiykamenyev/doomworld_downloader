@@ -103,7 +103,11 @@ def parse_thread_list(page_number):
     thread_elems = soup.find_all('li', class_='ipsDataItem')
     threads = []
     for thread in thread_elems:
-        id = thread['data-rowid']
+        # ID will be null for the subforum at the top of the page.
+        id = thread.get('data-rowid')
+        if not id:
+            continue
+
         if id in THREAD_MAP_KEYED_ON_ID:
             if THREAD_MAP_KEYED_ON_ID[id].get('additional_info', {}).get('ignore', False):
                 continue

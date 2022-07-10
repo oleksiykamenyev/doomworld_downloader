@@ -128,7 +128,7 @@ https://www.doomworld.com/forum/topic/39179-heretic-demos-non-demopack-and-nm/:
     wad: https://www.dsdarchive.com/wads/heretic
   id: '39179'
   name: Heretic demos (non-demopack and NM)
-https://www.doomworld.com/forum/topic/39285-origwad-speed-running/:
+"https://www.doomworld.com/forum/topic/39285-origwad-demos-complevel-3/":
   additional_info:
     wad: https://www.dsdarchive.com/wads/origwad
   id: '39285'
@@ -548,11 +548,6 @@ https://www.doomworld.com/forum/topic/70308-resurgence-demos-complevel-9/:
     wad: https://www.dsdarchive.com/wads/resurge
   id: '70308'
   name: Resurgence demos [-complevel 9]
-https://www.doomworld.com/forum/topic/70835-switcheroom-demos-complevel-3/:
-  additional_info:
-    wad: https://www.dsdarchive.com/wads/swtchrm
-  id: '70835'
-  name: Switcheroom demos [-complevel 3]
 https://www.doomworld.com/forum/topic/70836-going-down-demos-complevel-9/:
   additional_info:
     wad: https://www.dsdarchive.com/wads/gd
@@ -1293,6 +1288,16 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/retroeps
   id: '130106'
   name: "CH Retro Episode demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/130216-the-10x10-project-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/10x10
+  id: '130216'
+  name: "The 10x10 Project demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/130206-xerxesia-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/xerxesia
+  id: '130206'
+  name: "Xerxesia Demos [-complevel 21]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -1483,6 +1488,13 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/chex3
   id: '73086'
   name: Chex Quest series demos [-complevel 3]
+"https://www.doomworld.com/forum/topic/70835-switcheroom-and-switcheroom-2-demos-complevel-3-and-2/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/swtchrm
+      - https://www.dsdarchive.com/wads/swtchrm2
+  id: '70835'
+  name: Switcheroom and Switcheroom 2 demos [-complevel 3 and 2]
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
