@@ -3,11 +3,6 @@
 # {'additional_info': {'wad': 'wad', 'wads': 'wads', 'solo-net': 'solo-net', 'category': 'category', 'tas_only': 'tas_only', 'note': 'note', 'source_port': 'source_port', 'ignore': 'ignore', 'nomonsters': 'nomonsters'}, 'id': 'id', 'name': 'name'}
 
 # Single WAD threads
-https://www.doomworld.com/forum/topic/100975-sparta-ii-project-vesuvius-demos-complevel-9/:
-  additional_info:
-    wad: https://www.dsdarchive.com/wads/s2pv
-  id: '100975'
-  name: Sparta II - Project Vesuvius demos [-complevel 9]
 https://www.doomworld.com/forum/topic/101526-slaughterfest-2013-complevel-9/:
   additional_info:
     wad: https://www.dsdarchive.com/wads/sf3
@@ -1298,6 +1293,16 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/xerxesia
   id: '130206'
   name: "Xerxesia Demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/130330-100wave-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/100wave
+  id: '130330'
+  name: "100wave demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/130292-earth-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/eartg
+  id: '130292'
+  name: "Earth demos [-complevel 2]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -1495,6 +1500,29 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/swtchrm2
   id: '70835'
   name: Switcheroom and Switcheroom 2 demos [-complevel 3 and 2]
+"https://www.doomworld.com/forum/topic/130247-the-classic-episode-1-2-demos-complevel-3/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/class_ep
+      - https://www.dsdarchive.com/wads/class_e2
+  id: '130247'
+  name: The Classic Episode 1 + 2 demos [-complevel 3]
+"https://www.doomworld.com/forum/topic/100975-sparta-and-sparta-ii-project-vesuvius-demos-complevel-2-9/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/sparta
+      - https://www.dsdarchive.com/wads/s2pv
+  id: '100975'
+  name: Sparta and Sparta II - Project Vesuvius demos [-complevel 2 9]
+"https://www.doomworld.com/forum/topic/130293-death-tormention-trilogy-demos-complevel-3-and-9/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/pe4m_all
+      - https://www.dsdarchive.com/wads/pe4_dt2
+      - https://www.dsdarchive.com/wads/pe4_dt3
+      - https://www.dsdarchive.com/wads/dtpack
+  id: '130293'
+  name: Death Tormention Trilogy demos [-complevel 3 and 9]
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
