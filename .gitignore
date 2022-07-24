@@ -165,6 +165,7 @@ demo_pack_tmp/
 doomworld_downloader/wad_parse/idgames_api/completed_jsons/
 doomworld_downloader/wad_parse/idgames_api/deathmatch/
 doomworld_downloader/wad_parse/idgames_api/levels/
+doomworld_downloader/wad_parse/idgames_api/music/
 doomworld_downloader/wad_parse/idgames_api/themes/
 doomworld_downloader/wad_parse/idgames_api/*.json
 doomworld_downloader/wad_parse/idgames_api/*.zip

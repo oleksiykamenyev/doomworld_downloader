@@ -98,7 +98,7 @@ def main():
                 try:
                     local_wad_location = zip_extract(wad_download, overwrite=True)
                 except NotImplementedError:
-                    LOGGER.error('Issue extracting zip for WAD %s.', cur_wad_url)
+                    LOGGER.exception('Issue extracting zip for WAD %s.', cur_wad_url)
                     local_wad_location = None
                     new_wad_map_lines.append(line)
                     continue

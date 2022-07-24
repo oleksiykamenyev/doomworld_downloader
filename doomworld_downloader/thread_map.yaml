@@ -83,11 +83,6 @@ https://www.doomworld.com/forum/topic/35012-1024-demos/:
     wad: https://www.dsdarchive.com/wads/1024
   id: '35012'
   name: 1024 demos
-https://www.doomworld.com/forum/topic/35633-revolution-demos/:
-  additional_info:
-    wad: https://www.dsdarchive.com/wads/tvr
-  id: '35633'
-  name: Revolution! demos
 "https://www.doomworld.com/forum/topic/129022-extremal-doom-demos-complevel-2/":
   additional_info:
     wad: https://www.dsdarchive.com/wads/extremal
@@ -1303,6 +1298,16 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/eartg
   id: '130292'
   name: "Earth demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/130436-realm-of-demonology-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/rod
+  id: '130436'
+  name: "Realm of Demonology demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/130453-sacrament-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/sacrment
+  id: '130453'
+  name: "Sacrament demos [-complevel 2]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -1523,6 +1528,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/dtpack
   id: '130293'
   name: Death Tormention Trilogy demos [-complevel 3 and 9]
+"https://www.doomworld.com/forum/topic/35633-revolution-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/tvr
+  id: '35633'
+  name: Revolution! demos [-complevel 2]
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":

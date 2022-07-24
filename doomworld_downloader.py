@@ -36,6 +36,7 @@ from doomworld_downloader.wad_guesser import get_wad_guesses
 DOWNLOAD_INFO_FILE = 'doomworld_downloader/current_download.txt'
 HEADER_FILENAME_RE = re.compile(r'filename="(.+)"')
 DATETIME_FORMAT = 'YYYY'
+ZIP_RE = re.compile(r'^.*\.zip$', re.IGNORECASE)
 
 LOGGER = logging.getLogger(__name__)
 
@@ -55,7 +56,7 @@ def handle_demos(demos, post_data=None, demo_info_map=None, extra_wad_guess=None
         lmp_demo_info = {}
         is_demo_pack = False
         textfile_data = None
-        if demo.endswith('.zip'):
+        if ZIP_RE.match(demo):
             # Rename zip to account for any whitespace in the filename
             download_dir = os.path.dirname(demo)
             demo_location_filename = get_filename_no_ext(demo).replace(' ', '_')
