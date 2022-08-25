@@ -65,6 +65,7 @@ def get_download_filename(response, default_filename=None):
         if default_filename:
             return default_filename
         else:
+            LOGGER.error('Response headers: %s.', response.headers)
             raise RuntimeError(
                 'Could not find filename from HTML response {}.'.format(response.url)
             )

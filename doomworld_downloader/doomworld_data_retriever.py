@@ -87,7 +87,19 @@ def get_links(link_elems, extract_link=False):
         if not link_url.startswith('http'):
             link_url = 'https:' + link_url
         # Key on URL so that links with the same text can be kept track of.
-        links[link_url] = link_elem.getText().strip()
+        link_text = link_elem.getText().strip()
+        # A silly way to detect filenames in URLs, just so we have a default name for the download.
+        # Since Doomworld attachments do not have the filename in the URL, this should probably only
+        # ever return stuff that doesn't need to be uploaded.
+        link_filename = link_url.split('/')[-1]
+        if link_text:
+            link_name = link_text
+        elif '.' in link_filename:
+            link_name = link_filename
+        else:
+            link_name = ''
+
+        links[link_url] = link_name
         if extract_link:
             link_elem.extract()
     return links

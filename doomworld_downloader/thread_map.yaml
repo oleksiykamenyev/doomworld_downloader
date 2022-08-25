@@ -1308,6 +1308,46 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/sacrment
   id: '130453'
   name: "Sacrament demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/130492-the-brotherhood-of-ruin-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ruinbros
+  id: '130492'
+  name: "The Brotherhood of Ruin demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/130594-one-bloody-night-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/bldnight
+  id: '130594'
+  name: "One Bloody Night demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/130663-jiffybag-demos-complevel-09/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/jiffybag
+  id: '130663'
+  name: "Jiffybag demos [-complevel 09]"
+"https://www.doomworld.com/forum/topic/130718-the-box-of-a-thousand-demons-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/boa2kd
+  id: '130718'
+  name: "The Box of a Thousand Demons demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/130858-100-minutes-of-vr-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/100minvr
+  id: '130858'
+  name: "100 Minutes of /vr/ demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/130927-32-in-64kb-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/32in64k
+  id: '130927'
+  name: "32 in 64kb demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/130950-30minmap-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/30minmap
+  id: '130950'
+  name: "30minmap demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/130948-40-minuter-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/40minutr
+  id: '130948'
+  name: "40 minuter demos [-complevel 2]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -1430,6 +1470,7 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wads:
     - https://www.dsdarchive.com/wads/2048vr_v1_6
     - https://www.dsdarchive.com/wads/2048vr_v1_6g
+    - https://www.dsdarchive.com/wads/2048ex_v1_4
   id: '117894'
   name: "2048 Units of /vr/ demos [-complevel 9 (clean) -complevel 11 (dehacked)]"
 "https://www.doomworld.com/forum/topic/95228-experiencing-nirvana-demos-complevel-9/":
@@ -1530,9 +1571,18 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
   name: Death Tormention Trilogy demos [-complevel 3 and 9]
 "https://www.doomworld.com/forum/topic/35633-revolution-demos-complevel-2/":
   additional_info:
-    wad: https://www.dsdarchive.com/wads/tvr
+    wads:
+      - https://www.dsdarchive.com/wads/tvr
+      - https://www.dsdarchive.com/wads/tvrmidi
   id: '35633'
   name: Revolution! demos [-complevel 2]
+"https://www.doomworld.com/forum/topic/130493-scientist-scientist-2-demos-complevel-2/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/sci
+      - https://www.dsdarchive.com/wads/sci2
+  id: '130493'
+  name: Scientist + Scientist 2 demos [-complevel 2]
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
@@ -1770,7 +1820,10 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/dbp36
       - https://www.dsdarchive.com/wads/dbp37_augzen
       - https://www.dsdarchive.com/wads/dbp_39
+      - https://www.dsdarchive.com/wads/dbp40rc1
       - https://www.dsdarchive.com/wads/dbp_45
+      - https://www.dsdarchive.com/wads/dbp_47
+      - https://www.dsdarchive.com/wads/dbp50
 "https://www.doomworld.com/forum/topic/127478-mayhem-demo-thread-complevel-9/":
   id: "127478"
   name: MAYhem demo thread [-complevel 9]
