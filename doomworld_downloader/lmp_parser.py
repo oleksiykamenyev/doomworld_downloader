@@ -133,7 +133,12 @@ class LMPData(BaseData):
                 current_byte = lmp_bytes.read(1)
                 while current_byte != b'\x80':
                     footer_chars.append(current_byte)
-                    lmp_bytes.seek(-2, 1)  # Go back one byte
+                    try:
+                        lmp_bytes.seek(-2, 1)  # Go back one byte
+                    except OSError:
+                        LOGGER.exception('LMP %s had issue extracting footer.', self.lmp_path)
+                        break
+
                     current_byte = lmp_bytes.read(1)
 
         self._footer = b''.join(footer_chars[::-1]).decode(errors='ignore')

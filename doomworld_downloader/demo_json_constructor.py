@@ -148,7 +148,7 @@ class DemoJsonConstructor:
                 # think this should work.
                 lmp_files = sorted(lmp_files, key=lambda lmp: self.demo_jsons[lmp]['recorded_at'])
                 lmp_file_kept = lmp_files[0]
-                for lmp_file in lmp_files[:1]:
+                for lmp_file in lmp_files[1:]:
                     LOGGER.warning('Pruning LMP file %s in favor of matching category LMP %s.',
                                    lmp_file, lmp_file_kept)
                     self.demo_jsons.pop(lmp_file)

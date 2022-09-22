@@ -1348,6 +1348,26 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/40minutr
   id: '130948'
   name: "40 minuter demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/131004-plutonia-revisited-2-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/prcp2
+  id: '131004'
+  name: "Plutonia Revisited 2 (-complevel 9)"
+"https://www.doomworld.com/forum/topic/131352-capybara-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/capybara
+  id: '131352'
+  name: "Capybara demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/131085-nosp-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/nosp
+  id: '131085'
+  name: "NoSp demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/131022-hffm-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/hardfunv4
+  id: '131022'
+  name: "HFFM demos [-complevel 9]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -1816,6 +1836,8 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/dbp25_dbd
       - https://www.dsdarchive.com/wads/dbp26_tcodc
       - https://www.dsdarchive.com/wads/dbp27
+      - https://www.dsdarchive.com/wads/dbp_29
+      - https://www.dsdarchive.com/wads/dbp30
       - https://www.dsdarchive.com/wads/dbp_34
       - https://www.dsdarchive.com/wads/dbp36
       - https://www.dsdarchive.com/wads/dbp37_augzen
@@ -2008,6 +2030,7 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/cternity
       - https://www.dsdarchive.com/wads/havitetty
       - https://www.dsdarchive.com/wads/protosis
+      - https://www.dsdarchive.com/wads/10ambreakm
 "https://www.doomworld.com/forum/topic/128761-bprd-wads-demos-complevel-2-and-9/":
   id: "128761"
   name: B.P.R.D. Wads Demos [-complevel 2 and 9]
