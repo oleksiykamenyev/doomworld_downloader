@@ -48,9 +48,6 @@ class TextfileData(BaseData):
         re.compile(r'(UV)?[ -_]?No\s*mo(nsters)?[ -_]?100s?', re.IGNORECASE): 'NoMo 100S',
         re.compile(r'(UV)?[ -_]?Stroller', re.IGNORECASE): 'Stroller'
     }
-    NOTE_REGEXES = {
-        re.compile(r'(UV|NM)?[ -_]?Reality', re.IGNORECASE): 'Also Reality'
-    }
     PORT_REGEXES = {
         # Chocolate family
         # Chocolate Doom
@@ -264,11 +261,6 @@ class TextfileData(BaseData):
         else:
             LOGGER.info('Could not parse source port from textfile %s.', self.textfile_path)
             self.data.pop('source_port')
-
-        for note_regex, note in TextfileData.NOTE_REGEXES.items():
-            match = note_regex.search(self._raw_textfile)
-            if match:
-                self.note_strings.add(note)
 
     @staticmethod
     def _parse_category(text_str):

@@ -10,14 +10,15 @@ dsda_api_directory = d:\\MyStuff\\dsda3\\dsda-r-api-client
 demo_download_directory = demos_for_upload
 wad_download_directory = dsda_wads
 
-download_type = date-based|ad-hoc|demo_pack|dsda
+upload_type = date-based|ad-hoc|demo_pack|dsda
 ignore_cache = FALSE|true
 
 skip_playback = TRUE|false
-skip_playback_for_demo_packs = FALSE|true
 
 demo_date_cutoff = 2021-01-01T00:00:00Z
 always_try_solonet = FALSE|true
+add_lmp_metadata = true|FALSE
+run_through_all_cmd_line_options = true|FALSE
 
 [demo_pack]
 
@@ -25,11 +26,14 @@ input_folder = d:\\demo_pack_input
 output_folder = d:\\demo_pack_output
 user_map = doomworld_downloader\\user_map.yaml
 additional_info_map = doomworld_downloader\\additional_pack_info.yaml
+demo_pack_name = demo_pack_name
 
 [dsda_mode]
 
 page = https://www.dsdarchive.com/wads/d5da2
+demo_date_cutoff = 1998-01-01T00:00:00Z
 download_directory = dsda_demos
 sync_only = true|FALSE
 replace_zips = true|FALSE
 replace_zips_dir = replace_zips
+additional_info_map = doomworld_downloader\\additional_demo_info.yaml

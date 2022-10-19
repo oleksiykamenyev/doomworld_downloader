@@ -21,6 +21,10 @@ from bs4 import BeautifulSoup
 
 from zipfile import ZipFile
 
+# LMP: Standard demo file format (vanilla, Boom, MBF, (G)ZDoom, etc.)
+# CDM: Doomsday demo format
+# ZDD: ZDaemon new-style demo format
+DEMO_FILE_TYPES = ['cdm', 'lmp', 'zdd']
 
 HTTP_RE = re.compile(r'^https?://.+')
 HEADER_FILENAME_RE = re.compile(r'filename="(.+)"')
@@ -438,9 +442,4 @@ def is_demo_filename(demo):
     :param demo: Demo to check
     :return: True if provided demo has a supported filename, False otherwise
     """
-    demo = demo.lower()
-
-    # LMP: Standard demo file format (vanilla, Boom, MBF, (G)ZDoom, etc.)
-    # CDM: Doomsday demo format
-    # ZDD: ZDaemon new-style demo format
-    return demo.endswith('.lmp') or demo.endswith('.cdm') or demo.endswith('.zdd')
+    return os.path.splitext(demo.lower())[1].strip('.') in DEMO_FILE_TYPES

@@ -42,8 +42,8 @@ class LMPData(BaseData):
     )
 
     # Note: trying to record with complevels 10 (LxDoom 1.4.x) or 12 (PrBoom 2.03beta) will crash
-    # PrBoom+. Complevel -1 is identical to 17, however, -1 is more consistent, as hypothetical
-    # future PrBoom+ versions that require compatibility with an older PrBoom+ would presumable use
+    # PrBoom+. Complevel -1 is identical to 17, however, 17 is more consistent, as hypothetical
+    # future PrBoom+ versions that require compatibility with an older PrBoom+ would presumably use
     # the next complevel 17 for that. Pre-Boom complevels aren't included as they are present in the
     # footer.
     VERSION_COMPLEVEL_MAP = {
@@ -55,7 +55,7 @@ class LMPData(BaseData):
     #       basically, source_port could be guessed fuzzily here or perfectly, and most of the time,
     #       it is the latter, but might be nice to account for the former
     #       Maybe an override certainty dictionary is a way to do this?
-    CERTAIN_KEYS = ['is_solo_net', 'num_players', 'recorded_at', 'source_port']
+    CERTAIN_KEYS = ['is_solo_net', 'num_players', 'source_port']
     POSSIBLE_KEYS = ['is_tas']
 
     ADDITIONAL_IWADS = ['heretic', 'hexen']
@@ -64,7 +64,7 @@ class LMPData(BaseData):
     DEMO_DATE_CUTOFF = datetime.strptime(CONFIG.demo_date_cutoff, '%Y-%m-%dT%H:%M:%SZ')
     FUTURE_CUTOFF = datetime.today() + timedelta(days=1)
 
-    def __init__(self, lmp_path, recorded_date, demo_info=None):
+    def __init__(self, lmp_path, textfile_iwad=None):
         """Initialize LMP data class.
 
         :param lmp_path: Path to the LMP file
@@ -72,16 +72,12 @@ class LMPData(BaseData):
         """
         super().__init__()
         self.lmp_path = lmp_path
-        dsda_date = convert_datetime_to_dsda_date(recorded_date)
-        if not LMPData.DEMO_DATE_CUTOFF < recorded_date < LMPData.FUTURE_CUTOFF:
-            LOGGER.error('Found possibly incorrect date, setting to UNKNOWN: "%s".', dsda_date)
-            dsda_date = 'UNKNOWN'
-        self.data = {'num_players': 0, 'recorded_at': dsda_date}
+        self.data = {'num_players': 0}
         self.note_strings = set()
         self.raw_data = {'player_classes': [], 'wad_strings': []}
         self._header = None
         self._footer = None
-        self.demo_info = demo_info if demo_info else {}
+        self.textfile_iwad = textfile_iwad
 
     def analyze(self):
         """Analyze info provided to post parser."""
@@ -155,11 +151,10 @@ class LMPData(BaseData):
                         cpe, self.lmp_path)
 
         if not parse_lmp_out or 'Unknown engine' in parse_lmp_out:
-            upstream_iwad = self.demo_info.get('iwad')
             # Default to Heretic which receives more demos than Hexen
-            engine_option = 'hexen'
+            engine_option = 'heretic'
             for additional_iwad in LMPData.ADDITIONAL_IWADS:
-                if compare_iwad(upstream_iwad, additional_iwad):
+                if compare_iwad(self.textfile_iwad, additional_iwad):
                     engine_option = additional_iwad
                     break
 

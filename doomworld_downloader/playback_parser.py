@@ -8,13 +8,16 @@ import re
 import subprocess
 
 from collections import Counter
+from dataclasses import dataclass, field
 from shutil import copyfile, rmtree
 
 from .base_parser import BaseData
 from .data_manager import DataManager
 from .dsda import download_wad_from_dsda, get_wad_name_from_dsda_url
 from .upload_config import CONFIG, NEEDS_ATTENTION_PLACEHOLDER
-from .utils import checksum, parse_range, run_cmd, zip_extract, compare_iwad, get_single_key_value_dict
+from .utils import checksum, parse_range, run_cmd, zip_extract, compare_iwad, \
+    get_single_key_value_dict
+from .wad import Wad
 
 
 LOGGER = logging.getLogger(__name__)
@@ -99,6 +102,8 @@ class PlaybackData(BaseData):
         self.raw_data = {}
         self.note_strings = set()
 
+        self._demo_playback = None
+
     def analyze(self):
         """Analyze info provided to playback parser."""
         self._playback()
@@ -116,7 +121,8 @@ class PlaybackData(BaseData):
             else:
                 raise ValueError('Unrecognized key found in data dictionary: {}.'.format(key))
 
-    def _cleanup(self):
+    @staticmethod
+    def _cleanup():
         """Cleanup analysis and levelstat files, if they exist."""
         try:
             os.remove(PlaybackData.ANALYSIS_FILENAME)
@@ -129,13 +135,8 @@ class PlaybackData(BaseData):
         if not self.demo_info:
             return
 
-        # This may not always be necessary, as later PrBoom+ and DSDA-Doom demos have -solo-net in
-        # the footer, but this is necessary for older demos.
-        is_solo_net = self.demo_info.get('is_solo_net', False)
-        if is_solo_net:
-            self.base_command = '{} -solo-net'.format(self.base_command)
         num_players = self.demo_info.get('num_players')
-        if is_solo_net or (num_players and num_players > 1):
+        if num_players and num_players > 1:
             self.demo_info['game_mode'] = 'coop'
         else:
             self.demo_info['game_mode'] = 'single_player'
@@ -206,7 +207,6 @@ class PlaybackData(BaseData):
 
         :raises RuntimeError if the WAD could not be guessed for this demo
         """
-        wad_guessed = False
         for url, _ in self.wad_guesses.most_common():
             wad_guess = self.url_to_wad[url]
             if not wad_guess.commercial:
@@ -224,7 +224,6 @@ class PlaybackData(BaseData):
                     playback_cmd_lines.extend(
                         [f'{cmd} -solo-net' for cmd in playback_cmd_lines]
                     )
-
             # TASDooM demos sometimes require manually providing the complevel
             if self.demo_info.get('source_port') == 'TASDooM':
                 playback_cmd_lines.extend(
@@ -234,6 +233,8 @@ class PlaybackData(BaseData):
             for cmd_line in playback_cmd_lines:
                 if isinstance(cmd_line, dict):
                     cmd_line, cmd_line_info = get_single_key_value_dict(cmd_line)
+                    if isinstance(cmd_line_info, str):
+                        cmd_line_info = {'note': cmd_line_info}
                 else:
                     cmd_line_info = None
 
@@ -245,76 +246,82 @@ class PlaybackData(BaseData):
                     LOGGER.warning('Failed to play back demo %s.', self.lmp_path)
                     LOGGER.debug('Error message: %s.', e)
                 # Technically, there could be edge cases where a levelstat could be generated even
-                # if the wrong WAD is used (e.g., thissuxx). I'm not sure if there's any reasonable
-                # way to fix this, though.
-                # TODO: Perhaps a hardcoded exception list for when this guess might not be trusted
-                #       is needed (depends how likely the wrong guess is). Alternatively, perhaps
-                #       check against all possible command lines and try to infer which one is
-                #       correct by taking the best-seeming one?
-                # TODO: Handle maps with no exits (requires DSDA-Doom fix)
+                # if the wrong WAD is used (e.g., thissuxx map 1 will exit on pretty much any demo
+                # that is long enough). If the run_through_all_cmd_line_options option is on, such
+                # cases will be decided based on which playback completed the most maps. Otherwise,
+                # we will just take the first playback that succeeds.
                 if os.path.isfile(PlaybackData.LEVELSTAT_FILENAME):
-                    wad_guessed = True
-                    wad_files = [os.path.basename(wad_file.lower())
-                                 for wad_file in wad_guess.files.keys()]
-                    for footer_file in self.demo_info.get('footer_files', []):
-                        footer_lower = os.path.basename(footer_file.lower())
-                        footer_ext = os.path.splitext(footer_lower)[1]
-                        if not footer_ext:
-                            footer_lower = f'{footer_lower}.wad'
-                            footer_ext = '.wad'
-                        if (footer_lower not in wad_files and
-                                footer_lower != f'{wad_guess.iwad}.wad' and
-                                footer_lower not in PlaybackData.ALLOWED_FOOTER_FILES and
-                                footer_ext in PlaybackData.FOOTER_WAD_EXTENSIONS):
-                            LOGGER.error('Unexpected file %s found in footer for WAD %s.',
-                                         footer_file, wad_guess.name)
-                            self.playback_failed = True
-                    if self.playback_failed:
-                        break
+                    with open(PlaybackData.LEVELSTAT_FILENAME) as levelstat_strm:
+                        cur_levelstat = levelstat_strm.read()
+                    with open(PlaybackData.ANALYSIS_FILENAME) as analysis_strm:
+                        cur_analysis = analysis_strm.read()
 
-                    if '-solo-net' in command:
-                        self.data['is_solo_net'] = True
+                    cur_demo_playback = DemoPlayback(wad_guess, command, cur_levelstat,
+                                                     cur_analysis, cmd_line_info=cmd_line_info)
+                    if not self._demo_playback or self._demo_playback < cur_demo_playback:
+                        self._demo_playback = cur_demo_playback
 
-                    dsda_wad_name = (
-                        wad_guess.dsda_name
-                        if wad_guess.dsda_name else get_wad_name_from_dsda_url(wad_guess.dsda_url)
-                    )
-                    self.data['wad'] = dsda_wad_name
-                    self._parse_analysis()
-                    self._parse_levelstat(wad_guess)
-                    self._parse_raw_data(wad_guess)
-                    complevel = self.demo_info.get('complevel')
-                    if complevel:
-                        if int(wad_guess.complevel) != int(complevel):
-                            self.note_strings.add('Incompatible')
+                    self._cleanup()
 
-                    if cmd_line_info:
-                        if isinstance(cmd_line_info, dict):
-                            wad_update = cmd_line_info.get('update_wad')
-                            if wad_update:
-                                self.data['wad'] = wad_update
-                        else:
-                            self.note_strings.add(cmd_line_info)
-
-                    if '-complevel 5' in cmd_line:
-                        self.note_strings.add('Plays back with forced -complevel 5')
-
+                if not CONFIG.run_through_all_cmd_line_options:
                     break
 
-            if wad_guessed or self.playback_failed:
+            if not CONFIG.run_through_all_cmd_line_options and self._demo_playback:
                 break
 
-        if not wad_guessed:
+        if self._demo_playback:
+            wad_files = [os.path.basename(wad_file.lower())
+                         for wad_file in self._demo_playback.wad.files.keys()]
+            for footer_file in self.demo_info.get('footer_files', []):
+                footer_lower = os.path.basename(footer_file.lower())
+                footer_ext = os.path.splitext(footer_lower)[1]
+                if not footer_ext:
+                    footer_lower = f'{footer_lower}.wad'
+                    footer_ext = '.wad'
+                if (footer_lower not in wad_files and
+                        footer_lower != f'{self._demo_playback.wad.iwad}.wad' and
+                        footer_lower not in PlaybackData.ALLOWED_FOOTER_FILES and
+                        footer_ext in PlaybackData.FOOTER_WAD_EXTENSIONS):
+                    LOGGER.error('Unexpected file %s found in footer for WAD %s.',
+                                 footer_file, self._demo_playback.wad.name)
+                    self.playback_failed = True
+
+            if not self.playback_failed:
+                if '-solo-net' in self._demo_playback.cmd:
+                    self.demo_info['game_mode'] = 'coop'
+                    self.data['is_solo_net'] = True
+                    self.note_strings.add('Plays back with forced -solo-net')
+                if '-complevel 5' in self._demo_playback.cmd:
+                    self.note_strings.add('Plays back with forced -complevel 5')
+
+                dsda_wad_name = (self._demo_playback.wad.dsda_name
+                                 if self._demo_playback.wad.dsda_name
+                                 else get_wad_name_from_dsda_url(self._demo_playback.wad.dsda_url))
+                self.data['wad'] = dsda_wad_name
+                self._parse_analysis()
+                self._parse_levelstat()
+                self._parse_raw_data()
+                complevel = self.demo_info.get('complevel')
+                if complevel:
+                    if int(self._demo_playback.wad.complevel) != int(complevel):
+                        self.note_strings.add('Incompatible')
+
+                if self._demo_playback.cmd_line_info:
+                    wad_update = self._demo_playback.cmd_line_info.get('update_wad')
+                    note = self._demo_playback.cmd_line_info.get('note')
+                    if wad_update:
+                        self.data['wad'] = wad_update
+                    if note:
+                        self.note_strings.add(self._demo_playback.cmd_line_info)
+        else:
             LOGGER.error('Could not guess wad for demo %s.', self.lmp_path)
             self.playback_failed = True
 
-    def _parse_raw_data(self, wad):
+    def _parse_raw_data(self):
         """Parse additional info available in raw data.
 
         This is mostly for special cases that are not handled by DSDA-Doom as they depend on the
         WAD itself.
-
-        :param wad: WAD object
         """
         # TODO: Skipping multi-level runs for now, this needs to be refactored a bit to be cleaner
         #       first
@@ -324,7 +331,9 @@ class PlaybackData(BaseData):
         if len(self.raw_data['affected_levels']) > 1:
             return
 
-        map_info = wad.map_list_info.get_map_info(self.raw_data['affected_levels'][0])
+        map_info = self._demo_playback.wad.map_list_info.get_map_info(
+            self.raw_data['affected_levels'][0]
+        )
         skill = self.demo_info.get('skill')
         game_mode = self.demo_info.get('game_mode')
         is_nomo = self.raw_data.get('nomonsters', False)
@@ -418,10 +427,7 @@ class PlaybackData(BaseData):
           turbo 0
           category UV Max
         """
-        with open(PlaybackData.ANALYSIS_FILENAME) as analysis_strm:
-            analysis = analysis_strm.read()
-
-        for line in analysis.splitlines():
+        for line in self._demo_playback.analysis.splitlines():
             key, value = line.split(maxsplit=1)
             if key in self.BOOLEAN_INT_KEYS:
                 value = False if int(value) == 0 else True
@@ -435,7 +441,7 @@ class PlaybackData(BaseData):
 
             self.raw_data[key] = value
 
-    def _parse_levelstat(self, wad):
+    def _parse_levelstat(self):
         """Parse levelstat info.
 
         Levelstat format:
@@ -443,22 +449,19 @@ class PlaybackData(BaseData):
           MAP02 - 1:11.97 (2:34)  K: 0/0  I: 0/0  S: 0/0
         In case of co-op:
           E3M7 - 0:26.97 (0:26)  K: 3/38 (3+0)  I: 0/8 (0+0)  S: 0/4  (0+0)
-
-        :param wad: WAD object
         """
-        with open(PlaybackData.LEVELSTAT_FILENAME) as levelstat_strm:
-            levelstat = levelstat_strm.read()
-
-        levelstat = levelstat.splitlines()
+        levelstat = self._demo_playback.levelstat.splitlines()
         skill = self.demo_info.get('skill')
         game_mode = self.demo_info.get('game_mode')
         # IL run case
         if len(levelstat) == 1:
             levelstat_line_split = levelstat[0].split()
-            self.data['level'] = self._get_level(levelstat_line_split, wad)
+            self.data['level'] = self._get_level(levelstat_line_split, self._demo_playback.wad)
             self.data['secret_exit'] = self.data['level'].endswith('s')
             level_no_secret_exit_marker = self.data['level'].rstrip('s')
-            map_info = wad.map_list_info.get_map_info(level_no_secret_exit_marker)
+            map_info = self._demo_playback.wad.map_list_info.get_map_info(
+                level_no_secret_exit_marker
+            )
             self.raw_data['affected_levels'] = [level_no_secret_exit_marker]
             if (self.data['category'] in PlaybackData.ALL_KILLS_CATEGORIES or
                     self.data['category'] in PlaybackData.ALL_SECRETS_CATEGORIES or
@@ -489,11 +492,11 @@ class PlaybackData(BaseData):
             map_list = []
             self.raw_data['stats'] = []
             for line in levelstat:
-                level = self._get_level(line.split(), wad)
+                level = self._get_level(line.split(), self._demo_playback.wad)
                 map_list.append(level.rstrip('s'))
                 self.raw_data['stats'].append(PlaybackData._get_stats_from_levelstat_line(line))
 
-            self._detect_movie_type(wad, map_list)
+            self._detect_movie_type(self._demo_playback.wad, map_list)
             self.raw_data['affected_levels'] = map_list
 
     @staticmethod
@@ -643,8 +646,8 @@ class PlaybackData(BaseData):
                                                            game_mode=game_mode):
                         secret_maps.append(secret_map)
 
-        for map in secret_maps:
-            if map not in map_list:
+        for secret_map in secret_maps:
+            if secret_map not in map_list:
                 return False
 
         return True
@@ -678,3 +681,79 @@ class PlaybackData(BaseData):
             return int(level_str.replace('Map ', ''))
 
         return int(level_str.replace('E', '').replace('M', ''))
+
+
+@dataclass
+class DemoPlayback:
+    """DemoPlayback data class."""
+    wad: Wad
+    cmd: str
+    levelstat: str
+    analysis: str
+    levelstat_line_count: int = field(init=False)
+
+    cmd_line_info: dict = field(default_factory=dict)
+
+    def __post_init__(self):
+        """Post-initialization steps for DemoPlayback class."""
+        self.levelstat_line_count = len(self.levelstat.splitlines())
+
+    def __lt__(self, other):
+        """Less than overload for DemoPlayback.
+
+        Based on levelstat line count (i.e., number of maps completed)
+
+        :param other: Other DemoPlayback
+        :return: Whether this DemoPlayback is less than the other
+        """
+        return self.levelstat_line_count < other.levelstat_line_count
+
+    def __le__(self, other):
+        """Less than or equal to overload for DemoPlayback.
+
+        Based on levelstat line count (i.e., number of maps completed)
+
+        :param other: Other DemoPlayback
+        :return: Whether this DemoPlayback is less than or equal to the other
+        """
+        return self.levelstat_line_count <= other.levelstat_line_count
+
+    def __gt__(self, other):
+        """Greater than overload for DemoPlayback.
+
+        Based on levelstat line count (i.e., number of maps completed)
+
+        :param other: Other DemoPlayback
+        :return: Whether this DemoPlayback is greater than the other
+        """
+        return self.levelstat_line_count > other.levelstat_line_count
+
+    def __ge__(self, other):
+        """Greater than or equal to overload for DemoPlayback.
+
+        Based on levelstat line count (i.e., number of maps completed)
+
+        :param other: Other DemoPlayback
+        :return: Whether this DemoPlayback is greater than or equal to the other
+        """
+        return self.levelstat_line_count >= other.levelstat_line_count
+
+    def __eq__(self, other):
+        """Equal to overload for DemoPlayback.
+
+        Based on levelstat line count (i.e., number of maps completed)
+
+        :param other: Other DemoPlayback
+        :return: Whether this DemoPlayback is equal to the other
+        """
+        return self.levelstat_line_count == other.levelstat_line_count
+
+    def __ne__(self, other):
+        """Not equal to overload for DemoPlayback.
+
+        Based on levelstat line count (i.e., number of maps completed)
+
+        :param other: Other DemoPlayback
+        :return: Whether this DemoPlayback is not equal to the other
+        """
+        return self.levelstat_line_count != other.levelstat_line_count

@@ -1,12 +1,12 @@
 import argparse
 import logging
 import os
+import shutil
 
-from doomworld_downloader.upload_config import CONFIG
+from doomworld_downloader.upload_config import CONFIG, VALID_NO_ISSUE_DIR, FAILED_UPLOADS_FILE, \
+    FAILED_UPLOADS_LOG_DIR
 from doomworld_downloader.utils import get_log_level, run_cmd
 
-
-NO_ISSUE_JSON_DIR = 'demos_for_upload/no_issue_jsons'
 
 LOGGER = logging.getLogger(__name__)
 
@@ -37,11 +37,20 @@ def main():
     logging.basicConfig(level=log_level,
                         format='%(asctime)s - %(name)s - %(levelname)s: %(message)s')
 
-    for json_file in os.listdir(NO_ISSUE_JSON_DIR):
-        json_path = os.path.join(NO_ISSUE_JSON_DIR, json_file)
+    no_issue_dir = os.path.join(CONFIG.demo_download_directory, VALID_NO_ISSUE_DIR)
+    failed_uploads_log_dir = os.path.join(CONFIG.demo_download_directory, FAILED_UPLOADS_LOG_DIR)
+    for json_file in os.listdir(no_issue_dir):
+        json_path = os.path.join(no_issue_dir, json_file)
         upload_cmd = f'ruby {CONFIG.dsda_api_directory}/dsda-client.rb "{json_path}"'
-        # TODO: Keep track of failed_uploads.json files since otherwise they could be overwritten
         run_cmd(upload_cmd, dryrun=args.dryrun)
+        if os.path.exists(FAILED_UPLOADS_FILE):
+            LOGGER.error('JSON %s failed upload.', json_file)
+            os.makedirs(os.path.dirname(failed_uploads_log_dir), exist_ok=True)
+            shutil.move(
+                FAILED_UPLOADS_FILE,
+                os.path.join(failed_uploads_log_dir,
+                             f'{os.path.splitext(json_file)[0]}_{FAILED_UPLOADS_FILE}')
+            )
 
 
 if __name__ == '__main__':

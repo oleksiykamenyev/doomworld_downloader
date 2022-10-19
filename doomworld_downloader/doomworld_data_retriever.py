@@ -3,7 +3,6 @@ Doomworld data retriever.
 
 This contains all of the functionality needed to download demos from Doomworld.
 """
-# TODO: Perhaps the retriever should be a class?
 
 import itertools
 import logging
@@ -13,6 +12,7 @@ import shutil
 
 from dataclasses import dataclass, field
 from datetime import datetime
+from glob import glob
 from urllib.parse import urlparse, parse_qs
 
 import requests
@@ -21,7 +21,7 @@ import yaml
 from doomworld_downloader.upload_config import CONFIG, PLAYER_IGNORE_LIST, THREAD_MAP_KEYED_ON_ID, \
     AD_HOC_UPLOAD_CONFIG
 from doomworld_downloader.utils import get_download_filename, download_response, get_page, \
-    strip_accents
+    strip_accents, get_filename_no_ext
 
 
 DOOM_SPEED_DEMOS_URL = 'https://www.doomworld.com/forum/37-doom-speed-demos/?page={num}'
@@ -418,6 +418,12 @@ def download_attachments(post):
         attach_dir = os.path.join(author_dir, attach_id[0])
         download = download_response(response, attach_dir, attach_filename, overwrite=True)
 
+        download_renamed_filename = get_filename_no_ext(download).replace(' ', '_')
+        download_renamed = os.path.join(attach_dir, f'{download_renamed_filename}.zip')
+        if download != download_renamed:
+            shutil.move(download, download_renamed)
+            download = download_renamed
+
         # Additional metadata info about post saved for debugging
         meta_info = {'url': post.post_url}
         with open(os.path.join(attach_dir, METADATA_FILE), 'w') as meta_file:
@@ -442,3 +448,33 @@ def move_post_cache_to_failed(post):
     post_failed_dir = os.path.join(CONFIG.demo_download_directory, FAILED_POST_DIR)
     os.makedirs(os.path.join(CONFIG.demo_download_directory, FAILED_POST_DIR), exist_ok=True)
     shutil.move(post_cache_dir, post_failed_dir)
+
+
+def get_doomworld_posts(search_end_date, search_start_date, use_cached_downloads):
+    """Get Doomworld posts for download.
+
+    :param search_start_date: Search start date
+    :param search_end_date: Search end date
+    :param use_cached_downloads: Flag indicating to use cached download info
+    :return: Doomworld post list
+    """
+    if use_cached_downloads:
+        # Use cached stuff if available
+        post_cache_dir = os.path.join(CONFIG.demo_download_directory, 'post_cache')
+        post_info_files = glob(post_cache_dir + '/**/*.yaml', recursive=True)
+        posts = []
+        for post_info_file in post_info_files:
+            with open(post_info_file, encoding='utf-8') as post_info_stream:
+                post_dict = yaml.safe_load(post_info_stream)
+            post_dict['parent'] = Thread(**post_dict['parent'])
+            posts.append(Post(**post_dict))
+    else:
+        if CONFIG.upload_type == 'date-based':
+            threads = get_new_threads(search_start_date)
+            posts = get_new_posts(search_start_date, search_end_date, threads)
+        else:
+            posts = get_ad_hoc_posts()
+
+        for post in posts:
+            download_attachments(post)
+    return posts

@@ -20,6 +20,15 @@ WAD_MAP_PATH = 'doomworld_downloader/dsda_url_to_wad_info.yaml'
 
 NEEDS_ATTENTION_PLACEHOLDER = 'UNKNOWN'
 
+MAYBE_CHEATED_DIR = 'maybe_cheated_jsons'
+VALID_DEMO_PACK_DIR = 'tmp_demo_pack_jsons'
+VALID_ISSUE_DIR = 'issue_jsons'
+VALID_NO_ISSUE_DIR = 'no_issue_jsons'
+VALID_TAGS_DIR = 'tags_jsons'
+
+FAILED_UPLOADS_FILE = 'failed_uploads.json'
+FAILED_UPLOADS_LOG_DIR = 'failed_uploads_dir'
+
 AD_HOC_UPLOAD_CONFIG = {}
 PLAYER_IGNORE_LIST = []
 THREAD_MAP = {}
@@ -108,15 +117,15 @@ class UploadConfig:
             return 'dsda_wads'
 
     @property
-    def download_type(self):
-        """Get download type from config (optional).
+    def upload_type(self):
+        """Get upload type from config (optional).
 
         Default to date-based.
 
-        :return: Download type
+        :return: Upload type
         """
         try:
-            return self._config.get('general', 'download_type')
+            return self._config.get('general', 'upload_type')
         except (NoSectionError, NoOptionError):
             return 'date-based'
 
@@ -171,7 +180,7 @@ class UploadConfig:
         :return: Cutoff date for demo recorded_at info
         """
         try:
-            if self.download_type == 'dsda':
+            if self.upload_type == 'dsda':
                 return self._config.get('dsda_mode', 'demo_date_cutoff')
             else:
                 return self._config.get('general', 'demo_date_cutoff')
@@ -190,6 +199,36 @@ class UploadConfig:
             return self._config.getboolean('general', 'always_try_solonet')
         except (NoSectionError, NoOptionError):
             return False
+
+    @property
+    def add_lmp_metadata_for_demo_packs(self):
+        """Add lmp metadata to demo pack JSONs
+
+        LMP file will be stored to resulting JSON in extra lmp_metadata key. This may be useful for
+        manual verification during either demo pack compilation or processing demo packs posted to
+        Doomworld, but should not be turned on for the final upload (or cleaned before upload).
+
+        :return: Flag indicating whether to add lmp metadata to demo pack JSONs
+        """
+        try:
+            return self._config.getboolean('general', 'add_lmp_metadata')
+        except (NoSectionError, NoOptionError):
+            return None
+
+    @property
+    def run_through_all_cmd_line_options(self):
+        """Run through all command line options.
+
+        This will run through all command line options on playback, even if it finds one that syncs.
+        If multiple sync, it will choose the longest by map count as the "true" playback option. If
+        the longest does not exist, it will choose at random.
+
+        :return: Flag indicating run through all command line options
+        """
+        try:
+            return self._config.getboolean('general', 'run_through_all_cmd_line_options')
+        except (NoSectionError, NoOptionError):
+            return None
 
     @property
     def demo_pack_input_folder(self):
@@ -242,6 +281,23 @@ class UploadConfig:
         """
         try:
             return self._config.get('demo_pack', 'additional_info_map')
+        except (NoSectionError, NoOptionError):
+            return None
+
+    @property
+    def demo_pack_name(self):
+        """Get demo pack name.
+
+        Required for demo packs. Appends zip for final upload.
+
+        :return: Demo pack name
+        """
+        try:
+            demo_pack_name = self._config.get('demo_pack', 'name')
+            if not demo_pack_name.endswith('.zip'):
+                demo_pack_name = f'{demo_pack_name}.zip'
+
+            return demo_pack_name
         except (NoSectionError, NoOptionError):
             return None
 
