@@ -7,7 +7,10 @@ Internal idgames API documentation: https://www.doomworld.com/idgames/api/.
 import logging
 import os
 import requests
-import urllib
+
+from urllib.parse import urlparse
+
+from bs4 import BeautifulSoup
 
 
 LOGGER = logging.getLogger(__name__)
@@ -305,6 +308,8 @@ class IdgamesAPI():
         :return: Tuple containing response from idgames API for requested file (may be empty or
                  include multiple files if the download didn't match a single file), local file path
         :raises ValueError if either both file name and file ID are passed or neither
+        :raises RuntimeError if none of the mirrors for downloading the file are functional
+        :raises OSError if the local download path already exists and overwrite is not turned on
         """
         if file_id and file_name:
             LOGGER.error('Both file ID %s and file name %s passed to download!', file_id, file_name)
@@ -335,17 +340,20 @@ class IdgamesAPI():
             files_info = idgames_response['content']
 
         file_path = os.path.join(files_info['dir'], files_info['filename'])
+        file_download = None
         for mirror in cls.IDGAMES_MIRRORS:
             wad_url = mirror.format(file_path=file_path)
             try:
                 file_download = requests.get(wad_url)
                 file_download.raise_for_status()
-            except requests.exceptions.RequestException:
-                LOGGER.exception('Caught request exception from idgames mirror %s.', wad_url)
-                continue
             except requests.exceptions.HTTPError:
                 LOGGER.exception('Request to idgames mirror unsuccessful: %s.', wad_url)
                 continue
+            except requests.exceptions.RequestException:
+                LOGGER.exception('Caught request exception from idgames mirror %s.', wad_url)
+                continue
+
+            break
 
         if not file_download:
             raise RuntimeError('Could not download file from any of the known mirrors!')
@@ -368,11 +376,34 @@ class IdgamesAPI():
 
 
 def get_file_id_from_idgames_url(idgames_url):
-    url_parsed = urllib.parse.urlparse(idgames_url)
+    """Get file ID from idgames URL.
+
+    :param idgames_url: idgames URL
+    :return: idgames file ID
+    :raises ValueError if unable to get the idgames file ID
+    """
+    url_parsed = urlparse(idgames_url)
     if url_parsed.netloc != 'www.doomworld.com' or not url_parsed.path.startswith('/idgames/'):
         raise ValueError('Invalid idgames URL passed: {}'.format(idgames_url))
 
     file_name = os.path.basename(url_parsed.path)
+    # The idgames API doesn't support searches on any WADs with length lower than three characters,
+    # so in this case, we can work around by grabbing the WAD ID from the idgames frontend page
+    # contents.
+    if len(file_name) < 3:
+        LOGGER.info(
+            'WAD name %s length below three characters, trying to get ID from idgames webpage.',
+            file_name
+        )
+        request_res = requests.get(idgames_url)
+        page_text = str(request_res.text)
+        page_soup = BeautifulSoup(page_text, features='lxml')
+        idgames_protocol_elem = page_soup.find('ul', {'class': 'idgamesprotocol'})
+        if idgames_protocol_elem:
+            return idgames_protocol_elem.getText().split('/')[-1]
+        else:
+            raise RuntimeError(f'Could not find protocol element on page {idgames_url}.')
+
     file_search = IdgamesAPI.search(file_name)
     if file_search.get('content'):
         files_info = file_search['content']['file']
@@ -381,7 +412,8 @@ def get_file_id_from_idgames_url(idgames_url):
 
         file_path = url_parsed.path[9:]
         for file_info in files_info:
-            if file_path == os.path.join(file_info['dir'], file_info['filename'].split('.')[0]):
+            if file_path == os.path.join(file_info['dir'],
+                                         os.path.splitext(file_info['filename'])[0]):
                 return file_info['id']
 
         LOGGER.error('Could not find matching wad ID in file info list. File info list:\n',
