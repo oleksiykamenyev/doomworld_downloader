@@ -13,7 +13,7 @@ import unicodedata
 from datetime import datetime
 from shutil import rmtree
 from time import gmtime, strftime
-from urllib.parse import urlparse, urlunparse
+from urllib.parse import parse_qs, urlparse, urlunparse
 
 import requests
 
@@ -327,16 +327,22 @@ def parse_youtube_url(url):
     :param url: URL
     :return: YouTube URL code if it the URL was detected as a YouTube URL, else None
     """
-    url_split = None
-    if 'youtube.com/embed' in url:
-        return urlparse(url).path.strip('/').split('/')[-1]
-    elif 'youtube.com/' in url:
-        url_split = url.split('watch?v=')
-    elif 'youtu.be/' in url:
-        url_split = url.split('youtu.be/')
+    url_parse = urlparse(url)
+    if url_parse.hostname == 'youtu.be':
+        if url_parse.path == '/watch':
+            query_params = parse_qs(url_parse.query)
+            if 'v' in query_params:
+                return query_params['v'][0]
+        else:
+            return url_parse.path[1:]
 
-    if url_split and len(url_split) > 1:
-        return url_split[1]
+    if 'youtube' in url_parse.hostname:
+        if url_parse.path == '/watch':
+            query_params = parse_qs(url_parse.query)
+            if 'v' in query_params:
+                return query_params['v'][0]
+        if url_parse.path[:3] == '/v/' or url_parse.path[:7] == '/embed/':
+            return url_parse.path.split('/')[2]
 
     return None
 

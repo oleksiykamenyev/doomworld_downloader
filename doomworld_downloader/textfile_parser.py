@@ -7,7 +7,7 @@ import re
 
 from .base_parser import BaseData
 from .data_manager import DataManager
-from .utils import parse_youtube_url
+from .utils import parse_youtube_url, get_single_key_value_dict
 
 
 LOGGER = logging.getLogger(__name__)
@@ -35,19 +35,91 @@ class TextfileData(BaseData):
     CERTAIN_KEYS = ['is_tas']
     POSSIBLE_KEYS = ['category', 'source_port', 'video_link']
 
-    CATEGORY_REGEXES = {
-        re.compile(r'(UV)?[ -_]?(Max|100%)', re.IGNORECASE): 'UV Max',
-        re.compile(r'UV[ -_]?Speed', re.IGNORECASE): 'UV Speed',
-        re.compile(r'NM[ -_]?Speed', re.IGNORECASE): 'NM Speed',
-        re.compile(r'NM[ -_]?100s?', re.IGNORECASE): 'NM 100S',
-        re.compile(r'(UV)?[ -_]?-?fast', re.IGNORECASE): 'UV Fast',
-        re.compile(r'(UV)?[ -_]?-?respawn', re.IGNORECASE): 'UV Respawn',
-        re.compile(r'(UV)?[ -_]?Pacifist', re.IGNORECASE): 'Pacifist',
-        re.compile(r'(UV)?[ -_]?Tyson', re.IGNORECASE): 'Tyson',
-        re.compile(r'(UV)?[ -_]?No\s*mo(nsters)?\s*$', re.IGNORECASE): 'NoMo',
-        re.compile(r'(UV)?[ -_]?No\s*mo(nsters)?[ -_]?100s?', re.IGNORECASE): 'NoMo 100S',
-        re.compile(r'(UV)?[ -_]?Stroller', re.IGNORECASE): 'Stroller'
+    # Standard named DSDA category regexes. These are either used to guess in one of two ways:
+    #   - initial category guess if a category field is provided, which may be overridden by other
+    #     categories in cases where this match was inaccurate (e.g. matching UV-Max for
+    #     "skill 2 max")
+    #   - catchall case where the category field is not provided, so the entire txt is searched for
+    #     these regexes
+    STANDARD_CATEGORY_REGEXES = [
+        # UV 100% is assumed to be UV-Max, but 100% alone doesn't really mean much, so this case is
+        # specified separately.
+        {re.compile(r'(UV|Ultra[\s*-_]?Violence|Skill[\s*-_]?4)[\s*-_]?100%',
+                    re.IGNORECASE): 'UV Max'},
+        # NM categories are matched with precedence to avoid categorizing NM Speed as UV Speed, etc.
+        {re.compile(r'(NM|Night[\s*-_]?mare!?|Skill[\s*-_]?5)[\s*-_]?'
+                    r'([\s*-_]?with)?[\s*-_]?100[s%]?[\s*-_]?secrets?', re.IGNORECASE): 'NM 100S'},
+        {re.compile(r'(NM|Night[\s*-_]?mare!?|Skill[\s*-_]?5)[\s*-_]?Speed',
+                    re.IGNORECASE): 'NM Speed'},
+        # These cases are super lenient as the other category matches should override these for
+        # any cases where these may return an incorrect value.
+        {re.compile(r'Max', re.IGNORECASE): 'UV Max'},
+        {re.compile(r'Speed', re.IGNORECASE): 'UV Speed'},
+        {re.compile(r'-?fast', re.IGNORECASE): 'UV Fast'},
+        {re.compile(r'-?respawn', re.IGNORECASE): 'UV Respawn'},
+        {re.compile(r'Pacifist', re.IGNORECASE): 'Pacifist'},
+        {re.compile(r'Tyson', re.IGNORECASE): 'Tyson'},
+        {re.compile(r'Stroller', re.IGNORECASE): 'Stroller'},
+        {re.compile(r'No\s*mo(nsters?)?([\s*-_]?with)?[\s*-_]?100[s%]?[\s*-_]?secrets?',
+                    re.IGNORECASE): 'NoMo 100S'},
+        {re.compile(r'No\s*mo(nsters?)?', re.IGNORECASE): 'NoMo'},
+        # If just the difficulty is present, assume speed.
+        {re.compile(r'(UV|Ultra[\s*-_]?Violence|Skill[\s*-_]?4)', re.IGNORECASE): 'UV Speed'},
+        {re.compile(r'(NM|Night[\s*-_]?mare!?|Skill[\s*-_]?5)', re.IGNORECASE): 'NM Speed'}
+    ]
+
+    # Other category regexes that require notes on DSDA. Will only be run for textfiles where the
+    # category is explicitly defined as a colon-separated field to optimize performance. Only a
+    # subset of commonly seen other categories is included.
+    OTHER_CATEGORY_REGEXES = [
+        {re.compile(r'(HMP|Hurt[\s*-_]?Me[\s*-_]?Plenty|Skill[\s*-_]?3)[\s*-_]?(Max|100%)',
+                    re.IGNORECASE): 'HMP Max'},
+        {re.compile(r'(HMP|Hurt[\s*-_]?Me[\s*-_]?Plenty|Skill[\s*-_]?3)[\s*-_]?Speed',
+                    re.IGNORECASE): 'HMP Speed'},
+        {re.compile(
+            r'(HNTR|Hey,?[\s*-_]?Not[\s*-_]?Too[\s*-_]?Rough|Skill[\s*-_]?2)[\s*-_]?(Max|100%)',
+            re.IGNORECASE
+        ): 'HNTR Max'},
+        {re.compile(r'(HNTR|Hey,?[\s*-_]?Not[\s*-_]?Too[\s*-_]?Rough|Skill[\s*-_]?2)[\s*-_]?Speed',
+                    re.IGNORECASE): 'HNTR Speed'},
+        {re.compile(
+            r'(ITYTD|I\'?m?[\s*-_]?Too[\s*-_]?Young[\s*-_]?to[\s*-_]?Die|Skill[\s*-_]?1)[\s*-_]?'
+            r'(Max|100%)', re.IGNORECASE
+        ): 'ITYTD Max'},
+        {re.compile(
+            r'(ITYTD|I\'?m?[\s*-_]?Too[\s*-_]?Young[\s*-_]?to[\s*-_]?Die|Skill[\s*-_]?1)[\s*-_]?'
+            r'Speed', re.IGNORECASE
+        ): 'ITYTD Speed'},
+        {re.compile(r'(UV|Ultra[\s*-_]?Violence|Skill[\s*-_]?4)'
+                    r'([\s*-_]?with)?[\s*-_]?100s?[\s*-_]?secrets?', re.IGNORECASE): 'UV 100S'},
+        {re.compile(r'(NM|Night[\s*-_]?mare!?|Skill[\s*-_]?5)[\s*-_]?Pacifist',
+                    re.IGNORECASE): 'NM Pacifist'},
+        {re.compile(r'(NM|Night[\s*-_]?mare!?|Skill[\s*-_]?5)[\s*-_]?Stroller',
+                    re.IGNORECASE): 'NM Stroller'},
+        {re.compile(r'(UV|Ultra[\s*-_]?Violence|Skill[\s*-_]?4)[\s*-_]?-?fast[\s*-_]?Tyson',
+                    re.IGNORECASE): 'Tyson with -fast'},
+        {re.compile(
+            r'(UV|Ultra[\s*-_]?Violence|Skill[\s*-_]?4)[\s*-_]?Tyson([\s*-_]?with)?[\s*-_]?-?fast',
+            re.IGNORECASE
+        ): 'Tyson with -fast'},
+        {re.compile(r'(GM|Grand[\s*-_]?master)[\s*-_]?Tyson', re.IGNORECASE): 'Tyson with -fast'},
+        {re.compile(r'(UV|Ultra[\s*-_]?Violence|Skill[\s*-_]?4)[\s*-_]?Tank',
+                    re.IGNORECASE): 'UV Tank'},
+    ]
+    OTHER_CATEGORY_TO_INFO_MAP = {
+        'HMP Max': {'category': 'Other', 'note': 'Skill 3 max'},
+        'HMP Speed': {'category': 'Other', 'note': 'Skill 3 speed'},
+        'HNTR Max': {'category': 'Other', 'note': 'Skill 2 max'},
+        'HNTR Speed': {'category': 'Other', 'note': 'Skill 2 speed'},
+        'ITYTD Max': {'category': 'Other', 'note': 'Skill 1 max'},
+        'ITYTD Speed': {'category': 'Other', 'note': 'Skill 1 speed'},
+        'UV 100S': {'category': 'Other', 'note': 'UV 100S'},
+        'NM Pacifist': {'category': 'NM Speed', 'note': 'Also Pacifist'},
+        'NM Stroller': {'category': 'Other', 'note': 'NM Stroller'},
+        'Tyson with -fast': {'category': 'Other', 'note': 'Tyson with -fast'},
+        'UV Tank': {'category': 'Other', 'note': 'UV Tank'}
     }
+
     PORT_REGEXES = {
         # Chocolate family
         # Chocolate Doom
@@ -220,7 +292,7 @@ class TextfileData(BaseData):
 
             value_lowercase = value.lower()
             if key in TextfileData.CATEGORY_KEYS:
-                self.data['category'] = self._parse_category(value_lowercase)
+                self.data['category'] = self._parse_category(value_lowercase, check_other=True)
                 if 'tas' in value_lowercase.split():
                     self.data['is_tas'] = True
             elif key in TextfileData.PORT_KEYS:
@@ -247,7 +319,7 @@ class TextfileData(BaseData):
         # textfile, we just try the entire textfile; this is likely to be wrong since someone could
         # just have a category or port name in their general comments, but better than nothing.
         if not self.data.get('category'):
-            self.data['category'] = self._parse_category(self._raw_textfile)
+            self.data['category'] = self._parse_category(self._raw_textfile, check_other=False)
             if not self.data.get('category'):
                 LOGGER.info('Could not parse category from textfile %s.', self.textfile_path)
                 self.data.pop('category')
@@ -262,19 +334,31 @@ class TextfileData(BaseData):
             LOGGER.info('Could not parse source port from textfile %s.', self.textfile_path)
             self.data.pop('source_port')
 
-    @staticmethod
-    def _parse_category(text_str):
+    def _parse_category(self, text_str, check_other=False):
         """Parse category from a provided text string.
 
         :param text_str: Text string
+        :param check_other: Check other categories as part of the function
         :return: Category name if it was possible to parse, else None
         """
-        for category_regex, category_name in TextfileData.CATEGORY_REGEXES.items():
+        category_name = None
+        for category_dict in TextfileData.STANDARD_CATEGORY_REGEXES:
+            category_regex, cur_category_name = get_single_key_value_dict(category_dict)
             match = category_regex.search(text_str)
             if match:
-                return category_name
+                category_name = cur_category_name
+                break
 
-        return None
+        if check_other:
+            for category_dict in TextfileData.OTHER_CATEGORY_REGEXES:
+                category_regex, cur_category_name = get_single_key_value_dict(category_dict)
+                match = category_regex.search(text_str)
+                if match:
+                    other_category_info = TextfileData.OTHER_CATEGORY_TO_INFO_MAP[cur_category_name]
+                    self.note_strings.add(other_category_info['note'])
+                    return other_category_info['category']
+
+        return category_name
 
     @staticmethod
     def _parse_port(text_str, skip_vanilla_check=False):

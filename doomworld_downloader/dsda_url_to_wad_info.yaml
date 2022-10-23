@@ -1405,7 +1405,7 @@
   playback_cmd_line: "-file dodead"
   map_list_info:
     map_ranges: [["E1M1", "E1M9"]]
-    episodes: [["E1M1", "E1M9"]]
+    episodes: [["E1M1", "E1M8"]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom/d-f/dodead"
   dsda_paginated: false
   doomworld_thread: null
@@ -10562,6 +10562,14 @@
         tyson_only: true
       "E1M8":
         tyson_only: true
+      "E3M1":
+        tyson_only: true
+      "E3M3":
+        tyson_only: true
+      "E3M4":
+        tyson_only: true
+      "E3M5":
+        tyson_only: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom/megawads/ffdoom2"
   dsda_paginated: false
   doomworld_thread: null
@@ -19486,5 +19494,117 @@
     d2all: null
     episodes: []
   idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/8-bitadd":
+  wad_name: 8-bit Binary Addition
+  iwad: doom2
+  wad_files:
+    8-bitadd.wad: {checksum: "da63c60f928c94923583806b90406ad7"}
+  complevel: 9
+  playback_cmd_line: "-file 8-bitadd"
+  map_list_info:
+    map_ranges: [[1, 2]]
+    d2all: ["Map 01", "Map 02"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/0-9/8-bitadd"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/ohman":
+  wad_name: Oh, Man!
+  iwad: doom
+  wad_files:
+    ohman.wad: {checksum: "52e7be9dee2c9c80aa66aad6b73892db"}
+  complevel: 3
+  playback_cmd_line: "-file ohman"
+  map_list_info:
+    map_ranges: [["E2M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/m-o/ohman"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/bbetween":
+  wad_name: THE BRIDGE BETWEEN
+  iwad: doom2
+  wad_files:
+    bbetween.wad: {checksum: "58e9ca0d3bb976add5e4a3938e4e77b5"}
+  complevel: 9
+  playback_cmd_line: "-file bbetween"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+    map_info:
+      "Map 01":
+        skip_reality: true
+        skip_also_pacifist: true
+        tyson_only: true
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/deathmatch/Ports/a-c/bbetween"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/d2dw":
+  wad_name: "Doom II: Dark World [v1.0]"
+  iwad: doom2
+  wad_files:
+    d2dw-v1.wad: {checksum: "8d1fb08369a328d14e80519b82cd23c7"}
+  complevel: 9
+  playback_cmd_line: "-file d2dw-v1"
+  map_list_info:
+    map_ranges: [[1, 11]]
+    d2all: ["Map 01", "Map 11"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/d2dw"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/stickney":
+  wad_name: Stickney Installation
+  iwad: doom
+  wad_files:
+    stickney.wad: {checksum: "28d064d2de64e0c6b9c3cdb014cde32f"}
+  complevel: 3
+  playback_cmd_line: "-file stickney"
+  map_list_info:
+    map_ranges: [["E1M1", "E1M9"], ["E2M1", "E2M9"], ["E3M1", "E3M9"], ["E4M1", "E4M9"]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/megawads/stickney"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/eagleeye":
+  wad_name: EAGLEEYE.WAD
+  iwad: doom2
+  wad_files:
+    eagleeye.wad: {checksum: "aee963714584d89cc2922464be6e0ed8"}
+  complevel: 2
+  playback_cmd_line: "-file eagleeye"
+  map_list_info:
+    map_ranges: [[1, 3]]
+    d2all: ["Map 01", "Map 03"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/d-f/eagleeye"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/diy":
+  wad_name: DIY
+  iwad: doom2
+  wad_files:
+    diy.wad: {checksum: "fda6097184920b7a50f96bedbf2848e5"}
+  complevel: 21
+  playback_cmd_line: "-file diy"
+  map_list_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/diy"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/131987-diy-demos-complevel-21/"
+"https://www.dsdarchive.com/wads/kboom_9":
+  wad_name: kboom Series
+  iwad: doom2
+  wad_files:
+    kboom_9.wad: {checksum: "45bdd6a700161391240d0ae2ecf2dfef"}
+  complevel: 9
+  playback_cmd_line: "-file kboom_9"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/j-l/kboom_9"
   dsda_paginated: false
   doomworld_thread: null

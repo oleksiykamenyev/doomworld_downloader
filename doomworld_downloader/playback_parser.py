@@ -262,9 +262,8 @@ class PlaybackData(BaseData):
                         self._demo_playback = cur_demo_playback
 
                     self._cleanup()
-
-                if not CONFIG.run_through_all_cmd_line_options:
-                    break
+                    if not CONFIG.run_through_all_cmd_line_options:
+                        break
 
             if not CONFIG.run_through_all_cmd_line_options and self._demo_playback:
                 break
@@ -312,7 +311,7 @@ class PlaybackData(BaseData):
                     if wad_update:
                         self.data['wad'] = wad_update
                     if note:
-                        self.note_strings.add(self._demo_playback.cmd_line_info)
+                        self.note_strings.add(note)
         else:
             LOGGER.error('Could not guess wad for demo %s.', self.lmp_path)
             self.playback_failed = True
