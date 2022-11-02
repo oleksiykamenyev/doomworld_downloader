@@ -21,7 +21,8 @@ from .playback_parser import PlaybackData
 from .post_parser import PostData
 from .textfile_parser import TextfileData
 from .upload_config import CONFIG
-from .utils import convert_datetime_to_dsda_date, get_filename_no_ext, is_demo_filename
+from .utils import convert_datetime_to_dsda_date, get_filename_no_ext, is_demo_filename, \
+    get_single_key_value_dict
 from .wad_guesser import get_wad_guesses
 
 
@@ -74,6 +75,7 @@ class DemoProcessor:
                 lmp_to_info_map = demo_zip_info.lmp_to_info_map
                 zip_path = demo
                 primary_textfile_data = demo_zip_info.primary_textfile_data
+                primary_textfile_date = demo_zip_info.primary_textfile_date
             elif is_demo_filename(demo):
                 demo_date = self.additional_demo_info.get(demo, {}).get('recorded_date')
                 if not demo_date:
@@ -82,6 +84,7 @@ class DemoProcessor:
                 lmp_to_info_map = {demo: {'recorded_date': demo_date}, 'lmp_path': demo}
                 zip_path = None
                 primary_textfile_data = None
+                primary_textfile_date = None
             else:
                 raise RuntimeError(f'Demo {demo} provided that is an unsupported filetype.')
 
@@ -95,7 +98,8 @@ class DemoProcessor:
                 )
                 demo_info = DemoInfo(lmp_info['lmp_path'], demo_info_data, zip_path=zip_path)
                 demo_info.process_post_data(self.post_data)
-                demo_info.process_textfile(default_textfile_data=primary_textfile_data)
+                demo_info.process_textfile(default_textfile_data=primary_textfile_data,
+                                           default_textfile_date=primary_textfile_date)
                 demo_info.process_lmp()
                 demo_info.process_additional_demo_info()
                 if not CONFIG.skip_playback and demo_info.demo_process_failed:
@@ -124,6 +128,7 @@ class DemoZipInfo:
         # Outputs after processing
         self.lmp_to_info_map = {}
         self.primary_textfile_data = None
+        self.primary_textfile_date = None
         self.zip_process_failed = False
 
     def process_zip(self):
@@ -139,6 +144,7 @@ class DemoZipInfo:
         info_list = zip_file.infolist()
         main_lmp = None
         main_txt = None
+        main_txt_date = None
         txt_file_info = {}
         zip_filename_no_ext = get_filename_no_ext(self.zip_filename).lower()
         for zip_file_info in info_list:
@@ -153,12 +159,12 @@ class DemoZipInfo:
                     'lmp_path': os.path.join(self.zip_extract_dir, zip_member_name)
                 }
             if zip_member_name_lower.endswith('.txt'):
+                txt_date = datetime(*zip_file_info.date_time)
                 if get_filename_no_ext(zip_member_name_lower) == zip_filename_no_ext:
                     main_txt = zip_member_name
+                    main_txt_date = txt_date
 
-                txt_file_info[zip_member_name] = {
-                    'recorded_date': datetime(*zip_file_info.date_time)
-                }
+                txt_file_info[zip_member_name] = {'recorded_date': txt_date}
 
         if not self.lmp_to_info_map:
             LOGGER.warning('No lmp files found in zip %s.', self.zip_path)
@@ -168,6 +174,10 @@ class DemoZipInfo:
             LOGGER.error('No txt files found in zip %s.', self.zip_path)
             self.zip_process_failed = True
             return
+
+        if len(txt_file_info) == 1:
+            main_txt, main_txt_info = get_single_key_value_dict(txt_file_info)
+            main_txt_date = main_txt_info['recorded_date']
         if len(txt_file_info) > 1 and not main_txt:
             LOGGER.warning('Multiple txt files found in zip %s with no primary txt found.',
                            self.zip_path)
@@ -188,6 +198,7 @@ class DemoZipInfo:
         if main_txt:
             self.primary_textfile_data = TextfileData(os.path.join(self.zip_extract_dir, main_txt))
             self.primary_textfile_data.analyze()
+            self.primary_textfile_date = main_txt_date
 
     def clean(self):
         if os.path.exists(self.zip_extract_dir):
@@ -240,12 +251,16 @@ class DemoInfo:
         post_data.populate_data_manager(self.data_manager)
         self.note_strings = self.note_strings.union(post_data.note_strings)
 
-    def process_textfile(self, default_textfile_data=None):
+    def process_textfile(self, default_textfile_data=None, default_textfile_date=None):
         """Process demo textfile, if available.
 
         :param default_textfile_data: Default textfile info, if the lmp is part of a demo pack with
                                       no individual txt available for the lmp
+        :param default_textfile_date: Default textfile date
         """
+        # Set this in all cases, since it is the final fallback for date processing even if the lmp
+        # txt itself has a date parsed, since that could be an invalid date.
+        self._textfile_info['primary_txt_date'] = default_textfile_date
         if self.demo_info_data.txt_file_path:
             textfile_data = TextfileData(self.demo_info_data.txt_file_path)
             textfile_data.analyze()
@@ -302,7 +317,8 @@ class DemoInfo:
                                      DataManager.CERTAIN, source='extra_info')
 
         lmp_date = self.demo_info_data.recorded_date
-        txt_date = self.demo_info_data.txt_file_date
+        txt_date = (self.demo_info_data.txt_file_date if self.demo_info_data.txt_file_date
+                    else self._textfile_info.get('primary_txt_date'))
         dsda_date = convert_datetime_to_dsda_date(lmp_date)
         if not DemoInfo.DEMO_DATE_CUTOFF < lmp_date < DemoInfo.FUTURE_CUTOFF:
             LOGGER.warning('Found possibly incorrect lmp date "%s", trying txt date.', dsda_date)

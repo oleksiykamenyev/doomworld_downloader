@@ -45,7 +45,7 @@ def main():
         run_cmd(upload_cmd, dryrun=args.dryrun)
         if os.path.exists(FAILED_UPLOADS_FILE):
             LOGGER.error('JSON %s failed upload.', json_file)
-            os.makedirs(os.path.dirname(failed_uploads_log_dir), exist_ok=True)
+            os.makedirs(failed_uploads_log_dir, exist_ok=True)
             shutil.move(
                 FAILED_UPLOADS_FILE,
                 os.path.join(failed_uploads_log_dir,

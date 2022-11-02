@@ -15,7 +15,7 @@ LOGGER = logging.getLogger(__name__)
 
 class TextfileData(BaseData):
     """Store all uploader-relevant data for a demo textfile."""
-    CATEGORY_KEYS = ['category', 'discipline']
+    CATEGORY_KEYS = ['cat', 'category', 'discipline', 'type']
     PORT_KEYS = ['client', 'engine', 'exe', 'port', 'portused', 'sourceport', 'sourceportused',
                  'usingport', 'usingsourceport']
     # These port keys could be placed at the start of a line with no colon (i.e., in cases of
@@ -47,8 +47,10 @@ class TextfileData(BaseData):
         {re.compile(r'(UV|Ultra[\s*-_]?Violence|Skill[\s*-_]?4)[\s*-_]?100%',
                     re.IGNORECASE): 'UV Max'},
         # NM categories are matched with precedence to avoid categorizing NM Speed as UV Speed, etc.
-        {re.compile(r'(NM|Night[\s*-_]?mare!?|Skill[\s*-_]?5)[\s*-_]?'
-                    r'([\s*-_]?with)?[\s*-_]?100[s%]?[\s*-_]?secrets?', re.IGNORECASE): 'NM 100S'},
+        {re.compile(
+            r'(NM|Night[\s*-_]?mare!?|Skill[\s*-_]?5)[\s*-_]?'
+            r'([\s*-_]?with)?[\s*-_]?100[s%]?[\s*-_]?(secrets?)?', re.IGNORECASE
+        ): 'NM 100S'},
         {re.compile(r'(NM|Night[\s*-_]?mare!?|Skill[\s*-_]?5)[\s*-_]?Speed',
                     re.IGNORECASE): 'NM Speed'},
         # These cases are super lenient as the other category matches should override these for
@@ -62,7 +64,7 @@ class TextfileData(BaseData):
         {re.compile(r'Stroller', re.IGNORECASE): 'Stroller'},
         {re.compile(r'No\s*mo(nsters?)?([\s*-_]?with)?[\s*-_]?100[s%]?[\s*-_]?secrets?',
                     re.IGNORECASE): 'NoMo 100S'},
-        {re.compile(r'No\s*mo(nsters?)?', re.IGNORECASE): 'NoMo'},
+        {re.compile(r'No\s*mo(nsters?)?([\s*-_]?speed)?', re.IGNORECASE): 'NoMo'},
         # If just the difficulty is present, assume speed.
         {re.compile(r'(UV|Ultra[\s*-_]?Violence|Skill[\s*-_]?4)', re.IGNORECASE): 'UV Speed'},
         {re.compile(r'(NM|Night[\s*-_]?mare!?|Skill[\s*-_]?5)', re.IGNORECASE): 'NM Speed'}

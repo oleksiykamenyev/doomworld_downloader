@@ -61,7 +61,7 @@ class DemoJsonDumper:
                         LOGGER.warning('Pruning LMP file %s in favor of identical LMP %s.',
                                        demo_json.demo_info.lmp_metadata,
                                        demo_json_existing.demo_info.lmp_metadata)
-                        self.demo_location_to_jsons_map[demo_path].pop(demo_json_existing)
+                        self.demo_location_to_jsons_map[demo_path].remove(demo_json_existing)
 
         self.demo_location_to_jsons_map[demo_path].append(demo_json)
 

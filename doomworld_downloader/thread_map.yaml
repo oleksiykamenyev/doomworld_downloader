@@ -1388,6 +1388,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/diy
   id: '131987'
   name: "DIY demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/132135-stickney-installation-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/stickney
+  id: '132135'
+  name: "Stickney Installation demos [-complevel 3]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -1815,6 +1820,9 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/abyspe64
       - https://www.dsdarchive.com/wads/abyspe65
       - https://www.dsdarchive.com/wads/abyspe66
+      - https://www.dsdarchive.com/wads/abyspe67
+      - https://www.dsdarchive.com/wads/abyspe68
+      - https://www.dsdarchive.com/wads/abyspe69
 "https://www.doomworld.com/forum/topic/92251-doomworld-mega-project-series-demos/":
   id: "92251"
   name: Doomworld Mega Project Series Demos

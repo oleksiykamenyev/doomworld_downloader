@@ -336,7 +336,7 @@ def parse_youtube_url(url):
         else:
             return url_parse.path[1:]
 
-    if 'youtube' in url_parse.hostname:
+    if url_parse.hostname and 'youtube' in url_parse.hostname:
         if url_parse.path == '/watch':
             query_params = parse_qs(url_parse.query)
             if 'v' in query_params:
