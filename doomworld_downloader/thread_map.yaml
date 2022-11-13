@@ -1393,6 +1393,26 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/stickney
   id: '132135'
   name: "Stickney Installation demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/132357-ozonia-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ozonia
+  id: '132357'
+  name: "Ozonia demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/132358-2022-a-doom-odyssey-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/2022ado
+  id: '132358'
+  name: "2022: A Doom Odyssey demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/132359-heartland-demos-eternity-engine/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/heartland
+  id: '132359'
+  name: "Heartland demos [Eternity Engine]"
+"https://www.doomworld.com/forum/topic/132384-yum-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/yum
+  id: '132384'
+  name: "YUM demos [-complevel 21]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":

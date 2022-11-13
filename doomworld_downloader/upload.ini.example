@@ -16,6 +16,7 @@ ignore_cache = FALSE|true
 skip_playback = TRUE|false
 
 demo_date_cutoff = 2021-01-01T00:00:00Z
+check_txt_date = FALSE|true
 always_try_solonet = FALSE|true
 add_lmp_metadata = true|FALSE
 run_through_all_cmd_line_options = true|FALSE

@@ -70,7 +70,7 @@ class PlaybackData(BaseData):
 
     DOOM_1_MAP_RE = re.compile(r'^E(?P<episode_num>\d)M\ds?$')
 
-    ALLOWED_FOOTER_FILES = ['bloodcolor.deh', 'doom widescreen hud.wad',
+    ALLOWED_FOOTER_FILES = ['bloodcolor.deh', 'bloodfix.deh', 'doom widescreen hud.wad',
                             'doom 2 widescreen assets.wad', 'dsda-doom.wad', 'prboom-plus.wad']
     FOOTER_WAD_EXTENSIONS = ['.bex', '.deh', '.hhe', '.pk3', '.pk7', '.wad']
 
@@ -338,10 +338,10 @@ class PlaybackData(BaseData):
         is_nomo = self.raw_data.get('nomonsters', False)
         skip_reality = map_info.get_single_key_for_map('skip_reality', skill=skill,
                                                        game_mode=game_mode)
-        skip_reality_categories = map_info.get_single_key_for_map('skip_reality_categories',
+        skip_reality_categories = map_info.get_single_key_for_map('skip_reality_for_categories',
                                                                   skill=skill, game_mode=game_mode)
-        skip_reality_final = skip_reality and (skip_reality_categories is None or
-                                               self.data['category'] in skip_reality_categories)
+        skip_reality_final = skip_reality or (skip_reality_categories is not None and
+                                              self.data['category'] in skip_reality_categories)
         if self.raw_data.get('reality', False):
             add_reality_tag = True
             if is_nomo and not map_info.get_single_key_for_map('add_reality_in_nomo', skill=skill,
@@ -357,11 +357,11 @@ class PlaybackData(BaseData):
             skip_almost_reality = map_info.get_single_key_for_map('skip_almost_reality',
                                                                   skill=skill, game_mode=game_mode)
             skip_almost_reality_categories = map_info.get_single_key_for_map(
-                'skip_almost_reality_categories', skill=skill, game_mode=game_mode
+                'skip_almost_reality_for_categories', skill=skill, game_mode=game_mode
             )
             skip_almost_reality_final = (
-                skip_almost_reality and (skip_almost_reality_categories is None or
-                                         self.data['category'] in skip_almost_reality_categories)
+                skip_almost_reality or (skip_almost_reality_categories is not None and
+                                        self.data['category'] in skip_almost_reality_categories)
             )
             if is_nomo and not map_info.get_single_key_for_map('add_almost_reality_in_nomo',
                                                                skill=skill, game_mode=game_mode):
@@ -382,11 +382,18 @@ class PlaybackData(BaseData):
 
         skip_also_pacifist = map_info.get_single_key_for_map('skip_also_pacifist', skill=skill,
                                                              game_mode=game_mode)
+        skip_also_pacifist_categories = map_info.get_single_key_for_map(
+            'skip_also_pacifist_for_categories', skill=skill, game_mode=game_mode
+        )
+        skip_also_pacifist_final = skip_also_pacifist or (
+            skip_also_pacifist_categories is not None and
+            self.data['category'] in skip_also_pacifist_categories
+        )
         # If a run is not UV-Speed/Pacifist or on nomonsters, add tag for Also Pacifist
-        if not skip_also_pacifist and (self.raw_data.get('pacifist', False)
-                                       and not self.raw_data.get('nomonsters', False) and
-                                       self.data['category'] not in ['Pacifist', 'Stroller',
-                                                                     'UV Speed']):
+        if not skip_also_pacifist_final and (self.raw_data.get('pacifist', False)
+                                             and not self.raw_data.get('nomonsters', False) and
+                                             self.data['category'] not in ['Pacifist', 'Stroller',
+                                                                           'UV Speed']):
             self.note_strings.add('Also Pacifist')
 
         # Jumpwad has special rules for categories:

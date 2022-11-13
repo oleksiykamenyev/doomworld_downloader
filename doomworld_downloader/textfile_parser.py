@@ -286,6 +286,10 @@ class TextfileData(BaseData):
                 key, value = line.split(':', 1)
                 key = ''.join(key.lower().split())
                 value = value.strip()
+            elif ' - ' in line:
+                key, value = line.split(' - ', 1)
+                key = ''.join(key.lower().split())
+                value = value.strip()
             elif non_colon_port_match:
                 key = 'engine'
                 value = non_colon_port_match.group('value')

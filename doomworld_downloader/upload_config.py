@@ -188,6 +188,19 @@ class UploadConfig:
             return '1994-01-01T00:00:00Z'
 
     @property
+    def check_txt_date(self):
+        """Check txt date (optional).
+
+        If the lmp date looks wrong, this will check txt date as a fallback. Default to false.
+
+        :return: Flag indicating whether to check txt date
+        """
+        try:
+            return self._config.getboolean('general', 'check_txt_date')
+        except (NoSectionError, NoOptionError):
+            return False
+
+    @property
     def always_try_solonet(self):
         """Always try to play demos back with -solo-net (optional).
 

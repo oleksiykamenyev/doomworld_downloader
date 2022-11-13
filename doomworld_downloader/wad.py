@@ -20,8 +20,8 @@ class WadMapInfo:
         'allowed_missed_monsters': [], 'allowed_missed_secrets': [],
         'mark_secret_exit_as_normal': False, 'no_exit': False, 'nomo_map': False,
         'skip_almost_reality': False, 'skip_reality': False, 'tyson_only': False,
-        'skip_reality_categories': None, 'skip_almost_reality_categories': None,
-        'skip_also_pacifist': False
+        'skip_reality_for_categories': None, 'skip_almost_reality_for_categories': None,
+        'skip_also_pacifist': False, 'skip_also_pacifist_for_categories': None
     }
 
     def __init__(self, map_name, map_info_dict, wad_name, fail_on_error=False):

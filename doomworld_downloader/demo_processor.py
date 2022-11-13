@@ -189,7 +189,7 @@ class DemoZipInfo:
                 if get_filename_no_ext(lmp_file).lower() == get_filename_no_ext(txt_file).lower():
                     self.lmp_to_info_map[lmp_file].update(
                         {'txt_file_path': os.path.join(self.zip_extract_dir, txt_file),
-                         'txt_file_date': txt_file_info[txt_file]}
+                         'txt_file_date': txt_file_info[txt_file]['recorded_date']}
                     )
 
         zip_file.extractall(path=self.zip_extract_dir,
@@ -322,14 +322,14 @@ class DemoInfo:
         dsda_date = convert_datetime_to_dsda_date(lmp_date)
         if not DemoInfo.DEMO_DATE_CUTOFF < lmp_date < DemoInfo.FUTURE_CUTOFF:
             LOGGER.warning('Found possibly incorrect lmp date "%s", trying txt date.', dsda_date)
-            if txt_date:
+            if CONFIG.check_txt_date and txt_date:
                 dsda_date = convert_datetime_to_dsda_date(txt_date)
-                if not DemoInfo.DEMO_DATE_CUTOFF < txt_date < DemoInfo.FUTURE_CUTOFF:
+                if not DemoInfo.DEMO_DATE_CUTOFF < dsda_date < DemoInfo.FUTURE_CUTOFF:
                     LOGGER.error('Found possibly incorrect txt date, setting to UNKNOWN: "%s".',
                                  dsda_date)
                     dsda_date = 'UNKNOWN'
             else:
-                LOGGER.error('No txt date found, setting to UNKNOWN.')
+                LOGGER.error('Check txt date is not set or no txt date found, setting to UNKNOWN.')
                 dsda_date = 'UNKNOWN'
 
         self.data_manager.insert('recorded_at', dsda_date, DataManager.CERTAIN,
