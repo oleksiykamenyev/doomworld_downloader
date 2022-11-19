@@ -62,9 +62,9 @@ class TextfileData(BaseData):
         {re.compile(r'Pacifist', re.IGNORECASE): 'Pacifist'},
         {re.compile(r'Tyson', re.IGNORECASE): 'Tyson'},
         {re.compile(r'Stroller', re.IGNORECASE): 'Stroller'},
-        {re.compile(r'No\s*mo(nsters?)?([\s*-_]?with)?[\s*-_]?100[s%]?[\s*-_]?secrets?',
+        {re.compile(r'No[\s*-_]?mo(nsters?)?([\s*-_]?with)?[\s*-_]?100[s%]?[\s*-_]?secrets?',
                     re.IGNORECASE): 'NoMo 100S'},
-        {re.compile(r'No\s*mo(nsters?)?([\s*-_]?speed)?', re.IGNORECASE): 'NoMo'},
+        {re.compile(r'No[\s*-_]?mo(nsters?)?([\s*-_]?speed)?', re.IGNORECASE): 'NoMo'},
         # If just the difficulty is present, assume speed.
         {re.compile(r'(UV|Ultra[\s*-_]?Violence|Skill[\s*-_]?4)', re.IGNORECASE): 'UV Speed'},
         {re.compile(r'(NM|Night[\s*-_]?mare!?|Skill[\s*-_]?5)', re.IGNORECASE): 'NM Speed'}

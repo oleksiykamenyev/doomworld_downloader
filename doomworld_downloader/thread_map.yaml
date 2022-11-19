@@ -1413,6 +1413,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/yum
   id: '132384'
   name: "YUM demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/132456-mbos-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/mbos
+  id: '132456'
+  name: "MBOS demos [-complevel 21]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
