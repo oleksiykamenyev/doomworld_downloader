@@ -140,8 +140,11 @@ def main():
         wads_in_zip = glob.glob('{}/*.wad'.format(tmp_extract_path))
         num_maps = 0
         for wad in wads_in_zip:
-            wad_object = omg.WAD(wad)
-            num_maps += len(wad_object.maps)
+            try:
+                wad_object = omg.WAD(wad)
+                num_maps += len(wad_object.maps)
+            except ValueError:
+                LOGGER.exception('Encountered error when parsing WAD %s.', wad)
 
         if num_maps < 1:
             LOGGER.error('No maps found for wad %s.', file_info['filename'])

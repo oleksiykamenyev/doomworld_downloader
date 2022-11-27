@@ -1418,6 +1418,16 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/mbos
   id: '132456'
   name: "MBOS demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/132587-thirty-monsters-challenge-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/30mc
+  id: '132587'
+  name: "Thirty Monsters Challenge demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/132656-nostalgia-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/nostalgia
+  id: '132656'
+  name: "Nostalgia demos [-complevel 2]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -1668,6 +1678,15 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/frog_and_toad
   id: '131774'
   name: Frog / Toad / Frog and Toad demos [-complevel 9]
+"https://www.doomworld.com/forum/topic/132690-wormwood-series-demos-complevel-9/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/wormwood
+      - https://www.dsdarchive.com/wads/wormwood_eu
+      - https://www.dsdarchive.com/wads/wormwood3
+      - https://www.dsdarchive.com/wads/wormwood4
+  id: '132690'
+  name: Wormwood Series demos [-complevel 9]
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
@@ -2016,13 +2035,10 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/magnolia
       - https://www.dsdarchive.com/wads/oitl
       - https://www.dsdarchive.com/wads/fcff
-      - https://www.dsdarchive.com/wads/wormwood
       - https://www.dsdarchive.com/wads/pwacp
-      - https://www.dsdarchive.com/wads/wormwood_eu
       - https://www.dsdarchive.com/wads/doombound01
       - https://www.dsdarchive.com/wads/stuff
       - https://www.dsdarchive.com/wads/stuff2
-      - https://www.dsdarchive.com/wads/wormwood3
       - https://www.dsdarchive.com/wads/hyshw
 "https://www.doomworld.com/forum/topic/87839-demos-for-miscellaneous-cyberdemon531-gzdoom-maps/":
   id: "87839"
