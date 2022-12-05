@@ -1428,6 +1428,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/nostalgia
   id: '132656'
   name: "Nostalgia demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/132716-512-linedefs-of-vr-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/512linesvr
+  id: '132716'
+  name: "512 Linedefs of /vr/ demos [-complevel 9]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -1925,7 +1930,9 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/dbp27
       - https://www.dsdarchive.com/wads/dbp_29
       - https://www.dsdarchive.com/wads/dbp30
+      - https://www.dsdarchive.com/wads/dbp31
       - https://www.dsdarchive.com/wads/dbp_34
+      - https://www.dsdarchive.com/wads/dbp_35
       - https://www.dsdarchive.com/wads/dbp36
       - https://www.dsdarchive.com/wads/dbp37_augzen
       - https://www.dsdarchive.com/wads/dbp_39
@@ -2162,6 +2169,7 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/mnltdst
       - https://www.dsdarchive.com/wads/mnltdst_rc2
       - https://www.dsdarchive.com/wads/pagodia
+      - https://www.dsdarchive.com/wads/whtrmns
 "https://www.doomworld.com/forum/topic/129607-various-eternal-wads-demos/":
   id: "129607"
   name: 'Various "Eternal" Wads demos'
