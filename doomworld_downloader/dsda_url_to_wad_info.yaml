@@ -21616,6 +21616,13 @@
     map_ranges: [[1, 3]]
     d2all: ["Map 01", "Map 03"]
     episodes: []
+    map_info:
+      "Map 01":
+        skip_reality: true
+      "Map 02":
+        skip_reality: true
+      "Map 03":
+        skip_reality: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/deathmatch/m-o/mkrevwar"
   dsda_paginated: false
   doomworld_thread: null
@@ -21630,5 +21637,189 @@
     map_ranges: [["E1M1"]]
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom/d-f/darkpit"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/malxmtb":
+  wad_name: Xmas Tech Base
+  iwad: doom2
+  wad_files:
+    mal_xmastb.wad: {checksum: "e3840d4cb4b32fbe5ed52083dd6d3f3c"}
+  complevel: 2
+  playback_cmd_line: "-file mal_xmastb"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/m-o/malxmtb"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/tntsprng":
+  wad_name: The Spring Ballad
+  iwad: doom
+  wad_files:
+    spring.wad: {checksum: "23317a6422715b3739bf0b8be6924418"}
+  complevel: 3
+  playback_cmd_line: "-file spring"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/s-u/tntsprng"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/punchmas":
+  wad_name: A Very punch you in the face man Christmas
+  iwad: doom2
+  wad_files:
+    punchmas.wad: {checksum: "3dbc8f71d3f362e1b9960737495f69d7"}
+  complevel: 9
+  playback_cmd_line: "-file punchmas"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/themes/xmas/punchmas"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/winterdm":
+  wad_name: Winter Themed Deathmatch
+  iwad: doom2
+  wad_files:
+    winterdm.wad: {checksum: "3aaeda738af2ca3d712f9e611642b885"}
+  complevel: 2
+  playback_cmd_line: "-file winterdm"
+  map_list_info:
+    map_ranges: [[1, 9]]
+    d2all: ["Map 01", "Map 09"]
+    episodes: []
+    map_info:
+      "Map 01":
+        skip_reality: true
+      "Map 02":
+        skip_reality: true
+      "Map 03":
+        skip_reality: true
+      "Map 04":
+        skip_reality: true
+      "Map 05":
+        skip_reality: true
+      "Map 06":
+        skip_reality: true
+      "Map 07":
+        skip_reality: true
+      "Map 08":
+        skip_reality: true
+      "Map 09":
+        skip_reality: true
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/deathmatch/Ports/v-z/winterdm"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/pitsofdm":
+  wad_name: The Pits of DooM
+  iwad: doom
+  wad_files:
+    pitsofd1.wad: {checksum: "e8962db65981661108254473f63b0e89"}
+    pitsofd2.wad: {checksum: "47fc3afc295b062b010f885c51a20f20"}
+  complevel: 3
+  playback_cmd_line: "-file pitsofd1 pitsofd2"
+  map_list_info:
+    map_ranges: [["E1M1", "E1M9"]]
+    episodes: [["E1M1", "E1M8"]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/p-r/pitsofdm"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/scarves":
+  wad_name: SCARVES.WAD
+  iwad: doom
+  wad_files:
+    scarves.wad: {checksum: "968fd4544a79d4518ef7c67e2c4eacaf"}
+  complevel: 3
+  playback_cmd_line: "-file scarves"
+  map_list_info:
+    map_ranges: [["E1M3"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/s-u/scarves"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/rooftops":
+  wad_name: Rooftops.Wad
+  iwad: doom2
+  wad_files:
+    rooftops.wad: {checksum: "1880f78a2c8e77ef42f30818def0ed5b"}
+  complevel: 2
+  playback_cmd_line: "-file rooftops"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/p-r/rooftops"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/iasp":
+  wad_name: Intelligent Acid Structure Pool
+  iwad: doom2
+  wad_files:
+    iasp.wad: {checksum: "c2bb87ebadf545128cbf06ddc061d425"}
+  complevel: 2
+  playback_cmd_line: "-file iasp"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/g-i/iasp"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/atone":
+  wad_name: Atonement
+  iwad: doom2
+  wad_files:
+    atone.wad: {checksum: "014cf9b7332dbedec96c4a811daabf1a"}
+    atone.deh: {not_required_for_playback: true, checksum: "08513f030eaa6b0762d274199fe6b812"}
+  complevel: 2
+  playback_cmd_line: "-file atone"
+  map_list_info:
+    map_ranges: [[1, 33]]
+    episodes: [["Map 01", "Map 06"], ["Map 07", "Map 11"], ["Map 12", "Map 15"], ["Map 16", "Map 20"], ["Map 21", "Map 25"], ["Map 26", "Map 30"]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/atone"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/132903-atonement-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/edwardo":
+  wad_name: Mr. Edwardo :-)
+  iwad: doom
+  wad_files:
+    edwardo.wad: {checksum: "5a0a90b2e26e9ba1cf716d2081f5a150"}
+  complevel: 3
+  playback_cmd_line: "-file edwardo"
+  map_list_info:
+    map_ranges: [["E2M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/d-f/edwardo"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/hellpost":
+  wad_name: Hellpost
+  iwad: doom
+  wad_files:
+    hellpost.wad: {checksum: "2da7fce73529ba257e274b906a5e37f5"}
+  complevel: 3
+  playback_cmd_line: "-file hellpost"
+  map_list_info:
+    map_ranges: [["E2M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/g-i/hellpost"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/twow":
+  wad_name: THE WELLS OF WOE.
+  iwad: doom2
+  wad_files:
+    twow.wad: {checksum: "5793666976804c66a4f89c00e96ef657"}
+  complevel: 9
+  playback_cmd_line: "-file twow"
+  map_list_info:
+    map_ranges: [[1, 10], [31]]
+    d2all: ["Map 01", "Map 10"]
+    episodes: []
+    secret_exits: {"Map 09": "Map 31"}
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/s-u/twow"
   dsda_paginated: false
   doomworld_thread: null
