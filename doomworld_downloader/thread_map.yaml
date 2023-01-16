@@ -1438,6 +1438,41 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/atone
   id: '132903'
   name: "Atonement demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/133037-the-lost-magic-demos-cl-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/tlm
+  id: '133037'
+  name: "The Lost Magic demos (cl 9)"
+"https://www.doomworld.com/forum/topic/133130-200-line-massacre-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/200lnm
+  id: '133130'
+  name: "200 Line Massacre demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/133134-pocket-slaughter-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/pckslgt-v2
+  id: '133134'
+  name: "Pocket Slaughter demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/133287-junkfoodwad-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/junkfood
+  id: '133287'
+  name: "Junkfood.wad Demos [-complevel 9)"
+"https://www.doomworld.com/forum/topic/133301-blueage-demos-blueagefwad-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/blueagef
+  id: '133301'
+  name: "BlueAge Demos (blueagef.wad) -complevel 2"
+"https://www.doomworld.com/forum/topic/133348-balls-of-steel-community-project-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/boscp
+  id: '133348'
+  name: "Balls of Steel Community Project demos (-complevel 21)"
+"https://www.doomworld.com/forum/topic/133365-unrattled-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/unrattled
+  id: '133365'
+  name: "UNRATTLED demos [-complevel 9]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -1697,6 +1732,14 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/wormwood4
   id: '132690'
   name: Wormwood Series demos [-complevel 9]
+"https://www.doomworld.com/forum/topic/133477-short-maps-for-short-people-series-demos-complevel-2/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/smfsp2
+      - https://www.dsdarchive.com/wads/smfsp3
+      - https://www.dsdarchive.com/wads/smfsp8
+  id: '133477'
+  name: Short Maps for Short People series demos [-complevel 2]
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
@@ -1876,7 +1919,9 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/abyspe66
       - https://www.dsdarchive.com/wads/abyspe67
       - https://www.dsdarchive.com/wads/abyspe68
-      - https://www.dsdarchive.com/wads/abyspe69
+      - https://www.dsdarchive.com/wads/abyspe69_1
+      - https://www.dsdarchive.com/wads/abyspe69_2
+      - https://www.dsdarchive.com/wads/abyspe69_3
 "https://www.doomworld.com/forum/topic/92251-doomworld-mega-project-series-demos/":
   id: "92251"
   name: Doomworld Mega Project Series Demos
@@ -1943,8 +1988,9 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/dbp_39
       - https://www.dsdarchive.com/wads/dbp40rc1
       - https://www.dsdarchive.com/wads/dbp_45
-      - https://www.dsdarchive.com/wads/dbp_47
+      - https://www.dsdarchive.com/wads/dbp47
       - https://www.dsdarchive.com/wads/dbp50
+      - https://www.dsdarchive.com/wads/dbp_51
 "https://www.doomworld.com/forum/topic/127478-mayhem-demo-thread-complevel-9/":
   id: "127478"
   name: MAYhem demo thread [-complevel 9]
@@ -2302,11 +2348,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     ignore: true
   id: "111006"
   name: Similarities between speedrunning and musical performance
-"https://www.doomworld.com/forum/topic/118074-dsda-doom-source-port-v0210/":
+"https://www.doomworld.com/forum/topic/118074-dsda-doom-source-port-v0243/":
   additional_info:
     ignore: true
   id: "118074"
-  name: dsda-doom source port [v0.21.0]
+  name: dsda-doom source port [v0.24.3]
 "https://www.doomworld.com/forum/topic/116534-dsda-doom-guide-usage-recording-demos-and-some-extra-info/":
   additional_info:
     ignore: true
@@ -2322,6 +2368,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     ignore: true
   id: "126257"
   name: Max Exceptions Debate Thread
+"https://www.doomworld.com/forum/topic/133096-dsda-doom-v0256-2023-01-15/":
+  additional_info:
+    ignore: true
+  id: "133096"
+  name: dsda-doom v0.25.0 [2022-12-23]
 
 # Miscellanous threads
 # Ignored because this is not the correct thread for NRFTL, and the one demo post in here was duped

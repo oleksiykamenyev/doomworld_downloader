@@ -250,7 +250,7 @@ class DemoJson:
 
         for key in self.REQUIRED_KEYS:
             if key not in self.demo_dict:
-                LOGGER.error('Key %s for LMP%s%s not found in final demo JSON.',
+                LOGGER.error('Key %s for LMP %s%s not found in final demo JSON.',
                              key, self.demo_info.lmp_metadata, self.zip_msg)
                 self._set_has_issue()
                 self.demo_dict[key] = ([NEEDS_ATTENTION_PLACEHOLDER]

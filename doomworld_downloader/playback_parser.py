@@ -30,7 +30,8 @@ class PlaybackData(BaseData):
     """
     # -levelstat: Create a levelstat.txt file with level statistics
     # -analysis: Create an analysis.txt file with additional analysis on the demo
-    DEFAULT_ARGS = '-levelstat -analysis -nosound -nommusic -nodraw'
+    # -quiet: Suppress a bunch of playback logging from DSDA-Doom
+    DEFAULT_ARGS = '-levelstat -analysis -nosound -nomusic -nodraw -quiet'
     DSDA_DOOM_COMMAND_START = '{dsda_doom_path}/dsda-doom.exe {additional_args}'.format(
         dsda_doom_path=CONFIG.dsda_doom_directory, additional_args=DEFAULT_ARGS
     )
@@ -601,8 +602,11 @@ class PlaybackData(BaseData):
             # If the config sets these settings, use them even if they evaluate to None/empty
             episodes = wad.map_list_info.get_key('episodes')
             d2all = wad.map_list_info.get_key('d2all')
+            d1all = wad.map_list_info.get_key('d1all')
             if map_range == d2all:
                 self.data['level'] = 'D2All'
+            elif map_range == d1all:
+                self.data['level'] = 'D1All'
             elif episodes:
                 for idx, episode_range in enumerate(episodes):
                     if map_range == episode_range:

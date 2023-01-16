@@ -154,7 +154,7 @@ def main():
         # values as args to the datetime constructor
         idgames_date = datetime(*map(int, file_info['date'].split('-')))
         idgames_year = idgames_date.year
-        file_creation_year = file_creation_date.year
+        file_creation_year = file_creation_date.year if file_creation_date else idgames_year
         if idgames_year != file_creation_year:
             LOGGER.error('Mismatched years in idgames date and file creation date for wad %s!',
                          file_info['filename'])
@@ -162,7 +162,7 @@ def main():
                          file_creation_year)
 
         wad_year = file_creation_year
-        if file_creation_date < EARLIEST_WAD_TIME:
+        if file_creation_date and file_creation_date < EARLIEST_WAD_TIME:
             wad_year = idgames_year
 
         wad_json = {

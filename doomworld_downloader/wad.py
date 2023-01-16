@@ -138,7 +138,8 @@ class WadMapInfo:
 
 class WadMapListInfo:
     """WAD map list info object handler."""
-    TOP_LEVEL_KEYS = ['complevel', 'd2all', 'episodes', 'map_info', 'map_ranges', 'secret_exits']
+    TOP_LEVEL_KEYS = ['complevel', 'd1all', 'd2all', 'episodes', 'map_info', 'map_ranges',
+                      'secret_exits']
 
     D2ALL_DEFAULT = ['Map 01', 'Map 30']
     D2ALL_IWADS = ['doom2', 'plutonia', 'tnt']

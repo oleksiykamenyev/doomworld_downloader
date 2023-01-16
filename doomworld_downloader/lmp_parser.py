@@ -27,7 +27,8 @@ class LMPData(BaseData):
     LMP format like headers, footers, etc. That will be handled by the LMP library used underneath.
     """
     PORT_FOOTER_TO_DSDA_MAP = {'PrBoom-Plus': 'PRBoom', 'dsda-doom': 'DSDA-Doom', 'Woof': 'Woof',
-                               'Nugget Doom': 'Nugget Doom', 'SpeedWoof': 'SpeedWoof'}
+                               'Nugget Doom': 'Nugget Doom', 'SpeedWoof': 'SpeedWoof',
+                               'Crispy Doom': 'Crispy Doom'}
     KEY_LIST = [
         'engine', 'version', 'skill', 'episode', 'level', 'play mode', 'respawn', 'fast',
         'nomonsters', 'player 1', 'player 2', 'player 3', 'player 4', 'player 5', 'player 6',
@@ -324,9 +325,11 @@ class LMPData(BaseData):
                         self.raw_data['wad_strings'].append(
                             self._parse_file_in_footer(line[idx], '.deh')
                         )
-                if self.raw_data.get('complevel') == 'vanilla' and gameversion:
+                # Crispy Doom will not output a complevel to the footer, just gameversion
+                if ((not self.raw_data.get('complevel') or
+                     self.raw_data.get('complevel') == 'vanilla') and gameversion):
                     self.raw_data['complevel'] = LMPData.WOOF_GAMEVERSION_TO_COMPLEVEL_MAP.get(
-                        gameversion, self.raw_data['complevel']
+                        gameversion, self.raw_data.get('complevel')
                     )
 
     def _parse_file_in_footer(self, footer_file, extension):
