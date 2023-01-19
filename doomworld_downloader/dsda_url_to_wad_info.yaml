@@ -23150,3 +23150,116 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/0-9/1ff"
   dsda_paginated: false
   doomworld_thread: null
+"https://www.dsdarchive.com/wads/znud_v05":
+  wad_name: Non-Ultimate Doom
+  iwad: doom2
+  wad_files:
+    znud_v05/znud_v05.wad: {checksum: "8ab6784e20dcc7299d32f6b4af30b4a0"}
+  complevel: 9
+  playback_cmd_line: "-file znud_v05"
+  map_list_info:
+    map_ranges: [[1, 5]]
+    d2all: ["Map 01", "Map 05"]
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/86724-demos-for-miscellaneous-ribbiks-maps/"
+"https://www.dsdarchive.com/wads/dmax2021":
+  wad_name: Doomworld Maximum Project 2021
+  iwad: doom2
+  wad_files:
+    dmax2021.wad: {checksum: "b96a5ad2418748fd2604f780dad14dec"}
+    dmax2021_1.6.wad: {not_required_for_playback: true, "dupe_checksum": true, checksum: "b96a5ad2418748fd2604f780dad14dec"}
+  complevel: 2
+  playback_cmd_line: "-file dmax2021"
+  map_list_info:
+    map_ranges: [[1, 61], [HUB]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/dmax2021"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/abdmansn":
+  wad_name: Abandoned Mansion
+  iwad: doom2
+  wad_files:
+    abdmansn.wad: {checksum: "a00dfef7acd5b7283747be22c4babbe1"}
+  complevel: 2
+  playback_cmd_line: "-file abdmansn"
+  map_list_info:
+    map_ranges: [[21]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/a-c/abdmansn"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/bldguts2":
+  wad_name: "Blood 'n' Guts Part Two"
+  iwad: doom2
+  wad_files:
+    bldguts2.wad: {checksum: "2eb623f1f476e8ed6f0b66f843c149bd"}
+  complevel: 2
+  playback_cmd_line: "-file bldguts2"
+  map_list_info:
+    map_ranges: [[2]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/a-c/bldguts2"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/graphed":
+  wad_name: Graphed
+  iwad: doom2
+  wad_files:
+    graphed.wad: {checksum: "010c08886f430584eb361e6421498b03"}
+  complevel: 2
+  playback_cmd_line: "-file graphed"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/g-i/graphed"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/ham":
+  wad_name: HAM.wad
+  iwad: doom2
+  wad_files:
+    ham.wad: {checksum: "998a3801e87d5c314362068ae1732924"}
+  complevel: 2
+  playback_cmd_line: "-file ham"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/g-i/ham"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/val999":
+  wad_name: Exit to Hell
+  iwad: doom2
+  wad_files:
+    val999.wad: {checksum: "975b0c16538363806473c09eef357b24"}
+  complevel: 2
+  playback_cmd_line: "-file val999"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/v-z/val999"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/zombie":
+  wad_name: Zombie
+  iwad: doom2
+  wad_files:
+    zombie.wad: {checksum: "f216d1b76a3f75ca0388fbf9cd284cae"}
+  complevel: 2
+  playback_cmd_line: "-file zombie"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/v-z/zombie"
+  dsda_paginated: false
+  doomworld_thread: null
