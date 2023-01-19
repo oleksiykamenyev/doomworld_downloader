@@ -549,8 +549,6 @@ class PlaybackData(BaseData):
         map_ranges = wad.map_list_info.get_key('map_ranges')
         if map_ranges:
             level_num = self._convert_level_to_num(level)
-            # TODO: For episodic wads, if there were E1M10 and later, this wouldn't work, might
-            #       want to address that in the future
             for map_range in map_ranges:
                 try:
                     map_range = parse_range(map_range, remove_non_numeric_chars=True)

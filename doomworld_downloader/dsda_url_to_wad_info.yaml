@@ -20286,6 +20286,7 @@
   playback_cmd_line: "-file 2022ado"
   map_list_info:
     map_ranges: [["E1M1", "E1M10"], ["E2M1", "E2M10"], ["E3M1", "E3M10"], ["E4M1", "E4M10"], ["E5M1", "E5M10"]]
+    secret_exits: {"E1M3": "E1M9", "E1M8": "E1M10", "E2M5": "E2M9", "E2M9": "E2M10", "E3M6": "E3M9", "E3M9": "E3M10", "E4M2": "E4M9", "E4M9": "E4M10", "E5M4": "E5M9", "E5M9": "E5M10"}
   idgames_url: "https://www.doomworld.com/idgames/levels/doom/Ports/megawads/2002ado"
   dsda_paginated: false
   doomworld_thread: null
@@ -23128,7 +23129,24 @@
   playback_cmd_line: "-file ass69_3"
   map_list_info:
     map_ranges: [[1, 22]]
+    d2all: ["Map 01", "Map 22"]
+    episodes: []
     secret_exits: {"Map 15": "Map 31"}
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/abyspe69"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
+"https://www.dsdarchive.com/wads/1ff":
+  wad_name: 1 Fast Fight
+  iwad: doom2
+  wad_files:
+    1ff.wad: {checksum: "c6ee74a53f856e84b5844401e351e6eb"}
+    1ff.bex: {not_required_for_playback: true, checksum: "094fbc8be50260261e0f6f56591e758a"}
+  complevel: 9
+  playback_cmd_line: "-file 1ff"
+  map_list_info:
+    map_ranges: [[1, 10], [31, 32]]
+    d2all: ["Map 01", "Map 10"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/0-9/1ff"
+  dsda_paginated: false
+  doomworld_thread: null
