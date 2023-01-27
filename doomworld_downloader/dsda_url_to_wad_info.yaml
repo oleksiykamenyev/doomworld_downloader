@@ -4782,6 +4782,9 @@
     map_ranges: [[1, 5]]
     d2all: ["Map 01", "Map 05"]
     episodes: []
+    map_info:
+      "Map 01":
+        skip_reality_for_categories: ["UV Speed", "Stroller", "NM Speed", "Pacifist"]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/s-u/sbspd002"
   dsda_paginated: false
   doomworld_thread: null
@@ -18053,8 +18056,8 @@
   complevel: 2
   playback_cmd_line: "-file dbp50"
   map_list_info:
-    map_ranges: [[1, 15]]
-    d2all: ["Map 01", "Map 15"]
+    map_ranges: [[1, 16]]
+    d2all: ["Map 01", "Map 16"]
     episodes: []
     secret_exits: {}
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp50"
@@ -23178,7 +23181,7 @@
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/dmax2021"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/133619-doomworld-maximum-project-series-demos/"
 "https://www.dsdarchive.com/wads/abdmansn":
   wad_name: Abandoned Mansion
   iwad: doom2
@@ -23261,5 +23264,116 @@
     d2all: null
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/v-z/zombie"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/2001-e1":
+  wad_name: "2001 A Doom Oddyssey: Episode 1 demo release"
+  iwad: doom
+  wad_files:
+    2001-e1.wad: {checksum: "556083dfaf4f675909ccd8587711d399"}
+  complevel: 3
+  playback_cmd_line: "-file 2001-e1"
+  map_list_info:
+    map_ranges: [["E1M1", "E1M9"]]
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/sbspd003":
+  wad_name: "SargeBaldy Speedmapping Compilation #3"
+  iwad: doom2
+  wad_files:
+    sbspd003.wad: {checksum: "391a2476a6b5e42b273a587a930a43e9"}
+  complevel: 9
+  playback_cmd_line: "-file sbspd003"
+  map_list_info:
+    map_ranges: [[1, 6]]
+    d2all: ["Map 01", "Map 06"]
+    episodes: []
+    map_info:
+      "Map 03":
+        skip_almost_reality: true
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/s-u/sbspd003"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/dupe":
+  wad_name: Duped
+  iwad: doom
+  wad_files:
+    dupe.wad: {checksum: "ccd6e97fdcef7bec22b6785ef461b858"}
+  complevel: 3
+  playback_cmd_line: "-file dupe"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/d-f/dupe"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/shallowwe1":
+  wad_name: Shallow World E1
+  iwad: doom2
+  wad_files:
+    shallowwe1.wad: {checksum: "0204601d5519ee6ef81d2dbb446be849"}
+  complevel: 9
+  playback_cmd_line: "-file shallowwe1"
+  map_list_info:
+    map_ranges: [[1, 11], [33, 34]]
+    d2all: ["Map 01", "Map 11"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/s-u/shallowwe1"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/disorder":
+  wad_name: Disorder
+  iwad: doom2
+  wad_files:
+    disorder.wad: {checksum: "2f44a42b457cdf6b0ef054bf135c41c7"}
+  complevel: 9
+  playback_cmd_line: "-file disorder"
+  map_list_info:
+    map_ranges: [[1, 10]]
+    d2all: ["Map 01", "Map 10"]
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/oatb":
+  wad_name: "OOPS: All TechBase"
+  iwad: doom2
+  wad_files:
+    oatb.wad: {checksum: "7b6ccd61c1ca0706be1d0d7635beaf41"}
+    oatb.deh: {not_required_for_playback: true, checksum: "babae1f86901f3b609015dbe74552b2a"}
+  complevel: 2
+  playback_cmd_line: "-file oatb"
+  map_list_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/oatb"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/uacdiot":
+  wad_name: UAC Scientists are total morons
+  iwad: doom2
+  wad_files:
+    uacdiot.wad: {checksum: "99686962dfedea1422541059c417ab7d"}
+  complevel: 9
+  playback_cmd_line: "-file uacdiot"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/s-u/uacdiot"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/stranded":
+  wad_name: Stranded
+  iwad: doom2
+  wad_files:
+    stranded.wad: {checksum: "99686962dfedea1422541059c417ab7d"}
+  complevel: 21
+  playback_cmd_line: "-file stranded"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/s-u/stranded"
   dsda_paginated: false
   doomworld_thread: null

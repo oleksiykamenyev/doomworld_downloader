@@ -73,7 +73,7 @@ class PlaybackData(BaseData):
 
     ALLOWED_FOOTER_FILES = ['bloodcolor.deh', 'bloodfix.deh', 'doom widescreen hud.wad',
                             'doom 2 widescreen assets.wad', 'dsda-doom.wad', 'prboom-plus.wad',
-                            'doom_wide.wad']
+                            'doom_wide.wad', 'notransl.deh']
     FOOTER_WAD_EXTENSIONS = ['.bex', '.deh', '.hhe', '.pk3', '.pk7', '.wad']
 
     def __init__(self, lmp_path, wad_guesses, demo_info=None):
@@ -260,6 +260,27 @@ class PlaybackData(BaseData):
 
                     cur_demo_playback = DemoPlayback(wad_guess, command, cur_levelstat,
                                                      cur_analysis, cmd_line_info=cmd_line_info)
+                    wad_files = [os.path.basename(wad_file.lower())
+                                 for wad_file in cur_demo_playback.wad.files.keys()]
+                    unexpected_file = False
+                    for footer_file in self.demo_info.get('footer_files', []):
+                        footer_lower = os.path.basename(footer_file.lower())
+                        footer_ext = os.path.splitext(footer_lower)[1]
+                        if not footer_ext:
+                            footer_lower = f'{footer_lower}.wad'
+                            footer_ext = '.wad'
+                        if (footer_lower not in wad_files and
+                                footer_lower != f'{cur_demo_playback.wad.iwad}.wad' and
+                                footer_lower not in PlaybackData.ALLOWED_FOOTER_FILES and
+                                footer_ext in PlaybackData.FOOTER_WAD_EXTENSIONS):
+                            LOGGER.error('Unexpected file %s found in footer for WAD %s.',
+                                         footer_file, cur_demo_playback.wad.name)
+                            unexpected_file = True
+                            break
+
+                    if unexpected_file:
+                        continue
+
                     if not self._demo_playback or self._demo_playback < cur_demo_playback:
                         self._demo_playback = cur_demo_playback
 
@@ -271,22 +292,6 @@ class PlaybackData(BaseData):
                 break
 
         if self._demo_playback:
-            wad_files = [os.path.basename(wad_file.lower())
-                         for wad_file in self._demo_playback.wad.files.keys()]
-            for footer_file in self.demo_info.get('footer_files', []):
-                footer_lower = os.path.basename(footer_file.lower())
-                footer_ext = os.path.splitext(footer_lower)[1]
-                if not footer_ext:
-                    footer_lower = f'{footer_lower}.wad'
-                    footer_ext = '.wad'
-                if (footer_lower not in wad_files and
-                        footer_lower != f'{self._demo_playback.wad.iwad}.wad' and
-                        footer_lower not in PlaybackData.ALLOWED_FOOTER_FILES and
-                        footer_ext in PlaybackData.FOOTER_WAD_EXTENSIONS):
-                    LOGGER.error('Unexpected file %s found in footer for WAD %s.',
-                                 footer_file, self._demo_playback.wad.name)
-                    self.playback_failed = True
-
             if not self.playback_failed:
                 if '-solo-net' in self._demo_playback.cmd:
                     self.demo_info['game_mode'] = 'coop'
