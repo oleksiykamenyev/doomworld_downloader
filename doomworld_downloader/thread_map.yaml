@@ -263,11 +263,6 @@ https://www.doomworld.com/forum/topic/55438-vanguard-demos-complevel-9/:
     wad: https://www.dsdarchive.com/wads/vanguard
   id: '55438'
   name: Vanguard demos [-complevel 9]
-https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
-  additional_info:
-    wad: https://www.dsdarchive.com/wads/mm2
-  id: '55559'
-  name: Memento Mori II  demos [-complevel 2]
 https://www.doomworld.com/forum/topic/55560-ultimate-doom-demos-complevel-3/:
   additional_info:
     wad: https://www.dsdarchive.com/wads/doom
@@ -1488,6 +1483,16 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/anta_req
   id: '133654'
   name: "Antaresian Reliquary demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/133813-machete-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/machetefinal
+  id: '133813'
+  name: "Machete demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/133562-shallow-world-episode-1-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/shallowwe1
+  id: '133562'
+  name: "Shallow World Episode 1 demos [-complevel 9]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -1755,6 +1760,13 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/smfsp8
   id: '133477'
   name: Short Maps for Short People series demos [-complevel 2]
+https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/mm2
+      - https://www.dsdarchive.com/wads/mm2info
+  id: '55559'
+  name: Memento Mori II  demos [-complevel 2]
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
@@ -2002,6 +2014,7 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/dbp37_augzen
       - https://www.dsdarchive.com/wads/dbp_39
       - https://www.dsdarchive.com/wads/dbp40rc1
+      - https://www.dsdarchive.com/wads/dbp44rc2-4
       - https://www.dsdarchive.com/wads/dbp_45
       - https://www.dsdarchive.com/wads/dbp47
       - https://www.dsdarchive.com/wads/dbp50
@@ -2080,6 +2093,32 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
   additional_info:
     wads:
       - https://www.dsdarchive.com/wads/dmax2021
+"https://www.doomworld.com/forum/topic/133801-sargebaldy-speedmapping-compilations-demos/":
+  id: "133801"
+  name: SargeBaldy Speedmapping Compilations demos
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/sbspd001
+      - https://www.dsdarchive.com/wads/sbspd002
+      - https://www.dsdarchive.com/wads/sbspd003
+      - https://www.dsdarchive.com/wads/sbspd004
+      - https://www.dsdarchive.com/wads/sbspd005
+      - https://www.dsdarchive.com/wads/sbspd006
+      - https://www.dsdarchive.com/wads/sbspd007
+      - https://www.dsdarchive.com/wads/sbspd008
+      - https://www.dsdarchive.com/wads/sbspd009
+      - https://www.dsdarchive.com/wads/sbspd010
+      - https://www.dsdarchive.com/wads/sbspd011
+      - https://www.dsdarchive.com/wads/sbspd012
+      - https://www.dsdarchive.com/wads/sbspd013
+      - https://www.dsdarchive.com/wads/sbspd014
+      - https://www.dsdarchive.com/wads/sbspd015
+      - https://www.dsdarchive.com/wads/sbspd016
+      - https://www.dsdarchive.com/wads/sbspd017
+      - https://www.dsdarchive.com/wads/sbspd018
+      - https://www.dsdarchive.com/wads/sbspd019
+      - https://www.dsdarchive.com/wads/sbspd020
+      - https://www.dsdarchive.com/wads/sbspd021
 
 # WAD Author threads
 "https://www.doomworld.com/forum/topic/86724-demos-for-miscellaneous-ribbiks-maps/":

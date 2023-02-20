@@ -16,8 +16,10 @@ LOGGER = logging.getLogger(__name__)
 class TextfileData(BaseData):
     """Store all uploader-relevant data for a demo textfile."""
     CATEGORY_KEYS = ['cat', 'category', 'discipline', 'type']
-    PORT_KEYS = ['client', 'engine', 'exe', 'port', 'portused', 'sourceport', 'sourceportused',
-                 'usingport', 'usingsourceport']
+    PORT_KEYS = ['client', 'clients', 'engine', 'engines', 'exe', 'exes', 'port', 'ports',
+                 'portused', 'portsused', 'sourceport', 'sourceports', 'sourceportused',
+                 'sourceportsused', 'usingport', 'usingports', 'usingsourceport',
+                 'usingsourceports']
     # These port keys could be placed at the start of a line with no colon (i.e., in cases of
     # Compet-N-style textfiles. In this case, the script will still parse them.
     NON_COLON_PORT_REGEX = re.compile(
