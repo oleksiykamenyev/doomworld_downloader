@@ -27,9 +27,12 @@ LOGGER = logging.getLogger(__name__)
 class DemoJsonDumper:
     """Demo JSON dumper."""
 
-    def __init__(self):
+    def __init__(self, custom_json_parent_dir=None):
         """Initialize demo JSON dumper."""
         self.demo_location_to_jsons_map = defaultdict(list)
+        self._custom_json_parent_dir = custom_json_parent_dir
+
+        self.final_output_jsons = []
 
     def add_demo_json(self, demo_info, dedupe=True):
         """Add demo JSON to dumper.
@@ -105,11 +108,11 @@ class DemoJsonDumper:
                     has_tags = demo_json.has_tags or has_tags
 
                 demo_list_entry.update(file_entry)
-                final_demo_json = {'demo_pack': demo_list_entry}
+                final_output_json = {'demo_pack': demo_list_entry}
             else:
                 demo_list_entry = demo_jsons[0].demo_dict
                 demo_list_entry.update(file_entry)
-                final_demo_json = {'demo': demo_list_entry}
+                final_output_json = {'demo': demo_list_entry}
                 player_info = '_' + '_'.join(demo_list_entry['players'])
                 maybe_cheated = demo_jsons[0].maybe_cheated
                 has_issue = demo_jsons[0].has_issue
@@ -131,17 +134,20 @@ class DemoJsonDumper:
                 json_path = self._set_up_demo_json_file(json_filename, VALID_NO_ISSUE_DIR)
 
             with open(json_path, 'w', encoding='utf-8') as out_stream:
-                json.dump(final_demo_json, out_stream, indent=4, sort_keys=True)
+                json.dump(final_output_json, out_stream, indent=4, sort_keys=True)
 
-    @staticmethod
-    def _set_up_demo_json_file(json_filename, json_dir):
+            self.final_output_jsons.append(final_output_json)
+
+    def _set_up_demo_json_file(self, json_filename, json_dir):
         """Set up demo JSON file creation.
 
         :param json_filename: JSON filename
         :param json_dir: Directory to create JSON under
         :return: Path to JSON file to create
         """
-        json_dir = os.path.join(CONFIG.demo_download_directory, json_dir)
+        demo_parent_dir = (self._custom_json_parent_dir
+                           if self._custom_json_parent_dir else CONFIG.demo_download_directory)
+        json_dir = os.path.join(demo_parent_dir, json_dir)
         os.makedirs(json_dir, exist_ok=True)
         json_path = os.path.join(json_dir, json_filename)
         return json_path
@@ -264,6 +270,9 @@ class DemoJson:
             self._set_has_issue()
 
         self._construct_tags()
+
+        if self.demo_info.demo_id:
+            self.demo_dict['demo_id'] = self.demo_info.demo_id
 
     def _handle_needs_attention_entry(self, key_to_insert, evaluation):
         """Handle entries that are marked as needing attention.

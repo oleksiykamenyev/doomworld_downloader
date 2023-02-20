@@ -65,9 +65,10 @@ class DemoProcessor:
 
     def process_demos(self):
         """Process demos."""
-        for demo in self.demos_to_process:
+        for demo, input_demo_info in self.demos_to_process.items():
             if ZIP_RE.match(demo):
-                demo_zip_info = DemoZipInfo(zip_path=demo, post_data=self.post_data)
+                demo_zip_info = DemoZipInfo(zip_path=demo, post_data=self.post_data,
+                                            additional_info=input_demo_info)
                 demo_zip_info.process_zip()
                 if demo_zip_info.zip_process_failed:
                     continue
@@ -89,14 +90,23 @@ class DemoProcessor:
                 raise RuntimeError(f'Demo {demo} provided that is an unsupported filetype.')
 
             for lmp, lmp_info in lmp_to_info_map.items():
+                if os.path.basename(lmp) == 'drn104.lmp':
+                    continue
+                lmp_info_player_list = lmp_info.get('player_list')
+                if lmp_info_player_list:
+                    extra_info_player_list = lmp_info_player_list
+                else:
+                    extra_info_player_list = self.additional_demo_info.get('player_list', [])
+
                 demo_info_data = DemoInfoData(
                     recorded_date=lmp_info['recorded_date'],
                     txt_file_path=lmp_info.get('txt_file_path'),
                     txt_file_date=lmp_info.get('txt_file_date'),
-                    player_list=self.additional_demo_info.get('player_list', []),
+                    player_list=extra_info_player_list,
                     extra_wad_guesses=self.additional_demo_info.get('extra_wad_guesses', [])
                 )
-                demo_info = DemoInfo(lmp_info['lmp_path'], demo_info_data, zip_path=zip_path)
+                demo_info = DemoInfo(lmp_info['lmp_path'], demo_info_data, zip_path=zip_path,
+                                     demo_id=lmp_info.get('demo_id'))
                 demo_info.process_post_data(self.post_data)
                 demo_info.process_textfile(default_textfile_data=primary_textfile_data,
                                            default_textfile_date=primary_textfile_date)
@@ -112,11 +122,12 @@ class DemoProcessor:
 class DemoZipInfo:
     """Demo zip info object."""
 
-    def __init__(self, zip_path, post_data=None):
+    def __init__(self, zip_path, post_data=None, additional_info=None):
         """Initialize zip info object.
 
         :param zip_path: Path to the zip file for logging
         :param post_data: Data for post with the zip, if available
+        :param demo_id: Demo ID if available, for DSDA update mode
         """
         # Inputs for demo upload
         self.zip_path = zip_path
@@ -124,6 +135,13 @@ class DemoZipInfo:
         self.zip_extract_dir = os.path.join(os.path.dirname(zip_path),
                                             os.path.splitext(self.zip_filename)[0])
         self.post_data = post_data
+        if additional_info:
+            # In DSDA update mode, the demo ID may be passed to the demo processor in order to match
+            # up to entries on DSDA in case of duplicate file names, etc.
+            self._additional_info = {key: value for key, value in additional_info.items()
+                                     if key in ['player_list', 'demo_id'] and value}
+        else:
+            self._additional_info = {}
 
         # Outputs after processing
         self.lmp_to_info_map = {}
@@ -192,6 +210,8 @@ class DemoZipInfo:
                          'txt_file_date': txt_file_info[txt_file]['recorded_date']}
                     )
 
+            self.lmp_to_info_map[lmp_file].update(self._additional_info)
+
         zip_file.extractall(path=self.zip_extract_dir,
                             members=list(self.lmp_to_info_map.keys()) + list(txt_file_info.keys()))
 
@@ -211,12 +231,13 @@ class DemoInfo:
     DEMO_DATE_CUTOFF = datetime.strptime(CONFIG.demo_date_cutoff, '%Y-%m-%dT%H:%M:%SZ')
     FUTURE_CUTOFF = datetime.today() + timedelta(days=1)
 
-    def __init__(self, lmp_path, demo_info_data, zip_path=None):
+    def __init__(self, lmp_path, demo_info_data, zip_path=None, demo_id=None):
         """Initialize demo info object.
 
         :param lmp_path: Path to the LMP file
         :param demo_info_data: Demo info data
         :param zip_path: Path to the zip file for logging, if available
+        :param demo_id: Demo ID if available, for DSDA update mode
         """
         # Inputs for demo upload
         self.zip_path = zip_path
@@ -227,6 +248,9 @@ class DemoInfo:
         # full LMP path.
         self.lmp_metadata = os.path.basename(lmp_path) if zip_path else lmp_path
         self.demo_info_data = demo_info_data
+        # In DSDA update mode, the demo ID may be passed to the demo processor in order to match up
+        # to entries on DSDA in case of duplicate file names, etc.
+        self.demo_id = demo_id
 
         # Outputs after processing
         self.data_manager = DataManager()

@@ -211,7 +211,8 @@ class PlaybackData(BaseData):
         """
         for url, _ in self.wad_guesses.most_common():
             wad_guess = self.url_to_wad[url]
-            if not wad_guess.commercial:
+            # If this is a WAD update, the DSDA page may not be available yet.
+            if not wad_guess.commercial and not 'update/' in wad_guess.playback_cmd_line:
                 try:
                     self._check_wad_existence(wad_guess)
                 except RuntimeError:
@@ -386,6 +387,11 @@ class PlaybackData(BaseData):
                                                          game_mode=game_mode)
             if not tyson_only and self.data['category'] == 'UV Max':
                 self.data['category'] = 'Tyson'
+
+        # If a run was a Stroller, choose the Stroller category over UV-Speed, as this will happen
+        # for maps with no monsters.
+        if self.raw_data.get('stroller', True) and self.data['category'] == 'UV Speed':
+            self.data['category'] = 'Stroller'
 
         skip_also_pacifist = map_info.get_single_key_for_map('skip_also_pacifist', skill=skill,
                                                              game_mode=game_mode)

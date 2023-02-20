@@ -155,14 +155,16 @@ def parse_page_top(page_soup):
     return parsed_headers
 
 
-def dsda_demo_page_to_json(dsda_url):
-    """Convert DSDA demo page to JSON.
+def parse_dsda_demo_page(dsda_url):
+    """Parse DSDA page.
 
     :param dsda_url: DSDA URL
-    :return: JSON of demos from given DSDA URL
+    :return: Parse DSDA page, including headers and demos JSON
     """
     verify_dsda_url(dsda_url, page_types=['player', 'wad'])
     soup = get_page(dsda_url)
+    parsed_demo_page = {'headers': parse_page_top(soup)}
+
     demo_table = soup.find('table')
     table_header = demo_table.find('thead')
     header_cols = table_header.find('tr').find_all('th')
@@ -202,7 +204,8 @@ def dsda_demo_page_to_json(dsda_url):
                 row_values = cur_row_values
             demo_list.append(dict(zip(col_names, row_values)))
 
-    return demo_list
+    parsed_demo_page['demo_list'] = demo_list
+    return parsed_demo_page
 
 
 def get_wad_name_from_dsda_url(dsda_url):

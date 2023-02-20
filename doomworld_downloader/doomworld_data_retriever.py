@@ -398,7 +398,7 @@ def download_attachments(post):
         '{}'.format(''.join(c for c in post.author_name if c.isalnum() or c in KEEP_CHARS))
     )
     author_dir = strip_accents(author_dir)
-    downloads = []
+    downloads = {}
     for attach_url, attach_name in post.attachments.items():
         response = requests.get(attach_url)
         try:
@@ -432,7 +432,7 @@ def download_attachments(post):
         with open(content_file, 'w', encoding='utf-8') as content_file:
             content_file.write(post.post_text)
 
-        downloads.append(download)
+        downloads[download] = {}
 
     update_cache(post, downloads)
     post.cached_downloads = downloads

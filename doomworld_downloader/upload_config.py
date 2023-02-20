@@ -21,6 +21,7 @@ WAD_MAP_PATH = 'doomworld_downloader/dsda_url_to_wad_info.yaml'
 NEEDS_ATTENTION_PLACEHOLDER = 'UNKNOWN'
 
 MAYBE_CHEATED_DIR = 'maybe_cheated_jsons'
+UPDATE_JSON_DIR = 'demos_for_upload/update_jsons'
 VALID_DEMO_PACK_DIR = 'tmp_demo_pack_jsons'
 VALID_ISSUE_DIR = 'issue_jsons'
 VALID_NO_ISSUE_DIR = 'no_issue_jsons'
@@ -380,6 +381,19 @@ class UploadConfig:
             return self._config.get('dsda_mode', 'replace_zips_dir')
         except (NoSectionError, NoOptionError):
             return 'replace_zips'
+
+    @property
+    def dsda_mode_mark_advanced_demos_incompatible(self):
+        """Mark advanced port demos incompatible.
+
+        Default to False.
+
+        :return: Flag indicating whether to mark advanced demos incompatible
+        """
+        try:
+            return self._config.getboolean('dsda_mode', 'mark_advanced_demos_incompatible')
+        except (NoSectionError, NoOptionError):
+            return False
 
 
 CONFIG = UploadConfig()
