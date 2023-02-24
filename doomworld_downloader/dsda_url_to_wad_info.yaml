@@ -306,6 +306,7 @@
     map_info:
       "Map 01":
         skip_reality: true
+        skip_also_pacifist: true
         tyson_only: true
   idgames_url: "https://www.doomworld.com/idgames/themes/TeamTNT/boom/boomedit"
   dsda_paginated: false
@@ -16565,8 +16566,8 @@
   complevel: 9
   playback_cmd_line: "-file jamep1"
   map_list_info:
-    map_ranges: [[1, 12]]
-    d2all: ["Map 01", "Map 12"]
+    map_ranges: [[1, 11]]
+    d2all: ["Map 01", "Map 11"]
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/j-l/jamep1"
   dsda_paginated: false
@@ -24214,3 +24215,113 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp50"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/"
+"https://www.dsdarchive.com/wads/aika9":
+  wad_name: "\"Aika's 9 Speedmaps\""
+  iwad: doom2
+  wad_files:
+    aika9.wad: {checksum: "7a4050499313cff9e5063b854e36013e"}
+    aika9_rc3.wad: {not_required_for_playback: true, checksum: "7a4050499313cff9e5063b854e36013e"}
+  complevel: 9
+  playback_cmd_line: "-file aika9"
+  map_list_info:
+    map_ranges: [[1, 9]]
+    d2all: ["Map 01", "Map 09"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/aika9"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/134101-aikas-9-speedmaps-demos-cl9/"
+"https://www.dsdarchive.com/wads/darkgate":
+  wad_name: DARKGATE.WAD
+  iwad: doom
+  wad_files:
+    darkgate.wad: {checksum: "3e8d1346ce51aae1180b3505dbc03ef7"}
+  complevel: 3
+  playback_cmd_line: "-file darkgate"
+  map_list_info:
+    map_ranges: [["E1M1", "E1M8"]]
+    episodes: [["E1M1", "E1M8"]]
+    secret_exits: {}
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/d-f/darkgate"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/sbspd015":
+  wad_name: "SargeBaldy Speedmapping Compilation #15"
+  iwad: doom2
+  wad_files:
+    sbspd015.wad: {checksum: "d5d5274155f51fd6f3ccb822f4c30196"}
+  complevel: 9
+  playback_cmd_line: "-file sbspd015"
+  map_list_info:
+    map_ranges: [[1, 7]]
+    d2all: ["Map 01", "Map 07"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/s-u/sbspd015"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/133801-sargebaldy-speedmapping-compilations-demos/"
+"https://www.dsdarchive.com/wads/cooldoom":
+  wad_name: Cool Doom Level
+  iwad: doom
+  wad_files:
+    cooldoom.wad: {checksum: "786f52be69ef9d9c8b76a4085c3d7c22"}
+  complevel: 3
+  playback_cmd_line: "-file cooldoom"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/a-c/cooldoom"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/hr1943":
+  wad_name: Hell Revealed 1943
+  iwad: doom2
+  wad_files:
+    hr1943.wad: {checksum: "6df10f8755e266706aa9dd673219a9c6"}
+  complevel: 9
+  playback_cmd_line: "-file hr1943"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/g-i/hr1943"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/666_1994":
+  wad_name: 666.wad
+  iwad: doom
+  wad_files:
+    666.wad: {checksum: "523b552efae59a0123768bf2ef1eb7f6"}
+  complevel: 3
+  playback_cmd_line: "-file 666"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/dmfury":
+  wad_name: FURY
+  iwad: doom
+  wad_files:
+    fury.wad: {checksum: "6b2fbfef395eb24f53ee59bcfcbe2fa9"}
+  complevel: 3
+  playback_cmd_line: "-file fury"
+  map_list_info:
+    map_ranges: [["E1M2"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/d-f/dmfury"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/sbspd016":
+  wad_name: "SargeBaldy Speedmapping Compilation #16"
+  iwad: doom2
+  wad_files:
+    sbspd016.wad: {checksum: "ecffdc75e992bb2e18e9f083402e7ece"}
+  complevel: 9
+  playback_cmd_line: "-file sbspd016"
+  map_list_info:
+    map_ranges: [[1, 7]]
+    d2all: ["Map 01", "Map 07"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/s-u/sbspd016"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/133801-sargebaldy-speedmapping-compilations-demos/"

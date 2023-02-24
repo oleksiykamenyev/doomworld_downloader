@@ -1493,6 +1493,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/shallowwe1
   id: '133562'
   name: "Shallow World Episode 1 demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/134101-aikas-9-speedmaps-demos-cl9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/aika9
+  id: '134101'
+  name: "Aika's 9 Speedmaps demos [-cl9]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
