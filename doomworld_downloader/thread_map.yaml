@@ -1498,6 +1498,21 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/aika9
   id: '134101'
   name: "Aika's 9 Speedmaps demos [-cl9]"
+"https://www.doomworld.com/forum/topic/134167-the-summer-of-slaughter-demos-complevel-9-and-gzdoom/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/puss10sos
+  id: '134167'
+  name: "The Summer of Slaughter demos [-complevel 9 and GZDoom]"
+"https://www.doomworld.com/forum/topic/134326-hardfest-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/hardfest
+  id: '134326'
+  name: "Hardfest demos (complevel 9}"
+"https://www.doomworld.com/forum/topic/134353-disarray-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/disarray
+  id: '134353'
+  name: "Disarray demos [-complevel 21]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -1577,6 +1592,7 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wads:
     - https://www.dsdarchive.com/wads/hadron
     - https://www.dsdarchive.com/wads/hadrone2
+    - https://www.dsdarchive.com/wads/hadrone3
   id: "99313"
   name: Return to Hadron demos [-complevel 3]
 "https://www.doomworld.com/forum/topic/117036-64-kb-challenge-demos-complevel-2/":
