@@ -1513,6 +1513,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/disarray
   id: '134353'
   name: "Disarray demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/134546-skirmish-pvm-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/skirmish_pvm
+  id: '134546'
+  name: "Skirmish PvM Demos [Complevel 9]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":

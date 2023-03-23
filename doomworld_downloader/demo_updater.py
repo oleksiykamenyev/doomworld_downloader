@@ -11,6 +11,8 @@ import json
 import logging
 import os
 
+from collections import defaultdict
+
 from .upload_config import CONFIG, UPDATE_JSON_DIR
 
 
@@ -35,7 +37,7 @@ class DemoUpdater:
         self.dsda_output_jsons = self._process_output_jsons(dsda_output_jsons)
         self.replacement_output_jsons = self._process_output_jsons(replacement_output_jsons)
 
-        self.demo_update_jsons = {}
+        self.demo_update_jsons = defaultdict(list)
         self.demo_upload_jsons = {}
 
     def _process_output_jsons(self, output_jsons):
@@ -197,7 +199,7 @@ class DemoUpdater:
                 if len(player_list) == 1:
                     demo_update['match_details']['player'] = player_list[0]
 
-                self.demo_update_jsons[dsda_demo_info['demo_id']] = demo_update
+                self.demo_update_jsons[dsda_demo_info['demo_id']].append(demo_update)
 
     def dump_json_updates(self):
         """Dump demo JSONs as uploads.
@@ -211,7 +213,7 @@ class DemoUpdater:
             json_filename = f'{demo_id}_update.json'
             json_path = self._set_up_demo_json_file(json_filename, UPDATE_JSON_DIR)
 
-            demo_update_json_final = {'demo_update': demo_update_json}
+            demo_update_json_final = {'demo_updates': demo_update_json}
             with open(json_path, 'w', encoding='utf-8') as out_stream:
                 json.dump(demo_update_json_final, out_stream, indent=4, sort_keys=True)
 
