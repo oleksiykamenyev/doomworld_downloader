@@ -73,7 +73,7 @@ class PlaybackData(BaseData):
 
     ALLOWED_FOOTER_FILES = ['bloodcolor.deh', 'bloodfix.deh', 'doom widescreen hud.wad',
                             'doom 2 widescreen assets.wad', 'dsda-doom.wad', 'prboom-plus.wad',
-                            'doom_wide.wad', 'notransl.deh']
+                            'doom_wide.wad', 'notransl.deh', 'doomgirl_01.wad']
     FOOTER_WAD_EXTENSIONS = ['.bex', '.deh', '.hhe', '.pk3', '.pk7', '.wad']
 
     def __init__(self, lmp_path, wad_guesses, demo_info=None):

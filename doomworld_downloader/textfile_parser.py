@@ -153,7 +153,7 @@ class TextfileData(BaseData):
 
         # Boom/MBF family
         # Boom
-        re.compile(r'([\S+])Boom\s*(v|version)?(\s*|\.)?(?P<version>2\.0\.[0-2])',
+        re.compile(r'([\s+])Boom\s*(v|version)?(\s*|\.)?(?P<version>2\.0\.[0-2])',
                    re.IGNORECASE): 'Boom',
         # MBF
         re.compile(

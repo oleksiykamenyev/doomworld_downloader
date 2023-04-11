@@ -1518,6 +1518,56 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/skirmish_pvm
   id: '134546'
   name: "Skirmish PvM Demos [Complevel 9]"
+"https://www.doomworld.com/forum/topic/134593-rage-doom-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/rage20
+  id: '134593'
+  name: "Rage Doom demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/134607-puss-xx-hell-yeah-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/puss20-hy
+  id: '134607'
+  name: "PUSS XX HELL YEAH! demos (-complevel 9)"
+"https://www.doomworld.com/forum/topic/134762-the-magenta-spire-demos-complevel-11/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/magspire
+  id: '134762'
+  name: "The Magenta Spire demos [-complevel 11]"
+"https://www.doomworld.com/forum/topic/134724-hopscotch-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/hopscotch
+  id: '134724'
+  name: "Hopscotch demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/134774-cringe-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/cringe6
+  id: '134774'
+  name: "Cringe! demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/134813-one-hour-mapping-series-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ohm2
+  id: '134813'
+  name: "One Hour Mapping Series demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/134820-temporal-tantrum-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/temp_tantrum
+  id: '134820'
+  name: "Temporal Tantrum demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/134856-puss-ix-mapping-at-warpspeed-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/pussix-warp
+  id: '134856'
+  name: "PUSS IX: Mapping at Warpspeed demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/134922-the-talosian-incident-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/talosian
+  id: '134922'
+  name: "The Talosian Incident demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/117714-three-is-a-crowd-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/3iac
+  id: '117714'
+  name: "Three Is A Crowd demos [-complevel 2]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
