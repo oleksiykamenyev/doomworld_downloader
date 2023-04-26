@@ -1543,11 +1543,6 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/cringe6
   id: '134774'
   name: "Cringe! demos [-complevel 3]"
-"https://www.doomworld.com/forum/topic/134813-one-hour-mapping-series-demos-complevel-21/":
-  additional_info:
-    wad: https://www.dsdarchive.com/wads/ohm2
-  id: '134813'
-  name: "One Hour Mapping Series demos [-complevel 21]"
 "https://www.doomworld.com/forum/topic/134820-temporal-tantrum-demos-complevel-21/":
   additional_info:
     wad: https://www.dsdarchive.com/wads/temp_tantrum
@@ -1568,6 +1563,26 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/3iac
   id: '117714'
   name: "Three Is A Crowd demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/135017-dubzzzs-5minute-design-assembly-3-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/d5da3
+  id: '135017'
+  name: "Dubzzz's 5Minute Design Assembly #3 Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/135072-okuplok-slaughter-map-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/oku2v31
+  id: '135072'
+  name: "Okuplok Slaughter Map Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/135176-i-hate-slaughter-demonstrations-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/h8slaught
+  id: '135176'
+  name: "I Hate Slaughter Demonstrations [-complevel 21]"
+"https://www.doomworld.com/forum/topic/135161-doomium-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/dmium
+  id: '135161'
+  name: "Doomium demos [-complevel 9]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -1843,6 +1858,13 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/mm2info
   id: '55559'
   name: Memento Mori II  demos [-complevel 2]
+"https://www.doomworld.com/forum/topic/134813-one-hour-mapping-series-demos-complevel-21/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/ohm1
+      - https://www.dsdarchive.com/wads/ohm2
+  id: '134813'
+  name: "One Hour Mapping Series demos [-complevel 21]"
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
@@ -2366,7 +2388,7 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/g_o_evil
       - https://www.dsdarchive.com/wads/napalm
       - https://www.dsdarchive.com/wads/nhell_d2
-      - https://www.dsdarchive.com/wads/bbb
+      - https://www.dsdarchive.com/wads/bbb_1998
       - https://www.dsdarchive.com/wads/cybersky
       - https://www.dsdarchive.com/wads/32innail
       - https://www.dsdarchive.com/wads/gravity
@@ -2402,6 +2424,13 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
 "https://www.doomworld.com/forum/topic/23669-miscellaneous-demos-part-1-please-post-in-part-3-instead/":
   id: "23669"
   name: Miscellaneous demos (part 1) [please post in part 3 instead]
+
+# One-time competition threads
+"https://www.doomworld.com/forum/topic/135033-d5da3-speedrunning-team-competition-14-16-april-2023/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/d5da3
+  id: '135033'
+  name: "D5DA3 Speedrunning Team Competition (14-16 April 2023)."
 
 ### IGNORED THREADS FOR UPDATES
 # Non-speedrun demo threads

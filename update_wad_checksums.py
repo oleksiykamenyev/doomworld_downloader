@@ -82,9 +82,21 @@ def main():
                 wad_name = get_wad_name_from_dsda_url(cur_wad_url)
                 cur_download_dir = os.path.join(CONFIG.wad_download_directory, wad_name)
                 update_wad = cur_wad_entry.get('update', False)
-                if (in_commercial_wad or (args.skip_existing and os.path.isdir(cur_download_dir)) or
-                        (args.update_specified_wads and not update_wad)):
-                    LOGGER.debug('Skip existing WAD %s.', cur_wad_url)
+                skip_wad = False
+                if in_commercial_wad:
+                    LOGGER.debug('Skip commercial WAD %s.', cur_wad_url)
+                    skip_wad = True
+
+                if args.update_specified_wads:
+                    if not update_wad:
+                        LOGGER.debug('Skip non-updated WAD %s.', cur_wad_url)
+                        skip_wad = True
+                else:
+                    if args.skip_existing and os.path.isdir(cur_download_dir):
+                        LOGGER.debug('Skip existing WAD %s.', cur_wad_url)
+                        skip_wad = True
+
+                if skip_wad:
                     local_wad_location = None
                     new_wad_map_lines.append(line)
                     continue
