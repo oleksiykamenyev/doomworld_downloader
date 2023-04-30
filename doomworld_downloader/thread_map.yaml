@@ -1583,6 +1583,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/dmium
   id: '135161'
   name: "Doomium demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/135428-sepia-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/sepia
+  id: '135428'
+  name: "Sepia Demos [-complevel 21]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":

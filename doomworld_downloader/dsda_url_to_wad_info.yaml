@@ -24777,6 +24777,10 @@
     map_ranges: [[1, 20], ["10B"]]
     d2all: ["Map 01", "Map 20"]
     episodes: [["Map 01", "Map 06"], ["Map 07", "Map 11"], ["Map 12", "Map 20"]]
+    map_info:
+      "Map 10":
+        tyson_only: true
+        skip_also_pacifist: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/hardfest"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/134326-hardfest-demos-complevel-9/"
@@ -27614,3 +27618,452 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/heretic/0-9/666town"
   dsda_paginated: false
   doomworld_thread: null
+"https://www.dsdarchive.com/wads/castle5_1994":
+  wad_name: Castle of Combat for HERETIC, REG ONLY
+  iwad: doom
+  wad_files:
+    castle5.wad: {checksum: "0c15d9745cdf1c0c0c30cc3a5a56e21f"}
+  complevel: 3
+  playback_cmd_line: "-file castle5"
+  map_list_info:
+    map_ranges: [["E2M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/a-c/castle5"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/castle5_1996":
+  wad_name: "Gestalt666's Town of Heresy"
+  iwad: heretic
+  wad_files:
+    castle5.wad: {checksum: "9c644a02196b849b8e0e6f5931c5eedc"}
+  complevel: 0
+  playback_cmd_line: "-file castle5"
+  map_list_info:
+    map_ranges: [["E1M5"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/heretic/a-c/castle5"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/catacomb_1996":
+  wad_name: The Catacombs
+  iwad: heretic
+  wad_files:
+    catacomb.wad: {checksum: "8864a78bfe1f6e03b56a953d4afbda78"}
+  complevel: 0
+  playback_cmd_line: "-file catacomb"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/heretic/a-c/catacomb"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/catacomb_1995":
+  wad_name: Catacombs of Hell!!!
+  iwad: doom
+  wad_files:
+    catacomb.wad: {checksum: "f6e1405b06100b5ed794c2e18e7c35dd"}
+  complevel: 3
+  playback_cmd_line: "-file catacomb"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/a-c/catacomb"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/upr":
+  wad_name: Unia Polityki Realnej WAD
+  iwad: doom2
+  wad_files:
+    upr.wad: {checksum: "4bfa3b8d03899a1c598782a81c72645d"}
+  complevel: 2
+  playback_cmd_line: "-file upr"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/s-u/upr"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/polywad":
+  wad_name: Poly.wad
+  iwad: doom2
+  wad_files:
+    poly.wad: {checksum: "ebd37ec99a90c7c02ad377c390288a3f"}
+  complevel: 2
+  playback_cmd_line: "-file poly"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/p-r/polywad"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/brikblat":
+  wad_name: BrikBlat!
+  iwad: doom2
+  wad_files:
+    brikblat.wad: {checksum: "c2beb97efe6fc1067c0854b457c3ae98"}
+  complevel: 2
+  playback_cmd_line: "-file brikblat"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/a-c/brikblat"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/kea":
+  wad_name: "Kill 'Em All! (v1.1b)"
+  iwad: doom2
+  wad_files:
+    kea1b.wad: {checksum: "9320720d4b745dff5b5d491298513226"}
+  complevel: 2
+  playback_cmd_line: "-file kea1b"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/j-l/kea"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/bmoon":
+  wad_name: Blood Moon Eclipse
+  iwad: doom2
+  wad_files:
+    bmoon.wad: {checksum: "3112d8395cb44f73144603662b192411"}
+  complevel: 2
+  playback_cmd_line: "-file bmoon"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/bmoon"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/k_bd":
+  wad_name: Beyond Death
+  iwad: doom2
+  wad_files:
+    k_bd.wad: {checksum: "65898be4c2b817a9a7eb9081ef9e4655"}
+  complevel: 9
+  playback_cmd_line: "-file k_bd"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/j-l/k_bd"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/intzone":
+  wad_name: The Interdiction Zone
+  iwad: doom2
+  wad_files:
+    intzone.wad: {checksum: "608ddc23e8e58fe97e3d530047098e63"}
+  complevel: 2
+  playback_cmd_line: "-file intzone"
+  map_list_info:
+    map_ranges: [[7]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/g-i/intzone"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/dickie05":
+  wad_name: dickie05.WAD, issue 1 (Waterworld)
+  iwad: doom2
+  wad_files:
+    dickie05.wad: {checksum: "06bb81c1a7e4f7d5b794adca97613f2d"}
+  complevel: 2
+  playback_cmd_line: "-file dickie05"
+  map_list_info:
+    map_ranges: [[5]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/d-f/dickie05"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/fort":
+  wad_name: The FORTRESS
+  iwad: doom
+  wad_files:
+    fortress.wad: {checksum: "02659de1e8caeb5555d9e0a7018c3795"}
+  complevel: 3
+  playback_cmd_line: "-file fortress"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/d-f/fort"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/chaos":
+  wad_name: Chaos
+  iwad: doom
+  wad_files:
+    chaos.wad: {checksum: "87d49f0b802983b2c06062be3a2b7e55"}
+  complevel: 3
+  playback_cmd_line: "-file chaos"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/cortyard":
+  wad_name: The Court Yard
+  iwad: doom
+  wad_files:
+    cortyard.wad: {checksum: "ea8bfd61b919955411f0f173da8e2d38"}
+  complevel: 3
+  playback_cmd_line: "-file cortyard"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/a-c/cortyard"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/rabid":
+  wad_name: RABID.WAD
+  iwad: doom
+  wad_files:
+    rabid.wad: {checksum: "0fe04ee7e08f00056e23591d57cda188"}
+  complevel: 3
+  playback_cmd_line: "-file rabid"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+    map_info:
+      "E1M1":
+        mark_secret_exit_as_normal: true
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/p-r/rabid"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/zeus":
+  wad_name: ZEUS.WAD
+  iwad: doom
+  wad_files:
+    zeus.wad: {checksum: "0f73766168846fff0d9c912e714c17f9"}
+  complevel: 3
+  playback_cmd_line: "-file zeus"
+  map_list_info:
+    map_ranges: [["E2M5"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/d-f/dmzeus"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/dmwyba":
+  wad_name: Watch Yer Back!
+  iwad: doom
+  wad_files:
+    wyb_e2m1.wad: {checksum: "46a4a06f7f9372257b0e0f77936fb41a"}
+  complevel: 3
+  playback_cmd_line: "-file wyb_e2m1"
+  map_list_info:
+    map_ranges: [["E2M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/d-f/dmwyba"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/classic7":
+  wad_name: classic7.wad
+  iwad: doom
+  wad_files:
+    classic7.wad: {checksum: "9acec0910e55ab1446c92185694e0ad5"}
+  complevel: 3
+  playback_cmd_line: "-file classic7"
+  map_list_info:
+    map_ranges: [["E2M7"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/a-c/classic7"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/dmcity":
+  wad_name: CITY.WAD
+  iwad: doom
+  wad_files:
+    city.wad: {checksum: "58e1cd4987bc0e896543bc1ea09d19b4"}
+  complevel: 3
+  playback_cmd_line: "-file city"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/d-f/dmcity"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/deeps":
+  wad_name: DEEPS.WAD
+  iwad: doom
+  wad_files:
+    deeps.wad: {checksum: "d37615f4e694501e1691f4f4e215010f"}
+  complevel: 3
+  playback_cmd_line: "-file deeps"
+  map_list_info:
+    map_ranges: [["E2M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/d-f/deeps"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/gulph":
+  wad_name: Gulph
+  iwad: doom2
+  wad_files:
+    gulph.wad: {checksum: "8f189fba1dfd7664ea3e5cb03b178f4d"}
+    gulphgf.wad: {checksum: "ba020741803622029c5634bf1f0e43ea"}
+    gulphsp.wad: {checksum: "5ca0a9987f9ce2d85b0e1a9c5d90f775"}
+  complevel: 2
+  playback_cmd_line: "-file gulph gulphsp gulphgf"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/g-i/gulph"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/dmjh1":
+  wad_name: DMJH1.WAD
+  iwad: doom
+  wad_files:
+    dmjh1.wad: {checksum: "2914e9a2de98637fa699977ed5246bdd"}
+  complevel: 3
+  playback_cmd_line: "-file dmjh1"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/d-f/dmjh1"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/annex":
+  wad_name: Annex Of Death
+  iwad: doom
+  wad_files:
+    annex.wad: {checksum: "7ae49b750431379d4947946f005b7eca"}
+  complevel: 3
+  playback_cmd_line: "-file annex"
+  map_list_info:
+    map_ranges: [["E3M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/a-c/annex"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/simon10":
+  wad_name: SIMON10.WAD (ver 1.0)
+  iwad: doom
+  wad_files:
+    simon10.wad: {checksum: "7b3c69288453cde51306d28cf6fc53bd"}
+  complevel: 3
+  playback_cmd_line: "-file simon10"
+  map_list_info:
+    map_ranges: [["E1M1", "E1M2"]]
+    episodes: [["E1M1", "E1M2"]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/s-u/simon10"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/mntdoom":
+  wad_name: mntdoom
+  iwad: doom
+  wad_files:
+    mntdoom.wad: {checksum: "734af895b957ac1d30f6464b3bd010ed"}
+  complevel: 3
+  playback_cmd_line: "-file mntdoom"
+  map_list_info:
+    map_ranges: [["E2M1"]]
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/moon":
+  wad_name: "MooN's Land"
+  iwad: doom
+  wad_files:
+    moon.wad: {checksum: "e8fea16b2f2e66cdfed00c723d8bbeeb"}
+  complevel: 3
+  playback_cmd_line: "-file moon"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/m-o/moon"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/dmkat":
+  wad_name: KAT.WAD
+  iwad: doom
+  wad_files:
+    kat.wad: {checksum: "653612c388766e53c063ce3303d5a1ee"}
+  complevel: 3
+  playback_cmd_line: "-file kat"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/d-f/dmkat"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/earthbase":
+  wad_name: Earth Base
+  iwad: doom2
+  wad_files:
+    earthbase.wad: {checksum: "dbf9ec83c32fcc167ded4bfcb5f1ea9c"}
+  complevel: 2
+  playback_cmd_line: "-file earthbase"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/earthbase"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/chord1":
+  wad_name: CHORD1.WAD
+  iwad: doom2
+  wad_files:
+    chord1.wad: {checksum: "e577d0e05787ae6807510c4e7adb4ba9"}
+  complevel: 2
+  playback_cmd_line: "-file chord1"
+  map_list_info:
+    map_ranges: [[25]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/a-c/chord1"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/chord2":
+  wad_name: CHORD2.WAD
+  iwad: doom2
+  wad_files:
+    chord2.wad: {checksum: "8c69157c0cbbefd0d50a98a23d154093"}
+  complevel: 2
+  playback_cmd_line: "-file chord2"
+  map_list_info:
+    map_ranges: [[26]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/a-c/chord2"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/chord3":
+  wad_name: CHORD3.WAD
+  iwad: doom2
+  wad_files:
+    chord3.wad: {checksum: "80c4fa3e3881916a175db032c50e2ef9"}
+  complevel: 2
+  playback_cmd_line: "-file chord3"
+  map_list_info:
+    map_ranges: [[27]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/chord3"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/sepia":
+  wad_name: Sepia
+  iwad: doom2
+  wad_files:
+    sepia.wad: {checksum: "7408ed8869eed1f2c091685402ce4347"}
+  complevel: 21
+  playback_cmd_line: "-file sepia"
+  map_list_info:
+    map_ranges: [[1, 34]]
+    d2all: ["Map 01", "Map 30"]
+    episodes: [["Map 01", "Map 07"], ["Map 08", "Map 14"], ["Map 15", "Map 21"], ["Map 22", "Map 28"], ["Map 29", "Map 30"]]
+    secret_exits: {"Map 07": "Map 31", "Map 11": "Map 32", "Map 17": "Map 33", "Map 26": "Map 34"}
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/sepia"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/135428-sepia-demos-complevel-21/"
