@@ -1588,6 +1588,16 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/sepia
   id: '135428'
   name: "Sepia Demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/135575-goodwad-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/goodwad
+  id: '135575'
+  name: "GOODWAD demos [complevel 21]"
+"https://www.doomworld.com/forum/topic/135516-autophagy-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/autophagy
+  id: '135516'
+  name: "Autophagy demos [-complevel 2}"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -2137,6 +2147,7 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/mayhem18p
       - https://www.dsdarchive.com/wads/mayhem19
       - https://www.dsdarchive.com/wads/mayhem20
+      - https://www.dsdarchive.com/wads/mayhem22
 "https://www.doomworld.com/forum/topic/128765-doomworld-speedmapping-compilation-demos/":
   id: "128765"
   name: Doomworld Speedmapping Compilation Demos

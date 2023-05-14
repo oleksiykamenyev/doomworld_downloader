@@ -149,7 +149,11 @@ class DemoJsonDumper:
                            if self._custom_json_parent_dir else CONFIG.demo_download_directory)
         json_dir = os.path.join(demo_parent_dir, json_dir)
         os.makedirs(json_dir, exist_ok=True)
-        json_path = os.path.join(json_dir, json_filename)
+        json_path = os.path.join(
+            json_dir,
+            "".join(filename_char for filename_char in json_filename
+                    if filename_char.isalnum() or filename_char in ('_', '-'))
+        )
         return json_path
 
 
