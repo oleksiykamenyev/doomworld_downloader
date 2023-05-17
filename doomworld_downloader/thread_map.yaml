@@ -1598,6 +1598,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/autophagy
   id: '135516'
   name: "Autophagy demos [-complevel 2}"
+"https://www.doomworld.com/forum/topic/135801-ode2impslayer-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ode2impslayer
+  id: '135801'
+  name: "Ode2ImpSlayer demos [complevel 9]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
