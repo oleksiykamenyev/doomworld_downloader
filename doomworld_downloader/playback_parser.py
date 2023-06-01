@@ -158,7 +158,7 @@ class PlaybackData(BaseData):
 
         iwad = self.demo_info.get('iwad', '').lower()
         if compare_iwad(iwad, 'chex'):
-            self.base_command = '{} -iwad chex -exe chex'.format(self.base_command)
+            self.base_command = '{} -iwad chex'.format(self.base_command)
         if compare_iwad(iwad, 'heretic'):
             self.base_command = '{} -iwad commercial/heretic -heretic'.format(self.base_command)
         if compare_iwad(iwad, 'hexen'):
