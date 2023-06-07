@@ -65,6 +65,8 @@ class LMPData(BaseData):
     DEMO_DATE_CUTOFF = datetime.strptime(CONFIG.demo_date_cutoff, '%Y-%m-%dT%H:%M:%SZ')
     FUTURE_CUTOFF = datetime.today() + timedelta(days=1)
 
+    WOOF_REGEX = re.compile(r'Woof \d+\.\d+\.\d+')
+
     def __init__(self, lmp_path, textfile_iwad=None):
         """Initialize LMP data class.
 
@@ -287,6 +289,12 @@ class LMPData(BaseData):
             for footer_port_start in LMPData.PORT_FOOTER_TO_DSDA_MAP.keys():
                 if line.startswith(footer_port_start):
                     self.raw_data['source_port_family'] = line.strip()
+                # Woof versions starting from 11 seem to be placing the port name and port version
+                # not at the start of a footer line...
+                else:
+                    woof_port_info = self.WOOF_REGEX.search(line)
+                    if woof_port_info:
+                        self.raw_data['source_port_family'] = woof_port_info.group(0)
             # Detect the command-line section by an argument that should always be there, I think
             if '-iwad' in line:
                 line = shlex.split(line)

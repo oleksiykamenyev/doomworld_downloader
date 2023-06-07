@@ -90,8 +90,10 @@ class DemoProcessor:
                 raise RuntimeError(f'Demo {demo} provided that is an unsupported filetype.')
 
             for lmp, lmp_info in lmp_to_info_map.items():
-                if os.path.basename(lmp) == 'drn104.lmp':
+                # Skip automatically created junk directories by Mac OS
+                if os.path.basename(os.path.dirname(lmp)) == '__MACOSX':
                     continue
+
                 lmp_info_player_list = lmp_info.get('player_list')
                 if lmp_info_player_list:
                     extra_info_player_list = lmp_info_player_list

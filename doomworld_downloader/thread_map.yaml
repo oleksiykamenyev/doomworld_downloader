@@ -1603,6 +1603,16 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/ode2impslayr
   id: '135801'
   name: "Ode2ImpSlayer demos [complevel 9]"
+"https://www.doomworld.com/forum/topic/136246-demonic-deviation-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ddev
+  id: '136246'
+  name: "Demonic Deviation demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/136309-abandon-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/abandon
+  id: '136309'
+  name: "Abandon Demos [-complevel 9]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
