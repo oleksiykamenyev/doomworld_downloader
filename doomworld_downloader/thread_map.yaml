@@ -1613,6 +1613,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/abandon
   id: '136309'
   name: "Abandon Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/136461-abscission-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/abscission
+  id: '136461'
+  name: "Abscission Demos [-complevel 2]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
