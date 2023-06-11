@@ -17,9 +17,9 @@ class TextfileData(BaseData):
     """Store all uploader-relevant data for a demo textfile."""
     CATEGORY_KEYS = ['cat', 'category', 'discipline', 'type']
     PORT_KEYS = ['client', 'clients', 'engine', 'engines', 'exe', 'exes', 'port', 'ports',
-                 'portused', 'portsused', 'sourceport', 'sourceports', 'sourceportused',
-                 'sourceportsused', 'usingport', 'usingports', 'usingsourceport',
-                 'usingsourceports']
+                 'portused', 'portsused', 'recordedusing', 'recordedwith' 'sourceport',
+                 'sourceports', 'sourceportused', 'sourceportsused', 'usingport', 'usingports',
+                 'usingsourceport', 'usingsourceports']
     # These port keys could be placed at the start of a line with no colon (i.e., in cases of
     # Compet-N-style textfiles. In this case, the script will still parse them.
     NON_COLON_PORT_REGEX = re.compile(
@@ -27,6 +27,7 @@ class TextfileData(BaseData):
         re.IGNORECASE
     )
     TAS_PORTS = ['DRE', 'TASDoom', 'TASMBF', 'XDRE']
+    MULTI_COMPLEVEL_PORTS = ['PRBoom', 'DSDA-Doom', 'Woof', 'SpeedWoof', 'Nugget Doom']
     TAS_STRING = 'this is a tools-assisted demo'
     VIDEO_KEYS = [
         'video', 'videolink', 'youtube', 'youtubelink', 'youtubevideo', 'youtubevideolink', 'yt',
@@ -164,7 +165,7 @@ class TextfileData(BaseData):
         re.compile(r'TASMBF', re.IGNORECASE): 'TASMBF',
         # PrBoom
         re.compile(
-            r'(Pr|GL)Boom(\.exe)?^(\+|-?plus)\s*(v|version)?(\s*|\.)?(?P<version>\d\.\d\.\d)',
+            r'(Pr|GL)Boom(\.exe)?(?!\+|-?plus)\s*(v|version)?(\s|\.)*?(?P<version>\d\.\d\.\d)',
             re.IGNORECASE
         ): 'PRBoom',
         # PrBoom+
@@ -191,7 +192,7 @@ class TextfileData(BaseData):
             r'(v|version)?(\s*|\.)?(?P<version>\d\.\d+(\.\d+)?)\s*'
             r'-?((complevel|cl)\s*(?P<complevel>\d+))?',
             re.IGNORECASE
-        ): 'Woof',
+        ): 'Nugget Doom',
 
         # ZDoom family
         # ZDoom
@@ -260,6 +261,9 @@ class TextfileData(BaseData):
         :param data_manager: Data manager to populate
         """
         for key, value in self.data.items():
+            if not value:
+                continue
+
             if key in TextfileData.CERTAIN_KEYS:
                 data_manager.insert(key, value, DataManager.CERTAIN, source='textfile')
             elif key in TextfileData.POSSIBLE_KEYS:
@@ -334,10 +338,23 @@ class TextfileData(BaseData):
         if not self.data.get('source_port'):
             self.data['source_port'] = self._parse_port(self._raw_textfile, skip_vanilla_check=True)
 
-        if self.data.get('source_port'):
+        source_port = self.data.get('source_port')
+        if source_port:
             for tas_port in TextfileData.TAS_PORTS:
-                if tas_port in self.data['source_port']:
+                if tas_port in source_port:
                     self.data['is_tas'] = True
+
+            is_multi_cl_port = False
+            for multi_cl_port in self.MULTI_COMPLEVEL_PORTS:
+                if source_port.startswith(multi_cl_port):
+                    is_multi_cl_port = True
+                    break
+
+            # If this port can support multiple complevels, the LMP parser might be able to provide
+            # a more accurate guess for the cl, so the complevel logic will be calculated later.
+            if is_multi_cl_port:
+                self.raw_data['source_port'] = self.data['source_port']
+                self.data['source_port'] = None
         else:
             LOGGER.info('Could not parse source port from textfile %s.', self.textfile_path)
             self.data.pop('source_port')

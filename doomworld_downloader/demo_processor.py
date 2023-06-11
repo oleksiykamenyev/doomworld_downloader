@@ -295,10 +295,11 @@ class DemoInfo:
         else:
             return
 
-        self._textfile_info['wad_guesses'] = textfile_data.raw_data['wad_strings']
-        textfile_iwad = textfile_data.raw_data.get('iwad')
-        if textfile_iwad:
-            self._textfile_info['iwad'] = textfile_iwad
+        self._textfile_info = {
+            'wad_guesses': textfile_data.raw_data['wad_strings'],
+            'iwad': textfile_data.raw_data.get('iwad'),
+            'raw_source_port': textfile_data.raw_data.get('source_port')
+        }
 
         textfile_data.populate_data_manager(self.data_manager)
         self.note_strings = self.note_strings.union(textfile_data.note_strings)
@@ -361,6 +362,27 @@ class DemoInfo:
         self.data_manager.insert('recorded_at', dsda_date, DataManager.CERTAIN,
                                  source='extra_info')
 
+        raw_txt_source_port = self._textfile_info.get('raw_source_port')
+        lmp_complevel = self._lmp_info.get('complevel')
+        if raw_txt_source_port:
+            # If we did parse the source port from the LMP or if we didn't get any secondary guess
+            # at the complevel, we don't really care about the rest of this logic.
+            if self._lmp_info.get('source_port') or not lmp_complevel:
+                self.data_manager.insert('source_port', raw_txt_source_port, DataManager.POSSIBLE,
+                                         source='textfile')
+            else:
+                if 'cl' in raw_txt_source_port:
+                    txt_port, txt_cl = raw_txt_source_port.split('cl')
+                    if txt_cl != lmp_complevel:
+                        LOGGER.warning(
+                            'Textfile complevel %s and lmp complevel %s do not match for lmp %s!',
+                            txt_cl, lmp_complevel, self.lmp_path
+                        )
+                else:
+                    txt_port = raw_txt_source_port
+
+                self.data_manager.insert('source_port', f'{txt_port}cl{lmp_complevel}',
+                                         DataManager.POSSIBLE, source='lmp+textfile')
 
 @dataclass
 class DemoInfoData:

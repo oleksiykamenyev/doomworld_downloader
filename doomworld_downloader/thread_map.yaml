@@ -1618,6 +1618,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/abscission
   id: '136461'
   name: "Abscission Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/136551-the-quest-for-necronomicon-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/quest12
+  id: '136551'
+  name: "The Quest for Necronomicon demos [-complevel 3]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -2152,6 +2157,7 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/dbp47
       - https://www.dsdarchive.com/wads/dbp50
       - https://www.dsdarchive.com/wads/dbp_51
+      - https://www.dsdarchive.com/wads/dbp_52
 "https://www.doomworld.com/forum/topic/127478-mayhem-demo-thread-complevel-9/":
   id: "127478"
   name: MAYhem demo thread [-complevel 9]
