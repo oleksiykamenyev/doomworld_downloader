@@ -52,12 +52,8 @@ class LMPData(BaseData):
     }
     WOOF_GAMEVERSION_TO_COMPLEVEL_MAP = {'1.9': '2', 'ultimate': '3', 'final': '4', 'chex': '3'}
 
-    # TODO: We might benefit from certain/possible keys being possible to change as an instance;
-    #       basically, source_port could be guessed fuzzily here or perfectly, and most of the time,
-    #       it is the latter, but might be nice to account for the former
-    #       Maybe an override certainty dictionary is a way to do this?
-    CERTAIN_KEYS = ['is_solo_net', 'num_players', 'source_port']
-    POSSIBLE_KEYS = ['is_tas']
+    CERTAIN_KEYS = ['is_solo_net', 'num_players']
+    POSSIBLE_KEYS = ['is_tas', 'source_port']
 
     ADDITIONAL_IWADS = ['heretic', 'hexen']
     HEXEN_CLASS_MAPPING = {0: 'Fighter', 1: 'Cleric', 2: 'Mage'}
@@ -65,7 +61,7 @@ class LMPData(BaseData):
     DEMO_DATE_CUTOFF = datetime.strptime(CONFIG.demo_date_cutoff, '%Y-%m-%dT%H:%M:%SZ')
     FUTURE_CUTOFF = datetime.today() + timedelta(days=1)
 
-    WOOF_REGEX = re.compile(r'Woof \d+\.\d+\.\d+')
+    WOOF_REGEX = re.compile(r'Woof\s+\d+\.\d+\.\d+')
 
     def __init__(self, lmp_path, textfile_iwad=None):
         """Initialize LMP data class.
@@ -81,6 +77,8 @@ class LMPData(BaseData):
         self._header = None
         self._footer = None
         self.textfile_iwad = textfile_iwad
+
+        self.source_port_guess_certain = False
 
     def analyze(self):
         """Analyze info provided to post parser."""
@@ -115,7 +113,12 @@ class LMPData(BaseData):
             if key in LMPData.CERTAIN_KEYS:
                 data_manager.insert(key, value, DataManager.CERTAIN, source='lmp')
             elif key in LMPData.POSSIBLE_KEYS:
-                data_manager.insert(key, value, DataManager.POSSIBLE, source='lmp')
+                if key == 'source_port' and self.source_port_guess_certain:
+                    certainty = DataManager.CERTAIN
+                else:
+                    certainty = DataManager.POSSIBLE
+
+                data_manager.insert(key, value, certainty, source='lmp')
             else:
                 raise ValueError('Unrecognized key found in data dictionary: {}.'.format(key))
 
@@ -333,7 +336,7 @@ class LMPData(BaseData):
                         self.raw_data['wad_strings'].append(
                             self._parse_file_in_footer(line[idx], '.deh')
                         )
-                # Crispy Doom will not output a complevel to the footer, just gameversion
+                # Crispy Doom/Woof will not output a complevel to the footer, just gameversion
                 if ((not self.raw_data.get('complevel') or
                      self.raw_data.get('complevel') == 'vanilla') and gameversion):
                     self.raw_data['complevel'] = LMPData.WOOF_GAMEVERSION_TO_COMPLEVEL_MAP.get(
@@ -377,7 +380,6 @@ class LMPData(BaseData):
         # This value, along with complevel, could already be obtained from the footer, in which case
         # we can just use that.
         port_with_version = None
-        update_txt_source_port = False
         if source_port_family:
             port_split = source_port_family.split(maxsplit=2)
             # Later versions of XDRE output source port as "PrBoom-Plus 2.5.1.4 (XDRE 2.20)"
@@ -386,6 +388,7 @@ class LMPData(BaseData):
                 if not port_version.startswith('v'):
                     port_version = f'v{port_version}'
                 self.data['source_port'] = ' '.join([port_name, port_version])
+                self.source_port_guess_certain = True
                 return
             else:
                 port_name = ' '.join(port_split[:-1])
@@ -409,7 +412,11 @@ class LMPData(BaseData):
             self.raw_data['complevel'] = complevel
             if port_with_version:
                 self.data['source_port'] = f'{port_with_version}cl{complevel}'
+                self.source_port_guess_certain = True
                 return
+        elif port_with_version:
+            LOGGER.warning('Demo %s is missing complevel information!', self.lmp_path)
+            self.data['source_port'] = port_with_version
 
         # Up to (and including) Doom 1.2, first byte was skill level, not game/exe version
         if 0 <= raw_version <= 4:
@@ -417,6 +424,8 @@ class LMPData(BaseData):
                 self.data['source_port'] = 'Doom v1.2 or earlier'
         elif raw_version == 110:
             self.data['source_port'] = 'TASDooM'
+            self.source_port_guess_certain = True
+            return
 
         # This isn't 100% part of the port info, but this is the cleanest place to check for this.
         if raw_version == 111:

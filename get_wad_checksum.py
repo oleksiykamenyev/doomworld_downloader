@@ -6,4 +6,4 @@ from doomworld_downloader.utils import checksum
 
 # For manual checksums (IWADs, etc.), just use this. Could take an argument, but too lazy for now,
 # and this is easier for me to use. :P
-print(checksum('C:\\Games\\dsda-doom-dsda\\nrftl_midipack_zdoom.wad'))
+print(checksum('C:\\Games\\dsda-doom-dsda\\extras_for_sourceports.wad'))
