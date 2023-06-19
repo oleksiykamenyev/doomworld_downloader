@@ -245,6 +245,20 @@ class UploadConfig:
             return None
 
     @property
+    def add_all_bonus_demos(self):
+        """Add all bonus demos from a zip.
+
+        The uploader has a default setting that it only tracks lmps named identically as the zip
+        by default. If this flag is turned on, it will add other lmps as well.
+
+        :return: Flag indicating whether to add all bonus demos from a zip.
+        """
+        try:
+            return self._config.getboolean('general', 'run_through_all_cmd_line_options')
+        except (NoSectionError, NoOptionError):
+            return None
+
+    @property
     def demo_pack_input_folder(self):
         """Get demo pack input folder.
 
@@ -392,6 +406,19 @@ class UploadConfig:
         """
         try:
             return self._config.getboolean('dsda_mode', 'mark_advanced_demos_incompatible')
+        except (NoSectionError, NoOptionError):
+            return False
+
+    @property
+    def dsda_mode_skip_unknowns(self):
+        """Skip unknowns for updates in DSDA mode.
+
+        Default to False.
+
+        :return: Flag indicating whether to skip unknowns for updates in DSDA mode
+        """
+        try:
+            return self._config.getboolean('dsda_mode', 'skip_unknowns')
         except (NoSectionError, NoOptionError):
             return False
 

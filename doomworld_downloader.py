@@ -182,7 +182,8 @@ def main():
         )
         dsda_demo_processor = DemoProcessor(
             {entry: {'demo_id': entry_info_list[0]['demo_id'],
-                     'player_list': entry_info_list[0]['player_list']}
+                     'player_list': entry_info_list[0]['player_list'],
+                     'extra_wad_guesses': entry_info_list[0].get('extra_wad_guesses', [])}
              for entry, entry_info_list in dsda_info['entry_list'].items()},
             additional_demo_info=additional_info
         )

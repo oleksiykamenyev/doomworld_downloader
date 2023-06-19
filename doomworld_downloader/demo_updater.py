@@ -174,7 +174,9 @@ class DemoUpdater:
                 else:
                     LOGGER.debug('Difference for demo %s found in key %s!.', demo_location, key)
                     if not CONFIG.dsda_mode_replace_zips:
-                        demo_update[final_key] = full_demo_json.get(final_key, {})
+                        final_value = full_demo_json.get(final_key, {})
+                        if final_value != 'UNKNOWN' or not CONFIG.dsda_mode_skip_unknowns:
+                            demo_update[final_key] = full_demo_json.get(final_key, {})
 
         if is_advanced_port and CONFIG.dsda_mode_mark_advanced_demos_incompatible:
             demo_update['category'] = 'Other'

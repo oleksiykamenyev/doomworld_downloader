@@ -343,6 +343,15 @@ class PlaybackData(BaseData):
         )
         skill = self.demo_info.get('skill')
         game_mode = self.demo_info.get('game_mode')
+
+        # If a run was a valid Tyson (only Tyson weapons used and 100% kills) and the map is not
+        # Tyson-only, we always choose the Tyson category for the final run instead of UV Max.
+        if self.raw_data.get('tyson_weapons', False) and self.raw_data.get('100k', False):
+            tyson_only = map_info.get_single_key_for_map('tyson_only', skill=skill,
+                                                         game_mode=game_mode)
+            if not tyson_only and self.data['category'] == 'UV Max':
+                self.data['category'] = 'Tyson'
+
         is_nomo = self.raw_data.get('nomonsters', False)
         skip_reality = map_info.get_single_key_for_map('skip_reality', skill=skill,
                                                        game_mode=game_mode)
@@ -379,14 +388,6 @@ class PlaybackData(BaseData):
 
             if add_almost_reality_tag:
                 self.note_strings.add('Also Almost Reality')
-
-        # If a run was a valid Tyson (only Tyson weapons used and 100% kills) and the map is not
-        # Tyson-only, we always choose the Tyson category for the final run instead of UV Max.
-        if self.raw_data.get('tyson_weapons', False) and self.raw_data.get('100k', False):
-            tyson_only = map_info.get_single_key_for_map('tyson_only', skill=skill,
-                                                         game_mode=game_mode)
-            if not tyson_only and self.data['category'] == 'UV Max':
-                self.data['category'] = 'Tyson'
 
         # If a run was a Stroller, choose the Stroller category over UV-Speed, as this will happen
         # for maps with no monsters.
@@ -481,6 +482,8 @@ class PlaybackData(BaseData):
             map_info = self._demo_playback.wad.map_list_info.get_map_info(
                 level_no_secret_exit_marker
             )
+            # Not sure this should be the no-secret exit marker map, since some things can be
+            # different depending on secret exit.
             self.raw_data['affected_levels'] = [level_no_secret_exit_marker]
             if (self.data['category'] in PlaybackData.ALL_KILLS_CATEGORIES or
                     self.data['category'] in PlaybackData.ALL_SECRETS_CATEGORIES or

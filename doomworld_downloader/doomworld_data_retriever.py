@@ -9,6 +9,7 @@ import logging
 import os
 import re
 import shutil
+import uuid
 
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -205,7 +206,9 @@ def parse_thread_page(thread_url, thread=None):
 
         attachment_links = [
             link for link in post_content_elem.find_all('a')
-            if 'ipsAttachLink' in link.get('class', []) or ATTACH_URL_RE.match(link.get('href', ''))
+            if ('ipsAttachLink' in link.get('class', []) or
+                ATTACH_URL_RE.match(link.get('href', '')) or
+                'doomshack.org/uploads' in link.get('href', ''))
         ]
         attachments = get_links(attachment_links, extract_link=True)
         # Skip posts with no attachments as they have no demos to search for
@@ -414,8 +417,9 @@ def download_attachments(post):
             continue
 
         parsed_url = urlparse(attach_url)
-        attach_id = parse_qs(parsed_url.query, keep_blank_values=True)['id']
-        attach_dir = os.path.join(author_dir, attach_id[0])
+        attach_id = parse_qs(parsed_url.query, keep_blank_values=True).get('id')
+        attach_id = attach_id[0] if attach_id else str(uuid.uuid4())
+        attach_dir = os.path.join(author_dir, attach_id)
         download = download_response(response, attach_dir, attach_filename, overwrite=True)
 
         download_renamed_filename = get_filename_no_ext(download).replace(' ', '_')

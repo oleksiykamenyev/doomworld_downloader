@@ -100,13 +100,15 @@ class DemoProcessor:
                 else:
                     extra_info_player_list = self.additional_demo_info.get('player_list', [])
 
-                demo_info_data = DemoInfoData(
-                    recorded_date=lmp_info['recorded_date'],
-                    txt_file_path=lmp_info.get('txt_file_path'),
-                    txt_file_date=lmp_info.get('txt_file_date'),
-                    player_list=extra_info_player_list,
-                    extra_wad_guesses=self.additional_demo_info.get('extra_wad_guesses', [])
-                )
+                extra_wad_guesses = self.additional_demo_info.get('extra_wad_guesses', [])
+                additional_extra_wad_guesses = input_demo_info.get('extra_wad_guesses', [])
+                if additional_extra_wad_guesses:
+                    extra_wad_guesses.extend(additional_extra_wad_guesses)
+                demo_info_data = DemoInfoData(recorded_date=lmp_info['recorded_date'],
+                                              txt_file_path=lmp_info.get('txt_file_path'),
+                                              txt_file_date=lmp_info.get('txt_file_date'),
+                                              player_list=extra_info_player_list,
+                                              extra_wad_guesses=extra_wad_guesses)
                 demo_info = DemoInfo(lmp_info['lmp_path'], demo_info_data, zip_path=zip_path,
                                      demo_id=lmp_info.get('demo_id'))
                 demo_info.process_post_data(self.post_data)
@@ -171,7 +173,8 @@ class DemoZipInfo:
             zip_member_name = zip_file_info.filename
             zip_member_name_lower = zip_member_name.lower()
             if is_demo_filename(zip_member_name_lower):
-                if get_filename_no_ext(zip_member_name_lower) == zip_filename_no_ext:
+                if (get_filename_no_ext(zip_member_name_lower) == zip_filename_no_ext and
+                        not CONFIG.add_all_bonus_demos):
                     main_lmp = zip_member_name
 
                 self.lmp_to_info_map[zip_member_name] = {
