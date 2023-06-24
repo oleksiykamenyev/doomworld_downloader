@@ -116,9 +116,11 @@ class DemoProcessor:
                                            default_textfile_date=primary_textfile_date)
                 demo_info.process_lmp()
                 demo_info.process_additional_demo_info()
-                if not CONFIG.skip_playback and demo_info.demo_process_failed:
-                    self.process_failed = True
-                    continue
+                if demo_info.demo_process_failed:
+                    if not CONFIG.skip_playback:
+                        self.process_failed = True
+                    if CONFIG.exclude_demos_that_failed_playback:
+                        continue
 
                 self.demo_infos.append(demo_info)
 
@@ -327,12 +329,13 @@ class DemoInfo:
 
         playback_data = PlaybackData(self.lmp_path, wad_guesses, demo_info=self._lmp_info)
         playback_data.analyze()
-        if not CONFIG.skip_playback and playback_data.playback_failed:
-            additional_zip_msg = f' from zip {self.zip_path}' if self.zip_path else ''
-            LOGGER.info('Skipping lmp %s%s due to issues with playback.', self.lmp_metadata,
-                        additional_zip_msg)
+        if playback_data.playback_failed:
+            if not CONFIG.skip_playback:
+                additional_zip_msg = f' from zip {self.zip_path}' if self.zip_path else ''
+                LOGGER.info('Skipping lmp %s%s due to issues with playback.', self.lmp_metadata,
+                            additional_zip_msg)
             self.demo_process_failed = True
-            return False
+            return
 
         lmp_data.populate_data_manager(self.data_manager)
         playback_data.populate_data_manager(self.data_manager)

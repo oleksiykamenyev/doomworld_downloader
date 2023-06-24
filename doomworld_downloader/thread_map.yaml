@@ -1623,6 +1623,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/quest12
   id: '136551'
   name: "The Quest for Necronomicon demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/136822-hyperspeed-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/hyperspeed
+  id: '136822'
+  name: "HyperSpeed demos [-complevel 2]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":

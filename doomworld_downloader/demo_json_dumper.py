@@ -162,7 +162,8 @@ class DemoJson:
     SKILL_CATEGORY_NOTE_RE = re.compile('^Skill \d .+$')
 
     MISC_NOTES = ['Also Reality', 'Also Almost Reality', 'Uses turbo', 'Uses -longtics',
-                  'Also Pacifist', 'Plays back with forced -complevel 5']
+                  'Also Pacifist', 'Plays back with forced -complevel 5',
+                  'Good at DooM: gib yourself to end the level.']
     MISC_CATEGORY_NOTES = [
         '-altdeath', '-coop_spawns', '-fast', '-nomonsters', '-respawn', '-solo-net'
     ]
@@ -451,6 +452,8 @@ class DemoJson:
                 if note_string == 'Uses -longtics':
                     self.demo_dict['category'] = 'Other'
                     self._set_has_issue()
+                if note_string == 'Good at DooM: gib yourself to end the level.':
+                    self.demo_dict['category'] = 'Other'
 
         return '\n'.join(sorted(misc_tags))
 

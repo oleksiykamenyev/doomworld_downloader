@@ -73,7 +73,7 @@ class PlaybackData(BaseData):
 
     ALLOWED_FOOTER_FILES = ['bloodcolor.deh', 'bloodfix.deh', 'doom widescreen hud.wad',
                             'doom 2 widescreen assets.wad', 'dsda-doom.wad', 'prboom-plus.wad',
-                            'doom_wide.wad', 'notransl.deh', 'doomgirl_01.wad']
+                            'doom_wide.wad', 'notransl.deh', 'doomgirl_01.wad', 'good.deh']
     FOOTER_WAD_EXTENSIONS = ['.bex', '.deh', '.hhe', '.pk3', '.pk7', '.wad']
 
     def __init__(self, lmp_path, wad_guesses, demo_info=None):
@@ -232,6 +232,12 @@ class PlaybackData(BaseData):
                 playback_cmd_lines.extend(
                     [f'{cmd} -complevel 5' for cmd in playback_cmd_lines]
                 )
+            footer_files_lower = [footer_file.lower()
+                                  for footer_file in self.demo_info.get('footer_files', [])]
+            if 'good.deh' in footer_files_lower or CONFIG.always_try_good_at_doom:
+                all_cmds_with_good_deh = [f'{cmd} -deh good' for cmd in playback_cmd_lines]
+                playback_cmd_lines.extend([{cmd: 'Good at DooM: gib yourself to end the level.'}
+                                           for cmd in all_cmds_with_good_deh])
 
             for cmd_line in playback_cmd_lines:
                 if isinstance(cmd_line, dict):

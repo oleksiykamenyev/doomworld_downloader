@@ -227,7 +227,7 @@ class UploadConfig:
         try:
             return self._config.getboolean('general', 'add_lmp_metadata')
         except (NoSectionError, NoOptionError):
-            return None
+            return False
 
     @property
     def run_through_all_cmd_line_options(self):
@@ -242,7 +242,7 @@ class UploadConfig:
         try:
             return self._config.getboolean('general', 'run_through_all_cmd_line_options')
         except (NoSectionError, NoOptionError):
-            return None
+            return False
 
     @property
     def add_all_bonus_demos(self):
@@ -251,12 +251,38 @@ class UploadConfig:
         The uploader has a default setting that it only tracks lmps named identically as the zip
         by default. If this flag is turned on, it will add other lmps as well.
 
-        :return: Flag indicating whether to add all bonus demos from a zip.
+        :return: Flag indicating whether to add all bonus demos from a zip
         """
         try:
             return self._config.getboolean('general', 'run_through_all_cmd_line_options')
         except (NoSectionError, NoOptionError):
-            return None
+            return False
+
+    @property
+    def exclude_demos_that_failed_playback(self):
+        """Exclude demos that failed playback.
+
+        In this mode, any demo that failed playback will be entirely excluded from the final output
+        JSONs (normally, the script places a JSON anyway with any info it can gather about it
+        without a successful playback).
+
+        :return: Flag indicating whether to exclude demos that failed playback
+        """
+        try:
+            return self._config.getboolean('general', 'exclude_demos_that_failed_playback')
+        except (NoSectionError, NoOptionError):
+            return False
+
+    @property
+    def always_try_good_at_doom(self):
+        """Always try to play back demos with good.deh.
+
+        :return: Flag indicating always try to play back demos with good.deh
+        """
+        try:
+            return self._config.getboolean('general', 'always_try_good_at_doom')
+        except (NoSectionError, NoOptionError):
+            return False
 
     @property
     def demo_pack_input_folder(self):
