@@ -1628,6 +1628,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/hyperspeed
   id: '136822'
   name: "HyperSpeed demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/136961-toons-for-doom-2-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/toon2b
+  id: '136961'
+  name: "Toons for Doom 2 Demos [-complevel 2]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":

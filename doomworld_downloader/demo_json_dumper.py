@@ -306,7 +306,7 @@ class DemoJson:
 
             no_kills = True
             no_secrets = True
-            for stats in self.demo_info.additional_upload_info['stats']:
+            for stats in self.demo_info.additional_upload_info.get('stats', []):
                 if stats['kills'] != '0/0':
                     no_kills = False
                 if stats['secrets'] != '0/0':
