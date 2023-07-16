@@ -1628,11 +1628,26 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/hyperspeed
   id: '136822'
   name: "HyperSpeed demos [-complevel 2]"
-"https://www.doomworld.com/forum/topic/136961-toons-for-doom-2-demos-complevel-2/":
+"https://www.doomworld.com/forum/topic/137438-doom-2-the-way-we-remember-it-demos-complevel-2/":
   additional_info:
-    wad: https://www.dsdarchive.com/wads/toon2b
-  id: '136961'
-  name: "Toons for Doom 2 Demos [-complevel 2]"
+    wad: https://www.dsdarchive.com/wads/d2twwri
+  id: '137438'
+  name: "Doom 2: The Way We Remember It demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/137439-czechbox-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/czechbox
+  id: '137439'
+  name: "Czechbox demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/137440-phouse-the-great-arena-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/phtga
+  id: '137440'
+  name: "Phouse: The Great Arena demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/137487-grindfest-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/grindfest
+  id: '137487'
+  name: "Grindfest demos [-complevel 21]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -1915,6 +1930,13 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/ohm2
   id: '134813'
   name: "One Hour Mapping Series demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/136961-toons-for-doom-2-demos-complevel-2/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/toondm
+      - https://www.dsdarchive.com/wads/toon2b
+  id: '136961'
+  name: "Toons for Doom 2 Demos [-complevel 2]"
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":

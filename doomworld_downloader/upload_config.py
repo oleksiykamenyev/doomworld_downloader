@@ -254,7 +254,7 @@ class UploadConfig:
         :return: Flag indicating whether to add all bonus demos from a zip
         """
         try:
-            return self._config.getboolean('general', 'run_through_all_cmd_line_options')
+            return self._config.getboolean('general', 'add_all_bonus_demos')
         except (NoSectionError, NoOptionError):
             return False
 

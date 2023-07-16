@@ -56,6 +56,8 @@
   map_list_info:
     map_ranges: [[1, 32]]
     map_info:
+      "Map 16":
+        skip_also_pacifist_for_categories: ["NM Speed"]
       "Map 31":
         mark_secret_exit_as_normal: true
   idgames_url: null
@@ -712,7 +714,6 @@
   iwad: chex
   wad_files:
     chex.wad: {checksum: "25485721882b050afa96a56e5758dd52"}
-    chex.deh: {not_required_for_playback: true, checksum: "928cc1593cda42b78c8326807d5c80b6"}
   complevel: 3
   map_list_info:
     map_ranges: [["E1M1", "E1M5"]]
@@ -826,7 +827,7 @@
     sckrpnch.wad: {checksum: "c0b42bb95f6ddf6244d7ecffc0b6ab7b"}
     cc4-tex.wad: {dupe_checksum: true, not_required_for_playback: true, checksum: "3b2ae93bc2cfb06e97ec4f2687ba6050"}
   complevel: 2
-  playback_cmd_line: "-file sckrpnch"
+  playback_cmd_line: "-file sckrpnch cc4-tex"
   map_list_info:
     map_ranges: [[1, 9]]
     d2all: ["Map 01", "Map 09"]
@@ -1738,6 +1739,7 @@
         skip_reality_for_categories: ["UV Speed", "Pacifist"]
         skip_also_pacifist_for_categories: ["NM Speed"]
       "Map 03":
+        tyson_only: true
         skip_reality_for_categories: ["UV Speed", "Pacifist", "NM Speed", "Stroller"]
         skip_also_pacifist_for_categories: ["NM Speed"]
       "Map 04":
@@ -3474,6 +3476,9 @@
     map_ranges: [[1, 12]]
     d2all: ["Map 01", "Map 12"]
     episodes: []
+    map_info:
+      "Map 12":
+        skip_reality_for_categories: ["Pacifist", "UV Speed", "NM Speed"]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/abyspe30"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/"
@@ -4366,7 +4371,7 @@
         skip_reality: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/phtga"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/137440-phouse-the-great-arena-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/swomega":
   wad_name: Omega Facility
   iwad: doom2
@@ -5852,6 +5857,11 @@
     map_ranges: [[1, 16]]
     d2all: ["Map 01", "Map 16"]
     episodes: []
+    map_info:
+      "Map 01":
+        skip_also_pacifist_for_categories: ["NM Speed"]
+      "Map 05":
+        skip_also_pacifist_for_categories: ["NM Speed"]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dwspd002"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/128765-doomworld-speedmapping-compilation-demos/"
@@ -5924,6 +5934,10 @@
   playback_cmd_line: "-file cleim20"
   map_list_info:
     map_ranges: [[1, 32]]
+    map_info:
+      "Map 30":
+        skip_reality_for_categories: ["Pacifist", "UV Speed"]
+        skip_also_pacifist_for_categories: ["NM Speed"]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/cleim20p"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/128875-cleimos-and-cleimos-2-demos-complevel-2/"
@@ -10282,6 +10296,10 @@
   map_list_info:
     map_ranges: [[1, 32]]
     map_info:
+      "Map 03":
+        skip_also_pacifist_for_categories: ["NM Speed"]
+      "Map 06":
+        skip_also_pacifist_for_categories: ["NM Speed"]
       "Map 19":
         skip_reality_for_categories: ["Pacifist", "UV Speed", "NM Speed"]
         skip_also_pacifist_for_categories: ["NM Speed"]
@@ -11433,7 +11451,7 @@
   playback_cmd_line: "-file haste"
   map_list_info:
     map_ranges: [[1, 17], [31]]
-    d2all: ["Map 01", "Map 17"]
+    d2all: ["Map 01", "Map 16"]
     episodes: []
     secret_exits: {"Map 15": "Map 31"}
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/haste"
@@ -11947,9 +11965,14 @@
   playback_cmd_line: "-file d2twwri"
   map_list_info:
     map_ranges: [[1, 35]]
+    map_info:
+      "Map 08":
+        skip_reality_for_categories: ["Pacifist", "UV Speed"]
+      "Map 31":
+        skip_also_pacifist_for_categories: ["NM Speed"]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/d2twwri"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/137438-doom-2-the-way-we-remember-it-demos-complevel-2/"
 "https://www.dsdarchive.com/wads/abyspe59":
   wad_name: "Abyssal Speedmapping Sessions: Session 59"
   iwad: doom2
@@ -13026,6 +13049,14 @@
     map_ranges: [[1, 13]]
     d2all: ["Map 01", "Map 13"]
     episodes: []
+    map_info:
+      "Map 03":
+        skip_also_pacifist_for_categories: ["NM Speed"]
+      "Map 04":
+        skip_almost_reality_for_categories: ["Pacifist", "UV Speed", "NM Speed"]
+        skip_also_pacifist_for_categories: ["NM Speed"]
+      "Map 09":
+        skip_also_pacifist_for_categories: ["NM Speed"]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dwspd001"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/128765-doomworld-speedmapping-compilation-demos/"
@@ -15907,7 +15938,7 @@
     chilla.wad: {not_required_for_playback: true, dupe_checksum: true, checksum: "ee0df7f9025520e070c8128313f9f429"}
     ax.wad: {not_required_for_playback: true, dupe_checksum: true, checksum: "ee0df7f9025520e070c8128313f9f429"}
   complevel: 9
-  playback_cmd_line: "-file chillax-v9.7.3 chillax-v9.7.2_png_patch"
+  playback_cmd_line: "-file 'chillax-v9.7.3.wad' 'chillax-v9.7.2_png_patch.wad'"
   map_list_info:
     map_ranges: [[1, 47]]
     map_info:
@@ -15938,15 +15969,15 @@
     chilla.wad: {not_required_for_playback: true, dupe_checksum: true, checksum: "ee0df7f9025520e070c8128313f9f429"}
     ax.wad: {not_required_for_playback: true, dupe_checksum: true, checksum: "ee0df7f9025520e070c8128313f9f429"}
   complevel: 9
-  playback_cmd_line: "-file chillax-v9.7.2.wad"
-  alt_playback_cmd_lines: [{"-file chillax-v9.7.2 chillax-v9.7.2fixed": "Plays back with chillax-v9.7.2fixed.wad."},
-                           {"-file chillax-v9.7.2 chmapfix": "Plays back with chmapfix.wad."},
-                           {"-file chillax-v9.7.2 chillax-v9.7.2fixed chillaxmap20fix": "Plays back with chillax-v9.7.2fixed.wad and chillaxmap20fix.wad."},
-                           {"-file chillax-v9.7.2 chillax-v9.7.2fixed chmapfix": "Plays back with chillax-v9.7.2fixed.wad and chmapfix.wad."},
-                           {"-file chillax-v9.7.2 -deh no_block": "Plays back with no_block.deh."},
-                           {"-file chillax-v9.7.2 chillax-v9.7.2fixed -deh no_block": "Plays back with chillax-v9.7.2fixed.wad and no_block.deh."},
-                           {"-file chillax-v9.7.2 chmapfix -deh no_block": "Plays back with chmapfix.wad and no_block.deh."},
-                           {"-file chillax-v9.7.2 chillax-v9.7.2fixed chmapfix -deh no_block": "Plays back with chillax-v9.7.2fixed.wad, chmapfix.wad, and no_block.deh."}]
+  playback_cmd_line: "-file 'chillax-v9.7.2.wad'"
+  alt_playback_cmd_lines: [{"-file 'chillax-v9.7.2.wad' 'chillax-v9.7.2fixed.wad'": "Plays back with chillax-v9.7.2fixed.wad."},
+                           {"-file 'chillax-v9.7.2.wad' chmapfix": "Plays back with chmapfix.wad."},
+                           {"-file 'chillax-v9.7.2.wad' 'chillax-v9.7.2fixed.wad' chillaxmap20fix": "Plays back with chillax-v9.7.2fixed.wad and chillaxmap20fix.wad."},
+                           {"-file 'chillax-v9.7.2.wad' 'chillax-v9.7.2fixed.wad' chmapfix": "Plays back with chillax-v9.7.2fixed.wad and chmapfix.wad."},
+                           {"-file 'chillax-v9.7.2.wad' -deh no_block": "Plays back with no_block.deh."},
+                           {"-file 'chillax-v9.7.2.wad' 'chillax-v9.7.2fixed.wad' -deh no_block": "Plays back with chillax-v9.7.2fixed.wad and no_block.deh."},
+                           {"-file 'chillax-v9.7.2.wad' chmapfix -deh no_block": "Plays back with chmapfix.wad and no_block.deh."},
+                           {"-file 'chillax-v9.7.2.wad' 'chillax-v9.7.2fixed.wad' chmapfix -deh no_block": "Plays back with chillax-v9.7.2fixed.wad, chmapfix.wad, and no_block.deh."}]
   map_list_info:
     map_ranges: [[1, 47]]
     map_info:
@@ -28592,6 +28623,10 @@
     d2all: ["Map 01", "Map 30"]
     episodes: [["Map 01", "Map 07"], ["Map 08", "Map 14"], ["Map 15", "Map 21"], ["Map 22", "Map 28"], ["Map 29", "Map 30"]]
     secret_exits: {"Map 07": "Map 31", "Map 11": "Map 32", "Map 17": "Map 33", "Map 26": "Map 34"}
+    map_info:
+      "Map 33":
+        skip_reality_for_categories: ["Pacifist", "UV Speed", "NM Speed", "Stroller"]
+        skip_also_pacifist_for_categories: ["NM Speed"]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/sepia"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/135428-sepia-demos-complevel-21/"
@@ -33546,7 +33581,7 @@
     hyperspeed-v1.4.wad: {checksum: "dacaabb045b91f55fe41cc8ca5005cad"}
     hyperspeed-v1.3.wad: {not_required_for_playback: true, dupe_checksum: true, checksum: "dacaabb045b91f55fe41cc8ca5005cad"}
   complevel: 2
-  playback_cmd_line: "-file hyperspeed-v1.4"
+  playback_cmd_line: "-file 'hyperspeed-v1.4.wad'"
   map_list_info:
     map_ranges: [[1, 35]]
     map_info:
@@ -34236,6 +34271,7 @@
     "canon pixma customer service care by lukejhonson.wad": {checksum: "e8b084847f597676f1903b3931f90157"}
     # In case someone renames their WAD...
     canon_pixma_customer_service_care_by_lukejhonson.wad: {not_required_for_playback: true, dupe_checksum: true, checksum: "e8b084847f597676f1903b3931f90157"}
+    canonpixmacustomerservicecarebylukejhonson.wad: {not_required_for_playback: true, dupe_checksum: true, checksum: "e8b084847f597676f1903b3931f90157"}
   complevel: 3
   playback_cmd_line: "-file 'canon pixma customer service care by lukejhonson.wad'"
   map_list_info:
@@ -34268,5 +34304,266 @@
   map_list_info:
     map_ranges: [[1, 32]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/czechbox"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/137439-czechbox-demos-complevel-9/"
+"https://www.dsdarchive.com/wads/100lnmas":
+  wad_name: 100 Line Christmas (Community Project)
+  iwad: doom2
+  wad_files:
+    100lnmas.wad: {checksum: "79e21a9341e16becee65737efa0d940d"}
+    100lnmas.deh: {not_required_for_playback: true, checksum: "1b4f6344b4c24a8831314d26486856ca"}
+    100lnmas_ws.wad: {not_required_for_playback: true, checksum: "57bae60daf7301924b947e80a63f1633"}
+  complevel: 2
+  playback_cmd_line: "-file 100lnmas"
+  map_list_info:
+    map_ranges: [[1, 28], [31, 32]]
+    d2all: ["Map 01", "Map 28"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/themes/xmas/100lnmas"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/slottr2":
+  wad_name: SLOTTER II (Demo)
+  iwad: doom2
+  wad_files:
+    slottr2.wad: {checksum: "41ac5ecf281b59265aeeb2868f8cf09f"}
+    slottr2.deh: {not_required_for_playback: true, checksum: "a4ee043cee7d4b4183f2211ff30e037b"}
+    slottr2_ws.wad: {not_required_for_playback: true, checksum: "ee77126ca9f6aa5bb5fe492dd1c14bf2"}
+  complevel: 2
+  playback_cmd_line: "-file slottr2"
+  map_list_info:
+    map_ranges: [[1, 12], [30], [32]]
+    d2all: ["Map 01", "Map 12"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/s-u/slottr2"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/puss23-mrdt":
+  wad_name: "PUSS XXIII: Mappin' Round the Doommas Tree"
+  iwad: doom2
+  wad_files:
+    "puss23 mappin round the doommas tree.wad": {checksum: "bf4330155988b8099dcc473c0da4007c"}
+  complevel: 9
+  playback_cmd_line: "-file 'puss23 mappin round the doommas tree.wad'"
+  map_list_info:
+    map_ranges: [[1, 45]]
+    d2all: ["Map 01", "Map 44"]
+    episodes: []
+    secret_exits: {"Map 15": "Map 45"}
+  idgames_url: "https://www.doomworld.com/idgames/themes/xmas/puss23-mrdt"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/misery":
+  wad_name: Faint of Heart?
+  iwad: doom2
+  wad_files:
+    misery.wad: {checksum: "368ddfe127a3092c5adb19179c0b8115"}
+    axolotl.wad: {dupe_checksum: true, checksum: "ba17a289ecb71021c3980a6a7c801811"}
+    badpainpal.wad: {not_required_for_playback: true, checksum: "87820e17ea8e06a028506bf27a51d13a"}
+  complevel: 21
+  playback_cmd_line: "-file axolotl misery"
+  map_list_info:
+    map_ranges: [[7]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/m-o/misery"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/letitrol":
+  wad_name: Let It Roll
+  iwad: doom2
+  wad_files:
+    letitrol.wad: {checksum: "27be2c7188be2761b3ec9cbfc15ee100"}
+  complevel: 2
+  playback_cmd_line: "-file letitrol"
+  map_list_info:
+    map_ranges: [[1, 3]]
+    d2all: ["Map 01", "Map 03"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/j-l/letitrol"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/geoff":
+  wad_name: geoff
+  iwad: doom
+  wad_files:
+    geoff.wad: {checksum: "e2c65fa5c84b1da5763459067059597c"}
+  complevel: 3
+  playback_cmd_line: "-file geoff"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/jimmy":
+  wad_name: Jimmy!
+  iwad: doom2
+  wad_files:
+    jimmy.wad: {checksum: "aed9246c8d7ceb66424856b2da316fea"}
+  complevel: 2
+  playback_cmd_line: "-file jimmy"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/j-l/jimmy"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/asshole":
+  wad_name: asshole
+  iwad: doom2
+  wad_files:
+    asshole.wad: {checksum: "4a198ca20a124364c56a8f0f21a7592d"}
+  complevel: 2
+  playback_cmd_line: "-file asshole"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/asshole"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/gtwy2000":
+  wad_name: Gateway 2000
+  iwad: doom2
+  wad_files:
+    gtwy2000.wad: {checksum: "8afd111a3f95635ec79c4b4c09cf96b7"}
+  complevel: 2
+  playback_cmd_line: "-file gtwy2000"
+  map_list_info:
+    map_ranges: [[1, 3]]
+    d2all: ["Map 01", "Map 03"]
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/spankme":
+  wad_name: SPANKME.WAD
+  iwad: doom
+  wad_files:
+    spankme.wad: {checksum: "2886ab2dad2955976a8d9ff806acb531"}
+  complevel: 3
+  playback_cmd_line: "-file spankme"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/s-u/spankme"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/roar":
+  wad_name: RoaR.WAD
+  iwad: doom2
+  wad_files:
+    roar.wad: {checksum: "c45d6f283c8b745b26a755600a37ca58"}
+  complevel: 2
+  playback_cmd_line: "-file roar"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/deathmatch/p-r/roar"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/timecsr":
+  wad_name: Time Chaser
+  iwad: doom2
+  wad_files:
+    timecsr.wad: {checksum: "3b023a873f4fed1780436eb1fe0dbc98"}
+  complevel: 2
+  playback_cmd_line: "-file timecsr"
+  map_list_info:
+    map_ranges: [[1, 18]]
+    d2all: ["Map 01", "Map 18"]
+    episodes: []
+    secret_exits: {}
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/timecsr"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/grindfest":
+  wad_name: '"Grindfest"'
+  iwad: doom2
+  wad_files:
+    grindfest.wad: {checksum: "1d56e9192b5b5a7065659a1526ef906f"}
+  complevel: 21
+  playback_cmd_line: "-file grindfest"
+  map_list_info:
+    map_ranges: [[1, 33]]
+    secret_exits: {"Map 06": "Map 31", "Map 17": "Map 32", "Map 29": "Map 33"}
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/grindfest"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/137487-grindfest-demos-complevel-21/"
+"https://www.dsdarchive.com/wads/bcookie":
+  wad_name: Banana Cookie
+  iwad: doom2
+  wad_files:
+    bcookie.wad: {checksum: "2dae3a76f55c43f2af16733bfab28412"}
+  complevel: 17
+  playback_cmd_line: "-file bcookie"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/bcookie"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/eagle":
+  wad_name: The Eagle
+  iwad: doom2
+  wad_files:
+    eagle.wad: {checksum: "6bc32eb0460831266e866b4738d31ea1"}
+  complevel: 2
+  playback_cmd_line: "-file eagle"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/d-f/eagle"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/toondm":
+  wad_name: TOON DOOM
+  iwad: doom2
+  wad_files:
+    kitchen.wad: {checksum: "cbd90594a9379fe520b306fb706af35a"}
+    ralf.wad: {checksum: "f8120b0a6ada05a541b9802c7374c27c"}
+    toonflt.wad: {checksum: "88c8816a8d07fefc4bc83539e771c037"}
+    toongfx.wad: {checksum: "a574e51c9358a156ebba5ca051ccae33"}
+    toonsnd.wad: {checksum: "ccc4ed019238199fe07390915b597c41"}
+    toonspt.wad: {checksum: "629aaf57d11040f58567727d272e9122"}
+  complevel: 2
+  playback_cmd_line: "-file toonflt toongfx toonsnd toonspt kitchen ralf"
+  map_list_info:
+    map_ranges: [[1, 2]]
+    d2all: ["Map 01", "Map 02"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/s-u/toondm"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/136961-toons-for-doom-2-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/cleim10":
+  wad_name: Cleimos
+  iwad: doom
+  wad_files:
+    cleim10.wad: {checksum: "beced3b6c213065857b1ea36bd43d3c9"}
+  complevel: 3
+  playback_cmd_line: "-file cleim10"
+  map_list_info:
+    map_ranges: [["E2M1", "E2M9"]]
+    episodes: [["E2M1", "E2M8"]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/a-c/cleim10"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/128875-cleimos-and-cleimos-2-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/fucktrump":
+  wad_name: Fuck Trump
+  iwad: doom2
+  wad_files:
+    fucktrump.wad: {checksum: "7248b5588bb630010af44749cfa87f9f"}
+  complevel: 2
+  playback_cmd_line: "-file fucktrump"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/d-f/fucktrump"
   dsda_paginated: false
   doomworld_thread: null

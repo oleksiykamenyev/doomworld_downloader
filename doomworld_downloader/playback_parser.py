@@ -74,6 +74,7 @@ class PlaybackData(BaseData):
     ALLOWED_FOOTER_FILES = ['bloodcolor.deh', 'bloodfix.deh', 'doom widescreen hud.wad',
                             'doom 2 widescreen assets.wad', 'dsda-doom.wad', 'prboom-plus.wad',
                             'doom_wide.wad', 'notransl.deh', 'doomgirl_01.wad', 'good.deh']
+    CHEX_ADDITIONAL_FOOTER_FILES = ['chex.deh', 'chexehud.wad']
     FOOTER_WAD_EXTENSIONS = ['.bex', '.deh', '.hhe', '.pk3', '.pk7', '.wad']
 
     def __init__(self, lmp_path, wad_guesses, demo_info=None):
@@ -271,19 +272,21 @@ class PlaybackData(BaseData):
                                  for wad_file in cur_demo_playback.wad.files.keys()]
                     unexpected_file = False
                     for footer_file in self.demo_info.get('footer_files', []):
-                        footer_lower = os.path.basename(footer_file.lower())
-                        footer_ext = os.path.splitext(footer_lower)[1]
-                        if not footer_ext:
-                            footer_lower = f'{footer_lower}.wad'
-                            footer_ext = '.wad'
-                        if (footer_lower not in wad_files and
-                                footer_lower != f'{cur_demo_playback.wad.iwad}.wad' and
-                                footer_lower not in PlaybackData.ALLOWED_FOOTER_FILES and
-                                footer_ext in PlaybackData.FOOTER_WAD_EXTENSIONS):
-                            LOGGER.error('Unexpected file %s found in footer for WAD %s.',
-                                         footer_file, cur_demo_playback.wad.name)
-                            unexpected_file = True
-                            break
+                        footer_file_lower = os.path.basename(footer_file.lower())
+                        footer_file_ext = os.path.splitext(footer_file_lower)[1]
+                        if not footer_file_ext:
+                            footer_file_lower = f'{footer_file_lower}.wad'
+                            footer_file_ext = '.wad'
+                        if (footer_file_lower not in wad_files and
+                                footer_file_lower != f'{cur_demo_playback.wad.iwad}.wad' and
+                                footer_file_lower not in PlaybackData.ALLOWED_FOOTER_FILES and
+                                footer_file_ext in PlaybackData.FOOTER_WAD_EXTENSIONS):
+                            if (cur_demo_playback.wad.iwad == 'chex' and
+                                    footer_file_lower not in self.CHEX_ADDITIONAL_FOOTER_FILES):
+                                LOGGER.error('Unexpected file %s found in footer for WAD %s.',
+                                             footer_file, cur_demo_playback.wad.name)
+                                unexpected_file = True
+                                break
 
                     if unexpected_file:
                         continue
