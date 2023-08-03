@@ -1648,6 +1648,21 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/grindfest
   id: '137487'
   name: "Grindfest demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/137659-the-spawnsqwad-2000-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/spwnsq2k
+  id: '137659'
+  name: "The SpawnSQwad 2000 demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/137687-dum-dum-thoughts-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/thoughts
+  id: '137687'
+  name: "Dum-Dum Thoughts Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/138562-congestion-192-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/cngst192
+  id: '138562'
+  name: "Congestion 192 demos [-complevel 9]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":

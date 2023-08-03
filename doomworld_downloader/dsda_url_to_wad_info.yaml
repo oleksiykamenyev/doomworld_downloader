@@ -622,6 +622,8 @@
     d2all: ["Map 01", "Map 10"]
     episodes: []
     map_info:
+      "Map 03":
+        tyson_only: true
       "Map 08":
         skip_reality: true
       "Map 10":
@@ -1746,7 +1748,8 @@
         skip_reality_for_categories: ["UV Speed", "Pacifist", "NM Speed", "Stroller"]
         skip_also_pacifist_for_categories: ["NM Speed"]
       "Map 06":
-        skip_reality_for_categories: ["UV Speed", "Pacifist", "NM Speed", "Stroller"]
+        skip_reality: true
+        tyson_only: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/m-o/mad"
   dsda_paginated: false
   doomworld_thread: null
@@ -2078,12 +2081,16 @@
   map_list_info:
     map_ranges: [[1, 32]]
     map_info:
+      "Map 03":
+        tyson_only: true
+      "Map 05":
+        tyson_only: true
       "Map 19":
         tyson_only: true
         skip_reality_for_categories: ["Pacifist", "UV Speed"]
   idgames_url: null
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/138562-congestion-192-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/icarus":
   wad_name: Icarus
   iwad: doom2
@@ -3897,6 +3904,8 @@
     map_info:
       "Map 03":
         skip_reality: true
+      "Map 04":
+        skip_also_pacifist_for_categories: ["NM Speed"]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dwspd003"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/128765-doomworld-speedmapping-compilation-demos/"
@@ -5851,8 +5860,10 @@
   iwad: doom2
   wad_files:
     dwspd002.wad: {checksum: "859b707f6658ba7874fa2bb5b782f60d"}
+    dwspd002_map16_exit_fix.wad: {checksum: "1f79470800f1302726484c8573736e7f"}
   complevel: 9
   playback_cmd_line: "-file dwspd002"
+  alt_playback_cmd_lines: [{"-file dwspd002 dwspd002_map16_exit_fix": "Plays back with dwspd002_map16_exit_fix.wad."}]
   map_list_info:
     map_ranges: [[1, 16]]
     d2all: ["Map 01", "Map 16"]
@@ -9779,6 +9790,8 @@
   iwad: doom2
   wad_files:
     tn.wad: {checksum: "72bc37a0ece52cafbbbf6090b3ed60c3"}
+    # In case someone renames their WAD...
+    tangerinenightmare.wad: {not_required_for_playback: true, dupe_checksum: true, checksum: "72bc37a0ece52cafbbbf6090b3ed60c3"}
   complevel: 2
   playback_cmd_line: "-file tn"
   map_list_info:
@@ -10278,6 +10291,8 @@
   map_list_info:
     map_ranges: [[1, 32]]
     map_info:
+      "Map 03":
+        skip_also_pacifist_for_categories: ["NM Speed"]
       "Map 15":
         tyson_only: true
         skip_also_pacifist: true
@@ -11703,7 +11718,7 @@
   playback_cmd_line: "-file dbp17_alone"
   map_list_info:
     map_ranges: [[1, 10]]
-    d2all: ["Map 01", "Map 10"]
+    d2all: ["Map 01", "Map 09"]
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/dbp17_alone"
   dsda_paginated: false
@@ -28687,8 +28702,9 @@
         skip_also_pacifist: true
         tyson_only: true
       "Map 18":
-        skip_almost_reality_for_categories: ["Pacifist", "UV Speed", "NM Speed", "Stroller"]
-        skip_also_pacifist_for_categories: ["NM Speed"]
+        tyson_only: true
+        skip_almost_reality: true
+        skip_also_pacifist: true
       "Map 21":
         skip_almost_reality_for_categories: ["Pacifist", "UV Speed", "NM Speed", "Stroller"]
         skip_also_pacifist_for_categories: ["NM Speed"]
@@ -30415,7 +30431,7 @@
         skip_reality_for_categories: ["Pacifist", "UV Speed"]
         skip_also_pacifist_for_categories: ["NM Speed"]
       "Map 05":
-        skip_reality_for_categories: ["Pacifist", "UV Speed"]
+        skip_reality_for_categories: ["Pacifist", "UV Speed", "NM Speed"]
         skip_also_pacifist_for_categories: ["NM Speed"]
       "Map 06":
         skip_reality_for_categories: ["Pacifist", "UV Speed"]
@@ -33181,7 +33197,6 @@
   dsda_paginated: false
   doomworld_thread: null
 "https://www.dsdarchive.com/wads/revprblm":
-  update: true
   wad_name: The Revenant Problem
   iwad: doom2
   wad_files:
@@ -33211,7 +33226,6 @@
   doomworld_thread: null
 "https://www.dsdarchive.com/wads/revprblm_2017":
   parent: "https://www.dsdarchive.com/wads/revprblm"
-  update: true
   wad_name: The Revenant Problem
   iwad: doom2
   wad_files:
@@ -34565,5 +34579,425 @@
     d2all: null
     episodes: []
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/d-f/fucktrump"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/spwnsq2k":
+  wad_name: The SpawnSQwad 2000
+  iwad: doom2
+  wad_files:
+    spawnsq2k.wad: {checksum: "c1acf01a43fb275ba1bfd6a57e3b0d3a"}
+  complevel: 2
+  playback_cmd_line: "-file spawnsq2k"
+  map_list_info:
+    map_ranges: [[1, 32]]
+    map_info:
+      "Map 01":
+        skip_reality_for_categories: ["UV Speed", "NM Speed"]
+      "Map 03":
+        skip_reality_for_categories: ["UV Speed", "Pacifist", "NM Speed", "Stroller"]
+        skip_also_pacifist_for_categories: ["NM Speed"]
+      "Map 06":
+        skip_almost_reality: true
+        skip_also_pacifist: true
+      "Map 08":
+        skip_reality: true
+        skip_also_pacifist: true
+      "Map 09":
+        skip_reality: true
+        skip_also_pacifist: true
+      "Map 11":
+        skip_reality: true
+        skip_also_pacifist: true
+      "Map 12":
+        skip_reality: true
+        skip_also_pacifist: true
+      "Map 13":
+        skip_reality: true
+        skip_also_pacifist: true
+      "Map 14":
+        skip_reality: true
+        skip_also_pacifist: true
+      "Map 15":
+        skip_reality_for_categories: ["UV Max", "UV Fast", "UV Respawn", "UV Speed", "Pacifist", "NM Speed", "Stroller"]
+        skip_also_pacifist_for_categories: ["NM Speed"]
+      "Map 16":
+        skip_reality: true
+        skip_also_pacifist: true
+      "Map 17":
+        skip_also_pacifist: true
+      "Map 19":
+        skip_reality: true
+        skip_also_pacifist: true
+      "Map 20":
+        skip_reality_for_categories: ["UV Speed", "Pacifist", "NM Speed", "Stroller"]
+        skip_also_pacifist_for_categories: ["NM Speed"]
+      "Map 21":
+        skip_reality: true
+        skip_also_pacifist: true
+      "Map 23":
+        skip_reality_for_categories: ["UV Max", "UV Respawn", "UV Speed", "Pacifist", "NM Speed", "Stroller"]
+        skip_also_pacifist_for_categories: ["NM Speed"]
+      "Map 25":
+        skip_reality_for_categories: ["UV Max", "UV Respawn", "UV Speed"]
+      "Map 26":
+        skip_reality: true
+        skip_also_pacifist: true
+      "Map 27":
+        skip_reality: true
+        skip_also_pacifist: true
+      "Map 28":
+        skip_reality: true
+        skip_also_pacifist: true
+      "Map 32":
+        skip_reality_for_categories: ["UV Speed", "Pacifist"]
+        skip_also_pacifist_for_categories: ["NM Speed"]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/spwnsq2k"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/137659-the-spawnsqwad-2000-demos-complevel-2/"
+"https://www.dsdarchive.com/wads/d2redux":
+  wad_name: Doom 2 Redux
+  iwad: doom2
+  wad_files:
+    d2redux.wad: {checksum: "c436807b4704dcb6a8884a7099f69238"}
+  complevel: 9
+  playback_cmd_line: "-file d2redux"
+  map_list_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/d2redux"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/martin":
+  wad_name: The Light WAD
+  iwad: doom2
+  wad_files:
+    martin.wad: {checksum: "74bcfd71a2ad601d374e32ee3daa7959"}
+  complevel: 2
+  playback_cmd_line: "-file martin"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/m-o/martin"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/temple21":
+  wad_name: 'TEMPLE21.WAD "Temple of Doom ][--Entry" Level 1 Version 2.01'
+  iwad: doom2
+  wad_files:
+    temple21.wad: {checksum: "f8b3106c9f0b7b55547ee6bc467fd2d8"}
+  complevel: 2
+  playback_cmd_line: "-file temple21"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/s-u/temple21"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/thoughts":
+  wad_name: Dum-Dum Thoughts
+  iwad: doom2
+  wad_files:
+    thoughts.wad: {checksum: "897cc3198ea9f95d815cacfb84bf577f"}
+  complevel: 9
+  playback_cmd_line: "-file thoughts"
+  map_list_info:
+    map_ranges: [[1, 6]]
+    d2all: ["Map 01", "Map 06"]
+    episodes: []
+    map_info:
+      "Map 05":
+        tyson_only: true
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/s-u/thoughts"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/137687-dum-dum-thoughts-demos-complevel-9/"
+"https://www.dsdarchive.com/wads/impact":
+  wad_name: Impact
+  iwad: doom2
+  wad_files:
+    impact.wad: {checksum: "c832e524e090e72d59ee4e5eba471b63"}
+  complevel: 2
+  playback_cmd_line: "-file impact"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/g-i/impact"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/arrokoth":
+  wad_name: Arrokoth
+  iwad: doom
+  wad_files:
+    arrokoth.wad: {checksum: "b62a8ce01386b8d7b66fa6387657548b"}
+    arrokoth.deh: {not_required_for_playback: true, checksum: "a55252a9361cedbba03334f6e54f7c10"}
+    arrokoth_wide.wad: {not_required_for_playback: true, checksum: "ae4f596bb8c2823694e8b39220296016"}
+  complevel: 3
+  playback_cmd_line: "-file arrokoth"
+  map_list_info:
+    map_ranges: [["E1M1", "E1M9"]]
+    episodes: [["E1M1", "E1M8"]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/a-c/arrokoth"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/1fiffy7":
+  wad_name: "REoL TOUGH: SATAN'S CASTLE II: HIS NEW HOME IN HELL"
+  iwad: doom
+  wad_files:
+    fiffy7.wad: {checksum: "848dbc7a25223707bc78ea75d929c8db"}
+  complevel: 3
+  playback_cmd_line: "-file fiffy7"
+  map_list_info:
+    map_ranges: [["E3M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/0-9/1fiffy7"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/ramranch":
+  wad_name: Ram Ranch
+  iwad: doom2
+  wad_files:
+    ramranch.wad: {checksum: "63b52d56b3cfc17df6e6f2017d26a03d"}
+    ramranch.deh: {not_required_for_playback: true, checksum: "e8b539a20f62bea37e45fb8b3146aa95"}
+  complevel: 2
+  playback_cmd_line: "-file ramranch"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/p-r/ramranch"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/doom32r2":
+  wad_name: DOOM 32 (Release II)
+  iwad: doom2
+  wad_files:
+    doom32.wad: {checksum: "ffaf7fe48ae035664c10611b81c8bb6d"}
+  complevel: 2
+  playback_cmd_line: "-file doom32"
+  map_list_info:
+    map_ranges: [[1, 32]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/doom32r2"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/habita":
+  wad_name: Habita T7
+  iwad: doom2
+  wad_files:
+    habita.wad: {checksum: "0f9cb02e23fed00dbb6db100f453b371"}
+  complevel: 2
+  playback_cmd_line: "-file habita"
+  map_list_info:
+    map_ranges: [[6]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/g-i/habita"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/fdi2019":
+  wad_name: "Father's Day Insanity 2019"
+  iwad: doom2
+  wad_files:
+    fdi2019.wad: {checksum: "3a01e5c1e7e334c241cd0f6c533c48d9"}
+  complevel: 9
+  playback_cmd_line: "-file fdi2019"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/d-f/fdi2019"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/dmmisi":
+  wad_name: DMMISI.WAD
+  iwad: doom
+  wad_files:
+    dmmisi.wad: {checksum: "e55ec3a5a5d3b67421c31ef677fc8a92"}
+  complevel: 3
+  playback_cmd_line: "-file dmmisi"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/d-f/dmmisi"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/tnplhome":
+  wad_name: "There's no place like home."
+  iwad: doom
+  wad_files:
+    tnplhome.wad: {checksum: "831d48222f22d05da360326544bb23d3"}
+  complevel: 3
+  playback_cmd_line: "-file tnplhome"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/s-u/tnplhome"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/lbdoom":
+  wad_name: "Laura Beyer's Doom"
+  iwad: doom
+  wad_files:
+    modern/lbdoom.wad: {checksum: "dcc95ffa73b6e7b6a183f5f3a8176d10"}
+  complevel: 3
+  playback_cmd_line: "-file lbdoom"
+  map_list_info:
+    map_ranges: [["E1M1", "E1M9"], ["E2M1"], ["E3M1"], ["E4M1"]]
+    episodes: [["E1M1", "E1M8"]]
+    map_info:
+      "E1M3":
+        mark_secret_exit_as_normal: true
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/eden_2017":
+  wad_name: Eden
+  iwad: doom2
+  wad_files:
+    eden_b3f.wad: {checksum: "473ba8d862ac3c230ffb8ec23fed177d"}
+  complevel: 9
+  playback_cmd_line: "-file eden_b3f"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/shovel-6":
+  wad_name: "Fastest Shovels #6"
+  iwad: heretic
+  wad_files:
+    shovel-6.wad: {checksum: "ffc228d8b7dd2f96bc445b95299b56da"}
+  complevel: 0
+  playback_cmd_line: "-file shovel-6"
+  map_list_info:
+    map_ranges: [["E1M1", "E1M9"], ["E6M1"]]
+    episodes: [["E1M1", "E1M8"]]
+    map_info:
+      "E1M6":
+        mark_secret_exit_as_normal: true
+  idgames_url: "https://www.doomworld.com/idgames/levels/heretic/s-u/shovel-6"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/thenest":
+  wad_name: The Nest (Rocket Jones Vol. I)
+  iwad: doom
+  wad_files:
+    thenest.wad: {checksum: "af6c3fd5d336c8f4148d89a2d13cf1d9"}
+  complevel: 3
+  playback_cmd_line: "-file thenest"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/s-u/thenest"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/rtd":
+  wad_name: Return to Daro
+  iwad: doom2
+  wad_files:
+    rtd.wad: {checksum: "617b0d38a4c653b690b5fcaf7eb37a5c"}
+  complevel: 2
+  playback_cmd_line: "-file strain rtd -deh strain"
+  map_list_info:
+    map_ranges: [[1, 4]]
+    d2all: ["Map 01", "Map 04"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/p-r/rtd"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/butt_wad":
+  wad_name: BUTT.WAD - Mother of All Doom Levels
+  iwad: doom
+  wad_files:
+    butt.wad: {checksum: "94cd960ce69efe74feb153a0932c3a21"}
+  complevel: 3
+  playback_cmd_line: "-file butt"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/a-c/butt_wad"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/shovel-7":
+  wad_name: "Fastest Shovels #7"
+  iwad: doom
+  wad_files:
+    shovel-7.wad: {checksum: "ba65d4c04f29ccfbe155a194101d5514"}
+    shovel-7.deh: {not_required_for_playback: true, checksum: "100743a067cd945fb9d42b59ce87fbb0"}
+  complevel: 3
+  playback_cmd_line: "-file shovel-7"
+  map_list_info:
+    map_ranges: [["E1M1", "E1M9"], ["E2M1", "E2M2"]]
+    episodes: [["E1M1", "E1M8"], ["E2M1", "E2M2"]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/s-u/shovel-7"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/hotlhell":
+  wad_name: Hotel Hell
+  iwad: doom2
+  wad_files:
+    hotlhell.wad: {checksum: "f7d37ec8b467f6eb8e49070c47b7d0e7"}
+  complevel: 2
+  playback_cmd_line: "-file hotlhell"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/g-i/hotlhell"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/vega_1":
+  wad_name: VEGA_1.WAD
+  iwad: doom
+  wad_files:
+    vega_1.wad: {checksum: "6f3db13b560111abd763aebb27bfbd77"}
+  complevel: 3
+  playback_cmd_line: "-file vega_1"
+  map_list_info:
+    map_ranges: [["E2M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/v-z/vega_1"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/execute":
+  wad_name: EXECUTE.wad
+  iwad: doom
+  wad_files:
+    execute.wad: {checksum: "a81a30b372b3deeeef34cbc2994f7d62"}
+  complevel: 3
+  playback_cmd_line: "-file execute"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/d-f/execute"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/uroboros":
+  wad_name: Uroboros
+  iwad: doom2
+  wad_files:
+    uroboros.wad: {checksum: "3bd123681e33c05634d6ec5d03ed28eb"}
+  complevel: 9
+  playback_cmd_line: "-file uroboros"
+  map_list_info:
+    map_ranges: [[1, 11]]
+    d2all: ["Map 01", "Map 11"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/s-u/uroboros"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/ud94":
+  wad_name: "Undeath '94"
+  iwad: doom
+  wad_files:
+    ud94.wad: {checksum: "01fde9ec0298d1c1237d669cf1e30519"}
+  complevel: 3
+  playback_cmd_line: "-file ud94"
+  map_list_info:
+    map_ranges: [["E1M1", "E1M9"], ["E2M1", "E2M9"]]
+    episodes: [["E1M1", "E1M8"], ["E2M1", "E2M8"]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/s-u/ud94"
   dsda_paginated: false
   doomworld_thread: null
