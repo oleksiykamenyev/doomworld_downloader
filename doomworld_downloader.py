@@ -175,7 +175,7 @@ def main():
                 raise RuntimeError('Processing of replacement zips failed!')
             else:
                 for demo_info in replace_demo_processor.demo_infos:
-                    replace_demo_json_dumper.add_demo_json(demo_info)
+                    replace_demo_json_dumper.add_demo_json(demo_info, dedupe=CONFIG.dedupe_demos)
 
         dsda_demo_json_dumper = DemoJsonDumper(
             custom_json_parent_dir=os.path.join(CONFIG.demo_download_directory, 'dsda_demos')
@@ -192,7 +192,7 @@ def main():
             raise RuntimeError('Processing of DSDA zips failed!')
         else:
             for demo_info in dsda_demo_processor.demo_infos:
-                dsda_demo_json_dumper.add_demo_json(demo_info)
+                dsda_demo_json_dumper.add_demo_json(demo_info, dedupe=CONFIG.dedupe_demos)
 
         dsda_demo_json_dumper.dump_json_uploads()
 
@@ -205,15 +205,22 @@ def main():
     else:
         demo_json_dumper = DemoJsonDumper()
         posts = get_doomworld_posts(search_end_date, search_start_date, use_cached_downloads)
+        if CONFIG.additional_info_map:
+            with open(CONFIG.additional_info_map) as additional_info_map_stream:
+                additional_info_map = yaml.safe_load(additional_info_map_stream)
+        else:
+            additional_info_map = None
+
         for post in posts:
-            post_demo_processor = DemoProcessor(post.cached_downloads)
+            post_demo_processor = DemoProcessor(post.cached_downloads,
+                                                additional_demo_info=additional_info_map)
             post_demo_processor.process_post(post)
             post_demo_processor.process_demos()
             if post_demo_processor.process_failed:
                 move_post_cache_to_failed(post)
             else:
                 for demo_info in post_demo_processor.demo_infos:
-                    demo_json_dumper.add_demo_json(demo_info)
+                    demo_json_dumper.add_demo_json(demo_info, dedupe=CONFIG.dedupe_demos)
 
         demo_json_dumper.dump_json_uploads()
 

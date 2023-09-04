@@ -117,7 +117,8 @@ class PlaybackData(BaseData):
         :param data_manager: Data manager to populate
         """
         for key, value in self.data.items():
-            if key in PlaybackData.CERTAIN_KEYS:
+            if (key in PlaybackData.CERTAIN_KEYS or
+                    (key == 'category' and CONFIG.trust_dsda_doom_category)):
                 data_manager.insert(key, value, DataManager.CERTAIN, source='playback')
             elif key in PlaybackData.POSSIBLE_KEYS:
                 data_manager.insert(key, value, DataManager.POSSIBLE, source='playback')

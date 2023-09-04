@@ -196,21 +196,23 @@ class TextfileData(BaseData):
 
         # ZDoom family
         # ZDoom
-        re.compile(r'[\S+]ZDoom\s*(v|version)?(\s*|\.)?(?P<version>\d\.\d(\.\S+))?',
+        re.compile(r'[\s+]ZDoom(\.exe)?(\s*|-)?(v|version)?(\s*|\.)?(?P<version>\d\.\d(\.\d+)?)?',
                    re.IGNORECASE): 'ZDoom',
         # GZDoom
-        re.compile(r'GZDoom\s*(v|version)?(\s*|\.)?(?P<version>\d\.\d\.\d+)',
+        re.compile(r'GZDoom(\.exe)?(\s*|-)?(v|version)?(\s*|\.)?(?P<version>\d\.\d\.\d+)',
                    re.IGNORECASE): 'GZDoom',
         # ZDaemon
-        re.compile(r'ZDaemon\s*(v|version)?(\s*|\.)?(?P<version>\d\.\d\.\d+)',
+        re.compile(r'ZDaemon(\.exe)?(\s*|-)?(v|version)?(\s*|\.)?(?P<version>\d\.\d\.\d+)',
                    re.IGNORECASE): 'ZDaemon',
         # Zandronum
-        re.compile(r'Zandronum\s*(v|version)?(\s*|\.)?(?P<version>\d\.\d(\.\d+)?(\s*Alpha))',
-                   re.IGNORECASE): 'Zandronum',
+        re.compile(
+            r'Zandronum(\.exe)?(\s*|-)?(v|version)?(\s*|\.)?(?P<version>\d\.\d(\.\d+)?(\s*Alpha)?)',
+            re.IGNORECASE
+        ): 'Zandronum',
 
         # Other ports
         # Strawberry Doom
-        re.compile(r'Strawberry(\s*|-|_)?Doom\s*r(?P<version>\d+)',
+        re.compile(r'Strawberry(\s*|-|_)?Doom(\.exe)?(\s*|-)?r(?P<version>\d+)',
                    re.IGNORECASE): 'Strawberry Doom',
 
         # TAS

@@ -330,6 +330,18 @@ class DemoJson:
                     playback_category == 'UV Speed' and textfile_category == 'UV Max'):
                 self._handle_inferred_category(playback_category)
                 return
+        if key_to_insert == 'players':
+            extra_info_player_list = None
+            for possible_value, sources in evaluation.possible_values.items():
+                if 'extra_info' in sources:
+                    extra_info_player_list = possible_value
+                    break
+
+            if extra_info_player_list:
+                LOGGER.info('Overriding player list info from extra info for zipfile %s.',
+                            self.demo_info.lmp_metadata)
+                self.demo_dict['players'] = extra_info_player_list
+                return
 
         LOGGER.warning('LMP %s%s needs attention based on the following evaluation: "%s".',
                        self.demo_info.lmp_metadata, self.zip_msg, evaluation)

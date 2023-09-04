@@ -311,7 +311,7 @@ def get_page(url):
 
 
 def convert_datetime_to_dsda_date(datetime_to_convert):
-    return datetime_to_convert.strftime('%Y-%m-%d %H:%M:%S') + ' ' + strftime("%z", gmtime())
+    return datetime_to_convert.strftime('%Y-%m-%d %H:%M:%S') + ' ' + strftime('%z', gmtime())
 
 
 def convert_dsda_date_to_datetime(dsda_date):

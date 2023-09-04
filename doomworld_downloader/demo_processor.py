@@ -94,17 +94,38 @@ class DemoProcessor:
                 if os.path.basename(os.path.dirname(lmp)) == '__MACOSX':
                     continue
 
-                lmp_info_player_list = lmp_info.get('player_list')
-                if lmp_info_player_list:
-                    extra_info_player_list = lmp_info_player_list
+                if zip_path:
+                    lmp_override_info = self.additional_demo_info.get(lmp)
+                    if not lmp_override_info:
+                        lmp_override_info = self.additional_demo_info.get(os.path.basename(lmp), {})
                 else:
-                    extra_info_player_list = self.additional_demo_info.get('player_list', [])
+                    lmp_override_info = {}
+
+                if CONFIG.additional_info_map and not lmp_override_info:
+                    LOGGER.warning('Demo %s not found in override info.', lmp)
+
+                lmp_info_player_list = lmp_info.get('player_list')
+                extra_info_player_list = lmp_info_player_list if lmp_info_player_list else None
+                extra_info_recorded_date = lmp_override_info.get('recorded_date')
+                if not extra_info_player_list:
+                    lmp_override_player_list = lmp_override_info.get('player_list')
+                    if lmp_override_player_list:
+                        extra_info_player_list = lmp_override_player_list
+                    else:
+                        extra_info_player_list = self.additional_demo_info.get('player_list', [])
+                if not extra_info_recorded_date:
+                    extra_info_recorded_date = lmp_info['recorded_date']
+                else:
+                    extra_info_recorded_date = datetime.strptime(
+                        ' '.join(extra_info_recorded_date.split()[:-1]), '%Y-%m-%d %H:%M:%S'
+                    )
 
                 extra_wad_guesses = self.additional_demo_info.get('extra_wad_guesses', [])
                 additional_extra_wad_guesses = input_demo_info.get('extra_wad_guesses', [])
                 if additional_extra_wad_guesses:
                     extra_wad_guesses.extend(additional_extra_wad_guesses)
-                demo_info_data = DemoInfoData(recorded_date=lmp_info['recorded_date'],
+
+                demo_info_data = DemoInfoData(recorded_date=extra_info_recorded_date,
                                               txt_file_path=lmp_info.get('txt_file_path'),
                                               txt_file_date=lmp_info.get('txt_file_date'),
                                               player_list=extra_info_player_list,

@@ -277,10 +277,49 @@ class UploadConfig:
     def always_try_good_at_doom(self):
         """Always try to play back demos with good.deh.
 
-        :return: Flag indicating always try to play back demos with good.deh
+        :return: Flag indicating whether to always try to play back demos with good.deh
         """
         try:
             return self._config.getboolean('general', 'always_try_good_at_doom')
+        except (NoSectionError, NoOptionError):
+            return False
+
+    @property
+    def dedupe_demos(self):
+        """Dedupe demos on upload.
+
+        On by default to dedupe co-op demos.
+
+        :return: Flag indicating whether to dedupe demos on upload
+        """
+        try:
+            return self._config.getboolean('general', 'dedupe_demos')
+        except (NoSectionError, NoOptionError):
+            return True
+
+    @property
+    def additional_info_map(self):
+        """Get additional info map when needed (e.g., for demo pack uploads).
+
+        Optional for demo packs. Can override player info and recorded date for demos.
+
+        :return: Additional info map
+        """
+        try:
+            return self._config.get('general', 'additional_info_map')
+        except (NoSectionError, NoOptionError):
+            return None
+
+    @property
+    def trust_dsda_doom_category(self):
+        """Trust DSDA-Doom category.
+
+        Off by default to cross-check against the txt category.
+
+        :return: Trust DSDA-Doom category
+        """
+        try:
+            return self._config.getboolean('general', 'trust_dsda_doom_category')
         except (NoSectionError, NoOptionError):
             return False
 
@@ -321,20 +360,6 @@ class UploadConfig:
         """
         try:
             return self._config.get('demo_pack', 'user_map')
-        except (NoSectionError, NoOptionError):
-            return None
-
-    @property
-    def demo_pack_additional_info_map(self):
-        """Get demo pack output folder.
-
-        Optional for demo packs. Maps username from folder to player name for final JSON to upload
-        to DSDA.
-
-        :return: Demo pack output folder
-        """
-        try:
-            return self._config.get('demo_pack', 'additional_info_map')
         except (NoSectionError, NoOptionError):
             return None
 
@@ -474,12 +499,6 @@ def set_up_configs(upload_config_path=None):
     with open(WAD_MAP_PATH, encoding='utf-8') as wad_stream:
         wad_map_by_dsda_url_raw = yaml.safe_load(wad_stream)
 
-    if CONFIG.demo_pack_additional_info_map:
-        with open(CONFIG.demo_pack_additional_info_map, encoding='utf-8') as info_map_stream:
-            demo_pack_additional_info_raw = yaml.safe_load(info_map_stream)
-
-        for attach_info in demo_pack_additional_info_raw['attachments']:
-            DEMO_PACK_ADDITIONAL_INFO_MAP[attach_info['author']].append(attach_info)
     if CONFIG.demo_pack_user_map:
         with open(CONFIG.demo_pack_user_map, encoding='utf-8') as user_map_stream:
             DEMO_PACK_USER_MAP.update(yaml.safe_load(user_map_stream))

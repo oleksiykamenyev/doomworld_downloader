@@ -172,3 +172,5 @@ doomworld_downloader/wad_parse/idgames_api/*.wad
 doomworld_downloader/wad_parse/idgames_api/*.zip
 wad_upload_config.yaml
 record_index_info.txt
+demopack_download.yaml
+additional_demo_info.yaml

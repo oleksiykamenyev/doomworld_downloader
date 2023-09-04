@@ -1663,6 +1663,16 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/cngst192
   id: '138562'
   name: "Congestion 192 demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/138800-literalism-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/literalism
+  id: '138800'
+  name: "Literalism demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/139208-junk-food-2-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/junkfood2
+  id: '139208'
+  name: "Junk Food 2 Demos [-complevel 9]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -1952,6 +1962,13 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/toon2b
   id: '136961'
   name: "Toons for Doom 2 Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/139117-happy-birthday-kvo-glidancer-demos-complevel-9/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/4kvo
+      - https://www.dsdarchive.com/wads/glidancer
+  id: '139117'
+  name: "Happy Birthday Kvo & Glidancer Demos [-complevel 9]"
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
