@@ -1673,6 +1673,46 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/junkfood2
   id: '139208'
   name: "Junk Food 2 Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/139424-oops-all-techbase-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/oatb
+  id: '139424'
+  name: "OOPS: All Techbase demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/139825-final-fantasy-doom-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ffdoom2
+  id: '139825'
+  name: "Final Fantasy Doom demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/139827-10-sectors-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/10sector
+  id: '139827'
+  name: "10 Sectors demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/139933-puss-xxiv-lovers-quarrel-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/lvrsqrrl
+  id: '139933'
+  name: "PUSS XXIV: Lover's Quarrel [-complevel 2]"
+"https://www.doomworld.com/forum/topic/140157-i-cant-give-you-any-thing-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/icgya
+  id: '140157'
+  name: "I CANT GIVE YOU ANY THING demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/140167-ichinichi-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ichinichi
+  id: '140167'
+  name: "Ichinichi demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/140169-afternoon-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/afternoon
+  id: '140169'
+  name: "Afternoon demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/140251-doom-iiii-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/doomiiii
+  id: '140251'
+  name: "Doom IIII demos [-complevel 2]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":

@@ -449,3 +449,12 @@ def is_demo_filename(demo):
     :return: True if provided demo has a supported filename, False otherwise
     """
     return os.path.splitext(demo.lower())[1].strip('.') in DEMO_FILE_TYPES
+
+
+def get_orig_names_from_zip_info_map(zip_info_map):
+    """Get original filenames from zip info map.
+
+    :param zip_info_map: Zip info map
+    :return: Original names from zip info map
+    """
+    return list(zip_member['orig_name'] for zip_member in zip_info_map.values())

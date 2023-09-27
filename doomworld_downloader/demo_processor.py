@@ -22,7 +22,7 @@ from .post_parser import PostData
 from .textfile_parser import TextfileData
 from .upload_config import CONFIG
 from .utils import convert_datetime_to_dsda_date, get_filename_no_ext, is_demo_filename, \
-    get_single_key_value_dict
+    get_single_key_value_dict, get_orig_names_from_zip_info_map
 from .wad_guesser import get_wad_guesses
 
 
@@ -195,6 +195,12 @@ class DemoZipInfo:
         for zip_file_info in info_list:
             zip_member_name = zip_file_info.filename
             zip_member_name_lower = zip_member_name.lower()
+            orig_zip_member_name = zip_member_name
+            # Seems a zip file name may return something with the parent directory? Not sure if this
+            # can happen beyond one parent directory.
+            if zip_member_name.startswith('../'):
+                zip_member_name = zip_member_name[3:]
+
             if is_demo_filename(zip_member_name_lower):
                 if (get_filename_no_ext(zip_member_name_lower) == zip_filename_no_ext and
                         not CONFIG.add_all_bonus_demos):
@@ -202,7 +208,8 @@ class DemoZipInfo:
 
                 self.lmp_to_info_map[zip_member_name] = {
                     'recorded_date': datetime(*zip_file_info.date_time),
-                    'lmp_path': os.path.join(self.zip_extract_dir, zip_member_name)
+                    'lmp_path': os.path.join(self.zip_extract_dir, zip_member_name),
+                    'orig_name': orig_zip_member_name
                 }
             if zip_member_name_lower.endswith('.txt'):
                 txt_date = datetime(*zip_file_info.date_time)
@@ -210,7 +217,8 @@ class DemoZipInfo:
                     main_txt = zip_member_name
                     main_txt_date = txt_date
 
-                txt_file_info[zip_member_name] = {'recorded_date': txt_date}
+                txt_file_info[zip_member_name] = {'recorded_date': txt_date,
+                                                  'orig_name': orig_zip_member_name}
 
         if not self.lmp_to_info_map:
             LOGGER.warning('No lmp files found in zip %s.', self.zip_path)
@@ -240,8 +248,11 @@ class DemoZipInfo:
 
             self.lmp_to_info_map[lmp_file].update(self._additional_info)
 
-        zip_file.extractall(path=self.zip_extract_dir,
-                            members=list(self.lmp_to_info_map.keys()) + list(txt_file_info.keys()))
+        zip_file.extractall(
+            path=self.zip_extract_dir,
+            members=(get_orig_names_from_zip_info_map(self.lmp_to_info_map) +
+                     get_orig_names_from_zip_info_map(txt_file_info))
+        )
 
         if main_txt:
             self.primary_textfile_data = TextfileData(os.path.join(self.zip_extract_dir, main_txt))
