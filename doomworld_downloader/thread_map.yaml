@@ -1713,6 +1713,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/doomiiii
   id: '140251'
   name: "Doom IIII demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/140341-1x1-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/1x1
+  id: '140341'
+  name: "1x1 demos [-complevel 21]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":

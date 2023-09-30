@@ -35979,3 +35979,33 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/m-o/memories"
   dsda_paginated: false
   doomworld_thread: null
+"https://www.dsdarchive.com/wads/chris":
+  wad_name: "Chris's best of best Revised"
+  iwad: doom
+  wad_files:
+    chris.wad: {checksum: "658ca6e0a7dab4b3718c55326a320b89"}
+    chrismus.wad: {not_required_for_playback: true, checksum: "d43aa03f070cd41dbf5373c2193dc328"}
+  complevel: 9
+  playback_cmd_line: "-file chris"
+  map_list_info:
+    map_ranges: [["E1M1", "E1M9"], ["E2M1", "E2M9"], ["E3M1", "E3M4"]]
+    episodes: [["E1M1", "E1M8"], ["E2M1", "E2M8"], ["E3M1", "E3M4"]]
+    secret_exits: {}
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/Ports/a-c/chris"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/1x1":
+  wad_name: 1x1
+  iwad: doom2
+  wad_files:
+    1x1.wad: {checksum: "5523ed271c8dea8d735385ab9c2c67c6"}
+  complevel: 21
+  playback_cmd_line: "-file 1x1"
+  map_list_info:
+    map_ranges: [[1, 21], [31, 33]]
+    d2all: ["Map 01", "Map 21"]
+    episodes: []
+    secret_exits: {"Map 09": "Map 31", "Map 18": "Map 33", "Map 31": "Map 32"}
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/1x1"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/140341-1x1-demos-complevel-21/"
