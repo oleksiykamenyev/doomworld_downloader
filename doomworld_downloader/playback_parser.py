@@ -211,6 +211,8 @@ class PlaybackData(BaseData):
 
         :raises RuntimeError if the WAD could not be guessed for this demo
         """
+        # TODO: If there is no complevel info and it's a vanilla complevel, probably should try to
+        #       force every available complevel (2-4)
         for url, _ in self.wad_guesses.most_common():
             wad_guess = self.url_to_wad[url]
             # If this is a WAD update, the DSDA page may not be available yet.
@@ -675,7 +677,7 @@ class PlaybackData(BaseData):
                 else:
                     # Categories that do not require secrets do not need to visit nomonster maps.
                     map_info = wad.map_list_info.get_map_info(secret_map)
-                    if not map_info.get_single_key_for_map('has_no_kills', skill=skill,
+                    if not map_info.get_single_key_for_map('nomo_map', skill=skill,
                                                            game_mode=game_mode):
                         secret_maps.append(secret_map)
 

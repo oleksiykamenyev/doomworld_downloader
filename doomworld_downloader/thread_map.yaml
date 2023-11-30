@@ -1718,6 +1718,61 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/1x1
   id: '140341'
   name: "1x1 demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/140428-doomed-by-the-hour-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/bythehour
+  id: '140428'
+  name: "Doomed: By the Hour demos (-complevel 9)"
+"https://www.doomworld.com/forum/topic/140987-the-delirium-dimension-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/tdd
+  id: '140987'
+  name: "The Delirium Dimension demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/141012-nostalgia-2-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/nost2
+  id: '141012'
+  name: "Nostalgia 2 Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/141017-phobos-revisited-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/phobos-v
+  id: '141017'
+  name: "Phobos Revisited demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/141044-ultimate-doom-the-way-id-did-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/udtwid
+  id: '141044'
+  name: "Ultimate Doom the Way id Did demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/141146-60-minute-marathon-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/60mm
+  id: '141146'
+  name: "60 Minute Marathon Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/141139-obzen-demos-complevel-4/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/obzen
+  id: '141139'
+  name: "OBZEN demos [-complevel 4]"
+"https://www.doomworld.com/forum/topic/141278-what-lies-beneath-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/whatlies
+  id: '141278'
+  name: "What Lies Beneath demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/141300-pina-colada-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/pinacola
+  id: '141300'
+  name: "Pina Colada Demos [complevel -9]"
+"https://www.doomworld.com/forum/topic/141569-knee-deep-in-kdizd-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/kdikdizd
+  id: '141569'
+  name: "Knee Deep in KDiZD Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/131399-crescent-wars-demos-complevel-09/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/crescent_2022
+  id: '131399'
+  name: "CRESCENT WARS DEMOS [-complevel 09]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -1976,6 +2031,7 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/wormwood_eu
       - https://www.dsdarchive.com/wads/wormwood3
       - https://www.dsdarchive.com/wads/wormwood4
+      - https://www.dsdarchive.com/wads/wormwood5
   id: '132690'
   name: Wormwood Series demos [-complevel 9]
 "https://www.doomworld.com/forum/topic/133477-short-maps-for-short-people-series-demos-complevel-2/":
@@ -2014,6 +2070,15 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/glidancer
   id: '139117'
   name: "Happy Birthday Kvo & Glidancer Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/136803-glaive-series-demos-complevel-2/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/glaive
+      - https://www.dsdarchive.com/wads/glaive2
+      - https://www.dsdarchive.com/wads/warglaive
+      - https://www.dsdarchive.com/wads/glaive3
+  id: '136803'
+  name: "Glaive series demos [-complevel 2]"
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
@@ -2262,6 +2327,7 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/dbp_39
       - https://www.dsdarchive.com/wads/dbp40rc1
       - https://www.dsdarchive.com/wads/dbp44rc2-4
+      - https://www.dsdarchive.com/wads/dbp42
       - https://www.dsdarchive.com/wads/dbp_45
       - https://www.dsdarchive.com/wads/dbp47
       - https://www.dsdarchive.com/wads/dbp50

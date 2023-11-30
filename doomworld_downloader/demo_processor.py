@@ -356,6 +356,7 @@ class DemoInfo:
         wad_guesses = get_wad_guesses(
             self._post_info['wad_guesses'], self._textfile_info['wad_guesses'],
             lmp_data.raw_data['wad_strings'], self.demo_info_data.extra_wad_guesses,
+            CONFIG.additional_wad_guesses,
             iwad=self._lmp_info.get('iwad', self._textfile_info.get('iwad', ''))
         )
 

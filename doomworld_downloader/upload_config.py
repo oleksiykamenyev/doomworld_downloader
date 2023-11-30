@@ -473,6 +473,19 @@ class UploadConfig:
         except (NoSectionError, NoOptionError):
             return False
 
+    @property
+    def additional_wad_guesses(self):
+        """Additional WAD guesses if it helps with parsing a page.
+
+        Default to False.
+
+        :return: List of additional WAD guesses for page
+        """
+        try:
+            return self._config.get('dsda_mode', 'additional_wad_guesses').split(',')
+        except (NoSectionError, NoOptionError):
+            return []
+
 
 CONFIG = UploadConfig()
 

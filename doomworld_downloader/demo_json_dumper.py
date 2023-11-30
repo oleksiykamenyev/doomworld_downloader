@@ -241,6 +241,7 @@ class DemoJson:
 
     def _parse_demo_info(self):
         """Parse data from demo info."""
+        # TODO: If an engine isn't known but the complevel is, should still output it
         for evaluation in self.demo_info.data_manager:
             # Convert to JSON keys, default to value in the map.
             key_to_insert = self.KEY_TO_JSON_MAP.get(evaluation.key, evaluation.key)
@@ -455,8 +456,8 @@ class DemoJson:
             # should ensure that only one should be added to the notes.
             if (note_string in self.MISC_NOTES or
                     note_string.startswith('Recorded in skill ') or
-                    note_string.startswith('Plays back with ')):
-                misc_tags.append(note_string)
+                    note_string.startswith('Plays back with ') or
+                    note_string.startswith("Doesn't use the DeHackEd patch")):
                 if note_string == 'Uses turbo':
                     LOGGER.warning('LMP %s%s has issue due to unclear turbo usage.',
                                    self.demo_info.lmp_metadata, self.zip_msg)
@@ -466,6 +467,11 @@ class DemoJson:
                     self._set_has_issue()
                 if note_string == 'Good at DooM: gib yourself to end the level.':
                     self.demo_dict['category'] = 'Other'
+                if note_string.startswith("Doesn't use the DeHackEd patch"):
+                    note_string = self.demo_dict['category'] + '. ' + note_string
+                    self.demo_dict['category'] = 'Other'
+
+                misc_tags.append(note_string)
 
         return '\n'.join(sorted(misc_tags))
 

@@ -174,6 +174,12 @@ class TextfileData(BaseData):
             r'(v|version)?(\s*|\.)?(?P<version>\d\.\d\.\d\.\d)\s*'
             r'-?((complevel|cl)\s*(?P<complevel>\d+))?', re.IGNORECASE
         ): 'PRBoom',
+        # PrBoomX
+        re.compile(
+            r'(Pr|GL)(Boom)?\s*X\s*(\+|-?plus)?(\.exe)?(\s*|-)?'
+            r'(v|version)?(\s*|\.)?(?P<version>\d\.\d\.\d\.\d)\s*'
+            r'-?((complevel|cl)\s*(?P<complevel>\d+))?', re.IGNORECASE
+        ): 'PRBoomX',
         # DSDA-Doom
         re.compile(
             r'DSDA(\s*|-|_)?Doom(\.exe)?(\s*|-)?(v|version)?\.?(?P<version>\d\.\d+(\.\d+)?)\s*'
@@ -193,10 +199,12 @@ class TextfileData(BaseData):
             r'-?((complevel|cl)\s*(?P<complevel>\d+))?',
             re.IGNORECASE
         ): 'Nugget Doom',
+        # rboom
+        re.compile(r'^rboom(\.exe)?', re.IGNORECASE): 'rboom',
 
         # ZDoom family
         # ZDoom
-        re.compile(r'[\s+]ZDoom(\.exe)?(\s*|-)?(v|version)?(\s*|\.)?(?P<version>\d\.\d(\.\d+)?)?',
+        re.compile(r'^\s*ZDoom(\.exe)?(\s*|-)?(v|version)?(\s*|\.)?(?P<version>\d\.\d(\.\d+)?)?',
                    re.IGNORECASE): 'ZDoom',
         # GZDoom
         re.compile(r'GZDoom(\.exe)?(\s*|-)?(v|version)?(\s*|\.)?(?P<version>\d\.\d\.\d+)',
@@ -218,8 +226,17 @@ class TextfileData(BaseData):
         # TAS
         re.compile(r'XDRE(\.exe)?(\s*|-)?(v|version)?(\s*|\.)?(?P<version>\d.\d+)',
                    re.IGNORECASE): 'XDRE',
+
+        # Eternity Engine
+        re.compile(
+            r'Eternity(\s*|-|_)?(Engine)?(\.exe)?(\s*|-)?'
+            r'(v|version)?(\s*|\.)?(?P<version>\d+.\d+(\.\d+)?)',
+            re.IGNORECASE
+        ): 'Eternity Engine',
     }
 
+    # TODO: Support Doom95
+    # TODO: Make version optional
     VANILLA_PORT_REGEXES = {
         re.compile(
             r'((The\s+)?Ultimate\s*)?Doom(\.exe)?\s+(v|version)?\s*(?P<version>\d.\d+(\.\d+)?)',
@@ -401,7 +418,11 @@ class TextfileData(BaseData):
             if match:
                 # A whole bunch of hacky finagling to try to parse all kinds of different formats
                 # for a port name and conform them to a single naming convention.
-                version = match.group('version')
+                try:
+                    version = match.group('version')
+                except IndexError:
+                    version = ''
+
                 port_name_final = port_name
                 if not port_name_final:
                     port_name_final = match.group('name')

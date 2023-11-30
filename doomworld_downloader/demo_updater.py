@@ -145,6 +145,7 @@ class DemoUpdater:
         dsda_demo_info_to_check = dsda_demo_info['dsda_info']
         demo_update = {}
         is_advanced_port = self._check_advanced_port(full_demo_json['engine'])
+        # TODO: If a demo is cheated, should not try to mark it TAS
         for key, value in dsda_demo_info_to_check.items():
             test_value = value
             final_key = key

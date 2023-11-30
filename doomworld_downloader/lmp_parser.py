@@ -28,7 +28,7 @@ class LMPData(BaseData):
     """
     PORT_FOOTER_TO_DSDA_MAP = {'PrBoom-Plus': 'PRBoom', 'dsda-doom': 'DSDA-Doom', 'Woof': 'Woof',
                                'Nugget Doom': 'Nugget Doom', 'SpeedWoof': 'SpeedWoof',
-                               'Crispy Doom': 'Crispy Doom'}
+                               'Crispy Doom': 'Crispy Doom', 'PRBoomX': 'PRBoomX'}
     KEY_LIST = [
         'engine', 'version', 'skill', 'episode', 'level', 'play mode', 'respawn', 'fast',
         'nomonsters', 'player 1', 'player 2', 'player 3', 'player 4', 'player 5', 'player 6',
