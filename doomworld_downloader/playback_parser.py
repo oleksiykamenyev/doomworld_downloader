@@ -200,6 +200,7 @@ class PlaybackData(BaseData):
 
                 local_wad_location = zip_extract(zip_location)
 
+            # TODO: Make sure copy isn't read-only
             copyfile(os.path.join(local_wad_location, wad_file),
                      os.path.join(CONFIG.dsda_doom_directory, os.path.basename(wad_file)))
 

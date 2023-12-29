@@ -1773,6 +1773,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/crescent_2022
   id: '131399'
   name: "CRESCENT WARS DEMOS [-complevel 09]"
+"https://www.doomworld.com/forum/topic/142447-chex-quest-the-penultimate-breakfast-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/chextpb
+  id: '142447'
+  name: "Chex Quest: The Penultimate Breakfast demos [-complevel 3]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
