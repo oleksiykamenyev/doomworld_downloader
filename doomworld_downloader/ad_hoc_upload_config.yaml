@@ -1,2 +1,5 @@
-threads: ["https://www.doomworld.com/forum/topic/142436-italy-doom-italo-doom-collaborative-segmented-runs/"]
-posts: []
+threads: []
+posts:
+  - https://www.doomworld.com/forum/post/2752551
+  - https://www.doomworld.com/forum/post/2350159
+  - https://www.doomworld.com/forum/post/2733170

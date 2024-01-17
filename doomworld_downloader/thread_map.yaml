@@ -153,7 +153,7 @@ https://www.doomworld.com/forum/topic/47020-new-scythe-2b-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/scythe2
   id: '47020'
   name: New Scythe 2b Demos [-complevel 2]
-https://www.doomworld.com/forum/topic/47778-mini-level-megawad-demos/:
+"https://www.doomworld.com/forum/topic/47778-mini-level-megawad-demos-complevel-2-or-9/":
   additional_info:
     wad: https://www.dsdarchive.com/wads/mlm12
   id: '47778'
@@ -1643,11 +1643,6 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/phtga
   id: '137440'
   name: "Phouse: The Great Arena demos [-complevel 9]"
-"https://www.doomworld.com/forum/topic/137487-grindfest-demos-complevel-21/":
-  additional_info:
-    wad: https://www.dsdarchive.com/wads/grindfest
-  id: '137487'
-  name: "Grindfest demos [-complevel 21]"
 "https://www.doomworld.com/forum/topic/137659-the-spawnsqwad-2000-demos-complevel-2/":
   additional_info:
     wad: https://www.dsdarchive.com/wads/spwnsq2k
@@ -1778,6 +1773,21 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/chextpb
   id: '142447'
   name: "Chex Quest: The Penultimate Breakfast demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/142539-pacifist-paradise-secret-santa-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ppss
+  id: '142539'
+  name: "Pacifist Paradise Secret Santa [-complevel 9]"
+"https://www.doomworld.com/forum/topic/142666-flesharmonic-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/fhc
+  id: '142666'
+  name: "Flesharmonic demos [ -complevel 2 ]"
+"https://www.doomworld.com/forum/topic/142824-not-even-remotely-fair-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/nerf
+  id: '142824'
+  name: "Not Even Remotely Fair demos [-complevel 2]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -2084,6 +2094,13 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/glaive3
   id: '136803'
   name: "Glaive series demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/137487-grindfest-demos-complevel-21/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/grindfest
+      - https://www.dsdarchive.com/wads/grindfestdlc
+  id: '137487'
+  name: "Grindfest demos [-complevel 21]"
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
