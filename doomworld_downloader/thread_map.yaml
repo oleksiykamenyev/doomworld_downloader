@@ -1788,6 +1788,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/nerf
   id: '142824'
   name: "Not Even Remotely Fair demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/142940-mewo-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/mewo
+  id: '142940'
+  name: "MeWo Demos [-complevel 21]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -2101,6 +2106,13 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/grindfestdlc
   id: '137487'
   name: "Grindfest demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/142947-dubzzzs-5-minute-design-assembly-4-demos-complevel-9/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/d5da4a
+      - https://www.dsdarchive.com/wads/d5da4b
+  id: '142947'
+  name: "Dubzzz's 5-Minute Design Assembly #4 Demos [-complevel 9]"
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
