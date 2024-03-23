@@ -1793,6 +1793,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/mewo
   id: '142940'
   name: "MeWo Demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/143873-hardfest-2-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/hardfest2
+  id: '143873'
+  name: "Hardfest 2 demos [-complevel 9]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -2507,6 +2512,7 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/stuff
       - https://www.dsdarchive.com/wads/stuff2
       - https://www.dsdarchive.com/wads/hyshw
+      - https://www.dsdarchive.com/wads/cr2
 "https://www.doomworld.com/forum/topic/87839-demos-for-miscellaneous-cyberdemon531-gzdoom-maps/":
   id: "87839"
   name: Demos for miscellaneous Cyberdemon531 (G)ZDoom maps
@@ -2650,6 +2656,13 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/moonston
       - https://www.dsdarchive.com/wads/frozent
       - https://www.dsdarchive.com/wads/icar2015
+"https://www.doomworld.com/forum/topic/143491-mxu-discord-wad-demos/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/wang
+      - https://www.dsdarchive.com/wads/intrlde
+  id: '143491'
+  name: "MXU discord wad demos"
 
 # Misc specialized threads
 "https://www.doomworld.com/forum/topic/94942-misc-heretic-hexen-demos/":
