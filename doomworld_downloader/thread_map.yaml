@@ -1798,6 +1798,76 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/hardfest2
   id: '143873'
   name: "Hardfest 2 demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/145165-rosy-rubicunda-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/rr_final
+  id: '145165'
+  name: "Rosy Rubicunda demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/145153-the-quinary-conundrum-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/tqc
+  id: '145153'
+  name: "The Quinary Conundrum demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/145095-realm-of-chaos-25th-anniversary-edition-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/roc25
+  id: '145095'
+  name: "Realm of Chaos: 25th Anniversary Edition demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/145339-junkfood-3-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/junkfood3
+  id: '145339'
+  name: "Junkfood 3 demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/145347-doom-2-in-city-only-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/d2ico
+  id: '145347'
+  name: "Doom 2 In City Only demos (-complevel 21)"
+"https://www.doomworld.com/forum/topic/145398-crate-expectations-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/crate_escape
+  id: '145398'
+  name: "Crate Expectations demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/145399-thirty-years-with-doom-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/30years
+  id: '145399'
+  name: "Thirty Years with Doom demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/145400-deadliest-demolition-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/demolit
+  id: '145400'
+  name: "Deadliest Dem(o(li)ti)on demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/145401-the-uitimate-doom-in-name-only-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/udino
+  id: '145401'
+  name: "The UItimate Doom In Name Only demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/145402-speed-master-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/spmaster
+  id: '145402'
+  name: "Speed Master demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/145403-jaws-of-destruction-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/jawsofdest
+  id: '145403'
+  name: "Jaws of Destruction demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/145628-maiden-voyage-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/maidenvoy2
+  id: '145628'
+  name: "Maiden Voyage demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/146426-ambrosia-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ambrosia
+  id: '146426'
+  name: "Ambrosia demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/146006-corruption-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/corruption
+  id: '146006'
+  name: "Corruption demos [-complevel 21]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -2118,6 +2188,16 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/d5da4b
   id: '142947'
   name: "Dubzzz's 5-Minute Design Assembly #4 Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/145093-10-line-genocide-demos-complevel-9/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/10linee1
+      - https://www.dsdarchive.com/wads/10linee2
+      - https://www.dsdarchive.com/wads/10linee3
+      - https://www.dsdarchive.com/wads/10linee4
+      - https://www.dsdarchive.com/wads/10linee5
+  id: '145093'
+  name: "10 Line Genocide demos [-complevel 9]"
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
@@ -2636,6 +2716,7 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/mnltdst_rc2
       - https://www.dsdarchive.com/wads/pagodia
       - https://www.dsdarchive.com/wads/whtrmns
+      - https://www.dsdarchive.com/wads/dldstrct
 "https://www.doomworld.com/forum/topic/129607-various-eternal-wads-demos/":
   id: "129607"
   name: 'Various "Eternal" Wads demos'

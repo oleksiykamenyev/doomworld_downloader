@@ -121,21 +121,24 @@ def main():
 
         file_creation_date = None
         tmp_extract_path = 'tmp_extraction'
-        with ZipFile(local_file_path, 'r') as zip_file:
-            info_list = zip_file.infolist()
-            for file_zip_info in info_list:
-                for resource_re in RESOURCE_FILE_FORMATS:
-                    if resource_re.match(file_zip_info.filename):
-                        if not file_creation_date:
-                            file_creation_date = parse_zip_info_date_time(file_zip_info.date_time)
-                        else:
-                            cur_file_creation_date = parse_zip_info_date_time(
-                                file_zip_info.date_time
-                            )
-                            if cur_file_creation_date > file_creation_date:
-                                file_creation_date = cur_file_creation_date
+        try:
+            with ZipFile(local_file_path, 'r') as zip_file:
+                info_list = zip_file.infolist()
+                for file_zip_info in info_list:
+                    for resource_re in RESOURCE_FILE_FORMATS:
+                        if resource_re.match(file_zip_info.filename):
+                            if not file_creation_date:
+                                file_creation_date = parse_zip_info_date_time(file_zip_info.date_time)
+                            else:
+                                cur_file_creation_date = parse_zip_info_date_time(
+                                    file_zip_info.date_time
+                                )
+                                if cur_file_creation_date > file_creation_date:
+                                    file_creation_date = cur_file_creation_date
 
-            zip_file.extractall('tmp_extraction')
+                zip_file.extractall('tmp_extraction')
+        except NotImplementedError:
+            pass
 
         wads_in_zip = glob.glob('{}/*.wad'.format(tmp_extract_path))
         num_maps = 0

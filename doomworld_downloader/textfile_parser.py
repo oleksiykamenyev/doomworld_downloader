@@ -30,8 +30,8 @@ class TextfileData(BaseData):
     MULTI_COMPLEVEL_PORTS = ['PRBoom', 'DSDA-Doom', 'Woof', 'SpeedWoof', 'Nugget Doom']
     TAS_STRING = 'this is a tools-assisted demo'
     VIDEO_KEYS = [
-        'video', 'videolink', 'youtube', 'youtubelink', 'youtubevideo', 'youtubevideolink', 'yt',
-        'ytlink', 'ytvideo', 'ytvideolink'
+        'video', 'videolink', 'videoondemand', 'videoondemandlink', 'vod', 'vodlink', 'youtube',
+        'youtubelink', 'youtubevideo', 'youtubevideolink', 'yt', 'ytlink', 'ytvideo', 'ytvideolink'
     ]
     WAD_KEYS = ['mapset', 'pwad', 'pwadfile', 'wad']
 
@@ -309,11 +309,19 @@ class TextfileData(BaseData):
             non_colon_port_match = TextfileData.NON_COLON_PORT_REGEX.match(line)
             if ':' in line:
                 key, value = line.split(':', 1)
-                key = ''.join(key.lower().split())
+                key = ''.join(character for character in key.lower() if character.isalnum())
                 value = value.strip()
             elif ' - ' in line:
                 key, value = line.split(' - ', 1)
-                key = ''.join(key.lower().split())
+                key = ''.join(character for character in key.lower() if character.isalnum())
+                value = value.strip()
+            elif '\t' in line:
+                key, value = line.split('\t', 1)
+                key = ''.join(character for character in key.lower() if character.isalnum())
+                value = value.strip()
+            elif ' ' in line:
+                key, value = line.split(' ', 1)
+                key = ''.join(character for character in key.lower() if character.isalnum())
                 value = value.strip()
             elif non_colon_port_match:
                 key = 'engine'

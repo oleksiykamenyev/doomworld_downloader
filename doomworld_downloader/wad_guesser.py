@@ -56,7 +56,7 @@ def get_wad_guesses(*args, iwad=None):
                 for url, wad in WAD_MAP_BY_DSDA_URL.items():
                     wad_to_guess_sanitized_lower = wad_to_guess_sanitized.lower()
                     for wad_file in wad.files.keys():
-                        if wad_to_guess_sanitized_lower in os.path.basename(wad_file.lower()):
+                        if wad_to_guess_sanitized_lower == os.path.basename(wad_file.lower()):
                             wad_dict = wad.files[wad_file]
                             if not wad_dict.get('do_not_attempt_playback'):
                                 cur_wad_guesses.append(wad)
