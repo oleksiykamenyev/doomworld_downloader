@@ -1,911 +1,2203 @@
-#### TODOs
-# Update the WAD info to be unambiguous (perhaps it should be an ID mapping to a WAD map that has
-# all the relevant info about the WAD such as WAD name, compat, etc.)
-# Consider making all the IDs in here ints
-#  - They were auto-parsed into strings, and I've been too lazy to fix it, but it probably should be
-#    fixed
+# TODO: Might be worth updating this to be based on the ID because the thread name and URL can change
+# Keyset:
+# {'additional_info': {'wad': 'wad', 'wads': 'wads', 'solo-net': 'solo-net', 'category': 'category', 'tas_only': 'tas_only', 'note': 'note', 'source_port': 'source_port', 'ignore': 'ignore', 'nomonsters': 'nomonsters'}, 'id': 'id', 'name': 'name'}
 
 # Single WAD threads
-"https://www.doomworld.com/forum/topic/100975-sparta-ii-project-vesuvius-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/101526-slaughterfest-2013-complevel-9/:
   additional_info:
-    wad: s2pv
-  id: "100975"
-  name: Sparta II - Project Vesuvius demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/101526-slaughterfest-2013-complevel-9/":
-  additional_info:
-    wad: sf3
-  id: "101526"
+    wad: https://www.dsdarchive.com/wads/sf3
+  id: '101526'
   name: Slaughterfest (201)3 [-complevel 9]
-"https://www.doomworld.com/forum/topic/102891-32-hours-in-pain-demos-complevel-4/":
+https://www.doomworld.com/forum/topic/102891-32-hours-in-pain-demos-complevel-4/:
   additional_info:
-    wad: 32hnpain
-  id: "102891"
+    wad: https://www.dsdarchive.com/wads/32hnpain
+  id: '102891'
   name: 32 Hours In Pain demos [-complevel 4]
-"https://www.doomworld.com/forum/topic/103903-exomoon-demos-complevel-11/":
+https://www.doomworld.com/forum/topic/103903-exomoon-demos-complevel-11/:
   additional_info:
-    wad: exomoon
-  id: "103903"
+    wad: https://www.dsdarchive.com/wads/exomoon
+  id: '103903'
   name: Exomoon Demos [-complevel 11]
-"https://www.doomworld.com/forum/topic/104592-eviternity-demos-complevel-11/":
+https://www.doomworld.com/forum/topic/104592-eviternity-demos-complevel-11/:
   additional_info:
-    wad: eviternity
-  id: "104592"
+    wad: https://www.dsdarchive.com/wads/eviternity
+  id: '104592'
   name: Eviternity demos [-complevel 11]
-"https://www.doomworld.com/forum/topic/104884-speedzec-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/104884-speedzec-demos-complevel-9/:
   additional_info:
-    wad: speezdec
-  id: "104884"
+    wad: https://www.dsdarchive.com/wads/speezdec
+  id: '104884'
   name: Speedzec demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/105168-noye-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/105168-noye-demos-complevel-9/:
   additional_info:
-    wad: noye
-  id: "105168"
+    wad: https://www.dsdarchive.com/wads/noye
+  id: '105168'
   name: NoYe demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/106649-sigil-demos-complevel-3/":
+https://www.doomworld.com/forum/topic/106649-sigil-demos-complevel-3/:
   additional_info:
-    wad: sigil
-  id: "106649"
+    wad: https://www.dsdarchive.com/wads/sigil
+  id: '106649'
   name: SIGIL demos [-complevel 3]
-"https://www.doomworld.com/forum/topic/111128-slaughtermax-smaxwad-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/111128-slaughtermax-smaxwad-demos-complevel-9/:
   additional_info:
-    wad: smax
-  id: "111128"
+    wad: https://www.dsdarchive.com/wads/smax
+  id: '111128'
   name: SlaughterMAX (smax.wad) Demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/111674-eye-of-the-beholder-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/111674-eye-of-the-beholder-demos-complevel-2/:
   additional_info:
-    wad: eob11
-  id: "111674"
+    wad: https://www.dsdarchive.com/wads/eob11
+  id: '111674'
   name: Eye Of The Beholder demos (-complevel 2)
-"https://www.doomworld.com/forum/topic/20357-icarus-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/112725-nova-iii-demos-complevel-9/:
   additional_info:
-    wad: icarus
-  id: "20357"
+    wad: https://www.dsdarchive.com/wads/nova3
+  id: '112725'
+  name: NOVA III Demos [-complevel 9]
+https://www.doomworld.com/forum/topic/112922-flotsam-demos-complevel-9/:
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/flotsam
+  id: '112922'
+  name: Flotsam demos [complevel 9]
+https://www.doomworld.com/forum/topic/114802-akeldama-demos-complevel-2/:
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/akeldama
+  id: '114802'
+  name: Akeldama demos [-complevel 2]
+https://www.doomworld.com/forum/topic/20357-icarus-demos-complevel-2/:
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/icarus
+  id: '20357'
   name: Icarus Demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/20673-loh2-released-damn-right-thats-cool-complevel-9/":
+https://www.doomworld.com/forum/topic/20673-loh2-released-damn-right-thats-cool-complevel-9/:
   additional_info:
-    wad: loh2
-  id: "20673"
-  name: "LOH2 released.  Damn right, that's cool. [-complevel 9]"
-"https://www.doomworld.com/forum/topic/34511-2sectors-demo-pack-and-demos-complevel-2/":
+    wad: https://www.dsdarchive.com/wads/loh2
+  id: '20673'
+  name: LOH2 released.  Damn right, that's cool. [-complevel 9]
+https://www.doomworld.com/forum/topic/34511-2sectors-demo-pack-and-demos-complevel-2/:
   additional_info:
-    wad: 2sectors
-  id: "34511"
+    wad: https://www.dsdarchive.com/wads/2sectors
+  id: '34511'
   name: 2sectors demo-pack and demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/35012-1024-demos/":
+https://www.doomworld.com/forum/topic/35012-1024-demos/:
   additional_info:
-    wad: 1024
-  id: "35012"
+    wad: https://www.dsdarchive.com/wads/1024
+  id: '35012'
   name: 1024 demos
-"https://www.doomworld.com/forum/topic/35633-revolution-demos/":
+"https://www.doomworld.com/forum/topic/129022-extremal-doom-demos-complevel-2/":
   additional_info:
-    wad: tvr
-  id: "35633"
-  name: Revolution! demos
-"https://www.doomworld.com/forum/topic/35723-extremal-doom-demos/":
+    wad: https://www.dsdarchive.com/wads/extremal
+  id: '129022'
+  name: Extremal Doom Demos [-complevel 2]
+https://www.doomworld.com/forum/topic/36275-nilla-demos/:
   additional_info:
-    wad: extremal
-  id: "35723"
-  name: Extremal Doom Demos
-"https://www.doomworld.com/forum/topic/36275-nilla-demos/":
-  additional_info:
-    wad: nilla
-  id: "36275"
+    wad: https://www.dsdarchive.com/wads/nilla
+  id: '36275'
   name: Nilla demos
-"https://www.doomworld.com/forum/topic/36365-new-kama-sutra-demos/":
+https://www.doomworld.com/forum/topic/36365-new-kama-sutra-demos/:
   additional_info:
-    wad: ksutra
-  id: "36365"
+    wad: https://www.dsdarchive.com/wads/ksutra
+  id: '36365'
   name: New Kama Sutra demos
-"https://www.doomworld.com/forum/topic/38372-scythe-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/38372-scythe-demos-complevel-2/:
   additional_info:
-    wad: scythe
-  id: "38372"
+    wad: https://www.dsdarchive.com/wads/scythe
+  id: '38372'
   name: Scythe demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/38581-vae-victus-2-demos/":
+https://www.doomworld.com/forum/topic/38581-vae-victus-2-demos/:
   additional_info:
-    wad: vv2
-  id: "38581"
+    wad: https://www.dsdarchive.com/wads/vv2
+  id: '38581'
   name: Vae Victus 2 demos
-"https://www.doomworld.com/forum/topic/38673-scimitar-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/38673-scimitar-demos-complevel-9/:
   additional_info:
-    wad: scimitar
-  id: "38673"
+    wad: https://www.dsdarchive.com/wads/scimitar
+  id: '38673'
   name: Scimitar demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/39179-heretic-demos-non-demopack-and-nm/":
+https://www.doomworld.com/forum/topic/39179-heretic-demos-non-demopack-and-nm/:
   additional_info:
-    wad: heretic
-  id: "39179"
+    wad: https://www.dsdarchive.com/wads/heretic
+  id: '39179'
   name: Heretic demos (non-demopack and NM)
-"https://www.doomworld.com/forum/topic/39285-origwad-speed-running/":
+"https://www.doomworld.com/forum/topic/39285-origwad-demos-complevel-3/":
   additional_info:
-    wad: origwad
-  id: "39285"
+    wad: https://www.dsdarchive.com/wads/origwad
+  id: '39285'
   name: Origwad speed running!
-"https://www.doomworld.com/forum/topic/39985-hell-revealed-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/39985-hell-revealed-demos-complevel-2/:
   additional_info:
-    wad: hr
-  id: "39985"
+    wad: https://www.dsdarchive.com/wads/hr
+  id: '39985'
   name: Hell Revealed demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/40384-eternal-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/40384-eternal-demos-complevel-2/:
   additional_info:
-    wad: eternal
-  id: "40384"
+    wad: https://www.dsdarchive.com/wads/eternal
+  id: '40384'
   name: Eternal demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/43850-chex-quest-demos/":
+https://www.doomworld.com/forum/topic/45059-plutonia-2-demos-final-doom-executable-or-complevel-4/:
   additional_info:
-    wad: chex
-  id: "43850"
-  name: Chex Quest Demos
-"https://www.doomworld.com/forum/topic/45059-plutonia-2-demos-final-doom-executable-or-complevel-4/":
-  additional_info:
-    wad: pl2
-  id: "45059"
+    wad: https://www.dsdarchive.com/wads/pl2
+  id: '45059'
   name: Plutonia 2 Demos [Final DOOM executable or -complevel 4]
-"https://www.doomworld.com/forum/topic/46154-the-ultimate-nmd-demos/":
+https://www.doomworld.com/forum/topic/46154-the-ultimate-nmd-demos/:
   additional_info:
-    wad: nmdu
-  id: "46154"
+    wad: https://www.dsdarchive.com/wads/nmdu_2009-06
+  id: '46154'
   name: The Ultimate NMD - Demos
-"https://www.doomworld.com/forum/topic/46711-claustrophobia-1024-demos/":
+https://www.doomworld.com/forum/topic/46711-claustrophobia-1024-demos/:
   additional_info:
-    wad: 1024clau
-  id: "46711"
+    wad: https://www.dsdarchive.com/wads/1024clau
+  id: '46711'
   name: Claustrophobia 1024 Demos
-"https://www.doomworld.com/forum/topic/47020-new-scythe-2b-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/47020-new-scythe-2b-demos-complevel-2/:
   additional_info:
-    wad: scythe2
-  id: "47020"
+    wad: https://www.dsdarchive.com/wads/scythe2
+  id: '47020'
   name: New Scythe 2b Demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/47778-mini-level-megawad-demos/":
+"https://www.doomworld.com/forum/topic/47778-mini-level-megawad-demos-complevel-2-or-9/":
   additional_info:
-    wad: mlm12
-  id: "47778"
+    wad: https://www.dsdarchive.com/wads/mlm12
+  id: '47778'
   name: Mini-level Megawad demos
-"https://www.doomworld.com/forum/topic/47824-scythe-x-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/47824-scythe-x-demos-complevel-2/:
   additional_info:
-    wad: scythex
-  id: "47824"
+    wad: https://www.dsdarchive.com/wads/scythex
+  id: '47824'
   name: Scythe X demos (complevel 2)
-"https://www.doomworld.com/forum/topic/48343-heroes-tales-demos-complevel-4/":
+https://www.doomworld.com/forum/topic/48343-heroes-tales-demos-complevel-4/:
   additional_info:
-    wad: ht
-  id: "48343"
-  name: "Heroes' Tales Demos [-complevel 4]"
-"https://www.doomworld.com/forum/topic/49373-new-twilight-zone-demos/":
+    wad: https://www.dsdarchive.com/wads/ht
+  id: '48343'
+  name: Heroes' Tales Demos [-complevel 4]
+https://www.doomworld.com/forum/topic/49374-claustrophobia-1024-2-demos-thread-complevel-9/:
   additional_info:
-    wad: twzone
-  id: "49373"
-  name: New Twilight Zone demos
-"https://www.doomworld.com/forum/topic/49374-claustrophobia-1024-2-demos-thread-complevel-9/":
-  additional_info:
-    wad: 1024cla2
-  id: "49374"
+    wad: https://www.dsdarchive.com/wads/1024cla2
+  id: '49374'
   name: Claustrophobia 1024 2 Demos Thread [-complevel 9]
-"https://www.doomworld.com/forum/topic/49395-pendragon-demos-boom-complevel-9/":
+https://www.doomworld.com/forum/topic/49395-pendragon-demos-boom-complevel-9/:
   additional_info:
-    wad: pendragon
-  id: "49395"
+    wad: https://www.dsdarchive.com/wads/pendragon
+  id: '49395'
   name: Pendragon demos (Boom, -complevel 9)
-"https://www.doomworld.com/forum/topic/49409-phmlspd-demos-boom-complevel-9/":
+https://www.doomworld.com/forum/topic/49409-phmlspd-demos-boom-complevel-9/:
   additional_info:
-    wad: phmlspd
-  id: "49409"
+    wad: https://www.dsdarchive.com/wads/phmlspd
+  id: '49409'
   name: Phmlspd demos (Boom, -complevel 9)
-"https://www.doomworld.com/forum/topic/49704-heretic-curse-of-dsparil-demos/":
+https://www.doomworld.com/forum/topic/49704-heretic-curse-of-dsparil-demos/:
   additional_info:
-    wad: curse
-  id: "49704"
-  name: "Heretic - Curse of D'sparil Demos"
-"https://www.doomworld.com/forum/topic/50315-speed-of-doom-demos-complevel-9/":
+    wad: https://www.dsdarchive.com/wads/curse
+  id: '49704'
+  name: Heretic - Curse of D'sparil Demos
+https://www.doomworld.com/forum/topic/50315-speed-of-doom-demos-complevel-9/:
   additional_info:
-    wad: sodfinal
-  id: "50315"
+    wad: https://www.dsdarchive.com/wads/sodfinal
+  id: '50315'
   name: Speed of Doom demos (-complevel 9)
-"https://www.doomworld.com/forum/topic/50409-uac-ultra-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/50409-uac-ultra-demos-complevel-9/:
   additional_info:
-    wad: uacultra
-  id: "50409"
+    wad: https://www.dsdarchive.com/wads/uacultra
+  id: '50409'
   name: UAC Ultra demos (-complevel 9)
-"https://www.doomworld.com/forum/topic/51245-no-rest-for-the-living-demos/":
+https://www.doomworld.com/forum/topic/51245-no-rest-for-the-living-demos/:
   additional_info:
-    wad: nerve
-  id: "51245"
+    wad: https://www.dsdarchive.com/wads/nerve
+  id: '51245'
   name: No Rest For The Living Demos
-"https://www.doomworld.com/forum/topic/51722-operation-biowar-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/51722-operation-biowar-demos-complevel-2/:
   additional_info:
-    wad: biowar
-  id: "51722"
+    wad: https://www.dsdarchive.com/wads/biowar
+  id: '51722'
   name: Operation Biowar demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/52974-eternal-memories-1-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/52974-eternal-memories-1-demos-complevel-9/:
   additional_info:
-    wad: em116
-  id: "52974"
+    wad: https://www.dsdarchive.com/wads/em116
+  id: '52974'
   name: Eternal Memories 1 demos (-complevel 9)
-"https://www.doomworld.com/forum/topic/53334-d2reload-demos-doom2-or-complevel-2/":
+https://www.doomworld.com/forum/topic/53334-d2reload-demos-doom2-or-complevel-2/:
   additional_info:
-    wad: d2reload
-  id: "53334"
+    wad: https://www.dsdarchive.com/wads/d2reload
+  id: '53334'
   name: D2reload demos [Doom2/+ or -complevel 2]
-"https://www.doomworld.com/forum/topic/53468-epic-2-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/53468-epic-2-demos-complevel-2/:
   additional_info:
-    wad: epic2
-  id: "53468"
+    wad: https://www.dsdarchive.com/wads/epic2
+  id: '53468'
   name: Epic 2 demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/53682-sunder-demos/":
+https://www.doomworld.com/forum/topic/53682-sunder-demos/:
   additional_info:
-    wad: sunder
-  id: "53682"
+    wad: https://www.dsdarchive.com/wads/sunder
+  id: '53682'
   name: Sunder demos
-"https://www.doomworld.com/forum/topic/53786-fffart-demos-boom-complevel-9/":
+https://www.doomworld.com/forum/topic/53814-arch-vile-jump-megawad-demos-complevel-2/:
   additional_info:
-    wad: fffart
-  id: "53786"
-  name: fffart demos (Boom, -complevel 9)
-"https://www.doomworld.com/forum/topic/53814-arch-vile-jump-megawad-demos-complevel-2/":
-  additional_info:
-    wad: avj
-  id: "53814"
+    wad: https://www.dsdarchive.com/wads/avj
+  id: '53814'
   name: Arch-Vile Jump (megawad) demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/54092-whitemare-demos-complevel-2-recommended-for-most-maps/":
+https://www.doomworld.com/forum/topic/54092-whitemare-demos-complevel-2-recommended-for-most-maps/:
   additional_info:
-    wad: white2
-  id: "54092"
+    wad: https://www.dsdarchive.com/wads/whitemar
+  id: '54092'
   name: Whitemare demos [-complevel 2 recommended for most maps]
-"https://www.doomworld.com/forum/topic/54395-jenesis-demos-boom-complevel-9/":
+https://www.doomworld.com/forum/topic/54395-jenesis-demos-boom-complevel-9/:
   additional_info:
-    wad: jenesis
-  id: "54395"
+    wad: https://www.dsdarchive.com/wads/jenesis
+  id: '54395'
   name: Jenesis demos [Boom, complevel 9]
-"https://www.doomworld.com/forum/topic/54852-double-impact-demos-complevel-3/":
+https://www.doomworld.com/forum/topic/54852-double-impact-demos-complevel-3/:
   additional_info:
-    wad: dbimpact
-  id: "54852"
+    wad: https://www.dsdarchive.com/wads/dbimpact
+  id: '54852'
   name: Double Impact demos [-complevel 3]
-"https://www.doomworld.com/forum/topic/55137-plutonia-revisited-demos-complevel-4/":
+https://www.doomworld.com/forum/topic/55137-plutonia-revisited-demos-complevel-4/:
   additional_info:
-    wad: prcp
-  id: "55137"
+    wad: https://www.dsdarchive.com/wads/prcp
+  id: '55137'
   name: Plutonia Revisited demos [-complevel 4]
-"https://www.doomworld.com/forum/topic/55195-demonfear-demos-vanilla-or-complevel-2/":
+https://www.doomworld.com/forum/topic/55195-demonfear-demos-vanilla-or-complevel-2/:
   additional_info:
-    wad: dmonfear
-  id: "55195"
+    wad: https://www.dsdarchive.com/wads/dmonfear
+  id: '55195'
   name: Demonfear demos [vanilla or -complevel 2]
-"https://www.doomworld.com/forum/topic/55438-vanguard-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/55438-vanguard-demos-complevel-9/:
   additional_info:
-    wad: vanguard
-  id: "55438"
+    wad: https://www.dsdarchive.com/wads/vanguard
+  id: '55438'
   name: Vanguard demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/55560-ultimate-doom-demos-complevel-3/:
   additional_info:
-    wad: mm2
-  id: "55559"
-  name: Memento Mori II  demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/55560-ultimate-doom-demos-complevel-3/":
-  additional_info:
-    wad: doom
-  id: "55560"
+    wad: https://www.dsdarchive.com/wads/doom
+  id: '55560'
   name: Ultimate Doom demos [-complevel 3]
-"https://www.doomworld.com/forum/topic/55565-hr2-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/55565-hr2-demos-complevel-2/:
   additional_info:
-    wad: hr2final
-  id: "55565"
+    wad: https://www.dsdarchive.com/wads/hr2final
+  id: '55565'
   name: HR2 demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/55567-realm-of-chaos-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/55567-realm-of-chaos-demos-complevel-2/:
   additional_info:
-    wad: rlmchaos
-  id: "55567"
+    wad: https://www.dsdarchive.com/wads/rlmchaos
+  id: '55567'
   name: Realm of Chaos demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/55574-alien-vendetta-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/55574-alien-vendetta-demos-complevel-2/:
   additional_info:
-    wad: av
-  id: "55574"
+    wad: https://www.dsdarchive.com/wads/av
+  id: '55574'
   name: Alien Vendetta demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/55578-rebirth-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/55578-rebirth-demos-complevel-2/:
   additional_info:
-    wad: rebirth
-  id: "55578"
+    wad: https://www.dsdarchive.com/wads/rebirth
+  id: '55578'
   name: Rebirth demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/55580-requiem-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/55580-requiem-demos-complevel-2/:
   additional_info:
-    wad: requiem
-  id: "55580"
+    wad: https://www.dsdarchive.com/wads/requiem
+  id: '55580'
   name: Requiem demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/55586-memento-mori-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/55586-memento-mori-demos-complevel-2/:
   additional_info:
-    wad: mm
-  id: "55586"
+    wad: https://www.dsdarchive.com/wads/mm
+  id: '55586'
   name: Memento Mori demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/55589-doom-ii-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/55589-doom-ii-demos-complevel-2/:
   additional_info:
-    wad: doom2
-  id: "55589"
+    wad: https://www.dsdarchive.com/wads/doom2
+  id: '55589'
   name: DOOM II demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/56037-5-minute-map-megawad-demos-clvl-9/":
+https://www.doomworld.com/forum/topic/56108-doom-core-demos-complevel-2/:
   additional_info:
-    wad: 5minmap
-  id: "56037"
-  name: 5 minute map megawad demos -clvl 9
-"https://www.doomworld.com/forum/topic/56108-doom-core-demos-complevel-2/":
-  additional_info:
-    wad: dcv
-  id: "56108"
+    wad: https://www.dsdarchive.com/wads/dcv
+  id: '56108'
   name: Doom Core Demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/56348-chillax-demos-complevel-2/":
+"https://www.doomworld.com/forum/topic/56348-chillax-demos-complevel-9/":
   additional_info:
-    wad: chillax
-  id: "56348"
+    wad: https://www.dsdarchive.com/wads/chillax
+  id: '56348'
   name: Chillax Demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/57027-1994-tune-up-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/57027-1994-tune-up-demos-complevel-9/:
   additional_info:
-    wad: 1994tu
-  id: "57027"
+    wad: https://www.dsdarchive.com/wads/1994tu
+  id: '57027'
   name: 1994 Tune-up Demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/57324-congestion-384-demos/":
+"https://www.doomworld.com/forum/topic/57324-congestion-384-demos-complevel-2/":
   additional_info:
-    wad: cyc-384
-  id: "57324"
+    wad: https://www.dsdarchive.com/wads/cyc-384
+  id: '57324'
   name: Congestion 384 demos
-"https://www.doomworld.com/forum/topic/57450-killing-adventure-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/57450-killing-adventure-demos-complevel-9/:
   additional_info:
-    wad: killadve
-  id: "57450"
+    wad: https://www.dsdarchive.com/wads/killadve
+  id: '57450'
   name: Killing Adventure demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/57506-whispers-of-satan-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/57506-whispers-of-satan-demos-complevel-9/:
   additional_info:
-    wad: wos
-  id: "57506"
+    wad: https://www.dsdarchive.com/wads/wos
+  id: '57506'
   name: Whispers of Satan demos  [-complevel 9]
-"https://www.doomworld.com/forum/topic/57826-strain-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/57826-strain-demos-complevel-2/:
   additional_info:
-    wad: strain10
-  id: "57826"
+    wad: https://www.dsdarchive.com/wads/strain10
+  id: '57826'
   name: STRAIN demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/57837-wonderful-doom-demos-complevel-3/":
+https://www.doomworld.com/forum/topic/57837-wonderful-doom-demos-complevel-3/:
   additional_info:
-    wad: wd13
-  id: "57837"
+    wad: https://www.dsdarchive.com/wads/wd13
+  id: '57837'
   name: Wonderful Doom demos [-complevel 3]
-"https://www.doomworld.com/forum/topic/57845-reverie-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/57845-reverie-demos-complevel-2/:
   additional_info:
-    wad: reverie
-  id: "57845"
+    wad: https://www.dsdarchive.com/wads/reverie
+  id: '57845'
   name: Reverie demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/58009-khorus-speedy-shit-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/58009-khorus-speedy-shit-demos-complevel-2/:
   additional_info:
-    wad: kssht
-  id: "58009"
-  name: "Khorus' Speedy Shit demos [-complevel 2]"
-"https://www.doomworld.com/forum/topic/58105-doom-the-way-id-did-demos-complevel-3/":
+    wad: https://www.dsdarchive.com/wads/kssht
+  id: '58009'
+  name: Khorus' Speedy Shit demos [-complevel 2]
+https://www.doomworld.com/forum/topic/58105-doom-the-way-id-did-demos-complevel-3/:
   additional_info:
-    wad: dtwid
-  id: "58105"
+    wad: https://www.dsdarchive.com/wads/dtwid
+  id: '58105'
   name: Doom The Way id Did demos [-complevel 3]
-"https://www.doomworld.com/forum/topic/58350-eviltech-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/58350-eviltech-demos-complevel-2/:
   additional_info:
-    wad: eviltech
-  id: "58350"
+    wad: https://www.dsdarchive.com/wads/eviltech
+  id: '58350'
   name: Eviltech demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/58567-base-ganymede-demos-complevel-3/":
+https://www.doomworld.com/forum/topic/58567-base-ganymede-demos-complevel-3/:
   additional_info:
-    wad: bgcomp
-  id: "58567"
+    wad: https://www.dsdarchive.com/wads/bgcomp
+  id: '58567'
   name: Base Ganymede demos [-complevel 3]
-"https://www.doomworld.com/forum/topic/58833-slaughterfest-2011-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/58833-slaughterfest-2011-demos-complevel-9/:
   additional_info:
-    wad: sf2011
-  id: "58833"
+    wad: https://www.dsdarchive.com/wads/sf2011
+  id: '58833'
   name: Slaughterfest 2011 demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/59021-surge-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/59021-surge-demos-complevel-9/:
   additional_info:
-    wad: surge
-  id: "59021"
+    wad: https://www.dsdarchive.com/wads/surge
+  id: '59021'
   name: Surge demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/59348-equinox-demos/":
+https://www.doomworld.com/forum/topic/59355-equinox-demos-complevel-2/:
   additional_info:
-    wad: equinox
-  id: "59348"
-  name: Equinox demos
-"https://www.doomworld.com/forum/topic/59355-equinox-demos-complevel-2/":
-  additional_info:
-    wad: equinox
-  id: "59355"
+    wad: https://www.dsdarchive.com/wads/equinox
+  id: '59355'
   name: Equinox demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/60034-eternally-yours-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/60034-eternally-yours-demos-complevel-2/:
   additional_info:
-    wad: etrnyour
-  id: "60034"
+    wad: https://www.dsdarchive.com/wads/etrnyour
+  id: '60034'
   name: Eternally Yours demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/60041-survive-in-hell-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/60041-survive-in-hell-demos-complevel-9/:
   additional_info:
-    wad: sihr2
-  id: "60041"
+    wad: https://www.dsdarchive.com/wads/sihr2
+  id: '60041'
   name: Survive In Hell demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/60162-zones-of-fear-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/60162-zones-of-fear-demos-complevel-9/:
   additional_info:
-    wad: zof
-  id: "60162"
+    wad: https://www.dsdarchive.com/wads/zof
+  id: '60162'
   name: Zones of Fear demos [-complevel 9 ]
-"https://www.doomworld.com/forum/topic/60194-garrulismo-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/60194-garrulismo-demos-complevel-2/:
   additional_info:
-    wad: garrulo
-  id: "60194"
+    wad: https://www.dsdarchive.com/wads/garrulo
+  id: '60194'
   name: Garrulismo demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/60984-coffee-break-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/60984-coffee-break-demos-complevel-9/:
   additional_info:
-    wad: cafebrk1
-  id: "60984"
+    wad: https://www.dsdarchive.com/wads/cafebrk1
+  id: '60984'
   name: Coffee Break demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/61176-journey-to-hell-1st-release-demos/":
+https://www.doomworld.com/forum/topic/61176-journey-to-hell-1st-release-demos/:
   additional_info:
-    wad: jth
-  id: "61176"
+    wad: https://www.dsdarchive.com/wads/jth
+  id: '61176'
   name: Journey to Hell (1st release) demos
-"https://www.doomworld.com/forum/topic/62602-doom-the-way-id-did-the-lost-episodes-demos-complevel-3/":
+https://www.doomworld.com/forum/topic/62602-doom-the-way-id-did-the-lost-episodes-demos-complevel-3/:
   additional_info:
-    wad: dtwid-le
-  id: "62602"
-  name: "Doom the Way id Did : The Lost Episodes demos [complevel 3]"
-"https://www.doomworld.com/forum/topic/62985-interception-demos-complevel-2/":
+    wad: https://www.dsdarchive.com/wads/dtwid-le
+  id: '62602'
+  name: 'Doom the Way id Did : The Lost Episodes demos [complevel 3]'
+https://www.doomworld.com/forum/topic/62985-interception-demos-complevel-2/:
   additional_info:
-    wad: intercep
-  id: "62985"
+    wad: https://www.dsdarchive.com/wads/intercep
+  id: '62985'
   name: Interception demos (-complevel 2)
-"https://www.doomworld.com/forum/topic/63008-3-heures-dagonie-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/63008-3-heures-dagonie-demos-complevel-2/:
   additional_info:
-    wad: 3hafinal
-  id: "63008"
-  name: "3 Heures d'agonie demos [-complevel 2]"
-"https://www.doomworld.com/forum/topic/63261-stomper-demos-complevel-9/":
+    wad: https://www.dsdarchive.com/wads/3hafinal
+  id: '63008'
+  name: 3 Heures d'agonie demos [-complevel 2]
+https://www.doomworld.com/forum/topic/63261-stomper-demos-complevel-9/:
   additional_info:
-    wad: stomper
-  id: "63261"
+    wad: https://www.dsdarchive.com/wads/stomper
+  id: '63261'
   name: Stomper demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/63464-hadephobia-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/63464-hadephobia-demos-complevel-9/:
   additional_info:
-    wad: h_phobia
-  id: "63464"
+    wad: https://www.dsdarchive.com/wads/h_phobia
+  id: '63464'
   name: Hadephobia demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/64093-slaughterfest-2012-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/64093-slaughterfest-2012-demos-complevel-9/:
   additional_info:
-    wad: sf2012
-  id: "64093"
+    wad: https://www.dsdarchive.com/wads/sf2012
+  id: '64093'
   name: Slaughterfest 2012 demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/64770-1monster-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/64770-1monster-demos-complevel-9/:
   additional_info:
-    wad: 1monster
-  id: "64770"
+    wad: https://www.dsdarchive.com/wads/1monster
+  id: '64770'
   name: 1monster demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/65024-fava-beans-demos-complevel-3/":
+https://www.doomworld.com/forum/topic/65024-fava-beans-demos-complevel-3/:
   additional_info:
-    wad: 01fava
-  id: "65024"
+    wad: https://www.dsdarchive.com/wads/01fava
+  id: '65024'
   name: Fava Beans demos [-complevel 3]
-"https://www.doomworld.com/forum/topic/65115-perditions-gate-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/65115-perditions-gate-demos-complevel-2/:
   additional_info:
-    wad: perdgate
-  id: "65115"
-  name: "Perdition's Gate demos [-complevel 2]"
-"https://www.doomworld.com/forum/topic/65776-zone-300-demos-complevel-2/":
+    wad: https://www.dsdarchive.com/wads/perdgate
+  id: '65115'
+  name: Perdition's Gate demos [-complevel 2]
+https://www.doomworld.com/forum/topic/65776-zone-300-demos-complevel-2/:
   additional_info:
-    wad: zone300
-  id: "65776"
+    wad: https://www.dsdarchive.com/wads/zone300
+  id: '65776'
   name: Zone 300 demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/65998-the-selfish-series-boom-edition-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/65998-the-selfish-series-boom-edition-demos-complevel-9/:
   additional_info:
-    wad: bselfish
-  id: "65998"
+    wad: https://www.dsdarchive.com/wads/bselfish
+  id: '65998'
   name: The Selfish Series (Boom Edition) demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/66119-doom-2-the-way-id-did-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/66119-doom-2-the-way-id-did-demos-complevel-2/:
   additional_info:
-    wad: d2twid
-  id: "66119"
+    wad: https://www.dsdarchive.com/wads/d2twid
+  id: '66119'
   name: Doom 2 The Way id Did demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/66256-unholy-realms-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/66256-unholy-realms-demos-complevel-2/:
   additional_info:
-    wad: ur
-  id: "66256"
+    wad: https://www.dsdarchive.com/wads/ur
+  id: '66256'
   name: Unholy Realms demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/66735-concerned-demos-complevel-3/":
+https://www.doomworld.com/forum/topic/66735-concerned-demos-complevel-3/:
   additional_info:
-    wad: concern
-  id: "66735"
+    wad: https://www.dsdarchive.com/wads/concern
+  id: '66735'
   name: ConC.E.R.Ned demos [-complevel 3]
-"https://www.doomworld.com/forum/topic/66829-resonance-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/66829-resonance-demos-complevel-2/:
   additional_info:
-    wad: resonance
-  id: "66829"
+    wad: https://www.dsdarchive.com/wads/resonance
+  id: '66829'
   name: resonance demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/66888-1killtng-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/66888-1killtng-demos-complevel-2/:
   additional_info:
-    wad: 1killtng
-  id: "66888"
+    wad: https://www.dsdarchive.com/wads/1killtng
+  id: '66888'
   name: 1killtng demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/67134-plutonium-winds-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/67134-plutonium-winds-demos-complevel-9/:
   additional_info:
-    wad: pwfinal
-  id: "67134"
+    wad: https://www.dsdarchive.com/wads/pwfinal
+  id: '67134'
   name: Plutonium Winds demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/67926-chex-quest-demos/":
+https://www.doomworld.com/forum/topic/68100-squadron-417-demos-complevel-2/:
   additional_info:
-    wad: chex
-  id: "67926"
-  name: Chex Quest Demos
-"https://www.doomworld.com/forum/topic/68100-squadron-417-demos-complevel-2/":
-  additional_info:
-    wad: squadron
-  id: "68100"
+    wad: https://www.dsdarchive.com/wads/squadron
+  id: '68100'
   name: Squadron 417 demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/68802-countdown-to-extinction-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/68802-countdown-to-extinction-demos-complevel-2/:
   additional_info:
-    wad: ticktock
-  id: "68802"
+    wad: https://www.dsdarchive.com/wads/ticktock
+  id: '68802'
   name: Countdown to Extinction demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/69033-hell-in-hell-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/69033-hell-in-hell-demos-complevel-2/:
   additional_info:
-    wad: helinhel
-  id: "69033"
+    wad: https://www.dsdarchive.com/wads/helinhel
+  id: '69033'
   name: Hell in Hell demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/69397-maps-by-a-6yo-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/69397-maps-by-a-6yo-demos-complevel-2/:
   additional_info:
-    wad: mbm6yos
-  id: "69397"
+    wad: https://www.dsdarchive.com/wads/mbm6yos
+  id: '69397'
   name: maps by a 6/yo demos. [-complevel 2]
-"https://www.doomworld.com/forum/topic/69815-hellbound-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/69815-hellbound-demos-complevel-2/:
   additional_info:
-    wad: hellbnd_2013-09
-  id: "69815"
+    wad: https://www.dsdarchive.com/wads/hellbnd
+  id: '69815'
   name: Hellbound demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/70293-plutonia-1024-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/70293-plutonia-1024-demos-complevel-9/:
   additional_info:
-    wad: pl1024
-  id: "70293"
+    wad: https://www.dsdarchive.com/wads/pl1024
+  id: '70293'
   name: Plutonia 1024 demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/70308-resurgence-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/70308-resurgence-demos-complevel-9/:
   additional_info:
-    wad: resurge
-  id: "70308"
+    wad: https://www.dsdarchive.com/wads/resurge
+  id: '70308'
   name: Resurgence demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/70835-switcheroom-demos-complevel-3/":
+https://www.doomworld.com/forum/topic/70836-going-down-demos-complevel-9/:
   additional_info:
-    wad: swtchrm
-  id: "70835"
-  name: Switcheroom demos [-complevel 3]
-"https://www.doomworld.com/forum/topic/70836-going-down-demos-complevel-9/":
-  additional_info:
-    wad: gd
-  id: "70836"
+    wad: https://www.dsdarchive.com/wads/gd
+  id: '70836'
   name: Going Down demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/71585-3-heures-dagonie-2-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/71585-3-heures-dagonie-2-demos-complevel-2/:
   additional_info:
-    wad: 3ha2
-  id: "71585"
-  name: "3 Heures d'agonie 2 demos [-complevel 2]"
-"https://www.doomworld.com/forum/topic/71634-50-monsters-e1-demos-complevel-2/":
+    wad: https://www.dsdarchive.com/wads/3ha2
+  id: '71585'
+  name: 3 Heures d'agonie 2 demos [-complevel 2]
+https://www.doomworld.com/forum/topic/71634-50-monsters-e1-demos-complevel-2/:
   additional_info:
-    wad: 50mon_e1
-  id: "71634"
+    wad: https://www.dsdarchive.com/wads/50mon_e1
+  id: '71634'
   name: 50 Monsters E1 demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/72941-armadosia-v21-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/72941-armadosia-v21-demos-complevel-2/:
   additional_info:
-    wad: armadosia_2016
-  id: "72941"
+    wad: https://www.dsdarchive.com/wads/armadosia
+  id: '72941'
   name: Armadosia v2.1 demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/73086-chex-quest-series-demos-complevel-3/":
+https://www.doomworld.com/forum/topic/73809-whitemare-2-demos-complevel-9/:
   additional_info:
-    wad: chex
-  id: "73086"
-  name: Chex Quest series demos [-complevel 3]
-"https://www.doomworld.com/forum/topic/73809-whitemare-2-demos-complevel-9/":
-  additional_info:
-    wad: white2
-  id: "73809"
+    wad: https://www.dsdarchive.com/wads/white2
+  id: '73809'
   name: Whitemare 2 demos [-complevel 9]
 "https://www.doomworld.com/forum/topic/74484-sector-666-demos-complevel-2/":
   additional_info:
-    wad: 6661998
+    wad: https://www.dsdarchive.com/wads/666_1998
   id: "74484"
   name: Sector 666 demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/74563-50-shades-of-graytall-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/74563-50-shades-of-graytall-demos-complevel-9/:
   additional_info:
-    wad: 50shades
-  id: "74563"
+    wad: https://www.dsdarchive.com/wads/50shades
+  id: '74563'
   name: 50 Shades of Graytall demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/84547-nova-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/84547-nova-demos-complevel-2/:
   additional_info:
-    wad: nova_2015
-  id: "84547"
+    wad: https://www.dsdarchive.com/wads/nova
+  id: '84547'
   name: NOVA demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/84627-swift-death-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/84627-swift-death-demos-complevel-9/:
   additional_info:
-    wad: swideath
-  id: "84627"
+    wad: https://www.dsdarchive.com/wads/swideath
+  id: '84627'
   name: Swift Death demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/84858-nova-2-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/84858-nova-2-demos-complevel-2/:
   additional_info:
-    wad: nova2
-  id: "84858"
+    wad: https://www.dsdarchive.com/wads/nova2
+  id: '84858'
   name: NOVA 2 Demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/85607-italo-doom-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/85607-italo-doom-demos-complevel-9/:
   additional_info:
-    wad: italo
-  id: "85607"
+    wad: https://www.dsdarchive.com/wads/italo
+  id: '85607'
   name: Italo-Doom demos [complevel -9]
-"https://www.doomworld.com/forum/topic/86532-flashback-to-hell-complevel-9/":
+https://www.doomworld.com/forum/topic/86532-flashback-to-hell-complevel-9/:
   additional_info:
-    wad: fth666
-  id: "86532"
+    wad: https://www.dsdarchive.com/wads/fth666
+  id: '86532'
   name: Flashback to Hell [-complevel 9]
-"https://www.doomworld.com/forum/topic/86827-estranged-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/86827-estranged-demos-complevel-9/:
   additional_info:
-    wad: estranged
-  id: "86827"
+    wad: https://www.dsdarchive.com/wads/estrangd
+  id: '86827'
   name: Estranged demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/88566-rush-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/88566-rush-demos-complevel-9/:
   additional_info:
-    wad: rush
-  id: "88566"
+    wad: https://www.dsdarchive.com/wads/rush
+  id: '88566'
   name: Rush demos [complevel -9]
-"https://www.doomworld.com/forum/topic/88662-doom-2-in-name-only-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/88662-doom-2-in-name-only-demos-complevel-2/:
   additional_info:
-    wad: d2ino
-  id: "88662"
+    wad: https://www.dsdarchive.com/wads/d2ino
+  id: '88662'
   name: Doom 2 in Name Only demos [complevel -2]
-"https://www.doomworld.com/forum/topic/88848-bloodstain-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/88848-bloodstain-demos-complevel-9/:
   additional_info:
-    wad: bstain
-  id: "88848"
+    wad: https://www.dsdarchive.com/wads/bstain
+  id: '88848'
   name: Bloodstain demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/89070-arxangels-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/89070-arxangels-demos-complevel-2/:
   additional_info:
-    wad: arx
-  id: "89070"
+    wad: https://www.dsdarchive.com/wads/arx
+  id: '89070'
   name: Arxangels demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/89693-no-sleep-for-the-dead-demos-complevel-3/":
+https://www.doomworld.com/forum/topic/89693-no-sleep-for-the-dead-demos-complevel-3/:
   additional_info:
-    wad: nos4dead
-  id: "89693"
+    wad: https://www.dsdarchive.com/wads/nos4dead
+  id: '89693'
   name: No Sleep for the Dead demos [-complevel 3]
-"https://www.doomworld.com/forum/topic/89728-ancient-aliens-proofs-complevel-9/":
+https://www.doomworld.com/forum/topic/89728-ancient-aliens-proofs-complevel-9/:
   additional_info:
-    wad: aaliens
-  id: "89728"
+    wad: https://www.dsdarchive.com/wads/aaliens
+  id: '89728'
   name: Ancient Aliens proofs [-complevel 9]
-"https://www.doomworld.com/forum/topic/90252-urania-demos-complevel-4/":
+https://www.doomworld.com/forum/topic/90252-urania-demos-complevel-4/:
   additional_info:
-    wad: urania
-  id: "90252"
+    wad: https://www.dsdarchive.com/wads/urania
+  id: '90252'
   name: Urania demos [-complevel 4]
-"https://www.doomworld.com/forum/topic/90831-helldoom-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/90831-helldoom-demos-complevel-2/:
   additional_info:
-    wad: helldoom
-  id: "90831"
+    wad: https://www.dsdarchive.com/wads/helldoom
+  id: '90831'
   name: Helldoom demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/90995-tht-threnody-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/90995-tht-threnody-demos-complevel-9/:
   additional_info:
-    wad: thtthren
-  id: "90995"
-  name: "THT: Threnody demos [-complevel 9]"
-"https://www.doomworld.com/forum/topic/91297-the-journey-demos-complevel-2/":
+    wad: https://www.dsdarchive.com/wads/thtthren
+  id: '90995'
+  name: 'THT: Threnody demos [-complevel 9]'
+https://www.doomworld.com/forum/topic/91297-the-journey-demos-complevel-2/:
   additional_info:
-    wad: tj
-  id: "91297"
+    wad: https://www.dsdarchive.com/wads/tj
+  id: '91297'
   name: The Journey demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/91343-dark-tartarus-demos/":
+https://www.doomworld.com/forum/topic/91343-dark-tartarus-demos/:
   additional_info:
-    wad: tartaru5
-  id: "91343"
+    wad: https://www.dsdarchive.com/wads/tartaru5
+  id: '91343'
   name: Dark tartarus demos
-"https://www.doomworld.com/forum/topic/91848-echelon-demos-zdoom/":
+https://www.doomworld.com/forum/topic/91848-echelon-demos-zdoom/:
   additional_info:
-    wad: echelon
-  id: "91848"
+    wad: https://www.dsdarchive.com/wads/echelon
+  id: '91848'
   name: Echelon demos [ZDoom]
-"https://www.doomworld.com/forum/topic/91937-japanese-community-project-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/91937-japanese-community-project-demos-complevel-2/:
   additional_info:
-    wad: jpcp
-  id: "91937"
+    wad: https://www.dsdarchive.com/wads/jpcp
+  id: '91937'
   name: Japanese Community Project demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/91959-killing-adventure-2-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/91959-killing-adventure-2-demos-complevel-9/:
   additional_info:
-    wad: killadv2
-  id: "91959"
+    wad: https://www.dsdarchive.com/wads/killadv2
+  id: '91959'
   name: Killing Adventure 2 demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/92784-no-end-in-sight-demos-complevel-3/":
+https://www.doomworld.com/forum/topic/92784-no-end-in-sight-demos-complevel-3/:
   additional_info:
-    wad: neis
-  id: "92784"
+    wad: https://www.dsdarchive.com/wads/neis
+  id: '92784'
   name: No End In Sight demos [-complevel 3]
-"https://www.doomworld.com/forum/topic/93157-ludicrium-demos/":
+https://www.doomworld.com/forum/topic/93157-ludicrium-demos/:
   additional_info:
-    wad: ludicrm
-  id: "93157"
+    wad: https://www.dsdarchive.com/wads/ludicrm
+  id: '93157'
   name: Ludicrium Demos
-"https://www.doomworld.com/forum/topic/93777-ngmvmt2-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/93777-ngmvmt2-demos-complevel-9/:
   additional_info:
-    wad: ngmvmt2
-  id: "93777"
+    wad: https://www.dsdarchive.com/wads/ngmvmt2
+  id: '93777'
   name: ngmvmt2 demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/94088-50-monsters-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/94088-50-monsters-demos-complevel-2/:
   additional_info:
-    wad: 50monstr
-  id: "94088"
+    wad: https://www.dsdarchive.com/wads/50monstr
+  id: '94088'
   name: 50 Monsters demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/94236-3-heures-dagonie-3-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/94236-3-heures-dagonie-3-demos-complevel-2/:
   additional_info:
-    wad: 3ha3
-  id: "94236"
-  name: "3 Heures d'agonie 3 demos [-complevel 2]"
-"https://www.doomworld.com/forum/topic/94486-disjunction-demos-complevel-9/":
+    wad: https://www.dsdarchive.com/wads/3ha3
+  id: '94236'
+  name: 3 Heures d'agonie 3 demos [-complevel 2]
+https://www.doomworld.com/forum/topic/94486-disjunction-demos-complevel-9/:
   additional_info:
-    wad: disjunct
-  id: "94486"
+    wad: https://www.dsdarchive.com/wads/disjunct
+  id: '94486'
   name: Disjunction demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/94963-tntr-demos-complevel-4/":
+https://www.doomworld.com/forum/topic/94963-tntr-demos-complevel-4/:
   additional_info:
-    wad: tntr
-  id: "94963"
+    wad: https://www.dsdarchive.com/wads/tntr
+  id: '94963'
   name: TNTR demos [-complevel 4]
-"https://www.doomworld.com/forum/topic/95228-experiencing-nirvana-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/96954-dimensions-demos-complevel-9/:
   additional_info:
-    wad: enirvana
-  id: "95228"
-  name: Experiencing Nirvana demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/96954-dimensions-demos-complevel-9/":
-  additional_info:
-    wad: dmnsns
-  id: "96954"
+    wad: https://www.dsdarchive.com/wads/dmnsns
+  id: '96954'
   name: Dimensions demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/97057-300-minutes-of-vr-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/97057-300-minutes-of-vr-demos-complevel-2/:
   additional_info:
-    wad: 200minvr
-  id: "97057"
+    wad: https://www.dsdarchive.com/wads/300minvr
+  id: '97057'
   name: 300 minutes of /vr/ demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/97058-moonblood-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/97058-moonblood-demos-complevel-9/:
   additional_info:
-    wad: moonbld
-  id: "97058"
+    wad: https://www.dsdarchive.com/wads/moonbld
+  id: '97058'
   name: Moonblood demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/97080-2002ado-demos-complevel-3/":
+https://www.doomworld.com/forum/topic/97080-2002ado-demos-complevel-3/:
   additional_info:
-    wad: 2002ado
-  id: "97080"
+    wad: https://www.dsdarchive.com/wads/2002ado
+  id: '97080'
   name: 2002ADO demos [-complevel 3]
-"https://www.doomworld.com/forum/topic/97801-mystery-1-demos-complevel-9/":
+https://www.doomworld.com/forum/topic/97801-mystery-1-demos-complevel-9/:
   additional_info:
-    wad: mystery1
-  id: "97801"
+    wad: https://www.dsdarchive.com/wads/mystery1
+  id: '97801'
   name: Mystery 1 demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/":
+https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
   additional_info:
-    wad: hell2pay
-  id: "98794"
+    wad: https://www.dsdarchive.com/wads/hell2pay
+  id: '98794'
   name: Hell to Pay demos [-complevel 2]
 "https://www.doomworld.com/forum/topic/98924-tangerine-nightmare-demos-complevel-2/":
   additional_info:
-    wad: tn
-  id: "98924"
+    wad: https://www.dsdarchive.com/wads/tn
+  id: '98924'
   name: Tangerine Nightmare Demos (-Complevel 2)
 "https://www.doomworld.com/forum/topic/98933-ngmvmt1-demos-complevel-9/":
   additional_info:
-    wad: ngmvmt1
-  id: "98933"
+    wad: https://www.dsdarchive.com/wads/ngmvmt1
+  id: '98933'
   name: ngmvmt1 demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/112725-nova-iii-demos-complevel-9/":
+"https://www.doomworld.com/forum/topic/119699-bourgeois-megawad-complevel-2/":
   additional_info:
-    wad: nova3
-  id: "112725"
-  name: NOVA III Demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/112922-flotsam-demos-complevel-9/":
+    wad: https://www.dsdarchive.com/wads/bourgdm
+  id: '119699'
+  name: Bourgeois Megawad [-complevel 2]
+"https://www.doomworld.com/forum/topic/122131-micro-slaughter-community-project-demos-complevel-9/":
   additional_info:
-    wad: flotsam
-  id: "112922"
-  name: Flotsam demos [complevel 9]
-"https://www.doomworld.com/forum/topic/114802-akeldama-demos-complevel-2/":
+    wad: https://www.dsdarchive.com/wads/mscp_v1a
+  id: '122131'
+  name: Micro Slaughter Community Project demos [-complevel 9]
+"https://www.doomworld.com/forum/topic/123192-doom-ii-25-years-on-earth-one-year-late-edition-complevel-2/":
   additional_info:
-    wad: akeldama
-  id: "114802"
-  name: Akeldama demos [-complevel 2]
-"https://www.doomworld.com/forum/topic/116595-1000-lines-2-community-project-demos-complevel-2/":
+    wad: https://www.dsdarchive.com/wads/ph_25yoe
+  id: '123192'
+  name: "Doom II: 25 Years on Earth (One Year Late Edition) [-complevel 2]"
+"https://www.doomworld.com/forum/topic/118660-nosp2-demos-cl-9/":
   additional_info:
-    wad: 1klinecp2
-  id: "116595"
-  name: 1000 Lines 2 Community Project demos [-complevel 2]
+    wad: https://www.dsdarchive.com/wads/nosp2
+  id: '118660'
+  name: "NoSp2 Demos -Cl 9"
+"https://www.doomworld.com/forum/topic/123590-zone-400-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/zone400
+  id: '123590'
+  name: "Zone 400 demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/123072-gottagofast-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ggfast01
+  id: '123072'
+  name: "GottaGoFast Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/124136-lost-civilization-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/joi_lstcv15
+  id: '124136'
+  name: "Lost Civilization [-complevel 9]"
+"https://www.doomworld.com/forum/topic/121571-project-unity-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/projectunity
+  id: '121571'
+  name: "Project Unity demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/119367-this-suxx-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/thissuxx
+  id: '119367'
+  name: "This SUXX demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/118467-deathless-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/deathless
+  id: '118467'
+  name: "Deathless demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/37458-new-vile-flesh-demos/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/vile
+  id: '37458'
+  name: "New Vile Flesh demos"
+"https://www.doomworld.com/forum/topic/121163-sargasso-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/sargasso
+  id: '121163'
+  name: "Sargasso demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/121408-tenth-gear-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/tenthgear
+  id: '121408'
+  name: "Tenth Gear [-complevel 9]"
+"https://www.doomworld.com/forum/topic/120954-running-late-2-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/rl2
+  id: '120954'
+  name: "Running Late 2 Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/48482-mapgame-demos/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/mapgame
+  id: '48482'
+  name: "Mapgame demos"
+"https://www.doomworld.com/forum/topic/120959-syringe-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/syringe
+  id: '120959'
+  name: "Syringe demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/117817-180-minutes-pour-vivre-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/180mpv
+  id: '117817'
+  name: "180 Minutes Pour Vivre demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/31526-crimson-canyon-demos/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/crmsn37
+  id: '31526'
+  name: "Crimson Canyon demos"
+"https://www.doomworld.com/forum/topic/19394-mock2-demos/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/mock2
+  id: '19394'
+  name: "Mock2 demos"
+"https://www.doomworld.com/forum/topic/122628-plutonia-7-demos-complevel-7-i-mean-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/plut7
+  id: '122628'
+  name: "Plutonia 7+ demos [complevel -7, I mean 9]"
+"https://www.doomworld.com/forum/topic/124883-sol-ank-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/solank
+  id: '124883'
+  name: "Sol Ank demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/125138-axolotl-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/axolotl
+  id: '125138'
+  name: "Axolotl Demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/125345-donuts-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/donuts
+  id: '125345'
+  name: "Donuts Demos [complevel 9]"
+"https://www.doomworld.com/forum/topic/120870-boaty-mcboatwad-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/boatyboat
+  id: '120870'
+  name: "Boaty McBoatwad demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/24453-endgame-demos/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/endgame
+  id: '24453'
+  name: "Endgame demos"
+"https://www.doomworld.com/forum/topic/123000-full-moon-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/fullmoon
+  id: '123000'
+  name: "Full Moon Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/124095-struggle-antaresian-legacy-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/strg
+  id: '124095'
+  name: "Struggle: Antaresian Legacy demos (-complevel 2)"
+"https://www.doomworld.com/forum/topic/125749-nosp3-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/nosp3
+  id: '125749'
+  name: "NoSp3 Demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/125807-cpd-by-cheesewheel-proofs-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/cpd
+  id: '125807'
+  name: "CPD by Cheesewheel Proofs (complevel 2)"
+"https://www.doomworld.com/forum/topic/118584-h2h-xmas-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/h2h-xmas
+  id: '118584'
+  name: "H2H XMas demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/126158-fractured-worlds-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/fw
+  id: '126158'
+  name: "Fractured Worlds demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/126308-down-the-drain-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/drn
+  id: '126308'
+  name: "Down the Drain Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/126326-dubzzzs-5minute-design-assembly-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/d5da
+  id: '126326'
+  name: "Dubzzz's 5Minute Design Assembly [-complevel 9]"
+"https://www.doomworld.com/forum/topic/126431-ray-mohawk-2-demos-cl2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/mohawks2
+  id: '126431'
+  name: "Ray Mohawk 2 demos [-cl2]"
+"https://www.doomworld.com/forum/topic/126536-1-bad-wad-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/1badwad
+  id: '126536'
+  name: "1 Bad Wad demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/126637-practice-hub-demos-boom-compat-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/practicehub
+  id: '126637'
+  name: "Practice Hub demos [Boom compat, -complevel 9]"
+"https://www.doomworld.com/forum/topic/126762-dark-scythe-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/dscythe
+  id: '126762'
+  name: "Dark Scythe Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/126811-haste-demos-complevel-09/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/haste
+  id: '126811'
+  name: "Haste demos [-complevel 09]"
+"https://www.doomworld.com/forum/topic/128939-christopher-lutzs-inferno-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/inf-lutz
+  id: '128939'
+  name: "Christopher Lutz's Inferno demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/127337-rocky-learned-doom-builder-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/rldb
+  id: '127337'
+  name: 'Rocky "Learned" Doom Builder Demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/127422-cydonia-demos-complevel-4/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/cydonia
+  id: '127422'
+  name: "Cydonia Demos (complevel 4)"
+"https://www.doomworld.com/forum/topic/127598-bijou-doom-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/bijou
+  id: '127598'
+  name: "Bijou Doom Demos [complevel 3]"
+"https://www.doomworld.com/forum/topic/128568-tnt-threevilution-tnt3-demos-iwad-tntwad-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/tntthree
+  id: '128568'
+  name: "TNT: Threevilution (TNT3) demos [-iwad tnt.wad -complevel 9]"
+"https://www.doomworld.com/forum/topic/128676-death-in-excess-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/die_2020
+  id: '128676'
+  name: "Death In Excess Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/128679-lilithpk3-demos-zdoom-281/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/lilith
+  id: '128679'
+  name: "Lilith.pk3 Demos [ZDoom 2.8.1]"
+"https://www.doomworld.com/forum/topic/128697-invasion-uac-demos-zdoom-281/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/iu-part5-zd109c
+  id: '128697'
+  name: "Invasion UAC Demos [ZDoom 2.8.1]"
+"https://www.doomworld.com/forum/topic/128749-200-minutes-of-vr-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/200minvr
+  id: '128749'
+  name: "200 Minutes of /vr/ Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/128826-100-line-massacre-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/100lnm
+  id: '128826'
+  name: "100 Line Massacre Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/128832-dubzzzs-5minute-design-assembly-2-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/d5da2
+  id: '128832'
+  name: "Dubzzz's 5Minute Design Assembly #2 [-complevel 9]"
+"https://www.doomworld.com/forum/topic/128732-lunatic-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/lunatic
+  id: '128732'
+  name: "Lunatic Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/128696-10-sectors-part-2-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/10secto2
+  id: '128696'
+  name: "10 Sectors Part 2 Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/128690-arcade-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/arcade
+  id: '128690'
+  name: "Arcade Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/128692-one-sector-collection-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/1so
+  id: '128692'
+  name: "One Sector Collection [-complevel 9]"
+"https://www.doomworld.com/forum/topic/128727-tnt-resistance-demos-complevel-4/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/tntresist
+  id: '128727'
+  name: "TNT: Resistance Demos [-complevel 4]"
+"https://www.doomworld.com/forum/topic/128722-mutiny-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/mutiny
+  id: '128722'
+  name: "Mutiny Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/128773-1337-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/1337
+  id: '128773'
+  name: "1337 Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/128728-32in24-14-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/32in2414
+  id: '128728'
+  name: "32in24-14 Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/128678-alt-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/alt_2012-12
+  id: '128678'
+  name: "A.L.T. Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/48828-diet-32in24-demos/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/32in24-d
+  id: '48828'
+  name: "Diet 32in24 Demos"
+"https://www.doomworld.com/forum/topic/128729-five-rooms-of-doom-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/5room
+  id: '128729'
+  name: "Five Rooms of Doom [-complevel 9]"
+"https://www.doomworld.com/forum/topic/128780-10-monsters-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/10m
+  id: '128780'
+  name: "10 Monsters demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/128726-good-morning-phobos-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/gmp
+  id: '128726'
+  name: "Good Morning Phobos Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/128693-toilet-of-the-gods-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/totg
+  id: '128693'
+  name: "Toilet of the Gods Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/128725-hell-on-earth-super-tiny-edition-hoe64-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/hoe64
+  id: '128725'
+  name: "Hell on Earth: Super Tiny Edition (hoe64) [-complevel 2]"
+"https://www.doomworld.com/forum/topic/128838-five-minutes-to-kill-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/5min2kil
+  id: '128838'
+  name: "Five Minutes to Kill demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/128839-doom-64-for-doom-ii-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/d64d2
+  id: '128839'
+  name: "Doom 64 for Doom II [-complevel 2]"
+"https://www.doomworld.com/forum/topic/128840-endpoint-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/endpoint
+  id: '128840'
+  name: "Endpoint demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/128841-dark-covenant-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/darkcvnt
+  id: '128841'
+  name: "Dark Covenant demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/128842-cybercontrol-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/cybercon
+  id: '128842'
+  name: "Cybercontrol Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/128843-osiris-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/osiris
+  id: '128843'
+  name: "Osiris demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/128844-the-128-kb-mapping-extravagant-challenge-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/128k_ud
+  id: '128844'
+  name: 'The 128 KB Mapping Extravagant "Challenge" demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/128845-congestion-64-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/64
+  id: '128845'
+  name: 'Congestion 64 demos [-complevel 2]'
+"https://www.doomworld.com/forum/topic/128882-a-lost-world-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/alostworld
+  id: '128882'
+  name: 'A Lost World demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/128964-big-crappy-shit-megawad-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/bcsmw
+  id: '128964'
+  name: 'Big Crappy Shit Megawad demos [-complevel 2]'
+"https://www.doomworld.com/forum/topic/129040-zodiac-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/zodiac
+  id: '129040'
+  name: 'Zodiac demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/129141-judgment-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/judgment
+  id: '129141'
+  name: 'Judgment Demos [-complevel 21]'
+"https://www.doomworld.com/forum/topic/129231-cyberdreams-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/cydreams
+  id: '129231'
+  name: 'Cyberdreams demos [-complevel 2]'
+"https://www.doomworld.com/forum/topic/129232-violence-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/violence
+  id: '129232'
+  name: 'Violence demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/129232-dimensions-of-time-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/dot
+  id: '129232'
+  name: 'Dimensions of Time demos [-complevel 2]'
+"https://www.doomworld.com/forum/topic/129330-fruit-salad-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/fruitsalad
+  id: '129330'
+  name: 'Fruit Salad demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/129320-anomaly-report-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ar_2022
+  id: '129320'
+  name: 'Anomaly Report demos [-complevel 2]'
+"https://www.doomworld.com/forum/topic/129373-confinement-256-vanilla-version-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/conf265v
+  id: '129373'
+  name: 'Confinement 256 (vanilla version) demos [-complevel 2]'
+"https://www.doomworld.com/forum/topic/129374-preacher-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/preacher
+  id: '129374'
+  name: 'Preacher demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/129362-apocaclips-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/apocaclips
+  id: '129362'
+  name: 'Apocaclips demos [-complevel 2]'
+"https://www.doomworld.com/forum/topic/129499-cosmogenesis-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/cosmogenesis
+  id: '129499'
+  name: 'Cosmogenesis demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/129498-cryogenics-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/cryogenics
+  id: '129498'
+  name: 'Cryogenics demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/129506-400-minutes-of-vr-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/400minvr
+  id: '129506'
+  name: '400 minutes of /vr/ demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/129514-pizza-steve-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/pizzas
+  id: '129514'
+  name: 'Pizza Steve demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/129580-elegy-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/elegy
+  id: '129580'
+  name: 'Elegy demos [-complevel 2]'
+"https://www.doomworld.com/forum/topic/129473-poogerswad-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/poogers
+  id: '129473'
+  name: 'POOGERS.wad Demos [-complevel 9]'
+"https://www.doomworld.com/forum/topic/129598-ems-10-monster-pack-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/em10mon
+  id: '129598'
+  name: "E.M.'s 10 Monster Pack demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/129704-hell-ground-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/hg
+  id: '129704'
+  name: "Hell Ground demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/129705-bakers-dozen-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/bd
+  id: '129705'
+  name: "Baker's Dozen demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/129706-tnt-renascence-demos-complevel-4/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/tnt-ren
+  id: '129706'
+  name: "TNT: Renascence demos [-complevel 4]"
+"https://www.doomworld.com/forum/topic/129784-jumpwad-demos-complevel-11/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/jumpwad
+  id: '129784'
+  name: "Jumpwad demos [-complevel 11]"
+"https://www.doomworld.com/forum/topic/129820-project-space-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/psp
+  id: '129820'
+  name: "Project Space demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/129829-enslavement-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/enslave
+  id: '129829'
+  name: "Enslavement [-complevel 2]"
+"https://www.doomworld.com/forum/topic/129831-biotech2-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/biotech2
+  id: '129831'
+  name: "Biotech2 [-complevel 2]"
+"https://www.doomworld.com/forum/topic/129786-v64-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/v64
+  id: '129786'
+  name: "v64 demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/129844-slayer-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/slayer
+  id: '129844'
+  name: "Slayer Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/129851-crusades-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/crusades
+  id: '129851'
+  name: "Crusades demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/129947-dance-on-the-water-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/dotw
+  id: '129947'
+  name: "Dance on the Water demos (-complevel 9)"
+"https://www.doomworld.com/forum/topic/129979-rekkr-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/rekkr
+  id: '129979'
+  name: "Rekkr Demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/130104-slugfest-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/slugfest
+  id: '130104'
+  name: "Slugfest demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/130105-dsnacks-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/dsnacks
+  id: '130105'
+  name: "dsnacks demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/130106-ch-retro-episode-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/retroeps
+  id: '130106'
+  name: "CH Retro Episode demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/130216-the-10x10-project-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/10x10
+  id: '130216'
+  name: "The 10x10 Project demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/130206-xerxesia-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/xerxesia
+  id: '130206'
+  name: "Xerxesia Demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/130330-100wave-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/100wave
+  id: '130330'
+  name: "100wave demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/130292-earth-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/eartg
+  id: '130292'
+  name: "Earth demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/130436-realm-of-demonology-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/rod
+  id: '130436'
+  name: "Realm of Demonology demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/130453-sacrament-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/sacrment
+  id: '130453'
+  name: "Sacrament demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/130492-the-brotherhood-of-ruin-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ruinbros
+  id: '130492'
+  name: "The Brotherhood of Ruin demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/130594-one-bloody-night-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/bldnight
+  id: '130594'
+  name: "One Bloody Night demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/130663-jiffybag-demos-complevel-09/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/jiffybag
+  id: '130663'
+  name: "Jiffybag demos [-complevel 09]"
+"https://www.doomworld.com/forum/topic/130718-the-box-of-a-thousand-demons-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/boa2kd
+  id: '130718'
+  name: "The Box of a Thousand Demons demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/130858-100-minutes-of-vr-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/100minvr
+  id: '130858'
+  name: "100 Minutes of /vr/ demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/130927-32-in-64kb-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/32in64k
+  id: '130927'
+  name: "32 in 64kb demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/130950-30minmap-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/30minmap
+  id: '130950'
+  name: "30minmap demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/130948-40-minuter-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/40minutr
+  id: '130948'
+  name: "40 minuter demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/131004-plutonia-revisited-2-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/prcp2
+  id: '131004'
+  name: "Plutonia Revisited 2 (-complevel 9)"
+"https://www.doomworld.com/forum/topic/131352-capybara-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/capybara
+  id: '131352'
+  name: "Capybara demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/131085-nosp-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/nosp
+  id: '131085'
+  name: "NoSp demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/131022-hffm-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/hardfunv4
+  id: '131022'
+  name: "HFFM demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/131363-overboard-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/overboard
+  id: '131363'
+  name: "Overboard Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/131045-arrival-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/arrival
+  id: '131045'
+  name: "Arrival demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/131846-bytesize-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/bytesize
+  id: '131846'
+  name: "BYTESIZE [-complevel 9]"
+"https://www.doomworld.com/forum/topic/131987-diy-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/diy
+  id: '131987'
+  name: "DIY demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/132135-stickney-installation-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/stickney
+  id: '132135'
+  name: "Stickney Installation demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/132357-ozonia-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ozonia
+  id: '132357'
+  name: "Ozonia demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/132358-2022-a-doom-odyssey-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/2022ado
+  id: '132358'
+  name: "2022: A Doom Odyssey demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/132359-heartland-demos-eternity-engine/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/heartland
+  id: '132359'
+  name: "Heartland demos [Eternity Engine]"
+"https://www.doomworld.com/forum/topic/132384-yum-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/yum
+  id: '132384'
+  name: "YUM demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/132456-mbos-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/mbos
+  id: '132456'
+  name: "MBOS demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/132587-thirty-monsters-challenge-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/30mc
+  id: '132587'
+  name: "Thirty Monsters Challenge demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/132656-nostalgia-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/nostalgia
+  id: '132656'
+  name: "Nostalgia demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/132716-512-linedefs-of-vr-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/512linesvr
+  id: '132716'
+  name: "512 Linedefs of /vr/ demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/132903-atonement-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/atone
+  id: '132903'
+  name: "Atonement demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/133037-the-lost-magic-demos-cl-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/tlm
+  id: '133037'
+  name: "The Lost Magic demos (cl 9)"
+"https://www.doomworld.com/forum/topic/133130-200-line-massacre-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/200lnm
+  id: '133130'
+  name: "200 Line Massacre demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/133134-pocket-slaughter-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/pckslgt-v2
+  id: '133134'
+  name: "Pocket Slaughter demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/133287-junkfoodwad-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/junkfood
+  id: '133287'
+  name: "Junkfood.wad Demos [-complevel 9)"
+"https://www.doomworld.com/forum/topic/133301-blueage-demos-blueagefwad-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/blueagef
+  id: '133301'
+  name: "BlueAge Demos (blueagef.wad) -complevel 2"
+"https://www.doomworld.com/forum/topic/133348-balls-of-steel-community-project-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/boscp
+  id: '133348'
+  name: "Balls of Steel Community Project demos (-complevel 21)"
+"https://www.doomworld.com/forum/topic/133365-unrattled-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/unrattled
+  id: '133365'
+  name: "UNRATTLED demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/133615-disorder-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/disorder
+  id: '133615'
+  name: "Disorder demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/107741-shallow-world-episode-1-v11-update-idgames/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/shallowwe1
+  id: '133562'
+  name: "Shallow World Episode 1 demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/133654-antaresian-reliquary-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/anta_req
+  id: '133654'
+  name: "Antaresian Reliquary demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/133813-machete-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/machetefinal
+  id: '133813'
+  name: "Machete demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/133562-shallow-world-episode-1-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/shallowwe1
+  id: '133562'
+  name: "Shallow World Episode 1 demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/134101-aikas-9-speedmaps-demos-cl9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/aika9
+  id: '134101'
+  name: "Aika's 9 Speedmaps demos [-cl9]"
+"https://www.doomworld.com/forum/topic/134167-the-summer-of-slaughter-demos-complevel-9-and-gzdoom/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/puss10sos
+  id: '134167'
+  name: "The Summer of Slaughter demos [-complevel 9 and GZDoom]"
+"https://www.doomworld.com/forum/topic/134326-hardfest-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/hardfest
+  id: '134326'
+  name: "Hardfest demos (complevel 9}"
+"https://www.doomworld.com/forum/topic/134353-disarray-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/disarray
+  id: '134353'
+  name: "Disarray demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/134546-skirmish-pvm-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/skirmish_pvm
+  id: '134546'
+  name: "Skirmish PvM Demos [Complevel 9]"
+"https://www.doomworld.com/forum/topic/134593-rage-doom-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/rage20
+  id: '134593'
+  name: "Rage Doom demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/134607-puss-xx-hell-yeah-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/puss20-hy
+  id: '134607'
+  name: "PUSS XX HELL YEAH! demos (-complevel 9)"
+"https://www.doomworld.com/forum/topic/134762-the-magenta-spire-demos-complevel-11/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/magspire
+  id: '134762'
+  name: "The Magenta Spire demos [-complevel 11]"
+"https://www.doomworld.com/forum/topic/134724-hopscotch-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/hopscotch
+  id: '134724'
+  name: "Hopscotch demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/134774-cringe-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/cringe6
+  id: '134774'
+  name: "Cringe! demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/134820-temporal-tantrum-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/temp_tantrum
+  id: '134820'
+  name: "Temporal Tantrum demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/134856-puss-ix-mapping-at-warpspeed-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/pussix-warp
+  id: '134856'
+  name: "PUSS IX: Mapping at Warpspeed demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/134922-the-talosian-incident-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/talosian
+  id: '134922'
+  name: "The Talosian Incident demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/117714-three-is-a-crowd-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/3iac
+  id: '117714'
+  name: "Three Is A Crowd demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/135017-dubzzzs-5minute-design-assembly-3-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/d5da3
+  id: '135017'
+  name: "Dubzzz's 5Minute Design Assembly #3 Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/135072-okuplok-slaughter-map-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/oku2v31
+  id: '135072'
+  name: "Okuplok Slaughter Map Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/135176-i-hate-slaughter-demonstrations-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/h8slaught
+  id: '135176'
+  name: "I Hate Slaughter Demonstrations [-complevel 21]"
+"https://www.doomworld.com/forum/topic/135161-doomium-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/dmium
+  id: '135161'
+  name: "Doomium demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/135428-sepia-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/sepia
+  id: '135428'
+  name: "Sepia Demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/135575-goodwad-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/goodwad
+  id: '135575'
+  name: "GOODWAD demos [complevel 21]"
+"https://www.doomworld.com/forum/topic/135516-autophagy-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/autophagy
+  id: '135516'
+  name: "Autophagy demos [-complevel 2}"
+"https://www.doomworld.com/forum/topic/135801-ode2impslayer-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ode2impslayr
+  id: '135801'
+  name: "Ode2ImpSlayer demos [complevel 9]"
+"https://www.doomworld.com/forum/topic/136246-demonic-deviation-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ddev
+  id: '136246'
+  name: "Demonic Deviation demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/136309-abandon-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/abandon
+  id: '136309'
+  name: "Abandon Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/136461-abscission-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/abscission
+  id: '136461'
+  name: "Abscission Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/136551-the-quest-for-necronomicon-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/quest12
+  id: '136551'
+  name: "The Quest for Necronomicon demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/136822-hyperspeed-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/hyperspeed
+  id: '136822'
+  name: "HyperSpeed demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/137438-doom-2-the-way-we-remember-it-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/d2twwri
+  id: '137438'
+  name: "Doom 2: The Way We Remember It demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/137439-czechbox-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/czechbox
+  id: '137439'
+  name: "Czechbox demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/137440-phouse-the-great-arena-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/phtga
+  id: '137440'
+  name: "Phouse: The Great Arena demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/137659-the-spawnsqwad-2000-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/spwnsq2k
+  id: '137659'
+  name: "The SpawnSQwad 2000 demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/137687-dum-dum-thoughts-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/thoughts
+  id: '137687'
+  name: "Dum-Dum Thoughts Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/138562-congestion-192-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/cngst192
+  id: '138562'
+  name: "Congestion 192 demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/138800-literalism-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/literalism
+  id: '138800'
+  name: "Literalism demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/139208-junk-food-2-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/junkfood2
+  id: '139208'
+  name: "Junk Food 2 Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/139424-oops-all-techbase-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/oatb
+  id: '139424'
+  name: "OOPS: All Techbase demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/139825-final-fantasy-doom-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ffdoom2
+  id: '139825'
+  name: "Final Fantasy Doom demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/139827-10-sectors-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/10sector
+  id: '139827'
+  name: "10 Sectors demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/139933-puss-xxiv-lovers-quarrel-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/lvrsqrrl
+  id: '139933'
+  name: "PUSS XXIV: Lover's Quarrel [-complevel 2]"
+"https://www.doomworld.com/forum/topic/140157-i-cant-give-you-any-thing-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/icgya
+  id: '140157'
+  name: "I CANT GIVE YOU ANY THING demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/140167-ichinichi-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ichinichi
+  id: '140167'
+  name: "Ichinichi demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/140169-afternoon-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/afternoon
+  id: '140169'
+  name: "Afternoon demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/140251-doom-iiii-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/doomiiii
+  id: '140251'
+  name: "Doom IIII demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/140341-1x1-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/1x1
+  id: '140341'
+  name: "1x1 demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/140428-doomed-by-the-hour-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/bythehour
+  id: '140428'
+  name: "Doomed: By the Hour demos (-complevel 9)"
+"https://www.doomworld.com/forum/topic/140987-the-delirium-dimension-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/tdd
+  id: '140987'
+  name: "The Delirium Dimension demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/141012-nostalgia-2-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/nost2
+  id: '141012'
+  name: "Nostalgia 2 Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/141017-phobos-revisited-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/phobos-v
+  id: '141017'
+  name: "Phobos Revisited demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/141044-ultimate-doom-the-way-id-did-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/udtwid
+  id: '141044'
+  name: "Ultimate Doom the Way id Did demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/141146-60-minute-marathon-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/60mm
+  id: '141146'
+  name: "60 Minute Marathon Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/141139-obzen-demos-complevel-4/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/obzen
+  id: '141139'
+  name: "OBZEN demos [-complevel 4]"
+"https://www.doomworld.com/forum/topic/141278-what-lies-beneath-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/whatlies
+  id: '141278'
+  name: "What Lies Beneath demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/141300-pina-colada-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/pinacola
+  id: '141300'
+  name: "Pina Colada Demos [complevel -9]"
+"https://www.doomworld.com/forum/topic/141569-knee-deep-in-kdizd-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/kdikdizd
+  id: '141569'
+  name: "Knee Deep in KDiZD Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/131399-crescent-wars-demos-complevel-09/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/crescent_2022
+  id: '131399'
+  name: "CRESCENT WARS DEMOS [-complevel 09]"
+"https://www.doomworld.com/forum/topic/142447-chex-quest-the-penultimate-breakfast-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/chextpb
+  id: '142447'
+  name: "Chex Quest: The Penultimate Breakfast demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/142539-pacifist-paradise-secret-santa-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ppss
+  id: '142539'
+  name: "Pacifist Paradise Secret Santa [-complevel 9]"
+"https://www.doomworld.com/forum/topic/142666-flesharmonic-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/fhc
+  id: '142666'
+  name: "Flesharmonic demos [ -complevel 2 ]"
+"https://www.doomworld.com/forum/topic/142824-not-even-remotely-fair-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/nerf
+  id: '142824'
+  name: "Not Even Remotely Fair demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/142940-mewo-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/mewo
+  id: '142940'
+  name: "MeWo Demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/143873-hardfest-2-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/hardfest2
+  id: '143873'
+  name: "Hardfest 2 demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/145165-rosy-rubicunda-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/rr_final
+  id: '145165'
+  name: "Rosy Rubicunda demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/145153-the-quinary-conundrum-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/tqc
+  id: '145153'
+  name: "The Quinary Conundrum demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/145095-realm-of-chaos-25th-anniversary-edition-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/roc25
+  id: '145095'
+  name: "Realm of Chaos: 25th Anniversary Edition demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/145339-junkfood-3-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/junkfood3
+  id: '145339'
+  name: "Junkfood 3 demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/145347-doom-2-in-city-only-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/d2ico
+  id: '145347'
+  name: "Doom 2 In City Only demos (-complevel 21)"
+"https://www.doomworld.com/forum/topic/145398-crate-expectations-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/crate_escape
+  id: '145398'
+  name: "Crate Expectations demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/145399-thirty-years-with-doom-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/30years
+  id: '145399'
+  name: "Thirty Years with Doom demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/145400-deadliest-demolition-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/demolit
+  id: '145400'
+  name: "Deadliest Dem(o(li)ti)on demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/145401-the-uitimate-doom-in-name-only-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/udino
+  id: '145401'
+  name: "The UItimate Doom In Name Only demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/145402-speed-master-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/spmaster
+  id: '145402'
+  name: "Speed Master demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/145403-jaws-of-destruction-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/jawsofdest
+  id: '145403'
+  name: "Jaws of Destruction demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/145628-maiden-voyage-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/maidenvoy2
+  id: '145628'
+  name: "Maiden Voyage demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/146426-ambrosia-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ambrosia
+  id: '146426'
+  name: "Ambrosia demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/146006-corruption-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/corruption
+  id: '146006'
+  name: "Corruption demos [-complevel 21]"
 
 # Multi-WAD threads
-"https://www.doomworld.com/forum/topic/103041-mayhem-2018-purple-and-orange-demos-complevel-9/":
-  additional_info:
-    wads:
-    - mayhem18o
-    - mayhem18p
-  id: "103041"
-  name: "MAYhem 2018 : Purple and Orange demos (-complevel 9)"
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
   additional_info:
     wads:
-    - cchest
-    - cchest2
-    - cchest3
-    - cchest4
+    - https://www.dsdarchive.com/wads/cchest
+    - https://www.dsdarchive.com/wads/cchest2
+    - https://www.dsdarchive.com/wads/cchest3
+    - https://www.dsdarchive.com/wads/cchest4
   id: "41850"
   name: Community Chest Series Demos [Boom, -complevel 9]
 "https://www.doomworld.com/forum/topic/49909-deus-vult-and-deus-vult-2-demos/":
   additional_info:
     wads:
-    - dv
-    - dvii-1i
+    - https://www.dsdarchive.com/wads/dv
+    - https://www.dsdarchive.com/wads/dvii-1i
   id: "49909"
   name: Deus Vult and Deus Vult 2 demos
 "https://www.doomworld.com/forum/topic/54756-new-marswar-demos-complevel-2/":
   additional_info:
     wads:
-    - marswar
-    - marsw301
+    - https://www.dsdarchive.com/wads/marswar
+    - https://www.dsdarchive.com/wads/marsw301
   id: "54756"
   name: New Marswar demos [-complevel 2]
 "https://www.doomworld.com/forum/topic/55558-final-doom-demos-complevel-4/":
   additional_info:
     wads:
-    - tnt
-    - plutonia
+    - https://www.dsdarchive.com/wads/tnt
+    - https://www.dsdarchive.com/wads/plutonia
   id: "55558"
   name: Final DOOM demos [-complevel 4]
 "https://www.doomworld.com/forum/topic/56158-twilight-zone-1-amp-2-demos-complevel-2/":
   additional_info:
     wads:
-    - twzone
-    - twzone2
-    - twzonev2
+    - https://www.dsdarchive.com/wads/twzone
+    - https://www.dsdarchive.com/wads/twzone2
+    - https://www.dsdarchive.com/wads/twzone_1998
   id: "56158"
   name: Twilight Zone 1 & 2 demos [-complevel 2]
 "https://www.doomworld.com/forum/topic/65028-real-world-1-amp-2-demos-complevel-2/":
   additional_info:
     wads:
-    - rw
-    - rw2
+    - https://www.dsdarchive.com/wads/rw
+    - https://www.dsdarchive.com/wads/rw2
   id: "65028"
   name: Real World 1 & 2 demos [-complevel 2]
 "https://www.doomworld.com/forum/topic/65448-100lines-demos-complevel-9/":
   additional_info:
     wads:
-    - 100linen
-    - 100linet
+    - https://www.dsdarchive.com/wads/100linen
+    - https://www.dsdarchive.com/wads/100linet
   id: "65448"
   name: 100Lines Demos [-complevel 9]
 "https://www.doomworld.com/forum/topic/72445-valiant-sawdust-demos-complevel-11/":
   additional_info:
     wads:
-    - valiant
-    - sawedust
+    - https://www.dsdarchive.com/wads/valiant
+    - https://www.dsdarchive.com/wads/sawdust
   id: "72445"
   name: Valiant + Sawdust demos [-complevel 11]
 "https://www.doomworld.com/forum/topic/74096-sunlust-summer-of-69-demos-complevel-9/":
   additional_info:
     wads:
-    - sunlust
-    - summer69
+    - https://www.dsdarchive.com/wads/sunlust
+    - https://www.dsdarchive.com/wads/summer69
   id: "74096"
   name: "Sunlust + Summer of '69 demos [-complevel 9]"
 "https://www.doomworld.com/forum/topic/93102-back-to-saturn-x-demos-complevel-2/":
   additional_info:
     wads:
-    - btsx_e1_2017
+    - https://www.dsdarchive.com/wads/btsx_e1
   id: "93102"
   name: Back to Saturn X demos [-complevel 2]
 "https://www.doomworld.com/forum/topic/99313-return-to-hadron-demos-complevel-3/":
   additional_info:
     wads:
-    - hadron
-    - hadrone2
+    - https://www.dsdarchive.com/wads/hadron
+    - https://www.dsdarchive.com/wads/hadrone2
+    - https://www.dsdarchive.com/wads/hadrone3
   id: "99313"
   name: Return to Hadron demos [-complevel 3]
 "https://www.doomworld.com/forum/topic/117036-64-kb-challenge-demos-complevel-2/":
   additional_info:
     wads:
-    - 32of64-v
-    - 32of64-lr
+    - https://www.dsdarchive.com/wads/32of64-v
+    - https://www.dsdarchive.com/wads/32of64-lr
   id: "117036"
   name: 64 KB Challenge Demos [-complevel 2]
+"https://www.doomworld.com/forum/topic/53786-fffart-demos-boom-complevel-9/":
+  additional_info:
+    wads:
+    - https://www.dsdarchive.com/wads/fffart01
+    - https://www.dsdarchive.com/wads/fffart02
+    - https://www.dsdarchive.com/wads/fffart03
+  id: "53786"
+  name: fffart demos (Boom, -complevel 9)
+"https://www.doomworld.com/forum/topic/97486-newdoom-community-project-ndcpndcp2-demos/":
+  additional_info:
+    wads:
+    - https://www.dsdarchive.com/wads/ndcp
+    - https://www.dsdarchive.com/wads/ndcp2_2010
+  id: '97486'
+  name: "NewDoom Community Project (NDCP/NDCP2) demos"
+"https://www.doomworld.com/forum/topic/123785-sucker-punch-series-complevel-9/":
+  additional_info:
+    wads:
+    - https://www.dsdarchive.com/wads/sckrpnch
+    - https://www.dsdarchive.com/wads/sckrpnch2
+  id: '123785'
+  name: "Sucker Punch series [-cl2/-cl9]"
+"https://www.doomworld.com/forum/topic/122868-half-moon-1-2-demos-complevel-9/":
+  additional_info:
+    wads:
+    - https://www.dsdarchive.com/wads/halfmoon1
+    - https://www.dsdarchive.com/wads/halfmoon2
+  id: '122868'
+  name: "Half Moon 1 & 2 demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/117894-2048-units-of-vr-demos-complevel-9-clean-complevel-11-dehacked/":
+  additional_info:
+    wads:
+    - https://www.dsdarchive.com/wads/2048vr_v1_6
+    - https://www.dsdarchive.com/wads/2048vr_v1_6g
+    - https://www.dsdarchive.com/wads/2048ex_v1_4
+  id: '117894'
+  name: "2048 Units of /vr/ demos [-complevel 9 (clean) -complevel 11 (dehacked)]"
+"https://www.doomworld.com/forum/topic/95228-experiencing-nirvana-demos-complevel-9/":
+  additional_info:
+    wads:
+    - https://www.dsdarchive.com/wads/enirvana
+    - https://www.dsdarchive.com/wads/btnx_e1
+  id: '95228'
+  name: Experiencing Nirvana demos [-complevel 9]
+"https://www.doomworld.com/forum/topic/56037-5-minute-map-megawad-demos-clvl-9/":
+  additional_info:
+    wads:
+    - https://www.dsdarchive.com/wads/5minmap
+    - https://www.dsdarchive.com/wads/5mnmayh
+  id: '56037'
+  name: 5 minute map megawad demos -clvl 9
+"https://www.doomworld.com/forum/topic/126248-1000-lines-series-megathread-complevel-2/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/1klinecp
+      - https://www.dsdarchive.com/wads/1klinecp2
+      - https://www.dsdarchive.com/wads/1klinecp3
+  id: '126248'
+  name: 1000 Lines Series Megathread [-complevel 2]
+"https://www.doomworld.com/forum/topic/108513-dyingcamels-demons-demos/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/dyincam1
+      - https://www.dsdarchive.com/wads/dyincam2
+      - https://www.dsdarchive.com/wads/dyincam3
+  id: '108513'
+  name: "DyingCamel's Demons demos"
+"https://www.doomworld.com/forum/topic/128680-3x3-and-take-two-demos-complevel-9/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/3x3
+      - https://www.dsdarchive.com/wads/3x3ttwo
+  id: '128680'
+  name: "3x3 (and Take Two) Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/128795-combat-shock-combat-shock-2-demos-complevel-9/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/c-shock
+      - https://www.dsdarchive.com/wads/c-shock2
+  id: '128795'
+  name: "Combat Shock + Combat Shock 2 demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/128875-cleimos-and-cleimos-2-demos-complevel-2/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/cleim10
+      - https://www.dsdarchive.com/wads/cleim20
+  id: '128875'
+  name: "Cleimos and Cleimos 2 demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/129264-the-darkening-demos-both-episodes-complevel-2/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/darken
+      - https://www.dsdarchive.com/wads/darken2
+  id: '129264'
+  name: "The Darkening Demos (both episodes) [-complevel 2]"
+"https://www.doomworld.com/forum/topic/73086-chex-quest-series-demos-complevel-3/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/chex
+      - https://www.dsdarchive.com/wads/chex2
+      - https://www.dsdarchive.com/wads/chex3
+  id: '73086'
+  name: Chex Quest series demos [-complevel 3]
+"https://www.doomworld.com/forum/topic/70835-switcheroom-and-switcheroom-2-demos-complevel-3-and-2/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/swtchrm
+      - https://www.dsdarchive.com/wads/swtchrm2
+  id: '70835'
+  name: Switcheroom and Switcheroom 2 demos [-complevel 3 and 2]
+"https://www.doomworld.com/forum/topic/130247-the-classic-episode-1-2-demos-complevel-3/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/class_ep
+      - https://www.dsdarchive.com/wads/class_e2
+  id: '130247'
+  name: The Classic Episode 1 + 2 demos [-complevel 3]
+"https://www.doomworld.com/forum/topic/100975-sparta-and-sparta-ii-project-vesuvius-demos-complevel-2-9/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/sparta
+      - https://www.dsdarchive.com/wads/s2pv
+  id: '100975'
+  name: Sparta and Sparta II - Project Vesuvius demos [-complevel 2 9]
+"https://www.doomworld.com/forum/topic/130293-death-tormention-trilogy-demos-complevel-3-and-9/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/pe4m_all
+      - https://www.dsdarchive.com/wads/pe4_dt2
+      - https://www.dsdarchive.com/wads/pe4_dt3
+      - https://www.dsdarchive.com/wads/dtpack
+  id: '130293'
+  name: Death Tormention Trilogy demos [-complevel 3 and 9]
+"https://www.doomworld.com/forum/topic/35633-revolution-demos-complevel-2/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/tvr
+      - https://www.dsdarchive.com/wads/tvrmidi
+  id: '35633'
+  name: Revolution! demos [-complevel 2]
+"https://www.doomworld.com/forum/topic/130493-scientist-scientist-2-demos-complevel-2/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/sci
+      - https://www.dsdarchive.com/wads/sci2
+  id: '130493'
+  name: Scientist + Scientist 2 demos [-complevel 2]
+"https://www.doomworld.com/forum/topic/131773-stardate-20x6-20x7-demos-complevel-9/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/stardate
+      - https://www.dsdarchive.com/wads/sd20x7
+  id: '131773'
+  name: Stardate 20x6 + 20x7 demos [-complevel 9]
+"https://www.doomworld.com/forum/topic/131774-frog-toad-frog-and-toad-demos-complevel-9/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/frog
+      - https://www.dsdarchive.com/wads/toad
+      - https://www.dsdarchive.com/wads/frog_and_toad
+  id: '131774'
+  name: Frog / Toad / Frog and Toad demos [-complevel 9]
+"https://www.doomworld.com/forum/topic/132690-wormwood-series-demos-complevel-9/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/wormwood
+      - https://www.dsdarchive.com/wads/wormwood_eu
+      - https://www.dsdarchive.com/wads/wormwood3
+      - https://www.dsdarchive.com/wads/wormwood4
+      - https://www.dsdarchive.com/wads/wormwood5
+  id: '132690'
+  name: Wormwood Series demos [-complevel 9]
+"https://www.doomworld.com/forum/topic/133477-short-maps-for-short-people-series-demos-complevel-2/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/smfsp2
+      - https://www.dsdarchive.com/wads/smfsp3
+      - https://www.dsdarchive.com/wads/smfsp8
+  id: '133477'
+  name: Short Maps for Short People series demos [-complevel 2]
+https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/mm2
+      - https://www.dsdarchive.com/wads/mm2info
+  id: '55559'
+  name: Memento Mori II  demos [-complevel 2]
+"https://www.doomworld.com/forum/topic/134813-one-hour-mapping-series-demos-complevel-21/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/ohm1
+      - https://www.dsdarchive.com/wads/ohm2
+  id: '134813'
+  name: "One Hour Mapping Series demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/136961-toons-for-doom-2-demos-complevel-2/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/toondm
+      - https://www.dsdarchive.com/wads/toon2b
+  id: '136961'
+  name: "Toons for Doom 2 Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/139117-happy-birthday-kvo-glidancer-demos-complevel-9/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/4kvo
+      - https://www.dsdarchive.com/wads/glidancer
+  id: '139117'
+  name: "Happy Birthday Kvo & Glidancer Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/136803-glaive-series-demos-complevel-2/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/glaive
+      - https://www.dsdarchive.com/wads/glaive2
+      - https://www.dsdarchive.com/wads/warglaive
+      - https://www.dsdarchive.com/wads/glaive3
+  id: '136803'
+  name: "Glaive series demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/137487-grindfest-demos-complevel-21/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/grindfest
+      - https://www.dsdarchive.com/wads/grindfestdlc
+  id: '137487'
+  name: "Grindfest demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/142947-dubzzzs-5-minute-design-assembly-4-demos-complevel-9/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/d5da4a
+      - https://www.dsdarchive.com/wads/d5da4b
+  id: '142947'
+  name: "Dubzzz's 5-Minute Design Assembly #4 Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/145093-10-line-genocide-demos-complevel-9/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/10linee1
+      - https://www.dsdarchive.com/wads/10linee2
+      - https://www.dsdarchive.com/wads/10linee3
+      - https://www.dsdarchive.com/wads/10linee4
+      - https://www.dsdarchive.com/wads/10linee5
+  id: '145093'
+  name: "10 Line Genocide demos [-complevel 9]"
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
@@ -915,12 +2207,12 @@
   name: -solo-net [1-player coop] demos
 "https://www.doomworld.com/forum/topic/53174-nomonster-speedrunning/":
   additional_info:
-    category: nomo
+    nomonsters: true
   id: "53174"
   name: Nomonster speedrunning
 "https://www.doomworld.com/forum/topic/57060-new-stroller-demos/":
   additional_info:
-    category: stroller
+    category: Stroller
   id: "57060"
   name: New Stroller demos
 
@@ -949,7 +2241,7 @@
   id: "45996"
   name: Eternal TAS demos
   additional_info:
-    wad: eternal
+    wad: https://www.dsdarchive.com/wads/eternal
     tas_only: true
 
 # Other miscellaneous special case threads
@@ -964,33 +2256,494 @@
   additional_info:
     source_port: Mandoom v1.17
     category: Stupid difficulty.
+# Compet-N
+"https://www.doomworld.com/forum/topic/62327-compet-n-incoming-and-discussion-part-2-post-compet-n-entries-here/":
+  id: "62327"
+  name: "Compet-N: incoming and discussion, part 2 [post Compet-N entries here]"
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/doom
+      - https://www.dsdarchive.com/wads/doom2
+      - https://www.dsdarchive.com/wads/plutonia
+      - https://www.dsdarchive.com/wads/tnt
+      - https://www.dsdarchive.com/wads/av
+      - https://www.dsdarchive.com/wads/class_ep
+      - https://www.dsdarchive.com/wads/hr
+      - https://www.dsdarchive.com/wads/mm
+      - https://www.dsdarchive.com/wads/mm2
+      - https://www.dsdarchive.com/wads/requiem
+      - https://www.dsdarchive.com/wads/scythe
 
-### THREADS BELOW ARE LIMITED USE BUT DO NOT HAVE ANY ADDITIONAL INFO SINCE THE USE CASES ARE TOO
-### BROAD
+### THREADS BELOW HAVE MUCH LARGER SCOPE IN WADS CONSIDERED
 # Large WAD Series threads
 "https://www.doomworld.com/forum/topic/72137-kaiser_-series-demos-see-first-post-for-compat/":
   id: "72137"
   name: Kaiser_* series demos [see first post for compat]
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/kaiser_1
+      - https://www.dsdarchive.com/wads/kaiser_2
+      - https://www.dsdarchive.com/wads/kaiser_3
+      - https://www.dsdarchive.com/wads/kaiser_4
+      - https://www.dsdarchive.com/wads/kaiser_5
+      - https://www.dsdarchive.com/wads/kaiser_6
+      - https://www.dsdarchive.com/wads/kaiser_7
+      - https://www.dsdarchive.com/wads/kaiser_8
+      - https://www.dsdarchive.com/wads/kaiser_9
+      - https://www.dsdarchive.com/wads/kaiser_10
+      - https://www.dsdarchive.com/wads/kaiser_11
+      - https://www.dsdarchive.com/wads/kaiser_12
+      - https://www.dsdarchive.com/wads/kaiser_13
+      - https://www.dsdarchive.com/wads/kaiser_14
+      - https://www.dsdarchive.com/wads/kaiser_16
+      - https://www.dsdarchive.com/wads/kaiser_17
+      - https://www.dsdarchive.com/wads/kaiser_18
+      - https://www.dsdarchive.com/wads/kaiser_19
+      - https://www.dsdarchive.com/wads/kaiser_20
+      - https://www.dsdarchive.com/wads/kaiser_21
+      - https://www.dsdarchive.com/wads/kaiser_22
+      - https://www.dsdarchive.com/wads/kaiser_23
+      - https://www.dsdarchive.com/wads/kaiser_28
 "https://www.doomworld.com/forum/topic/72239-abyssal-speedmapping-sessions-series-demos-complevel-9/":
   id: "72239"
   name: Abyssal Speedmapping Sessions series demos [-complevel 9]
-"https://www.doomworld.com/forum/topic/85762-abyssal-speedmapping-sessions-demos-complevel-9/":
-  id: "85762"
-  name: Abyssal Speedmapping Sessions demos [complevel 9]
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/abysped1
+      - https://www.dsdarchive.com/wads/abysped2
+      - https://www.dsdarchive.com/wads/abysped3
+      - https://www.dsdarchive.com/wads/abysped4
+      - https://www.dsdarchive.com/wads/abysped5
+      - https://www.dsdarchive.com/wads/abysped6
+      - https://www.dsdarchive.com/wads/abysped7
+      - https://www.dsdarchive.com/wads/abysped8
+      - https://www.dsdarchive.com/wads/abysped9
+      - https://www.dsdarchive.com/wads/abyspe10
+      - https://www.dsdarchive.com/wads/abyspe11
+      - https://www.dsdarchive.com/wads/abyspe12
+      - https://www.dsdarchive.com/wads/abyspe13
+      - https://www.dsdarchive.com/wads/abyspe14
+      - https://www.dsdarchive.com/wads/abyspe15
+      - https://www.dsdarchive.com/wads/abyspe16
+      - https://www.dsdarchive.com/wads/abyspe17
+      - https://www.dsdarchive.com/wads/abyspe18
+      - https://www.dsdarchive.com/wads/abyspe19
+      - https://www.dsdarchive.com/wads/abyspe20
+      - https://www.dsdarchive.com/wads/abyspe21
+      - https://www.dsdarchive.com/wads/abyspe22
+      - https://www.dsdarchive.com/wads/abyspe23
+      - https://www.dsdarchive.com/wads/abyspe24
+      - https://www.dsdarchive.com/wads/abyspe25
+      - https://www.dsdarchive.com/wads/abyspe26
+      - https://www.dsdarchive.com/wads/abyspe27
+      - https://www.dsdarchive.com/wads/abyspe28
+      - https://www.dsdarchive.com/wads/abyspe29
+      - https://www.dsdarchive.com/wads/abyspe30
+      - https://www.dsdarchive.com/wads/abyspe31
+      - https://www.dsdarchive.com/wads/abyspe32
+      - https://www.dsdarchive.com/wads/abyspe33
+      - https://www.dsdarchive.com/wads/abyspe34
+      - https://www.dsdarchive.com/wads/abyspe35
+      - https://www.dsdarchive.com/wads/abyspe36
+      - https://www.dsdarchive.com/wads/abyspe37
+      - https://www.dsdarchive.com/wads/abyspe38
+      - https://www.dsdarchive.com/wads/abyspe39
+      - https://www.dsdarchive.com/wads/abyspe40
+      - https://www.dsdarchive.com/wads/abyspe41
+      - https://www.dsdarchive.com/wads/abyspe42
+      - https://www.dsdarchive.com/wads/abyspe43
+      - https://www.dsdarchive.com/wads/abyspe44
+      - https://www.dsdarchive.com/wads/abyspe45
+      - https://www.dsdarchive.com/wads/abyspe46
+      - https://www.dsdarchive.com/wads/abyspe47
+      - https://www.dsdarchive.com/wads/abyspe48
+      - https://www.dsdarchive.com/wads/abyspe49
+      - https://www.dsdarchive.com/wads/abyspe50
+      - https://www.dsdarchive.com/wads/abyspe51
+      - https://www.dsdarchive.com/wads/abyspe52
+      - https://www.dsdarchive.com/wads/abyspe53
+      - https://www.dsdarchive.com/wads/abyspe54
+      - https://www.dsdarchive.com/wads/abyspe55
+      - https://www.dsdarchive.com/wads/abyspe56
+      - https://www.dsdarchive.com/wads/abyspe57
+      - https://www.dsdarchive.com/wads/abyspe58
+      - https://www.dsdarchive.com/wads/abyspe59
+      - https://www.dsdarchive.com/wads/abyspe60
+      - https://www.dsdarchive.com/wads/abyspe61
+      - https://www.dsdarchive.com/wads/abyspe62
+      - https://www.dsdarchive.com/wads/abyspe63
+      - https://www.dsdarchive.com/wads/abyspe64
+      - https://www.dsdarchive.com/wads/abyspe65
+      - https://www.dsdarchive.com/wads/abyspe66
+      - https://www.dsdarchive.com/wads/abyspe67
+      - https://www.dsdarchive.com/wads/abyspe68
+      - https://www.dsdarchive.com/wads/abyspe69_1
+      - https://www.dsdarchive.com/wads/abyspe69_2
+      - https://www.dsdarchive.com/wads/abyspe69_3
 "https://www.doomworld.com/forum/topic/92251-doomworld-mega-project-series-demos/":
   id: "92251"
   name: Doomworld Mega Project Series Demos
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/dmp2012
+      - https://www.dsdarchive.com/wads/dmp2013b
+      - https://www.dsdarchive.com/wads/dmp2013l
+      - https://www.dsdarchive.com/wads/dmp2013z
+      - https://www.dsdarchive.com/wads/dmp2014
+      - https://www.dsdarchive.com/wads/dmp2015a
+      - https://www.dsdarchive.com/wads/dmp2015b
+      - https://www.dsdarchive.com/wads/dmp2015c
+      - https://www.dsdarchive.com/wads/dmp2016
+      - https://www.dsdarchive.com/wads/dmp2017
+      - https://www.dsdarchive.com/wads/dmp2018cl2
+      - https://www.dsdarchive.com/wads/dmp2018cl9
+      - https://www.dsdarchive.com/wads/dmp2019
+      - https://www.dsdarchive.com/wads/dmp2021_7soul
+      - https://www.dsdarchive.com/wads/dmp2021_cannonball
+      - https://www.dsdarchive.com/wads/dmp2021_duckreconmajor
+      - https://www.dsdarchive.com/wads/dmp2021_em
+      - https://www.dsdarchive.com/wads/dmp2021_endingghost
+      - https://www.dsdarchive.com/wads/dmp2021_general_roasterock
+      - https://www.dsdarchive.com/wads/dmp2021_midnightmage
+      - https://www.dsdarchive.com/wads/dmp2021_obsidian
+      - https://www.dsdarchive.com/wads/dmp2021_pegleg
+      - https://www.dsdarchive.com/wads/dmp2021_timeofdeath
+"https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/":
+  id: "123364"
+  name: DBP Demo Thread
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/dbp01
+      - https://www.dsdarchive.com/wads/dbp_02
+      - https://www.dsdarchive.com/wads/dbp_03
+      - https://www.dsdarchive.com/wads/dbp_04
+      - https://www.dsdarchive.com/wads/dbp_05
+      - https://www.dsdarchive.com/wads/dbp_06
+      - https://www.dsdarchive.com/wads/dbp7xmas
+      - https://www.dsdarchive.com/wads/dbp8_mbg
+      - https://www.dsdarchive.com/wads/dbp_09
+      - https://www.dsdarchive.com/wads/dbp11
+      - https://www.dsdarchive.com/wads/dbp12
+      - https://www.dsdarchive.com/wads/dbp13
+      - https://www.dsdarchive.com/wads/dbp14atf
+      - https://www.dsdarchive.com/wads/dbp15
+      - https://www.dsdarchive.com/wads/dbp17_alone
+      - https://www.dsdarchive.com/wads/dbp18_up
+      - https://www.dsdarchive.com/wads/dbp20_dnd
+      - https://www.dsdarchive.com/wads/dbp21_rc2
+      - https://www.dsdarchive.com/wads/dbp_23_v2
+      - https://www.dsdarchive.com/wads/dbp24_sb
+      - https://www.dsdarchive.com/wads/dbp25_dbd
+      - https://www.dsdarchive.com/wads/dbp26_tcodc
+      - https://www.dsdarchive.com/wads/dbp27
+      - https://www.dsdarchive.com/wads/dbp_29
+      - https://www.dsdarchive.com/wads/dbp30
+      - https://www.dsdarchive.com/wads/dbp31
+      - https://www.dsdarchive.com/wads/dbp_34
+      - https://www.dsdarchive.com/wads/dbp_35
+      - https://www.dsdarchive.com/wads/dbp36
+      - https://www.dsdarchive.com/wads/dbp37_augzen
+      - https://www.dsdarchive.com/wads/dbp_39
+      - https://www.dsdarchive.com/wads/dbp40rc1
+      - https://www.dsdarchive.com/wads/dbp44rc2-4
+      - https://www.dsdarchive.com/wads/dbp42
+      - https://www.dsdarchive.com/wads/dbp_45
+      - https://www.dsdarchive.com/wads/dbp47
+      - https://www.dsdarchive.com/wads/dbp50
+      - https://www.dsdarchive.com/wads/dbp_51
+      - https://www.dsdarchive.com/wads/dbp_52
+"https://www.doomworld.com/forum/topic/127478-mayhem-demo-thread-complevel-9/":
+  id: "127478"
+  name: MAYhem demo thread [-complevel 9]
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/mayhem12
+      - https://www.dsdarchive.com/wads/mayhem13
+      - https://www.dsdarchive.com/wads/mayhem14
+      - https://www.dsdarchive.com/wads/mayhem15
+      - https://www.dsdarchive.com/wads/mayhem16
+      - https://www.dsdarchive.com/wads/mayhem17
+      - https://www.dsdarchive.com/wads/mayhem18o
+      - https://www.dsdarchive.com/wads/mayhem18p
+      - https://www.dsdarchive.com/wads/mayhem19
+      - https://www.dsdarchive.com/wads/mayhem20
+      - https://www.dsdarchive.com/wads/mayhem22
+"https://www.doomworld.com/forum/topic/128765-doomworld-speedmapping-compilation-demos/":
+  id: "128765"
+  name: Doomworld Speedmapping Compilation Demos
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/dwspd001
+      - https://www.dsdarchive.com/wads/dwspd002
+      - https://www.dsdarchive.com/wads/dwspd003
+      - https://www.dsdarchive.com/wads/dwspd004
+      - https://www.dsdarchive.com/wads/dwspd005
+      - https://www.dsdarchive.com/wads/dwspd006
+      - https://www.dsdarchive.com/wads/dwspd007
+      - https://www.dsdarchive.com/wads/dwspd008
+      - https://www.dsdarchive.com/wads/dwspd009
+      - https://www.dsdarchive.com/wads/dwspd010
+      - https://www.dsdarchive.com/wads/dwspd012
+      - https://www.dsdarchive.com/wads/dwspd013
+      - https://www.dsdarchive.com/wads/dwspd014
+      - https://www.dsdarchive.com/wads/dwspd015
+      - https://www.dsdarchive.com/wads/dwspd016
+      - https://www.dsdarchive.com/wads/dwspd017
+      - https://www.dsdarchive.com/wads/dwspd018
+      - https://www.dsdarchive.com/wads/dwspd019
+      - https://www.dsdarchive.com/wads/dwspd020
+      - https://www.dsdarchive.com/wads/dwspd021
+      - https://www.dsdarchive.com/wads/dwspd022
+      - https://www.dsdarchive.com/wads/dwspd023
+      - https://www.dsdarchive.com/wads/dwspd024
+"https://www.doomworld.com/forum/topic/128958-master-levels-for-doom-ii-demos-complevel-2/":
+  id: "128958"
+  name: Master Levels for Doom II demos [-complevel 2]
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/attack_ml
+      - https://www.dsdarchive.com/wads/blacktwr
+      - https://www.dsdarchive.com/wads/bloodsea
+      - https://www.dsdarchive.com/wads/canyon_ml
+      - https://www.dsdarchive.com/wads/catwalk
+      - https://www.dsdarchive.com/wads/combine
+      - https://www.dsdarchive.com/wads/fistula
+      - https://www.dsdarchive.com/wads/garrison
+      - https://www.dsdarchive.com/wads/geryon
+      - https://www.dsdarchive.com/wads/manor_ml
+      - https://www.dsdarchive.com/wads/mephisto
+      - https://www.dsdarchive.com/wads/minos
+      - https://www.dsdarchive.com/wads/nessus
+      - https://www.dsdarchive.com/wads/paradox_ml
+      - https://www.dsdarchive.com/wads/subspace
+      - https://www.dsdarchive.com/wads/subterra
+      - https://www.dsdarchive.com/wads/teeth
+      - https://www.dsdarchive.com/wads/ttrap
+      - https://www.dsdarchive.com/wads/vesperas
+      - https://www.dsdarchive.com/wads/virgil
+"https://www.doomworld.com/forum/topic/133619-doomworld-maximum-project-series-demos/":
+  id: "133619"
+  name: Doomworld Maximum Project Series Demos
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/dmax2021
+"https://www.doomworld.com/forum/topic/133801-sargebaldy-speedmapping-compilations-demos/":
+  id: "133801"
+  name: SargeBaldy Speedmapping Compilations demos
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/sbspd001
+      - https://www.dsdarchive.com/wads/sbspd002
+      - https://www.dsdarchive.com/wads/sbspd003
+      - https://www.dsdarchive.com/wads/sbspd004
+      - https://www.dsdarchive.com/wads/sbspd005
+      - https://www.dsdarchive.com/wads/sbspd006
+      - https://www.dsdarchive.com/wads/sbspd007
+      - https://www.dsdarchive.com/wads/sbspd008
+      - https://www.dsdarchive.com/wads/sbspd009
+      - https://www.dsdarchive.com/wads/sbspd010
+      - https://www.dsdarchive.com/wads/sbspd011
+      - https://www.dsdarchive.com/wads/sbspd012
+      - https://www.dsdarchive.com/wads/sbspd013
+      - https://www.dsdarchive.com/wads/sbspd014
+      - https://www.dsdarchive.com/wads/sbspd015
+      - https://www.dsdarchive.com/wads/sbspd016
+      - https://www.dsdarchive.com/wads/sbspd017
+      - https://www.dsdarchive.com/wads/sbspd018
+      - https://www.dsdarchive.com/wads/sbspd019
+      - https://www.dsdarchive.com/wads/sbspd020
+      - https://www.dsdarchive.com/wads/sbspd021
 
 # WAD Author threads
 "https://www.doomworld.com/forum/topic/86724-demos-for-miscellaneous-ribbiks-maps/":
   id: "86724"
   name: Demos for miscellaneous Ribbiks maps
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/rbk_old
+      - https://www.dsdarchive.com/wads/cg
+      - https://www.dsdarchive.com/wads/ribk30
+      - https://www.dsdarchive.com/wads/ribk30_2
+      - https://www.dsdarchive.com/wads/ribkswaste
+      - https://www.dsdarchive.com/wads/tttn
+      - https://www.dsdarchive.com/wads/43230_secrets
+      - https://www.dsdarchive.com/wads/800000_secrets
+      - https://www.dsdarchive.com/wads/chiggity
+      - https://www.dsdarchive.com/wads/skipper
+      - https://www.dsdarchive.com/wads/jackalope
+      - https://www.dsdarchive.com/wads/hamster
+      - https://www.dsdarchive.com/wads/spoons
+      - https://www.dsdarchive.com/wads/tessellations
+      - https://www.dsdarchive.com/wads/arctan
+      - https://www.dsdarchive.com/wads/buscemi
+      - https://www.dsdarchive.com/wads/whisky
+      - https://www.dsdarchive.com/wads/swtw
+      - https://www.dsdarchive.com/wads/znud_v05
+      - https://www.dsdarchive.com/wads/crumpets
+      - https://www.dsdarchive.com/wads/jq2
+      - https://www.dsdarchive.com/wads/pepper
+      - https://www.dsdarchive.com/wads/nefertiti_v06
+      - https://www.dsdarchive.com/wads/dspd_rbk
+      - https://www.dsdarchive.com/wads/magnolia
+      - https://www.dsdarchive.com/wads/oitl
+      - https://www.dsdarchive.com/wads/fcff
+      - https://www.dsdarchive.com/wads/pwacp
+      - https://www.dsdarchive.com/wads/doombound01
+      - https://www.dsdarchive.com/wads/stuff
+      - https://www.dsdarchive.com/wads/stuff2
+      - https://www.dsdarchive.com/wads/hyshw
+      - https://www.dsdarchive.com/wads/cr2
 "https://www.doomworld.com/forum/topic/87839-demos-for-miscellaneous-cyberdemon531-gzdoom-maps/":
   id: "87839"
   name: Demos for miscellaneous Cyberdemon531 (G)ZDoom maps
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/disrpair
+      - https://www.dsdarchive.com/wads/gzspd1
+      - https://www.dsdarchive.com/wads/gzspd2
+      - https://www.dsdarchive.com/wads/gzspd3
+      - https://www.dsdarchive.com/wads/grnmchn
+      - https://www.dsdarchive.com/wads/gzspd4
+      - https://www.dsdarchive.com/wads/hm
+      - https://www.dsdarchive.com/wads/disrpar2
+      - https://www.dsdarchive.com/wads/hm2
 "https://www.doomworld.com/forum/topic/90295-timeofdeath-wads-and-their-demos/":
   id: "90295"
   name: TimeOfDeath wads and their demos
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/dib28a
+      - https://www.dsdarchive.com/wads/smedley
+      - https://www.dsdarchive.com/wads/squane
+      - https://www.dsdarchive.com/wads/chips19
+      - https://www.dsdarchive.com/wads/flanagan
+      - https://www.dsdarchive.com/wads/dekutree
+      - https://www.dsdarchive.com/wads/loink
+      - https://www.dsdarchive.com/wads/tom19
+      - https://www.dsdarchive.com/wads/sloth0409
+      - https://www.dsdarchive.com/wads/slut
+      - https://www.dsdarchive.com/wads/av20mem
+      - https://www.dsdarchive.com/wads/bump
+      - https://www.dsdarchive.com/wads/uuhhtod
+      - https://www.dsdarchive.com/wads/nostril
+      - https://www.dsdarchive.com/wads/em116
+      - https://www.dsdarchive.com/wads/reality03
+      - https://www.dsdarchive.com/wads/ditkd01
+      - https://www.dsdarchive.com/wads/ninadobrev
+      - https://www.dsdarchive.com/wads/pppp
+      - https://www.dsdarchive.com/wads/64lemons
+      - https://www.dsdarchive.com/wads/nh1
+      - https://www.dsdarchive.com/wads/nh2
+      - https://www.dsdarchive.com/wads/expiredl
+      - https://www.dsdarchive.com/wads/tinytod
+      - https://www.dsdarchive.com/wads/merkin
+      - https://www.dsdarchive.com/wads/nina2
+      - https://www.dsdarchive.com/wads/roomblow
+      - https://www.dsdarchive.com/wads/cassie
+      - https://www.dsdarchive.com/wads/bensteinsmoney
+      - https://www.dsdarchive.com/wads/xaserpic
+      - https://www.dsdarchive.com/wads/esp
+      - https://www.dsdarchive.com/wads/teledest
+      - https://www.dsdarchive.com/wads/dib2627
+      - https://www.dsdarchive.com/wads/nh3
+      - https://www.dsdarchive.com/wads/nh4
+      - https://www.dsdarchive.com/wads/nh5
+      - https://www.dsdarchive.com/wads/nh666v2
+      - https://www.dsdarchive.com/wads/nh7v4
+      - https://www.dsdarchive.com/wads/loser
+      - https://www.dsdarchive.com/wads/esp2
+"https://www.doomworld.com/forum/topic/121232-doomshack-plays-various-works-of-doomkid/":
+  id: "121232"
+  name: Doomshack Plays (various works of Doomkid)
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/tdevil2
+      - https://www.dsdarchive.com/wads/sinseven
+      - https://www.dsdarchive.com/wads/shovelad
+      - https://www.dsdarchive.com/wads/mohawks
+      - https://www.dsdarchive.com/wads/rwdyrudy
+      - https://www.dsdarchive.com/wads/rudy2
+      - https://www.dsdarchive.com/wads/dkmega1
+"https://www.doomworld.com/forum/topic/127472-various-decay-wads/":
+  id: "127472"
+  name: Various Decay wads
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/cternity
+      - https://www.dsdarchive.com/wads/havitetty
+      - https://www.dsdarchive.com/wads/protosis
+      - https://www.dsdarchive.com/wads/10ambreakm
+"https://www.doomworld.com/forum/topic/128761-bprd-wads-demos-complevel-2-and-9/":
+  id: "128761"
+  name: B.P.R.D. Wads Demos [-complevel 2 and 9]
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/nuts
+      - https://www.dsdarchive.com/wads/nuts2
+      - https://www.dsdarchive.com/wads/bdw
+      - https://www.dsdarchive.com/wads/grove
+      - https://www.dsdarchive.com/wads/nuts3
+      - https://www.dsdarchive.com/wads/darkcanyon
+      - https://www.dsdarchive.com/wads/doomland
+      - https://www.dsdarchive.com/wads/doom2_2
+      - https://www.dsdarchive.com/wads/doom22_2
+      - https://www.dsdarchive.com/wads/run
+      - https://www.dsdarchive.com/wads/fritter
+      - https://www.dsdarchive.com/wads/grovealt
+      - https://www.dsdarchive.com/wads/bordoom
+      - https://www.dsdarchive.com/wads/awaken
+      - https://www.dsdarchive.com/wads/impo
+      - https://www.dsdarchive.com/wads/bdwhell
+      - https://www.dsdarchive.com/wads/fataldm
+      - https://www.dsdarchive.com/wads/hand
+"https://www.doomworld.com/forum/topic/128721-miscellaneous-romero-wads-demos-complevel-2-and-3/":
+  id: "128721"
+  name: Miscellaneous Romero Wads Demos [-complevel 2 and 3]
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/e1m4b
+      - https://www.dsdarchive.com/wads/e1m8b
+      - https://www.dsdarchive.com/wads/one-humanity
+"https://www.doomworld.com/forum/topic/128699-miscellaneous-squonker-wads-demos-complevel-2/":
+  id: "128699"
+  name: Miscellaneous Squonker Wads Demos [-complevel 2]
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/mynrnlds
+      - https://www.dsdarchive.com/wads/vigor
+      - https://www.dsdarchive.com/wads/sq3
+      - https://www.dsdarchive.com/wads/mnltdst
+      - https://www.dsdarchive.com/wads/mnltdst_rc2
+      - https://www.dsdarchive.com/wads/pagodia
+      - https://www.dsdarchive.com/wads/whtrmns
+      - https://www.dsdarchive.com/wads/dldstrct
+"https://www.doomworld.com/forum/topic/129607-various-eternal-wads-demos/":
+  id: "129607"
+  name: 'Various "Eternal" Wads demos'
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/eden_2007
+      - https://www.dsdarchive.com/wads/g_o_evil
+      - https://www.dsdarchive.com/wads/napalm
+      - https://www.dsdarchive.com/wads/nhell_d2
+      - https://www.dsdarchive.com/wads/bbb_1998
+      - https://www.dsdarchive.com/wads/cybersky
+      - https://www.dsdarchive.com/wads/32innail
+      - https://www.dsdarchive.com/wads/gravity
+      - https://www.dsdarchive.com/wads/eclipse
+      - https://www.dsdarchive.com/wads/nightomb
+      - https://www.dsdarchive.com/wads/longdays
+      - https://www.dsdarchive.com/wads/vg
+      - https://www.dsdarchive.com/wads/moonston
+      - https://www.dsdarchive.com/wads/frozent
+      - https://www.dsdarchive.com/wads/icar2015
+"https://www.doomworld.com/forum/topic/143491-mxu-discord-wad-demos/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/wang
+      - https://www.dsdarchive.com/wads/intrlde
+  id: '143491'
+  name: "MXU discord wad demos"
 
 # Misc specialized threads
 "https://www.doomworld.com/forum/topic/94942-misc-heretic-hexen-demos/":
@@ -999,6 +2752,30 @@
 "https://www.doomworld.com/forum/topic/112532-personal-best-demo-thread-%E2%86%90-post-your-non-wrs-here/":
   id: "112532"
   name: "Personal Best Demo Thread ← POST YOUR NON-WRs HERE"
+"https://www.doomworld.com/forum/topic/125196-misc-deathmatchduel-map-demos/":
+  id: "125196"
+  name: Misc. Deathmatch/Duel Map Demos
+
+# Global miscellaneous threads:
+"https://www.doomworld.com/forum/topic/126957-miscellaneous-demos-part-4/":
+  id: "126957"
+  name: Miscellaneous demos (part 4)
+"https://www.doomworld.com/forum/topic/70300-miscellaneous-demos-part-3-please-post-in-part-4-instead/":
+  id: "70300"
+  name: Miscellaneous demos (part 3) [please post in part 4 instead]
+"https://www.doomworld.com/forum/topic/59122-miscellaneous-demos-part-2-please-post-in-part-3-instead/":
+  id: "59122"
+  name: Miscellaneous demos (part 2) [please post in part 3 instead]
+"https://www.doomworld.com/forum/topic/23669-miscellaneous-demos-part-1-please-post-in-part-3-instead/":
+  id: "23669"
+  name: Miscellaneous demos (part 1) [please post in part 3 instead]
+
+# One-time competition threads
+"https://www.doomworld.com/forum/topic/135033-d5da3-speedrunning-team-competition-14-16-april-2023/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/d5da3
+  id: '135033'
+  name: "D5DA3 Speedrunning Team Competition (14-16 April 2023)."
 
 ### IGNORED THREADS FOR UPDATES
 # Non-speedrun demo threads
@@ -1037,7 +2814,6 @@
 "https://www.doomworld.com/forum/topic/112350-freedoom-2/":
   additional_info:
     ignore: true
-    wad: freedoom2
   id: "112350"
   name: Freedoom 2
 
@@ -1082,10 +2858,36 @@
     ignore: true
   id: "111006"
   name: Similarities between speedrunning and musical performance
+"https://www.doomworld.com/forum/topic/118074-dsda-doom-source-port-v0243/":
+  additional_info:
+    ignore: true
+  id: "118074"
+  name: dsda-doom source port [v0.24.3]
+"https://www.doomworld.com/forum/topic/116534-dsda-doom-guide-usage-recording-demos-and-some-extra-info/":
+  additional_info:
+    ignore: true
+  id: "116534"
+  name: dsda-doom guide [Usage, recording demos, and some extra info]
+"https://www.doomworld.com/forum/topic/126619-notable-2021-demos/":
+  additional_info:
+    ignore: true
+  id: "126619"
+  name: Notable 2021 demos
+"https://www.doomworld.com/forum/topic/126257-max-exceptions-debate-thread/":
+  additional_info:
+    ignore: true
+  id: "126257"
+  name: Max Exceptions Debate Thread
+"https://www.doomworld.com/forum/topic/133096-dsda-doom-v0256-2023-01-15/":
+  additional_info:
+    ignore: true
+  id: "133096"
+  name: dsda-doom v0.25.0 [2022-12-23]
 
 # Miscellanous threads
 # Ignored because this is not the correct thread for NRFTL, and the one demo post in here was duped
 # in the correct thread
+# Note: this thread is locked, but I'm keeping it in the config anyway.
 "https://www.doomworld.com/forum/topic/113687-doom-ii-no-rest-for-the-living/":
   additional_info:
     ignore: true

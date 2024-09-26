@@ -1,0 +1,6 @@
+MAP26 - 26:26.26 (26:26)  K: 26/26  I: 26/26  S: 26/26
+comments.txt
+hello
+Player: Tezur0
+Played on dsda-doom 0.14.0 (cl9)
+Wad: Wad name (wad.WAD)

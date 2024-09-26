@@ -1,0 +1,5248 @@
+rc02-020.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40676/rc02-020.zip
+  demo_time: 0:20
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Xit Vono
+  - Vincent Catalaa
+  wad: requiem
+rc28-033.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41139/rc28-033.zip
+  demo_time: 0:33
+  engine: DooM2 v1.9
+  level: Map 28
+  player:
+  - Xit Vono
+  - Vincent Catalaa
+  wad: requiem
+requvlmp.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/43630/requvlmp.zip
+  demo_time: '11:21'
+  engine: DooM2 v1.9
+  level: Map 21
+  player:
+  - Kai-Uwe Humpert
+  wad: requiem
+rf01-038.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40655/rf01-038.zip
+  demo_time: 0:38
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Tatsurd-cacocaco
+  wad: requiem
+rf01-040.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40656/rf01-040.zip
+  demo_time: 0:40
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Xit Vono
+  wad: requiem
+rf01-044.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40657/rf01-044.zip
+  demo_time: 0:44
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Arno Slagboom
+  wad: requiem
+rf02-114.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40690/rf02-114.zip
+  demo_time: '1:14'
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Tatsurd-cacocaco
+  wad: requiem
+rf02-116.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40691/rf02-116.zip
+  demo_time: '1:16'
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Radek Pecka
+  wad: requiem
+rf02-120.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40692/rf02-120.zip
+  demo_time: '1:20'
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Xit Vono
+  wad: requiem
+rf02-123.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40693/rf02-123.zip
+  demo_time: '1:23'
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Radek Pecka
+  wad: requiem
+rf02-220.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40694/rf02-220.zip
+  demo_time: '2:20'
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Xit Vono
+  wad: requiem
+rf03-851.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40729/rf03-851.zip
+  demo_time: '8:51'
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - vdgg
+  wad: requiem
+rf031101.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40730/rf031101.zip
+  demo_time: '11:01'
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - Xit Vono
+  wad: requiem
+rf04-659.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40760/rf04-659.zip
+  demo_time: '6:59'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Xit Vono
+  wad: requiem
+rf041059.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40761/rf041059.zip
+  demo_time: '10:59'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Xit Vono
+  wad: requiem
+rf051357.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40780/rf051357.zip
+  demo_time: '13:57'
+  engine: DooM2 v1.9
+  level: Map 05
+  player:
+  - Tomas Kollar
+  wad: requiem
+rf052104.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40781/rf052104.zip
+  demo_time: '21:04'
+  engine: DooM2 v1.9
+  level: Map 05
+  player:
+  - Xit Vono
+  wad: requiem
+rf061338.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40799/rf061338.zip
+  demo_time: '13:38'
+  engine: DooM2 v1.9
+  level: Map 06
+  player:
+  - Xit Vono
+  wad: requiem
+rf07-336.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40810/rf07-336.zip
+  demo_time: '3:36'
+  engine: DooM2 v1.9
+  level: Map 07
+  player:
+  - SAV88
+  wad: requiem
+rf07-711.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40811/rf07-711.zip
+  demo_time: '7:11'
+  engine: DooM2 v1.9
+  level: Map 07
+  player:
+  - Xit Vono
+  wad: requiem
+rf081437.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40820/rf081437.zip
+  demo_time: '14:37'
+  engine: DooM2 v1.9
+  level: Map 08
+  player:
+  - Tomas Kollar
+  wad: requiem
+rf081819.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40821/rf081819.zip
+  demo_time: '18:19'
+  engine: DooM2 v1.9
+  level: Map 08
+  player:
+  - Xit Vono
+  wad: requiem
+rf09-916.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40842/rf09-916.zip
+  demo_time: '9:16'
+  engine: DooM2 v1.9
+  level: Map 09
+  player:
+  - Tomas Kollar
+  wad: requiem
+rf091032.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40843/rf091032.zip
+  demo_time: '10:32'
+  engine: DooM2 v1.9
+  level: Map 09
+  player:
+  - Xit Vono
+  wad: requiem
+rf10-540.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40866/rf10-540.zip
+  demo_time: '5:40'
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Tomas Kollar
+  wad: requiem
+rf10-751.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40867/rf10-751.zip
+  demo_time: '7:51'
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Xit Vono
+  wad: requiem
+rf11-333.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40895/rf11-333.zip
+  demo_time: '3:33'
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Revved
+  wad: requiem
+rf11-549.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40896/rf11-549.zip
+  demo_time: '5:49'
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Eugene Kapustin
+  wad: requiem
+rf11-612.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40897/rf11-612.zip
+  demo_time: '6:12'
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Xit Vono
+  wad: requiem
+rf121145.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40915/rf121145.zip
+  demo_time: '11:45'
+  engine: DooM2 v1.9
+  level: Map 12
+  player:
+  - Xit Vono
+  wad: requiem
+rf131123.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40926/rf131123.zip
+  demo_time: '11:23'
+  engine: DooM2 v1.9
+  level: Map 13
+  player:
+  - Xit Vono
+  wad: requiem
+rf141305.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40941/rf141305.zip
+  demo_time: '13:05'
+  engine: DooM2 v1.9
+  level: Map 14
+  player:
+  - Xit Vono
+  wad: requiem
+rf151721.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40952/rf151721.zip
+  demo_time: '17:21'
+  engine: DooM2 v1.9
+  level: Map 15
+  player:
+  - Revved
+  wad: requiem
+rf161347.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40963/rf161347.zip
+  demo_time: '13:47'
+  engine: DooM2 v1.9
+  level: Map 16
+  player:
+  - Xit Vono
+  wad: requiem
+rf171424.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40974/rf171424.zip
+  demo_time: '14:24'
+  engine: DooM2 v1.9
+  level: Map 17
+  player:
+  - Revved
+  wad: requiem
+rf18-844.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40984/rf18-844.zip
+  demo_time: '8:44'
+  engine: DooM2 v1.9
+  level: Map 18
+  player:
+  - Revved
+  wad: requiem
+rf19-753.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40997/rf19-753.zip
+  demo_time: '7:53'
+  engine: DooM2 v1.9
+  level: Map 19
+  player:
+  - Revved
+  wad: requiem
+rf20-043.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41014/rf20-043.zip
+  demo_time: 0:43
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Archy
+  wad: requiem
+rf20-046.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41015/rf20-046.zip
+  demo_time: 0:46
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Kyle McAwesome
+  wad: requiem
+rf20-053.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41017/rf20-053.zip
+  demo_time: 0:53
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Xit Vono
+  wad: requiem
+rf20-058.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41018/rf20-058.zip
+  demo_time: 0:58
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Opulent
+  wad: requiem
+rf211229.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41037/rf211229.zip
+  demo_time: '12:29'
+  engine: DooM2 v1.9
+  level: Map 21
+  player:
+  - Revved
+  wad: requiem
+rf221055.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41052/rf221055.zip
+  demo_time: '10:55'
+  engine: DooM2 v1.9
+  level: Map 22
+  player:
+  - Revved
+  wad: requiem
+rf24-653.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41076/rf24-653.zip
+  demo_time: '6:53'
+  engine: DooM2 v1.9
+  level: Map 24
+  player:
+  - vdgg
+  wad: requiem
+rf24-944.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41077/rf24-944.zip
+  demo_time: '9:44'
+  engine: DooM2 v1.9
+  level: Map 24
+  player:
+  - vdgg
+  wad: requiem
+rf25-348.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41102/rf25-348.zip
+  demo_time: '3:48'
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Revved
+  wad: requiem
+rf25-458.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41103/rf25-458.zip
+  demo_time: '4:58'
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Method
+  wad: requiem
+rf26-038.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41116/rf26-038.zip
+  demo_time: 0:38
+  engine: DooM2 v1.9
+  level: Map 26
+  player:
+  - Kimo Xvirus
+  wad: requiem
+rf26-117.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41117/rf26-117.zip
+  demo_time: '1:17'
+  engine: DooM2 v1.9
+  level: Map 26
+  player:
+  - Eugene Kapustin
+  wad: requiem
+rf26-153.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41118/rf26-153.zip
+  demo_time: '1:53'
+  engine: DooM2 v1.9
+  level: Map 26
+  player:
+  - Xit Vono
+  wad: requiem
+rf272343.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41135/rf272343.zip
+  demo_time: '23:43'
+  engine: DooM2 v1.9
+  level: Map 27
+  player:
+  - Revved
+  wad: requiem
+rf28-739.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41146/rf28-739.zip
+  demo_time: '7:39'
+  engine: DooM2 v1.9
+  level: Map 28
+  player:
+  - Revved
+  wad: requiem
+rf292015.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41155/rf292015.zip
+  demo_time: '20:15'
+  engine: DooM2 v1.9
+  level: Map 29
+  player:
+  - Revved
+  wad: requiem
+rf30-115.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41166/rf30-115.zip
+  demo_time: '1:15'
+  engine: DooM2 v1.9
+  level: Map 30
+  player:
+  - Archy
+  wad: requiem
+rf30-209.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41167/rf30-209.zip
+  demo_time: '2:09'
+  engine: DooM2 v1.9
+  level: Map 30
+  player:
+  - Xit Vono
+  wad: requiem
+rf31-218.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41184/rf31-218.zip
+  demo_time: '2:18'
+  engine: DooM2 v1.9
+  level: Map 31
+  player:
+  - Eugene Kapustin
+  wad: requiem
+rf31-310.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41185/rf31-310.zip
+  demo_time: '3:10'
+  engine: DooM2 v1.9
+  level: Map 31
+  player:
+  - Eugene Kapustin
+  wad: requiem
+rf31-353.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41186/rf31-353.zip
+  demo_time: '3:53'
+  engine: DooM2 v1.9
+  level: Map 31
+  player:
+  - Xit Vono
+  wad: requiem
+rf32-156.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41206/rf32-156.zip
+  demo_time: '1:56'
+  engine: DooM2 v1.9
+  level: Map 32
+  player:
+  - Espi
+  wad: requiem
+rf32-211.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41207/rf32-211.zip
+  demo_time: '2:11'
+  engine: DooM2 v1.9
+  level: Map 32
+  player:
+  - Erik Alm
+  wad: requiem
+rf32-328.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41208/rf32-328.zip
+  demo_time: '3:28'
+  engine: DooM2 v1.9
+  level: Map 32
+  player:
+  - Altima Mantoid
+  wad: requiem
+rf32-356.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41209/rf32-356.zip
+  demo_time: '3:56'
+  engine: DooM2 v1.9
+  level: Map 32
+  player:
+  - Xit Vono
+  wad: requiem
+rn01-011.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40648/rn01-011.zip
+  demo_time: 0:11
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Kimo Xvirus
+  wad: requiem
+rn01-012.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40649/rn01-012.zip
+  demo_time: 0:12
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Adam Williamson
+  wad: requiem
+rn01-015.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40650/rn01-015.zip
+  demo_time: 0:15
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Dashiva
+  wad: requiem
+rn01-016.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40652/rn01-016.zip
+  demo_time: 0:16
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Dashiva
+  wad: requiem
+rn02-029.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40682/rn02-029.zip
+  demo_time: 0:29
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Adam Hegyi
+  wad: requiem
+rn02-030.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40683/rn02-030.zip
+  demo_time: 0:30
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Adam Williamson
+  wad: requiem
+rn02-032.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40684/rn02-032.zip
+  demo_time: 0:32
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Laszlo Vecsei
+  wad: requiem
+rn02-036.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40685/rn02-036.zip
+  demo_time: 0:36
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Dashiva
+  wad: requiem
+rn03-719.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40728/rn03-719.zip
+  demo_time: '7:19'
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - Xit Vono
+  wad: requiem
+rn051004.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40777/rn051004.zip
+  demo_time: '10:04'
+  engine: DooM2 v1.9
+  level: Map 05
+  player:
+  - Xit Vono
+  wad: requiem
+rn07-345.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40809/rn07-345.zip
+  demo_time: '3:45'
+  engine: DooM2 v1.9
+  level: Map 07
+  player:
+  - Xit Vono
+  wad: requiem
+rn081027.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40817/rn081027.zip
+  demo_time: '10:27'
+  engine: DooM2 v1.9
+  level: Map 08
+  player:
+  - Xit Vono
+  wad: requiem
+rn09-646.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40838/rn09-646.zip
+  demo_time: '6:46'
+  engine: DooM2 v1.9
+  level: Map 09
+  player:
+  - Xit Vono
+  wad: requiem
+rn10-234.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40861/rn10-234.zip
+  demo_time: '2:34'
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Xit Vono
+  wad: requiem
+rn10-257.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40862/rn10-257.zip
+  demo_time: '2:57'
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Xit Vono
+  wad: requiem
+rn11-130.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40892/rn11-130.zip
+  demo_time: '1:30'
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Xit Vono
+  wad: requiem
+rn12-653.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40913/rn12-653.zip
+  demo_time: '6:53'
+  engine: DooM2 v1.9
+  level: Map 12
+  player:
+  - Xit Vono
+  wad: requiem
+rn12-833.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40914/rn12-833.zip
+  demo_time: '8:33'
+  engine: DooM2 v1.9
+  level: Map 12
+  player:
+  - Xit Vono
+  wad: requiem
+rn131002.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40925/rn131002.zip
+  demo_time: '10:02'
+  engine: DooM2 v1.9
+  level: Map 13
+  player:
+  - Xit Vono
+  wad: requiem
+rn151106.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40950/rn151106.zip
+  demo_time: '11:06'
+  engine: DooM2 v1.9
+  level: Map 15
+  player:
+  - Xit Vono
+  wad: requiem
+rn15s854.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40957/rn15s854.zip
+  demo_time: '8:54'
+  engine: DooM2 v1.9
+  level: Map 15s
+  player:
+  - Xit Vono
+  wad: requiem
+rn161028.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40962/rn161028.zip
+  demo_time: '10:28'
+  engine: DooM2 v1.9
+  level: Map 16
+  player:
+  - Xit Vono
+  wad: requiem
+rn17-530.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40971/rn17-530.zip
+  demo_time: '5:30'
+  engine: DooM2 v1.9
+  level: Map 17
+  player:
+  - Xit Vono
+  wad: requiem
+rn19-106.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40994/rn19-106.zip
+  demo_time: '1:06'
+  engine: DooM2 v1.9
+  level: Map 19
+  player:
+  - Xit Vono
+  wad: requiem
+rn19-112.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40995/rn19-112.zip
+  demo_time: '1:12'
+  engine: DooM2 v1.9
+  level: Map 19
+  player:
+  - Jason Dyer
+  wad: requiem
+rn19-118.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40996/rn19-118.zip
+  demo_time: '1:18'
+  engine: DooM2 v1.9
+  level: Map 19
+  player:
+  - Gusta
+  wad: requiem
+rn20-012.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41005/rn20-012.zip
+  demo_time: 0:12
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Kimo Xvirus
+  wad: requiem
+rn20-013.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41006/rn20-013.zip
+  demo_time: 0:13
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Radek Pecka
+  wad: requiem
+rn20-014.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41007/rn20-014.zip
+  demo_time: 0:14
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Cameron Prosser
+  wad: requiem
+rn20-018.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41008/rn20-018.zip
+  demo_time: 0:18
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Adam Hegyi
+  wad: requiem
+rn20-025.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41009/rn20-025.zip
+  demo_time: 0:25
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Xit Vono
+  wad: requiem
+rn20-032.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41010/rn20-032.zip
+  demo_time: 0:32
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Xit Vono
+  wad: requiem
+rn211050.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41036/rn211050.zip
+  demo_time: '10:50'
+  engine: DooM2 v1.9
+  level: Map 21
+  player:
+  - Xit Vono
+  wad: requiem
+rn22-753.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41051/rn22-753.zip
+  demo_time: '7:53'
+  engine: DooM2 v1.9
+  level: Map 22
+  player:
+  - Xit Vono
+  wad: requiem
+rn23-602.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41060/rn23-602.zip
+  demo_time: '6:02'
+  engine: DooM2 v1.9
+  level: Map 23
+  player:
+  - Xit Vono
+  wad: requiem
+rn24-546.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41075/rn24-546.zip
+  demo_time: '5:46'
+  engine: DooM2 v1.9
+  level: Map 24
+  player:
+  - Xit Vono
+  wad: requiem
+rn25-106.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41100/rn25-106.zip
+  demo_time: '1:06'
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Erik Alm
+  wad: requiem
+rn25-148.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41101/rn25-148.zip
+  demo_time: '1:48'
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Xit Vono
+  wad: requiem
+rn26-007.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41113/rn26-007.zip
+  demo_time: 0:07
+  engine: DooM2 v1.9
+  level: Map 26
+  player:
+  - Adam Hegyi
+  wad: requiem
+rn26-026.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41115/rn26-026.zip
+  demo_time: 0:26
+  engine: DooM2 v1.9
+  level: Map 26
+  player:
+  - Xit Vono
+  wad: requiem
+rn27-723.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41134/rn27-723.zip
+  demo_time: '7:23'
+  engine: DooM2 v1.9
+  level: Map 27
+  player:
+  - Xit Vono
+  wad: requiem
+rn28-234.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41145/rn28-234.zip
+  demo_time: '2:34'
+  engine: DooM2 v1.9
+  level: Map 28
+  player:
+  - Xit Vono
+  wad: requiem
+rn291057.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41154/rn291057.zip
+  demo_time: '10:57'
+  engine: DooM2 v1.9
+  level: Map 29
+  player:
+  - Xit Vono
+  wad: requiem
+rn30-017.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41163/rn30-017.zip
+  demo_time: 0:17
+  engine: DooM2 v1.9
+  level: Map 30
+  player:
+  - Kimo Xvirus
+  wad: requiem
+rn30-019.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41164/rn30-019.zip
+  demo_time: 0:19
+  engine: DooM2 v1.9
+  level: Map 30
+  player:
+  - Adam Hegyi
+  wad: requiem
+rn30-124.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41165/rn30-124.zip
+  demo_time: '1:24'
+  engine: DooM2 v1.9
+  level: Map 30
+  player:
+  - Xit Vono
+  wad: requiem
+rn31-213.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41180/rn31-213.zip
+  demo_time: '2:13'
+  engine: DooM2 v1.9
+  level: Map 31
+  player:
+  - Eugene Kapustin
+  wad: requiem
+rn31-239.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41182/rn31-239.zip
+  demo_time: '2:39'
+  engine: DooM2 v1.9
+  level: Map 31
+  player:
+  - Xit Vono
+  wad: requiem
+rn31s217.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41181/rn31s217.zip
+  demo_time: '2:17'
+  engine: DooM2 v1.9
+  level: Map 31
+  player:
+  - Eugene Kapustin
+  wad: requiem
+rn31s247.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41183/rn31s247.zip
+  demo_time: '2:47'
+  engine: DooM2 v1.9
+  level: Map 31
+  player:
+  - Xit Vono
+  wad: requiem
+rn32-013.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41200/rn32-013.zip
+  demo_time: 0:13
+  engine: DooM2 v1.9
+  level: Map 32
+  player:
+  - Xit Vono
+  wad: requiem
+rn32-014.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41201/rn32-014.zip
+  demo_time: 0:14
+  engine: DooM2 v1.9
+  level: Map 32
+  player:
+  - Cameron Prosser
+  wad: requiem
+rn32-015.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41202/rn32-015.zip
+  demo_time: 0:15
+  engine: DooM2 v1.9
+  level: Map 32
+  player:
+  - Cameron Prosser
+  wad: requiem
+rp01-012.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40663/rp01-012.zip
+  demo_time: 0:12
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Adam Williamson
+  wad: requiem
+rp02-032.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40701/rp02-032.zip
+  demo_time: 0:32
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Xit Vono
+  wad: requiem
+rp02-034.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40702/rp02-034.zip
+  demo_time: 0:34
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Radek Pecka
+  wad: requiem
+rp02-037.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40703/rp02-037.zip
+  demo_time: 0:37
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Cameron Prosser
+  wad: requiem
+rp02-122.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40705/rp02-122.zip
+  demo_time: '1:22'
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Xit Vono
+  wad: requiem
+rp041424.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40765/rp041424.zip
+  demo_time: '14:24'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Xit Vono
+  wad: requiem
+rp10-150.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40870/rp10-150.zip
+  demo_time: '1:50'
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Xit Vono
+  wad: requiem
+rp10-836.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40871/rp10-836.zip
+  demo_time: '8:36'
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Xit Vono
+  wad: requiem
+rp11-945.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40901/rp11-945.zip
+  demo_time: '9:45'
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Xit Vono
+  wad: requiem
+rp19-222.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40998/rp19-222.zip
+  demo_time: '2:22'
+  engine: DooM2 v1.9
+  level: Map 19
+  player:
+  - Xit Vono
+  wad: requiem
+rp20-011.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41023/rp20-011.zip
+  demo_time: 0:11
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Cameron Prosser
+  wad: requiem
+rp20-017.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41024/rp20-017.zip
+  demo_time: 0:17
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Xit Vono
+  wad: requiem
+rp24-102.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41079/rp24-102.zip
+  demo_time: '1:02'
+  engine: DooM2 v1.9
+  level: Map 24
+  player:
+  - Xit Vono
+  wad: requiem
+rp25-033.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41105/rp25-033.zip
+  demo_time: 0:33
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Erik Alm
+  wad: requiem
+rp25-041.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41106/rp25-041.zip
+  demo_time: 0:41
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Jason Dyer
+  wad: requiem
+rp25-043.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41107/rp25-043.zip
+  demo_time: 0:43
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Erik Alm
+  wad: requiem
+rq01-011.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40644/rq01-011.zip
+  demo_time: 0:11
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Adam Hegyi
+  wad: requiem
+rq01-012.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40646/rq01-012.zip
+  demo_time: 0:12
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Adam Hegyi
+  wad: requiem
+rq01-013.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40647/rq01-013.zip
+  demo_time: 0:13
+  engine: PRBoom cl-1
+  level: Map 01
+  player:
+  - Dislogical
+  wad: requiem
+rq01-02x027.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/44326/rq01-02x027.zip
+  demo_time: 0:27
+  engine: PRBoom v2.4.8.4cl2
+  level: Other Movie
+  player:
+  - ClumsyDoomer
+  wad: requiem
+rq01-02y311.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/44325/rq01-02y311.zip
+  demo_time: '3:11'
+  engine: DooM2 v1.9
+  level: Other Movie
+  player:
+  - vdgg
+  wad: requiem
+rq01-036.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40638/rq01-036.zip
+  demo_time: 0:36
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Xit Vono
+  wad: requiem
+rq01-038.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40639/rq01-038.zip
+  demo_time: 0:38
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Adam Hegyi
+  wad: requiem
+rq01-03s918.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/44329/rq01-03s918.zip
+  demo_time: '9:18'
+  engine: DooM2 v1.9
+  level: Other Movie
+  player:
+  - Xit Vono
+  wad: requiem
+rq01-03x048.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/47412/rq01-03x048.zip
+  demo_time: 0:48
+  engine: PRBoom 2.5.1.4cl2
+  level: Other Movie
+  player:
+  - Dimon12321
+  wad: requiem
+rq01-040.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40640/rq01-040.zip
+  demo_time: 0:40
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Adam Hegyi
+  wad: requiem
+rq01-043.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40642/rq01-043.zip
+  demo_time: 0:43
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Henning Skogsto
+  wad: requiem
+rq01-04n1156.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/44328/rq01-04n1156.zip
+  demo_time: '11:56'
+  engine: DooM2 v1.9
+  level: Other Movie
+  player:
+  - Xit Vono
+  wad: requiem
+rq01-12x1208.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/44327/rq01-12x1208.zip
+  demo_time: '12:08'
+  engine: PRBoom v2.2.4.2cl2
+  level: Other Movie
+  player:
+  - Xit Vono
+  wad: requiem
+rq01n015.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40651/rq01n015.zip
+  demo_time: 0:15
+  engine: PRBoom v2.5.0.8cl2
+  level: Map 01
+  player:
+  - Daiyu Xiaoxiang
+  wad: requiem
+rq01o010xit.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40670/rq01o010xit.zip
+  demo_time: 0:10
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Xit Vono
+  wad: requiem
+rq01p027.zip:
+- category: Stroller
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40664/rq01p027.zip
+  demo_time: 0:27
+  engine: PRBoom v2.5.1.3cl2
+  level: Map 01
+  player:
+  - David Spring
+  wad: requiem
+rq01x011.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40645/rq01x011.zip
+  demo_time: 0:11
+  engine: PRBoom v2.5.0.7cl2
+  level: Map 01
+  player:
+  - ClumsyDoomer
+  wad: requiem
+rq01x041kempling.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40641/rq01x041kempling.zip
+  demo_time: 0:41
+  engine: TASDooM
+  level: Map 01
+  player:
+  - Andy Kempling
+  wad: requiem
+rq01x997.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40643/rq01x997.zip
+  demo_time: 0:09
+  engine: PRBoom cl2
+  level: Map 01
+  player:
+  - abyrvalg
+  wad: requiem
+rq02-023skepticist.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40677/rq02-023skepticist.zip
+  demo_time: 0:23
+  engine: PRBoom v2.5.0.6cl2
+  level: Map 02
+  player:
+  - Skepticist
+  wad: requiem
+rq02-024.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40678/rq02-024.zip
+  demo_time: 0:24
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - cack_handed
+  wad: requiem
+rq02-028.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40679/rq02-028.zip
+  demo_time: 0:28
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Adam Hegyi
+  wad: requiem
+rq02-029.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40680/rq02-029.zip
+  demo_time: 0:29
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Adam Hegyi
+  wad: requiem
+rq02-030.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40681/rq02-030.zip
+  demo_time: 0:30
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Adam Hegyi
+  wad: requiem
+rq02-102.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40671/rq02-102.zip
+  demo_time: '1:02'
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Tatsurd-cacocaco
+  wad: requiem
+rq02-104.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40672/rq02-104.zip
+  demo_time: '1:04'
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Xit Vono
+  wad: requiem
+rq02-106.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40673/rq02-106.zip
+  demo_time: '1:06'
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Adam Hegyi
+  wad: requiem
+rq02-111.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40675/rq02-111.zip
+  demo_time: '1:11'
+  engine: PRBoom v2.5.0cl2
+  level: Map 02
+  player:
+  - William Huber
+  wad: requiem
+rq02o028xit.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40710/rq02o028xit.zip
+  demo_time: 0:28
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Xit Vono
+  wad: requiem
+rq02p031.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40700/rq02p031.zip
+  demo_time: 0:31
+  engine: PRBoom v2.5.0.9cl2
+  level: Map 02
+  player:
+  - Memfis
+  wad: requiem
+rq02str114.zip:
+- category: Stroller
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40704/rq02str114.zip
+  demo_time: '1:14'
+  engine: PRBoom v2.5.0.9cl2
+  level: Map 02
+  player:
+  - Memfis
+  wad: requiem
+rq02x110kempling.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40674/rq02x110kempling.zip
+  demo_time: '1:10'
+  engine: TASDooM
+  level: Map 02
+  player:
+  - Andy Kempling
+  wad: requiem
+rq03-049.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40713/rq03-049.zip
+  demo_time: 0:49
+  engine: PRBoom v2.5.1.3cl2
+  level: Map 03
+  player:
+  - AD_79
+  wad: requiem
+rq03-052.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40714/rq03-052.zip
+  demo_time: 0:52
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - Xit Vono
+  wad: requiem
+rq03-053.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40715/rq03-053.zip
+  demo_time: 0:53
+  engine: PRBoom v2.5.0.2cl2
+  level: Map 03
+  player:
+  - Skepticist
+  wad: requiem
+rq03-129.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40716/rq03-129.zip
+  demo_time: '1:29'
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - Xit Vono
+  wad: requiem
+rq03-136.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40717/rq03-136.zip
+  demo_time: '1:36'
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - Xit Vono
+  wad: requiem
+rq03-138.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40718/rq03-138.zip
+  demo_time: '1:38'
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - Method
+  wad: requiem
+rq03-141.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40719/rq03-141.zip
+  demo_time: '1:41'
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - Xit Vono
+  wad: requiem
+rq03-143.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40720/rq03-143.zip
+  demo_time: '1:43'
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - Method
+  wad: requiem
+rq03-147.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40721/rq03-147.zip
+  demo_time: '1:47'
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - Xit Vono
+  wad: requiem
+rq03-155.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40722/rq03-155.zip
+  demo_time: '1:55'
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - Twister
+  wad: requiem
+rq03-216.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40723/rq03-216.zip
+  demo_time: '2:16'
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - Xit Vono
+  wad: requiem
+rq03-234.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40724/rq03-234.zip
+  demo_time: '2:34'
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - Xit Vono
+  wad: requiem
+rq03-300.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40725/rq03-300.zip
+  demo_time: '3:00'
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - Xit Vono
+  wad: requiem
+rq03-352.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40726/rq03-352.zip
+  demo_time: '3:52'
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - Xit Vono
+  wad: requiem
+rq03-520.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40711/rq03-520.zip
+  demo_time: '5:20'
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - Xit Vono
+  wad: requiem
+rq03-541.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40712/rq03-541.zip
+  demo_time: '5:41'
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - Xit Vono
+  wad: requiem
+rq03o029.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40734/rq03o029.zip
+  demo_time: 0:29
+  engine: PRBoom v2.5.1.4cl2
+  level: Map 03
+  player:
+  - 4shockblast
+  wad: requiem
+rq03o030.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40735/rq03o030.zip
+  demo_time: 0:30
+  engine: PRBoom v2.5.1.3cl2
+  level: Map 03
+  player:
+  - AD_79
+  wad: requiem
+rq03o035.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40736/rq03o035.zip
+  demo_time: 0:35
+  engine: PRBoom v2.5.1.4cl2
+  level: Map 03
+  player:
+  - Cyberdemon531
+  wad: requiem
+rq03o054xit.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40737/rq03o054xit.zip
+  demo_time: 0:54
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - Xit Vono
+  wad: requiem
+rq04-118.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40746/rq04-118.zip
+  demo_time: '1:18'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Xit Vono
+  wad: requiem
+rq04-129.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40747/rq04-129.zip
+  demo_time: '1:29'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Xit Vono
+  wad: requiem
+rq04-135.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40748/rq04-135.zip
+  demo_time: '1:35'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Ocelot
+  wad: requiem
+rq04-136.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40749/rq04-136.zip
+  demo_time: '1:36'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Xit Vono
+  wad: requiem
+rq04-137.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40750/rq04-137.zip
+  demo_time: '1:37'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Oyvind Stenhaug
+  wad: requiem
+rq04-149.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40751/rq04-149.zip
+  demo_time: '1:49'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Xit Vono
+  wad: requiem
+rq04-203.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40752/rq04-203.zip
+  demo_time: '2:03'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Oyvind Stenhaug
+  wad: requiem
+rq04-230.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40753/rq04-230.zip
+  demo_time: '2:30'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Xit Vono
+  wad: requiem
+rq04-246.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40754/rq04-246.zip
+  demo_time: '2:46'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Oyvind Stenhaug
+  wad: requiem
+rq04-318.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40755/rq04-318.zip
+  demo_time: '3:18'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Xit Vono
+  wad: requiem
+rq04-319.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40738/rq04-319.zip
+  demo_time: '3:19'
+  engine: PRBoom v2.5.0.5cl2
+  level: Map 04
+  player:
+  - SAV88
+  wad: requiem
+rq04-337.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40739/rq04-337.zip
+  demo_time: '3:37'
+  engine: PRBoom v2.5.1.2cl2
+  level: Map 04
+  player:
+  - Memfis
+  wad: requiem
+rq04-341.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40740/rq04-341.zip
+  demo_time: '3:41'
+  engine: Chocolate DooM v1.2.1
+  level: Map 04
+  player:
+  - SAV88
+  wad: requiem
+rq04-358skepticist.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40741/rq04-358skepticist.zip
+  demo_time: '3:58'
+  engine: PRBoom v2.5.0.6cl2
+  level: Map 04
+  player:
+  - Skepticist
+  wad: requiem
+rq04-407.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40742/rq04-407.zip
+  demo_time: '4:07'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Xit Vono
+  wad: requiem
+rq04-425.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40743/rq04-425.zip
+  demo_time: '4:25'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Xit Vono
+  wad: requiem
+rq04o049.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40767/rq04o049.zip
+  demo_time: 0:49
+  engine: PRBoom v2.5.1.3cl2
+  level: Map 04
+  player:
+  - AD_79
+  wad: requiem
+rq04o051xit.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40768/rq04o051xit.zip
+  demo_time: 0:51
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Xit Vono
+  wad: requiem
+rq04s309.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40756/rq04s309.zip
+  demo_time: '3:09'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Xit Vono
+  wad: requiem
+rq04x112.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40744/rq04x112.zip
+  demo_time: '1:12'
+  engine: TASDooM
+  level: Map 04
+  player:
+  - Jakub Machata
+  wad: requiem
+rq04x117.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40745/rq04x117.zip
+  demo_time: '1:17'
+  engine: TASDooM
+  level: Map 04
+  player:
+  - Alexis Neuhaus
+  wad: requiem
+rq04xp549.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40764/rq04xp549.zip
+  demo_time: '5:49'
+  engine: TASDooM
+  level: Map 04
+  player:
+  - Xit Vono
+  wad: requiem
+rq04xs712.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40759/rq04xs712.zip
+  demo_time: '7:12'
+  engine: TASDooM
+  level: Map 04
+  player:
+  - Xit Vono
+  wad: requiem
+rq05-243.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40773/rq05-243.zip
+  demo_time: '2:43'
+  engine: Chocolate DooM v1.2.1
+  level: Map 05
+  player:
+  - SAV88
+  wad: requiem
+rq05-330.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40774/rq05-330.zip
+  demo_time: '3:30'
+  engine: DooM2 v1.9
+  level: Map 05
+  player:
+  - Xit Vono
+  wad: requiem
+rq05-336.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40775/rq05-336.zip
+  demo_time: '3:36'
+  engine: DooM2 v1.9
+  level: Map 05
+  player:
+  - Xit Vono
+  wad: requiem
+rq05-557.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40769/rq05-557.zip
+  demo_time: '5:57'
+  engine: PRBoom v2.5.1.5cl2
+  level: Map 05
+  player:
+  - SAV88
+  wad: requiem
+rq05-624.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40776/rq05-624.zip
+  demo_time: '6:24'
+  engine: DooM2 v1.9
+  level: Map 05
+  player:
+  - Xit Vono
+  wad: requiem
+rq05-654.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40771/rq05-654.zip
+  demo_time: '6:54'
+  engine: Chocolate DooM v1.2.1
+  level: Map 05
+  player:
+  - SAV88
+  wad: requiem
+rq05-844.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40772/rq05-844.zip
+  demo_time: '8:44'
+  engine: DooM2 v1.9
+  level: Map 05
+  player:
+  - Xit Vono
+  wad: requiem
+rq05o131xit.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40785/rq05o131xit.zip
+  demo_time: '1:31'
+  engine: DooM2 v1.9
+  level: Map 05
+  player:
+  - Xit Vono
+  wad: requiem
+rq05xn1022.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40778/rq05xn1022.zip
+  demo_time: '10:22'
+  engine: TASDooM
+  level: Map 05
+  player:
+  - Xit Vono
+  wad: requiem
+rq05xp715.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40783/rq05xp715.zip
+  demo_time: '7:15'
+  engine: TASDooM
+  level: Map 05
+  player:
+  - Xit Vono
+  wad: requiem
+rq06-413.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40790/rq06-413.zip
+  demo_time: '4:13'
+  engine: DooM2 v1.9
+  level: Map 06
+  player:
+  - Xit Vono
+  wad: requiem
+rq06-428.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40791/rq06-428.zip
+  demo_time: '4:28'
+  engine: DooM2 v1.9
+  level: Map 06
+  player:
+  - Jason Dyer
+  wad: requiem
+rq06-450.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40792/rq06-450.zip
+  demo_time: '4:50'
+  engine: DooM2 v1.9
+  level: Map 06
+  player:
+  - Xit Vono
+  wad: requiem
+rq06-458.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40793/rq06-458.zip
+  demo_time: '4:58'
+  engine: DooM2 v1.9
+  level: Map 06
+  player:
+  - Jason Dyer
+  wad: requiem
+rq06-536.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40794/rq06-536.zip
+  demo_time: '5:36'
+  engine: DooM2 v1.9
+  level: Map 06
+  player:
+  - Xit Vono
+  wad: requiem
+rq06-552.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40795/rq06-552.zip
+  demo_time: '5:52'
+  engine: PRBoom cl2
+  level: Map 06
+  player:
+  - Jason Dyer
+  wad: requiem
+rq06-615.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40796/rq06-615.zip
+  demo_time: '6:15'
+  engine: DooM2 v1.9
+  level: Map 06
+  player:
+  - Xit Vono
+  wad: requiem
+rq06-747.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40787/rq06-747.zip
+  demo_time: '7:47'
+  engine: DooM2 v1.9
+  level: Map 06
+  player:
+  - GuyNamedErick
+  wad: requiem
+rq06-810.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40788/rq06-810.zip
+  demo_time: '8:10'
+  engine: DooM2 v1.9
+  level: Map 06
+  player:
+  - Xit Vono
+  wad: requiem
+rq06o140xit.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40802/rq06o140xit.zip
+  demo_time: '1:40'
+  engine: DooM2 v1.9
+  level: Map 06
+  player:
+  - Xit Vono
+  wad: requiem
+rq06xs827.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40797/rq06xs827.zip
+  demo_time: '8:27'
+  engine: TASDooM
+  level: Map 06
+  player:
+  - Xit Vono
+  wad: requiem
+rq07-115.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40806/rq07-115.zip
+  demo_time: '1:15'
+  engine: DooM2 v1.9
+  level: Map 07
+  player:
+  - Xit Vono
+  wad: requiem
+rq07-119.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40807/rq07-119.zip
+  demo_time: '1:19'
+  engine: DooM2 v1.9
+  level: Map 07
+  player:
+  - Adam Hegyi
+  wad: requiem
+rq07-323.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40803/rq07-323.zip
+  demo_time: '3:23'
+  engine: PRBoom v2.5.1.4cl2
+  level: Map 07
+  player:
+  - Cyberdemon531
+  wad: requiem
+rq07-339.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40804/rq07-339.zip
+  demo_time: '3:39'
+  engine: DooM2 v1.9
+  level: Map 07
+  player:
+  - Xit Vono
+  wad: requiem
+rq07x105.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40805/rq07x105.zip
+  demo_time: '1:05'
+  engine: TASDooM
+  level: Map 07
+  player:
+  - Jakub Machata
+  wad: requiem
+rq07xn300.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40808/rq07xn300.zip
+  demo_time: '3:00'
+  engine: TASDooM
+  level: Map 07
+  player:
+  - Xit Vono
+  wad: requiem
+rq08-647.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40815/rq08-647.zip
+  demo_time: '6:47'
+  engine: DooM2 v1.9
+  level: Map 08
+  player:
+  - Xit Vono
+  wad: requiem
+rq08-754.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40816/rq08-754.zip
+  demo_time: '7:54'
+  engine: DooM2 v1.9
+  level: Map 08
+  player:
+  - Xit Vono
+  wad: requiem
+rq08-821.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40812/rq08-821.zip
+  demo_time: '8:21'
+  engine: PRBoom v2.5.0.5cl2
+  level: Map 08
+  player:
+  - SAV88
+  wad: requiem
+rq08-917.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40813/rq08-917.zip
+  demo_time: '9:17'
+  engine: DooM2 v1.9
+  level: Map 08
+  player:
+  - Xit Vono
+  wad: requiem
+rq08-947xit.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40814/rq08-947xit.zip
+  demo_time: '9:47'
+  engine: DooM2 v1.9
+  level: Map 08
+  player:
+  - Xit Vono
+  wad: requiem
+rq08f857.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40819/rq08f857.zip
+  demo_time: '8:57'
+  engine: PRBoom v2.5.0.5cl2
+  level: Map 08
+  player:
+  - SAV88
+  wad: requiem
+rq08o218xit.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40825/rq08o218xit.zip
+  demo_time: '2:18'
+  engine: DooM2 v1.9
+  level: Map 08
+  player:
+  - Xit Vono
+  wad: requiem
+rq08xs1315.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40818/rq08xs1315.zip
+  demo_time: '13:15'
+  engine: TASDooM
+  level: Map 08
+  player:
+  - Xit Vono
+  wad: requiem
+rq09-149.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40831/rq09-149.zip
+  demo_time: '1:49'
+  engine: DooM2 v1.9
+  level: Map 09
+  player:
+  - SAV88
+  wad: requiem
+rq09-156.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40832/rq09-156.zip
+  demo_time: '1:56'
+  engine: DooM2 v1.9
+  level: Map 09
+  player:
+  - Hitherto
+  wad: requiem
+rq09-204.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40833/rq09-204.zip
+  demo_time: '2:04'
+  engine: DooM2 v1.9
+  level: Map 09
+  player:
+  - Xit Vono
+  wad: requiem
+rq09-210.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40834/rq09-210.zip
+  demo_time: '2:10'
+  engine: DooM2 v1.9
+  level: Map 09
+  player:
+  - Oyvind Stenhaug
+  wad: requiem
+rq09-216.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40835/rq09-216.zip
+  demo_time: '2:16'
+  engine: DooM2 v1.9
+  level: Map 09
+  player:
+  - Xit Vono
+  wad: requiem
+rq09-245.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40836/rq09-245.zip
+  demo_time: '2:45'
+  engine: DooM2 v1.9
+  level: Map 09
+  player:
+  - Oyvind Stenhaug
+  wad: requiem
+rq09-316.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40837/rq09-316.zip
+  demo_time: '3:16'
+  engine: DooM2 v1.9
+  level: Map 09
+  player:
+  - Xit Vono
+  wad: requiem
+rq09-528.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40826/rq09-528.zip
+  demo_time: '5:28'
+  engine: DooM2 v1.9
+  level: Map 09
+  player:
+  - Tatsurd-cacocaco
+  wad: requiem
+rq09-530.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40827/rq09-530.zip
+  demo_time: '5:30'
+  engine: Chocolate DooM v1.2.1
+  level: Map 09
+  player:
+  - SAV88
+  wad: requiem
+rq09-552.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40828/rq09-552.zip
+  demo_time: '5:52'
+  engine: DooM2 v1.9
+  level: Map 09
+  player:
+  - Hitherto
+  wad: requiem
+rq09-620.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40829/rq09-620.zip
+  demo_time: '6:20'
+  engine: DooM2 v1.9
+  level: Map 09
+  player:
+  - Xit Vono
+  wad: requiem
+rq09-725.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40830/rq09-725.zip
+  demo_time: '7:25'
+  engine: PRBoom v2.5.0.8cl2
+  level: Map 09
+  player:
+  - Daiyu Xiaoxiang
+  wad: requiem
+rq09xn924.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40839/rq09xn924.zip
+  demo_time: '9:24'
+  engine: TASDooM
+  level: Map 09
+  player:
+  - Xit Vono
+  wad: requiem
+rq09xp939.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40845/rq09xp939.zip
+  demo_time: '9:39'
+  engine: TASDooM
+  level: Map 09
+  player:
+  - Xit Vono
+  wad: requiem
+rq10-048.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40851/rq10-048.zip
+  demo_time: 0:48
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Xit Vono
+  wad: requiem
+rq10-057.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40852/rq10-057.zip
+  demo_time: 0:57
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Vile
+  wad: requiem
+rq10-059.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40853/rq10-059.zip
+  demo_time: 0:59
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Oyvind Stenhaug
+  wad: requiem
+rq10-101.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40854/rq10-101.zip
+  demo_time: '1:01'
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Vile
+  wad: requiem
+rq10-103.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40855/rq10-103.zip
+  demo_time: '1:03'
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Oyvind Stenhaug
+  wad: requiem
+rq10-10334.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40856/rq10-10334.zip
+  demo_time: '1:03'
+  engine: PRBoom cl2
+  level: Map 10
+  player:
+  - Dislogical
+  wad: requiem
+rq10-106.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40857/rq10-106.zip
+  demo_time: '1:06'
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Xit Vono
+  wad: requiem
+rq10-110.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40858/rq10-110.zip
+  demo_time: '1:10'
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Oyvind Stenhaug
+  wad: requiem
+rq10-119.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40859/rq10-119.zip
+  demo_time: '1:19'
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Xit Vono
+  wad: requiem
+rq10-323.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40846/rq10-323.zip
+  demo_time: '3:23'
+  engine: PRBoom v2.5.1.3cl2
+  level: Map 10
+  player:
+  - PjSpartacus
+  wad: requiem
+rq10-342.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40847/rq10-342.zip
+  demo_time: '3:42'
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Method
+  wad: requiem
+rq10-344.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40848/rq10-344.zip
+  demo_time: '3:44'
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Xit Vono
+  wad: requiem
+rq10-351.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40849/rq10-351.zip
+  demo_time: '3:51'
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Method
+  wad: requiem
+rq10-355.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40850/rq10-355.zip
+  demo_time: '3:55'
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Xit Vono
+  wad: requiem
+rq10f437.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40865/rq10f437.zip
+  demo_time: '4:37'
+  engine: PRBoom v2.5.1.3cl2
+  level: Map 10
+  player:
+  - PjSpartacus
+  wad: requiem
+rq10n106.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40860/rq10n106.zip
+  demo_time: '1:06'
+  engine: Chocolate DooM v1.2.1
+  level: Map 10
+  player:
+  - SAV88
+  wad: requiem
+rq10p123.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40869/rq10p123.zip
+  demo_time: '1:23'
+  engine: PRBoom v2.5.0.9cl2
+  level: Map 10
+  player:
+  - Memfis
+  wad: requiem
+rq10s159.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40863/rq10s159.zip
+  demo_time: '1:59'
+  engine: PRBoom v2.5.0.8cl2
+  level: Map 10
+  player:
+  - Kyle McAwesome
+  wad: requiem
+rq11-041.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40882/rq11-041.zip
+  demo_time: 0:41
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Radek Pecka
+  wad: requiem
+rq11-042.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40883/rq11-042.zip
+  demo_time: 0:42
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Xit Vono
+  wad: requiem
+rq11-046.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40884/rq11-046.zip
+  demo_time: 0:46
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Twister
+  wad: requiem
+rq11-047.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40885/rq11-047.zip
+  demo_time: 0:47
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Xit Vono
+  wad: requiem
+rq11-050.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40886/rq11-050.zip
+  demo_time: 0:50
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Twister
+  wad: requiem
+rq11-052.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40887/rq11-052.zip
+  demo_time: 0:52
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Twister
+  wad: requiem
+rq11-053.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40888/rq11-053.zip
+  demo_time: 0:53
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Xit Vono
+  wad: requiem
+rq11-058.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40889/rq11-058.zip
+  demo_time: 0:58
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Xit Vono
+  wad: requiem
+rq11-103.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40890/rq11-103.zip
+  demo_time: '1:03'
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Xit Vono
+  wad: requiem
+rq11-110.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40891/rq11-110.zip
+  demo_time: '1:10'
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Xit Vono
+  wad: requiem
+rq11-223.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40873/rq11-223.zip
+  demo_time: '2:23'
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Tatsurd-cacocaco
+  wad: requiem
+rq11-227.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40874/rq11-227.zip
+  demo_time: '2:27'
+  engine: PRBoom v2.5.1.4cl2
+  level: Map 11
+  player:
+  - Plut
+  wad: requiem
+rq11-229.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40875/rq11-229.zip
+  demo_time: '2:29'
+  engine: PRBoom v2.5.1.3cl2
+  level: Map 11
+  player:
+  - Plut
+  wad: requiem
+rq11-242.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40876/rq11-242.zip
+  demo_time: '2:42'
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - vdgg
+  wad: requiem
+rq11-244.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40877/rq11-244.zip
+  demo_time: '2:44'
+  engine: PRBoom v2.5.1.3cl2
+  level: Map 11
+  player:
+  - Plut
+  wad: requiem
+rq11-252.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40878/rq11-252.zip
+  demo_time: '2:52'
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - vdgg
+  wad: requiem
+rq11-257.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40879/rq11-257.zip
+  demo_time: '2:57'
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Xit Vono
+  wad: requiem
+rq11-502.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40880/rq11-502.zip
+  demo_time: '5:02'
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Brad Spencer
+  wad: requiem
+rq11c033.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40881/rq11c033.zip
+  demo_time: 0:33
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Twister
+  - Method
+  wad: requiem
+rq11o029xit.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40904/rq11o029xit.zip
+  demo_time: 0:29
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Xit Vono
+  wad: requiem
+rq11xn134.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40893/rq11xn134.zip
+  demo_time: '1:34'
+  engine: TASDooM
+  level: Map 11
+  player:
+  - Xit Vono
+  wad: requiem
+rq11xp133.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40900/rq11xp133.zip
+  demo_time: '1:33'
+  engine: TASDooM
+  level: Map 11
+  player:
+  - Xit Vono
+  wad: requiem
+rq12-150.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40907/rq12-150.zip
+  demo_time: '1:50'
+  engine: DooM2 v1.9
+  level: Map 12
+  player:
+  - Xit Vono
+  wad: requiem
+rq12-152.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40908/rq12-152.zip
+  demo_time: '1:52'
+  engine: DooM2 v1.9
+  level: Map 12
+  player:
+  - Method
+  wad: requiem
+rq12-203.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40909/rq12-203.zip
+  demo_time: '2:03'
+  engine: DooM2 v1.9
+  level: Map 12
+  player:
+  - Xit Vono
+  wad: requiem
+rq12-212.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40910/rq12-212.zip
+  demo_time: '2:12'
+  engine: DooM2 v1.9
+  level: Map 12
+  player:
+  - Xit Vono
+  wad: requiem
+rq12-232.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40911/rq12-232.zip
+  demo_time: '2:32'
+  engine: DooM2 v1.9
+  level: Map 12
+  player:
+  - Xit Vono
+  wad: requiem
+rq12-339.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40912/rq12-339.zip
+  demo_time: '3:39'
+  engine: DooM2 v1.9
+  level: Map 12
+  player:
+  - Xit Vono
+  wad: requiem
+rq12-727.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40905/rq12-727.zip
+  demo_time: '7:27'
+  engine: PRBoom cl2
+  level: Map 12
+  player:
+  - Kristian Ronge
+  wad: requiem
+rq12-913.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40906/rq12-913.zip
+  demo_time: '9:13'
+  engine: DooM2 v1.9
+  level: Map 12
+  player:
+  - Xit Vono
+  wad: requiem
+rq12xp340.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40917/rq12xp340.zip
+  demo_time: '3:40'
+  engine: TASDooM
+  level: Map 12
+  player:
+  - Xit Vono
+  wad: requiem
+rq13-434.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40923/rq13-434.zip
+  demo_time: '4:34'
+  engine: DooM2 v1.9
+  level: Map 13
+  player:
+  - Xit Vono
+  wad: requiem
+rq13-556.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40924/rq13-556.zip
+  demo_time: '5:56'
+  engine: DooM2 v1.9
+  level: Map 13
+  player:
+  - Xit Vono
+  wad: requiem
+rq13-653.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40920/rq13-653.zip
+  demo_time: '6:53'
+  engine: DooM2 v1.9
+  level: Map 13
+  player:
+  - Xit Vono
+  wad: requiem
+rq13-717.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40921/rq13-717.zip
+  demo_time: '7:17'
+  engine: DooM2 v1.9
+  level: Map 13
+  player:
+  - Adam Williamson
+  wad: requiem
+rq13c020.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40922/rq13c020.zip
+  demo_time: 0:20
+  engine: ZDaemon v1.09.01
+  level: Map 13
+  player:
+  - Memfis
+  - Plut
+  wad: requiem
+rq13x613adamw.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40918/rq13x613adamw.zip
+  demo_time: '6:13'
+  engine: TASDooM
+  level: Map 13
+  player:
+  - Adam Williamson
+  wad: requiem
+rq13x648olivera.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40919/rq13x648olivera.zip
+  demo_time: '6:48'
+  engine: TASDooM
+  level: Map 13
+  player:
+  - Andy Olivera
+  wad: requiem
+rq14-1309.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40934/rq14-1309.zip
+  demo_time: '13:09'
+  engine: DooM2 v1.9
+  level: Map 14
+  player:
+  - Jason Henry
+  wad: requiem
+rq14-248.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40935/rq14-248.zip
+  demo_time: '2:48'
+  engine: DooM2 v1.9
+  level: Map 14
+  player:
+  - Xit Vono
+  wad: requiem
+rq14-325.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40936/rq14-325.zip
+  demo_time: '3:25'
+  engine: PRBoom v2.5.1.4cl2
+  level: Map 14
+  player:
+  - Cyberdemon531
+  wad: requiem
+rq14-334.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40937/rq14-334.zip
+  demo_time: '3:34'
+  engine: DooM2 v1.9
+  level: Map 14
+  player:
+  - Xit Vono
+  wad: requiem
+rq14-423.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40938/rq14-423.zip
+  demo_time: '4:23'
+  engine: DooM2 v1.9
+  level: Map 14
+  player:
+  - Xit Vono
+  wad: requiem
+rq14-458.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40929/rq14-458.zip
+  demo_time: '4:58'
+  engine: Chocolate DooM v1.2.1
+  level: Map 14
+  player:
+  - SAV88
+  wad: requiem
+rq14-548.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40930/rq14-548.zip
+  demo_time: '5:48'
+  engine: DooM2 v1.9
+  level: Map 14
+  player:
+  - Xit Vono
+  wad: requiem
+rq14-557.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40932/rq14-557.zip
+  demo_time: '5:57'
+  engine: DooM2 v1.9
+  level: Map 14
+  player:
+  - Radek Pecka
+  wad: requiem
+rq14-614.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40933/rq14-614.zip
+  demo_time: '6:14'
+  engine: DooM2 v1.9
+  level: Map 14
+  player:
+  - Xit Vono
+  wad: requiem
+rq14f836.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40940/rq14f836.zip
+  demo_time: '8:36'
+  engine: PRBoom v2.5.1.4cl2
+  level: Map 14
+  player:
+  - Cyberdemon531
+  wad: requiem
+rq14o047.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40944/rq14o047.zip
+  demo_time: 0:47
+  engine: PRBoom v2.5.1.4cl2
+  level: Map 14
+  player:
+  - Cyberdemon531
+  wad: requiem
+rq14x554olivera.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40931/rq14x554olivera.zip
+  demo_time: '5:54'
+  engine: TASDooM
+  level: Map 14
+  player:
+  - Andy Olivera
+  wad: requiem
+rq15-248.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40948/rq15-248.zip
+  demo_time: '2:48'
+  engine: Chocolate DooM v1.2.1
+  level: Map 15
+  player:
+  - SAV88
+  wad: requiem
+rq15-627.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40949/rq15-627.zip
+  demo_time: '6:27'
+  engine: DooM2 v1.9
+  level: Map 15
+  player:
+  - Xit Vono
+  wad: requiem
+rq15-755.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40945/rq15-755.zip
+  demo_time: '7:55'
+  engine: PRBoom v2.5.0.8cl2
+  level: Map 15
+  player:
+  - SAV88
+  wad: requiem
+rq15-848.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40946/rq15-848.zip
+  demo_time: '8:48'
+  engine: Chocolate DooM v1.2.1
+  level: Map 15
+  player:
+  - SAV88
+  wad: requiem
+rq151058.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40947/rq151058.zip
+  demo_time: '10:58'
+  engine: DooM2 v1.9
+  level: Map 15
+  player:
+  - Xit Vono
+  wad: requiem
+rq15s-156.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40954/rq15s-156.zip
+  demo_time: '1:56'
+  engine: Chocolate DooM v1.2.1
+  level: Map 15s
+  player:
+  - SAV88
+  wad: requiem
+rq15s440.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40955/rq15s440.zip
+  demo_time: '4:40'
+  engine: DooM2 v1.9
+  level: Map 15s
+  player:
+  - Xit Vono
+  wad: requiem
+rq15s517.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40956/rq15s517.zip
+  demo_time: '5:17'
+  engine: DooM2 v1.9
+  level: Map 15s
+  player:
+  - Xit Vono
+  wad: requiem
+rq15t2443.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40953/rq15t2443.zip
+  demo_time: '24:43'
+  engine: PRBoom v2.5.1.5cl2
+  level: Map 15
+  player:
+  - Bloodite Krypto
+  wad: requiem
+rq16-552.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40958/rq16-552.zip
+  demo_time: '5:52'
+  engine: Chocolate DooM v1.2.1
+  level: Map 16
+  player:
+  - SAV88
+  wad: requiem
+rq16-603.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40961/rq16-603.zip
+  demo_time: '6:03'
+  engine: DooM2 v1.9
+  level: Map 16
+  player:
+  - Xit Vono
+  wad: requiem
+rq16-721.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40959/rq16-721.zip
+  demo_time: '7:21'
+  engine: DooM2 v1.9
+  level: Map 16
+  player:
+  - Xit Vono
+  wad: requiem
+rq16-805.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40960/rq16-805.zip
+  demo_time: '8:05'
+  engine: DooM2 v1.9
+  level: Map 16
+  player:
+  - Adam Williamson
+  wad: requiem
+rq17-113.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40967/rq17-113.zip
+  demo_time: '1:13'
+  engine: PRBoom v2.5.1.4cl2
+  level: Map 17
+  player:
+  - ELMLE
+  wad: requiem
+rq17-206.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40968/rq17-206.zip
+  demo_time: '2:06'
+  engine: DooM2 v1.9
+  level: Map 17
+  player:
+  - Twister
+  wad: requiem
+rq17-215.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40969/rq17-215.zip
+  demo_time: '2:15'
+  engine: DooM2 v1.9
+  level: Map 17
+  player:
+  - Xit Vono
+  wad: requiem
+rq17-239.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40970/rq17-239.zip
+  demo_time: '2:39'
+  engine: DooM2 v1.9
+  level: Map 17
+  player:
+  - Xit Vono
+  wad: requiem
+rq17-750.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40966/rq17-750.zip
+  demo_time: '7:50'
+  engine: DooM2 v1.9
+  level: Map 17
+  player:
+  - Xit Vono
+  wad: requiem
+rq17o119xit.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40977/rq17o119xit.zip
+  demo_time: '1:19'
+  engine: DooM2 v1.9
+  level: Map 17
+  player:
+  - Xit Vono
+  wad: requiem
+rq17s223.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40972/rq17s223.zip
+  demo_time: '2:23'
+  engine: PRBoom v2.5.1.4cl2
+  level: Map 17
+  player:
+  - ELMLE
+  wad: requiem
+rq18-252.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40980/rq18-252.zip
+  demo_time: '2:52'
+  engine: DooM2 v1.9
+  level: Map 18
+  player:
+  - Xit Vono
+  wad: requiem
+rq18-318.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40981/rq18-318.zip
+  demo_time: '3:18'
+  engine: DooM2 v1.9
+  level: Map 18
+  player:
+  - Xit Vono
+  wad: requiem
+rq18-347.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40982/rq18-347.zip
+  demo_time: '3:47'
+  engine: DooM2 v1.9
+  level: Map 18
+  player:
+  - Xit Vono
+  wad: requiem
+rq18-354.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40978/rq18-354.zip
+  demo_time: '3:54'
+  engine: DooM2 v1.9
+  level: Map 18
+  player:
+  - Tatsurd-cacocaco
+  wad: requiem
+rq18-453.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40979/rq18-453.zip
+  demo_time: '4:53'
+  engine: DooM2 v1.9
+  level: Map 18
+  player:
+  - Xit Vono
+  wad: requiem
+rq19-107.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40988/rq19-107.zip
+  demo_time: '1:07'
+  engine: DooM2 v1.9
+  level: Map 19
+  player:
+  - Gusta
+  wad: requiem
+rq19-213.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40989/rq19-213.zip
+  demo_time: '2:13'
+  engine: DooM2 v1.9
+  level: Map 19
+  player:
+  - Jason Dyer
+  wad: requiem
+rq19-227.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40990/rq19-227.zip
+  demo_time: '2:27'
+  engine: DooM2 v1.9
+  level: Map 19
+  player:
+  - Jason Dyer
+  wad: requiem
+rq19-230.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40991/rq19-230.zip
+  demo_time: '2:30'
+  engine: DooM2 v1.9
+  level: Map 19
+  player:
+  - Jason Dyer
+  wad: requiem
+rq19-238.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40992/rq19-238.zip
+  demo_time: '2:38'
+  engine: DooM2 v1.9
+  level: Map 19
+  player:
+  - Jason Dyer
+  wad: requiem
+rq19-239.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40993/rq19-239.zip
+  demo_time: '2:39'
+  engine: DooM2 v1.9
+  level: Map 19
+  player:
+  - Xit Vono
+  wad: requiem
+rq19-527.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40986/rq19-527.zip
+  demo_time: '5:27'
+  engine: DooM2 v1.9
+  level: Map 19
+  player:
+  - Xit Vono
+  wad: requiem
+rq20-010.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41022/rq20-010.zip
+  demo_time: 0:10
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Adam Hegyi
+  wad: requiem
+rq20-011.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41003/rq20-011.zip
+  demo_time: 0:11
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Adam Hegyi
+  wad: requiem
+rq20-012.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41004/rq20-012.zip
+  demo_time: 0:12
+  engine: PRBoom cl2
+  level: Map 20
+  player:
+  - Dislogical
+  wad: requiem
+rq20-035.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40999/rq20-035.zip
+  demo_time: 0:35
+  engine: PRBoom v2.5.1.3cl2
+  level: Map 20
+  player:
+  - Memfis
+  wad: requiem
+rq20-036.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41000/rq20-036.zip
+  demo_time: 0:36
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Adam Hegyi
+  wad: requiem
+rq20-046.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41001/rq20-046.zip
+  demo_time: 0:46
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Arno Slagboom
+  wad: requiem
+rq20-142.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41002/rq20-142.zip
+  demo_time: '1:42'
+  engine: PRBoom v2.5.1.4cl2
+  level: Map 20
+  player:
+  - Ling
+  wad: requiem
+rq20f047.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41016/rq20f047.zip
+  demo_time: 0:47
+  engine: PRBoom v2.5.0.8cl2
+  level: Map 20
+  player:
+  - Kyle McAwesome
+  wad: requiem
+rq20o774.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41031/rq20o774.zip
+  demo_time: 0:07
+  engine: PRBoom v2.5.1.4cl2
+  level: Map 20
+  player:
+  - 4shockblast
+  wad: requiem
+rq20o837.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41032/rq20o837.zip
+  demo_time: 0:08
+  engine: PRBoom v2.5.1.3cl2
+  level: Map 20
+  player:
+  - David Spring
+  wad: requiem
+rq20t250.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41026/rq20t250.zip
+  demo_time: '2:50'
+  engine: PRBoom v2.5.1.3cl2
+  level: Map 20
+  player:
+  - Erwin Lin
+  wad: requiem
+rq21-456.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41034/rq21-456.zip
+  demo_time: '4:56'
+  engine: DooM2 v1.9
+  level: Map 21
+  player:
+  - vdgg
+  wad: requiem
+rq21-636.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41035/rq21-636.zip
+  demo_time: '6:36'
+  engine: DooM2 v1.9
+  level: Map 21
+  player:
+  - Xit Vono
+  wad: requiem
+rq21-838.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41033/rq21-838.zip
+  demo_time: '8:38'
+  engine: DooM2 v1.9
+  level: Map 21
+  player:
+  - Xit Vono
+  wad: requiem
+rq21o346.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41039/rq21o346.zip
+  demo_time: '3:46'
+  engine: PRBoom v2.5.0.2cl2
+  level: Map 21
+  player:
+  - Doomdaniel95
+  wad: requiem
+rq21o357.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41040/rq21o357.zip
+  demo_time: '3:57'
+  engine: PRBoom v2.5.0.2cl2
+  level: Map 21
+  player:
+  - Doomdaniel95
+  wad: requiem
+rq21o455.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41041/rq21o455.zip
+  demo_time: '4:55'
+  engine: PRBoom v2.5.0.2cl2
+  level: Map 21
+  player:
+  - Doomdaniel95
+  wad: requiem
+rq22-247.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41047/rq22-247.zip
+  demo_time: '2:47'
+  engine: Chocolate DooM v1.2.1
+  level: Map 22
+  player:
+  - SAV88
+  wad: requiem
+rq22-318.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41048/rq22-318.zip
+  demo_time: '3:18'
+  engine: DooM2 v1.9
+  level: Map 22
+  player:
+  - Adam Williamson
+  wad: requiem
+rq22-335.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41049/rq22-335.zip
+  demo_time: '3:35'
+  engine: DooM2 v1.9
+  level: Map 22
+  player:
+  - Adam Williamson
+  wad: requiem
+rq22-445.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41050/rq22-445.zip
+  demo_time: '4:45'
+  engine: DooM2 v1.9
+  level: Map 22
+  player:
+  - Xit Vono
+  wad: requiem
+rq22-459.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41042/rq22-459.zip
+  demo_time: '4:59'
+  engine: Chocolate DooM v1.2.1
+  level: Map 22
+  player:
+  - SAV88
+  wad: requiem
+rq22-518.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41043/rq22-518.zip
+  demo_time: '5:18'
+  engine: DooM2 v1.9
+  level: Map 22
+  player:
+  - Henning Skogsto
+  wad: requiem
+rq22-525.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41044/rq22-525.zip
+  demo_time: '5:25'
+  engine: DooM2 v1.9
+  level: Map 22
+  player:
+  - Adam Williamson
+  wad: requiem
+rq22-558.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41045/rq22-558.zip
+  demo_time: '5:58'
+  engine: DooM2 v1.9
+  level: Map 22
+  player:
+  - Yashar Garibzadeh
+  wad: requiem
+rq22-628.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41046/rq22-628.zip
+  demo_time: '6:28'
+  engine: DooM2 v1.9
+  level: Map 22
+  player:
+  - Jason Henry
+  wad: requiem
+rq22p1140.zip:
+- category: Other
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41054/rq22p1140.zip
+  demo_time: '11:40'
+  engine: PRBoom v2.5.0.9cl2
+  level: Map 22
+  player:
+  - Memfis
+  wad: requiem
+rq23-149.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41057/rq23-149.zip
+  demo_time: '1:49'
+  engine: DooM2 v1.9
+  level: Map 23
+  player:
+  - xepop
+  wad: requiem
+rq23-1835.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41056/rq23-1835.zip
+  demo_time: '18:35'
+  engine: DooM2 v1.9
+  level: Map 23
+  player:
+  - Jason Henry
+  wad: requiem
+rq23-459.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41058/rq23-459.zip
+  demo_time: '4:59'
+  engine: DooM2 v1.9
+  level: Map 23
+  player:
+  - Xit Vono
+  wad: requiem
+rq23-618.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41059/rq23-618.zip
+  demo_time: '6:18'
+  engine: DooM2 v1.9
+  level: Map 23
+  player:
+  - Xit Vono
+  wad: requiem
+rq23-633.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41055/rq23-633.zip
+  demo_time: '6:33'
+  engine: DooM2 v1.9
+  level: Map 23
+  player:
+  - Xit Vono
+  wad: requiem
+rq23f620.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41062/rq23f620.zip
+  demo_time: '6:20'
+  engine: PRBoom v2.5.1.3cl2
+  level: Map 23
+  player:
+  - Istvan Pataki
+  wad: requiem
+rq23f639.zip:
+- category: Other
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41065/rq23f639.zip
+  demo_time: '6:39'
+  engine: PRBoom v2.5.1.2cl2
+  level: Map 23
+  player:
+  - Istvan Pataki
+  wad: requiem
+rq23xf433.zip:
+- category: UV Fast
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41061/rq23xf433.zip
+  demo_time: '4:33'
+  engine: PRBoom v2.5.1.2cl2
+  level: Map 23
+  player:
+  - Istvan Pataki
+  wad: requiem
+rq24-039skepticist.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41070/rq24-039skepticist.zip
+  demo_time: 0:39
+  engine: PRBoom v2.5.0.6cl2
+  level: Map 24
+  player:
+  - Skepticist
+  wad: requiem
+rq24-041.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41071/rq24-041.zip
+  demo_time: 0:41
+  engine: DooM2 v1.9
+  level: Map 24
+  player:
+  - cack_handed
+  wad: requiem
+rq24-148.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41072/rq24-148.zip
+  demo_time: '1:48'
+  engine: DooM2 v1.9
+  level: Map 24
+  player:
+  - Adam Hegyi
+  wad: requiem
+rq24-313.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41073/rq24-313.zip
+  demo_time: '3:13'
+  engine: DooM2 v1.9
+  level: Map 24
+  player:
+  - Xit Vono
+  wad: requiem
+rq24-416.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41066/rq24-416.zip
+  demo_time: '4:16'
+  engine: Chocolate DooM v1.2.1
+  level: Map 24
+  player:
+  - SAV88
+  wad: requiem
+rq24-535.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41067/rq24-535.zip
+  demo_time: '5:35'
+  engine: DooM2 v1.9
+  level: Map 24
+  player:
+  - vdgg
+  wad: requiem
+rq24-543.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41068/rq24-543.zip
+  demo_time: '5:43'
+  engine: PRBoom v2.4.8.5cl2
+  level: Map 24
+  player:
+  - Skepticist
+  wad: requiem
+rq24-628.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41069/rq24-628.zip
+  demo_time: '6:28'
+  engine: DooM2 v1.9
+  level: Map 24
+  player:
+  - Xit Vono
+  wad: requiem
+rq24o019.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41082/rq24o019.zip
+  demo_time: 0:19
+  engine: PRBoom v2.5.1.4cl2
+  level: Map 24
+  player:
+  - MD922
+  wad: requiem
+rq24r507.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41078/rq24r507.zip
+  demo_time: '5:07'
+  engine: PRBoom v2.5.1.1cl2
+  level: Map 24
+  player:
+  - vdgg
+  wad: requiem
+rq24xn303.zip:
+- category: NM Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41074/rq24xn303.zip
+  demo_time: '3:03'
+  engine: TASDooM
+  level: Map 24
+  player:
+  - Xit Vono
+  wad: requiem
+rq24xp248.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41080/rq24xp248.zip
+  demo_time: '2:48'
+  engine: TASDooM
+  level: Map 24
+  player:
+  - Xit Vono
+  wad: requiem
+rq25-031.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41088/rq25-031.zip
+  demo_time: 0:31
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Laszlo Vecsei
+  wad: requiem
+rq25-032.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41089/rq25-032.zip
+  demo_time: 0:32
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Laszlo Vecsei
+  wad: requiem
+rq25-033.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41090/rq25-033.zip
+  demo_time: 0:33
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Erik Alm
+  wad: requiem
+rq25-036.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41091/rq25-036.zip
+  demo_time: 0:36
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Jason Dyer
+  wad: requiem
+rq25-037.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41092/rq25-037.zip
+  demo_time: 0:37
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Erik Alm
+  wad: requiem
+rq25-041.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41093/rq25-041.zip
+  demo_time: 0:41
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Erik Alm
+  wad: requiem
+rq25-042.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41094/rq25-042.zip
+  demo_time: 0:42
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Jason Dyer
+  wad: requiem
+rq25-051.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41095/rq25-051.zip
+  demo_time: 0:51
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Erik Alm
+  wad: requiem
+rq25-055.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41096/rq25-055.zip
+  demo_time: 0:55
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Jason Dyer
+  wad: requiem
+rq25-056.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41097/rq25-056.zip
+  demo_time: 0:56
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Erik Alm
+  wad: requiem
+rq25-109.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41098/rq25-109.zip
+  demo_time: '1:09'
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Erik Alm
+  wad: requiem
+rq25-152.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41099/rq25-152.zip
+  demo_time: '1:52'
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Jason Dyer
+  wad: requiem
+rq25-155.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41083/rq25-155.zip
+  demo_time: '1:55'
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Tatsurd-cacocaco
+  wad: requiem
+rq25-223.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41084/rq25-223.zip
+  demo_time: '2:23'
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - vdgg
+  wad: requiem
+rq25-242.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41085/rq25-242.zip
+  demo_time: '2:42'
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Erik Alm
+  wad: requiem
+rq25-302.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41086/rq25-302.zip
+  demo_time: '3:02'
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Opulent
+  wad: requiem
+rq25t1008.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41108/rq25t1008.zip
+  demo_time: '10:08'
+  engine: PRBoom v2.5.1.1cl2
+  level: Map 25
+  player:
+  - vdgg
+  wad: requiem
+rq25x023.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41087/rq25x023.zip
+  demo_time: 0:23
+  engine: PRBoom v2.2.6.2cl2
+  level: Map 25
+  player:
+  - vdgg
+  wad: requiem
+rq26-007.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41123/rq26-007.zip
+  demo_time: 0:07
+  engine: DooM2 v1.9
+  level: Map 26
+  player:
+  - Adam Hegyi
+  wad: requiem
+rq26-033.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41109/rq26-033.zip
+  demo_time: 0:33
+  engine: DooM2 v1.9
+  level: Map 26
+  player:
+  - Kimo Xvirus
+  wad: requiem
+rq26-035.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41110/rq26-035.zip
+  demo_time: 0:35
+  engine: DooM2 v1.9
+  level: Map 26
+  player:
+  - Kimo Xvirus
+  wad: requiem
+rq26-038.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41111/rq26-038.zip
+  demo_time: 0:38
+  engine: DooM2 v1.9
+  level: Map 26
+  player:
+  - Radek Pecka
+  wad: requiem
+rq26-041.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41112/rq26-041.zip
+  demo_time: 0:41
+  engine: DooM2 v1.9
+  level: Map 26
+  player:
+  - Xit Vono
+  wad: requiem
+rq26o697.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41127/rq26o697.zip
+  demo_time: 0:06
+  engine: PRBoom v2.5.1.4cl2
+  level: Map 26
+  player:
+  - 4shockblast
+  wad: requiem
+rq26o774.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41128/rq26o774.zip
+  demo_time: 0:07
+  engine: PRBoom v2.5.1.3cl2
+  level: Map 26
+  player:
+  - David Spring
+  wad: requiem
+rq27-1514.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41130/rq27-1514.zip
+  demo_time: '15:14'
+  engine: PRBoom v2.5.1.4cl2
+  level: Map 27
+  player:
+  - Cyberdemon531
+  wad: requiem
+rq27-449.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41132/rq27-449.zip
+  demo_time: '4:49'
+  engine: DooM2 v1.9
+  level: Map 27
+  player:
+  - Xit Vono
+  wad: requiem
+rq27-525.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41133/rq27-525.zip
+  demo_time: '5:25'
+  engine: DooM2 v1.9
+  level: Map 27
+  player:
+  - Oyvind Stenhaug
+  wad: requiem
+rq271415.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41129/rq271415.zip
+  demo_time: '14:15'
+  engine: DooM2 v1.9
+  level: Map 27
+  player:
+  - GuyNamedErick
+  wad: requiem
+rq271520.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41131/rq271520.zip
+  demo_time: '15:20'
+  engine: DooM2 v1.9
+  level: Map 27
+  player:
+  - vdgg
+  wad: requiem
+rq27t6401.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41136/rq27t6401.zip
+  demo_time: '1:04:01'
+  engine: PRBoom v2.5.1.5cl2
+  level: Map 27
+  player:
+  - Bloodite Krypto
+  wad: requiem
+rq28-059.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41140/rq28-059.zip
+  demo_time: 0:59
+  engine: DooM2 v1.9
+  level: Map 28
+  player:
+  - Method
+  wad: requiem
+rq28-102.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41141/rq28-102.zip
+  demo_time: '1:02'
+  engine: DooM2 v1.9
+  level: Map 28
+  player:
+  - Method
+  wad: requiem
+rq28-110.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41142/rq28-110.zip
+  demo_time: '1:10'
+  engine: DooM2 v1.9
+  level: Map 28
+  player:
+  - Xit Vono
+  wad: requiem
+rq28-124.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41143/rq28-124.zip
+  demo_time: '1:24'
+  engine: DooM2 v1.9
+  level: Map 28
+  player:
+  - Method
+  wad: requiem
+rq28-154.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41144/rq28-154.zip
+  demo_time: '1:54'
+  engine: DooM2 v1.9
+  level: Map 28
+  player:
+  - Xit Vono
+  wad: requiem
+rq28-423.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41137/rq28-423.zip
+  demo_time: '4:23'
+  engine: DooM2 v1.9
+  level: Map 28
+  player:
+  - Radek Pecka
+  wad: requiem
+rq28-449.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41138/rq28-449.zip
+  demo_time: '4:49'
+  engine: DooM2 v1.9
+  level: Map 28
+  player:
+  - Xit Vono
+  wad: requiem
+rq28t2019.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41148/rq28t2019.zip
+  demo_time: '20:19'
+  engine: PRBoom v2.5.1.1cl2
+  level: Map 28
+  player:
+  - vdgg
+  wad: requiem
+rq28xo026.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41150/rq28xo026.zip
+  demo_time: 0:26
+  engine: PRBoom v2.5.1.3cl2
+  level: Map 28
+  player:
+  - 4shockblast
+  wad: requiem
+rq29-507.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41152/rq29-507.zip
+  demo_time: '5:07'
+  engine: DooM2 v1.9
+  level: Map 29
+  player:
+  - vdgg
+  wad: requiem
+rq29-555.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41153/rq29-555.zip
+  demo_time: '5:55'
+  engine: DooM2 v1.9
+  level: Map 29
+  player:
+  - Xit Vono
+  wad: requiem
+rq291313.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41151/rq291313.zip
+  demo_time: '13:13'
+  engine: DooM2 v1.9
+  level: Map 29
+  player:
+  - vdgg
+  wad: requiem
+rq30-017.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41161/rq30-017.zip
+  demo_time: 0:17
+  engine: DooM2 v1.9
+  level: Map 30
+  player:
+  - Adam Hegyi
+  wad: requiem
+rq30-018.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41162/rq30-018.zip
+  demo_time: 0:18
+  engine: PRBoom v2.5.0.8cl2
+  level: Map 30
+  player:
+  - Daiyu Xiaoxiang
+  wad: requiem
+rq30-049.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41156/rq30-049.zip
+  demo_time: 0:49
+  engine: DooM2 v1.9
+  level: Map 30
+  player:
+  - Kimo Xvirus
+  wad: requiem
+rq30-110.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41157/rq30-110.zip
+  demo_time: '1:10'
+  engine: DooM2 v1.9
+  level: Map 30
+  player:
+  - Altima Mantoid
+  wad: requiem
+rq30-122.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41158/rq30-122.zip
+  demo_time: '1:22'
+  engine: DooM2 v1.9
+  level: Map 30
+  player:
+  - Xit Vono
+  wad: requiem
+rq30-152.zip:
+- category: Other
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41173/rq30-152.zip
+  demo_time: '1:52'
+  engine: DooM2 v1.9
+  level: Map 30
+  player:
+  - Altima Mantoid
+  wad: requiem
+rq30-221.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41159/rq30-221.zip
+  demo_time: '2:21'
+  engine: DooM2 v1.9
+  level: Map 30
+  player:
+  - Altima Mantoid
+  wad: requiem
+rq30t514.zip:
+- category: Other
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41174/rq30t514.zip
+  demo_time: '5:14'
+  engine: PRBoom v2.5.1.1cl2
+  level: Map 30
+  player:
+  - vdgg
+  wad: requiem
+rq31-125.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41176/rq31-125.zip
+  demo_time: '1:25'
+  engine: DooM2 v1.9
+  level: Map 31
+  player:
+  - Eugene Kapustin
+  wad: requiem
+rq31-128.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41177/rq31-128.zip
+  demo_time: '1:28'
+  engine: DooM2 v1.9
+  level: Map 31
+  player:
+  - Xit Vono
+  wad: requiem
+rq31-136.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41178/rq31-136.zip
+  demo_time: '1:36'
+  engine: DooM2 v1.9
+  level: Map 31
+  player:
+  - Erik Alm
+  wad: requiem
+rq31-146.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41179/rq31-146.zip
+  demo_time: '1:46'
+  engine: DooM2 v1.9
+  level: Map 31
+  player:
+  - Xit Vono
+  wad: requiem
+rq31-148.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41175/rq31-148.zip
+  demo_time: '1:48'
+  engine: DooM2 v1.9
+  level: Map 31
+  player:
+  - Vile
+  wad: requiem
+rq31o030.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41190/rq31o030.zip
+  demo_time: 0:30
+  engine: PRBoom v2.5.1.3cl2
+  level: Map 31
+  player:
+  - AD_79
+  wad: requiem
+rq31o032.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41191/rq31o032.zip
+  demo_time: 0:32
+  engine: PRBoom v2.5.1.3cl2
+  level: Map 31
+  player:
+  - David Spring
+  wad: requiem
+rq31s-036.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41192/rq31s-036.zip
+  demo_time: 0:36
+  engine: PRBoom v2.5.0.9cl2
+  level: Map 31s
+  player:
+  - Memfis
+  wad: requiem
+rq31s115.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41193/rq31s115.zip
+  demo_time: '1:15'
+  engine: DooM2 v1.9
+  level: Map 31s
+  player:
+  - Eugene Kapustin
+  wad: requiem
+rq31s124.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41194/rq31s124.zip
+  demo_time: '1:24'
+  engine: DooM2 v1.9
+  level: Map 31s
+  player:
+  - Xit Vono
+  wad: requiem
+rq31s145.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41195/rq31s145.zip
+  demo_time: '1:45'
+  engine: DooM2 v1.9
+  level: Map 31s
+  player:
+  - Xit Vono
+  wad: requiem
+rq32-013.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41198/rq32-013.zip
+  demo_time: 0:13
+  engine: DooM2 v1.9
+  level: Map 32
+  player:
+  - Kimo Xvirus
+  wad: requiem
+rq32-014.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41211/rq32-014.zip
+  demo_time: 0:14
+  engine: DooM2 v1.9
+  level: Map 32
+  player:
+  - Cameron Prosser
+  wad: requiem
+rq32-015.zip:
+- category: Pacifist
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41212/rq32-015.zip
+  demo_time: 0:15
+  engine: DooM2 v1.9
+  level: Map 32
+  player:
+  - Cameron Prosser
+  wad: requiem
+rq32-016.zip:
+- category: UV Speed
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41199/rq32-016.zip
+  demo_time: 0:16
+  engine: DooM2 v1.9
+  level: Map 32
+  player:
+  - Adam Hegyi
+  wad: requiem
+rq32-107.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41196/rq32-107.zip
+  demo_time: '1:07'
+  engine: DooM2 v1.9
+  level: Map 32
+  player:
+  - Vile
+  wad: requiem
+rq32-114.zip:
+- category: UV Max
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41197/rq32-114.zip
+  demo_time: '1:14'
+  engine: DooM2 v1.9
+  level: Map 32
+  player:
+  - Radek Pecka
+  wad: requiem
+rq32o886.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41214/rq32o886.zip
+  demo_time: 0:08
+  engine: PRBoom v2.5.1.4cl2
+  level: Map 32
+  player:
+  - 4shockblast
+  wad: requiem
+rq32o949.zip:
+- category: NoMo
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41215/rq32o949.zip
+  demo_time: 0:09
+  engine: PRBoom v2.5.1.3cl2
+  level: Map 32
+  player:
+  - David Spring
+  wad: requiem
+rquvlmp2.zip:
+- category: Other
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/43631/rquvlmp2.zip
+  demo_time: '8:10'
+  engine: DooM2 v1.9
+  level: Map 21
+  player:
+  - Rudy Jurjako
+  wad: requiem
+rr01-037.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40658/rr01-037.zip
+  demo_time: 0:37
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Radek Pecka
+  wad: requiem
+rr01-038.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40659/rr01-038.zip
+  demo_time: 0:38
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Xit Vono
+  wad: requiem
+rr01-040.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40660/rr01-040.zip
+  demo_time: 0:40
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Radek Pecka
+  wad: requiem
+rr01-044.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40661/rr01-044.zip
+  demo_time: 0:44
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Xit Vono
+  wad: requiem
+rr01-047.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40662/rr01-047.zip
+  demo_time: 0:47
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Xit Vono
+  wad: requiem
+rr02-102.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40695/rr02-102.zip
+  demo_time: '1:02'
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Radek Pecka
+  wad: requiem
+rr02-103.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40696/rr02-103.zip
+  demo_time: '1:03'
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Xit Vono
+  wad: requiem
+rr02-105.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40697/rr02-105.zip
+  demo_time: '1:05'
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Xit Vono
+  wad: requiem
+rr02-106.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40698/rr02-106.zip
+  demo_time: '1:06'
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Radek Pecka
+  wad: requiem
+rr02-117.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40699/rr02-117.zip
+  demo_time: '1:17'
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Xit Vono
+  wad: requiem
+rr03-614.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40731/rr03-614.zip
+  demo_time: '6:14'
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - "Zvonimir Bu\u017Eani\u0107"
+  wad: requiem
+rr03-701.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40732/rr03-701.zip
+  demo_time: '7:01'
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - Xit Vono
+  wad: requiem
+rr04-448.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40762/rr04-448.zip
+  demo_time: '4:48'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - vdgg
+  wad: requiem
+rr041235.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40763/rr041235.zip
+  demo_time: '12:35'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Xit Vono
+  wad: requiem
+rr051201.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40782/rr051201.zip
+  demo_time: '12:01'
+  engine: DooM2 v1.9
+  level: Map 05
+  player:
+  - Xit Vono
+  wad: requiem
+rr06-843.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40800/rr06-843.zip
+  demo_time: '8:43'
+  engine: DooM2 v1.9
+  level: Map 06
+  player:
+  - Xit Vono
+  wad: requiem
+rr081126.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40822/rr081126.zip
+  demo_time: '11:26'
+  engine: DooM2 v1.9
+  level: Map 08
+  player:
+  - Tomas Kollar
+  wad: requiem
+rr081439.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40823/rr081439.zip
+  demo_time: '14:39'
+  engine: DooM2 v1.9
+  level: Map 08
+  player:
+  - Xit Vono
+  wad: requiem
+rr09-735.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40844/rr09-735.zip
+  demo_time: '7:35'
+  engine: DooM2 v1.9
+  level: Map 09
+  player:
+  - Xit Vono
+  wad: requiem
+rr10-337.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40868/rr10-337.zip
+  demo_time: '3:37'
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Xit Vono
+  wad: requiem
+rr11-318.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40898/rr11-318.zip
+  demo_time: '3:18'
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - vdgg
+  wad: requiem
+rr11-348.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40899/rr11-348.zip
+  demo_time: '3:48'
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Xit Vono
+  wad: requiem
+rr12-913.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40916/rr12-913.zip
+  demo_time: '9:13'
+  engine: DooM2 v1.9
+  level: Map 12
+  player:
+  - Xit Vono
+  wad: requiem
+rr13-834.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40927/rr13-834.zip
+  demo_time: '8:34'
+  engine: DooM2 v1.9
+  level: Map 13
+  player:
+  - Xit Vono
+  wad: requiem
+rr14-726.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40942/rr14-726.zip
+  demo_time: '7:26'
+  engine: DooM2 v1.9
+  level: Map 14
+  player:
+  - Xit Vono
+  wad: requiem
+rr16-955.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40964/rr16-955.zip
+  demo_time: '9:55'
+  engine: DooM2 v1.9
+  level: Map 16
+  player:
+  - Xit Vono
+  wad: requiem
+rr17-818.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40975/rr17-818.zip
+  demo_time: '8:18'
+  engine: DooM2 v1.9
+  level: Map 17
+  player:
+  - Revved
+  wad: requiem
+rr18-520.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40985/rr18-520.zip
+  demo_time: '5:20'
+  engine: DooM2 v1.9
+  level: Map 18
+  player:
+  - Revved
+  wad: requiem
+rr20-041.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41019/rr20-041.zip
+  demo_time: 0:41
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Radek Pecka
+  wad: requiem
+rr20-047.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41020/rr20-047.zip
+  demo_time: 0:47
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Altima Mantoid
+  wad: requiem
+rr20-049.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41021/rr20-049.zip
+  demo_time: 0:49
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Xit Vono
+  wad: requiem
+rr21-834.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41038/rr21-834.zip
+  demo_time: '8:34'
+  engine: DooM2 v1.9
+  level: Map 21
+  player:
+  - Revved
+  wad: requiem
+rr22-720.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41053/rr22-720.zip
+  demo_time: '7:20'
+  engine: DooM2 v1.9
+  level: Map 22
+  player:
+  - Revved
+  wad: requiem
+rr23-605.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41064/rr23-605.zip
+  demo_time: '6:05'
+  engine: DooM2 v1.9
+  level: Map 23
+  player:
+  - vdgg
+  wad: requiem
+rr25-231.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41104/rr25-231.zip
+  demo_time: '2:31'
+  engine: DooM2 v1.9
+  level: Map 25
+  player:
+  - Revved
+  wad: requiem
+rr26-028.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41119/rr26-028.zip
+  demo_time: 0:28
+  engine: DooM2 v1.9
+  level: Map 26
+  player:
+  - Kimo Xvirus
+  wad: requiem
+rr26-038.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41120/rr26-038.zip
+  demo_time: 0:38
+  engine: DooM2 v1.9
+  level: Map 26
+  player:
+  - Erik Alm
+  wad: requiem
+rr26-041.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41121/rr26-041.zip
+  demo_time: 0:41
+  engine: DooM2 v1.9
+  level: Map 26
+  player:
+  - Eugene Kapustin
+  wad: requiem
+rr26-105.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41122/rr26-105.zip
+  demo_time: '1:05'
+  engine: DooM2 v1.9
+  level: Map 26
+  player:
+  - Xit Vono
+  wad: requiem
+rr28-318.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41147/rr28-318.zip
+  demo_time: '3:18'
+  engine: DooM2 v1.9
+  level: Map 28
+  player:
+  - Revved
+  wad: requiem
+rr30-041.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41168/rr30-041.zip
+  demo_time: 0:41
+  engine: DooM2 v1.9
+  level: Map 30
+  player:
+  - Kimo Xvirus
+  wad: requiem
+rr30-107.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41169/rr30-107.zip
+  demo_time: '1:07'
+  engine: DooM2 v1.9
+  level: Map 30
+  player:
+  - Altima Mantoid
+  wad: requiem
+rr30-119.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41170/rr30-119.zip
+  demo_time: '1:19'
+  engine: DooM2 v1.9
+  level: Map 30
+  player:
+  - Xit Vono
+  wad: requiem
+rr30-140.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41171/rr30-140.zip
+  demo_time: '1:40'
+  engine: DooM2 v1.9
+  level: Map 30
+  player:
+  - Altima Mantoid
+  wad: requiem
+rr31-157.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41187/rr31-157.zip
+  demo_time: '1:57'
+  engine: DooM2 v1.9
+  level: Map 31
+  player:
+  - Eugene Kapustin
+  wad: requiem
+rr31-322.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41188/rr31-322.zip
+  demo_time: '3:22'
+  engine: DooM2 v1.9
+  level: Map 31
+  player:
+  - Xit Vono
+  wad: requiem
+rr32-231.zip:
+- category: UV Respawn
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41210/rr32-231.zip
+  demo_time: '2:31'
+  engine: DooM2 v1.9
+  level: Map 32
+  player:
+  - Altima Mantoid
+  wad: requiem
+rs01-015.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40653/rs01-015.zip
+  demo_time: 0:15
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Adam Williamson
+  wad: requiem
+rs01-020.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40654/rs01-020.zip
+  demo_time: 0:20
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Dashiva
+  wad: requiem
+rs02-041.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40686/rs02-041.zip
+  demo_time: 0:41
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Radek Pecka
+  wad: requiem
+rs02-042.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40687/rs02-042.zip
+  demo_time: 0:42
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Xit Vono
+  wad: requiem
+rs02-044.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40688/rs02-044.zip
+  demo_time: 0:44
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Adam Hegyi
+  wad: requiem
+rs02-108.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40689/rs02-108.zip
+  demo_time: '1:08'
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Xit Vono
+  wad: requiem
+rs03-231.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40727/rs03-231.zip
+  demo_time: '2:31'
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - Xit Vono
+  wad: requiem
+rs04-332.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40757/rs04-332.zip
+  demo_time: '3:32'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Xit Vono
+  wad: requiem
+rs04-421.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40758/rs04-421.zip
+  demo_time: '4:21'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Xit Vono
+  wad: requiem
+rs051150.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40779/rs051150.zip
+  demo_time: '11:50'
+  engine: DooM2 v1.9
+  level: Map 05
+  player:
+  - Xit Vono
+  wad: requiem
+rs06-856.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40798/rs06-856.zip
+  demo_time: '8:56'
+  engine: DooM2 v1.9
+  level: Map 06
+  player:
+  - Xit Vono
+  wad: requiem
+rs09-318.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40840/rs09-318.zip
+  demo_time: '3:18'
+  engine: DooM2 v1.9
+  level: Map 09
+  player:
+  - SAV88
+  wad: requiem
+rs09-631.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40841/rs09-631.zip
+  demo_time: '6:31'
+  engine: DooM2 v1.9
+  level: Map 09
+  player:
+  - Xit Vono
+  wad: requiem
+rs10-305.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40864/rs10-305.zip
+  demo_time: '3:05'
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Xit Vono
+  wad: requiem
+rs11-204.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40894/rs11-204.zip
+  demo_time: '2:04'
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Tatsurd-cacocaco
+  wad: requiem
+rs14-848.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40939/rs14-848.zip
+  demo_time: '8:48'
+  engine: DooM2 v1.9
+  level: Map 14
+  player:
+  - Xit Vono
+  wad: requiem
+rs15-950.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40951/rs15-950.zip
+  demo_time: '9:50'
+  engine: DooM2 v1.9
+  level: Map 15
+  player:
+  - Xit Vono
+  wad: requiem
+rs17-554.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40973/rs17-554.zip
+  demo_time: '5:54'
+  engine: DooM2 v1.9
+  level: Map 17
+  player:
+  - Xit Vono
+  wad: requiem
+rs18-924.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40983/rs18-924.zip
+  demo_time: '9:24'
+  engine: DooM2 v1.9
+  level: Map 18
+  player:
+  - Xit Vono
+  wad: requiem
+rs20-025.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41011/rs20-025.zip
+  demo_time: 0:25
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Eugene Kapustin
+  wad: requiem
+rs20-101.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41013/rs20-101.zip
+  demo_time: '1:01'
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Xit Vono
+  wad: requiem
+rs20-2329.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/47410/rs20-2329.zip
+  demo_time: 0:23
+  engine: PRBoom 2.5.1.4
+  level: Map 20
+  player:
+  - JonaG
+  wad: requiem
+rs26-009.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41114/rs26-009.zip
+  demo_time: 0:09
+  engine: DooM2 v1.9
+  level: Map 26
+  player:
+  - Adam Hegyi
+  wad: requiem
+rs32-015.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41203/rs32-015.zip
+  demo_time: 0:15
+  engine: DooM2 v1.9
+  level: Map 32
+  player:
+  - Kimo Xvirus
+  wad: requiem
+rs32-016.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41204/rs32-016.zip
+  demo_time: 0:16
+  engine: DooM2 v1.9
+  level: Map 32
+  player:
+  - Cameron Prosser
+  wad: requiem
+rs32-018.zip:
+- category: NM 100S
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41205/rs32-018.zip
+  demo_time: 0:18
+  engine: DooM2 v1.9
+  level: Map 32
+  player:
+  - Cameron Prosser
+  wad: requiem
+rt01-044.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40665/rt01-044.zip
+  demo_time: 0:44
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Xit Vono
+  wad: requiem
+rt01-045.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40666/rt01-045.zip
+  demo_time: 0:45
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Radek Pecka
+  wad: requiem
+rt01-046.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40667/rt01-046.zip
+  demo_time: 0:46
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Adam Williamson
+  wad: requiem
+rt01-055.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40668/rt01-055.zip
+  demo_time: 0:55
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Xit Vono
+  wad: requiem
+rt01-056.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40669/rt01-056.zip
+  demo_time: 0:56
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Arno Slagboom
+  wad: requiem
+rt02-258.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40706/rt02-258.zip
+  demo_time: '2:58'
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Tatsurd-cacocaco
+  wad: requiem
+rt02-312.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40707/rt02-312.zip
+  demo_time: '3:12'
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Xit Vono
+  wad: requiem
+rt02-324.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40708/rt02-324.zip
+  demo_time: '3:24'
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Adam Williamson
+  wad: requiem
+rt02-717.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40709/rt02-717.zip
+  demo_time: '7:17'
+  engine: DooM2 v1.9
+  level: Map 02
+  player:
+  - Erwin Lin
+  wad: requiem
+rt031845.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40733/rt031845.zip
+  demo_time: '18:45'
+  engine: DooM2 v1.9
+  level: Map 03
+  player:
+  - Xit Vono
+  wad: requiem
+rt043102.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40766/rt043102.zip
+  demo_time: '31:02'
+  engine: DooM2 v1.9
+  level: Map 04
+  player:
+  - Xit Vono
+  wad: requiem
+rt053415.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40784/rt053415.zip
+  demo_time: '34:15'
+  engine: DooM2 v1.9
+  level: Map 05
+  player:
+  - Xit Vono
+  wad: requiem
+rt063746.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40801/rt063746.zip
+  demo_time: '37:46'
+  engine: DooM2 v1.9
+  level: Map 06
+  player:
+  - vdgg
+  wad: requiem
+rt082231.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40824/rt082231.zip
+  demo_time: '22:31'
+  engine: DooM2 v1.9
+  level: Map 08
+  player:
+  - Xit Vono
+  wad: requiem
+rt101454.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40872/rt101454.zip
+  demo_time: '14:54'
+  engine: DooM2 v1.9
+  level: Map 10
+  player:
+  - Xit Vono
+  wad: requiem
+rt111042.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40902/rt111042.zip
+  demo_time: '10:42'
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - vdgg
+  wad: requiem
+rt111330.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40903/rt111330.zip
+  demo_time: '13:30'
+  engine: DooM2 v1.9
+  level: Map 11
+  player:
+  - Xit Vono
+  wad: requiem
+rt132248.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40928/rt132248.zip
+  demo_time: '22:48'
+  engine: DooM2 v1.9
+  level: Map 13
+  player:
+  - Xit Vono
+  wad: requiem
+rt141711.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40943/rt141711.zip
+  demo_time: '17:11'
+  engine: DooM2 v1.9
+  level: Map 14
+  player:
+  - Xit Vono
+  wad: requiem
+rt162736.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40965/rt162736.zip
+  demo_time: '27:36'
+  engine: DooM2 v1.9
+  level: Map 16
+  player:
+  - Xit Vono
+  wad: requiem
+rt173414.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/40976/rt173414.zip
+  demo_time: '34:14'
+  engine: DooM2 v1.9
+  level: Map 17
+  player:
+  - vdgg
+  wad: requiem
+rt20-214.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41025/rt20-214.zip
+  demo_time: '2:14'
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Xit Vono
+  wad: requiem
+rt20-254.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41027/rt20-254.zip
+  demo_time: '2:54'
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Xit Vono
+  wad: requiem
+rt20-508.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41028/rt20-508.zip
+  demo_time: '5:08'
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Erwin Lin
+  wad: requiem
+rt20-547.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41029/rt20-547.zip
+  demo_time: '5:47'
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Erwin Lin
+  wad: requiem
+rt20-601.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41030/rt20-601.zip
+  demo_time: '6:01'
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Erwin Lin
+  wad: requiem
+rt242345.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41081/rt242345.zip
+  demo_time: '23:45'
+  engine: DooM2 v1.9
+  level: Map 24
+  player:
+  - vdgg
+  wad: requiem
+rt26-213.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41124/rt26-213.zip
+  demo_time: '2:13'
+  engine: DooM2 v1.9
+  level: Map 26
+  player:
+  - Xit Vono
+  wad: requiem
+rt26-349.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41125/rt26-349.zip
+  demo_time: '3:49'
+  engine: DooM2 v1.9
+  level: Map 26
+  player:
+  - Eugene Kapustin
+  wad: requiem
+rt26-625.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41126/rt26-625.zip
+  demo_time: '6:25'
+  engine: DooM2 v1.9
+  level: Map 26
+  player:
+  - Xit Vono
+  wad: requiem
+rt30-420.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41172/rt30-420.zip
+  demo_time: '4:20'
+  engine: DooM2 v1.9
+  level: Map 30
+  player:
+  - vdgg
+  wad: requiem
+rt311321.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41189/rt311321.zip
+  demo_time: '13:21'
+  engine: DooM2 v1.9
+  level: Map 31
+  player:
+  - Xit Vono
+  wad: requiem
+rt32-938.zip:
+- category: Tyson
+  demo_dl: https://www.dsdarchive.com/files/demos/requiem/41213/rt32-938.zip
+  demo_time: '9:38'
+  engine: DooM2 v1.9
+  level: Map 32
+  player:
+  - Xit Vono
+  wad: requiem
+strlpack.zip:
+- category: Stroller
+  demo_dl: https://www.dsdarchive.com/files/demos/av/43947/strlpack.zip
+  demo_time: 0:25
+  engine: DooM2 v1.9
+  level: Map 01
+  player:
+  - Kristian Ronge
+  wad: requiem
+- category: Stroller
+  demo_dl: https://www.dsdarchive.com/files/demos/av/43947/strlpack.zip
+  demo_time: 0:20
+  engine: DooM2 v1.9
+  level: Map 20
+  player:
+  - Kristian Ronge
+  wad: requiem
+- category: Stroller
+  demo_dl: https://www.dsdarchive.com/files/demos/av/43947/strlpack.zip
+  demo_time: 0:14
+  engine: DooM2 v1.9
+  level: Map 26
+  player:
+  - Grazza
+  wad: requiem
+- category: Stroller
+  demo_dl: https://www.dsdarchive.com/files/demos/av/43947/strlpack.zip
+  demo_time: 0:25
+  engine: DooM2 v1.9
+  level: Map 32
+  player:
+  - Grazza
+  wad: requiem

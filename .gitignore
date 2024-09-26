@@ -138,6 +138,39 @@ upload.ini
 # Uploader working files/directories
 # These are automatically created by the upload process.
 demos_for_upload/
+dsda_demos/
+dsda_wads/
+failed_posts/
+completed_jsons
+
+# THIS SHOULD NEVER BE PUBLIC
+cheat_detection.py
+otp.txt
 
 # 4shockblast: will use this for any tmp code I write to auto-generate/fix configs and stuff
 tmp_code.py
+analysis.txt
+levelstat.txt
+log.txt
+doomworld_downloader/backup_dsda_url_to_wad_info.yaml
+cur_log.txt
+failed_uploads.json
+.token
+jsons_complete/
+tmp_demos_for_upload/
+sample_scripts/
+additional_pack_info.yaml
+user_map.yaml
+demo_pack_tmp/
+doomworld_downloader/wad_parse/idgames_api/completed_jsons/
+doomworld_downloader/wad_parse/idgames_api/deathmatch/
+doomworld_downloader/wad_parse/idgames_api/levels/
+doomworld_downloader/wad_parse/idgames_api/music/
+doomworld_downloader/wad_parse/idgames_api/themes/
+doomworld_downloader/wad_parse/idgames_api/*.json
+doomworld_downloader/wad_parse/idgames_api/*.wad
+doomworld_downloader/wad_parse/idgames_api/*.zip
+wad_upload_config.yaml
+record_index_info.txt
+demopack_download.yaml
+additional_demo_info.yaml

@@ -3,6 +3,38 @@
 search_start_date = 2020-06-23T00:00:00Z
 search_end_date = 2020-06-23T23:59:59Z
 
-prboom_plus_directory = d:\\Games\\prboom-plus-2517
+dsda_doom_directory = d:\\Games\\dsda-doom-dsda
 parse_lmp_directory = d:\\MyStuff\\lmp
-testing_mode = true
+dsda_api_directory = d:\\MyStuff\\dsda3\\dsda-r-api-client
+
+demo_download_directory = demos_for_upload
+wad_download_directory = dsda_wads
+
+upload_type = date-based|ad-hoc|demo_pack|dsda
+ignore_cache = FALSE|true
+
+skip_playback = TRUE|false
+
+demo_date_cutoff = 2021-01-01T00:00:00Z
+check_txt_date = FALSE|true
+always_try_solonet = FALSE|true
+add_lmp_metadata = true|FALSE
+run_through_all_cmd_line_options = true|FALSE
+
+[demo_pack]
+
+input_folder = d:\\demo_pack_input
+output_folder = d:\\demo_pack_output
+user_map = doomworld_downloader\\user_map.yaml
+additional_info_map = doomworld_downloader\\additional_pack_info.yaml
+demo_pack_name = demo_pack_name
+
+[dsda_mode]
+
+page = https://www.dsdarchive.com/wads/d5da2
+demo_date_cutoff = 1998-01-01T00:00:00Z
+download_directory = dsda_demos
+sync_only = true|FALSE
+replace_zips = true|FALSE
+replace_zips_dir = replace_zips
+additional_info_map = doomworld_downloader\\additional_demo_info.yaml

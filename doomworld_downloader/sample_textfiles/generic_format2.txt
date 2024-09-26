@@ -1,0 +1,17 @@
+PWAD:		PWAD
+PWAD File:	PWAD.wad
+Map:		01 (some random text)
+Skill:		4
+Category:	Pacifist
+Exe:		DSDA Doom v0.18.0 -complevel 9
+
+Time:		1:01:01.00
+
+Author:		Player123456
+Attempt:	10000000
+
+Youtube: https://www.youtube.com/watch?v=abcdefghijk
+
+Comments:
+
+this run sux
