@@ -69,7 +69,11 @@ class DemoProcessor:
             if ZIP_RE.match(demo):
                 demo_zip_info = DemoZipInfo(zip_path=demo, post_data=self.post_data,
                                             additional_info=input_demo_info)
-                demo_zip_info.process_zip()
+                try:
+                    demo_zip_info.process_zip()
+                except NotImplementedError:
+                    LOGGER.exception('Found non-supported compresion method in zip %s.', demo)
+                    continue
                 if demo_zip_info.zip_process_failed:
                     continue
 

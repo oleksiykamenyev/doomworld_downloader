@@ -1868,6 +1868,41 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/corruption
   id: '146006'
   name: "Corruption demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/146682-simulacrum-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/simulacrum
+  id: '146682'
+  name: "Simulacrum demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/147104-down-under-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/dunder
+  id: '147104'
+  name: "Down Under demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/147180-spectrum-descent-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/specdesc
+  id: '147180'
+  name: "Spectrum Descent demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/147519-judgment-retrial-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/judgmentrt
+  id: '147519'
+  name: "Judgment: Retrial demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/147818-60-minute-marathon-2-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/60mm2
+  id: '147818'
+  name: "60 Minute Marathon 2 demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/148086-misaligned-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/misaligned
+  id: '148086'
+  name: "Misaligned demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/148292-thirty-monsters-challenge-2-thirty-aliens-demos-30mc2-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/30mc2
+  id: '148292'
+  name: "Thirty Monsters Challenge 2: Thirty Aliens Demos (30MC2) [-complevel 21]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -2013,7 +2048,7 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wads:
       - https://www.dsdarchive.com/wads/1klinecp
       - https://www.dsdarchive.com/wads/1klinecp2
-      - https://www.dsdarchive.com/wads/1klinecp3
+      - https://www.dsdarchive.com/wads/1k3v1a
   id: '126248'
   name: 1000 Lines Series Megathread [-complevel 2]
 "https://www.doomworld.com/forum/topic/108513-dyingcamels-demons-demos/":
@@ -2553,6 +2588,13 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/sbspd019
       - https://www.dsdarchive.com/wads/sbspd020
       - https://www.dsdarchive.com/wads/sbspd021
+"https://www.doomworld.com/forum/topic/148072-crispy-chicken-speedmap-sessions-demos-various-complevels/":
+  id: "148072"
+  name: Crispy Chicken Speedmap Sessions demos [various complevels]
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/ccss01
+      - https://www.dsdarchive.com/wads/ccss02
 
 # WAD Author threads
 "https://www.doomworld.com/forum/topic/86724-demos-for-miscellaneous-ribbiks-maps/":
