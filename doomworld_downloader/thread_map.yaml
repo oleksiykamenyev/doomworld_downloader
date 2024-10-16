@@ -1903,6 +1903,11 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/30mc2
   id: '148292'
   name: "Thirty Monsters Challenge 2: Thirty Aliens Demos (30MC2) [-complevel 21]"
+"https://www.doomworld.com/forum/topic/148748-hispanic-community-project-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/hcp
+  id: '148748'
+  name: "Hispanic Community Project demos [-complevel 9]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":

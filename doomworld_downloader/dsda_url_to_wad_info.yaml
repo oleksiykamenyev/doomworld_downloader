@@ -5879,6 +5879,9 @@
     map_ranges: [[1, 17], [31, 32]]
     d2all: ["Map 01", "Map 17"]
     episodes: []
+    map_info:
+      "Map 12":
+        skip_also_pacifist_for_categories: ["NM Speed"]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/s2pv"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/100975-sparta-and-sparta-ii-project-vesuvius-demos-complevel-2-9/"
@@ -21089,8 +21092,8 @@
   complevel: 2
   playback_cmd_line: "-file final4"
   map_list_info:
-    map_ranges: [[1, 6]]
-    d2all: ["Map 01", "Map 06"]
+    map_ranges: [[1, 4]]
+    d2all: ["Map 01", "Map 04"]
     episodes: []
     map_info:
       "Map 02":
@@ -39744,7 +39747,7 @@
         skip_reality_for_categories: ["UV Speed", "Pacifist", "NM Speed", "Stroller"]
         skip_also_pacifist_for_categories: ["NM Speed"]
       "Map 25":
-        skip_reality_for_categories: ["UV Speed", "Pacifist", "NM Speed", "Stroller"]
+        skip_reality_for_categories: ["UV Respawn", "UV Speed", "Pacifist", "NM Speed", "Stroller"]
         skip_also_pacifist_for_categories: ["NM Speed"]
       "Map 26":
         skip_reality_for_categories: ["UV Speed", "Pacifist", "NM Speed"]
@@ -41854,6 +41857,9 @@
       "Map 17":
         skip_reality_for_categories: ["UV Speed", "Pacifist", "NM Speed", "Stroller"]
         skip_also_pacifist_for_categories: ["NM Speed"]
+      "Map 39":
+        skip_reality_for_categories: ["UV Speed", "Pacifist", "NM Speed", "Stroller"]
+        skip_also_pacifist_for_categories: ["NM Speed"]
       "Map 43":
         skip_reality_for_categories: ["UV Speed", "Pacifist", "NM Speed", "Stroller"]
         skip_also_pacifist_for_categories: ["NM Speed"]
@@ -43509,8 +43515,14 @@
     episodes: [["Map 01", "Map 10"], ["Map 11", "Map 21"], ["Map 22", "Map 32"], ["Map 33", "Map 43"], ["Map 44", "Map 54"], ["Map 55", "Map 64"], ["Map 65", "Map 74"]]
     secret_exits: {}
     map_info:
+      "Map 01":
+        skip_reality_for_categories: ["UV Speed", "Pacifist", "NM Speed"]
+        skip_also_pacifist_for_categories: ["NM Speed"]
       "Map 03":
         skip_reality_for_categories: ["UV Speed", "Pacifist", "NM Speed", "Stroller"]
+        skip_also_pacifist_for_categories: ["NM Speed"]
+      "Map 09":
+        skip_almost_reality_for_categories: ["UV Speed", "Pacifist", "NM Speed", "Stroller"]
         skip_also_pacifist_for_categories: ["NM Speed"]
       "Map 11":
         tyson_only: true
@@ -43530,15 +43542,29 @@
       "Map 28":
         skip_reality_for_categories: ["UV Speed", "Pacifist", "NM Speed", "Stroller"]
         skip_also_pacifist_for_categories: ["NM Speed"]
+      "Map 30":
+        skip_reality_for_categories: ["UV Speed", "Pacifist", "NM Speed", "Stroller"]
+        skip_also_pacifist_for_categories: ["NM Speed"]
       "Map 33":
         skip_reality_for_categories: ["UV Max", "UV Respawn", "UV Speed", "Pacifist", "NM Speed", "Stroller"]
         skip_also_pacifist_for_categories: ["NM Speed"]
       "Map 40":
         skip_reality_for_categories: ["UV Speed", "Pacifist", "NM Speed", "Stroller"]
         skip_also_pacifist_for_categories: ["NM Speed"]
+      "Map 46":
+        skip_reality_for_categories: ["UV Speed", "Pacifist", "NM Speed"]
+        skip_also_pacifist_for_categories: ["NM Speed"]
+      "Map 48":
+        skip_reality_for_categories: ["UV Max", "UV Respawn", "Tyson", "UV Speed"]
+        tyson_only: true
       "Map 67":
         skip_reality: true
         skip_also_pacifist: true
+      "Map 70":
+        skip_reality: true
+        skip_also_pacifist: true
+      "Map 71":
+        skip_reality_for_categories: ["UV Speed", "NM Speed"]
       "Map 74":
         tyson_only: true
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/60mm2"
@@ -43759,8 +43785,8 @@
   complevel: 11
   playback_cmd_line: "-file lockjaw"
   map_list_info:
-    map_ranges: [["E1M1", "E1M8"]]
-    episodes: [["E1M1", "E1M9"]]
+    map_ranges: [["E1M1", "E1M9"]]
+    episodes: [["E1M1", "E1M8"]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom/Ports/j-l/lockjaw"
   dsda_paginated: false
   doomworld_thread: null
@@ -43995,6 +44021,147 @@
   map_list_info:
     map_ranges: [["E1M1"]]
     episodes: []
-  idgames_url: "https://dsdarchive.com/wads/realm10"
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/p-r/realm10"
   dsda_paginated: false
   doomworld_thread: null
+"https://www.dsdarchive.com/wads/rave":
+  wad_name: R.A.V.E.
+  iwad: doom2
+  wad_files:
+    rave.wad: {checksum: "a44e4ff8f53b4d582fbae947a2192de5"}
+  complevel: 2
+  playback_cmd_line: "-file rave"
+  map_list_info:
+    map_ranges: [[1]]
+    d2all: null
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/p-r/rave"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/puss32_d30":
+  wad_name: "PUSS 32: D-30"
+  iwad: doom
+  wad_files:
+    "d30.full.wad": {checksum: "9a69d23c579dc127fc24610c3363d385"}
+    "d30.absurdity.wad": {not_required_for_playback: true, checksum: "52fc9830f5b1a54d5fddd65591f9024e"}
+    "d30.vol1.wad": {not_required_for_playback: true, checksum: "fe734b30c54e493d09512da43d8384f1"}
+    "d30.vol2.wad": {not_required_for_playback: true, checksum: "7cfe7416e04d6651dec2c28a7c37d0f6"}
+  complevel: 9
+  playback_cmd_line: "-file 'd30.full.wad'"
+  map_list_info:
+    map_ranges: [["E1M1", "E1M9"], ["E2M1", "E2M9"], ["E3M1", "E3M9"], ["E4M1", "E4M9"], ["E5M1", "E5M9"], ["E6M1", "E6M9"], ["E7M1", "E7M9"], ["E8M1", "E8M4"]]
+    episodes: [["E1M1", "E1M8"], ["E2M1", "E2M8"], ["E3M1", "E3M8"], ["E4M1", "E4M8"], ["E5M1", "E5M8"], ["E6M1", "E6M8"], ["E7M1", "E7M8"], ["E8M1", "E8M4"]]
+    secret_exits: {"E1M3": "E1M9", "E2M5": "E2M9", "E3M6": "E3M9", "E4M3": "E4M9", "E5M5": "E5M9", "E6M6": "E6M9", "E7M5": "E7M9"}
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/puss32_d30"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/hotblood":
+  wad_name: HOTBLOOD.WAD
+  iwad: doom
+  wad_files:
+    hotblood.wad: {checksum: "165376623c51ce061e0403441502d0bb"}
+  complevel: 3
+  playback_cmd_line: "-file hotblood"
+  map_list_info:
+    map_ranges: [["E2M7"]]
+    episodes: []
+  idgames_url: null
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/classic5":
+  wad_name: classic5.wad - version 1.1
+  iwad: doom
+  wad_files:
+    classic5.wad: {checksum: "00f0ec0e6fb297bb61deee3a65da1bc6"}
+  complevel: 3
+  playback_cmd_line: "-file classic5"
+  map_list_info:
+    map_ranges: [["E2M5"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/a-c/classic5"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/darken2":
+  wad_name: The Darkening Episode 2
+  iwad: doom2
+  wad_files:
+    darken2.wad: {checksum: "1f73606389281c41a8ff89acc9053b15"}
+  complevel: 2
+  playback_cmd_line: "-file darken2"
+  map_list_info:
+    map_ranges: [[1, 24]]
+    d2all: ["Map 01", "Map 24"]
+    episodes: [["Map 01", "Map 12"], ["Map 13", "Map 24"]]
+    secret_exits: {}
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/megawads/darken2"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/10level":
+  wad_name: 10-Level Wad (10levels.zip)
+  iwad: doom2
+  wad_files:
+    10levels.wad: {checksum: "99c5da26e16950cf5089f2e1ca65111d"}
+    10musics.wad: {not_required_for_playback: true, checksum: "949b450b64f3e23159645cc6f8e2b682"}
+  complevel: 2
+  playback_cmd_line: "-file 10levels"
+  map_list_info:
+    map_ranges: [[1, 10]]
+    d2all: ["Map 01", "Map 10"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/0-9/10level"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/11space":
+  wad_name: 11SPACE.WAD
+  iwad: doom
+  wad_files:
+    11space.wad: {checksum: "7939e1d29696bf8e5d5ceede09b43c6c"}
+  complevel: 3
+  playback_cmd_line: "-file 11space"
+  map_list_info:
+    map_ranges: [["E1M1"]]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/0-9/11space"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/draftex":
+  wad_name: Thy Flesh - Turned into a draft-excluder
+  iwad: doom
+  wad_files:
+    draftex.wad: {checksum: "c1a71c28a94dcb8584ff5b0604fda18e"}
+  complevel: 3
+  playback_cmd_line: "-file draftex"
+  map_list_info:
+    map_ranges: [["E4M1", "E4M9"]]
+    episodes: [["E4M1", "E4M8"]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/Ports/d-f/draftex"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/frayed":
+  wad_name: Frayed
+  iwad: doom
+  wad_files:
+    frayed.wad: {checksum: "3db196bf93364cae1a160a638229f4b6"}
+  complevel: 3
+  playback_cmd_line: "-file frayed"
+  map_list_info:
+    map_ranges: [["E1M1", "E1M9"], ["E2M1", "E2M9"], ["E3M1", "E3M9"], ["E4M1", "E4M9"]]
+    episodes: [["E1M1", "E1M8"], ["E2M1", "E2M8"], ["E3M1", "E3M8"], ["E4M1", "E4M8"]]
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom/Ports/megawads/frayed"
+  dsda_paginated: false
+  doomworld_thread: null
+"https://www.dsdarchive.com/wads/hcp":
+  wad_name: Hispanic Community Project
+  iwad: doom2
+  wad_files:
+    hcp.wad: {checksum: "13237539158176114fbe90b4a6d5757c"}
+  complevel: 9
+  playback_cmd_line: "-file hcp"
+  map_list_info:
+    map_ranges: [[1, 43]]
+    d2all: ["Map 01", "Map 24"]
+    episodes: [["Map 01", "Map 06"], ["Map 07", "Map 17"], ["Map 18", "Map 28"], ["Map 29", "Map 40"]]
+    secret_exits: {"Map 12": "Map 41", "Map 41": "Map 42", "Map 42": "Map 43"}
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/hcp"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/148748-hispanic-community-project-demos-complevel-9/"
