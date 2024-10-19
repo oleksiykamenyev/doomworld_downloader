@@ -43046,7 +43046,7 @@
     episodes: [["Map 01", "Map 10"], ["Map 11", "Map 20"]]
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/sfpwdhttps"
   dsda_paginated: false
-  doomworld_thread: null
+  doomworld_thread: "https://www.doomworld.com/forum/topic/148777-sunder-for-people-who-dont-have-time-to-play-sunder-demos-complevel-9/"
 "https://www.dsdarchive.com/wads/auavian":
   wad_name: Austrian Avian Association
   iwad: doom2
@@ -44165,3 +44165,31 @@
   idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/hcp"
   dsda_paginated: false
   doomworld_thread: "https://www.doomworld.com/forum/topic/148748-hispanic-community-project-demos-complevel-9/"
+"https://www.dsdarchive.com/wads/wl4phoenyx":
+  wad_name: With Love For Phoenyx
+  iwad: doom2
+  wad_files:
+    wl4phoenyx.wad: {checksum: "341229cab679c6bb953b0f311c6eced3"}
+  complevel: 21
+  playback_cmd_line: "-file wl4phoenyx"
+  map_list_info:
+    map_ranges: [[1, 14], [31]]
+    d2all: ["Map 01", "Map 14"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/megawads/wl4phoenyx"
+  dsda_paginated: false
+  doomworld_thread: "https://www.doomworld.com/forum/topic/148781-with-love-for-phoenyx-demos-complevel-21/"
+"https://www.dsdarchive.com/wads/bondleday":
+  wad_name: Bondleday!
+  iwad: doom2
+  wad_files:
+    bondleday.wad: {checksum: "f2f731a5f126ab04b3000b289bee57cf"}
+  complevel: 21
+  playback_cmd_line: "-file bondleday"
+  map_list_info:
+    map_ranges: [[1, 8]]
+    d2all: ["Map 01", "Map 07"]
+    episodes: []
+  idgames_url: "https://www.doomworld.com/idgames/levels/doom2/Ports/a-c/bondleday"
+  dsda_paginated: false
+  doomworld_thread: null

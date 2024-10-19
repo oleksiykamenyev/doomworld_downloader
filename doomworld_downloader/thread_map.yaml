@@ -1908,6 +1908,16 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/hcp
   id: '148748'
   name: "Hispanic Community Project demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/148777-sunder-for-people-who-dont-have-time-to-play-sunder-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/sfpwdhttps
+  id: '148777'
+  name: "Sunder For People Who Don't Have Time To Play Sunder demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/148781-with-love-for-phoenyx-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/wl4phoenyx
+  id: '148781'
+  name: "With Love For Phoenyx demos [-complevel 21]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
