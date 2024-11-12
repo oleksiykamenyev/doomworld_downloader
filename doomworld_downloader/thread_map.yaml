@@ -1918,6 +1918,26 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/wl4phoenyx
   id: '148781'
   name: "With Love For Phoenyx demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/148897-333-am-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/333am
+  id: '148897'
+  name: "3:33 A.M. Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/148928-nostalgia-zero-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/nostzero
+  id: '148928'
+  name: "Nostalgia Zero demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/149087-sign-of-torment-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/sot
+  id: '149087'
+  name: "Sign of Torment demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/149293-constriction-1024-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/cnst1024
+  id: '149293'
+  name: "Constriction: 1024 Demos [-complevel 9]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
