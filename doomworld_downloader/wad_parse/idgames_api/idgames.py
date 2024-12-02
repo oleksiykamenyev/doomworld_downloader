@@ -58,7 +58,7 @@ class IdgamesAPI():
             base_url=cls.IDGAMES_API_BASE, action=action, params=params_args
         )
 
-        return requests.get(call_url)
+        return requests.get(call_url, headers={"User-Agent": "Mozilla/5.0"})
 
     @classmethod
     def _handle_response(cls, response):

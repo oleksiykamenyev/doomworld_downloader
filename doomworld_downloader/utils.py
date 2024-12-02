@@ -305,7 +305,7 @@ def get_page(url):
     :param url: URL to get
     :return: Parsed tree structure
     """
-    request_res = requests.get(url)
+    request_res = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
     page_text = str(request_res.text)
     return BeautifulSoup(page_text, features='lxml')
 

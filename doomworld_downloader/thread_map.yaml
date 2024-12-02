@@ -1938,6 +1938,36 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/cnst1024
   id: '149293'
   name: "Constriction: 1024 Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/149497-dimension-of-the-boomed-demos-complevel-11/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/dotb_rc3
+  id: '149497'
+  name: "Dimension of the Boomed demos [-complevel 11]"
+"https://www.doomworld.com/forum/topic/149360-extra-beany-canned-doom-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/canned
+  id: '149360'
+  name: "Extra Beany Canned Doom demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/149562-plerbtonia-demos-complevel-4/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/plerbtonia
+  id: '149562'
+  name: "Plerbtonia Demos [-complevel 4]"
+"https://www.doomworld.com/forum/topic/149577-firefly-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/firefly
+  id: '149577'
+  name: "Firefly demos [complevel 21]"
+"https://www.doomworld.com/forum/topic/149579-scattered-thoughts-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/scattered
+  id: '149579'
+  name: "Scattered Thoughts demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/149607-snow-wave-community-project-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/snowave
+  id: '149607'
+  name: "Snow Wave Community Project demos [-complevel 9]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":

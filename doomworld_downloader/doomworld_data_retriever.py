@@ -332,8 +332,10 @@ def get_new_posts(search_start_date, search_end_date, new_threads):
     posts = []
     for thread in new_threads:
         for page_num in range(thread.last_page_num, 0, -1):
-            cur_posts = parse_thread_page(THREAD_URL_FMT.format(base_url=thread.url, num=page_num),
-                                          thread)
+            cur_posts = parse_thread_page(
+                THREAD_URL_FMT.format(base_url=thread.url.rstrip('/'), num=page_num),
+                thread
+            )
             # If the last post on a page is before the start date, we can break out immediately
             # since we are going backwards in time from the last page.
             if cur_posts and cur_posts[-1].post_date < search_start_date:
@@ -403,7 +405,7 @@ def download_attachments(post):
     author_dir = strip_accents(author_dir)
     downloads = {}
     for attach_url, attach_name in post.attachments.items():
-        response = requests.get(attach_url)
+        response = requests.get(attach_url, headers={"User-Agent": "Mozilla/5.0"})
         try:
             attach_filename = get_download_filename(response, default_filename=attach_name)
         except RuntimeError:
