@@ -11,7 +11,7 @@ import subprocess
 from datetime import datetime, timedelta
 
 from .base_parser import BaseData
-from .cheat_detection import check_tas
+from .cheat_detection import check_tas_lmp_file
 from .data_manager import DataManager
 from .upload_config import CONFIG
 from .utils import run_cmd, convert_datetime_to_dsda_date, compare_iwad
@@ -28,7 +28,8 @@ class LMPData(BaseData):
     """
     PORT_FOOTER_TO_DSDA_MAP = {'PrBoom-Plus': 'PRBoom', 'dsda-doom': 'DSDA-Doom', 'Woof': 'Woof',
                                'Nugget Doom': 'Nugget Doom', 'SpeedWoof': 'SpeedWoof',
-                               'Crispy Doom': 'Crispy Doom', 'PRBoomX': 'PRBoomX'}
+                               'Crispy Doom': 'Crispy Doom', 'Crispy Heretic': 'Crispy Heretic',
+                               'Crispy Hexen': 'Crispy Hexen', 'PRBoomX': 'PRBoomX'}
     KEY_LIST = [
         'engine', 'version', 'skill', 'episode', 'level', 'play mode', 'respawn', 'fast',
         'nomonsters', 'player 1', 'player 2', 'player 3', 'player 4', 'player 5', 'player 6',
@@ -100,7 +101,7 @@ class LMPData(BaseData):
         if self.raw_data['player_classes']:
             self.note_strings.add('Hexen class: ' + ', '.join(self.raw_data['player_classes']))
 
-        is_tas = check_tas(self.lmp_path, self.data, self.raw_data)
+        is_tas = check_tas_lmp_file(self)
         if is_tas:
             self.data['is_tas'] = is_tas
 

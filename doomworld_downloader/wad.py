@@ -16,12 +16,10 @@ class WadMapInfo:
     SKILL_OPTIONS = ['easy', 'medium', 'hard']
 
     VALID_KEYS = {
-        'add_almost_reality_in_nomo': False, 'add_reality_in_nomo': False,
-        'allowed_missed_monsters': [], 'allowed_missed_secrets': [],
-        'mark_secret_exit_as_normal': False, 'no_exit': False, 'nomo_map': False,
-        'skip_almost_reality': False, 'skip_reality': False, 'tyson_only': False,
-        'skip_reality_for_categories': None, 'skip_almost_reality_for_categories': None,
-        'skip_also_pacifist': False, 'skip_also_pacifist_for_categories': None
+        'add_almost_reality_in_nomo': False, 'add_reality_in_nomo': False, 'mark_secret_exit_as_normal': False,
+        'no_exit': False, 'nomo_map': False, 'skip_almost_reality': False, 'skip_reality': False,
+        'tyson_only': False, 'skip_reality_for_categories': None, 'skip_almost_reality_for_categories': None,
+        'skip_also_pacifist': False, 'skip_also_pacifist_for_categories': None, 'required_max_secret_count': None
     }
 
     def __init__(self, map_name, map_info_dict, wad_name, fail_on_error=False):
@@ -68,8 +66,7 @@ class WadMapInfo:
         # If both game mode and skill elements are found at the top level of a WAD map info config,
         # we fail the validation
         if found_game_mode and found_skill:
-            LOGGER.error('Game mode and skill must be at separate hierarchies for a single map '
-                         'info object.')
+            LOGGER.error('Game mode and skill must be at separate hierarchies for a single map info object.')
             pass_validation = False
 
         if not pass_validation and self._fail_on_error:

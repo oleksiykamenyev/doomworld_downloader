@@ -16,12 +16,73 @@ import re
 
 from collections import defaultdict
 
-from .upload_config import CONFIG, NEEDS_ATTENTION_PLACEHOLDER, MAYBE_CHEATED_DIR, \
-    VALID_DEMO_PACK_DIR, VALID_ISSUE_DIR, VALID_NO_ISSUE_DIR, VALID_TAGS_DIR
+from .upload_config import (CONFIG, NEEDS_ATTENTION_PLACEHOLDER, MAYBE_CHEATED_DIR, \
+                            VALID_DEMO_PACK_DIR, VALID_ISSUE_DIR, VALID_NO_ISSUE_DIR, VALID_TAGS_DIR,
+                            INVALID_SOURCE_PORT_DIR, ALLOWED_ENGINE_TO_MIN_VERSION_MAP)
 from .utils import checksum
 
 
+VERSION_NO_PATCH_RE = re.compile(r'^v(?P<major>\d+)\.(?P<minor>\d+)(cl\d+)?$')
+VERSION_PATCH_RE = re.compile(r'^v(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)(cl\d+)?$')
+
 LOGGER = logging.getLogger(__name__)
+
+
+def check_engine(engine, is_tas=False):
+    """Check if engine for given demo is allowed.
+
+    For all non-TAS demos, it must be one of the allowed version at the minimum version or above. Will always return
+    true for DSDA mode as well, as we do not need to enforce anything for existing demos.
+
+    :param engine: Engine info.
+    :param is_tas: Flag indicating if the demo is TAS.
+    :return True if source port is allowed, False otherwise
+    """
+    if is_tas or CONFIG.upload_type == 'dsda' or engine == 'UNKNOWN' or not CONFIG.enforce_engine_versions:
+        return True
+
+    # If we have no space, there is no version number, so this cannot be an allowed engine.
+    if ' ' not in engine:
+        return False
+
+    engine_family, engine_version = engine.split(' ', 1)
+    engine_min_version = ALLOWED_ENGINE_TO_MIN_VERSION_MAP.get(engine_family)
+    if engine_min_version == 'any':
+        return True
+
+    version_match = VERSION_PATCH_RE.match(engine_version)
+    if version_match:
+        major = version_match.group('major')
+        minor = version_match.group('minor')
+        patch = version_match.group('patch')
+    else:
+        version_match = VERSION_NO_PATCH_RE.match(engine_version)
+        # We got some malformed engine version...
+        if not version_match:
+            return False
+
+        major = version_match.group('major')
+        minor = version_match.group('minor')
+        patch = None
+
+    if not engine_min_version:
+        return False
+
+    engine_min_version_parts = engine_min_version.split('.')
+    if len(engine_min_version_parts) == 3:
+        min_major, min_minor, min_patch = engine_min_version_parts
+    else:
+        min_major, min_minor = engine_min_version_parts
+        min_patch = None
+
+    if int(major) < int(min_major):
+        return False
+    if int(minor) < int(min_minor):
+        return False
+    if patch and min_patch and int(patch) < int(min_patch):
+        return False
+
+    return True
 
 
 class DemoJsonDumper:
@@ -84,6 +145,7 @@ class DemoJsonDumper:
 
         for demo_location, demo_jsons in self.demo_location_to_jsons_map.items():
             file_entry = {'file': {'name': '/'.join(os.path.split(demo_location))}}
+            has_invalid_source_port = False
             if len(demo_jsons) > 1:
                 demo_list_entry = {'demos': []}
                 player_info = None
@@ -107,6 +169,8 @@ class DemoJsonDumper:
                     has_issue = demo_json.has_issue or has_issue
                     has_tags = demo_json.has_tags or has_tags
 
+                    has_invalid_source_port = not check_engine(demo_dict['engine']) or has_invalid_source_port
+
                 demo_list_entry.update(file_entry)
                 final_output_json = {'demo_pack': demo_list_entry}
             else:
@@ -117,6 +181,7 @@ class DemoJsonDumper:
                 maybe_cheated = demo_jsons[0].maybe_cheated
                 has_issue = demo_jsons[0].has_issue
                 has_tags = demo_jsons[0].has_tags
+                has_invalid_source_port = not check_engine(demo_list_entry['engine'])
 
             # Set JSON filename to filename_playername_checksum. If the demo is a demo pack
             demo_filename = os.path.splitext(os.path.basename(demo_location))[0]
@@ -124,6 +189,8 @@ class DemoJsonDumper:
             json_filename = f'{demo_filename}{player_info}{demo_checksum}.json'
             if maybe_cheated:
                 json_path = self._set_up_demo_json_file(json_filename, MAYBE_CHEATED_DIR)
+            elif has_invalid_source_port:
+                json_path = self._set_up_demo_json_file(json_filename, INVALID_SOURCE_PORT_DIR)
             elif has_issue:
                 json_path = self._set_up_demo_json_file(json_filename, VALID_ISSUE_DIR)
             elif has_tags:
@@ -159,11 +226,11 @@ class DemoJsonDumper:
 
 class DemoJson:
     """Demo JSON wrapper class."""
-    SKILL_CATEGORY_NOTE_RE = re.compile('^Skill \d .+$')
+    SKILL_CATEGORY_NOTE_RE = re.compile(r'^Skill \d .+$')
 
     MISC_NOTES = ['Also Reality', 'Also Almost Reality', 'Uses turbo', 'Uses -longtics',
                   'Also Pacifist', 'Plays back with forced -complevel 5',
-                  'Good at DooM: gib yourself to end the level.']
+                  'Good at DooM: gib yourself to end the level.', 'Demo syncs with a forced -respawn argument.']
     MISC_CATEGORY_NOTES = [
         '-altdeath', '-coop_spawns', '-fast', '-nomonsters', '-respawn', '-solo-net'
     ]
@@ -241,7 +308,6 @@ class DemoJson:
 
     def _parse_demo_info(self):
         """Parse data from demo info."""
-        # TODO: If an engine isn't known but the complevel is, should still output it
         for evaluation in self.demo_info.data_manager:
             # Convert to JSON keys, default to value in the map.
             key_to_insert = self.KEY_TO_JSON_MAP.get(evaluation.key, evaluation.key)

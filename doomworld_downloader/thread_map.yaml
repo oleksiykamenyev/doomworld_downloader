@@ -1968,6 +1968,46 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/snowave
   id: '149607'
   name: "Snow Wave Community Project demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/149841-pina-colada-2-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/pinacolada2
+  id: '149841'
+  name: "Pina Colada 2 demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/150289-elsp-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/elsp
+  id: '150289'
+  name: "elsp demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/150155-ivydotwad-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ivydotwad
+  id: '150155'
+  name: "ivydotwad demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/150536-tonys-speedmappy-tomfoolery-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/tsmt
+  id: '150536'
+  name: "Tony's Speedmappy Tomfoolery demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/150600-shades-of-azure-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/azureshades
+  id: '150600'
+  name: "Shades of Azure demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/150700-forevr-alone-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/forvraln
+  id: '150700'
+  name: "Fore/vr/ Alone demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/150896-brisk-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/brisk
+  id: '150896'
+  name: "Brisk demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/150950-the-ultimate-return-to-hadron-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/uhadron
+  id: '150950'
+  name: "The Ultimate Return To Hadron demos [-complevel 3]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":

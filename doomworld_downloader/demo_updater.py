@@ -14,7 +14,10 @@ import os
 from collections import defaultdict
 
 from .upload_config import CONFIG, UPDATE_JSON_DIR
+from .utils import normalize_time_to_minutes_and_seconds
 
+
+ADVANCED_PORTS = ['ZDoom', 'GZDoom', 'Zandronum', 'ZDaemon', 'Legacy', 'Doomsday']
 
 LOGGER = logging.getLogger(__name__)
 
@@ -85,12 +88,12 @@ class DemoUpdater:
                     dsda_info = demo_dict['dsda_info']
                     # This is the key used to match the demos; each piece of info is included in
                     # order of most importance. Specifically, if we cannot match to the other side
-                    # with all of the pieces of info, the last one will be removed for a more fuzzy
+                    # with all the pieces of info, the last one will be removed for a more fuzzy
                     # matching strategy in case the update script changed that value. As such, any
                     # value that is most likely to update is placed last in the list. If at any
-                    # point, the fuzzy matching returns more than one demo, we cannot match this one
+                    # point, the fuzzy matching returns more than one demo, we cannot match this demo
                     # and a warning will be output.
-                    match_key = [demo_dict['player_list'], dsda_info['level'], dsda_info['time'],
+                    match_key = [list(demo_dict['player_list']), dsda_info['level'], dsda_info['time'],
                                  dsda_info['wad'], dsda_info['category']]
                     found_match = False
                     matching_demo_json = None
@@ -104,12 +107,17 @@ class DemoUpdater:
                                     # In case of the time, also check if cutting out the tics in the
                                     # JSON value will provide a match; this is possible if a demo on
                                     # DSDA has no tics and the updater added tics.
-                                    # TODO: Time comparison should take into account that time is
-                                    #       displayed in minutes:seconds from DSDA-Doom output, but
-                                    #       includes hours on DSDA
-                                    if json_key == 'time' and json_value.split('.')[0] != value:
-                                        found_match = False
-                                        break
+                                    if json_key == 'time':
+                                        dsda_time_normalized = normalize_time_to_minutes_and_seconds(value)
+                                        if '.' not in dsda_time_normalized:
+                                            json_value_to_test = json_value.split('.')[0]
+                                        else:
+                                            json_value_to_test = json_value
+                                        if json_value_to_test == dsda_time_normalized:
+                                            continue
+
+                                    found_match = False
+                                    break
 
                             if found_match:
                                 matching_demo_json = demo_json
@@ -162,16 +170,20 @@ class DemoUpdater:
             else:
                 json_value = full_demo_json.get(key)
 
-            # TODO: Time comparison should take into account that time is displayed in
-            #       minutes:seconds from DSDA-Doom output, but includes hours on DSDA
             if (test_value or json_value) and test_value != json_value:
                 # In case of advanced ports, we can't trust the output anyway.
                 if is_advanced_port:
                     continue
 
                 # We shouldn't override video links obtained from DSDA with nothing.
+                # We also need to make sure not to trigger updates if time display is in hours on DSDA and minutes from
+                # JSON
                 if not json_value and test_value and key == 'video_link':
                     pass
+                elif key == 'time':
+                    test_time_normalized = normalize_time_to_minutes_and_seconds(test_value)
+                    if json_value == test_time_normalized:
+                        pass
                 else:
                     LOGGER.debug('Difference for demo %s found in key %s!.', demo_location, key)
                     if not CONFIG.dsda_mode_replace_zips:
@@ -251,7 +263,8 @@ class DemoUpdater:
         :param port_name: Port name
         :return: Port name to check
         """
-        if 'ZDoom' in port_name or 'ZDaemon' in port_name or 'Doomsday' in port_name:
-            return True
+        for advanced_port_part in ADVANCED_PORTS:
+            if advanced_port_part in port_name:
+                return True
 
         return False

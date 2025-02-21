@@ -66,9 +66,14 @@ class IdgamesAPI():
 
         :param response: Response object from API call
         :return: Response object converted to JSON if there was no error
-        :raises RuntimeError if there as an error in the response object
+        :raises RuntimeError if there was an error in the response object
         """
-        response_json = response.json()
+        try:
+            response_json = response.json()
+        except requests.exceptions.JSONDecodeError:
+            LOGGER.exception('Received malformed JSON response:\n%s', response)
+            raise
+
         if response_json.get('error'):
             error_type = response_json['error']['type']
             error_message = response_json['error']['message']

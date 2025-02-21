@@ -41,13 +41,9 @@ def parse_args():
 
 def main():
     """Main function."""
-    with open('.\eunomo5846.lmp', 'rb+') as lmp_bytes:
-        lmp_bytes.seek(0)
-        lmp_bytes.write(b'\xdd\x1d\x4d\x42\x46\xe6\x00\x03\x01\x01\x00\x00\x01\x00\x01\x00\x00\x01\x91\xa8\x39\x44\x01\x00\x00\x00\x00\x01\x01\x00\x01\x00\x2d')
-        lmp_bytes.seek(0)
-        version = lmp_bytes.read(1)
-
-    print(version)
+    with open('.\idumea02m4550.lmp', 'rb+') as lmp_bytes:
+        lmp_bytes.seek(36)
+        lmp_bytes.write(b'\x17')
 
 
 if __name__ == '__main__':

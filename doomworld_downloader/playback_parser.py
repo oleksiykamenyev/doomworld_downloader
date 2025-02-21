@@ -12,6 +12,7 @@ from dataclasses import dataclass, field
 from shutil import copyfile, rmtree
 
 from .base_parser import BaseData
+from .cheat_detection import check_tas_playback
 from .data_manager import DataManager
 from .dsda import download_wad_from_dsda, get_wad_name_from_dsda_url
 from .upload_config import CONFIG, NEEDS_ATTENTION_PLACEHOLDER
@@ -50,24 +51,34 @@ class PlaybackData(BaseData):
     PAREN_WITH_OFFSET_RE = re.compile(r'\(\s+')
 
     ALL_SECRETS_CATEGORIES = [
-        'UV Max', 'UV Fast', 'UV Respawn', 'NM 100S', 'NoMo 100S', 'SM Max', 'BP Max',
+        'UV Max', 'UV Fast', 'UV Respawn', 'UV 100S', 'NM 100S', 'NoMo 100S', 'SM Max', 'SM Respawn', 'SM 100S',
+        'BP Max', 'BP Respawn', 'BP 100S', 'Sk5 Max', 'Sk5 Respawn', 'Sk5 100S', 'Sk4 Max', 'Sk4 Respawn', 'Sk4 100S',
+        'Sk3 Max', 'Sk3 Fast', 'Sk3 Respawn', 'Sk3 100S', 'Sk3 NoMo 100S', 'Sk2 Max', 'Sk2 Fast', 'Sk2 Respawn',
+        'Sk2 100S', 'Sk2 NoMo 100S', 'Sk1 Max', 'Sk1 Fast', 'Sk1 Respawn', 'Sk1 100S', 'Sk1 NoMo 100S',
         'Skill 3 Max', 'Skill 3 Fast', 'Skill 3 Respawn', 'Skill 3 100S', 'Skill 3 NoMo 100S',
         'Skill 2 Max', 'Skill 2 Fast', 'Skill 2 Respawn', 'Skill 2 100S', 'Skill 2 NoMo 100S',
-        'Skill 1 Max', 'Skill 1 Fast', 'Skill 1 Respawn', 'Skill 1 100S', 'Skill 1 NoMo 100S'
+        'Skill 1 Max', 'Skill 1 Fast', 'Skill 1 Respawn', 'Skill 1 100S', 'Skill 1 NoMo 100S', 'NM-Lite', 'UV Tank'
     ]
     ALL_KILLS_CATEGORIES = [
-        'UV Max', 'UV Fast', 'UV Respawn', 'UV Tyson', 'Tyson', 'Skill 3 Max', 'Skill 3 Fast',
+        'UV Max', 'UV Fast', 'UV Respawn', 'UV Tyson', 'Tyson', 'SM Max', 'SM Respawn', 'SM Tyson',
+        'BP Max', 'BP Respawn', 'BP Tyson', 'Sk5 Max', 'Sk5 Respawn', 'Sk5 Tyson', 'Sk4 Max', 'Sk4 Respawn',
+        'Sk4 Tyson', 'Sk3 Max', 'Sk3 Fast', 'Sk3 Respawn', 'Sk3 Tyson', 'Sk2 Max', 'Sk2 Fast', 'Sk2 Respawn',
+        'Sk2 Tyson', 'Sk1 Max', 'Sk1 Fast', 'Sk1 Respawn', 'Sk1 Tyson', 'Skill 3 Max', 'Skill 3 Fast',
         'Skill 3 Respawn', 'Skill 3 Tyson', 'Skill 2 Max', 'Skill 2 Fast', 'Skill 2 Respawn',
-        'Skill 2 Tyson', 'Skill 1 Max', 'Skill 1 Fast', 'Skill 1 Respawn', 'Skill 1 Tyson'
+        'Skill 2 Tyson', 'Skill 1 Max', 'Skill 1 Fast', 'Skill 1 Respawn', 'Skill 1 Tyson', 'UV Tank'
     ]
     # TODO: Fix this in DSDA-Doom
     DOOM_CATEGORY_MAP = {'UV Tyson': 'Tyson'}
+    # BP Speed/BP Max/NM Speed/NM 100S distinctions are sorted out based on the raw data in analysis.txt
+    HERETIC_CATEGORY_MAP = {'UV Max': 'SM Max', 'UV Speed': 'SM Speed', 'NM Speed': 'BP Speed', 'NM 100S': 'BP Speed'}
+    # Sk5 Speed/Sk5 Max/NM Speed/NM 100S distinctions are sorted out based on the raw data in analysis.txt
+    HEXEN_CATEGORY_MAP = {'UV Max': 'Sk4 Max', 'UV Speed': 'Sk4 Speed', 'NM Speed': 'Sk5 Speed', 'NM 100S': 'Sk5 Speed'}
     BOOLEAN_INT_KEYS = ['nomonsters', 'respawn', 'fast', 'pacifist', 'stroller', 'almost_reality',
                         '100k', '100s', 'weapon_collector', 'tyson_weapons', 'turbo', 'reality']
 
     CERTAIN_KEYS = ['levelstat', 'time', 'level', 'kills', 'items', 'secrets', 'secret_exit', 'wad',
                     'is_solo_net']
-    POSSIBLE_KEYS = ['category']
+    POSSIBLE_KEYS = ['category', 'is_tas']
 
     DOOM_1_MAP_RE = re.compile(r'^E(?P<episode_num>\d)M\ds?$')
 
@@ -82,8 +93,7 @@ class PlaybackData(BaseData):
 
         :param lmp_path: Path to the LMP file
         :param wad_guesses: List of WAD guesses ordered from most likely to least likely
-        :param demo_info: Miscellaneous additional info about the demo useful for demo playback and
-                          categorization
+        :param demo_info: Miscellaneous additional info about the demo useful for demo playback and categorization
         """
         super().__init__()
         self._cleanup()
@@ -106,6 +116,9 @@ class PlaybackData(BaseData):
         self.note_strings = set()
 
         self._demo_playback = None
+
+        self.is_heretic = False
+        self.is_hexen = False
 
     def analyze(self):
         """Analyze info provided to playback parser."""
@@ -159,12 +172,10 @@ class PlaybackData(BaseData):
                 self.demo_info['skill'] = None
 
         iwad = self.demo_info.get('iwad', '').lower()
-        if compare_iwad(iwad, 'chex'):
-            self.base_command = '{} -iwad chex'.format(self.base_command)
         if compare_iwad(iwad, 'heretic'):
-            self.base_command = '{} -iwad commercial/heretic -heretic'.format(self.base_command)
+            self.base_command = '{} -heretic'.format(self.base_command)
         if compare_iwad(iwad, 'hexen'):
-            self.base_command = '{} -iwad commercial/hexen -hexen'.format(self.base_command)
+            self.base_command = '{} -hexen'.format(self.base_command)
 
     @staticmethod
     def _check_wad_existence(wad):
@@ -254,16 +265,11 @@ class PlaybackData(BaseData):
 
                 command = '{} -iwad commercial/{} {}'.format(self.base_command, wad_guess.iwad,
                                                              cmd_line)
-                try:
-                    run_cmd(command)
-                except subprocess.CalledProcessError as e:
-                    LOGGER.warning('Failed to play back demo %s.', self.lmp_path)
-                    LOGGER.debug('Error message: %s.', e)
-                # Technically, there could be edge cases where a levelstat could be generated even
-                # if the wrong WAD is used (e.g., thissuxx map 1 will exit on pretty much any demo
-                # that is long enough). If the run_through_all_cmd_line_options option is on, such
-                # cases will be decided based on which playback completed the most maps. Otherwise,
-                # we will just take the first playback that succeeds.
+                self._attempt_demo_playback(command)
+                # Technically, there could be edge cases where a levelstat could be generated even if the wrong WAD is
+                # used (e.g., thissuxx map 1 will exit on pretty much any demo that is long enough). If the
+                # run_through_all_cmd_line_options option is on, such cases will be decided based on which playback
+                # completed the most maps. Otherwise, we will just take the first playback that succeeds.
                 if os.path.isfile(PlaybackData.LEVELSTAT_FILENAME):
                     with open(PlaybackData.LEVELSTAT_FILENAME) as levelstat_strm:
                         cur_levelstat = levelstat_strm.read()
@@ -307,6 +313,10 @@ class PlaybackData(BaseData):
 
         if self._demo_playback:
             if not self.playback_failed:
+                if '-iwad commercial/heretic' in self._demo_playback.cmd:
+                    self.is_heretic = True
+                if '-iwad commercial/hexen' in self._demo_playback.cmd:
+                    self.is_hexen = True
                 if '-solo-net' in self._demo_playback.cmd:
                     self.demo_info['game_mode'] = 'coop'
                     self.data['is_solo_net'] = True
@@ -321,6 +331,7 @@ class PlaybackData(BaseData):
                 self._parse_analysis()
                 self._parse_levelstat()
                 self._parse_raw_data()
+                # TODO: Support WADs with multiple complevels across different maps
                 complevel = self.demo_info.get('complevel')
                 if complevel:
                     if int(self._demo_playback.wad.complevel) != int(complevel):
@@ -333,9 +344,24 @@ class PlaybackData(BaseData):
                         self.data['wad'] = wad_update
                     if note:
                         self.note_strings.add(note)
+
+                is_tas = check_tas_playback(self._demo_playback, self.lmp_path)
+                if is_tas:
+                    self.data['is_tas'] = is_tas
         else:
             LOGGER.error('Could not guess wad for demo %s.', self.lmp_path)
             self.playback_failed = True
+
+    def _attempt_demo_playback(self, command):
+        """Attempt demo playback with given command.
+
+        :param Command to attemot playback for
+        """
+        try:
+            run_cmd(command)
+        except subprocess.CalledProcessError as e:
+            LOGGER.warning('Failed to play back demo %s.', self.lmp_path)
+            LOGGER.debug('Error message: %s.', e)
 
     def _parse_raw_data(self):
         """Parse additional info available in raw data.
@@ -356,12 +382,46 @@ class PlaybackData(BaseData):
         )
         skill = self.demo_info.get('skill')
         game_mode = self.demo_info.get('game_mode')
+        all_kills_obtained = self.raw_data.get('100k', False)
+        all_secrets_obtained = self.raw_data.get('100s', False)
 
-        # If a run was a valid Tyson (only Tyson weapons used and 100% kills) and the map is not
-        # Tyson-only, we always choose the Tyson category for the final run instead of UV Max.
-        if self.raw_data.get('tyson_weapons', False) and self.raw_data.get('100k', False):
-            tyson_only = map_info.get_single_key_for_map('tyson_only', skill=skill,
-                                                         game_mode=game_mode)
+        all_required_kills_obtained = all_kills_obtained
+        all_required_secrets_obtained = all_secrets_obtained
+
+        max_secret_count = map_info.get_single_key_for_map('required_max_secret_count', skill=skill,
+                                                           game_mode=game_mode)
+        obtained_secret_number, total_secret_number = map(int, self.data['secrets'].split('/'))
+        _, total_kill_number = map(int, self.data['kills'].split('/'))
+        has_at_least_one_secret = total_secret_number > 0
+        has_at_least_one_kill = total_kill_number > 0
+        if max_secret_count:
+            max_secret_number = int(max_secret_count.split('/')[0])
+            if obtained_secret_number >= max_secret_number:
+                all_required_secrets_obtained = True
+
+        if all_required_kills_obtained and all_required_secrets_obtained and (has_at_least_one_secret or
+                                                                              has_at_least_one_kill):
+            if self.data['category'] == 'UV Speed':
+                self.data['category'] = 'UV Max'
+            elif self.data['category'] == 'Other':
+                if self.raw_data.get('skill') == '4':
+                    is_standard_category = (
+                        self.raw_data.get('nomonsters') == '0' and self.raw_data.get('reborn') == '0' and
+                        self.raw_data.get('turbo') == '0' and self.raw_data.get('solo_net') == '0' and
+                        self.raw_data.get('coop_spawns') == '0'
+                    )
+                    if is_standard_category:
+                        if self.raw_data.get('fast') == '1':
+                            self.data['category'] = 'UV Fast'
+                        elif self.raw_data.get('respawn') == '1':
+                            self.data['category'] = 'UV Respawn'
+        elif self.data['category'] == 'NM Speed' and all_required_secrets_obtained and has_at_least_one_secret:
+            self.data['category'] = 'NM 100S'
+
+        # If a run was a valid Tyson (only Tyson weapons used and 100% kills) and the map is not Tyson-only, we always
+        # choose the Tyson category for the final run instead of UV Max.
+        if self.raw_data.get('tyson_weapons', False) and all_required_kills_obtained:
+            tyson_only = map_info.get_single_key_for_map('tyson_only', skill=skill, game_mode=game_mode)
             if not tyson_only and self.data['category'] == 'UV Max':
                 self.data['category'] = 'Tyson'
 
@@ -417,10 +477,9 @@ class PlaybackData(BaseData):
             self.data['category'] in skip_also_pacifist_categories
         )
         # If a run is not UV-Speed/Pacifist or on nomonsters, add tag for Also Pacifist
-        if not skip_also_pacifist_final and (self.raw_data.get('pacifist', False)
-                                             and not self.raw_data.get('nomonsters', False) and
-                                             self.data['category'] not in ['Pacifist', 'Stroller',
-                                                                           'UV Speed']):
+        if not skip_also_pacifist_final and (self.raw_data.get('pacifist', False) and
+                                             not self.raw_data.get('nomonsters', False) and
+                                             self.data['category'] not in ['Pacifist', 'Stroller', 'UV Speed']):
             self.note_strings.add('Also Pacifist')
 
         # Jumpwad has special rules for categories:
@@ -438,6 +497,41 @@ class PlaybackData(BaseData):
                 self.data['category'] = 'UV Speed'
             elif self.data['category'] == 'Pacifist':
                 self.data['category'] = 'UV Speed'
+
+        if self.is_heretic:
+            self.data['category'] = PlaybackData.HERETIC_CATEGORY_MAP.get(self.data['category'], self.data['category'])
+        if self.is_hexen:
+            self.data['category'] = PlaybackData.HEXEN_CATEGORY_MAP.get(self.data['category'], self.data['category'])
+
+        if self.data['category'] == 'BP Speed':
+            if self.raw_data.get('respawn', False):
+                if all_required_secrets_obtained and has_at_least_one_secret:
+                    self.data['category'] = 'NM 100S'
+                else:
+                    self.data['category'] = 'NM Speed'
+            else:
+                if all_required_kills_obtained and all_required_secrets_obtained:
+                    self.data['category'] = 'BP Max'
+                elif all_required_secrets_obtained and has_at_least_one_secret:
+                    playback_cmd_with_respawn = f'{self._demo_playback.cmd} -respawn'
+                    self._attempt_demo_playback(playback_cmd_with_respawn)
+
+                    playback_with_respawn_successful = False
+                    if os.path.isfile(PlaybackData.LEVELSTAT_FILENAME):
+                        with open(PlaybackData.LEVELSTAT_FILENAME) as levelstat_strm:
+                            cur_levelstat_line_count = len(levelstat_strm.read().splitlines())
+
+                        if cur_levelstat_line_count == self._demo_playback.levelstat_line_count:
+                            playback_with_respawn_successful = True
+
+                    if playback_with_respawn_successful:
+                        self.data['category'] = 'NM 100S'
+                        self.note_strings.add('Demo syncs with a forced -respawn argument.')
+                    else:
+                        self.data['category'] = 'Other'
+                        self.note_strings.add('BP 100S')
+
+        # TODO: Add 100% items tags for Nerf only
 
     def _parse_analysis(self):
         """Parse analysis info.
@@ -469,7 +563,6 @@ class PlaybackData(BaseData):
                 # performed, which will be handled later.
                 self.note_strings.add('Uses turbo')
             if key == 'category':
-                # TODO: Heretic categories still incorrect in analysis, need DSDA-Doom fix
                 self.data['category'] = PlaybackData.DOOM_CATEGORY_MAP.get(value, value)
 
             self.raw_data[key] = value

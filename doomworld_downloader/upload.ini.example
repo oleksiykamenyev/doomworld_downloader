@@ -20,6 +20,9 @@ check_txt_date = FALSE|true
 always_try_solonet = FALSE|true
 add_lmp_metadata = true|FALSE
 run_through_all_cmd_line_options = true|FALSE
+assume_latest_version_for_vanilla_ports = true|FALSE
+
+enforce_engine_versions = true|FALSE
 
 [demo_pack]
 

@@ -458,3 +458,24 @@ def get_orig_names_from_zip_info_map(zip_info_map):
     :return: Original names from zip info map
     """
     return list(zip_member['orig_name'] for zip_member in zip_info_map.values())
+
+
+def normalize_time_to_minutes_and_seconds(time_str):
+    """Normalize time to minutes and seconds.
+
+    For strings with an hour number, it converts them to just minutes and seconds:
+      e.g., 0:56:56 -> 56:56; 1:09:00 -> 69:00
+
+    Otherwise it just returns the time:
+      e.g., 45:10.32 -> 45:10.32
+
+    :param time_str: Time string
+    :return: Time string in minutes and seconds
+    """
+    time_str_split = time_str.split(':')
+    if len(time_str_split) == 3:
+        hours_in_min = int(time_str_split[0]) * 60
+        mins_total = int(time_str_split[1]) + hours_in_min
+        return f'{mins_total}:{time_str_split[2]}'
+    else:
+        return time_str

@@ -18,7 +18,7 @@ from doomworld_downloader.utils import checksum, get_log_level, zip_extract
 
 
 CHECKSUM_RE = re.compile(r'checksum: (null|\".*\")')
-WAD_FILE_EXTENSIONS = ['.bex', '.deh', '.pk3', '.pk7', '.wad']
+WAD_FILE_EXTENSIONS = ['.bex', '.deh', '.ipk3', '.ipk7', '.pk3', '.pk7', '.wad']
 
 DSDA_URL_TO_WAD_INFO_FILE = 'doomworld_downloader/dsda_url_to_wad_info.yaml'
 DSDA_URL_TO_WAD_INFO_BACKUP = 'doomworld_downloader/backup_dsda_url_to_wad_info.yaml'

@@ -23,6 +23,7 @@ NEEDS_ATTENTION_PLACEHOLDER = 'UNKNOWN'
 MAYBE_CHEATED_DIR = 'maybe_cheated_jsons'
 UPDATE_JSON_DIR = 'demos_for_upload/update_jsons'
 VALID_DEMO_PACK_DIR = 'tmp_demo_pack_jsons'
+INVALID_SOURCE_PORT_DIR = 'invalid_source_port_jsons'
 VALID_ISSUE_DIR = 'issue_jsons'
 VALID_NO_ISSUE_DIR = 'no_issue_jsons'
 VALID_TAGS_DIR = 'tags_jsons'
@@ -39,6 +40,13 @@ WAD_MAP_BY_IDGAMES_URL = {}
 
 DEMO_PACK_ADDITIONAL_INFO_MAP = defaultdict(list)
 DEMO_PACK_USER_MAP = {}
+
+ALLOWED_ENGINE_TO_MIN_VERSION_MAP = {
+    'DSDA-Doom': '0.28.2', 'Woof': '14.5.0', 'Crispy Doom': '7.0.0', 'Crispy Heretic': '7.0.0',
+    'Crispy Hexen': '7.0.0', 'DooM': '1.9', 'DooM2': '1.9', 'DooM2f': '1.9', 'LMPC': 'any', 'TASMBF': 'any',
+    'DRE': 'any', 'XDRE': 'any', 'Notepad': 'any', 'ZDoom': 'any', 'GZDoom': 'any', 'Zandronum': 'any',
+    'ZDaemon': 'any', 'Eternity Engine': 'any', 'Doomsday': 'any', 'EDGE': 'any', '3DGE': 'any'
+}
 
 
 class UploadConfig:
@@ -316,10 +324,36 @@ class UploadConfig:
 
         Off by default to cross-check against the txt category.
 
-        :return: Trust DSDA-Doom category
+        :return: Flag indicating whether to trust DSDA-Doom category
         """
         try:
             return self._config.getboolean('general', 'trust_dsda_doom_category')
+        except (NoSectionError, NoOptionError):
+            return False
+
+    @property
+    def enforce_engine_versions(self):
+        """Enforce engine versions.
+
+        Will enforce only allowed versions per the ALLOWED_ENGINE_TO_MIN_VERSION_MAP dictionary.
+
+        :return: Flag indicating whether to enforce engine versions
+        """
+        try:
+            return self._config.getboolean('general', 'enforce_engine_versions')
+        except (NoSectionError, NoOptionError):
+            return False
+
+    @property
+    def assume_latest_version_for_vanilla_ports(self):
+        """Assume latest version for vanilla ports.
+
+        If version is not provided for vanilla port exe, this will assume the demo used v1.9 of the exes.
+
+        :return: Flag indicating whether to assume latest version for vanilla ports
+        """
+        try:
+            return self._config.getboolean('general', 'assume_latest_version_for_vanilla_ports')
         except (NoSectionError, NoOptionError):
             return False
 
