@@ -422,6 +422,7 @@ def download_attachments(post):
         attach_id = parse_qs(parsed_url.query, keep_blank_values=True).get('id')
         attach_id = attach_id[0] if attach_id else str(uuid.uuid4())
         attach_dir = os.path.join(author_dir, attach_id)
+        attach_filename = attach_filename.replace(':', '_')
         download = download_response(response, attach_dir, attach_filename, overwrite=True)
 
         download_renamed_filename = get_filename_no_ext(download).replace(' ', '_')

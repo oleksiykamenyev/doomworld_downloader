@@ -45,7 +45,7 @@ def check_engine(engine, is_tas=False):
     if ' ' not in engine:
         return False
 
-    engine_family, engine_version = engine.split(' ', 1)
+    engine_family, engine_version = engine.rsplit(' ', 1)
     engine_min_version = ALLOWED_ENGINE_TO_MIN_VERSION_MAP.get(engine_family)
     if engine_min_version == 'any':
         return True
@@ -75,14 +75,16 @@ def check_engine(engine, is_tas=False):
         min_major, min_minor = engine_min_version_parts
         min_patch = None
 
-    if int(major) < int(min_major):
-        return False
-    if int(minor) < int(min_minor):
-        return False
-    if patch and min_patch and int(patch) < int(min_patch):
-        return False
+    if int(major) > int(min_major):
+        return True
+    if int(major) == int(min_major):
+        if int(minor) > int(min_minor):
+            return True
+        if int(minor) == int(min_minor):
+            if patch and min_patch:
+                return int(patch) >= int(min_patch)
 
-    return True
+    return False
 
 
 class DemoJsonDumper:
@@ -458,7 +460,7 @@ class DemoJson:
         for note_string in self.demo_info.note_strings:
             if note_string.startswith('Other Movie '):
                 # We don't actually need the "Other Movie" part, as that info is present in the
-                # level info; it is included so this note is more easy to detect in this function.
+                # level info; it is included so this note is easier to detect in this function.
                 other_movie = note_string.split('Other Movie ')[1]
             if note_string == 'Does not visit secret maps.':
                 no_secret_maps = note_string

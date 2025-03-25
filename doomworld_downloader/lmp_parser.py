@@ -132,19 +132,27 @@ class LMPData(BaseData):
             # (G)ZDoom demos don't use \x80 as the "end of inputs" and also don't even have a footer
             # (all meta info is in the header)
             if not self._is_zdoom_or_gzdoom():
-                lmp_bytes.seek(-1, 2)  # Go one byte before the end of file
-                current_byte = lmp_bytes.read(1)
-                while current_byte != b'\x80':
-                    footer_chars.append(current_byte)
-                    try:
-                        lmp_bytes.seek(-2, 1)  # Go back one byte
-                    except OSError:
-                        LOGGER.exception('LMP %s had issue extracting footer.', self.lmp_path)
-                        break
-
+                current_byte = None
+                while current_byte != b'\x80' and current_byte != b'':
                     current_byte = lmp_bytes.read(1)
 
-        self._footer = b''.join(footer_chars[::-1]).decode(errors='ignore')
+                while current_byte != b'':
+                    current_byte = lmp_bytes.read(1)
+                    footer_chars.append(current_byte)
+
+                #lmp_bytes.seek(-1, 2)  # Go one byte before the end of file
+                #current_byte = lmp_bytes.read(1)
+                #while current_byte != b'\x80':
+                #    footer_chars.append(current_byte)
+                #    try:
+                #        lmp_bytes.seek(-2, 1)  # Go back one byte
+                #    except OSError:
+                #        LOGGER.exception('LMP %s had issue extracting footer.', self.lmp_path)
+                #        break
+
+                #    current_byte = lmp_bytes.read(1)
+
+        self._footer = b''.join(footer_chars).decode(errors='ignore')
 
     def _parse_lmp(self):
         """Parse LMP file using the parse_lmp Ruby library."""
@@ -293,6 +301,8 @@ class LMPData(BaseData):
             for footer_port_start in LMPData.PORT_FOOTER_TO_DSDA_MAP.keys():
                 if line.startswith(footer_port_start):
                     self.raw_data['source_port_family'] = line.strip()
+                elif line.startswith('PWAD') and footer_port_start in line:
+                    self.raw_data['source_port_family'] = f'{footer_port_start}{line.split(footer_port_start)[1]}'
                 # Woof versions starting from 11 seem to be placing the port name and port version
                 # not at the start of a footer line...
                 else:

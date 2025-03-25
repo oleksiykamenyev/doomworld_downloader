@@ -210,9 +210,10 @@ class DemoZipInfo:
                         not CONFIG.add_all_bonus_demos):
                     main_lmp = zip_member_name
 
+                lmp_name_unzipped = zip_member_name.replace(':', '_')
                 self.lmp_to_info_map[zip_member_name] = {
                     'recorded_date': datetime(*zip_file_info.date_time),
-                    'lmp_path': os.path.join(self.zip_extract_dir, zip_member_name),
+                    'lmp_path': os.path.join(self.zip_extract_dir, lmp_name_unzipped),
                     'orig_name': orig_zip_member_name
                 }
             if zip_member_name_lower.endswith('.txt'):
@@ -245,8 +246,9 @@ class DemoZipInfo:
         for lmp_file in self.lmp_to_info_map:
             for txt_file in txt_file_info:
                 if get_filename_no_ext(lmp_file).lower() == get_filename_no_ext(txt_file).lower():
+                    txt_file_name_unzipped = txt_file.replace(':', '_')
                     self.lmp_to_info_map[lmp_file].update(
-                        {'txt_file_path': os.path.join(self.zip_extract_dir, txt_file),
+                        {'txt_file_path': os.path.join(self.zip_extract_dir, txt_file_name_unzipped),
                          'txt_file_date': txt_file_info[txt_file]['recorded_date']}
                     )
 
@@ -259,6 +261,7 @@ class DemoZipInfo:
         )
 
         if main_txt:
+            main_txt = main_txt.replace(':', '_')
             self.primary_textfile_data = TextfileData(os.path.join(self.zip_extract_dir, main_txt))
             self.primary_textfile_data.analyze()
             self.primary_textfile_date = main_txt_date

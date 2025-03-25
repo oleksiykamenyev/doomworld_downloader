@@ -2008,6 +2008,26 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/uhadron
   id: '150950'
   name: "The Ultimate Return To Hadron demos [-complevel 3]"
+"https://www.doomworld.com/forum/topic/151819-archie-demos-gzdoom-1802-cm0/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/archie_release_1b
+  id: '151819'
+  name: "ARCHIE demos [GZDoom 1.8.02] [+cm0]"
+"https://www.doomworld.com/forum/topic/151999-little-italo-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/littleitalo
+  id: '151999'
+  name: "Little Italo demos [complevel -9]"
+"https://www.doomworld.com/forum/topic/152027-who-is-who-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/whoiswho
+  id: '152027'
+  name: "Who Is Who demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/149541-eviternity-ii-demos-complevel-21-dsda-demo-compatibility-patch-in-op/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/eviternityii
+  id: '149541'
+  name: "Eviternity II demos [-complevel 21] (DSDA DEMO COMPATIBILITY PATCH IN OP)"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":

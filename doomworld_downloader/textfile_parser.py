@@ -40,7 +40,7 @@ class TextfileData(BaseData):
     SKILL_KEYS = ['skill']
 
     CERTAIN_KEYS = ['is_tas']
-    POSSIBLE_KEYS = ['category', 'source_port', 'video_link', 'time']
+    POSSIBLE_KEYS = ['category', 'levelstat', 'source_port', 'video_link', 'time']
 
     # Standard named DSDA category regexes. These are either used to guess in one of two ways:
     #   - initial category guess if a category field is provided, which may be overridden by other
@@ -466,6 +466,7 @@ class TextfileData(BaseData):
                 parsed_time = self._parse_time(value_lowercase)
                 if parsed_time:
                     self.data['time'] = parsed_time
+                    self.data['levelstat'] = parsed_time
             elif key == 'iwad':
                 self.raw_data['iwad'] = value_lowercase
             elif key in TextfileData.SKILL_KEYS:
@@ -488,6 +489,7 @@ class TextfileData(BaseData):
                 self.data['category'] = category_guess
             if not self.data.get('time'):
                 self.data['time'] = time_guess
+                self.data['levelstat'] = time_guess
 
             if 'tas' in in_line.split():
                 self.data['is_tas'] = True
