@@ -2028,6 +2028,36 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/eviternityii
   id: '149541'
   name: "Eviternity II demos [-complevel 21] (DSDA DEMO COMPATIBILITY PATCH IN OP)"
+"https://www.doomworld.com/forum/topic/152270-junkfood-4-slotterween-demos-cl21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/junkfood4
+  id: '152270'
+  name: "Junkfood 4: Slotterween demos [cl21]"
+"https://www.doomworld.com/forum/topic/152377-rusty-drill-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/rustydrill
+  id: '152377'
+  name: "Rusty Drill Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/152673-oversaturation-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/oversaturation
+  id: '152673'
+  name: "Oversaturation demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/152689-pirate-doom-ii-demos-complevel-11/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/pd2
+  id: '152689'
+  name: "Pirate Doom II demos [-complevel 11]"
+"https://www.doomworld.com/forum/topic/152900-pacifist-paradise-secret-santa-2-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ppss2
+  id: '152900'
+  name: "Pacifist Paradise Secret Santa 2 demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/152985-hardfest-3-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/hardfest3
+  id: '152985'
+  name: "Hardfest 3 demos [-complevel 21]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":

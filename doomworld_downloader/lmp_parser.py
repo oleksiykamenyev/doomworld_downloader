@@ -140,6 +140,7 @@ class LMPData(BaseData):
                     current_byte = lmp_bytes.read(1)
                     footer_chars.append(current_byte)
 
+                # TODO: Figure out if I prefer above code
                 #lmp_bytes.seek(-1, 2)  # Go one byte before the end of file
                 #current_byte = lmp_bytes.read(1)
                 #while current_byte != b'\x80':
