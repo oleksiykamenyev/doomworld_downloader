@@ -147,8 +147,7 @@ def parse_page_top(page_soup):
 
         # Sample text:
         #   2 demos, 3:27.91 | Table View | Leaderboard | Stats | Map Select
-        stats_link = div.find('a', string="Stats")
-        table_info = stats_link.parent
+        table_info = div.find('p', {'class': 'p-short one-line'})
         stats = table_info.getText().split('|')[0].split(',')
         parsed_headers['demo_count'] = int(stats[0].split(' ')[0].strip())
         parsed_headers['demo_time'] = stats[1].strip()

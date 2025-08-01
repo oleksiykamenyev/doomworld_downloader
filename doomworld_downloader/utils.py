@@ -21,8 +21,8 @@ from bs4 import BeautifulSoup
 
 from zipfile import ZipFile
 
-# LMP: Standard demo file format (vanilla, Boom, MBF, (G)ZDoom, etc.)
 # CDM: Doomsday demo format
+# LMP: Standard demo file format (vanilla, Boom, MBF, (G)ZDoom, etc.)
 # ZDD: ZDaemon new-style demo format
 DEMO_FILE_TYPES = ['cdm', 'lmp', 'zdd']
 

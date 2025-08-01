@@ -428,11 +428,6 @@ https://www.doomworld.com/forum/topic/63008-3-heures-dagonie-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/3hafinal
   id: '63008'
   name: 3 Heures d'agonie demos [-complevel 2]
-https://www.doomworld.com/forum/topic/63261-stomper-demos-complevel-9/:
-  additional_info:
-    wad: https://www.dsdarchive.com/wads/stomper
-  id: '63261'
-  name: Stomper demos [-complevel 9]
 https://www.doomworld.com/forum/topic/63464-hadephobia-demos-complevel-9/:
   additional_info:
     wad: https://www.dsdarchive.com/wads/h_phobia
@@ -2058,6 +2053,46 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/hardfest3
   id: '152985'
   name: "Hardfest 3 demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/153127-dominus-diabolicus-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/dominusd
+  id: '153127'
+  name: "Dominus Diabolicus demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/153195-dubzzzs-5-minute-design-assembly-5-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/d5da5
+  id: '153195'
+  name: "Dubzzz's 5-Minute Design Assembly #5 Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/153488-death-by-1000-lines-demos-ultimate-doom-complvl-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ud1k
+  id: '153488'
+  name: "Death by 1000 Lines demos [Ultimate DOOM -complvl 3]"
+"https://www.doomworld.com/forum/topic/153538-occula-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/occula
+  id: '153538'
+  name: "Occula demos [complevel 9]"
+"https://www.doomworld.com/forum/topic/153689-dont-fear-the-demons-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/dntfeardmons
+  id: '153689'
+  name: "Don't Fear The Demons demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/154075-going-down-turbo-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/gdturbo
+  id: '154075'
+  name: "Going Down Turbo demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/154306-earthless-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/earthless
+  id: '154306'
+  name: "Earthless Demos (-complevel 2)"
+"https://www.doomworld.com/forum/topic/154339-crispy-chicken-speedmap-session-09-random-idgames-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ccss09
+  id: '154339'
+  name: "Crispy Chicken Speedmap Session 09: Random idgames [complevel -2]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -2388,6 +2423,13 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/10linee5
   id: '145093'
   name: "10 Line Genocide demos [-complevel 9]"
+https://www.doomworld.com/forum/topic/63261-stomper-demos-complevel-9/:
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/stomperbeta2
+      - https://www.dsdarchive.com/wads/stomperunfinished
+  id: '63261'
+  name: Stomper demos [-complevel 9]
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
@@ -2617,6 +2659,7 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/dbp13
       - https://www.dsdarchive.com/wads/dbp14atf
       - https://www.dsdarchive.com/wads/dbp15
+      - https://www.dsdarchive.com/wads/dbp16_v0_99a
       - https://www.dsdarchive.com/wads/dbp17_alone
       - https://www.dsdarchive.com/wads/dbp18_up
       - https://www.dsdarchive.com/wads/dbp20_dnd
@@ -2635,13 +2678,16 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/dbp37_augzen
       - https://www.dsdarchive.com/wads/dbp_39
       - https://www.dsdarchive.com/wads/dbp40rc1
-      - https://www.dsdarchive.com/wads/dbp44rc2-4
       - https://www.dsdarchive.com/wads/dbp42
+      - https://www.dsdarchive.com/wads/dbp43
+      - https://www.dsdarchive.com/wads/dbp44rc2-4
       - https://www.dsdarchive.com/wads/dbp_45
       - https://www.dsdarchive.com/wads/dbp47
       - https://www.dsdarchive.com/wads/dbp50
+      - https://www.dsdarchive.com/wads/dbp50_2022_08_05
       - https://www.dsdarchive.com/wads/dbp_51
       - https://www.dsdarchive.com/wads/dbp_52
+      - https://www.dsdarchive.com/wads/dbp_55
 "https://www.doomworld.com/forum/topic/127478-mayhem-demo-thread-complevel-9/":
   id: "127478"
   name: MAYhem demo thread [-complevel 9]
