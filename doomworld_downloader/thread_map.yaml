@@ -2093,6 +2093,21 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/ccss09
   id: '154339'
   name: "Crispy Chicken Speedmap Session 09: Random idgames [complevel -2]"
+"https://www.doomworld.com/forum/topic/154598-serenity-demos-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/serenity
+  id: '154598'
+  name: "Serenity Demos (-complevel 3)"
+"https://www.doomworld.com/forum/topic/154735-tntxiao-demos-complevel-4/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/tnt-xiao
+  id: '154735'
+  name: "TNT:XIAO Demos (complevel 4)"
+"https://www.doomworld.com/forum/topic/154803-combustion-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/combust
+  id: '154803'
+  name: "Combustion Demos [-complevel 2]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":

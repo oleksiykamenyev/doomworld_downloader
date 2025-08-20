@@ -6,7 +6,7 @@ import logging
 import os
 
 from .dsda import conform_dsda_wad_url
-from .upload_config import WAD_MAP_BY_DSDA_URL, WAD_MAP_BY_IDGAMES_URL
+from .upload_config import CONFIG, WAD_MAP_BY_DSDA_URL, WAD_MAP_BY_IDGAMES_URL
 from .utils import conform_url, conform_idgames_url
 
 
@@ -62,6 +62,9 @@ def get_wad_guesses(*args, iwad=None):
                                 cur_wad_guesses.append(wad)
 
             for wad_guess in cur_wad_guesses:
+                if CONFIG.upload_type == 'date-based' and wad_guess.ignore_for_new_demos:
+                    continue
+
                 if wad_guess.parent:
                     wad_guesses.append(WAD_MAP_BY_DSDA_URL[wad_guess.parent])
                 wad_guesses.append(wad_guess)

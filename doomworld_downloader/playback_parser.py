@@ -330,38 +330,57 @@ class PlaybackData(BaseData):
                 self.data['wad'] = dsda_wad_name
                 self._parse_analysis()
                 self._parse_levelstat()
-                self._parse_raw_data()
-                # TODO: Support WADs with multiple complevels across different maps
-                complevel = self.demo_info.get('complevel')
-                if complevel:
-                    if int(self._demo_playback.wad.complevel) != int(complevel):
-                        self.note_strings.add('Incompatible')
+                ignore_demo = self._check_if_skip()
+                if ignore_demo:
+                    LOGGER.error('Skipping demo due to ignore rule %s.', self.lmp_path)
+                    self.playback_failed = True
+                else:
+                    self._parse_raw_data()
+                    # TODO: Support WADs with multiple complevels across different maps
+                    complevel = self.demo_info.get('complevel')
+                    if complevel:
+                        if int(self._demo_playback.wad.complevel) != int(complevel):
+                            self.note_strings.add('Incompatible')
 
-                if self._demo_playback.cmd_line_info:
-                    wad_update = self._demo_playback.cmd_line_info.get('update_wad')
-                    note = self._demo_playback.cmd_line_info.get('note')
-                    if wad_update:
-                        self.data['wad'] = wad_update
-                    if note:
-                        self.note_strings.add(note)
+                    if self._demo_playback.cmd_line_info:
+                        wad_update = self._demo_playback.cmd_line_info.get('update_wad')
+                        note = self._demo_playback.cmd_line_info.get('note')
+                        if wad_update:
+                            self.data['wad'] = wad_update
+                        if note:
+                            self.note_strings.add(note)
 
-                is_tas = check_tas_playback(self._demo_playback, self.lmp_path)
-                if is_tas:
-                    self.data['is_tas'] = is_tas
+                    is_tas = check_tas_playback(self._demo_playback, self.lmp_path)
+                    if is_tas:
+                        self.data['is_tas'] = is_tas
         else:
-            LOGGER.error('Could not guess wad for demo %s.', self.lmp_path)
+            LOGGER.error('Could not guess WAD for demo %s.', self.lmp_path)
             self.playback_failed = True
 
     def _attempt_demo_playback(self, command):
         """Attempt demo playback with given command.
 
-        :param Command to attemot playback for
+        :param Command to attempt playback for
         """
         try:
             run_cmd(command)
         except subprocess.CalledProcessError as e:
             LOGGER.warning('Failed to play back demo %s.', self.lmp_path)
             LOGGER.debug('Error message: %s.', e)
+
+    def _check_if_skip(self):
+        """Check if we need to skip the current demo for processing.
+
+        :param Whether to ignore the current demo
+        """
+        skill = self.demo_info.get('skill')
+        game_mode = self.demo_info.get('game_mode')
+        for affected_level in self.raw_data['affected_levels']:
+            map_info = self._demo_playback.wad.map_list_info.get_map_info(affected_level)
+            if not map_info.get_single_key_for_map('ignore_level', skill=skill, game_mode=game_mode):
+                return False
+
+        return True
 
     def _parse_raw_data(self):
         """Parse additional info available in raw data.
@@ -382,7 +401,7 @@ class PlaybackData(BaseData):
         )
         skill = self.demo_info.get('skill')
         game_mode = self.demo_info.get('game_mode')
-        all_kills_obtained = self.raw_data.get('100k', False)
+        all_kills_obtained = self.raw_data.get('missed_monsters', -1) == '0'
         all_secrets_obtained = self.raw_data.get('100s', False)
 
         all_required_kills_obtained = all_kills_obtained

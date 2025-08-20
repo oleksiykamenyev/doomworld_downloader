@@ -14,7 +14,7 @@ from .base_parser import BaseData
 from .cheat_detection import check_tas_lmp_file
 from .data_manager import DataManager
 from .upload_config import CONFIG
-from .utils import run_cmd, convert_datetime_to_dsda_date, compare_iwad
+from .utils import run_cmd, compare_iwad
 
 
 LOGGER = logging.getLogger(__name__)

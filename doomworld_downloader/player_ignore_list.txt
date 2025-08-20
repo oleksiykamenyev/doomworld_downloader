@@ -1,17 +1,25 @@
 # Players that need to be ignored for demos due to past cheating infractions, etc.
 # Maxine
+# Shon_RT alt
 31952
 # Creeper2006
+# Shon_RT alt
 31818
 # Shon_RT
+# Shon_RT alt
 25640
 # Ray / Rey / Rae
+# Shon_RT alt
 31258
 # Amicia
+# Shon_RT alt
 31619
 # CringleChimp
+# Shon_RT alt
 30772
 # Plats
+# Not sure why the ban was issued in the end TBH.
 28527
 # LixFortun4
+# JCD alt/ban evasion attempt
 41195

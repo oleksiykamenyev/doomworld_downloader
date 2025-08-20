@@ -347,6 +347,9 @@ class IdgamesAPI():
         file_path = os.path.join(files_info['dir'], files_info['filename'])
         file_download = None
         for mirror in cls.IDGAMES_MIRRORS:
+            if 'ftp.' in mirror:
+                continue
+
             wad_url = mirror.format(file_path=file_path)
             try:
                 file_download = requests.get(wad_url)
@@ -400,7 +403,8 @@ def get_file_id_from_idgames_url(idgames_url):
             'WAD name %s length below three characters, trying to get ID from idgames webpage.',
             file_name
         )
-        request_res = requests.get(idgames_url)
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:141.0) Gecko/20100101 Firefox/141.0'}
+        request_res = requests.get(idgames_url, headers=headers)
         page_text = str(request_res.text)
         page_soup = BeautifulSoup(page_text, features='lxml')
         idgames_protocol_elem = page_soup.find('ul', {'class': 'idgamesprotocol'})
