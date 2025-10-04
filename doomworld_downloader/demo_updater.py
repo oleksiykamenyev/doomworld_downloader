@@ -184,6 +184,8 @@ class DemoUpdater:
                     test_time_normalized = normalize_time_to_minutes_and_seconds(test_value)
                     if json_value == test_time_normalized:
                         pass
+                #elif key == 'tas':
+                #    pass
                 else:
                     LOGGER.debug('Difference for demo %s found in key %s!.', demo_location, key)
                     if not CONFIG.dsda_mode_replace_zips:

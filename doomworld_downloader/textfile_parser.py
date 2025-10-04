@@ -708,4 +708,3 @@ class TextfileData(BaseData):
         other_category_info = TextfileData.OTHER_CATEGORY_TO_INFO_MAP[category_guess]
         self.note_strings.add(other_category_info['note'])
         return other_category_info['category']
-

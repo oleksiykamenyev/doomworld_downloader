@@ -2108,6 +2108,21 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/combust
   id: '154803'
   name: "Combustion Demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/155089-perditions-gate-resurgence-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/pg-resurge
+  id: '155089'
+  name: "Perdition's Gate Resurgence [-complevel 2]"
+"https://www.doomworld.com/forum/topic/155103-impping-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/impping
+  id: '155103'
+  name: "impping! demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/155260-doom-2-in-rural-only-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/d2iro
+  id: '155260'
+  name: "Doom 2 in Rural Only Demos [-complevel 21]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -2438,13 +2453,26 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/10linee5
   id: '145093'
   name: "10 Line Genocide demos [-complevel 9]"
-https://www.doomworld.com/forum/topic/63261-stomper-demos-complevel-9/:
+"https://www.doomworld.com/forum/topic/63261-stomper-demos-complevel-9/":
   additional_info:
     wads:
       - https://www.dsdarchive.com/wads/stomperbeta2
       - https://www.dsdarchive.com/wads/stomperunfinished
   id: '63261'
   name: Stomper demos [-complevel 9]
+"https://www.doomworld.com/forum/topic/154386-profane-promiseland-demos-complevel-9/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/profanep
+      - https://www.dsdarchive.com/wads/profanepclassic
+  id: '154386'
+  name: Profane Promiseland Demos [-complevel 9]
+"https://www.doomworld.com/forum/topic/154874-synami-speedmapping-sessions-demo-thread-complevel-9/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/sss01
+  id: '154874'
+  name: Synami Speedmapping Sessions Demo Thread [-complevel 9]
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
@@ -2778,6 +2806,9 @@ https://www.doomworld.com/forum/topic/63261-stomper-demos-complevel-9/:
   additional_info:
     wads:
       - https://www.dsdarchive.com/wads/dmax2021
+      - https://www.dsdarchive.com/wads/dmax2022
+      - https://www.dsdarchive.com/wads/dmax2023
+      - https://www.dsdarchive.com/wads/dmax2024
 "https://www.doomworld.com/forum/topic/133801-sargebaldy-speedmapping-compilations-demos/":
   id: "133801"
   name: SargeBaldy Speedmapping Compilations demos
