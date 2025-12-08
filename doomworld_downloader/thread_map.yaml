@@ -2123,6 +2123,51 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/d2iro
   id: '155260'
   name: "Doom 2 in Rural Only Demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/155516-limit-buffet-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/lb
+  id: '155516'
+  name: "Limit Buffet demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/155624-headless-chicken-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/hdlschkn
+  id: '155624'
+  name: "Headless Chicken demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/155968-1-agile-altercation-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/1aa
+  id: '155968'
+  name: "1 Agile Altercation demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/155996-necromantic-thirst-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/nt
+  id: '155996'
+  name: "Necromantic Thirst demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/155997-stroll-in-the-park-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/stroll
+  id: '155997'
+  name: "Stroll in the Park demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/155999-startan-simulator-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/starsim
+  id: '155999'
+  name: "Startan Simulator demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/156159-sunless-empire-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/sunless
+  id: '156159'
+  name: "Sunless Empire demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/156164-vydotwad-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/2vydotwad
+  id: '156164'
+  name: "][vydotwad demos (-complevel 21)"
+"https://www.doomworld.com/forum/topic/156318-baron-door-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/barondoor
+  id: '156318'
+  name: "Baron Door demos [-Complevel 9]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -2471,8 +2516,30 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
   additional_info:
     wads:
       - https://www.dsdarchive.com/wads/sss01
+      - https://www.dsdarchive.com/wads/sss02
   id: '154874'
   name: Synami Speedmapping Sessions Demo Thread [-complevel 9]
+"https://www.doomworld.com/forum/topic/154093-tele-direct-altantic-doom-re-dialed-demos-complevel-21/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/telly3
+      - https://www.dsdarchive.com/wads/telly-rd
+  id: '154093'
+  name: "Tele-Direct Altantic Doom: Re-Dialed! demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/155506-njdoom-1-2-demos-complevel-3-2/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/njdoom
+      - https://www.dsdarchive.com/wads/njdoom2
+  id: '155506'
+  name: "NJDoom 1 & 2 Demos [-complevel 3, 2]"
+"https://www.doomworld.com/forum/topic/155893-surge-dm-and-surge-dm-ii-demos-complevel-2/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/surgedm
+      - https://www.dsdarchive.com/wads/surge2
+  id: '155893'
+  name: "Surge DM and Surge DM II Demos (-complevel 2)"
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
@@ -2842,6 +2909,8 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
     wads:
       - https://www.dsdarchive.com/wads/ccss01
       - https://www.dsdarchive.com/wads/ccss02
+      - https://www.dsdarchive.com/wads/ccss04
+      - https://www.dsdarchive.com/wads/ccss05
 
 # WAD Author threads
 "https://www.doomworld.com/forum/topic/86724-demos-for-miscellaneous-ribbiks-maps/":
