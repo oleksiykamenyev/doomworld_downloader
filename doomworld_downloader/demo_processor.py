@@ -199,6 +199,10 @@ class DemoZipInfo:
         for zip_file_info in info_list:
             zip_member_name = zip_file_info.filename
             zip_member_name_lower = zip_member_name.lower()
+            # Ignore automatically generated directories produced by Macs.
+            if zip_member_name_lower.startswith('__macosx'):
+                continue
+
             orig_zip_member_name = zip_member_name
             # Seems a zip file name may return something with the parent directory? Not sure if this
             # can happen beyond one parent directory.
@@ -350,6 +354,12 @@ class DemoInfo:
 
     def process_lmp(self):
         """Process demo lmp."""
+        # TODO: Better way to identify this run.
+        # This demo should never attempt playback.
+        if 'd5da523xt159' in self.lmp_path.lower():
+            self.demo_process_failed = True
+            return
+
         lmp_data = LMPData(self.lmp_path, textfile_iwad=self._textfile_info.get('iwad'))
         lmp_data.analyze()
         self._lmp_info = {

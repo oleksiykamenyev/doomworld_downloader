@@ -12,7 +12,7 @@ from shutil import rmtree
 
 import yaml
 
-from doomworld_downloader.dsda import download_wad_from_dsda, get_wad_name_from_dsda_url
+from doomworld_downloader.dsda import download_wad_from_dsda, get_wad_or_player_name_from_dsda_url
 from doomworld_downloader.upload_config import CONFIG
 from doomworld_downloader.utils import checksum, get_log_level, zip_extract
 
@@ -79,7 +79,7 @@ def main():
                 cur_wad_url = line.rstrip(':').replace('"', '')
                 cur_wad_entry = wad_map_by_dsda_url_dict.get(cur_wad_url)
                 in_commercial_wad = cur_wad_entry.get('commercial', False)
-                wad_name = get_wad_name_from_dsda_url(cur_wad_url)
+                wad_name = get_wad_or_player_name_from_dsda_url(cur_wad_url)
                 cur_download_dir = os.path.join(CONFIG.wad_download_directory, wad_name)
                 update_wad = cur_wad_entry.get('update', False)
                 skip_wad = False

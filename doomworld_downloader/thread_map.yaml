@@ -278,11 +278,6 @@ https://www.doomworld.com/forum/topic/55567-realm-of-chaos-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/rlmchaos
   id: '55567'
   name: Realm of Chaos demos [-complevel 2]
-https://www.doomworld.com/forum/topic/55574-alien-vendetta-demos-complevel-2/:
-  additional_info:
-    wad: https://www.dsdarchive.com/wads/av
-  id: '55574'
-  name: Alien Vendetta demos [-complevel 2]
 https://www.doomworld.com/forum/topic/55578-rebirth-demos-complevel-2/:
   additional_info:
     wad: https://www.dsdarchive.com/wads/rebirth
@@ -298,11 +293,6 @@ https://www.doomworld.com/forum/topic/55586-memento-mori-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/mm
   id: '55586'
   name: Memento Mori demos [-complevel 2]
-https://www.doomworld.com/forum/topic/55589-doom-ii-demos-complevel-2/:
-  additional_info:
-    wad: https://www.dsdarchive.com/wads/doom2
-  id: '55589'
-  name: DOOM II demos [-complevel 2]
 https://www.doomworld.com/forum/topic/56108-doom-core-demos-complevel-2/:
   additional_info:
     wad: https://www.dsdarchive.com/wads/dcv
@@ -2168,6 +2158,51 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/barondoor
   id: '156318'
   name: "Baron Door demos [-Complevel 9]"
+"https://www.doomworld.com/forum/topic/156506-dexcom-1-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/dexcom1
+  id: '156506'
+  name: "Dexcom 1 demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/156706-alizarin-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/alizarin
+  id: '156706'
+  name: "ALIZARIN Demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/156836-ultimate-doom-demos-pt2-complevel-3/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/doom
+  id: '156836'
+  name: "Ultimate Doom demos pt.2 [-complevel 3]"
+"https://www.doomworld.com/forum/topic/156839-blitz-race-against-time-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/blitz
+  id: '156839'
+  name: "Blitz: Race Against Time demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/156835-plutonia-demos-complevel-4/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/plutonia
+  id: "156835"
+  name: "Plutonia demos [-complevel 4]"
+"https://www.doomworld.com/forum/topic/156838-tnt-evilution-demos-complevel-4/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/tnt
+  id: "156838"
+  name: "TNT: Evilution demos [-complevel 4]"
+"https://www.doomworld.com/forum/topic/156931-legacy-of-rust-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/id1
+  id: "156931"
+  name: "Legacy of Rust [-complevel 21]"
+"https://www.doomworld.com/forum/topic/157092-synamis-speedmaps-2-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/sysp2
+  id: "157092"
+  name: "Synami's Speedmaps 2 demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/157211-paint-it-doom-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/paintitdoom
+  id: "157211"
+  name: "Paint It DOOM demos [-complevel 21]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -2540,6 +2575,36 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/surge2
   id: '155893'
   name: "Surge DM and Surge DM II Demos (-complevel 2)"
+"https://www.doomworld.com/forum/topic/156472-a-war-on-christmas-series-demos-complevel-2-21/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/waronxmas
+      - https://www.dsdarchive.com/wads/waronxmas2
+      - https://www.dsdarchive.com/wads/waronxmas3
+      - https://www.dsdarchive.com/wads/waronxmas4
+  id: '156472'
+  name: "A War On Christmas series demos [-complevel 2, 21]"
+https://www.doomworld.com/forum/topic/55589-doom-ii-demos-complevel-2/:
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/doom2
+      - https://www.dsdarchive.com/wads/doom2bfg
+  id: '55589'
+  name: DOOM II demos [-complevel 2]
+"https://www.doomworld.com/forum/topic/156834-doom-ii-demos-pt2-complevel-2/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/doom2
+      - https://www.dsdarchive.com/wads/doom2bfg
+  id: '156834'
+  name: "DOOM II demos pt.2 [-complevel 2]"
+https://www.doomworld.com/forum/topic/55574-alien-vendetta-demos-complevel-2/:
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/av
+      - https://www.dsdarchive.com/wads/av_old
+  id: '55574'
+  name: Alien Vendetta demos [-complevel 2]
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
@@ -2569,6 +2634,11 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
     tas_only: true
   id: "73574"
   name: "TAS (tool-assisted) demos: part 2"
+"https://www.doomworld.com/forum/topic/156933-tas-tool-assisted-demos-pt3/":
+  additional_info:
+    tas_only: true
+  id: "156933"
+  name: "TAS (tool-assisted) demos (pt.3)"
 "https://www.doomworld.com/forum/topic/73593-azuruish-star-thread-putting-speed-where-it-belongs/":
   additional_info:
     tas_only: true
@@ -2750,6 +2820,7 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/dmp2021_obsidian
       - https://www.dsdarchive.com/wads/dmp2021_pegleg
       - https://www.dsdarchive.com/wads/dmp2021_timeofdeath
+      - https://www.dsdarchive.com/wads/tod-dmp22-m1
 "https://www.doomworld.com/forum/topic/123364-dbp-demo-thread/":
   id: "123364"
   name: DBP Demo Thread
@@ -2764,6 +2835,7 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/dbp7xmas
       - https://www.dsdarchive.com/wads/dbp8_mbg
       - https://www.dsdarchive.com/wads/dbp_09
+      - https://www.dsdarchive.com/wads/dbp_09_2019_03_09
       - https://www.dsdarchive.com/wads/dbp11
       - https://www.dsdarchive.com/wads/dbp12
       - https://www.dsdarchive.com/wads/dbp13
@@ -2797,7 +2869,10 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/dbp50_2022_08_05
       - https://www.dsdarchive.com/wads/dbp_51
       - https://www.dsdarchive.com/wads/dbp_52
+      - https://www.dsdarchive.com/wads/dbp_54_rc1_3
       - https://www.dsdarchive.com/wads/dbp_55
+      - https://www.dsdarchive.com/wads/dbp_66_rc3
+      - https://www.dsdarchive.com/wads/dbp67_rc3
 "https://www.doomworld.com/forum/topic/127478-mayhem-demo-thread-complevel-9/":
   id: "127478"
   name: MAYhem demo thread [-complevel 9]
@@ -2807,6 +2882,7 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/mayhem13
       - https://www.dsdarchive.com/wads/mayhem14
       - https://www.dsdarchive.com/wads/mayhem15
+      - https://www.dsdarchive.com/wads/mayhem15_2016_06
       - https://www.dsdarchive.com/wads/mayhem16
       - https://www.dsdarchive.com/wads/mayhem17
       - https://www.dsdarchive.com/wads/mayhem18o
@@ -2814,6 +2890,7 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/mayhem19
       - https://www.dsdarchive.com/wads/mayhem20
       - https://www.dsdarchive.com/wads/mayhem22
+      - https://www.dsdarchive.com/wads/mayhem24
 "https://www.doomworld.com/forum/topic/128765-doomworld-speedmapping-compilation-demos/":
   id: "128765"
   name: Doomworld Speedmapping Compilation Demos
@@ -2910,6 +2987,7 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/ccss01
       - https://www.dsdarchive.com/wads/ccss02
       - https://www.dsdarchive.com/wads/ccss04
+      - https://www.dsdarchive.com/wads/ccss05
       - https://www.dsdarchive.com/wads/ccss05
 
 # WAD Author threads
@@ -3241,6 +3319,11 @@ https://www.doomworld.com/forum/topic/55559-memento-mori-ii-demos-complevel-2/:
     ignore: true
   id: "133096"
   name: dsda-doom v0.25.0 [2022-12-23]
+"https://www.doomworld.com/forum/topic/156626-2025-notable-demo-thread/":
+  additional_info:
+    ignore: true
+  id: "156626"
+  name: 2025 Notable Demo Thread
 
 # Miscellanous threads
 # Ignored because this is not the correct thread for NRFTL, and the one demo post in here was duped

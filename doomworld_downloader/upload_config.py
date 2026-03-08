@@ -358,6 +358,21 @@ class UploadConfig:
             return False
 
     @property
+    def do_not_prune_advanced_ports(self):
+        """For demo packs of advanced port demos, do not prune duplicate demos.
+
+        We would want this if advanced port demo packs were submitted as there's no way to identify if the demos are
+        actually co-op runs of the same map or different demos in this case. We generally probably want this on at all
+        times, as co-op demos in advanced ports are very rare.
+
+        :return: Flag indicating whether to not prune duplicate demos for advanced ports
+        """
+        try:
+            return self._config.getboolean('general', 'enforce_engine_versions')
+        except (NoSectionError, NoOptionError):
+            return False
+
+    @property
     def demo_pack_input_folder(self):
         """Get demo pack input folder.
 

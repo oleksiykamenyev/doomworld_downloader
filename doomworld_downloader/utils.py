@@ -31,6 +31,8 @@ HTTP_RE = re.compile(r'^https?://.+')
 HEADER_FILENAME_RE = re.compile(r'filename="(.+)"')
 IDGAMES_ID_URL_RE = re.compile(r'^https://www.doomworld.com/idgames/\?id=\d+$')
 
+ADVANCED_PORTS = ['ZDoom', 'GZDoom', 'Zandronum', 'ZDaemon', 'Legacy', 'Doomsday']
+
 LOGGER = logging.getLogger(__name__)
 
 
@@ -480,3 +482,17 @@ def normalize_time_to_minutes_and_seconds(time_str):
         return f'{mins_total}:{time_str_split[2]}'
     else:
         return time_str
+
+def check_advanced_port(port_name):
+    """Check if port provided is an advanced engine.
+
+    e.g., ZDoom, ZDaemon, etc.
+
+    :param port_name: Port name
+    :return: Port name to check
+    """
+    for advanced_port_part in ADVANCED_PORTS:
+        if advanced_port_part in port_name:
+            return True
+
+    return False

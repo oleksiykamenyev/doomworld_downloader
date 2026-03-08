@@ -14,7 +14,7 @@ from shutil import copyfile, rmtree
 from .base_parser import BaseData
 from .cheat_detection import check_tas_playback
 from .data_manager import DataManager
-from .dsda import download_wad_from_dsda, get_wad_name_from_dsda_url
+from .dsda import download_wad_from_dsda, get_wad_or_player_name_from_dsda_url
 from .upload_config import CONFIG, NEEDS_ATTENTION_PLACEHOLDER
 from .utils import checksum, parse_range, run_cmd, zip_extract, compare_iwad, \
     get_single_key_value_dict
@@ -67,7 +67,6 @@ class PlaybackData(BaseData):
         'Skill 3 Respawn', 'Skill 3 Tyson', 'Skill 2 Max', 'Skill 2 Fast', 'Skill 2 Respawn',
         'Skill 2 Tyson', 'Skill 1 Max', 'Skill 1 Fast', 'Skill 1 Respawn', 'Skill 1 Tyson', 'UV Tank'
     ]
-    # TODO: Fix this in DSDA-Doom
     DOOM_CATEGORY_MAP = {'UV Tyson': 'Tyson'}
     # BP Speed/BP Max/NM Speed/NM 100S distinctions are sorted out based on the raw data in analysis.txt
     HERETIC_CATEGORY_MAP = {'UV Max': 'SM Max', 'UV Speed': 'SM Speed', 'NM Speed': 'BP Speed', 'NM 100S': 'BP Speed'}
@@ -112,7 +111,7 @@ class PlaybackData(BaseData):
         self.url_to_wad = {wad.dsda_url: wad for wad in wad_guesses}
         self.wad_guesses = Counter([wad.dsda_url for wad in wad_guesses])
         self.data = {}
-        self.raw_data = {}
+        self.raw_data = {'stats': {}}
         self.note_strings = set()
 
         self._demo_playback = None
@@ -136,7 +135,7 @@ class PlaybackData(BaseData):
             elif key in PlaybackData.POSSIBLE_KEYS:
                 data_manager.insert(key, value, DataManager.POSSIBLE, source='playback')
             else:
-                raise ValueError('Unrecognized key found in data dictionary: {}.'.format(key))
+                raise ValueError(f'Unrecognized key found in data dictionary: {key}.')
 
     @staticmethod
     def _cleanup():
@@ -173,9 +172,9 @@ class PlaybackData(BaseData):
 
         iwad = self.demo_info.get('iwad', '').lower()
         if compare_iwad(iwad, 'heretic'):
-            self.base_command = '{} -heretic'.format(self.base_command)
+            self.base_command = f'{self.base_command} -heretic'
         if compare_iwad(iwad, 'hexen'):
-            self.base_command = '{} -hexen'.format(self.base_command)
+            self.base_command = f'{self.base_command} -hexen'
 
     @staticmethod
     def _check_wad_existence(wad):
@@ -199,15 +198,18 @@ class PlaybackData(BaseData):
             if wad_info.get('not_required_for_playback', False):
                 continue
 
-            wad_checksum = wad_info['checksum']
-            if wad_file in dsda_doom_dirlist:
-                if wad_checksum == checksum(os.path.join(CONFIG.dsda_doom_directory, wad_file)):
-                    continue
+            wad_checksum = wad_info.get('checksum')
+            if wad_checksum:
+                if wad_file in dsda_doom_dirlist:
+                    if wad_checksum == checksum(os.path.join(CONFIG.dsda_doom_directory, wad_file)):
+                        continue
+            else:
+                LOGGER.error('WAD %s has no checksum information.', wad.name)
 
             if local_wad_location is None:
                 zip_location = download_wad_from_dsda(wad.dsda_url) if wad.dsda_url else None
                 if not zip_location:
-                    raise RuntimeError('Could not download wad {}.'.format(wad.name))
+                    raise RuntimeError(f'Could not download wad {wad.name}.')
 
                 local_wad_location = zip_extract(zip_location)
 
@@ -222,6 +224,7 @@ class PlaybackData(BaseData):
         """Play back demo and categorize it.
 
         :raises RuntimeError if the WAD could not be guessed for this demo
+                ValueError if there's issues with getting the complevel required for the WAD
         """
         # TODO: If there is no complevel info and it's a vanilla complevel, probably should try to
         #       force every available complevel (2-4)
@@ -237,7 +240,10 @@ class PlaybackData(BaseData):
 
             # Prefer the primary playback CMD line; if it doesn't work, look through the
             # alternatives
-            playback_cmd_lines = [wad_guess.playback_cmd_line] + wad_guess.alt_playback_cmd_lines
+            primary_cmd_line = ([wad_guess.playback_cmd_line]
+                                if wad_guess.playback_cmd_line or wad_guess.commercial else [])
+
+            playback_cmd_lines = primary_cmd_line + wad_guess.alt_playback_cmd_lines
             if CONFIG.always_try_solonet:
                 if '-solo-net' not in self.base_command:
                     playback_cmd_lines.extend(
@@ -263,8 +269,7 @@ class PlaybackData(BaseData):
                 else:
                     cmd_line_info = None
 
-                command = '{} -iwad commercial/{} {}'.format(self.base_command, wad_guess.iwad,
-                                                             cmd_line)
+                command = f'{self.base_command} -iwad commercial/{wad_guess.iwad} {cmd_line}'
                 self._attempt_demo_playback(command)
                 # Technically, there could be edge cases where a levelstat could be generated even if the wrong WAD is
                 # used (e.g., thissuxx map 1 will exit on pretty much any demo that is long enough). If the
@@ -326,7 +331,7 @@ class PlaybackData(BaseData):
 
                 dsda_wad_name = (self._demo_playback.wad.dsda_name
                                  if self._demo_playback.wad.dsda_name
-                                 else get_wad_name_from_dsda_url(self._demo_playback.wad.dsda_url))
+                                 else get_wad_or_player_name_from_dsda_url(self._demo_playback.wad.dsda_url))
                 self.data['wad'] = dsda_wad_name
                 self._parse_analysis()
                 self._parse_levelstat()
@@ -336,10 +341,47 @@ class PlaybackData(BaseData):
                     self.playback_failed = True
                 else:
                     self._parse_raw_data()
-                    # TODO: Support WADs with multiple complevels across different maps
                     complevel = self.demo_info.get('complevel')
                     if complevel:
-                        if int(self._demo_playback.wad.complevel) != int(complevel):
+                        # Intended complevels can be finicky, so these are the assumptions that are taken when checking
+                        # demos for incompatibility here:
+                        #  - For each WAD, complevel can be set at the top-level and per-map. In both cases, complevel
+                        #    could be a single value or a list of allowed complevels.
+                        #  - If both a single value and list are set, the case is ambiguous, and an error is thrown.
+                        #  - If neither is set, we can't do the verification here, so an error is thrown then as well.
+                        #  - The per-map complevel always overrides the WAD complevel if available.
+                        #  - For multi-level runs, the allowed complevels are taken to be the superset of all the
+                        #    per-map complevels, based on the above logic of determining each map's complevel.
+                        if self._demo_playback.wad.complevel and self._demo_playback.wad.complevels:
+                            raise ValueError(f'Multiple complevels defined for WAD {self._demo_playback.wad.name}.')
+
+                        allowed_complevels = []
+                        for affected_level in self.raw_data['affected_levels']:
+                            map_info = self._demo_playback.wad.map_list_info.get_map_info(affected_level)
+                            skill = self.demo_info.get('skill')
+                            game_mode = self.demo_info.get('game_mode')
+                            map_complevel = map_info.get_single_key_for_map('complevel', skill=skill,
+                                                                            game_mode=game_mode)
+                            map_complevels = map_info.get_single_key_for_map('complevels', skill=skill,
+                                                                             game_mode=game_mode)
+                            if map_complevel and map_complevels:
+                                raise ValueError(
+                                    f'Multiple complevels defined for level {affected_level} in WAD '
+                                    f'{self._demo_playback.wad.name}.'
+                                )
+
+                            if not map_complevel and not map_complevels:
+                                map_complevel = self._demo_playback.wad.complevel
+                                map_complevels = self._demo_playback.wad.complevels
+
+                            if map_complevel:
+                                allowed_complevels.append((int(map_complevel)))
+                            elif map_complevels:
+                                allowed_complevels.extend([int(complevel) for complevel in map_complevels])
+
+                        if not allowed_complevels:
+                            raise ValueError(f'Could not find complevel for WAD {self._demo_playback.wad.name}.')
+                        elif int(complevel) not in allowed_complevels:
                             self.note_strings.add('Incompatible')
 
                     if self._demo_playback.cmd_line_info:
@@ -388,35 +430,94 @@ class PlaybackData(BaseData):
         This is mostly for special cases that are not handled by DSDA-Doom as they depend on the
         WAD itself.
         """
-        # TODO: Skipping multi-level runs for now, this needs to be refactored a bit to be cleaner
-        #       first
-        # TODO: Additional processing needed for maps that are max exceptions; for a
-        #       complete fix, this will need DSDA-Doom to output missed monster/secret
-        #       IDs
-        if len(self.raw_data['affected_levels']) > 1:
-            return
-
-        map_info = self._demo_playback.wad.map_list_info.get_map_info(
-            self.raw_data['affected_levels'][0]
-        )
+        # TODO: DSDA-Doom should output missed kill/secret IDs for better max verification (mostly kills)
         skill = self.demo_info.get('skill')
         game_mode = self.demo_info.get('game_mode')
-        all_kills_obtained = self.raw_data.get('missed_monsters', -1) == '0'
-        all_secrets_obtained = self.raw_data.get('100s', False)
 
-        all_required_kills_obtained = all_kills_obtained
-        all_required_secrets_obtained = all_secrets_obtained
+        all_required_kills_obtained = True
+        all_required_secrets_obtained = True
+        all_required_items_obtained = True
+        has_at_least_one_secret = False
+        has_at_least_one_kill = False
+        all_maps_tyson_only = True
+        all_maps_skip_reality = True
+        all_maps_add_reality_in_nomo = True
+        all_maps_skip_almost_reality = True
+        all_maps_add_almost_reality_in_nomo = True
+        all_maps_skip_also_pacifist = True
+        for affected_level, stats in self.raw_data['stats'].items():
+            map_info = self._demo_playback.wad.map_list_info.get_map_info(affected_level)
 
-        max_secret_count = map_info.get_single_key_for_map('required_max_secret_count', skill=skill,
+            required_max_secret_count = map_info.get_single_key_for_map('required_max_secret_count', skill=skill,
+                                                                        game_mode=game_mode)
+            required_max_kill_count = map_info.get_single_key_for_map('required_max_kill_count', skill=skill,
+                                                                      game_mode=game_mode)
+
+            obtained_secret_number, total_secret_number = map(int, stats['secrets'].split('/'))
+            obtained_kill_number, total_kill_number = map(int, stats['kills'].split('/'))
+            obtained_item_number, total_item_number = map(int, stats['items'].split('/'))
+
+            if required_max_secret_count:
+                required_max_secrets = int(required_max_secret_count.split('/')[0])
+            else:
+                required_max_secrets = int(total_secret_number)
+
+            if required_max_kill_count:
+                required_max_kills = int(required_max_kill_count.split('/')[0])
+            else:
+                required_max_kills = total_kill_number
+
+            has_at_least_one_secret = has_at_least_one_secret or total_secret_number > 0
+            has_at_least_one_kill = has_at_least_one_kill or total_kill_number > 0
+
+            if obtained_secret_number < required_max_secrets:
+                all_required_secrets_obtained = False
+            if obtained_kill_number < required_max_kills:
+                all_required_kills_obtained = False
+            if obtained_item_number < total_item_number:
+                all_required_items_obtained = False
+
+            tyson_only = map_info.get_single_key_for_map('tyson_only', skill=skill, game_mode=game_mode)
+            all_maps_tyson_only = all_maps_tyson_only and tyson_only
+
+            skip_reality = map_info.get_single_key_for_map('skip_reality', skill=skill,
                                                            game_mode=game_mode)
-        obtained_secret_number, total_secret_number = map(int, self.data['secrets'].split('/'))
-        _, total_kill_number = map(int, self.data['kills'].split('/'))
-        has_at_least_one_secret = total_secret_number > 0
-        has_at_least_one_kill = total_kill_number > 0
-        if max_secret_count:
-            max_secret_number = int(max_secret_count.split('/')[0])
-            if obtained_secret_number >= max_secret_number:
-                all_required_secrets_obtained = True
+            skip_reality_categories = map_info.get_single_key_for_map('skip_reality_for_categories',
+                                                                      skill=skill, game_mode=game_mode)
+            skip_reality_final = skip_reality or (skip_reality_categories is not None and
+                                                  self.data['category'] in skip_reality_categories)
+
+            all_maps_skip_reality = all_maps_skip_reality and skip_reality_final
+
+            add_reality_in_nomo = map_info.get_single_key_for_map('add_reality_in_nomo', skill=skill,
+                                                                  game_mode=game_mode)
+            all_maps_add_reality_in_nomo = all_maps_add_reality_in_nomo and add_reality_in_nomo
+
+            skip_almost_reality = map_info.get_single_key_for_map('skip_almost_reality', skill=skill,
+                                                                  game_mode=game_mode)
+            skip_almost_reality_categories = map_info.get_single_key_for_map(
+                'skip_almost_reality_for_categories', skill=skill, game_mode=game_mode
+            )
+            skip_almost_reality_final = (
+                skip_almost_reality or (skip_almost_reality_categories is not None and
+                                        self.data['category'] in skip_almost_reality_categories)
+            )
+
+            all_maps_skip_almost_reality = all_maps_skip_almost_reality and skip_almost_reality_final
+
+            add_almost_reality_in_nomo = map_info.get_single_key_for_map('add_almost_reality_in_nomo', skill=skill,
+                                                                         game_mode=game_mode)
+            all_maps_add_almost_reality_in_nomo = all_maps_add_almost_reality_in_nomo and add_almost_reality_in_nomo
+
+            skip_also_pacifist = map_info.get_single_key_for_map('skip_also_pacifist', skill=skill, game_mode=game_mode)
+            skip_also_pacifist_categories = map_info.get_single_key_for_map(
+                'skip_also_pacifist_for_categories', skill=skill, game_mode=game_mode
+            )
+            skip_also_pacifist_final = skip_also_pacifist or (
+                skip_also_pacifist_categories is not None and self.data['category'] in skip_also_pacifist_categories
+            )
+
+            all_maps_skip_also_pacifist = all_maps_skip_also_pacifist and skip_also_pacifist_final
 
         if all_required_kills_obtained and all_required_secrets_obtained and (has_at_least_one_secret or
                                                                               has_at_least_one_kill):
@@ -440,82 +541,53 @@ class PlaybackData(BaseData):
         # If a run was a valid Tyson (only Tyson weapons used and 100% kills) and the map is not Tyson-only, we always
         # choose the Tyson category for the final run instead of UV Max.
         if self.raw_data.get('tyson_weapons', False) and all_required_kills_obtained:
-            tyson_only = map_info.get_single_key_for_map('tyson_only', skill=skill, game_mode=game_mode)
-            if not tyson_only and self.data['category'] == 'UV Max':
+            if not all_maps_tyson_only and self.data['category'] == 'UV Max':
                 self.data['category'] = 'Tyson'
 
         is_nomo = self.raw_data.get('nomonsters', False)
-        skip_reality = map_info.get_single_key_for_map('skip_reality', skill=skill,
-                                                       game_mode=game_mode)
-        skip_reality_categories = map_info.get_single_key_for_map('skip_reality_for_categories',
-                                                                  skill=skill, game_mode=game_mode)
-        skip_reality_final = skip_reality or (skip_reality_categories is not None and
-                                              self.data['category'] in skip_reality_categories)
         if self.raw_data.get('reality', False):
             add_reality_tag = True
-            if is_nomo and not map_info.get_single_key_for_map('add_reality_in_nomo', skill=skill,
-                                                               game_mode=game_mode):
+            if is_nomo and not all_maps_add_reality_in_nomo:
                 add_reality_tag = False
-            if skip_reality_final:
+            if all_maps_skip_reality:
                 add_reality_tag = False
 
             if add_reality_tag:
                 self.note_strings.add('Also Reality')
         elif self.raw_data.get('almost_reality', False):
             add_almost_reality_tag = True
-            skip_almost_reality = map_info.get_single_key_for_map('skip_almost_reality',
-                                                                  skill=skill, game_mode=game_mode)
-            skip_almost_reality_categories = map_info.get_single_key_for_map(
-                'skip_almost_reality_for_categories', skill=skill, game_mode=game_mode
-            )
-            skip_almost_reality_final = (
-                skip_almost_reality or (skip_almost_reality_categories is not None and
-                                        self.data['category'] in skip_almost_reality_categories)
-            )
-            if is_nomo and not map_info.get_single_key_for_map('add_almost_reality_in_nomo',
-                                                               skill=skill, game_mode=game_mode):
+            if is_nomo and not all_maps_add_almost_reality_in_nomo:
                 add_almost_reality_tag = False
-            if skip_reality_final or skip_almost_reality_final:
+            if all_maps_skip_reality or all_maps_skip_almost_reality:
                 add_almost_reality_tag = False
 
             if add_almost_reality_tag:
                 self.note_strings.add('Also Almost Reality')
 
-        # If a run was a Stroller, choose the Stroller category over UV-Speed, as this will happen
-        # for maps with no monsters.
+        # If a run was a Stroller, choose the Stroller category over UV-Speed, as this will happen for maps with no
+        # monsters.
         if self.raw_data.get('stroller', True) and self.data['category'] == 'UV Speed':
             self.data['category'] = 'Stroller'
 
-        skip_also_pacifist = map_info.get_single_key_for_map('skip_also_pacifist', skill=skill,
-                                                             game_mode=game_mode)
-        skip_also_pacifist_categories = map_info.get_single_key_for_map(
-            'skip_also_pacifist_for_categories', skill=skill, game_mode=game_mode
-        )
-        skip_also_pacifist_final = skip_also_pacifist or (
-            skip_also_pacifist_categories is not None and
-            self.data['category'] in skip_also_pacifist_categories
-        )
         # If a run is not UV-Speed/Pacifist or on nomonsters, add tag for Also Pacifist
-        if not skip_also_pacifist_final and (self.raw_data.get('pacifist', False) and
-                                             not self.raw_data.get('nomonsters', False) and
-                                             self.data['category'] not in ['Pacifist', 'Stroller', 'UV Speed']):
+        if not all_maps_skip_also_pacifist and (self.raw_data.get('pacifist', False) and
+                                                not self.raw_data.get('nomonsters', False) and
+                                                self.data['category'] not in ['Pacifist', 'Stroller', 'UV Speed']):
             self.note_strings.add('Also Pacifist')
 
         # Jumpwad has special rules for categories:
         #   - Pacifist doesn't exist.
         #   - UV-Max requires items.
         if self.data['wad'] == 'jumpwad':
-            all_items = True
-            for stats in self.raw_data['stats']:
-                items_gotten, total_items = stats['items'].split('/')
-                if items_gotten != total_items:
-                    all_items = False
-                    break
-
-            if not all_items and self.data['category'] == 'UV Max':
+            if not all_required_items_obtained and self.data['category'] == 'UV Max':
                 self.data['category'] = 'UV Speed'
             elif self.data['category'] == 'Pacifist':
                 self.data['category'] = 'UV Speed'
+
+        # Nerf has special tags for 100% items.
+        if self.data['wad'] == 'nerf':
+            if not all_required_items_obtained and self.data['category'] == 'NM 100S':
+                self.note_strings.add('Also 100% items')
 
         if self.is_heretic:
             self.data['category'] = PlaybackData.HERETIC_CATEGORY_MAP.get(self.data['category'], self.data['category'])
@@ -550,8 +622,6 @@ class PlaybackData(BaseData):
                         self.data['category'] = 'Other'
                         self.note_strings.add('BP 100S')
 
-        # TODO: Add 100% items tags for Nerf only
-
     def _parse_analysis(self):
         """Parse analysis info.
 
@@ -578,8 +648,8 @@ class PlaybackData(BaseData):
             if key in self.BOOLEAN_INT_KEYS:
                 value = False if int(value) == 0 else True
             if key == 'turbo' and value:
-                # This will need manual effort to actually figure out what kind of turbo usage is
-                # performed, which will be handled later.
+                # This will need manual effort to actually figure out what kind of turbo usage is performed, which will
+                # be handled later.
                 self.note_strings.add('Uses turbo')
             if key == 'category':
                 self.data['category'] = PlaybackData.DOOM_CATEGORY_MAP.get(value, value)
@@ -598,6 +668,7 @@ class PlaybackData(BaseData):
         levelstat = self._demo_playback.levelstat.splitlines()
         skill = self.demo_info.get('skill')
         game_mode = self.demo_info.get('game_mode')
+
         # IL run case
         if len(levelstat) == 1:
             levelstat_line_split = levelstat[0].split()
@@ -607,20 +678,20 @@ class PlaybackData(BaseData):
             map_info = self._demo_playback.wad.map_list_info.get_map_info(
                 level_no_secret_exit_marker
             )
-            # Not sure this should be the no-secret exit marker map, since some things can be
-            # different depending on secret exit.
-            self.raw_data['affected_levels'] = [level_no_secret_exit_marker]
             if (self.data['category'] in PlaybackData.ALL_KILLS_CATEGORIES or
                     self.data['category'] in PlaybackData.ALL_SECRETS_CATEGORIES or
                     map_info.get_single_key_for_map('mark_secret_exit_as_normal', skill=skill,
                                                     game_mode=game_mode)):
-                self.data['level'] = self.data['level'].rstrip('s')
+                self.data['level'] = level_no_secret_exit_marker
+                self.raw_data['affected_levels'] = [level_no_secret_exit_marker]
+            else:
+                self.raw_data['affected_levels'] = [self.data['level']]
 
             time = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_TIME_IDX]
             self.data['time'] = time
             self.data['levelstat'] = time
             stats_dict = PlaybackData._get_stats_from_levelstat_line(levelstat[0])
-            self.raw_data['stats'] = [stats_dict]
+            self.raw_data['stats'][self.data['level']] = stats_dict
             self.data['kills'] = stats_dict['kills']
             self.data['items'] = stats_dict['items']
             self.data['secrets'] = stats_dict['secrets']
@@ -637,11 +708,11 @@ class PlaybackData(BaseData):
             )
 
             map_list = []
-            self.raw_data['stats'] = []
             for line in levelstat:
                 level = self._get_level(line.split(), self._demo_playback.wad)
-                map_list.append(level.rstrip('s'))
-                self.raw_data['stats'].append(PlaybackData._get_stats_from_levelstat_line(line))
+                level_no_secret_exit_marker = level.rstrip('s')
+                map_list.append(level_no_secret_exit_marker)
+                self.raw_data['stats'][level_no_secret_exit_marker] = PlaybackData._get_stats_from_levelstat_line(line)
 
             self._detect_movie_type(self._demo_playback.wad, map_list)
             self.raw_data['affected_levels'] = map_list
@@ -752,16 +823,14 @@ class PlaybackData(BaseData):
                         episode_num = (doom_1_map_match.group('episode_num') if doom_1_map_match
                                        else idx + 1)
 
-                        self.data['level'] = 'Episode {}'.format(episode_num)
+                        self.data['level'] = f'Episode {episode_num}'
 
             if not self.data.get('level'):
                 self.data['level'] = 'Other Movie'
-                self.note_strings.add('Other Movie {} - {}'.format(first_non_secret_map,
-                                                                   last_non_secret_map))
+                self.note_strings.add(f'Other Movie {first_non_secret_map} - {last_non_secret_map}')
         else:
             self.data['level'] = 'Other Movie'
-            self.note_strings.add('Other Movie {} - {}'.format(first_non_secret_map,
-                                                               last_non_secret_map))
+            self.note_strings.add(f'Other Movie {first_non_secret_map} - {last_non_secret_map}')
             self.note_strings.add('Does not visit secret maps.')
 
     def _has_required_secret_maps(self, wad, map_list):

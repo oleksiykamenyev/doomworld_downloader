@@ -29,7 +29,7 @@ class LMPData(BaseData):
     PORT_FOOTER_TO_DSDA_MAP = {'PrBoom-Plus': 'PRBoom', 'dsda-doom': 'DSDA-Doom', 'Woof': 'Woof',
                                'Nugget Doom': 'Nugget Doom', 'SpeedWoof': 'SpeedWoof',
                                'Crispy Doom': 'Crispy Doom', 'Crispy Heretic': 'Crispy Heretic',
-                               'Crispy Hexen': 'Crispy Hexen', 'PRBoomX': 'PRBoomX'}
+                               'Crispy Hexen': 'Crispy Hexen', 'PRBoomX': 'PRBoomX', 'nyan-doom': 'Nyan Doom'}
     KEY_LIST = [
         'engine', 'version', 'skill', 'episode', 'level', 'play mode', 'respawn', 'fast',
         'nomonsters', 'player 1', 'player 2', 'player 3', 'player 4', 'player 5', 'player 6',
@@ -140,18 +140,19 @@ class LMPData(BaseData):
                     current_byte = lmp_bytes.read(1)
                     footer_chars.append(current_byte)
 
-                # TODO: Figure out if I prefer above code
-                #lmp_bytes.seek(-1, 2)  # Go one byte before the end of file
-                #current_byte = lmp_bytes.read(1)
-                #while current_byte != b'\x80':
-                #    footer_chars.append(current_byte)
-                #    try:
-                #        lmp_bytes.seek(-2, 1)  # Go back one byte
-                #    except OSError:
-                #        LOGGER.exception('LMP %s had issue extracting footer.', self.lmp_path)
-                #        break
+                # Below code will look for footer from the end of the file, above from the start. Below seemed to fail
+                # for some Woof demos, so keeping above for now.
+                # lmp_bytes.seek(-1, 2)  # Go one byte before the end of file
+                # current_byte = lmp_bytes.read(1)
+                # while current_byte != b'\x80':
+                #     footer_chars.append(current_byte)
+                #     try:
+                #         lmp_bytes.seek(-2, 1)  # Go back one byte
+                #     except OSError:
+                #         LOGGER.exception('LMP %s had issue extracting footer.', self.lmp_path)
+                #         break
 
-                #    current_byte = lmp_bytes.read(1)
+                #     current_byte = lmp_bytes.read(1)
 
         self._footer = b''.join(footer_chars).decode(errors='ignore')
 

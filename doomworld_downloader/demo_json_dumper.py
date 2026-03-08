@@ -19,7 +19,7 @@ from collections import defaultdict
 from .upload_config import (CONFIG, NEEDS_ATTENTION_PLACEHOLDER, MAYBE_CHEATED_DIR, \
                             VALID_DEMO_PACK_DIR, VALID_ISSUE_DIR, VALID_NO_ISSUE_DIR, VALID_TAGS_DIR,
                             INVALID_SOURCE_PORT_DIR, ALLOWED_ENGINE_TO_MIN_VERSION_MAP)
-from .utils import checksum
+from .utils import check_advanced_port, checksum
 
 
 VERSION_NO_PATCH_RE = re.compile(r'^v(?P<major>\d+)\.(?P<minor>\d+)(cl\d+)?$')
@@ -112,6 +112,11 @@ class DemoJsonDumper:
         if dedupe:
             for demo_json_existing in self.demo_location_to_jsons_map[demo_path]:
                 if demo_json_existing.compare_to(demo_json, exclude_keys=['recorded_at']):
+                    # If we encounter a demo pack of advanced port demos, we probably don't want to prune, as it's
+                    # unlikely that these are co-op runs.
+                    if CONFIG.do_not_prune_advanced_ports and check_advanced_port(demo_json.demo_dict['engine']):
+                        continue
+
                     # Prune LMP files based on their recorded date, since it makes sense to take
                     # the earliest date of the same time if we have multiple. In case recorded_date
                     # comes up as UNKNOWN for any of the lmps, it should be sorted after actual
@@ -232,7 +237,8 @@ class DemoJson:
 
     MISC_NOTES = ['Also Reality', 'Also Almost Reality', 'Uses turbo', 'Uses -longtics',
                   'Also Pacifist', 'Plays back with forced -complevel 5',
-                  'Good at DooM: gib yourself to end the level.', 'Demo syncs with a forced -respawn argument.']
+                  'Good at DooM: gib yourself to end the level.', 'Demo syncs with a forced -respawn argument.',
+                  'Also 100% items']
     MISC_CATEGORY_NOTES = [
         '-altdeath', '-coop_spawns', '-fast', '-nomonsters', '-respawn', '-solo-net'
     ]
@@ -375,7 +381,7 @@ class DemoJson:
 
             no_kills = True
             no_secrets = True
-            for stats in self.demo_info.additional_upload_info.get('stats', []):
+            for stats in self.demo_info.additional_upload_info.get('stats').values():
                 if stats['kills'] != '0/0':
                     no_kills = False
                 if stats['secrets'] != '0/0':

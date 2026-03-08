@@ -20,7 +20,7 @@ class WadMapInfo:
         'no_exit': False, 'nomo_map': False, 'skip_almost_reality': False, 'skip_reality': False,
         'tyson_only': False, 'skip_reality_for_categories': None, 'skip_almost_reality_for_categories': None,
         'skip_also_pacifist': False, 'skip_also_pacifist_for_categories': None, 'required_max_secret_count': None,
-        'ignore_level': False
+        'required_max_kill_count': None, 'ignore_level': False, 'complevel': None, 'complevels': []
     }
 
     def __init__(self, map_name, map_info_dict, wad_name, fail_on_error=False):
@@ -136,7 +136,7 @@ class WadMapInfo:
 
 class WadMapListInfo:
     """WAD map list info object handler."""
-    TOP_LEVEL_KEYS = ['complevel', 'd1all', 'd2all', 'episodes', 'map_info', 'map_ranges',
+    TOP_LEVEL_KEYS = ['complevel', 'complevels', 'd1all', 'd2all', 'episodes', 'map_info', 'map_ranges',
                       'secret_exits']
 
     D2ALL_DEFAULT = ['Map 01', 'Map 30']
@@ -256,8 +256,6 @@ class Wad:
     iwad: str
     # Files needed for the wad mapped to their MD5 hashes (e.g., scythe.wad: {hash})
     files: dict
-    # Complevel needed for the wad (e.g., 2)
-    complevel: int
     # Special info on the different maps in the wad; for example, whether any maps are nomo, etc.
     map_list_info: WadMapListInfo
     idgames_url: str
@@ -268,6 +266,10 @@ class Wad:
     dsda_paginated: bool
     doomworld_thread: str
 
+    # Complevel needed for the wad (e.g., 2), if the WAD is not a multi-complevel case.
+    complevel: int = None
+    # Complevels that could be used for the wad (e.g., 2), if there are multiple.
+    complevels: list = field(default_factory=list)
     # Playback command line for the wad (e.g., "-file scythe")
     playback_cmd_line: str = ''
     # Alternative command lines (e.g., for fixwad cases like "-file tnt tnt31")

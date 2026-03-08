@@ -14,7 +14,6 @@ from .utils import parse_youtube_url, get_single_key_value_dict, normalize_time_
 LOGGER = logging.getLogger(__name__)
 
 
-# TODO: Handle Heretic/Hexen categories
 class TextfileData(BaseData):
     """Store all uploader-relevant data for a demo textfile."""
     CATEGORY_KEYS = ['cat', 'catagory', 'category', 'catagories', 'categories', 'discipline', 'type']

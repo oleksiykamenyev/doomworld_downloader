@@ -4,11 +4,15 @@ Various utilities to parse DSDA pages
 
 import logging
 import os
-import requests
+import re
+import string
 
+from collections import defaultdict
 from dataclasses import dataclass
 
-from urllib.parse import urlparse, urlunparse
+import requests
+
+from urllib.parse import urlparse, urlunparse, urljoin
 
 from doomworld_downloader.upload_config import CONFIG
 from doomworld_downloader.utils import get_download_filename, download_response, get_page
@@ -16,8 +20,14 @@ from doomworld_downloader.utils import get_download_filename, download_response,
 
 LOGGER = logging.getLogger(__name__)
 
+DSDA_GROUP_PAGE_REGEXES = [
+    re.compile(r'^Map Select$'), re.compile(r'^Episode \d+ ILs$'), re.compile(r'^Movies$')
+]
+
 DSDA_START = 'https://www.dsdarchive.com'
 DSDA_PLAYER_URL = f'{DSDA_START}/players'
+DSDA_PLAYER_API_URL = f'{DSDA_START}/api/players'
+DSDA_WAD_URL = f'{DSDA_START}/wads'
 
 
 @dataclass
@@ -155,15 +165,17 @@ def parse_page_top(page_soup):
     return parsed_headers
 
 
-def parse_dsda_demo_page(dsda_url):
-    """Parse DSDA page.
+def extract_demos_from_demo_table(dsda_url, soup=None):
+    """Parse demo table from DSDA page.
 
     :param dsda_url: DSDA URL
-    :return: Parse DSDA page, including headers and demos JSON
+    :param soup: Full DSDA page parsed into a BeautifulSoup object, if the page was already parsed by the calling
+                 function.
+    :return: Demos JSON of demos on the page.
     """
-    verify_dsda_url(dsda_url, page_types=['player', 'wad'])
-    soup = get_page(dsda_url)
-    parsed_demo_page = {'headers': parse_page_top(soup)}
+    if not soup:
+        verify_dsda_url(dsda_url, page_types=['player', 'wad'])
+        soup = get_page(dsda_url)
 
     demo_table = soup.find('table')
     table_header = demo_table.find('thead')
@@ -178,7 +190,6 @@ def parse_dsda_demo_page(dsda_url):
             col_names.append(header_cell.labels[0])
         else:
             raise ValueError(f'Unclear header cell {col} found on page {dsda_url}.')
-
     rows = demo_table.find('tbody').find_all('tr')
     col_len = len(col_names)
     demo_list = []
@@ -204,18 +215,329 @@ def parse_dsda_demo_page(dsda_url):
                 row_values = cur_row_values
             demo_list.append(dict(zip(col_names, row_values)))
 
+    return demo_list
+
+
+def parse_dsda_demo_page(dsda_url, parse_all_pages=False):
+    """Parse DSDA page.
+
+    :param dsda_url: DSDA URL
+    :param parse_all_pages: Flag indicating to parse all pages in cases of DSDA pages that are paginated
+    :return: Parse DSDA page, including headers and demos JSON
+    """
+    verify_dsda_url(dsda_url, page_types=['player', 'wad'])
+    soup = get_page(dsda_url)
+    parsed_demo_page = {'headers': parse_page_top(soup)}
+    page_short_name = get_wad_or_player_name_from_dsda_url(dsda_url)
+    parsed_demo_page['headers']['short_name'] = page_short_name
+
+    dsda_map_pages_to_urls = {}
+    button_groups = soup.find_all('div', class_='btn-group')
+    for button_group in button_groups:
+        button = button_group.find('button')
+        if button and button.text.strip() == 'Map Select':
+            for page_link in button_group.find_all('a'):
+                page_name = page_link.text
+                skip_page = False
+                for group_page_regex in DSDA_GROUP_PAGE_REGEXES:
+                    if group_page_regex.match(page_name):
+                        skip_page = True
+                        break
+
+                if skip_page:
+                    continue
+
+                dsda_map_pages_to_urls[page_name] = urljoin(dsda_url, page_link['href'])
+
+    demo_list = extract_demos_from_demo_table(dsda_url, soup=soup)
+    parsed_levels = set([demo['Level'].text for demo in demo_list])
+    parsed_level_count = len(parsed_levels)
+    if parse_all_pages and parsed_level_count < len(dsda_map_pages_to_urls):
+        LOGGER.info('Paginated DSDA WAD detected.')
+        parsed_level = next(iter(parsed_levels))
+        LOGGER.info('Level %s already parsed.', parsed_level)
+
+        for page_name, additional_url in dsda_map_pages_to_urls.items():
+            if page_name != parsed_level:
+                demo_list.extend(extract_demos_from_demo_table(additional_url))
+
     parsed_demo_page['demo_list'] = demo_list
     return parsed_demo_page
 
 
-def get_wad_name_from_dsda_url(dsda_url):
-    """Get WAD name from DSDA URL.
+def parse_dsda_demo_page_with_annotation(dsda_url, parse_all_pages=False, grant_index_from_cheated_demos=False):
+    """Parse DSDA page with code-created annotation.
+
+    Demos will be annotated as records, basic checks will be performed, record index calculated, etc.
 
     :param dsda_url: DSDA URL
-    :return: WAD name from DSDA URL
+    :param parse_all_pages: Flag indicating to parse all pages in cases of DSDA pages that are paginated
+    :param grant_index_from_cheated_demos: Flag indicating whether to grant demos index from cheated and dubious demos
+    :return: Parse DSDA page, including headers and demos JSON with additional annotation.
+    """
+    parsed_demo_page = parse_dsda_demo_page(dsda_url, parse_all_pages=parse_all_pages)
+    demo_list = parsed_demo_page['demo_list']
+    unchanged_demos = []
+    for entry in list(demo_list):
+        time_str_split = entry['Time'].text.split(':')
+        if len(time_str_split) == 3:
+            hours, mins, secs = time_str_split
+            hours = int(hours)
+        else:
+            hours = 0
+            mins, secs = time_str_split
+
+        mins = int(mins)
+        if '.' in secs:
+            secs, millis = secs.split('.')
+        else:
+            millis = '0'
+
+        secs = int(secs)
+        time_in_seconds = hours * 3600 + mins * 60 + secs
+        entry['time_in_seconds'] = float(f'{time_in_seconds}.{millis}')
+
+        entry_notes = entry['Note'].text.split()
+        num_players = 1
+        if '2P' in entry_notes:
+            num_players = 2
+        if '3P' in entry_notes:
+            num_players = 3
+        if '4P' in entry_notes:
+            num_players = 4
+
+        entry['num_players'] = num_players
+
+        if 'SN' in entry_notes or 'TAS' in entry_notes:
+            entry['record_index'] = 0
+            entry['is_record'] = False
+            unchanged_demos.append(entry)
+            demo_list.remove(entry)
+
+        # Default values.
+        entry['is_record'] = False
+        entry['cheated_record'] = False
+        entry['record_index'] = 0
+        entry['potential_record_index'] = 0
+        entry['actual_record'] = None
+        entry['supersedes'] = None
+        entry['faster_cheated_record'] = None
+
+    category_level_num_players_pairs = list(set([(entry['Category'].text, entry['Level'].text, entry['num_players'])
+                                                 for entry in demo_list]))
+    split_lists = []
+    for category, level, num_players in category_level_num_players_pairs:
+        split_lists.append(
+            [entry for entry in demo_list
+             if entry['Category'].text == category and entry['Level'].text == level and
+             entry['num_players'] == num_players]
+        )
+
+    final_demo_list = []
+    record_references = defaultdict(dict)
+    for split_list in split_lists:
+        if split_list:
+            # For Other/Other Movie demos, no annotation can be performed.
+            if split_list[0]['Category'].text == 'Other' or split_list[0]['Level'].text == 'Other Movie':
+                final_demo_list.extend(split_list)
+            else:
+                split_list_sorted = sorted(split_list, key=lambda entry_key: entry_key['time_in_seconds'])
+                list_index_of_record = 0
+                list_index_of_cheated_record = 0
+                found_record = False
+                found_cheated_record = False
+                top_record_index = 0
+                top_potential_record_index = 0
+                for idx, entry in enumerate(split_list_sorted):
+                    labels_joined = '\n'.join(entry['Note'].labels)
+                    if 'Dubious' in labels_joined or 'Cheated' in labels_joined:
+                        if not found_record and not found_cheated_record:
+                            list_index_of_cheated_record = idx
+                            found_cheated_record = True
+                        else:
+                            if grant_index_from_cheated_demos:
+                                top_record_index += 1
+                                top_potential_record_index += 1
+                    else:
+                        if not found_record:
+                            list_index_of_record = idx
+                            found_record = True
+                            if found_cheated_record:
+                                top_potential_record_index += 1
+                        else:
+                            top_record_index += 1
+                            top_potential_record_index += 1
+
+                # It's possible we won't find any record, e.g., if every demo for a category/level is cheated or
+                # dubious.
+                if found_record:
+                    if found_cheated_record:
+                        split_list_sorted[list_index_of_record]['faster_cheated_record'] = split_list_sorted[
+                            list_index_of_cheated_record
+                        ]
+
+                    split_list_sorted[list_index_of_record]['is_record'] = True
+                    split_list_sorted[list_index_of_record]['record_index'] = top_record_index
+
+                    record_level = split_list_sorted[list_index_of_record]['Level'].text
+                    record_category = split_list_sorted[list_index_of_record]['Category'].text
+                    record_num_players = split_list_sorted[list_index_of_record]['num_players']
+                    if record_category not in record_references[record_level]:
+                        record_references[record_level][record_category] = defaultdict(dict)
+                    if record_num_players not in record_references[record_level][record_category]:
+                        record_references[record_level][record_category][record_num_players] = defaultdict(dict)
+
+                    record_references[record_level][record_category][record_num_players] = split_list_sorted[
+                        list_index_of_record
+                    ]
+                if found_cheated_record:
+                    split_list_sorted[list_index_of_cheated_record]['cheated_record'] = True
+                    split_list_sorted[list_index_of_cheated_record]['potential_record_index'] = top_potential_record_index
+
+                final_demo_list.extend(split_list_sorted)
+
+    for level in record_references:
+        for possible_num_players in range(1, 5):
+            # Handle Pacifist -> UV-Speed crosslist
+            possible_pacifist_record = record_references[level].get('Pacifist', {}).get(possible_num_players, {})
+            if possible_pacifist_record:
+                possible_speed_record = record_references[level].get('UV Speed', {}).get(possible_num_players, {})
+                if possible_speed_record:
+                    if possible_pacifist_record['time_in_seconds'] < possible_speed_record['time_in_seconds']:
+                        # Add 1 because this demo should take on all of the record index of anything it supersedes +
+                        # the demo it beats.
+                        possible_pacifist_record['record_index'] += possible_speed_record['record_index'] + 1
+                        possible_pacifist_record['supersedes'] = possible_speed_record
+                        possible_speed_record['is_record'] = False
+                        possible_speed_record['record_index'] = 0
+                        possible_speed_record['actual_record'] = possible_pacifist_record
+
+                possible_speed_record = record_references[level].get('SM Speed', {}).get(possible_num_players, {})
+                if possible_speed_record:
+                    if possible_pacifist_record['time_in_seconds'] < possible_speed_record['time_in_seconds']:
+                        # Add 1 because this demo should take on all of the record index of anything it supersedes +
+                        # the demo it beats.
+                        possible_pacifist_record['record_index'] += possible_speed_record['record_index'] + 1
+                        possible_pacifist_record['supersedes'] = possible_speed_record
+                        possible_speed_record['is_record'] = False
+                        possible_speed_record['record_index'] = 0
+                        possible_speed_record['actual_record'] = possible_pacifist_record
+
+                possible_speed_record = record_references[level].get('Sk4 Speed', {}).get(possible_num_players, {})
+                if possible_speed_record:
+                    if possible_pacifist_record['time_in_seconds'] < possible_speed_record['time_in_seconds']:
+                        # Add 1 because this demo should take on all of the record index of anything it supersedes +
+                        # the demo it beats.
+                        possible_pacifist_record['record_index'] += possible_speed_record['record_index'] + 1
+                        possible_pacifist_record['supersedes'] = possible_speed_record
+                        possible_speed_record['is_record'] = False
+                        possible_speed_record['record_index'] = 0
+                        possible_speed_record['actual_record'] = possible_pacifist_record
+
+            # Handle Stroller -> Pacifist crosslist
+            possible_stroller_record = record_references[level].get('Stroller', {}).get(possible_num_players, {})
+            if possible_stroller_record:
+                if possible_pacifist_record:
+                    if possible_stroller_record['time_in_seconds'] < possible_pacifist_record['time_in_seconds']:
+                        # Add 1 because this demo should take on all of the record index of anything it supersedes +
+                        # the demo it beats.
+                        possible_stroller_record['record_index'] += possible_pacifist_record['record_index'] + 1
+                        possible_stroller_record['supersedes'] = possible_pacifist_record
+                        possible_pacifist_record['is_record'] = False
+                        possible_pacifist_record['record_index'] = 0
+                        possible_pacifist_record['actual_record'] = possible_stroller_record
+                        if possible_pacifist_record['supersedes']:
+                            possible_pacifist_record['supersedes']['actual_record'] = possible_stroller_record
+
+            # Handle UV-Max -> UV-Speed potential crosslist
+            possible_uv_max_record = record_references[level].get('UV Max', {}).get(possible_num_players, {})
+            if possible_uv_max_record:
+                possible_speed_record = record_references[level].get('UV Speed', {}).get(possible_num_players, {})
+                if possible_speed_record:
+                    max_time_in_seconds = possible_uv_max_record['time_in_seconds']
+                    if max_time_in_seconds < possible_speed_record['time_in_seconds']:
+                        possible_pacifist_record = possible_speed_record.get('actual_record')
+                        if (not possible_pacifist_record or (
+                                possible_pacifist_record and
+                                (max_time_in_seconds < possible_pacifist_record['time_in_seconds'])
+                        )):
+                            LOGGER.warning('Potential faster UV Max record found than UV Speed!')
+                            LOGGER.warning('WAD: %s, level: %s.', dsda_url, level)
+
+            possible_sm_max_record = record_references[level].get('SM Max', {}).get(possible_num_players, {})
+            if possible_sm_max_record:
+                possible_speed_record = record_references[level].get('SM Speed', {}).get(possible_num_players, {})
+                if possible_speed_record:
+                    max_time_in_seconds = possible_sm_max_record['time_in_seconds']
+                    if max_time_in_seconds < possible_speed_record['time_in_seconds']:
+                        possible_pacifist_record = possible_speed_record.get('actual_record')
+                        if (not possible_pacifist_record or (
+                                possible_pacifist_record and
+                                (max_time_in_seconds < possible_pacifist_record['time_in_seconds'])
+                        )):
+                            LOGGER.warning('Potential faster SM Max record found than SM Speed!')
+                            LOGGER.warning('WAD: %s, level: %s.', dsda_url, level)
+
+            possible_sk4_max_record = record_references[level].get('Sk4 Max', {}).get(possible_num_players, {})
+            if possible_sk4_max_record:
+                possible_speed_record = record_references[level].get('Sk4 Speed', {}).get(possible_num_players, {})
+                if possible_speed_record:
+                    max_time_in_seconds = possible_sk4_max_record['time_in_seconds']
+                    if max_time_in_seconds < possible_speed_record['time_in_seconds']:
+                        possible_pacifist_record = possible_speed_record.get('actual_record')
+                        if (not possible_pacifist_record or (
+                                possible_pacifist_record and
+                                (max_time_in_seconds < possible_pacifist_record['time_in_seconds'])
+                        )):
+                            LOGGER.warning('Potential faster Sk4 Max record found than Sk4 Speed!')
+                            LOGGER.warning('WAD: %s, level: %s.', dsda_url, level)
+
+            possible_bp_max_record = record_references[level].get('BP Max', {}).get(possible_num_players, {})
+            if possible_bp_max_record:
+                possible_speed_record = record_references[level].get('BP Speed', {}).get(possible_num_players, {})
+                if possible_speed_record:
+                    if possible_bp_max_record['time_in_seconds'] < possible_speed_record['time_in_seconds']:
+                        LOGGER.warning('Potential faster BP Max record found than BP Speed!')
+                        LOGGER.warning('WAD: %s, level: %s.', dsda_url, level)
+
+            possible_sk5_max_record = record_references[level].get('Sk5 Max', {}).get(possible_num_players, {})
+            if possible_sk5_max_record:
+                possible_speed_record = record_references[level].get('Sk5 Speed', {}).get(possible_num_players, {})
+                if possible_speed_record:
+                    if possible_sk5_max_record['time_in_seconds'] < possible_speed_record['time_in_seconds']:
+                        LOGGER.warning('Potential faster Sk5 Max record found than Sk5 Speed!')
+                        LOGGER.warning('WAD: %s, level: %s.', dsda_url, level)
+
+            possible_nm100_record = record_references[level].get('NM 100S', {}).get(possible_num_players, {})
+            if possible_nm100_record:
+                possible_speed_record = record_references[level].get('NM Speed', {}).get(possible_num_players, {})
+                if possible_speed_record:
+                    if possible_nm100_record['time_in_seconds'] < possible_speed_record['time_in_seconds']:
+                        LOGGER.warning('Potential faster NM 100S record found than NM Speed!')
+                        LOGGER.warning('WAD: %s, level: %s.', dsda_url, level)
+
+            possible_nomo100_record = record_references[level].get('NoMo 100S', {}).get(possible_num_players, {})
+            if possible_nm100_record:
+                possible_speed_record = record_references[level].get('NoMo Speed', {}).get(possible_num_players, {})
+                if possible_speed_record:
+                    if possible_nomo100_record['time_in_seconds'] < possible_speed_record['time_in_seconds']:
+                        LOGGER.warning('Potential faster NoMo 100S record found than NoMo Speed!')
+                        LOGGER.warning('WAD: %s, level: %s.', dsda_url, level)
+
+    final_demo_list.extend(unchanged_demos)
+    return {'headers': parsed_demo_page['headers'], 'demo_list': final_demo_list}
+
+
+def get_wad_or_player_name_from_dsda_url(dsda_url):
+    """Get WAD or player name from DSDA URL.
+
+    :param dsda_url: DSDA URL
+    :return: WAD or player name from DSDA URL
     """
     # https://www.dsdarchive.com/wads/scythe:
     #   path: /wads/scythe
+    # https://www.dsdarchive.com/players/---:
+    #   path: /players/---
     return urlparse(dsda_url).path.strip('/').split('/')[1]
 
 
@@ -239,7 +561,7 @@ def download_wad_from_dsda(dsda_url, overwrite=True):
     response = requests.get(wad_url)
     default_filename = urlparse(wad_url).path.strip('/').split('/')[-1]
     download_filename = get_download_filename(response, default_filename=default_filename)
-    wad_name = get_wad_name_from_dsda_url(dsda_url)
+    wad_name = get_wad_or_player_name_from_dsda_url(dsda_url)
     download_dir = os.path.join(CONFIG.wad_download_directory, wad_name)
     download_response(response, download_dir, download_filename, overwrite=overwrite)
     return os.path.join(download_dir, download_filename)
@@ -277,21 +599,32 @@ def conform_dsda_wad_url(dsda_wad_url):
     return urlunparse(parsed_url)
 
 
+def get_wads():
+    """Get dictionary of WAD short names mapped to WAD URLs.
+
+    :return: WAD short names mapped to WAD URLs
+    """
+    wads = {}
+    for wad_page_param in ['9'] + list(string.ascii_lowercase):
+        soup = get_page(f'{DSDA_WAD_URL}?letter={wad_page_param}')
+        player_table = soup.find('table')
+        rows = player_table.find('tbody').find_all('tr')
+        for row in rows:
+            wad_file_col = row.find('td', class_='wadfile')
+            dsda_cell = parse_dsda_cell(wad_file_col)
+            wads[dsda_cell.text] = next(iter(dsda_cell.links.values()))
+
+    return wads
+
+
 def get_players():
     """Get dictionary of player names mapped to player URLs.
 
     :return: Player names mapped to player URLs
     """
-    soup = get_page(DSDA_PLAYER_URL)
-    player_table = soup.find('table')
-    rows = player_table.find('tbody').find_all('tr')
-    players = {}
-    for row in rows:
-        first_col = row.find('td')
-        dsda_cell = parse_dsda_cell(first_col)
-        players[dsda_cell.text] = next(iter(dsda_cell.links.values()))
-
-    return players
+    api_response = requests.get(DSDA_PLAYER_API_URL, headers={"User-Agent": "Mozilla/5.0"})
+    return {player_dict['name']: '/'.join([DSDA_PLAYER_URL, player_dict['username']])
+            for player_dict in api_response.json()['players']}
 
 
 def get_player_stats(player_url):

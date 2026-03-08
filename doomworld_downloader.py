@@ -14,7 +14,7 @@ from urllib.parse import urlparse
 import yaml
 
 from doomworld_downloader.dsda import parse_dsda_demo_page, download_demo_from_dsda, \
-    get_wad_name_from_dsda_url, verify_dsda_url, conform_dsda_wad_url
+    get_wad_or_player_name_from_dsda_url, verify_dsda_url, conform_dsda_wad_url
 from doomworld_downloader.demo_json_dumper import DemoJsonDumper
 from doomworld_downloader.demo_processor import DemoProcessor
 from doomworld_downloader.demo_updater import DemoUpdater
@@ -72,7 +72,7 @@ def set_up_dsda_page_update(use_cached_info):
                 video_link = next(iter(dsda_row['video'].links.values()))
                 dsda_info['video_link'] = video_link.split('=')[1]
             if not dsda_info.get('wad'):
-                dsda_info['wad'] = get_wad_name_from_dsda_url(CONFIG.dsda_mode_page)
+                dsda_info['wad'] = get_wad_or_player_name_from_dsda_url(CONFIG.dsda_mode_page)
             if not dsda_info.get('tags'):
                 dsda_info['tags'] = None
 

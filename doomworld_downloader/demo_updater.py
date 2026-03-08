@@ -14,10 +14,8 @@ import os
 from collections import defaultdict
 
 from .upload_config import CONFIG, UPDATE_JSON_DIR
-from .utils import normalize_time_to_minutes_and_seconds
+from .utils import check_advanced_port, normalize_time_to_minutes_and_seconds
 
-
-ADVANCED_PORTS = ['ZDoom', 'GZDoom', 'Zandronum', 'ZDaemon', 'Legacy', 'Doomsday']
 
 LOGGER = logging.getLogger(__name__)
 
@@ -152,7 +150,7 @@ class DemoUpdater:
         """
         dsda_demo_info_to_check = dsda_demo_info['dsda_info']
         demo_update = {}
-        is_advanced_port = self._check_advanced_port(full_demo_json['engine'])
+        is_advanced_port = check_advanced_port(full_demo_json['engine'])
         # TODO: If a demo is cheated, should not try to mark it TAS
         for key, value in dsda_demo_info_to_check.items():
             test_value = value
@@ -178,15 +176,17 @@ class DemoUpdater:
                 # We shouldn't override video links obtained from DSDA with nothing.
                 # We also need to make sure not to trigger updates if time display is in hours on DSDA and minutes from
                 # JSON
+                skip_update = False
                 if not json_value and test_value and key == 'video_link':
-                    pass
+                    skip_update = True
                 elif key == 'time':
                     test_time_normalized = normalize_time_to_minutes_and_seconds(test_value)
                     if json_value == test_time_normalized:
-                        pass
+                        skip_update = True
                 #elif key == 'tas':
-                #    pass
-                else:
+                #    skip_update = True
+
+                if not skip_update:
                     LOGGER.debug('Difference for demo %s found in key %s!.', demo_location, key)
                     if not CONFIG.dsda_mode_replace_zips:
                         final_value = full_demo_json.get(final_key, {})
@@ -223,7 +223,7 @@ class DemoUpdater:
 
         :raises RuntimeError if there are no demos to dump.
         """
-        if not self.demo_update_jsons:
+        if not self.demo_update_jsons and not self.demo_upload_jsons:
             raise RuntimeError('No demo update JSONs to dump!')
 
         for demo_id, demo_update_json in self.demo_update_jsons.items():
@@ -255,18 +255,3 @@ class DemoUpdater:
         os.makedirs(json_dir, exist_ok=True)
         json_path = os.path.join(json_dir, json_filename)
         return json_path
-
-    @staticmethod
-    def _check_advanced_port(port_name):
-        """Check if port provided is an advanced engine.
-
-        e.g., ZDoom, ZDaemon, etc.
-
-        :param port_name: Port name
-        :return: Port name to check
-        """
-        for advanced_port_part in ADVANCED_PORTS:
-            if advanced_port_part in port_name:
-                return True
-
-        return False

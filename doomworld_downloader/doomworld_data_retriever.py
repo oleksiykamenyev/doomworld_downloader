@@ -284,29 +284,27 @@ def get_ad_hoc_posts():
         thread_base_url = thread_base_url.rstrip('/')
         pages_to_get = thread_map.get('pages', [])
         if not pages_to_get:
-            # This is safe because pages past the last on Doomworld overflow to the last page.
-            pages_to_get = itertools.count(start=1)
+            # If we want to get the entire thread, we need to detect how many pages to iterate.
+            #
+            # Note that while Doomworld appears to update page numbers beyond the last page to the last page in the URL
+            # in a browser, this isn't an actual redirect and must be done through JavaScript. As a result, it is tricky
+            # to detect that programmatically, so we need to have logic for checking how many pages there are.
+            soup = get_page(thread_base_url)
+            thread_elems = soup.find_all('a', attrs={'data-page':True})
+            if thread_elems:
+                last_page_num = max([int(elem.get('data-page')) for elem in thread_elems])
+            else:
+                last_page_num = 1
+
+            pages_to_get = [1, last_page_num]
         else:
             pages_to_get = iter(pages_to_get)
 
         posts_to_get = [parse_ad_hoc_post(post)[0] for post in thread_map.get('posts', [])]
-        prev_page_num = None
         for page_num in pages_to_get:
             thread_url = THREAD_URL_FMT.format(base_url=thread_base_url, num=page_num)
-            # Default value here is ['1'] because, even in the case of single query param values,
-            # parse_qs returns a list
-            cur_page_num = parse_qs(urlparse(requests.get(thread_url).url).query,
-                                    keep_blank_values=True).get('page', ['1'])
-            # In case the thread is included in full, we will detect the last page if we see the
-            # same list of posts more than once (which is what happens when we overflow pages on
-            # Doomworld).
-            if prev_page_num and cur_page_num == prev_page_num:
-                break
-            prev_page_num = cur_page_num
 
-            cur_posts = parse_thread_page(
-                THREAD_URL_FMT.format(base_url=thread_base_url, num=page_num), thread=None
-            )
+            cur_posts = parse_thread_page(thread_url, thread=None)
             if posts_to_get:
                 for post_to_get in posts_to_get:
                     for cur_post in cur_posts:
@@ -423,6 +421,7 @@ def download_attachments(post):
         attach_id = attach_id[0] if attach_id else str(uuid.uuid4())
         attach_dir = os.path.join(author_dir, attach_id)
         attach_filename = attach_filename.replace(':', '_')
+        attach_filename = attach_filename.replace('/', '_')
         download = download_response(response, attach_dir, attach_filename, overwrite=True)
 
         download_renamed_filename = get_filename_no_ext(download).replace(' ', '_')
