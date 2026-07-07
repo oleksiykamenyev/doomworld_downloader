@@ -193,7 +193,7 @@ class DemoJsonDumper:
             # Set JSON filename to filename_playername_checksum. If the demo is a demo pack
             demo_filename = os.path.splitext(os.path.basename(demo_location))[0]
             demo_checksum = f'_{checksum(demo_location)}' if os.path.exists(demo_location) else ''
-            json_filename = f'{demo_filename}{player_info}{demo_checksum}.json'
+            json_filename = f'{demo_filename}{player_info}{demo_checksum}'
             if maybe_cheated:
                 json_path = self._set_up_demo_json_file(json_filename, MAYBE_CHEATED_DIR)
             elif has_invalid_source_port:
@@ -207,6 +207,7 @@ class DemoJsonDumper:
             else:
                 json_path = self._set_up_demo_json_file(json_filename, VALID_NO_ISSUE_DIR)
 
+            json_filename = f'{json_filename}.json'
             with open(json_path, 'w', encoding='utf-8') as out_stream:
                 json.dump(final_output_json, out_stream, indent=4, sort_keys=True)
 
@@ -236,7 +237,7 @@ class DemoJson:
     SKILL_CATEGORY_NOTE_RE = re.compile(r'^Skill \d .+$')
 
     MISC_NOTES = ['Also Reality', 'Also Almost Reality', 'Uses turbo', 'Uses -longtics',
-                  'Also Pacifist', 'Plays back with forced -complevel 5',
+                  'Also Pacifist', 'Plays back with forced -complevel 5', 'Plays back with forced -nomonsters.',
                   'Good at DooM: gib yourself to end the level.', 'Demo syncs with a forced -respawn argument.',
                   'Also 100% items']
     MISC_CATEGORY_NOTES = [
@@ -381,7 +382,7 @@ class DemoJson:
 
             no_kills = True
             no_secrets = True
-            for stats in self.demo_info.additional_upload_info.get('stats').values():
+            for stats in self.demo_info.additional_upload_info.get('stats', {}).values():
                 if stats['kills'] != '0/0':
                     no_kills = False
                 if stats['secrets'] != '0/0':
@@ -403,6 +404,32 @@ class DemoJson:
             # or secrets, the two categories are identical so we take the playback value.
             if (no_secrets and no_kills and
                     playback_category == 'UV Speed' and textfile_category == 'UV Max'):
+                self._handle_inferred_category(playback_category)
+                return
+
+            # If the playback showed SM Speed or Sk4 Speed and textfile showed UV Speed, then the categories are
+            # identical, just the textfile IWAD wasn't parsed, so this isn't an issue
+            if ((playback_category == 'SM Speed' or playback_category == 'Sk4 Speed') and
+                    textfile_category == 'UV Speed'):
+                self._handle_inferred_category(playback_category)
+                return
+
+            # If the playback showed Sk5 Speed and textfile showed NM Speed, then the categories are identical, just
+            # the textfile IWAD wasn't parsed, so this isn't an issue
+            #
+            # Note: we can't make this assumption for Heretic, because Heretic has both NM Speed and BP Speed, so we
+            #       can't be sure if an incorrect NM Speed detection in a Heretic txt is just a textfile error or a
+            #       recording parameters error.
+            if playback_category == 'Sk5 Speed' and textfile_category == 'NM Speed':
+                self._handle_inferred_category(playback_category)
+                return
+
+            # If the playback showed SM Max, Sk4 Max, BP Max, or Sk5 Max and textfile showed UV Max, then the categories
+            # are identical, just the textfile IWAD wasn't parsed, so this isn't an issue
+            #
+            # Note: since Doom has no official skill 5 max, the textfile could never parse to NM Max.
+            if (playback_category == 'SM Max' or playback_category == 'Sk4 Max' or playback_category == 'BP Max' or
+                playback_category == 'Sk5 Max') and textfile_category == 'UV Max':
                 self._handle_inferred_category(playback_category)
                 return
         if key_to_insert == 'players':

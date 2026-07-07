@@ -14,6 +14,8 @@ from .utils import parse_youtube_url, get_single_key_value_dict, normalize_time_
 LOGGER = logging.getLogger(__name__)
 
 
+# TODO: Handle most active player textfiles that do not match the norm.
+#       Should be the following: 4shockblast (old txts), TVK, AlexEightch, Compet-N txts, vdgg, possibly more
 class TextfileData(BaseData):
     """Store all uploader-relevant data for a demo textfile."""
     CATEGORY_KEYS = ['cat', 'catagory', 'category', 'catagories', 'categories', 'discipline', 'type']
@@ -207,6 +209,16 @@ class TextfileData(BaseData):
             r'Chocolate(\s*|-|_)?Doom(\.exe)?(\s*|-)?'
             r'(v|version)?(\s*|\.)?(?P<version>\d\.\d+\.\d+)', re.IGNORECASE
         ): 'Chocolate DooM',
+        # Chocolate Heretic
+        re.compile(
+            r'Chocolate(\s*|-|_)?Heretic(\.exe)?(\s*|-)?'
+            r'(v|version)?(\s*|\.)?(?P<version>\d\.\d+\.\d+)', re.IGNORECASE
+        ): 'Chocolate Heretic',
+        # Chocolate Hexen
+        re.compile(
+            r'Chocolate(\s*|-|_)?Hexen(\.exe)?(\s*|-)?'
+            r'(v|version)?(\s*|\.)?(?P<version>\d\.\d+\.\d+)', re.IGNORECASE
+        ): 'Chocolate Hexen',
         # Crispy Doom
         re.compile(
             r'Crispy(\s*|-|_)?Doom(\.exe)?(\s*|-)?'
@@ -217,6 +229,11 @@ class TextfileData(BaseData):
             r'Crispy(\s*|-|_)?Heretic(\.exe)?(\s*|-)?'
             r'(v|version)?(\s*|\.)?(?P<version>\d\.\d+(\.\d+)?)', re.IGNORECASE
         ): 'Crispy Heretic',
+        # Crispy Hexen
+        re.compile(
+            r'Crispy(\s*|-|_)?Hexen(\.exe)?(\s*|-)?'
+            r'(v|version)?(\s*|\.)?(?P<version>\d\.\d+(\.\d+)?)', re.IGNORECASE
+        ): 'Crispy Hexen',
         # CNDoom
         re.compile(
             r'CNDoom(\.exe)?\s*(v|version)?(\s*|\.)?(?P<version>\d\.\d\.\d(\.\d))?', re.IGNORECASE
@@ -282,16 +299,19 @@ class TextfileData(BaseData):
         re.compile(r'^\s*ZDoom(\.exe)?(\s*|-)?(v|version)?(\s*|\.)?(?P<version>\d\.\d(\.\d+)?)?',
                    re.IGNORECASE): 'ZDoom',
         # GZDoom
-        re.compile(r'GZDoom(\.exe)?(\s*|-)?(v|version)?(\s*|\.)?(?P<version>\d\.\d\.\d+)',
+        re.compile(r'GZDoom(\.exe)?(\s*|-)?(v|version)?(\s*|\.)?(?P<version>\d\.\d+\.\d+)',
                    re.IGNORECASE): 'GZDoom',
         # ZDaemon
-        re.compile(r'ZDaemon(\.exe)?(\s*|-)?(v|version)?(\s*|\.)?(?P<version>\d\.\d\.\d+)',
+        re.compile(r'ZDaemon(\.exe)?(\s*|-)?(v|version)?(\s*|\.)?(?P<version>\d\.\d+\.\d+)',
                    re.IGNORECASE): 'ZDaemon',
         # Zandronum
         re.compile(
-            r'Zandronum(\.exe)?(\s*|-)?(v|version)?(\s*|\.)?(?P<version>\d\.\d(\.\d+)?(\s*Alpha)?)',
+            r'Zandronum(\.exe)?(\s*|-)?(v|version)?(\s*|\.)?(?P<version>\d\.\d+(\.\d+)?(\s*Alpha)?)',
             re.IGNORECASE
         ): 'Zandronum',
+        # UZDoom
+        re.compile(r'UZDoom(\.exe)?(\s*|-)?(v|version)?(\s*|\.)?(?P<version>\d\.\d+\.\d+)',
+                   re.IGNORECASE): 'UZDoom',
 
         # Other ports
         # Strawberry Doom
@@ -325,15 +345,27 @@ class TextfileData(BaseData):
 
         # Doom95
         re.compile(
-            r'Doomsday(\s*|-|_)?(?P<version>95)(\s*|-|_)?(Engine)?(\.exe)?(\s*|-)?',
+            r'Doom(\s*|-|_)?95(\s*|-|_)?(Engine)?(\.exe)?(\s*|-)?',
             re.IGNORECASE
-        ): 'DooM2',
+        ): 'Doom95',
 
         # jHeretic
         re.compile(
-            r'jHeretic(\s*|-|_)?(?P<version>\d+\.\d+(\(se\d+\))?)(\s*|-|_)?(Engine)?(\.exe)?(\s*|-)?',
+            r'jHeretic(\s*|-|_)?(?P<version>\d+\.\d+(\.\d+)?\s*(\(se\d+\))?)(\s*|-|_)?(Engine)?(\.exe)?(\s*|-)?',
             re.IGNORECASE
         ): 'jHeretic',
+
+        # jHexen
+        re.compile(
+            r'jHexen(\s*|-|_)?(?P<version>\d+\.\d+(\.\d+)?\s*(\(se\d+\))?)(\s*|-|_)?(Engine)?(\.exe)?(\s*|-)?',
+            re.IGNORECASE
+        ): 'jHexen',
+
+        # Hexen
+        re.compile(
+            r'Hexen(\s*|-|_)?(\+|plus)(\s*|-|_)?(?P<version>\d+\.\d+(\.\d+)?)?(Engine)?(\.exe)?(\s*|-)?',
+            re.IGNORECASE
+        ): 'Hexen+',
     }
 
     VANILLA_PORT_REGEXES = {
@@ -592,6 +624,11 @@ class TextfileData(BaseData):
 
                     if not version.startswith('v'):
                         version = f'v{version}'
+
+                    # Safety condition in case someone puts a whitespace between the version number and (se in jHeretic
+                    # and jHexen demos.
+                    if port_name_final == 'jHeretic' or port_name_final == 'jHexen':
+                        version = re.sub(r'\s*\(se', '(se', version)
 
                     version = f' {version}'
                 else:

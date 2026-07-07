@@ -42,7 +42,7 @@ DEMO_PACK_ADDITIONAL_INFO_MAP = defaultdict(list)
 DEMO_PACK_USER_MAP = {}
 
 ALLOWED_ENGINE_TO_MIN_VERSION_MAP = {
-    'DSDA-Doom': '0.28.2', 'Woof': '14.5.0', 'Crispy Doom': '7.0.0', 'Crispy Heretic': '7.0.0',
+    'DSDA-Doom': '0.28.2', 'Woof': '14.5.0', 'Crispy Doom': '7.0.0', 'Nyan Doom': '1.4.2', 'Crispy Heretic': '7.0.0',
     'Crispy Hexen': '7.0.0', 'DooM': '1.9', 'DooM2': '1.9', 'DooM2f': '1.9', 'LMPC': 'any', 'TASMBF': 'any',
     'DRE': 'any', 'XDRE': 'any', 'Notepad': 'any', 'ZDoom': 'any', 'GZDoom': 'any', 'Zandronum': 'any',
     'ZDaemon': 'any', 'Eternity Engine': 'any', 'Doomsday': 'any', 'EDGE': 'any', '3DGE': 'any'
@@ -373,6 +373,28 @@ class UploadConfig:
             return False
 
     @property
+    def selenium_tmp_download_dir(self):
+        """Selenium temporary download dir when regular requests downloads do not work.
+
+        :return: Selenium temporary download dir
+        """
+        try:
+            return self._config.get('general', 'selenium_tmp_download_dir')
+        except (NoSectionError, NoOptionError):
+            return None
+
+    @property
+    def ignore_extra_wad_files(self):
+        """Ignore extra WAD files noted in the footer.
+
+        :return: Flag indicating whether to ignore extra WAD files noted in the footer.
+        """
+        try:
+            return self._config.getboolean('general', 'ignore_extra_wad_files')
+        except (NoSectionError, NoOptionError):
+            return False
+
+    @property
     def demo_pack_input_folder(self):
         """Get demo pack input folder.
 
@@ -572,10 +594,9 @@ def set_up_configs(upload_config_path=None):
         map_list_info = WadMapListInfo(wad_dict['map_list_info'], wad_name, iwad,
                                        fail_on_error=True)
         wad_info = Wad(
-            name=wad_name, iwad=iwad, files=wad_dict['wad_files'], complevel=wad_dict['complevel'],
-            map_list_info=map_list_info, idgames_url=idgames_url, dsda_url=url, other_url='',
-            dsda_paginated=wad_dict['dsda_paginated'],
-            doomworld_thread=wad_dict['doomworld_thread'],
+            name=wad_name, iwad=iwad, files=wad_dict['wad_files'], complevel=wad_dict.get('complevel'),
+            complevels=wad_dict.get('complevels'), map_list_info=map_list_info, idgames_url=idgames_url, dsda_url=url,
+            other_url='', dsda_paginated=wad_dict['dsda_paginated'], doomworld_thread=wad_dict['doomworld_thread'],
             playback_cmd_line=wad_dict.get('playback_cmd_line', ''),
             alt_playback_cmd_lines=wad_dict.get('alt_playback_cmd_lines', []),
             dsda_name=wad_dict.get('dsda_name'), commercial=wad_dict.get('commercial', False),

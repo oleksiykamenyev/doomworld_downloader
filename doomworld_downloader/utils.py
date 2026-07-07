@@ -7,7 +7,10 @@ import logging
 import os
 import re
 import shlex
+import shutil
 import subprocess
+import time
+
 import unicodedata
 
 from datetime import datetime
@@ -18,6 +21,9 @@ from urllib.parse import parse_qs, urlparse, urlunparse
 import requests
 
 from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium_stealth import stealth
 
 from zipfile import ZipFile
 
@@ -31,7 +37,29 @@ HTTP_RE = re.compile(r'^https?://.+')
 HEADER_FILENAME_RE = re.compile(r'filename="(.+)"')
 IDGAMES_ID_URL_RE = re.compile(r'^https://www.doomworld.com/idgames/\?id=\d+$')
 
-ADVANCED_PORTS = ['ZDoom', 'GZDoom', 'Zandronum', 'ZDaemon', 'Legacy', 'Doomsday']
+ADVANCED_PORTS = ['ZDoom', 'GZDoom', 'Zandronum', 'ZDaemon', 'Legacy', 'Doomsday', 'UZDoom']
+
+SELENIUM_TMP_DOWNLOAD_DIR = 'C:\\MyStuff\\dsda3\\doomworld_downloader\\selenium_download_tmp_dir'
+
+OPTIONS = webdriver.ChromeOptions()
+OPTIONS.headless = True
+OPTIONS.add_argument('start-maximized')
+OPTIONS.add_argument('--headless')
+OPTIONS.add_experimental_option('excludeSwitches', ['enable-automation'])
+OPTIONS.add_experimental_option('useAutomationExtension', False)
+
+DOWNLOAD_PREFS = {
+    "download.default_directory": SELENIUM_TMP_DOWNLOAD_DIR, # Set custom path
+    "download.prompt_for_download": False,      # Disable 'Save As' popup
+    "directory_upgrade": True,
+    "plugins.always_open_pdf_externally": True  # Download PDFs instead of viewing
+}
+OPTIONS.add_experimental_option("prefs", DOWNLOAD_PREFS)
+
+DRIVER = webdriver.Chrome(options=OPTIONS, service=Service(r'C:\MyStuff\dsda3\chromedriver.exe'))
+stealth(DRIVER, languages=['en-US', 'en'], vendor='Google Inc.', platform='Win32', webgl_vendor='Intel Inc.',
+        renderer='Intel Iris OpenGL Engine', fix_hairline=True)
+
 
 LOGGER = logging.getLogger(__name__)
 
@@ -78,6 +106,25 @@ def get_download_filename(response, default_filename=None):
             )
 
 
+def create_download_path(download_dir, download_filename, overwrite):
+    """Create a download path.
+
+    :param download_dir: Download directory to place download to
+    :param download_filename: Download filename
+    :param overwrite: Flag indicating whether to overwrite the local path if it exists
+    :return: Path to local download
+    """
+    os.makedirs(download_dir, exist_ok=True)
+    download_path = os.path.join(download_dir, download_filename)
+    if os.path.exists(download_path):
+        if overwrite:
+            LOGGER.debug('Overwrite local download path %s.', download_path)
+        else:
+            raise OSError('Local download path {} already exists.'.format(download_path))
+
+    return download_path
+
+
 def download_response(response, download_dir, download_filename, overwrite=False):
     """Download file from response.
 
@@ -87,19 +134,40 @@ def download_response(response, download_dir, download_filename, overwrite=False
     :param overwrite: Flag indicating whether to overwrite the local path if it exists
     :return: Path to local download
     """
-    os.makedirs(download_dir, exist_ok=True)
-    download_path = os.path.join(download_dir, download_filename)
-
-    if os.path.exists(download_path):
-        if overwrite:
-            LOGGER.debug('Overwrite local download path %s.', download_path)
-        else:
-            raise OSError('Local download path {} already exists.'.format(download_path))
-
+    download_path = create_download_path(download_dir, download_filename, overwrite)
     with open(download_path, 'wb') as output_file:
         output_file.write(response.content)
 
     return download_path
+
+
+def download_from_dropbox(dropbox_url, download_path):
+    """Download file from Dropbox.
+
+    :param dropbox_url: Dropbox URL
+    :param download_path: Download path
+    :return: Path to local download
+    """
+    try:
+        if 'dl=0' in dropbox_url:
+            dropbox_url.replace('dl=0', 'dl=1')
+        elif 'dl=1' not in dropbox_url:
+             if '?' not in dropbox_url:
+                 dropbox_url = f'{dropbox_url}?dl=1'
+             else:
+                 dropbox_url = f'{dropbox_url}&dl=1'
+
+        response = requests.get(dropbox_url, stream=True)
+        response.raise_for_status() # Raise an exception for bad status codes
+
+        with open(download_path, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                f.write(chunk)
+
+        return download_path
+    except requests.exceptions.RequestException as e:
+        LOGGER.error('Failed to download from Dropbox URL %s.', dropbox_url)
+        return None
 
 
 def zip_extract(zip_path, extract_dir=None, extract_extension=None, overwrite=False):
@@ -310,7 +378,81 @@ def get_page(url):
     """
     request_res = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
     page_text = str(request_res.text)
-    return BeautifulSoup(page_text, features='lxml')
+    page_soup = BeautifulSoup(page_text, features='lxml')
+    if 'Just a moment...' in page_soup.getText():
+        LOGGER.warning('Could not retrieve page with requests, trying Selenium.')
+        DRIVER.get(url)
+        return BeautifulSoup(DRIVER.page_source, features='lxml')
+
+    return page_soup
+
+
+def download_file_from_doomworld(attach_url, attach_dir, attach_name):
+    """Download file from Doomworld
+
+    :param attach_url: Attachment URL
+    :param attach_dir: Attachment directory to download to
+    :param attach_name: Attachment filename
+    :return: Download location on local filesystem
+    :raises RuntimeError if the attachment filename for a given post cannot be determined or if Selenium temp download
+                         directory has no filed or more than one file or Selenium fails to download anything after ten
+                         attempts
+    """
+    response = requests.get(attach_url, headers={"User-Agent": "Mozilla/5.0"})
+    if response.status_code == 403:
+        LOGGER.warning('Could not retrieve download with requests, trying Selenium.')
+        DRIVER.get(attach_url)
+        file_downloaded = False
+        check_attempt = 0
+        while not file_downloaded:
+            files_downloaded = os.listdir(SELENIUM_TMP_DOWNLOAD_DIR)
+
+            temp_file_seen = False
+            if files_downloaded:
+                for downloaded_file in files_downloaded:
+                    if downloaded_file.endswith('.tmp'):
+                        temp_file_seen = True
+                        break
+
+            if not files_downloaded or temp_file_seen:
+                file_downloaded = False
+
+            check_attempt += 1
+            if check_attempt < 10:
+                time.sleep(1)
+            else:
+                raise RuntimeError('Could not download attachment URL %s using Selenium!', attach_url)
+
+        if len(os.listdir(SELENIUM_TMP_DOWNLOAD_DIR)) == 0:
+            raise RuntimeError('No files detected in Selenium temp download directory!')
+        if len(os.listdir(SELENIUM_TMP_DOWNLOAD_DIR)) > 1:
+            raise RuntimeError('More than one file detected in Selenium temp download directory!')
+
+        attach_filename = os.listdir(SELENIUM_TMP_DOWNLOAD_DIR)[0]
+        attach_temp_path = os.path.join(SELENIUM_TMP_DOWNLOAD_DIR, attach_filename)
+        download = os.path.join(attach_dir, attach_filename)
+
+        shutil.move(attach_temp_path, download)
+    else:
+        try:
+            attach_filename = get_download_filename(response, default_filename=attach_name)
+        except RuntimeError:
+            LOGGER.error('Could not get attachment filename for attachment name %s, URL %s.',
+                         attach_name, attach_url)
+            raise
+
+        attach_filename = attach_filename.replace(':', '_')
+        attach_filename = attach_filename.replace('/', '_')
+
+        download = download_response(response, attach_dir, attach_filename, overwrite=True)
+
+    download_renamed_filename = get_filename_no_ext(download).replace(' ', '_')
+    download_renamed = os.path.join(attach_dir, f'{download_renamed_filename}.zip')
+    if download != download_renamed:
+        shutil.move(download, download_renamed)
+        download = download_renamed
+
+    return download
 
 
 def convert_datetime_to_dsda_date(datetime_to_convert):
@@ -357,7 +499,9 @@ def compare_iwad(demo_iwad, cmp_iwad):
     :param cmp_iwad: Comparison IWAD, passed in without the ".wad" extension
     :return: True if the IWADs are the same, false otherwise
     """
-    return demo_iwad == cmp_iwad or demo_iwad == '{}.wad'.format(cmp_iwad)
+    demo_iwad = demo_iwad.lower()
+    cmp_iwad = cmp_iwad.lower()
+    return demo_iwad == cmp_iwad or demo_iwad == f'{cmp_iwad}.wad'
 
 
 def freeze_obj(obj):

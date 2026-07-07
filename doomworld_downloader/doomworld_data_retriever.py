@@ -4,25 +4,30 @@ Doomworld data retriever.
 This contains all of the functionality needed to download demos from Doomworld.
 """
 
+import contextlib
 import itertools
 import logging
 import os
 import re
 import shutil
 import uuid
+import zipfile
 
 from dataclasses import dataclass, field
 from datetime import datetime
 from glob import glob
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import urlparse, parse_qs, unquote
 
+import gdown
+import py7zr
+import rarfile
 import requests
 import yaml
 
 from doomworld_downloader.upload_config import CONFIG, PLAYER_IGNORE_LIST, THREAD_MAP_KEYED_ON_ID, \
     AD_HOC_UPLOAD_CONFIG
-from doomworld_downloader.utils import get_download_filename, download_response, get_page, \
-    strip_accents, get_filename_no_ext
+from doomworld_downloader.utils import download_file_from_doomworld, get_page, strip_accents, create_download_path, \
+    download_from_dropbox
 
 
 DOOM_SPEED_DEMOS_URL = 'https://www.doomworld.com/forum/37-doom-speed-demos/?page={num}'
@@ -89,10 +94,21 @@ def get_links(link_elems, extract_link=False):
             link_url = 'https:' + link_url
         # Key on URL so that links with the same text can be kept track of.
         link_text = link_elem.getText().strip()
+
+        # Generate a UUID object
+        unique_id = uuid.uuid4()
+
+        # Convert the UUID to a 32-character string and remove hyphens
+        unique_string = str(unique_id).replace('-', '')
+
         # A silly way to detect filenames in URLs, just so we have a default name for the download.
-        # Since Doomworld attachments do not have the filename in the URL, this should probably only
-        # ever return stuff that doesn't need to be uploaded.
-        link_filename = link_url.split('/')[-1]
+        # For Doomworld links and Google Drive links, use a random string instead, this should never really be used.
+        if 'drive.google.com' in link_url or ('doomworld' in link_url and 'attachment' in link_url):
+            link_filename = unique_string
+        else:
+            link_path = urlparse(link_url).path
+            link_filename = os.path.basename(os.path.normpath(link_path))
+
         if link_text:
             link_name = link_text
         elif '.' in link_filename:
@@ -113,16 +129,21 @@ def parse_thread_list(page_number):
     :return: List of all threads at the page
     """
     soup = get_page(DOOM_SPEED_DEMOS_URL.format(num=page_number))
+    if 'Just a moment...' in soup.getText():
+        raise RuntimeError('Reaached CloudFlare redirect, cannot get threads.')
+
     thread_elems = soup.find_all('li', class_='ipsDataItem')
     threads = []
     for thread in thread_elems:
         # ID will be null for the subforum at the top of the page.
         id = thread.get('data-rowid')
         if not id:
+            LOGGER.debug('Ignoring thread with null ID.')
             continue
 
         if id in THREAD_MAP_KEYED_ON_ID:
             if THREAD_MAP_KEYED_ON_ID[id].get('additional_info', {}).get('ignore', False):
+                LOGGER.debug('Ignoring thread with ID %s due to ignore list.', id)
                 continue
 
         title = thread.find(class_='ipsDataItem_title')
@@ -206,16 +227,17 @@ def parse_thread_page(thread_url, thread=None):
 
         attachment_links = [
             link for link in post_content_elem.find_all('a')
-            if ('ipsAttachLink' in link.get('class', []) or
-                ATTACH_URL_RE.match(link.get('href', '')) or
-                'doomshack.org/uploads' in link.get('href', ''))
+            if ('ipsAttachLink' in link.get('class', []) or ATTACH_URL_RE.match(link.get('href', '')) or
+                'doomshack.org/uploads' in link.get('href', '') or 'drive.google.com' in link.get('href', '') or
+                'dropbox.com' in link.get('href', ''))
         ]
         attachments = get_links(attachment_links, extract_link=True)
+        post_id = post['id'].split('_')[1]
         # Skip posts with no attachments as they have no demos to search for
         if not attachments:
+            LOGGER.debug('Skip post with no attachments with ID %s.', post_id)
             continue
 
-        post_id = post['id'].split('_')[1]
         post_url = POST_URL_FMT.format(post_id=post_id)
 
         links = get_links(post_content_elem.find_all('a'), extract_link=True)
@@ -228,6 +250,7 @@ def parse_thread_page(thread_url, thread=None):
         # URL format: https://www.doomworld.com/profile/{id}-{author_name}/
         author_id = int(author_elem.find('a')['href'].rstrip('/').rsplit('/', 1)[-1].split('-')[0])
         if author_id in PLAYER_IGNORE_LIST:
+            LOGGER.debug('Skip post %s from ignored author %s.', post_id, author_id)
             continue
 
         post_text_elem = post.find('div', class_='ipsColumn')
@@ -393,7 +416,6 @@ def download_attachments(post):
 
     :param post: Post to download attachments for
     :return: Download locations on local filesystem
-    :raises RuntimeError if the attachment filename for a given post cannot be determined
     """
     # Sanitize author name so that it can be used to create a local directory
     author_dir = os.path.join(
@@ -403,32 +425,50 @@ def download_attachments(post):
     author_dir = strip_accents(author_dir)
     downloads = {}
     for attach_url, attach_name in post.attachments.items():
-        response = requests.get(attach_url, headers={"User-Agent": "Mozilla/5.0"})
-        try:
-            attach_filename = get_download_filename(response, default_filename=attach_name)
-        except RuntimeError:
-            LOGGER.error('Could not get attachment filename for attachment name %s, URL %s.',
-                         attach_name, attach_url)
-            raise
-
-        if RAR_7Z_RE.match(attach_filename):
-            LOGGER.warning('Rar or 7z file %s detected for post %s.', attach_name, post.post_url)
-        if not ZIP_RE.match(attach_filename):
-            continue
-
         parsed_url = urlparse(attach_url)
         attach_id = parse_qs(parsed_url.query, keep_blank_values=True).get('id')
         attach_id = attach_id[0] if attach_id else str(uuid.uuid4())
         attach_dir = os.path.join(author_dir, attach_id)
-        attach_filename = attach_filename.replace(':', '_')
-        attach_filename = attach_filename.replace('/', '_')
-        download = download_response(response, attach_dir, attach_filename, overwrite=True)
 
-        download_renamed_filename = get_filename_no_ext(download).replace(' ', '_')
-        download_renamed = os.path.join(attach_dir, f'{download_renamed_filename}.zip')
-        if download != download_renamed:
-            shutil.move(download, download_renamed)
-            download = download_renamed
+        if 'drive.google.com' in attach_url:
+            # For Google Drive, gdown doesn't support just getting a filename. Need to download first, then we have the
+            # filename...
+            os.makedirs(attach_dir, exist_ok=True)
+            with contextlib.chdir(attach_dir):
+                try:
+                    attach_filename = gdown.download(url=attach_url, fuzzy=True)
+                except gdown.exceptions.FileURLRetrievalError:
+                    LOGGER.exception('Caught exception downloading from Google Drive URL %s.', attach_url)
+                    attach_filename = None
+                except OSError:
+                    LOGGER.exception('Caught OSError downloading from Google Drive URL %s.', attach_url)
+                    LOGGER.error('This can happen when attempting to download a directory instead of a file.')
+                    attach_filename = None
+
+            if not attach_filename:
+                LOGGER.error('Failed to download from Google Drive URL %s.', attach_url)
+                continue
+
+            download = os.path.join(attach_dir, attach_filename)
+        elif 'dropbox.com' in attach_url:
+            # For Dropbox, this should already be set to the last element in the path, which seems to always be the
+            # filename.
+            attach_path = urlparse(attach_url).path
+            attach_filename = unquote(os.path.basename(os.path.normpath(attach_path)))
+            download = create_download_path(attach_dir, attach_filename, overwrite=True)
+            downloaded = download_from_dropbox(attach_url, download)
+            if not downloaded:
+                continue
+        else:
+            download = download_file_from_doomworld(attach_url, attach_dir, attach_name)
+
+        # TODO: Consider re-packing such files to zip.
+        if py7zr.is_7zfile(download):
+            LOGGER.warning('7z file %s detected for post %s.', attach_name, post.post_url)
+        elif rarfile.is_rarfile(download):
+            LOGGER.warning('RAR file %s detected for post %s.', attach_name, post.post_url)
+        if not zipfile.is_zipfile(download):
+            continue
 
         # Additional metadata info about post saved for debugging
         meta_info = {'url': post.post_url}
@@ -445,6 +485,7 @@ def download_attachments(post):
     return downloads
 
 
+
 def move_post_cache_to_failed(post):
     """Move specific post cache dir to failed directory.
 
@@ -456,12 +497,13 @@ def move_post_cache_to_failed(post):
     shutil.move(post_cache_dir, post_failed_dir)
 
 
-def get_doomworld_posts(search_end_date, search_start_date, use_cached_downloads):
+def get_doomworld_posts(search_end_date, search_start_date, use_cached_downloads, force_redownload=False):
     """Get Doomworld posts for download.
 
     :param search_start_date: Search start date
     :param search_end_date: Search end date
     :param use_cached_downloads: Flag indicating to use cached download info
+    :param force_redownload: Flag indicating to force redownload anyway. Should only ever be on for testing
     :return: Doomworld post list
     """
     if use_cached_downloads:
@@ -473,7 +515,11 @@ def get_doomworld_posts(search_end_date, search_start_date, use_cached_downloads
             with open(post_info_file, encoding='utf-8') as post_info_stream:
                 post_dict = yaml.safe_load(post_info_stream)
             post_dict['parent'] = Thread(**post_dict['parent'])
-            posts.append(Post(**post_dict))
+            post_obj = Post(**post_dict)
+            if force_redownload:
+                download_attachments(post_obj)
+
+            posts.append(post_obj)
     else:
         if CONFIG.upload_type == 'date-based':
             threads = get_new_threads(search_start_date)

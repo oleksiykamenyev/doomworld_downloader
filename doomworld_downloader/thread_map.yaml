@@ -2158,11 +2158,6 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/barondoor
   id: '156318'
   name: "Baron Door demos [-Complevel 9]"
-"https://www.doomworld.com/forum/topic/156506-dexcom-1-demos-complevel-21/":
-  additional_info:
-    wad: https://www.dsdarchive.com/wads/dexcom1
-  id: '156506'
-  name: "Dexcom 1 demos [-complevel 21]"
 "https://www.doomworld.com/forum/topic/156706-alizarin-demos-complevel-21/":
   additional_info:
     wad: https://www.dsdarchive.com/wads/alizarin
@@ -2203,6 +2198,71 @@ https://www.doomworld.com/forum/topic/98794-hell-to-pay-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/paintitdoom
   id: "157211"
   name: "Paint It DOOM demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/157546-blues-brothers-2025-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/bb2025
+  id: "157546"
+  name: "Blues Brothers 2025 demos [complevel 21]"
+"https://www.doomworld.com/forum/topic/157746-lemoncholia-demos-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/lemon
+  id: "157746"
+  name: "Lemoncholia demos [-complevel 2]"
+"https://www.doomworld.com/forum/topic/157784-twogers-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/twogers
+  id: "157784"
+  name: "TWOGERS Demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/145522-revenant-hallway-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/revhallway
+  id: "145522"
+  name: "Revenant Hallway demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/158265-harmony-compatible-complevel-2/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/harmonyc
+  id: "158265"
+  name: "Harmony Compatible [-complevel 2]"
+"https://www.doomworld.com/forum/topic/158423-neon-overdrive-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/neonover
+  id: "158423"
+  name: "Neon Overdrive demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/158536-four-perfectly-fine-lemons-demps-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/4pfl
+  id: "158536"
+  name: "Four Perfectly Fine Lemons demps [-complevel 21]"
+"https://www.doomworld.com/forum/topic/158682-one-of-everything-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/ooe
+  id: "158682"
+  name: "One of Everything demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/158702-amalgoom-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/amalgoom
+  id: "158702"
+  name: "Amalgoom demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/158782-johnwadwad-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/johnwad
+  id: "158782"
+  name: "Johnwad.wad demos [-complevel 21]"
+"https://www.doomworld.com/forum/topic/158839-violetshift-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/violetshift
+  id: "158839"
+  name: "Violetshift demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/158939-igimm-demos-complevel-9/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/igimm
+  id: "158939"
+  name: "Igimm Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/158792-balls-of-steel-mapping-demos-complevel-21/":
+  additional_info:
+    wad: https://www.dsdarchive.com/wads/bosm
+  id: "158792"
+  name: "Balls of Steel Mapping demos [complevel 21]"
 
 # Multi-WAD threads
 "https://www.doomworld.com/forum/topic/41850-community-chest-series-demos-boom-complevel-9/":
@@ -2598,13 +2658,27 @@ https://www.doomworld.com/forum/topic/55589-doom-ii-demos-complevel-2/:
       - https://www.dsdarchive.com/wads/doom2bfg
   id: '156834'
   name: "DOOM II demos pt.2 [-complevel 2]"
-https://www.doomworld.com/forum/topic/55574-alien-vendetta-demos-complevel-2/:
+"https://www.doomworld.com/forum/topic/55574-alien-vendetta-demos-complevel-2/":
   additional_info:
     wads:
       - https://www.dsdarchive.com/wads/av
       - https://www.dsdarchive.com/wads/av_old
   id: '55574'
   name: Alien Vendetta demos [-complevel 2]
+"https://www.doomworld.com/forum/topic/158134-doom-speedmapping-session-demos-complevel-9/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/hdsped01
+      - https://www.dsdarchive.com/wads/hdsped02
+  id: '158134'
+  name: "#DooM Speedmapping Session Demos [-complevel 9]"
+"https://www.doomworld.com/forum/topic/156506-dexcom-demos-complevel-21/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/dexcom1
+      - https://www.dsdarchive.com/wads/dexcom2026
+  id: '156506'
+  name: "Dexcom demos [-complevel 21]"
 
 # Category-specific threads
 "https://www.doomworld.com/forum/topic/52379-solo-net-1-player-coop-demos/":
@@ -3212,6 +3286,13 @@ https://www.doomworld.com/forum/topic/55574-alien-vendetta-demos-complevel-2/:
     wad: https://www.dsdarchive.com/wads/d5da3
   id: '135033'
   name: "D5DA3 Speedrunning Team Competition (14-16 April 2023)."
+"https://www.doomworld.com/forum/topic/158884-competition-final-doom-record-blast-2100-cash-pool/":
+  additional_info:
+    wads:
+      - https://www.dsdarchive.com/wads/plutonia
+      - https://www.dsdarchive.com/wads/tnt
+  id: '158884'
+  name: "Competition :: Final Doom RECORD BLAST!! :: $2100 cash pool"
 
 ### IGNORED THREADS FOR UPDATES
 # Non-speedrun demo threads

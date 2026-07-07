@@ -360,11 +360,12 @@ class DemoInfo:
             self.demo_process_failed = True
             return
 
-        lmp_data = LMPData(self.lmp_path, textfile_iwad=self._textfile_info.get('iwad'))
+        lmp_data = LMPData(self.lmp_path, iwad_guess=self._textfile_info.get('iwad'))
         lmp_data.analyze()
+        lmp_iwad = lmp_data.raw_data.get('iwad', '')
         self._lmp_info = {
             'complevel': lmp_data.raw_data.get('complevel'),
-            'iwad': lmp_data.raw_data.get('iwad', ''),
+            'iwad': lmp_iwad,
             'footer_files': lmp_data.raw_data['wad_strings'],
             'skill': lmp_data.raw_data.get('skill'),
             'num_players': lmp_data.raw_data.get('num_players'),
@@ -386,6 +387,16 @@ class DemoInfo:
                             additional_zip_msg)
             self.demo_process_failed = True
             return
+
+        # This is ugly, but in most cases, we want to do lmp parsing before playback parsing, except for Heretic and
+        # Hexen demos, which are not distinguishable easily from the lmp file. In this case, if the playback IWAD does
+        # not match the lmp parser, we need to re-parse the lmp with the right IWAD.
+        if playback_data.is_heretic and lmp_iwad == 'hexen.wad':
+            lmp_data = LMPData(self.lmp_path, iwad_guess='heretic.wad')
+            lmp_data.analyze()
+        elif playback_data.is_hexen and lmp_iwad == 'heretic.wad':
+            lmp_data = LMPData(self.lmp_path, iwad_guess='hexen.wad')
+            lmp_data.analyze()
 
         lmp_data.populate_data_manager(self.data_manager)
         playback_data.populate_data_manager(self.data_manager)

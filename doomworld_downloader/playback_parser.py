@@ -81,9 +81,11 @@ class PlaybackData(BaseData):
 
     DOOM_1_MAP_RE = re.compile(r'^E(?P<episode_num>\d)M\ds?$')
 
-    ALLOWED_FOOTER_FILES = ['bloodcolor.deh', 'bloodfix.deh', 'doom widescreen hud.wad',
-                            'doom 2 widescreen assets.wad', 'dsda-doom.wad', 'prboom-plus.wad',
-                            'doom_wide.wad', 'notransl.deh', 'doomgirl_01.wad', 'good.deh']
+    ALLOWED_FOOTER_FILES = [
+        'bloodcolor.deh', 'bloodfix.deh', 'doom widescreen hud.wad', 'doom 2 widescreen assets.wad', 'dsda-doom.wad',
+        'prboom-plus.wad', 'doom_wide.wad', 'notransl.deh', 'doomgirl_01.wad', 'good.deh', 'extras.wad',
+        'nototallump.wad'
+    ]
     CHEX_ADDITIONAL_FOOTER_FILES = ['chex.deh', 'chexehud.wad']
     FOOTER_WAD_EXTENSIONS = ['.bex', '.deh', '.hhe', '.pk3', '.pk7', '.wad']
 
@@ -170,12 +172,6 @@ class PlaybackData(BaseData):
                 LOGGER.error('Invalid skill %s passed to playback parser.', raw_skill)
                 self.demo_info['skill'] = None
 
-        iwad = self.demo_info.get('iwad', '').lower()
-        if compare_iwad(iwad, 'heretic'):
-            self.base_command = f'{self.base_command} -heretic'
-        if compare_iwad(iwad, 'hexen'):
-            self.base_command = f'{self.base_command} -hexen'
-
     @staticmethod
     def _check_wad_existence(wad):
         """Check that the WAD exists locally.
@@ -249,11 +245,18 @@ class PlaybackData(BaseData):
                     playback_cmd_lines.extend(
                         [f'{cmd} -solo-net' for cmd in playback_cmd_lines]
                     )
-            # TASDooM demos sometimes require manually providing the complevel
+            # TASDooM demos sometimes require manually providing the complevel.
             if self.demo_info.get('source_port') == 'TASDooM':
                 playback_cmd_lines.extend(
                     [f'{cmd} -complevel 5' for cmd in playback_cmd_lines]
                 )
+            # Hexen nomo demos pre-modern ports require manually specifying -nomonsters.
+            if (self.demo_info.get('source_port') == 'Hexen' or self.demo_info.get('source_port') == 'Hexen+' or
+                    self.demo_info.get('source_port') == 'jHexen' or
+                    self.demo_info.get('source_port') == 'Chocolate Hexen'):
+                all_cmds_with_nomonsters = [f'{cmd} -nomonsters' for cmd in playback_cmd_lines]
+                playback_cmd_lines.extend([{cmd: 'Plays back with forced -nomonsters.'}
+                                           for cmd in all_cmds_with_nomonsters])
             footer_files_lower = [footer_file.lower()
                                   for footer_file in self.demo_info.get('footer_files', [])]
             if 'good.deh' in footer_files_lower or CONFIG.always_try_good_at_doom:
@@ -269,7 +272,13 @@ class PlaybackData(BaseData):
                 else:
                     cmd_line_info = None
 
-                command = f'{self.base_command} -iwad commercial/{wad_guess.iwad} {cmd_line}'
+                additional_args = ''
+                if compare_iwad(wad_guess.iwad, 'heretic'):
+                    additional_args = '-heretic'
+                if compare_iwad(wad_guess.iwad, 'hexen'):
+                    additional_args = '-hexen'
+
+                command = f'{self.base_command} -iwad commercial/{wad_guess.iwad} {cmd_line} {additional_args}'
                 self._attempt_demo_playback(command)
                 # Technically, there could be edge cases where a levelstat could be generated even if the wrong WAD is
                 # used (e.g., thissuxx map 1 will exit on pretty much any demo that is long enough). If the
@@ -285,6 +294,7 @@ class PlaybackData(BaseData):
                                                      cur_analysis, cmd_line_info=cmd_line_info)
                     wad_files = [os.path.basename(wad_file.lower())
                                  for wad_file in cur_demo_playback.wad.files.keys()]
+                    footer_files_normalized = []
                     unexpected_file = False
                     for footer_file in self.demo_info.get('footer_files', []):
                         footer_file_lower = os.path.basename(footer_file.lower())
@@ -292,22 +302,53 @@ class PlaybackData(BaseData):
                         if not footer_file_ext:
                             footer_file_lower = f'{footer_file_lower}.wad'
                             footer_file_ext = '.wad'
+
+                        footer_files_normalized.append(footer_file_lower)
                         if (footer_file_lower not in wad_files and
                                 footer_file_lower != f'{cur_demo_playback.wad.iwad}.wad' and
                                 footer_file_lower not in PlaybackData.ALLOWED_FOOTER_FILES and
                                 footer_file_ext in PlaybackData.FOOTER_WAD_EXTENSIONS):
-                            if (cur_demo_playback.wad.iwad == 'chex' and
-                                    footer_file_lower not in self.CHEX_ADDITIONAL_FOOTER_FILES):
+                            if (cur_demo_playback.wad.iwad != 'chex' or
+                                    (cur_demo_playback.wad.iwad == 'chex' and
+                                     footer_file_lower not in self.CHEX_ADDITIONAL_FOOTER_FILES)):
                                 LOGGER.error('Unexpected file %s found in footer for WAD %s.',
                                              footer_file, cur_demo_playback.wad.name)
                                 unexpected_file = True
                                 break
 
-                    if unexpected_file:
+                    if not CONFIG.ignore_extra_wad_files and unexpected_file:
                         continue
 
-                    if not self._demo_playback or self._demo_playback < cur_demo_playback:
+                    # This is convoluted logic to ensure that we prefer to assign a demo to a WAD that matches some
+                    # file we saw in the footer. For every WAD guess if we see any required WAD in the footer, we
+                    # assume that that WAD is more valid than the other potential guess we got, unless the past WAD
+                    # also had required WADs in the footer. This ensures that if a given demo happens to play back
+                    # with a trivial case (e.g., a skipmap in DV2), that we do not assign the demo to DV2 as long as
+                    # we can detect that it should actually play back with some other WAD.
+                    #
+                    # This could result in false positives, but only if someone chooses to run an unrelated WAD with
+                    # some other WAD's sprites or textures, which I hope no one will ever do...
+                    found_playback_wad_in_footer_files = False
+                    relevant_wad_files = [
+                        os.path.basename(wad_file.lower())
+                        for wad_file, wad_dict in cur_demo_playback.wad.files.items()
+                        if (not wad_dict.get('not_required_for_playback', False) and
+                            not wad_dict.get('do_not_attempt_playback', False))
+                    ]
+                    for wad_file in relevant_wad_files:
+                        if wad_file in footer_files_normalized:
+                            found_playback_wad_in_footer_files = True
+                            break
+                    if self._demo_playback:
+                        if (not self._demo_playback.found_playback_wad_in_footer_files and
+                                found_playback_wad_in_footer_files and
+                                (self._demo_playback.wad != cur_demo_playback.wad)):
+                            self._demo_playback = cur_demo_playback
+                        elif self._demo_playback < cur_demo_playback:
+                            self._demo_playback = cur_demo_playback
+                    else:
                         self._demo_playback = cur_demo_playback
+                        self._demo_playback.found_playback_wad_in_footer_files = found_playback_wad_in_footer_files
 
                     self._cleanup()
                     if not CONFIG.run_through_all_cmd_line_options:
@@ -364,17 +405,20 @@ class PlaybackData(BaseData):
                                                                             game_mode=game_mode)
                             map_complevels = map_info.get_single_key_for_map('complevels', skill=skill,
                                                                              game_mode=game_mode)
-                            if map_complevel and map_complevels:
+
+                            # Note: explicit comparison against None is needed for map complevel, as 0 evaluates to
+                            #       False.
+                            if map_complevel is not None and map_complevels:
                                 raise ValueError(
                                     f'Multiple complevels defined for level {affected_level} in WAD '
                                     f'{self._demo_playback.wad.name}.'
                                 )
 
-                            if not map_complevel and not map_complevels:
+                            if map_complevel is None and not map_complevels:
                                 map_complevel = self._demo_playback.wad.complevel
                                 map_complevels = self._demo_playback.wad.complevels
 
-                            if map_complevel:
+                            if map_complevel is not None:
                                 allowed_complevels.append((int(map_complevel)))
                             elif map_complevels:
                                 allowed_complevels.extend([int(complevel) for complevel in map_complevels])
@@ -579,14 +623,15 @@ class PlaybackData(BaseData):
         #   - Pacifist doesn't exist.
         #   - UV-Max requires items.
         if self.data['wad'] == 'jumpwad':
-            if not all_required_items_obtained and self.data['category'] == 'UV Max':
+            if all_required_items_obtained and self.data['category'] == 'UV Max':
                 self.data['category'] = 'UV Speed'
             elif self.data['category'] == 'Pacifist':
                 self.data['category'] = 'UV Speed'
 
-        # Nerf has special tags for 100% items.
+        # Nerf has special tags for 100% items when running NM 100S.
         if self.data['wad'] == 'nerf':
-            if not all_required_items_obtained and self.data['category'] == 'NM 100S':
+            if all_required_items_obtained and (self.data['category'] == 'NM 100S' or
+                                                self.data['category'] == 'NoMo 100S'):
                 self.note_strings.add('Also 100% items')
 
         if self.is_heretic:
@@ -812,10 +857,19 @@ class PlaybackData(BaseData):
             episodes = wad.map_list_info.get_key('episodes')
             d2all = wad.map_list_info.get_key('d2all')
             d1all = wad.map_list_info.get_key('d1all')
-            if map_range == d2all:
+            herall = wad.map_list_info.get_key('herall')
+            hexall = wad.map_list_info.get_key('hexall')
+            chexall = wad.map_list_info.get_key('chexall')
+            if d2all and map_range == d2all:
                 self.data['level'] = 'D2All'
-            elif map_range == d1all:
+            elif d1all and map_range == d1all:
                 self.data['level'] = 'D1All'
+            elif herall and map_range == herall:
+                self.data['level'] = 'HerAll'
+            elif hexall and map_range == hexall:
+                self.data['level'] = 'HexAll'
+            elif chexall and map_range == chexall:
+                self.data['level'] = 'ChexAll'
             elif episodes:
                 for idx, episode_range in enumerate(episodes):
                     if map_range == episode_range:
@@ -910,6 +964,7 @@ class DemoPlayback:
     levelstat_line_count: int = field(init=False)
 
     cmd_line_info: dict = field(default_factory=dict)
+    found_playback_wad_in_footer_files: bool = False
 
     def __post_init__(self):
         """Post-initialization steps for DemoPlayback class."""

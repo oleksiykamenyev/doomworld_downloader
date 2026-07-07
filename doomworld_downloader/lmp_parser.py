@@ -64,11 +64,11 @@ class LMPData(BaseData):
 
     WOOF_REGEX = re.compile(r'Woof\s+\d+\.\d+\.\d+')
 
-    def __init__(self, lmp_path, textfile_iwad=None):
+    def __init__(self, lmp_path, iwad_guess=None):
         """Initialize LMP data class.
 
         :param lmp_path: Path to the LMP file
-        :param textfile_iwad: IWAD info from the textfile
+        :param iwad_guess: IWAD guess (likely from textfile)
         """
         super().__init__()
         self.lmp_path = lmp_path
@@ -77,7 +77,7 @@ class LMPData(BaseData):
         self.raw_data = {'player_classes': [], 'wad_strings': []}
         self._header = None
         self._footer = None
-        self.textfile_iwad = textfile_iwad
+        self.iwad_guess = iwad_guess
 
         self.source_port_guess_certain = False
 
@@ -87,8 +87,8 @@ class LMPData(BaseData):
         # TODO: There are probably other demos that we can't just put into the LMP parser, this
         #       logic may need to be expanded
         if not self._is_zdoom_or_gzdoom():
-            self._parse_lmp()
             self._parse_footer()
+            self._parse_lmp()
 
         self._get_source_port()
         # DSDA API expects the num_players (i.e., guys) argument to be a string
@@ -171,14 +171,16 @@ class LMPData(BaseData):
             # Default to Heretic which receives more demos than Hexen
             engine_option = 'heretic'
             for additional_iwad in LMPData.ADDITIONAL_IWADS:
-                if compare_iwad(self.textfile_iwad, additional_iwad):
+                if compare_iwad(self.iwad_guess, additional_iwad):
                     engine_option = additional_iwad
                     break
 
             try:
                 parse_lmp_out = run_cmd('{} --engine={}'.format(parse_lmp_cmd, engine_option),
                                         get_output=True)
-                self.raw_data['iwad'] = f'{engine_option}.wad'
+
+                if not self.raw_data['iwad']:
+                    self.raw_data['iwad'] = f'{engine_option}.wad'
             except subprocess.CalledProcessError as cpe:
                 LOGGER.info('Encountered exception %s when running parse LMP command for LMP %s.',
                             cpe, self.lmp_path)
@@ -257,9 +259,9 @@ class LMPData(BaseData):
         if line.count(':') == 1:
             cur_key, value = [part.strip() for part in line.split(':')]
             if cur_key == key:
-                iwad = self.raw_data.get('iwad')
+                iwad = self.raw_data.get('iwad', '').lower()
                 if LMPData.PLAYER_RE.match(key):
-                    if iwad == 'hexen':
+                    if iwad == 'hexen.wad':
                         player_value, class_value = value.split()
                         # Hexen player line would look like the following (first value is the
                         # player existence value, second value in parens is the class):
@@ -327,6 +329,7 @@ class LMPData(BaseData):
                         if elem == '-iwad':
                             self.raw_data['iwad'] = self._parse_file_in_footer(line[idx + 1],
                                                                                '.wad')
+                            self.iwad_guess = self.raw_data['iwad']
                         if elem == '-file':
                             # There may be multiple WAD files passed in, so check all of them
                             in_wad_args = True

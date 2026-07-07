@@ -136,11 +136,19 @@ class WadMapInfo:
 
 class WadMapListInfo:
     """WAD map list info object handler."""
-    TOP_LEVEL_KEYS = ['complevel', 'complevels', 'd1all', 'd2all', 'episodes', 'map_info', 'map_ranges',
-                      'secret_exits']
+    TOP_LEVEL_KEYS = ['complevel', 'complevels', 'd1all', 'd2all', 'herall', 'hexall', 'chexall', 'episodes',
+                      'map_info', 'map_ranges', 'secret_exits']
 
+    D1ALL_DEFAULT = ['E1M1', 'E4M9']
+    D1ALL_IWADS = ['doom']
     D2ALL_DEFAULT = ['Map 01', 'Map 30']
     D2ALL_IWADS = ['doom2', 'plutonia', 'tnt']
+    HEXALL_DEFAULT = ['Map 01', 'Map 40']
+    HEXALL_IWADS = ['hexen']
+    HERALL_DEFAULT = ['E1M1', 'E6M2']
+    HERALL_IWADS = ['heretic']
+    CHEXALL_DEFAULT = None
+    CHEXALL_IWADS = ['chex']
     EPISODE_DEFAULTS = {
         'doom': [['E1M1', 'E1M8'], ['E2M1', 'E2M8'], ['E3M1', 'E3M8'], ['E4M1', 'E4M8']],
         'doom2': [['Map 01', 'Map 10'], ['Map 11', 'Map 20'], ['Map 21', 'Map 30']],
@@ -149,8 +157,11 @@ class WadMapListInfo:
         # One less map for episode 6 since E6M1 won't appear in the levelstat due to having no exit
         'heretic': [['E1M1', 'E1M8'], ['E2M1', 'E2M8'], ['E3M1', 'E3M8'], ['E4M1', 'E4M8'],
                     ['E5M1', 'E5M8'], ['E6M1', 'E6M2']],
-        # TODO: Handle Hexen
-        'hexen': [[]],
+        # TODO: Most Hexen maps may have multiple exits, only one of which on the end map should finish the hub, so
+        #       these start and end markers are unusable unless I know which exit was taken, which is not output by
+        #       DSDA.
+        'hexen': [['Map 01', 'Map 02'], ['Map 13', 'Map 12'], ['Map 27', 'Map 27'], ['Map 22', 'Map 23'],
+                  ['Map 35', 'Map 40']],
         'chex': [['E1M1', 'E1M5']]
     }
     SECRET_EXIT_DEFAULTS = {
@@ -159,8 +170,7 @@ class WadMapListInfo:
         'plutonia': {'Map 15': 'Map 31', 'Map 31': 'Map 32'},
         'tnt': {'Map 15': 'Map 31', 'Map 31': 'Map 32'},
         'heretic': {'E1M6': 'E1M9', 'E2M4': 'E2M9', 'E3M4': 'E3M9', 'E4M4': 'E4M9', 'E5M3': 'E5M9'},
-        # TODO: Handle Hexen
-        'hexen': {},
+        'hexen': {'Map 02': 'Map 06', 'Map 13': 'Map 11', 'Map 27': 'Map 31', 'Map 21': 'Map 26', 'Map 35': 'Map 39'},
         'chex': {}
     }
 
@@ -212,6 +222,14 @@ class WadMapListInfo:
 
         if key == 'd2all' and self.iwad in WadMapListInfo.D2ALL_IWADS:
             return self.D2ALL_DEFAULT
+        if key == 'd1all' and self.iwad in WadMapListInfo.D1ALL_IWADS:
+            return self.D1ALL_DEFAULT
+        if key == 'herall' and self.iwad in WadMapListInfo.HERALL_IWADS:
+            return self.HERALL_DEFAULT
+        if key == 'hexall' and self.iwad in WadMapListInfo.HEXALL_IWADS:
+            return self.HEXALL_DEFAULT
+        if key == 'chexall' and self.iwad in WadMapListInfo.CHEXALL_IWADS:
+            return self.CHEXALL_DEFAULT
         if key == 'episodes':
             return WadMapListInfo.EPISODE_DEFAULTS.get(self.iwad)
         if key == 'secret_exits':
