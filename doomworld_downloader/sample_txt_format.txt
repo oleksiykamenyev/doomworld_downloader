@@ -1,0 +1,10 @@
+PWAD: something.wad
+PWAD Name: Name
+Map: ##
+Skill: 4
+Category: UV-Max
+Exe: DSDA-Doom #.##.# complevel ##
+Recorded on: Date
+Time: #:##
+Author: player_name
+Description:

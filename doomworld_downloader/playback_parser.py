@@ -1,0 +1,1031 @@
+"""
+Parse data out of DSDA-Doom playback of the LMP.
+"""
+
+import logging
+import os
+import re
+import subprocess
+
+from collections import Counter
+from dataclasses import dataclass, field
+from shutil import copyfile, rmtree
+
+from .base_parser import BaseData
+from .cheat_detection import check_tas_playback
+from .data_manager import DataManager
+from .dsda import download_wad_from_dsda, get_wad_or_player_name_from_dsda_url
+from .upload_config import CONFIG, NEEDS_ATTENTION_PLACEHOLDER
+from .utils import checksum, parse_range, run_cmd, zip_extract, compare_iwad, \
+    get_single_key_value_dict
+from .wad import Wad
+
+
+LOGGER = logging.getLogger(__name__)
+
+
+class PlaybackData(BaseData):
+    """Store all uploader-relevant data obtainable using DSDA-Doom.
+
+    This includes data from levelstat.txt as well as the analysis.txt files.
+    """
+    # -levelstat: Create a levelstat.txt file with level statistics
+    # -analysis: Create an analysis.txt file with additional analysis on the demo
+    # -quiet: Suppress a bunch of playback logging from DSDA-Doom
+    DEFAULT_ARGS = '-levelstat -analysis -nosound -nomusic -nodraw -quiet'
+    DSDA_DOOM_COMMAND_START = '{dsda_doom_path}/dsda-doom.exe {additional_args}'.format(
+        dsda_doom_path=CONFIG.dsda_doom_directory, additional_args=DEFAULT_ARGS
+    )
+
+    ANALYSIS_FILENAME = 'analysis.txt'
+    LEVELSTAT_FILENAME = 'levelstat.txt'
+
+    LEVELSTAT_LINE_LEVEL_IDX = 0
+    LEVELSTAT_LINE_TIME_IDX = 2
+    LEVELSTAT_LINE_TOTAL_TIME_IDX = 3
+    LEVELSTAT_LINE_KILLS_IDX = 5
+    LEVELSTAT_LINE_ITEMS_IDX = 7
+    LEVELSTAT_LINE_SECRETS_IDX = 9
+    LEVELSTAT_LINE_ITEMS_COOP_IDX = 8
+    LEVELSTAT_LINE_SECRETS_COOP_IDX = 11
+    PAREN_WITH_OFFSET_RE = re.compile(r'\(\s+')
+
+    ALL_SECRETS_CATEGORIES = [
+        'UV Max', 'UV Fast', 'UV Respawn', 'UV 100S', 'NM 100S', 'NoMo 100S', 'SM Max', 'SM Respawn', 'SM 100S',
+        'BP Max', 'BP Respawn', 'BP 100S', 'Sk5 Max', 'Sk5 Respawn', 'Sk5 100S', 'Sk4 Max', 'Sk4 Respawn', 'Sk4 100S',
+        'Sk3 Max', 'Sk3 Fast', 'Sk3 Respawn', 'Sk3 100S', 'Sk3 NoMo 100S', 'Sk2 Max', 'Sk2 Fast', 'Sk2 Respawn',
+        'Sk2 100S', 'Sk2 NoMo 100S', 'Sk1 Max', 'Sk1 Fast', 'Sk1 Respawn', 'Sk1 100S', 'Sk1 NoMo 100S',
+        'Skill 3 Max', 'Skill 3 Fast', 'Skill 3 Respawn', 'Skill 3 100S', 'Skill 3 NoMo 100S',
+        'Skill 2 Max', 'Skill 2 Fast', 'Skill 2 Respawn', 'Skill 2 100S', 'Skill 2 NoMo 100S',
+        'Skill 1 Max', 'Skill 1 Fast', 'Skill 1 Respawn', 'Skill 1 100S', 'Skill 1 NoMo 100S', 'NM-Lite', 'UV Tank'
+    ]
+    ALL_KILLS_CATEGORIES = [
+        'UV Max', 'UV Fast', 'UV Respawn', 'UV Tyson', 'Tyson', 'SM Max', 'SM Respawn', 'SM Tyson',
+        'BP Max', 'BP Respawn', 'BP Tyson', 'Sk5 Max', 'Sk5 Respawn', 'Sk5 Tyson', 'Sk4 Max', 'Sk4 Respawn',
+        'Sk4 Tyson', 'Sk3 Max', 'Sk3 Fast', 'Sk3 Respawn', 'Sk3 Tyson', 'Sk2 Max', 'Sk2 Fast', 'Sk2 Respawn',
+        'Sk2 Tyson', 'Sk1 Max', 'Sk1 Fast', 'Sk1 Respawn', 'Sk1 Tyson', 'Skill 3 Max', 'Skill 3 Fast',
+        'Skill 3 Respawn', 'Skill 3 Tyson', 'Skill 2 Max', 'Skill 2 Fast', 'Skill 2 Respawn',
+        'Skill 2 Tyson', 'Skill 1 Max', 'Skill 1 Fast', 'Skill 1 Respawn', 'Skill 1 Tyson', 'UV Tank'
+    ]
+    DOOM_CATEGORY_MAP = {'UV Tyson': 'Tyson'}
+    # BP Speed/BP Max/NM Speed/NM 100S distinctions are sorted out based on the raw data in analysis.txt
+    HERETIC_CATEGORY_MAP = {'UV Max': 'SM Max', 'UV Speed': 'SM Speed', 'NM Speed': 'BP Speed', 'NM 100S': 'BP Speed'}
+    # Sk5 Speed/Sk5 Max/NM Speed/NM 100S distinctions are sorted out based on the raw data in analysis.txt
+    HEXEN_CATEGORY_MAP = {'UV Max': 'Sk4 Max', 'UV Speed': 'Sk4 Speed', 'NM Speed': 'Sk5 Speed', 'NM 100S': 'Sk5 Speed'}
+    BOOLEAN_INT_KEYS = ['nomonsters', 'respawn', 'fast', 'pacifist', 'stroller', 'almost_reality',
+                        '100k', '100s', 'weapon_collector', 'tyson_weapons', 'turbo', 'reality']
+
+    CERTAIN_KEYS = ['levelstat', 'time', 'level', 'kills', 'items', 'secrets', 'secret_exit', 'wad',
+                    'is_solo_net']
+    POSSIBLE_KEYS = ['category', 'is_tas']
+
+    DOOM_1_MAP_RE = re.compile(r'^E(?P<episode_num>\d)M\ds?$')
+
+    ALLOWED_FOOTER_FILES = [
+        'bloodcolor.deh', 'bloodfix.deh', 'doom widescreen hud.wad', 'doom 2 widescreen assets.wad', 'dsda-doom.wad',
+        'prboom-plus.wad', 'doom_wide.wad', 'notransl.deh', 'doomgirl_01.wad', 'good.deh', 'extras.wad',
+        'nototallump.wad'
+    ]
+    CHEX_ADDITIONAL_FOOTER_FILES = ['chex.deh', 'chexehud.wad']
+    FOOTER_WAD_EXTENSIONS = ['.bex', '.deh', '.hhe', '.pk3', '.pk7', '.wad']
+
+    def __init__(self, lmp_path, wad_guesses, demo_info=None):
+        """Initialize playback data class.
+
+        :param lmp_path: Path to the LMP file
+        :param wad_guesses: List of WAD guesses ordered from most likely to least likely
+        :param demo_info: Miscellaneous additional info about the demo useful for demo playback and categorization
+        """
+        super().__init__()
+        self._cleanup()
+
+        # -fastdemo: Play back demo as fast as possible, this is better than timedemo since it does
+        #            not display any tic statistics afterwards, so DSDA-Doom doesn't hang waiting
+        #            for user input
+        self.base_command = '{} -fastdemo "{}"'.format(PlaybackData.DSDA_DOOM_COMMAND_START,
+                                                       lmp_path)
+        self.lmp_path = lmp_path
+        self.playback_failed = False
+
+        self.demo_info = demo_info if demo_info else {}
+        self._append_misc_args()
+
+        self.url_to_wad = {wad.dsda_url: wad for wad in wad_guesses}
+        self.wad_guesses = Counter([wad.dsda_url for wad in wad_guesses])
+        self.data = {}
+        self.raw_data = {'stats': {}}
+        self.note_strings = set()
+
+        self._demo_playback = None
+
+        self.is_heretic = False
+        self.is_hexen = False
+
+    def analyze(self):
+        """Analyze info provided to playback parser."""
+        self._playback()
+
+    def populate_data_manager(self, data_manager):
+        """Populate data manager with info from post.
+
+        :param data_manager: Data manager to populate
+        """
+        for key, value in self.data.items():
+            if (key in PlaybackData.CERTAIN_KEYS or
+                    (key == 'category' and CONFIG.trust_dsda_doom_category)):
+                data_manager.insert(key, value, DataManager.CERTAIN, source='playback')
+            elif key in PlaybackData.POSSIBLE_KEYS:
+                data_manager.insert(key, value, DataManager.POSSIBLE, source='playback')
+            else:
+                raise ValueError(f'Unrecognized key found in data dictionary: {key}.')
+
+    @staticmethod
+    def _cleanup():
+        """Cleanup analysis and levelstat files, if they exist."""
+        try:
+            os.remove(PlaybackData.ANALYSIS_FILENAME)
+            os.remove(PlaybackData.LEVELSTAT_FILENAME)
+        except OSError:
+            pass
+
+    def _append_misc_args(self):
+        """Append miscellaneous arguments to the playback command based on demo info."""
+        if not self.demo_info:
+            return
+
+        num_players = self.demo_info.get('num_players')
+        if num_players and num_players > 1:
+            self.demo_info['game_mode'] = 'coop'
+        else:
+            self.demo_info['game_mode'] = 'single_player'
+
+        raw_skill = self.demo_info['skill']
+        if raw_skill:
+            raw_skill = int(raw_skill)
+            if 0 < raw_skill < 3:
+                self.demo_info['skill'] = 'easy'
+            elif raw_skill == 3:
+                self.demo_info['skill'] = 'medium'
+            elif 3 < raw_skill < 6:
+                self.demo_info['skill'] = 'hard'
+            else:
+                LOGGER.error('Invalid skill %s passed to playback parser.', raw_skill)
+                self.demo_info['skill'] = None
+
+    @staticmethod
+    def _check_wad_existence(wad):
+        """Check that the WAD exists locally.
+
+        Download wad if it does not exist. Downloads will only be done from DSDA because in order
+        for an upload to even be possible, we need the WAD to be on DSDA, in which case it would
+        probably already be in the local config files anyway. Additionally, not every WAD is on
+        idgames, and WADs on DSDA may not match the same name WADs on idgames anyway (which would be
+        a problem but out of scope of this script). Additionally, a single download location is
+        simpler.
+
+        Mismatches between idgames and DSDA will need to be handled by a separate utility. (TODO)
+
+        :param wad: WAD object to check for
+        :raises RuntimeError if the WAD could not be downloaded.
+        """
+        dsda_doom_dirlist = [file.lower() for file in os.listdir(CONFIG.dsda_doom_directory)]
+        local_wad_location = None
+        for wad_file, wad_info in wad.files.items():
+            if wad_info.get('not_required_for_playback', False):
+                continue
+
+            wad_checksum = wad_info.get('checksum')
+            if wad_checksum:
+                if wad_file in dsda_doom_dirlist:
+                    if wad_checksum == checksum(os.path.join(CONFIG.dsda_doom_directory, wad_file)):
+                        continue
+            else:
+                LOGGER.error('WAD %s has no checksum information.', wad.name)
+
+            if local_wad_location is None:
+                zip_location = download_wad_from_dsda(wad.dsda_url) if wad.dsda_url else None
+                if not zip_location:
+                    raise RuntimeError(f'Could not download wad {wad.name}.')
+
+                local_wad_location = zip_extract(zip_location)
+
+            # TODO: Make sure copy isn't read-only
+            copyfile(os.path.join(local_wad_location, wad_file),
+                     os.path.join(CONFIG.dsda_doom_directory, os.path.basename(wad_file)))
+
+        if local_wad_location:
+            rmtree(local_wad_location)
+
+    def _playback(self):
+        """Play back demo and categorize it.
+
+        :raises RuntimeError if the WAD could not be guessed for this demo
+                ValueError if there's issues with getting the complevel required for the WAD
+        """
+        # TODO: If there is no complevel info and it's a vanilla complevel, probably should try to
+        #       force every available complevel (2-4)
+        for url, _ in self.wad_guesses.most_common():
+            wad_guess = self.url_to_wad[url]
+            # If this is a WAD update, the DSDA page may not be available yet.
+            if not wad_guess.commercial and not 'update/' in wad_guess.playback_cmd_line:
+                try:
+                    self._check_wad_existence(wad_guess)
+                except RuntimeError:
+                    LOGGER.error('Wad %s not available.', wad_guess.name)
+                    continue
+
+            # Prefer the primary playback CMD line; if it doesn't work, look through the
+            # alternatives
+            primary_cmd_line = ([wad_guess.playback_cmd_line]
+                                if wad_guess.playback_cmd_line or wad_guess.commercial else [])
+
+            playback_cmd_lines = primary_cmd_line + wad_guess.alt_playback_cmd_lines
+            if CONFIG.always_try_solonet:
+                if '-solo-net' not in self.base_command:
+                    playback_cmd_lines.extend(
+                        [f'{cmd} -solo-net' for cmd in playback_cmd_lines]
+                    )
+            # TASDooM demos sometimes require manually providing the complevel.
+            if self.demo_info.get('source_port') == 'TASDooM':
+                playback_cmd_lines.extend(
+                    [f'{cmd} -complevel 5' for cmd in playback_cmd_lines]
+                )
+            # Hexen nomo demos pre-modern ports require manually specifying -nomonsters.
+            if (self.demo_info.get('source_port') == 'Hexen' or self.demo_info.get('source_port') == 'Hexen+' or
+                    self.demo_info.get('source_port') == 'jHexen' or
+                    self.demo_info.get('source_port') == 'Chocolate Hexen'):
+                all_cmds_with_nomonsters = [f'{cmd} -nomonsters' for cmd in playback_cmd_lines]
+                playback_cmd_lines.extend([{cmd: 'Plays back with forced -nomonsters.'}
+                                           for cmd in all_cmds_with_nomonsters])
+            footer_files_lower = [footer_file.lower()
+                                  for footer_file in self.demo_info.get('footer_files', [])]
+            if 'good.deh' in footer_files_lower or CONFIG.always_try_good_at_doom:
+                all_cmds_with_good_deh = [f'{cmd} -deh good' for cmd in playback_cmd_lines]
+                playback_cmd_lines.extend([{cmd: 'Good at DooM: gib yourself to end the level.'}
+                                           for cmd in all_cmds_with_good_deh])
+
+            for cmd_line in playback_cmd_lines:
+                if isinstance(cmd_line, dict):
+                    cmd_line, cmd_line_info = get_single_key_value_dict(cmd_line)
+                    if isinstance(cmd_line_info, str):
+                        cmd_line_info = {'note': cmd_line_info}
+                else:
+                    cmd_line_info = None
+
+                additional_args = ''
+                if compare_iwad(wad_guess.iwad, 'heretic'):
+                    additional_args = '-heretic'
+                if compare_iwad(wad_guess.iwad, 'hexen'):
+                    additional_args = '-hexen'
+
+                command = f'{self.base_command} -iwad commercial/{wad_guess.iwad} {cmd_line} {additional_args}'
+                self._attempt_demo_playback(command)
+                # Technically, there could be edge cases where a levelstat could be generated even if the wrong WAD is
+                # used (e.g., thissuxx map 1 will exit on pretty much any demo that is long enough). If the
+                # run_through_all_cmd_line_options option is on, such cases will be decided based on which playback
+                # completed the most maps. Otherwise, we will just take the first playback that succeeds.
+                if os.path.isfile(PlaybackData.LEVELSTAT_FILENAME):
+                    with open(PlaybackData.LEVELSTAT_FILENAME) as levelstat_strm:
+                        cur_levelstat = levelstat_strm.read()
+                    with open(PlaybackData.ANALYSIS_FILENAME) as analysis_strm:
+                        cur_analysis = analysis_strm.read()
+
+                    cur_demo_playback = DemoPlayback(wad_guess, command, cur_levelstat,
+                                                     cur_analysis, cmd_line_info=cmd_line_info)
+                    wad_files = [os.path.basename(wad_file.lower())
+                                 for wad_file in cur_demo_playback.wad.files.keys()]
+                    footer_files_normalized = []
+                    unexpected_file = False
+                    for footer_file in self.demo_info.get('footer_files', []):
+                        footer_file_lower = os.path.basename(footer_file.lower())
+                        footer_file_ext = os.path.splitext(footer_file_lower)[1]
+                        if not footer_file_ext:
+                            footer_file_lower = f'{footer_file_lower}.wad'
+                            footer_file_ext = '.wad'
+
+                        footer_files_normalized.append(footer_file_lower)
+                        if (footer_file_lower not in wad_files and
+                                footer_file_lower != f'{cur_demo_playback.wad.iwad}.wad' and
+                                footer_file_lower not in PlaybackData.ALLOWED_FOOTER_FILES and
+                                footer_file_ext in PlaybackData.FOOTER_WAD_EXTENSIONS):
+                            if (cur_demo_playback.wad.iwad != 'chex' or
+                                    (cur_demo_playback.wad.iwad == 'chex' and
+                                     footer_file_lower not in self.CHEX_ADDITIONAL_FOOTER_FILES)):
+                                LOGGER.error('Unexpected file %s found in footer for WAD %s.',
+                                             footer_file, cur_demo_playback.wad.name)
+                                unexpected_file = True
+                                break
+
+                    if not CONFIG.ignore_extra_wad_files and unexpected_file:
+                        continue
+
+                    # This is convoluted logic to ensure that we prefer to assign a demo to a WAD that matches some
+                    # file we saw in the footer. For every WAD guess if we see any required WAD in the footer, we
+                    # assume that that WAD is more valid than the other potential guess we got, unless the past WAD
+                    # also had required WADs in the footer. This ensures that if a given demo happens to play back
+                    # with a trivial case (e.g., a skipmap in DV2), that we do not assign the demo to DV2 as long as
+                    # we can detect that it should actually play back with some other WAD.
+                    #
+                    # This could result in false positives, but only if someone chooses to run an unrelated WAD with
+                    # some other WAD's sprites or textures, which I hope no one will ever do...
+                    found_playback_wad_in_footer_files = False
+                    relevant_wad_files = [
+                        os.path.basename(wad_file.lower())
+                        for wad_file, wad_dict in cur_demo_playback.wad.files.items()
+                        if (not wad_dict.get('not_required_for_playback', False) and
+                            not wad_dict.get('do_not_attempt_playback', False))
+                    ]
+                    for wad_file in relevant_wad_files:
+                        if wad_file in footer_files_normalized:
+                            found_playback_wad_in_footer_files = True
+                            break
+                    if self._demo_playback:
+                        if (not self._demo_playback.found_playback_wad_in_footer_files and
+                                found_playback_wad_in_footer_files and
+                                (self._demo_playback.wad != cur_demo_playback.wad)):
+                            self._demo_playback = cur_demo_playback
+                        elif self._demo_playback < cur_demo_playback:
+                            self._demo_playback = cur_demo_playback
+                    else:
+                        self._demo_playback = cur_demo_playback
+                        self._demo_playback.found_playback_wad_in_footer_files = found_playback_wad_in_footer_files
+
+                    self._cleanup()
+                    if not CONFIG.run_through_all_cmd_line_options:
+                        break
+
+            if not CONFIG.run_through_all_cmd_line_options and self._demo_playback:
+                break
+
+        if self._demo_playback:
+            if not self.playback_failed:
+                if '-iwad commercial/heretic' in self._demo_playback.cmd:
+                    self.is_heretic = True
+                if '-iwad commercial/hexen' in self._demo_playback.cmd:
+                    self.is_hexen = True
+                if '-solo-net' in self._demo_playback.cmd:
+                    self.demo_info['game_mode'] = 'coop'
+                    self.data['is_solo_net'] = True
+                    self.note_strings.add('Plays back with forced -solo-net')
+                if '-complevel 5' in self._demo_playback.cmd:
+                    self.note_strings.add('Plays back with forced -complevel 5')
+
+                dsda_wad_name = (self._demo_playback.wad.dsda_name
+                                 if self._demo_playback.wad.dsda_name
+                                 else get_wad_or_player_name_from_dsda_url(self._demo_playback.wad.dsda_url))
+                self.data['wad'] = dsda_wad_name
+                self._parse_analysis()
+                self._parse_levelstat()
+                ignore_demo = self._check_if_skip()
+                if ignore_demo:
+                    LOGGER.error('Skipping demo due to ignore rule %s.', self.lmp_path)
+                    self.playback_failed = True
+                else:
+                    self._parse_raw_data()
+                    complevel = self.demo_info.get('complevel')
+                    if complevel:
+                        # Intended complevels can be finicky, so these are the assumptions that are taken when checking
+                        # demos for incompatibility here:
+                        #  - For each WAD, complevel can be set at the top-level and per-map. In both cases, complevel
+                        #    could be a single value or a list of allowed complevels.
+                        #  - If both a single value and list are set, the case is ambiguous, and an error is thrown.
+                        #  - If neither is set, we can't do the verification here, so an error is thrown then as well.
+                        #  - The per-map complevel always overrides the WAD complevel if available.
+                        #  - For multi-level runs, the allowed complevels are taken to be the superset of all the
+                        #    per-map complevels, based on the above logic of determining each map's complevel.
+                        if self._demo_playback.wad.complevel and self._demo_playback.wad.complevels:
+                            raise ValueError(f'Multiple complevels defined for WAD {self._demo_playback.wad.name}.')
+
+                        allowed_complevels = []
+                        for affected_level in self.raw_data['affected_levels']:
+                            map_info = self._demo_playback.wad.map_list_info.get_map_info(affected_level)
+                            skill = self.demo_info.get('skill')
+                            game_mode = self.demo_info.get('game_mode')
+                            map_complevel = map_info.get_single_key_for_map('complevel', skill=skill,
+                                                                            game_mode=game_mode)
+                            map_complevels = map_info.get_single_key_for_map('complevels', skill=skill,
+                                                                             game_mode=game_mode)
+
+                            # Note: explicit comparison against None is needed for map complevel, as 0 evaluates to
+                            #       False.
+                            if map_complevel is not None and map_complevels:
+                                raise ValueError(
+                                    f'Multiple complevels defined for level {affected_level} in WAD '
+                                    f'{self._demo_playback.wad.name}.'
+                                )
+
+                            if map_complevel is None and not map_complevels:
+                                map_complevel = self._demo_playback.wad.complevel
+                                map_complevels = self._demo_playback.wad.complevels
+
+                            if map_complevel is not None:
+                                allowed_complevels.append((int(map_complevel)))
+                            elif map_complevels:
+                                allowed_complevels.extend([int(complevel) for complevel in map_complevels])
+
+                        if not allowed_complevels:
+                            raise ValueError(f'Could not find complevel for WAD {self._demo_playback.wad.name}.')
+                        elif int(complevel) not in allowed_complevels:
+                            self.note_strings.add('Incompatible')
+
+                    if self._demo_playback.cmd_line_info:
+                        wad_update = self._demo_playback.cmd_line_info.get('update_wad')
+                        note = self._demo_playback.cmd_line_info.get('note')
+                        if wad_update:
+                            self.data['wad'] = wad_update
+                        if note:
+                            self.note_strings.add(note)
+
+                    is_tas = check_tas_playback(self._demo_playback, self.lmp_path)
+                    if is_tas:
+                        self.data['is_tas'] = is_tas
+        else:
+            LOGGER.error('Could not guess WAD for demo %s.', self.lmp_path)
+            self.playback_failed = True
+
+    def _attempt_demo_playback(self, command):
+        """Attempt demo playback with given command.
+
+        :param Command to attempt playback for
+        """
+        try:
+            run_cmd(command)
+        except subprocess.CalledProcessError as e:
+            LOGGER.warning('Failed to play back demo %s.', self.lmp_path)
+            LOGGER.debug('Error message: %s.', e)
+
+    def _check_if_skip(self):
+        """Check if we need to skip the current demo for processing.
+
+        :param Whether to ignore the current demo
+        """
+        skill = self.demo_info.get('skill')
+        game_mode = self.demo_info.get('game_mode')
+        for affected_level in self.raw_data['affected_levels']:
+            map_info = self._demo_playback.wad.map_list_info.get_map_info(affected_level)
+            if not map_info.get_single_key_for_map('ignore_level', skill=skill, game_mode=game_mode):
+                return False
+
+        return True
+
+    def _parse_raw_data(self):
+        """Parse additional info available in raw data.
+
+        This is mostly for special cases that are not handled by DSDA-Doom as they depend on the
+        WAD itself.
+        """
+        # TODO: DSDA-Doom should output missed kill/secret IDs for better max verification (mostly kills)
+        skill = self.demo_info.get('skill')
+        game_mode = self.demo_info.get('game_mode')
+
+        all_required_kills_obtained = True
+        all_required_secrets_obtained = True
+        all_required_items_obtained = True
+        has_at_least_one_secret = False
+        has_at_least_one_kill = False
+        all_maps_tyson_only = True
+        all_maps_skip_reality = True
+        all_maps_add_reality_in_nomo = True
+        all_maps_skip_almost_reality = True
+        all_maps_add_almost_reality_in_nomo = True
+        all_maps_skip_also_pacifist = True
+        for affected_level, stats in self.raw_data['stats'].items():
+            map_info = self._demo_playback.wad.map_list_info.get_map_info(affected_level)
+
+            required_max_secret_count = map_info.get_single_key_for_map('required_max_secret_count', skill=skill,
+                                                                        game_mode=game_mode)
+            required_max_kill_count = map_info.get_single_key_for_map('required_max_kill_count', skill=skill,
+                                                                      game_mode=game_mode)
+
+            obtained_secret_number, total_secret_number = map(int, stats['secrets'].split('/'))
+            obtained_kill_number, total_kill_number = map(int, stats['kills'].split('/'))
+            obtained_item_number, total_item_number = map(int, stats['items'].split('/'))
+
+            if required_max_secret_count:
+                required_max_secrets = int(required_max_secret_count.split('/')[0])
+            else:
+                required_max_secrets = int(total_secret_number)
+
+            if required_max_kill_count:
+                required_max_kills = int(required_max_kill_count.split('/')[0])
+            else:
+                required_max_kills = total_kill_number
+
+            has_at_least_one_secret = has_at_least_one_secret or total_secret_number > 0
+            has_at_least_one_kill = has_at_least_one_kill or total_kill_number > 0
+
+            if obtained_secret_number < required_max_secrets:
+                all_required_secrets_obtained = False
+            if obtained_kill_number < required_max_kills:
+                all_required_kills_obtained = False
+            if obtained_item_number < total_item_number:
+                all_required_items_obtained = False
+
+            tyson_only = map_info.get_single_key_for_map('tyson_only', skill=skill, game_mode=game_mode)
+            all_maps_tyson_only = all_maps_tyson_only and tyson_only
+
+            skip_reality = map_info.get_single_key_for_map('skip_reality', skill=skill,
+                                                           game_mode=game_mode)
+            skip_reality_categories = map_info.get_single_key_for_map('skip_reality_for_categories',
+                                                                      skill=skill, game_mode=game_mode)
+            skip_reality_final = skip_reality or (skip_reality_categories is not None and
+                                                  self.data['category'] in skip_reality_categories)
+
+            all_maps_skip_reality = all_maps_skip_reality and skip_reality_final
+
+            add_reality_in_nomo = map_info.get_single_key_for_map('add_reality_in_nomo', skill=skill,
+                                                                  game_mode=game_mode)
+            all_maps_add_reality_in_nomo = all_maps_add_reality_in_nomo and add_reality_in_nomo
+
+            skip_almost_reality = map_info.get_single_key_for_map('skip_almost_reality', skill=skill,
+                                                                  game_mode=game_mode)
+            skip_almost_reality_categories = map_info.get_single_key_for_map(
+                'skip_almost_reality_for_categories', skill=skill, game_mode=game_mode
+            )
+            skip_almost_reality_final = (
+                skip_almost_reality or (skip_almost_reality_categories is not None and
+                                        self.data['category'] in skip_almost_reality_categories)
+            )
+
+            all_maps_skip_almost_reality = all_maps_skip_almost_reality and skip_almost_reality_final
+
+            add_almost_reality_in_nomo = map_info.get_single_key_for_map('add_almost_reality_in_nomo', skill=skill,
+                                                                         game_mode=game_mode)
+            all_maps_add_almost_reality_in_nomo = all_maps_add_almost_reality_in_nomo and add_almost_reality_in_nomo
+
+            skip_also_pacifist = map_info.get_single_key_for_map('skip_also_pacifist', skill=skill, game_mode=game_mode)
+            skip_also_pacifist_categories = map_info.get_single_key_for_map(
+                'skip_also_pacifist_for_categories', skill=skill, game_mode=game_mode
+            )
+            skip_also_pacifist_final = skip_also_pacifist or (
+                skip_also_pacifist_categories is not None and self.data['category'] in skip_also_pacifist_categories
+            )
+
+            all_maps_skip_also_pacifist = all_maps_skip_also_pacifist and skip_also_pacifist_final
+
+        if all_required_kills_obtained and all_required_secrets_obtained and (has_at_least_one_secret or
+                                                                              has_at_least_one_kill):
+            if self.data['category'] == 'UV Speed':
+                self.data['category'] = 'UV Max'
+            elif self.data['category'] == 'Other':
+                if self.raw_data.get('skill') == '4':
+                    is_standard_category = (
+                        self.raw_data.get('nomonsters') == '0' and self.raw_data.get('reborn') == '0' and
+                        self.raw_data.get('turbo') == '0' and self.raw_data.get('solo_net') == '0' and
+                        self.raw_data.get('coop_spawns') == '0'
+                    )
+                    if is_standard_category:
+                        if self.raw_data.get('fast') == '1':
+                            self.data['category'] = 'UV Fast'
+                        elif self.raw_data.get('respawn') == '1':
+                            self.data['category'] = 'UV Respawn'
+        elif self.data['category'] == 'NM Speed' and all_required_secrets_obtained and has_at_least_one_secret:
+            self.data['category'] = 'NM 100S'
+
+        # If a run was a valid Tyson (only Tyson weapons used and 100% kills) and the map is not Tyson-only, we always
+        # choose the Tyson category for the final run instead of UV Max.
+        if self.raw_data.get('tyson_weapons', False) and all_required_kills_obtained:
+            if not all_maps_tyson_only and self.data['category'] == 'UV Max':
+                self.data['category'] = 'Tyson'
+
+        is_nomo = self.raw_data.get('nomonsters', False)
+        if self.raw_data.get('reality', False):
+            add_reality_tag = True
+            if is_nomo and not all_maps_add_reality_in_nomo:
+                add_reality_tag = False
+            if all_maps_skip_reality:
+                add_reality_tag = False
+
+            if add_reality_tag:
+                self.note_strings.add('Also Reality')
+        elif self.raw_data.get('almost_reality', False):
+            add_almost_reality_tag = True
+            if is_nomo and not all_maps_add_almost_reality_in_nomo:
+                add_almost_reality_tag = False
+            if all_maps_skip_reality or all_maps_skip_almost_reality:
+                add_almost_reality_tag = False
+
+            if add_almost_reality_tag:
+                self.note_strings.add('Also Almost Reality')
+
+        # If a run was a Stroller, choose the Stroller category over UV-Speed, as this will happen for maps with no
+        # monsters.
+        if self.raw_data.get('stroller', True) and self.data['category'] == 'UV Speed':
+            self.data['category'] = 'Stroller'
+
+        # If a run is not UV-Speed/Pacifist or on nomonsters, add tag for Also Pacifist
+        if not all_maps_skip_also_pacifist and (self.raw_data.get('pacifist', False) and
+                                                not self.raw_data.get('nomonsters', False) and
+                                                self.data['category'] not in ['Pacifist', 'Stroller', 'UV Speed']):
+            self.note_strings.add('Also Pacifist')
+
+        # Jumpwad has special rules for categories:
+        #   - Pacifist doesn't exist.
+        #   - UV-Max requires items.
+        if self.data['wad'] == 'jumpwad':
+            if all_required_items_obtained and self.data['category'] == 'UV Max':
+                self.data['category'] = 'UV Speed'
+            elif self.data['category'] == 'Pacifist':
+                self.data['category'] = 'UV Speed'
+
+        # Nerf has special tags for 100% items when running NM 100S.
+        if self.data['wad'] == 'nerf':
+            if all_required_items_obtained and (self.data['category'] == 'NM 100S' or
+                                                self.data['category'] == 'NoMo 100S'):
+                self.note_strings.add('Also 100% items')
+
+        if self.is_heretic:
+            self.data['category'] = PlaybackData.HERETIC_CATEGORY_MAP.get(self.data['category'], self.data['category'])
+        if self.is_hexen:
+            self.data['category'] = PlaybackData.HEXEN_CATEGORY_MAP.get(self.data['category'], self.data['category'])
+
+        if self.data['category'] == 'BP Speed':
+            if self.raw_data.get('respawn', False):
+                if all_required_secrets_obtained and has_at_least_one_secret:
+                    self.data['category'] = 'NM 100S'
+                else:
+                    self.data['category'] = 'NM Speed'
+            else:
+                if all_required_kills_obtained and all_required_secrets_obtained:
+                    self.data['category'] = 'BP Max'
+                elif all_required_secrets_obtained and has_at_least_one_secret:
+                    playback_cmd_with_respawn = f'{self._demo_playback.cmd} -respawn'
+                    self._attempt_demo_playback(playback_cmd_with_respawn)
+
+                    playback_with_respawn_successful = False
+                    if os.path.isfile(PlaybackData.LEVELSTAT_FILENAME):
+                        with open(PlaybackData.LEVELSTAT_FILENAME) as levelstat_strm:
+                            cur_levelstat_line_count = len(levelstat_strm.read().splitlines())
+
+                        if cur_levelstat_line_count == self._demo_playback.levelstat_line_count:
+                            playback_with_respawn_successful = True
+
+                    if playback_with_respawn_successful:
+                        self.data['category'] = 'NM 100S'
+                        self.note_strings.add('Demo syncs with a forced -respawn argument.')
+                    else:
+                        self.data['category'] = 'Other'
+                        self.note_strings.add('BP 100S')
+
+    def _parse_analysis(self):
+        """Parse analysis info.
+
+        Analysis format:
+          skill 4
+          nomonsters 0
+          respawn 0
+          fast 0
+          pacifist 0
+          stroller 0
+          reality 0
+          almost_reality 0
+          100k 1
+          100s 1
+          missed_monsters 0
+          missed_secrets 0
+          weapon_collector 0
+          tyson_weapons 0
+          turbo 0
+          category UV Max
+        """
+        for line in self._demo_playback.analysis.splitlines():
+            key, value = line.split(maxsplit=1)
+            if key in self.BOOLEAN_INT_KEYS:
+                value = False if int(value) == 0 else True
+            if key == 'turbo' and value:
+                # This will need manual effort to actually figure out what kind of turbo usage is performed, which will
+                # be handled later.
+                self.note_strings.add('Uses turbo')
+            if key == 'category':
+                self.data['category'] = PlaybackData.DOOM_CATEGORY_MAP.get(value, value)
+
+            self.raw_data[key] = value
+
+    def _parse_levelstat(self):
+        """Parse levelstat info.
+
+        Levelstat format:
+          MAP01 - 1:23.00 (1:23)  K: 1337/1337  I: 69/69  S: 420/420
+          MAP02 - 1:11.97 (2:34)  K: 0/0  I: 0/0  S: 0/0
+        In case of co-op:
+          E3M7 - 0:26.97 (0:26)  K: 3/38 (3+0)  I: 0/8 (0+0)  S: 0/4  (0+0)
+        """
+        levelstat = self._demo_playback.levelstat.splitlines()
+        skill = self.demo_info.get('skill')
+        game_mode = self.demo_info.get('game_mode')
+
+        # IL run case
+        if len(levelstat) == 1:
+            levelstat_line_split = levelstat[0].split()
+            self.data['level'] = self._get_level(levelstat_line_split, self._demo_playback.wad)
+            self.data['secret_exit'] = self.data['level'].endswith('s')
+            level_no_secret_exit_marker = self.data['level'].rstrip('s')
+            map_info = self._demo_playback.wad.map_list_info.get_map_info(
+                level_no_secret_exit_marker
+            )
+            if (self.data['category'] in PlaybackData.ALL_KILLS_CATEGORIES or
+                    self.data['category'] in PlaybackData.ALL_SECRETS_CATEGORIES or
+                    map_info.get_single_key_for_map('mark_secret_exit_as_normal', skill=skill,
+                                                    game_mode=game_mode)):
+                self.data['level'] = level_no_secret_exit_marker
+                self.raw_data['affected_levels'] = [level_no_secret_exit_marker]
+            else:
+                self.raw_data['affected_levels'] = [self.data['level']]
+
+            time = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_TIME_IDX]
+            self.data['time'] = time
+            self.data['levelstat'] = time
+            stats_dict = PlaybackData._get_stats_from_levelstat_line(levelstat[0])
+            self.raw_data['stats'][self.data['level']] = stats_dict
+            self.data['kills'] = stats_dict['kills']
+            self.data['items'] = stats_dict['items']
+            self.data['secrets'] = stats_dict['secrets']
+        else:
+            self.data['secret_exit'] = False
+            # Final time will be printed in parens on the last line of the levelstat.
+            self.data['time'] = levelstat[-1].split()[
+                PlaybackData.LEVELSTAT_LINE_TOTAL_TIME_IDX
+            ].replace('(', '').replace(')', '')
+
+            self.data['levelstat'] = ','.join(
+                [line.split()[PlaybackData.LEVELSTAT_LINE_TIME_IDX].split('.')[0]
+                 for line in levelstat]
+            )
+
+            map_list = []
+            for line in levelstat:
+                level = self._get_level(line.split(), self._demo_playback.wad)
+                level_no_secret_exit_marker = level.rstrip('s')
+                map_list.append(level_no_secret_exit_marker)
+                self.raw_data['stats'][level_no_secret_exit_marker] = PlaybackData._get_stats_from_levelstat_line(line)
+
+            self._detect_movie_type(self._demo_playback.wad, map_list)
+            self.raw_data['affected_levels'] = map_list
+
+    @staticmethod
+    def _get_stats_from_levelstat_line(levelstat_line):
+        """Get kills/items/secrets stats from levelstat line.
+
+        :param levelstat_line: Levelstat line
+        :return: Levelstat line stats as a dictionary
+        """
+        stats_dict = {}
+        # For movie runs, the open parentheses get offset with whitespace, which messes with
+        # splitting the line, so we need to remove the whitespace before splitting.
+        levelstat_line = PlaybackData.PAREN_WITH_OFFSET_RE.sub('(', levelstat_line)
+        levelstat_line_split = levelstat_line.split()
+        stats_dict['kills'] = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_KILLS_IDX]
+        levelstat_split_len = len(levelstat_line_split)
+        if levelstat_split_len == 10:
+            stats_dict['items'] = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_ITEMS_IDX]
+            stats_dict['secrets'] = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_SECRETS_IDX]
+        elif levelstat_split_len == 13:
+            stats_dict['items'] = levelstat_line_split[PlaybackData.LEVELSTAT_LINE_ITEMS_COOP_IDX]
+            stats_dict['secrets'] = levelstat_line_split[
+                PlaybackData.LEVELSTAT_LINE_SECRETS_COOP_IDX
+            ]
+        else:
+            raise RuntimeError(f'Unrecognized levelstat line format: {levelstat_line}.')
+
+        return stats_dict
+
+    def _get_level(self, levelstat_line_split, wad):
+        """Get level from levelstat split into lines.
+
+        This returns a dummy value and sets a note if the level run isn't actually a map in the WAD.
+
+        :param levelstat_line_split: Levelstat split into lines
+        :param wad: WAD object
+        :return: Level in levelstat
+        :raises ValueError if there's an issue parsing map ranges for WAD object
+        """
+        level = self._convert_level_to_dsda_format(
+            levelstat_line_split[PlaybackData.LEVELSTAT_LINE_LEVEL_IDX]
+        )
+        map_ranges = wad.map_list_info.get_key('map_ranges')
+        if map_ranges:
+            level_num = self._convert_level_to_num(level)
+            for map_range in map_ranges:
+                try:
+                    map_range = parse_range(map_range, remove_non_numeric_chars=True)
+                except ValueError:
+                    LOGGER.error('Issue parsing ranges for WAD %s.', wad.name)
+                    raise
+
+                map_range[1] += 1
+                if level_num in range(*map_range):
+                    return level
+
+        self.note_strings.add('Run for map that is not part of the wad.')
+        return NEEDS_ATTENTION_PLACEHOLDER
+
+    def _detect_movie_type(self, wad, map_list):
+        """Detect movie type for a given demo.
+
+        The format for maps in the map list is either Map xx or ExMx. Secret exit markers are
+        assumed to have already been stripped.
+
+        :param wad: WAD object
+        :param map_list: Map list that is covered by the demo.
+        """
+        # TODO: This won't work for Hexen
+        # Note that while this pulls from the secret exits dictionary, it is actually the exits
+        # mapped to the maps they go to, and this pulls the values only
+        secret_maps = wad.map_list_info.get_key('secret_exits').values()
+        # Technically a WAD can start or end on secret maps, and it's unclear in cases like that if
+        # UV-Speeds should start/visit those, but for the sake of consistency, will keep it this
+        # way for now.
+        first_non_secret_map = None
+        last_non_secret_map = None
+        for cur_map in map_list:
+            if cur_map in secret_maps:
+                continue
+            if not first_non_secret_map:
+                first_non_secret_map = cur_map
+
+            last_non_secret_map = cur_map
+
+        # In case a WAD is restricted to the secret maps (e.g., teeth.wad, maps 31-32) :^)
+        if not first_non_secret_map and not last_non_secret_map:
+            first_non_secret_map = map_list[0]
+            last_non_secret_map = map_list[-1]
+
+        has_required_secret_maps = self._has_required_secret_maps(wad, map_list)
+        map_range = [first_non_secret_map, last_non_secret_map]
+        if has_required_secret_maps:
+            # If the config sets these settings, use them even if they evaluate to None/empty
+            episodes = wad.map_list_info.get_key('episodes')
+            d2all = wad.map_list_info.get_key('d2all')
+            d1all = wad.map_list_info.get_key('d1all')
+            herall = wad.map_list_info.get_key('herall')
+            hexall = wad.map_list_info.get_key('hexall')
+            chexall = wad.map_list_info.get_key('chexall')
+            if d2all and map_range == d2all:
+                self.data['level'] = 'D2All'
+            elif d1all and map_range == d1all:
+                self.data['level'] = 'D1All'
+            elif herall and map_range == herall:
+                self.data['level'] = 'HerAll'
+            elif hexall and map_range == hexall:
+                self.data['level'] = 'HexAll'
+            elif chexall and map_range == chexall:
+                self.data['level'] = 'ChexAll'
+            elif episodes:
+                for idx, episode_range in enumerate(episodes):
+                    if map_range == episode_range:
+                        doom_1_map_match = PlaybackData.DOOM_1_MAP_RE.match(map_range[0])
+                        episode_num = (doom_1_map_match.group('episode_num') if doom_1_map_match
+                                       else idx + 1)
+
+                        self.data['level'] = f'Episode {episode_num}'
+
+            if not self.data.get('level'):
+                self.data['level'] = 'Other Movie'
+                self.note_strings.add(f'Other Movie {first_non_secret_map} - {last_non_secret_map}')
+        else:
+            self.data['level'] = 'Other Movie'
+            self.note_strings.add(f'Other Movie {first_non_secret_map} - {last_non_secret_map}')
+            self.note_strings.add('Does not visit secret maps.')
+
+    def _has_required_secret_maps(self, wad, map_list):
+        """Determine whether all required secret maps (if any) were visited by the demo.
+
+        :param wad: WAD object
+        :param map_list: Map list that is covered by the demo.
+        :return: Flag indicating if all required secret maps (if any) were visited by the demo.
+        """
+        category = self.data['category']
+        if (category not in PlaybackData.ALL_SECRETS_CATEGORIES and
+                category not in PlaybackData.ALL_KILLS_CATEGORIES):
+            return True
+
+        secret_exits = wad.map_list_info.get_key('secret_exits')
+        if not secret_exits:
+            return True
+
+        skill = self.demo_info.get('skill')
+        game_mode = self.demo_info.get('game_mode')
+        secret_maps = []
+        for secret_exit, secret_map in secret_exits.items():
+            if secret_exit in map_list:
+                if category in PlaybackData.ALL_SECRETS_CATEGORIES:
+                    secret_maps.append(secret_map)
+                else:
+                    # Categories that do not require secrets do not need to visit nomonster maps.
+                    map_info = wad.map_list_info.get_map_info(secret_map)
+                    if not map_info.get_single_key_for_map('nomo_map', skill=skill,
+                                                           game_mode=game_mode):
+                        secret_maps.append(secret_map)
+
+        for secret_map in secret_maps:
+            if secret_map not in map_list:
+                return False
+
+        return True
+
+    @staticmethod
+    def _convert_level_to_dsda_format(level_str):
+        """Convert level text from levelstat format to DSDA format.
+
+        :param level_str: Level string from levelstat
+        :return: Level string in DSDA format
+        """
+        # Doom 2/Final Doom case (MAP##)
+        if 'MAP' in level_str:
+            return level_str.replace('MAP', 'Map ')
+
+        # Doom 1/Heretic/Hexen case (E#M#)
+        return level_str
+
+    @staticmethod
+    def _convert_level_to_num(level_str):
+        """Convert level text from levelstat/DSDA formats to number.
+
+        :param level_str: Level string from levelstat or DSDA
+        :return: Level number
+        """
+        # Replace any secret exit marker
+        level_str = level_str.replace('s', '')
+        if 'MAP' in level_str:
+            return int(level_str.replace('MAP', ''))
+        elif 'Map ' in level_str:
+            return int(level_str.replace('Map ', ''))
+
+        return int(level_str.replace('E', '').replace('M', ''))
+
+
+@dataclass
+class DemoPlayback:
+    """DemoPlayback data class."""
+    wad: Wad
+    cmd: str
+    levelstat: str
+    analysis: str
+    levelstat_line_count: int = field(init=False)
+
+    cmd_line_info: dict = field(default_factory=dict)
+    found_playback_wad_in_footer_files: bool = False
+
+    def __post_init__(self):
+        """Post-initialization steps for DemoPlayback class."""
+        self.levelstat_line_count = len(self.levelstat.splitlines())
+
+    def __lt__(self, other):
+        """Less than overload for DemoPlayback.
+
+        Based on levelstat line count (i.e., number of maps completed)
+
+        :param other: Other DemoPlayback
+        :return: Whether this DemoPlayback is less than the other
+        """
+        return self.levelstat_line_count < other.levelstat_line_count
+
+    def __le__(self, other):
+        """Less than or equal to overload for DemoPlayback.
+
+        Based on levelstat line count (i.e., number of maps completed)
+
+        :param other: Other DemoPlayback
+        :return: Whether this DemoPlayback is less than or equal to the other
+        """
+        return self.levelstat_line_count <= other.levelstat_line_count
+
+    def __gt__(self, other):
+        """Greater than overload for DemoPlayback.
+
+        Based on levelstat line count (i.e., number of maps completed)
+
+        :param other: Other DemoPlayback
+        :return: Whether this DemoPlayback is greater than the other
+        """
+        return self.levelstat_line_count > other.levelstat_line_count
+
+    def __ge__(self, other):
+        """Greater than or equal to overload for DemoPlayback.
+
+        Based on levelstat line count (i.e., number of maps completed)
+
+        :param other: Other DemoPlayback
+        :return: Whether this DemoPlayback is greater than or equal to the other
+        """
+        return self.levelstat_line_count >= other.levelstat_line_count
+
+    def __eq__(self, other):
+        """Equal to overload for DemoPlayback.
+
+        Based on levelstat line count (i.e., number of maps completed)
+
+        :param other: Other DemoPlayback
+        :return: Whether this DemoPlayback is equal to the other
+        """
+        return self.levelstat_line_count == other.levelstat_line_count
+
+    def __ne__(self, other):
+        """Not equal to overload for DemoPlayback.
+
+        Based on levelstat line count (i.e., number of maps completed)
+
+        :param other: Other DemoPlayback
+        :return: Whether this DemoPlayback is not equal to the other
+        """
+        return self.levelstat_line_count != other.levelstat_line_count

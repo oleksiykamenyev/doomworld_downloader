@@ -1,0 +1,13 @@
+Pwad: PWAD.wad
+Map: 02 - Map Name
+Skill: Ultra-Violence
+Category: UV Pacifist
+Engine: GZDoom 4.4.1
+
+Time: 4:56
+
+Author: YetAnotherE1M1Runner
+
+Comments: aaskdjhaskdjh
+ adaskjdhaskjdakd
+ asdjasd

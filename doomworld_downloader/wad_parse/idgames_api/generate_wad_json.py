@@ -121,27 +121,33 @@ def main():
 
         file_creation_date = None
         tmp_extract_path = 'tmp_extraction'
-        with ZipFile(local_file_path, 'r') as zip_file:
-            info_list = zip_file.infolist()
-            for file_zip_info in info_list:
-                for resource_re in RESOURCE_FILE_FORMATS:
-                    if resource_re.match(file_zip_info.filename):
-                        if not file_creation_date:
-                            file_creation_date = parse_zip_info_date_time(file_zip_info.date_time)
-                        else:
-                            cur_file_creation_date = parse_zip_info_date_time(
-                                file_zip_info.date_time
-                            )
-                            if cur_file_creation_date > file_creation_date:
-                                file_creation_date = cur_file_creation_date
+        try:
+            with ZipFile(local_file_path, 'r') as zip_file:
+                info_list = zip_file.infolist()
+                for file_zip_info in info_list:
+                    for resource_re in RESOURCE_FILE_FORMATS:
+                        if resource_re.match(file_zip_info.filename):
+                            if not file_creation_date:
+                                file_creation_date = parse_zip_info_date_time(file_zip_info.date_time)
+                            else:
+                                cur_file_creation_date = parse_zip_info_date_time(
+                                    file_zip_info.date_time
+                                )
+                                if cur_file_creation_date > file_creation_date:
+                                    file_creation_date = cur_file_creation_date
 
-            zip_file.extractall('tmp_extraction')
+                zip_file.extractall('tmp_extraction')
+        except NotImplementedError:
+            pass
 
         wads_in_zip = glob.glob('{}/*.wad'.format(tmp_extract_path))
         num_maps = 0
         for wad in wads_in_zip:
-            wad_object = omg.WAD(wad)
-            num_maps += len(wad_object.maps)
+            try:
+                wad_object = omg.WAD(wad)
+                num_maps += len(wad_object.maps)
+            except ValueError:
+                LOGGER.exception('Encountered error when parsing WAD %s.', wad)
 
         if num_maps < 1:
             LOGGER.error('No maps found for wad %s.', file_info['filename'])
@@ -151,7 +157,7 @@ def main():
         # values as args to the datetime constructor
         idgames_date = datetime(*map(int, file_info['date'].split('-')))
         idgames_year = idgames_date.year
-        file_creation_year = file_creation_date.year
+        file_creation_year = file_creation_date.year if file_creation_date else idgames_year
         if idgames_year != file_creation_year:
             LOGGER.error('Mismatched years in idgames date and file creation date for wad %s!',
                          file_info['filename'])
@@ -159,7 +165,7 @@ def main():
                          file_creation_year)
 
         wad_year = file_creation_year
-        if file_creation_date < EARLIEST_WAD_TIME:
+        if file_creation_date and file_creation_date < EARLIEST_WAD_TIME:
             wad_year = idgames_year
 
         wad_json = {
@@ -167,7 +173,7 @@ def main():
             'single_map': num_maps == 1,
             'iwad': file_info['dir'].split('/')[1],
             'name': file_info['title'],
-            'short_name': file_info['filename'].split('.')[0],
+            'short_name': os.path.splitext(file_info['filename'])[0],
             'year': wad_year,
             'file': {
                 'name': local_file_path,

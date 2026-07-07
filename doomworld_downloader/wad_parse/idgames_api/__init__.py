@@ -1,0 +1,3 @@
+"""
+IDGames API package.
+"""

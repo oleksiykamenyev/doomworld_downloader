@@ -1,0 +1,628 @@
+{
+  "demo_updates": [
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NoMo",
+        "level": "Map 10",
+        "player": "Cacatou",
+        "time": "0:12.80",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NoMo."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NM Speed",
+        "level": "Map 11",
+        "player": "ferfrancuito",
+        "time": "0:04.71",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NM Speed."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "Pacifist",
+        "level": "Map 11",
+        "player": "ferfrancuito",
+        "time": "0:04.31",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible Pacifist."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "Pacifist",
+        "level": "Map 11",
+        "player": "ferfrancuito",
+        "time": "0:04.77",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible Pacifist."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "Pacifist",
+        "level": "Map 11",
+        "player": "Scorpius",
+        "time": "0:04.80",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible Pacifist."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NoMo",
+        "level": "Map 12",
+        "player": "Cacatou",
+        "time": "0:14.94",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NoMo."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "UV Max",
+        "level": "Map 13",
+        "player": "psichotik",
+        "time": "1:16.17",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible UV Max."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NoMo",
+        "level": "Map 13",
+        "player": "Cacatou",
+        "time": "0:22.89",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NoMo."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NoMo",
+        "level": "Map 14",
+        "player": "Cacatou",
+        "time": "0:27.86",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NoMo."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NoMo",
+        "level": "Map 15",
+        "player": "Cacatou",
+        "time": "0:11",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NoMo."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NoMo",
+        "level": "Map 16",
+        "player": "Cacatou",
+        "time": "0:25.37",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NoMo."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NoMo",
+        "level": "Map 17",
+        "player": "Cacatou",
+        "time": "0:29.80",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NoMo."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NoMo",
+        "level": "Map 19",
+        "player": "Cacatou",
+        "time": "1:21.71",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NoMo."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "UV Speed",
+        "level": "Map 20",
+        "player": "psichotik",
+        "time": "0:49.40",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible UV Speed."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "Pacifist",
+        "level": "Map 20",
+        "player": "DoomHero85",
+        "time": "1:52.83",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible Pacifist."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NoMo",
+        "level": "Map 20",
+        "player": "Cacatou",
+        "time": "0:39.86",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NoMo."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "Tyson",
+        "level": "Map 21",
+        "player": "Ling",
+        "time": "3:08.49",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible Tyson."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "UV Respawn",
+        "level": "Map 22",
+        "player": "Ancalagon",
+        "time": "0:56.97",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible UV Respawn."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NoMo",
+        "level": "Map 22",
+        "player": "Cacatou",
+        "time": "0:23.80",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NoMo."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NM Speed",
+        "level": "Map 23",
+        "player": "ferfrancuito",
+        "time": "0:03.23",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NM Speed."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "Pacifist",
+        "level": "Map 23",
+        "player": "ferfrancuito",
+        "time": "0:03.71",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible Pacifist."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "Pacifist",
+        "level": "Map 23",
+        "player": "Scorpius",
+        "time": "0:04.00",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible Pacifist."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NoMo",
+        "level": "Map 23",
+        "player": "Cacatou",
+        "time": "0:26.80",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NoMo."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NoMo",
+        "level": "Map 25",
+        "player": "Cacatou",
+        "time": "0:17.40",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NoMo."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "UV Max",
+        "level": "Map 26",
+        "player": "A7MAD",
+        "time": "2:35.49",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible UV Max."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "UV Max",
+        "level": "Map 26",
+        "player": "eschdoom",
+        "time": "2:49.94",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible UV Max."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "UV Max",
+        "level": "Map 26",
+        "player": "Huy Pham",
+        "time": "2:51.49",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible UV Max."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "UV Max",
+        "level": "Map 26",
+        "player": "Richie Agnew",
+        "time": "3:04.83",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible UV Max."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "UV Max",
+        "level": "Map 26",
+        "player": "Huy Pham",
+        "time": "3:13.63",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible UV Max."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "UV Max",
+        "level": "Map 26",
+        "player": "Richie Agnew",
+        "time": "3:33.34",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible UV Max."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "UV Max",
+        "level": "Map 26",
+        "player": "Huy Pham",
+        "time": "3:43.94",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible UV Max."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "UV Max",
+        "level": "Map 26",
+        "player": "Richie Agnew",
+        "time": "3:44.37",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible UV Max."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NM Speed",
+        "level": "Map 26",
+        "player": "Red-XIII",
+        "time": "0:30.94",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NM Speed."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NoMo",
+        "level": "Map 27",
+        "player": "Cacatou",
+        "time": "0:57.40",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NoMo."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NoMo",
+        "level": "Map 28",
+        "player": "Cacatou",
+        "time": "0:29.40",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NoMo."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NoMo",
+        "level": "Map 29",
+        "player": "Cacatou",
+        "time": "1:38.51",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NoMo."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NoMo",
+        "level": "Map 30",
+        "player": "Cacatou",
+        "time": "0:35.46",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NoMo."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NoMo",
+        "level": "Map 31",
+        "player": "Cacatou",
+        "time": "0:33.86",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NoMo."
+        }
+      ]
+    },
+    {
+      "category": "Other",
+      "match_details": {
+        "category": "NoMo",
+        "level": "Map 32",
+        "player": "Cacatou",
+        "time": "0:55.89",
+        "wad": "scythe"
+      },
+      "tags": [
+        {
+          "show": true,
+          "text": "Incompatible NoMo."
+        }
+      ]
+    }
+  ]
+}

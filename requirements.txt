@@ -1,0 +1,11 @@
+beautifulsoup4
+gdown
+lxml
+omgifol
+py7zr
+pyotp
+PyYAML
+rarfile
+requests
+selenium
+selenium-stealth

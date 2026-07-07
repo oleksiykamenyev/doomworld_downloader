@@ -1,0 +1,19 @@
+             SOME WAD
+        Map 01: MAP NAME
+  Map Authors: TeamNitroglycerine
+-----------------------------------
+            random.lmp
+
+UV-Speed in 4:20.69
+
+    Kills   - 18%
+    Items   - 9%
+    Secrets - 0%
+
+Recorded with: PrBoom-plus 2.5.1.4
+-complevel 9
+
+Skill level: Ultra-Violence
+Author: 4shockblast
+
+Comments: blah blah blah
